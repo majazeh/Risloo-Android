@@ -24,8 +24,6 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 
-import java.util.ArrayList;
-
 public class EditSessionTabSessionFragment extends Fragment {
 
     // Binding
@@ -335,10 +333,22 @@ public class EditSessionTabSessionFragment extends Fragment {
                     if (binding.statusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
                         binding.statusIncludeLayout.selectSpinner.setSelection(i);
 
-                        if (status.equals("زمان\u200Cبندی شده"))
+                        if (status.equals("زمان\u200Cبندی شده")) {
                             binding.scheduledGroup.setVisibility(View.VISIBLE);
-                        else
+
+                            if (model.getOpens_at_type() != null && !model.getOpens_at_type().equals("") && model.getOpens_at_type().equals("absolute")) {
+                                binding.startAccurateIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                                binding.startRelativeIncludeLayout.getRoot().setVisibility(View.GONE);
+                            }
+
+                            if (model.getClosed_at_type() != null && !model.getClosed_at_type().equals("") && model.getClosed_at_type().equals("absolute")) {
+                                binding.endAccurateIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                                binding.endRelativeIncludeLayout.getRoot().setVisibility(View.GONE);
+                            }
+
+                        } else {
                             binding.scheduledGroup.setVisibility(View.GONE);
+                        }
                     }
                 }
             }
@@ -353,31 +363,90 @@ public class EditSessionTabSessionFragment extends Fragment {
                 binding.coordinationIncludeLayout.inputEditText.setText(coordination);
             }
 
-            startAccurateTime = String.valueOf(DateManager.currentTimestamp());
-            binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+            if (model.getOpens_at_type() != null && !model.getOpens_at_type().equals("")) {
+                startType = model.getOpens_at_type();
+                switch (startType) {
+                    case "absolute":
+                        binding.startTypeIncludeLayout.firstRadioButton.setChecked(true);
+                        break;
+                    case "relative":
+                        binding.startTypeIncludeLayout.secondRadioButton.setChecked(true);
+                        break;
+                }
+            }
 
-            startAccurateDate = String.valueOf(DateManager.currentTimestamp());
-            binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+            if (model.getClosed_at_type() != null && !model.getClosed_at_type().equals("")) {
+                endType = model.getClosed_at_type();
+                switch (endType) {
+                    case "absolute":
+                        binding.endTypeIncludeLayout.firstRadioButton.setChecked(true);
+                        break;
+                    case "relative":
+                        binding.endTypeIncludeLayout.secondRadioButton.setChecked(true);
+                        break;
+                }
 
-            endAccurateTime = String.valueOf(DateManager.currentTimestamp());
-            binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                binding.endTypeIncludeLayout.headerCheckBox.setChecked(true);
 
-            endAccurateDate = String.valueOf(DateManager.currentTimestamp());
-            binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+                binding.endTypeIncludeLayout.firstRadioButton.setAlpha((float) 1);
+                binding.endTypeIncludeLayout.secondRadioButton.setAlpha((float) 1);
+                binding.endRelativeIncludeLayout.getRoot().setAlpha((float) 1);
+                binding.endAccurateIncludeLayout.getRoot().setAlpha((float) 1);
 
-            binding.endTypeIncludeLayout.firstRadioButton.setAlpha((float) 0.4);
-            binding.endTypeIncludeLayout.secondRadioButton.setAlpha((float) 0.4);
-            binding.endRelativeIncludeLayout.getRoot().setAlpha((float) 0.4);
-            binding.endAccurateIncludeLayout.getRoot().setAlpha((float) 0.4);
+                binding.endTypeIncludeLayout.firstRadioButton.setEnabled(true);
+                binding.endTypeIncludeLayout.secondRadioButton.setEnabled(true);
+                binding.endAccurateIncludeLayout.timeTextView.setEnabled(true);
+                binding.endAccurateIncludeLayout.dateTextView.setEnabled(true);
 
-            binding.endTypeIncludeLayout.firstRadioButton.setEnabled(false);
-            binding.endTypeIncludeLayout.secondRadioButton.setEnabled(false);
-            binding.endAccurateIncludeLayout.timeTextView.setEnabled(false);
-            binding.endAccurateIncludeLayout.dateTextView.setEnabled(false);
+                binding.endRelativeIncludeLayout.dayEditText.setFocusableInTouchMode(true);
+                binding.endRelativeIncludeLayout.hourEditText.setFocusableInTouchMode(true);
+                binding.endRelativeIncludeLayout.minuteEditText.setFocusableInTouchMode(true);
 
-            binding.endRelativeIncludeLayout.getRoot().setFocusableInTouchMode(false);
-            binding.endRelativeIncludeLayout.hourEditText.setFocusableInTouchMode(false);
-            binding.endRelativeIncludeLayout.minuteEditText.setFocusableInTouchMode(false);
+            } else {
+                binding.endTypeIncludeLayout.headerCheckBox.setChecked(true);
+
+                binding.endTypeIncludeLayout.firstRadioButton.setAlpha((float) 0.4);
+                binding.endTypeIncludeLayout.secondRadioButton.setAlpha((float) 0.4);
+                binding.endRelativeIncludeLayout.getRoot().setAlpha((float) 0.4);
+                binding.endAccurateIncludeLayout.getRoot().setAlpha((float) 0.4);
+
+                binding.endTypeIncludeLayout.firstRadioButton.setEnabled(false);
+                binding.endTypeIncludeLayout.secondRadioButton.setEnabled(false);
+                binding.endAccurateIncludeLayout.timeTextView.setEnabled(false);
+                binding.endAccurateIncludeLayout.dateTextView.setEnabled(false);
+
+                binding.endRelativeIncludeLayout.getRoot().setFocusableInTouchMode(false);
+                binding.endRelativeIncludeLayout.hourEditText.setFocusableInTouchMode(false);
+                binding.endRelativeIncludeLayout.minuteEditText.setFocusableInTouchMode(false);
+            }
+
+            if (model.getOpens_at() != 0 && startType.equals("absolute")) {
+                startAccurateTime = String.valueOf(model.getOpens_at());
+                startAccurateDate = String.valueOf(model.getOpens_at());
+
+                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+            } else {
+                startAccurateTime = String.valueOf(DateManager.currentTimestamp());
+                startAccurateDate = String.valueOf(DateManager.currentTimestamp());
+
+                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+            }
+
+            if (model.getClosed_at() != 0 && endType.equals("absolute")) {
+                endAccurateTime = String.valueOf(model.getClosed_at());
+                endAccurateDate = String.valueOf(model.getClosed_at());
+
+                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+            } else {
+                endAccurateTime = String.valueOf(DateManager.currentTimestamp());
+                endAccurateDate = String.valueOf(DateManager.currentTimestamp());
+
+                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+            }
         }
     }
 
