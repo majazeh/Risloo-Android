@@ -7,13 +7,13 @@
     android:background="@null"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
-    android:overScrollMode="always"
+    android:overScrollMode="never"
     android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Test.TestPsyDescFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_12sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

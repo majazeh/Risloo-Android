@@ -1,141 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@null"
+    android:fillViewport="true"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="never"
     android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Auth.AuthLoginFragment">
 
-    <include
-        android:id="@+id/header_textView"
-        layout="@layout/component_auth_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_24sdp"
-        app:layout_constraintEnd_toEndOf="@id/mobile_editText"
-        app:layout_constraintStart_toStartOf="@id/mobile_editText"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <include
-        android:id="@+id/title_textView"
-        layout="@layout/component_auth_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32sdp"
-        app:layout_constraintEnd_toEndOf="@id/mobile_editText"
-        app:layout_constraintStart_toStartOf="@id/mobile_editText"
-        app:layout_constraintTop_toBottomOf="@id/header_textView" />
+        <include
+            android:id="@+id/header_textView"
+            layout="@layout/component_auth_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="@id/mobile_editText"
+            app:layout_constraintStart_toStartOf="@id/mobile_editText"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/mobile_editText"
-        layout="@layout/component_auth_input_suggestion"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
-        android:layout_marginEnd="@dimen/_24sdp"
-        android:layout_marginStart="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_textView" />
+        <include
+            android:id="@+id/title_textView"
+            layout="@layout/component_auth_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_32sdp"
+            app:layout_constraintEnd_toEndOf="@id/mobile_editText"
+            app:layout_constraintStart_toStartOf="@id/mobile_editText"
+            app:layout_constraintTop_toBottomOf="@id/header_textView" />
 
-    <include
-        android:id="@+id/error_includeLayout"
-        layout="@layout/component_auth_error"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/mobile_editText"
-        app:layout_constraintStart_toStartOf="@id/mobile_editText"
-        app:layout_constraintTop_toBottomOf="@id/mobile_editText" />
+        <include
+            android:id="@+id/mobile_editText"
+            layout="@layout/component_auth_input_suggestion"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_textView" />
 
-    <include
-        android:id="@+id/guide_includeLayout"
-        layout="@layout/component_auth_guide"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_6sdp"
-        app:layout_constraintEnd_toEndOf="@id/mobile_editText"
-        app:layout_constraintStart_toStartOf="@id/mobile_editText"
-        app:layout_constraintTop_toBottomOf="@id/error_includeLayout"
-        app:layout_goneMarginTop="@dimen/_6sdp" />
+        <include
+            android:id="@+id/error_includeLayout"
+            layout="@layout/component_auth_error"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/mobile_editText"
+            app:layout_constraintStart_toStartOf="@id/mobile_editText"
+            app:layout_constraintTop_toBottomOf="@id/mobile_editText" />
 
-    <include
-        android:id="@+id/button_textView"
-        layout="@layout/component_auth_button"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="@id/mobile_editText"
-        app:layout_constraintStart_toStartOf="@id/mobile_editText"
-        app:layout_constraintTop_toBottomOf="@id/guide_includeLayout" />
+        <include
+            android:id="@+id/guide_includeLayout"
+            layout="@layout/component_auth_guide"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_6sdp"
+            app:layout_constraintEnd_toEndOf="@id/mobile_editText"
+            app:layout_constraintStart_toStartOf="@id/mobile_editText"
+            app:layout_constraintTop_toBottomOf="@id/error_includeLayout"
+            app:layout_goneMarginTop="@dimen/_6sdp" />
 
-    <include
-        android:id="@+id/register_helper_textView"
-        layout="@layout/component_auth_helper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="@id/mobile_editText"
-        app:layout_constraintStart_toStartOf="@id/mobile_editText"
-        app:layout_constraintTop_toBottomOf="@id/button_textView" />
+        <include
+            android:id="@+id/button_textView"
+            layout="@layout/component_auth_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@id/mobile_editText"
+            app:layout_constraintStart_toStartOf="@id/mobile_editText"
+            app:layout_constraintTop_toBottomOf="@id/guide_includeLayout" />
 
-    <include
-        android:id="@+id/password_recover_helper_textView"
-        layout="@layout/component_auth_helper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@id/mobile_editText"
-        app:layout_constraintStart_toStartOf="@id/mobile_editText"
-        app:layout_constraintTop_toBottomOf="@id/register_helper_textView" />
+        <include
+            android:id="@+id/register_helper_textView"
+            layout="@layout/component_auth_helper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@id/mobile_editText"
+            app:layout_constraintStart_toStartOf="@id/mobile_editText"
+            app:layout_constraintTop_toBottomOf="@id/button_textView" />
 
-    <include
-        android:id="@+id/register_link_textView"
-        layout="@layout/component_auth_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintEnd_toStartOf="@id/separator_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_recover_helper_textView" />
+        <include
+            android:id="@+id/password_recover_helper_textView"
+            layout="@layout/component_auth_helper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/mobile_editText"
+            app:layout_constraintStart_toStartOf="@id/mobile_editText"
+            app:layout_constraintTop_toBottomOf="@id/register_helper_textView" />
 
-    <View
-        android:id="@+id/separator_view"
-        android:layout_width="@dimen/_1sdp"
-        android:layout_height="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_6sdp"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:background="@color/Gray500"
-        app:layout_constraintBottom_toBottomOf="@id/register_link_textView"
-        app:layout_constraintEnd_toStartOf="@id/password_recover_link_textView"
-        app:layout_constraintStart_toEndOf="@id/register_link_textView"
-        app:layout_constraintTop_toTopOf="@id/register_link_textView" />
+        <include
+            android:id="@+id/register_link_textView"
+            layout="@layout/component_auth_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintEnd_toStartOf="@id/separator_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password_recover_helper_textView" />
 
-    <include
-        android:id="@+id/password_recover_link_textView"
-        layout="@layout/component_auth_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintBottom_toBottomOf="@id/register_link_textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/separator_view"
-        app:layout_constraintTop_toTopOf="@id/register_link_textView" />
+        <View
+            android:id="@+id/separator_view"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:background="@color/Gray500"
+            app:layout_constraintBottom_toBottomOf="@id/register_link_textView"
+            app:layout_constraintEnd_toStartOf="@id/password_recover_link_textView"
+            app:layout_constraintStart_toEndOf="@id/register_link_textView"
+            app:layout_constraintTop_toTopOf="@id/register_link_textView" />
 
-    <include
-        android:id="@+id/illu_imageView"
-        layout="@layout/component_auth_illu"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_32sdp"
-        app:layout_constraintDimensionRatio="14:9"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/mobile_editText"
-        app:layout_constraintStart_toStartOf="@id/mobile_editText"
-        app:layout_constraintTop_toBottomOf="@id/register_link_textView" />
+        <include
+            android:id="@+id/password_recover_link_textView"
+            layout="@layout/component_auth_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintBottom_toBottomOf="@id/register_link_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/separator_view"
+            app:layout_constraintTop_toTopOf="@id/register_link_textView" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/illu_imageView"
+            layout="@layout/component_auth_illu"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_32sdp"
+            app:layout_constraintDimensionRatio="14:9"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/mobile_editText"
+            app:layout_constraintStart_toStartOf="@id/mobile_editText"
+            app:layout_constraintTop_toBottomOf="@id/register_link_textView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
