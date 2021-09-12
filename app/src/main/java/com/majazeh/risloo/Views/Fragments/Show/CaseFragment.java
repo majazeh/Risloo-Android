@@ -135,7 +135,7 @@ public class CaseFragment extends Fragment {
 
                     switch (pos) {
                         case "گزارشات": {
-                            NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment("case", caseModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment( caseModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {

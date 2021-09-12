@@ -14,6 +14,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.ReserveScheduleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragmentArgs;
@@ -235,16 +236,19 @@ public class BreadCrumb {
             case R.id.centerUsersFragment:
                 setModels("center", CenterUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerUsers();
-            case R.id.clientReportsFragment:
-                clientReportsType = ClientReportsFragmentArgs.fromBundle(arguments).getType();
+            case R.id.clientReportsFragment:{
+                TypeModel typeModel = ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (clientReportsType.equals("case"))
-                    setModels("case", ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel());
-                else
-                    setModels("session", ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel());
+                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel")) {
+                    clientReportsType = "case";
+                    setModels("case", typeModel);
+                } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+                    clientReportsType = "session";
+                    setModels("session", typeModel);
+                }
 
                 return clientReports();
-            case R.id.roomPlatformsFragment:
+            } case R.id.roomPlatformsFragment:
                 setModels("room", RoomPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomPlatforms();
             case R.id.roomSchedulesFragment:
@@ -293,16 +297,19 @@ public class BreadCrumb {
             case R.id.sampleFragment:
                 setModels("sample", SampleFragmentArgs.fromBundle(arguments).getTypeModel());
                 return sample();
-            case R.id.sessionFragment:
-                sessionType = SessionFragmentArgs.fromBundle(arguments).getType();
+            case R.id.sessionFragment: {
+                TypeModel typeModel = SessionFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (!sessionType.equals("session"))
-                    setModels("schedule", SessionFragmentArgs.fromBundle(arguments).getTypeModel());
-                else
-                    setModels("session", SessionFragmentArgs.fromBundle(arguments).getTypeModel());
+                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel")) {
+                    sessionType = "schedule";
+                    setModels("schedule", typeModel);
+                } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+                    sessionType = "session";
+                    setModels("session", typeModel);
+                }
 
                 return session();
-            case R.id.treasuryFragment:
+            } case R.id.treasuryFragment:
                 setModels("treasury", TreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
                 return treasury();
             case R.id.userFragment:
@@ -397,9 +404,9 @@ public class BreadCrumb {
                 NavDirections action;
 
                 if (clientReportsType.equals("case"))
-                    action = NavigationMainDirections.actionGlobalClientReportsFragment("case", caseModel);
+                    action = NavigationMainDirections.actionGlobalClientReportsFragment(caseModel);
                 else
-                    action = NavigationMainDirections.actionGlobalClientReportsFragment("session", sessionModel);
+                    action = NavigationMainDirections.actionGlobalClientReportsFragment(sessionModel);
 
                 ((MainActivity) activity).navController.navigate(action);
             } break;
@@ -460,9 +467,9 @@ public class BreadCrumb {
                 NavDirections action;
 
                 if (!sessionType.equals("session"))
-                    action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
+                    action = NavigationMainDirections.actionGlobalSessionFragment(scheduleModel);
                 else
-                    action = NavigationMainDirections.actionGlobalSessionFragment("session", sessionModel);
+                    action = NavigationMainDirections.actionGlobalSessionFragment(sessionModel);
 
                 ((MainActivity) activity).navController.navigate(action);
             } break;

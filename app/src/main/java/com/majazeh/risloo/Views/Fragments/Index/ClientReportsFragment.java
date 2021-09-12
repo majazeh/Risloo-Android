@@ -30,6 +30,7 @@ import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -160,13 +161,17 @@ public class ClientReportsFragment extends Fragment {
     }
 
     private void setArgs() {
-        type = ClientReportsFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = ClientReportsFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (type.equals("case")) {
-            caseModel = (CaseModel) ClientReportsFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel")) {
+            type = "case";
+
+            caseModel = (CaseModel) typeModel;
             setData(caseModel);
-        } else {
-            sessionModel = (SessionModel) ClientReportsFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+            type = "session";
+
+            sessionModel = (SessionModel) typeModel;
             setData(sessionModel);
         }
     }

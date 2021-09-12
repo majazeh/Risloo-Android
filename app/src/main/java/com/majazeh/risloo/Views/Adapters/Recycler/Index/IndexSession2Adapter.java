@@ -128,7 +128,7 @@ public class IndexSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     @SuppressLint("ClickableViewAccessibility")
     private void listener(IndexSession2Holder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("session", model);
+            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 

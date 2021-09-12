@@ -481,7 +481,7 @@ public class ReserveScheduleFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
+                        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(scheduleModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
@@ -591,7 +591,7 @@ public class ReserveScheduleFragment extends Fragment {
                         } else {
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
 
-                            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment( scheduleModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         }
                     });

@@ -33,6 +33,7 @@ import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -54,12 +55,12 @@ public class SessionFragment extends Fragment {
 
     // Models
     public SessionModel sessionModel;
+    public ScheduleModel scheduleModel;
 
     // Objects
     private HashMap data, header;
 
     // Vars
-    private String type = "session";
     private boolean userSelect = false;
 
     @Nullable
@@ -150,7 +151,7 @@ public class SessionFragment extends Fragment {
                     switch (pos) {
                         case "گزارشات": {
                             if (sessionModel != null) {
-                                NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment("session", sessionModel);
+                                NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment(sessionModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
                         } break;
@@ -197,13 +198,13 @@ public class SessionFragment extends Fragment {
     }
 
     private void setArgs() {
-        type = SessionFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = SessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (!type.equals("session")) {
-            ScheduleModel scheduleModel = (ScheduleModel) SessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel")) {
+            scheduleModel = (ScheduleModel) typeModel;
             setData(scheduleModel);
-        } else {
-            sessionModel = (SessionModel) SessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+            sessionModel = (SessionModel) typeModel;
             setData(sessionModel);
         }
     }

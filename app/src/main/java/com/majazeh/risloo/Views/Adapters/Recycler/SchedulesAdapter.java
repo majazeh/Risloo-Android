@@ -113,7 +113,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
                 NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(model);
                 ((MainActivity) activity).navController.navigate(action);
             } else {
-                NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", model);
+                NavDirections action = NavigationMainDirections.actionGlobalSessionFragment( model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());
