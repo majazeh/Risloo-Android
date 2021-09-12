@@ -36,6 +36,7 @@ public class UserModel extends TypeModel {
     private List caseList;
     private List sampleList;
     private JSONArray treasuries;
+    private JSONObject dalilyScheduleExports;
 
     public UserModel() {
         super();
@@ -126,6 +127,9 @@ public class UserModel extends TypeModel {
         }
         if (!jsonObject.isNull("treasuries")){
             setTreasuries(jsonObject.getJSONArray("treasuries"));
+        }
+        if (!jsonObject.isNull("dalily_schedule_exports")){
+            setDalilyScheduleExports(jsonObject.getJSONObject("dalily_schedule_exports"));
         }
     }
 
@@ -335,6 +339,14 @@ public class UserModel extends TypeModel {
 
     public void setMeta(JSONObject meta) {
         this.meta = meta;
+    }
+
+    public JSONObject getDalilyScheduleExports() {
+        return dalilyScheduleExports;
+    }
+
+    public void setDalilyScheduleExports(JSONObject dalilyScheduleExports) {
+        this.dalilyScheduleExports = dalilyScheduleExports;
     }
 
     @NonNull

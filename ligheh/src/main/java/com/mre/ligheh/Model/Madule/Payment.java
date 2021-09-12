@@ -21,7 +21,7 @@ public class Payment extends Model{
 
     public static void auth(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.post("auth", data, header, response, null);
+            Model.post("auth", data, header, response, PaymentModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

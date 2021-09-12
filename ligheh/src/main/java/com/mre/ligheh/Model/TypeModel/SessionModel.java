@@ -25,7 +25,9 @@ public class SessionModel extends TypeModel {
     private String description = "";
     private int duration;
     private int opens_at;
+    private String opens_at_type;
     private int closed_at;
+    private String closed_at_type;
     private int started_at;
     private int canceled_at;
     private JSONArray fields;
@@ -74,6 +76,12 @@ public class SessionModel extends TypeModel {
                 setOpens_at(jsonObject.getInt("opens_at"));
             if (!jsonObject.isNull("closed_at"))
                 setClosed_at(jsonObject.getInt("closed_at"));
+
+            if (!jsonObject.isNull("opens_at_type"))
+                setOpens_at_type(jsonObject.getString("opens_at_type"));
+            if (!jsonObject.isNull("closed_at_type"))
+                setClosed_at_type(jsonObject.getString("closed_at_type"));
+
             if (!jsonObject.isNull("started_at"))
                 setStarted_at(jsonObject.getInt("started_at"));
             if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
@@ -329,5 +337,21 @@ public class SessionModel extends TypeModel {
 
     public void setTransactions(List transactions) {
         this.transactions = transactions;
+    }
+
+    public String getOpens_at_type() {
+        return opens_at_type;
+    }
+
+    public void setOpens_at_type(String opens_at_type) {
+        this.opens_at_type = opens_at_type;
+    }
+
+    public String getClosed_at_type() {
+        return closed_at_type;
+    }
+
+    public void setClosed_at_type(String closed_at_type) {
+        this.closed_at_type = closed_at_type;
     }
 }
