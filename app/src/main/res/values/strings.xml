@@ -1193,6 +1193,15 @@
     <string name="DashboardFragmentNoPasswordAction">تنظیم کلمه عبور</string>
     <string name="DashboardFragmentNoCenterAction">مراکز درمانی</string>
 
+    <string name="DashboardFragmentNoSchedulesTodayTitle">برنامه‌ای برای امروز ندارید!</string>
+    <string name="DashboardFragmentNoSchedulesTomorrowTitle">جلسه‌ای برای فردا ثبت نشده است!</string>
+
+    <string name="DashboardFragmentHasSchedulesTodayTitle">برنامه‌ای برای امروز دارید!</string>
+    <string name="DashboardFragmentHasSchedulesTomorrowTitle">جلسه‌ای برای فردا ثبت شده است!</string>
+
+    <string name="DashboardFragmentHasSchedulesAction">دریافت فایل</string>
+
+    <string name="DashboardFragmentSchedulesHeader">برنامه درمانی من</string>
     <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
 
     /*
