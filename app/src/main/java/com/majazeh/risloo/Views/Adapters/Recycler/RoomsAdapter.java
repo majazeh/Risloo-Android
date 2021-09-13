@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,14 +17,20 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.RoomsHolder;
+import com.majazeh.risloo.Views.Fragments.Show.DashboardFragment;
 import com.majazeh.risloo.databinding.SingleItemRoomBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
+
+    // Fragments
+    private Fragment current;
 
     // Objects
     private Activity activity;
@@ -44,6 +51,8 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
     @Override
     public void onBindViewHolder(@NonNull RoomsHolder holder, int i) {
         RoomModel model = (RoomModel) items.get(i);
+
+        initializer();
 
         detector(holder);
 
@@ -75,6 +84,10 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
         }
     }
 
+    private void initializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+    }
+
     private void detector(RoomsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
@@ -89,15 +102,32 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
     }
 
     private void setData(RoomsHolder holder, RoomModel model) {
-        if (!model.getRoomManager().getName().equals(""))
-            holder.binding.nameTextView.setText(model.getRoomManager().getName());
-        else
-            holder.binding.nameTextView.setText(model.getRoomManager().getId());
+        if (current instanceof DashboardFragment) {
+            try {
+                if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null)
+                    holder.binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
+                else if (model.getRoomCenter() != null && model.getRoomCenter().getManager() != null)
+                    holder.binding.nameTextView.setText(model.getRoomCenter().getManager().getName());
 
-        if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
-            setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
-        else
-            setAvatar(holder, "");
+                if (model.getRoomCenter() != null && model.getRoomCenter().getDetail().has("avatar") && !model.getRoomCenter().getDetail().isNull("avatar") && model.getRoomCenter().getDetail().getJSONArray("avatar").length() != 0)
+                    setAvatar(holder, model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                else
+                    setAvatar(holder, "");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            if (!model.getRoomManager().getName().equals(""))
+                holder.binding.nameTextView.setText(model.getRoomManager().getName());
+            else
+                holder.binding.nameTextView.setText(model.getRoomManager().getId());
+
+            if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
+                setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
+            else
+                setAvatar(holder, "");
+        }
     }
 
     private void setAvatar(RoomsHolder holder, String url) {

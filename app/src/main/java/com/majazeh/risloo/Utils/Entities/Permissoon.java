@@ -176,15 +176,6 @@ public class Permissoon {
             return false;
     }
 
-    public boolean showReserveScheduleNotCallAuth(UserModel userModel, ScheduleModel scheduleModel) {
-        if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null)
-            return userModel.getUserType().equals("admin") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("operator");
-        else if (userModel != null)
-            return userModel.getUserType().equals("admin");
-        else
-            return false;
-    }
-
     /*
     ---------- Case ----------
     */
