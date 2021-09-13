@@ -175,6 +175,7 @@ public class DashboardFragment extends Fragment {
     private void setData(UserModel model) {
         try {
             ((MainActivity) requireActivity()).singleton.update(model);
+            ((MainActivity) requireActivity()).setData();
 
             // Missings Data
             if (model.isNo_password())
