@@ -234,7 +234,11 @@ public class DashboardFragment extends Fragment {
                 roomsAdapter.setItems(myRooms);
                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
-                binding.roomsGroup.setVisibility(View.VISIBLE);
+                if (roomsAdapter.getItemCount() == 0)
+                    binding.roomsGroup.setVisibility(View.GONE);
+                else
+                    binding.roomsGroup.setVisibility(View.VISIBLE);
+
             } else if (roomsAdapter.getItemCount() == 0) {
                 binding.roomsGroup.setVisibility(View.GONE);
             }
