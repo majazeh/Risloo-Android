@@ -71,7 +71,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity(), "loading");
+            DialogManager.showLoadingDialog(requireActivity(), "");
 
             data.put("key", key);
 

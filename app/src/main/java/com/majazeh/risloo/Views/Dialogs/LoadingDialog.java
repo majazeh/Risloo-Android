@@ -23,7 +23,7 @@ public class LoadingDialog extends AppCompatDialogFragment {
     private DialogLoadingBinding binding;
 
     // Vars
-    private String method;
+    private String title;
 
     @NonNull
     @Override
@@ -35,7 +35,7 @@ public class LoadingDialog extends AppCompatDialogFragment {
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(binding.getRoot());
-        dialog.getWindow().setAttributes(ParamsManager.applyWrapContent(dialog));
+        dialog.getWindow().setAttributes(ParamsManager.wrapContent(dialog));
 
         setCancelable(false);
 
@@ -53,21 +53,13 @@ public class LoadingDialog extends AppCompatDialogFragment {
     }
 
     private void setDialog() {
-        switch (method) {
-            case "loading":
-                binding.titleTextView.setText(getResources().getString(R.string.DialogLoadingTitle));
-                break;
-            case "payment":
-                binding.titleTextView.setText(getResources().getString(R.string.DialogPaymentTitle));
-                break;
-            case "callback":
-                binding.titleTextView.setText(getResources().getString(R.string.DialogCallbackTitle));
-                break;
+        if (!title.equals("")) {
+            binding.titleTextView.setText(title);
         }
     }
 
-    public void setData(String method) {
-        this.method = method;
+    public void setData(String title) {
+        this.title = title;
     }
 
     @Override

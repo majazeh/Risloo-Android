@@ -172,7 +172,7 @@ public class CreateTreasuryFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("title", title);
         data.put("region_id", regionId);

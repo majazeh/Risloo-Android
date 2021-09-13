@@ -239,7 +239,7 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("type", type);
         data.put("manager_id", managerId);

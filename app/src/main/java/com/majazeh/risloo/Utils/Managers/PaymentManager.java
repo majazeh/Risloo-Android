@@ -17,7 +17,7 @@ public class PaymentManager {
     */
 
     public static void request(Activity activity, PaymentModel model) {
-        DialogManager.showLoadingDialog(activity, "payment");
+        DialogManager.showLoadingDialog(activity, "");
 
         HashMap data = new HashMap<>();
         HashMap header = new HashMap<>();
@@ -59,7 +59,7 @@ public class PaymentManager {
     }
 
     public static void finalize(Activity activity, PaymentModel model) {
-        DialogManager.showLoadingDialog(activity, "callback");
+        DialogManager.showLoadingDialog(activity, "");
 
         HashMap data = new HashMap<>();
         HashMap header = new HashMap<>();

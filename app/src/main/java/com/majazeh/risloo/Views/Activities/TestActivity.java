@@ -423,7 +423,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void closeSample() {
-        DialogManager.showLoadingDialog(this, "loading");
+        DialogManager.showLoadingDialog(this, "");
 
         Sample.close(sampleAnswers, data, header, new Response() {
             @Override

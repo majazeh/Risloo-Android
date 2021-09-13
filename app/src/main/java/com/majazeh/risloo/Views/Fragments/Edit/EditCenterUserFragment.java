@@ -211,7 +211,7 @@ public class EditCenterUserFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("position", SelectionManager.getUserType(requireActivity(), "en", position));
         data.put("nickname", nickname);

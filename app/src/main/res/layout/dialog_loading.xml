@@ -1,44 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:padding="@dimen/_10sdp"
     android:background="@drawable/draw_12sdp_solid_white"
     tools:context=".Views.Dialogs.LoadingDialog">
 
     <ProgressBar
         android:id="@+id/loading_progressBar"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_width="@dimen/_42sdp"
+        android:layout_height="@dimen/_42sdp"
+        android:layout_gravity="center"
         android:theme="@style/ProgressBarTheme"
-        app:layout_constraintBottom_toBottomOf="@id/title_textView"
-        app:layout_constraintEnd_toStartOf="@id/title_textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title_textView"
         style="@style/Widget.AppCompat.ProgressBar" />
 
     <TextView
         android:id="@+id/title_textView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:gravity="start"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:gravity="center"
         android:text="@string/DialogLoadingTitle"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="@dimen/_9ssp"
         android:textStyle="bold"
-        android:textColor="@color/Gray700"
+        android:textColor="@color/Gray400"
         android:textAlignment="gravity"
-        android:fontFamily="@font/dana_bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/loading_progressBar"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/dana_bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

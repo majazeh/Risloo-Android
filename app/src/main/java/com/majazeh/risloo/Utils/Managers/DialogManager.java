@@ -20,13 +20,13 @@ public class DialogManager {
     ---------- Show ----------
     */
 
-    public static void showLoadingDialog(Activity activity, String method) {
+    public static void showLoadingDialog(Activity activity, String title) {
         loadingDialog = new LoadingDialog();
         if (activity instanceof AppCompatActivity)
             loadingDialog.show(((AppCompatActivity) activity).getSupportFragmentManager(), "loadingDialog");
         else if (activity instanceof FragmentActivity)
             loadingDialog.show(((FragmentActivity) activity).getSupportFragmentManager(), "loadingDialog");
-        loadingDialog.setData(method);
+        loadingDialog.setData(title);
     }
 
     public static void showSearchableDialog(Activity activity, String method) {

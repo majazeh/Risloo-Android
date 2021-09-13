@@ -135,7 +135,7 @@ public class EditUserTabCryptoFragment extends Fragment {
     }
 
     private void doWork(String key) {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         if (key.equals("public")) {
             // TODO : Place Code Here

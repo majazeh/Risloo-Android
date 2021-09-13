@@ -160,7 +160,7 @@ public class CreateCaseUserFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("client_id", referencesAdapter.getIds());
 

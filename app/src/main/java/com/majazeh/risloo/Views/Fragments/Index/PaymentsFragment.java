@@ -245,7 +245,7 @@ public class PaymentsFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("treasury_id", treasury);
         data.put("amount", amount);

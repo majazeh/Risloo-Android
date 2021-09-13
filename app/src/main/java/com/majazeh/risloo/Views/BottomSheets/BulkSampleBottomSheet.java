@@ -100,7 +100,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity(), "loading");
+            DialogManager.showLoadingDialog(requireActivity(), "");
 
             data.put("key", key);
 

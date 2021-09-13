@@ -188,7 +188,7 @@ public class CreateScheduleFragment extends Fragment {
     }
 
     public void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         // Time Data
         if (time instanceof CreateScheduleTabTimeFragment) {

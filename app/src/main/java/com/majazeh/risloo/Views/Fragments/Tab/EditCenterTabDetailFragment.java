@@ -249,7 +249,7 @@ public class EditCenterTabDetailFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("manager_id", managerId);
         data.put("address", address);

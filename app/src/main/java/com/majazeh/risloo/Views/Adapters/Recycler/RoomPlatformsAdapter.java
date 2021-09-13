@@ -283,7 +283,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
     }
 
     private void doWork(RoomPlatformsHolder holder, SessionPlatformModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity,"loading");
+        DialogManager.showLoadingDialog(activity,"");
 
         if (current instanceof RoomPlatformsFragment)
             data.put("id", ((RoomPlatformsFragment) current).roomId);

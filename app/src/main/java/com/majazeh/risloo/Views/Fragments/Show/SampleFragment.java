@@ -491,7 +491,7 @@ public class SampleFragment extends Fragment {
     }
 
     private void fillSample() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         Sample.fill(data, header, new Response() {
             @Override
@@ -516,7 +516,7 @@ public class SampleFragment extends Fragment {
     }
 
     private void closeSample() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         Sample.close(sampleAnswers, data, header, new Response() {
             @Override
@@ -541,7 +541,7 @@ public class SampleFragment extends Fragment {
     }
 
     private void openSample() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         Sample.open(data, header, new Response() {
             @Override
@@ -566,7 +566,7 @@ public class SampleFragment extends Fragment {
     }
 
     private void scoreSample() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         Sample.score(data, header, new Response() {
             @Override

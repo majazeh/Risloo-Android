@@ -446,7 +446,7 @@ public class ReserveScheduleFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("field", field);
         data.put("session_platform", platform);

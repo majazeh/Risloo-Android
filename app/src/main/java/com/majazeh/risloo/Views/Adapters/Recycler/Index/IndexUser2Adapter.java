@@ -195,7 +195,7 @@ public class IndexUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void doWork(UserModel model, String position) {
-        DialogManager.showLoadingDialog(activity, "loading");
+        DialogManager.showLoadingDialog(activity, "");
 
         if (current instanceof SessionFragment)
             data.put("id", ((SessionFragment) current).sessionModel.getId());

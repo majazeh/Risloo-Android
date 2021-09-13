@@ -160,7 +160,7 @@ public class CreateRoomUserFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("user_id", referencesAdapter.getIds());
 

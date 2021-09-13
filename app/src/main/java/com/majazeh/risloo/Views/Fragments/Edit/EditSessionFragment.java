@@ -178,7 +178,7 @@ public class EditSessionFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         // Time Data
         if (time instanceof EditSessionTabTimeFragment) {

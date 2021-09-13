@@ -143,7 +143,7 @@ public class CreateRoomFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("psychologist_id", psychologyId);
 

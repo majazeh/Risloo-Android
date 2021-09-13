@@ -239,7 +239,7 @@ public class CreateCaseFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("title", title);
         data.put("client_id", referencesAdapter.getIds());

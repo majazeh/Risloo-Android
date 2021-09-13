@@ -263,7 +263,7 @@ public class CreateSessionUserFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "loading");
+        DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("field", axis);
         data.put("session_platform", platform);

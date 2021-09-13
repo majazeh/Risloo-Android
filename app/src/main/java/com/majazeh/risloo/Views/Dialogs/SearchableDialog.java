@@ -86,7 +86,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(binding.getRoot());
         dialog.setCancelable(true);
-        dialog.getWindow().setAttributes(ParamsManager.applyWrapContent(dialog));
+        dialog.getWindow().setAttributes(ParamsManager.matchWrapContent(dialog));
 
         return dialog;
     }
