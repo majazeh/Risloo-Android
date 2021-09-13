@@ -23,6 +23,8 @@ import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.databinding.FragmentDashboardBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -220,7 +222,16 @@ public class DashboardFragment extends Fragment {
 
             // Rooms Data
             if (!model.getRoomList().data().isEmpty()) {
-                roomsAdapter.setItems(model.getRoomList().data());
+                ArrayList<TypeModel> myRooms = new ArrayList<>();
+
+                for (TypeModel typeModel : model.getRoomList().data()) {
+                    RoomModel roomModel = (RoomModel) typeModel;
+
+                    if (roomModel != null && roomModel.getRoomAcceptation() != null && roomModel.getRoomAcceptation().getPosition().equals("manager"))
+                        myRooms.add(roomModel);
+                }
+
+                roomsAdapter.setItems(myRooms);
                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
                 binding.roomsGroup.setVisibility(View.VISIBLE);

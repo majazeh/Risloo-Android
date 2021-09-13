@@ -108,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
         Decorator decorator = new Decorator(this);
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
-            decorator.navShowSystemUI(false, true);
+            decorator.showSystemUI(false, true);
             decorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
-            decorator.navShowSystemUI(true, true);
+            decorator.showSystemUI(true, true);
             decorator.setSystemUIColor(Color.TRANSPARENT, getResources().getColor(R.color.Gray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.GONE);
