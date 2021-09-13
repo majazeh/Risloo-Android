@@ -29,7 +29,6 @@ import com.majazeh.risloo.Views.Adapters.Recycler.Create.CreateCheckAdapter;
 import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
-import com.mre.ligheh.Model.Madule.Payment;
 import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
@@ -79,8 +78,6 @@ public class ReserveScheduleFragment extends Fragment {
         setArgs();
 
         setPermission();
-
-        setCallBack();
 
         return binding.getRoot();
     }
@@ -495,12 +492,10 @@ public class ReserveScheduleFragment extends Fragment {
                             JSONObject responseObject = new JSONObject(response);
 
                             if (responseObject.getString("message").equals("POVERTY")) {
-                                DialogManager.dismissLoadingDialog();
+                                JSONObject paymentObject = responseObject.getJSONObject("payment");
+                                PaymentModel paymentModel = new PaymentModel(paymentObject);
 
-                                JSONObject payment = responseObject.getJSONObject("payment");
-                                String key = payment.getString("authorized_key");
-
-                                callAuth("payment", key);
+                                PaymentManager.request(requireActivity(), paymentModel);
                             } else {
                                 if (!responseObject.isNull("errors")) {
                                     JSONObject errorsObject = responseObject.getJSONObject("errors");
@@ -551,58 +546,6 @@ public class ReserveScheduleFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    });
-                }
-            }
-        });
-    }
-
-    private void setCallBack() {
-        if (!((MainActivity) requireActivity()).singleton.getPaymentAuthKey().equals("")) {
-            callAuth("callback", ((MainActivity) requireActivity()).singleton.getPaymentAuthKey());
-            ((MainActivity) requireActivity()).singleton.clearPayment();
-        }
-    }
-
-    private void callAuth(String method, String key) {
-        DialogManager.showLoadingDialog(requireActivity(), method);
-
-        HashMap data = new HashMap<>();
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-
-        data.put("authorized_key", key);
-
-        Payment.auth(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                PaymentModel model = (PaymentModel) object;
-
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
-
-                        if (method.equals("payment")) {
-                            // TODO : Update Schedule Model
-
-                            ((MainActivity) requireActivity()).singleton.fillPayment(key, scheduleModel);
-
-                            PaymentManager.request(requireActivity(), model.getRedirect());
-                        } else {
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
-
-                            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment( scheduleModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        // Place Code if Needed
                     });
                 }
             }

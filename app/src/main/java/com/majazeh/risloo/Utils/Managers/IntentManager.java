@@ -15,6 +15,7 @@ import android.provider.Settings;
 
 import androidx.core.content.FileProvider;
 
+import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.DisplayActivity;
 import com.majazeh.risloo.Views.Activities.IntroActivity;
@@ -169,6 +170,19 @@ public class IntentManager {
         context.startActivity(Intent.createChooser(intent, chooser));
     }
 
+    public static void mediaScan(Activity activity, File file) {
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(file));
+
+        activity.sendBroadcast(intent);
+    }
+
+    public static void clipboard(Context context, String value) {
+        ClipboardManager manager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("saved", value);
+        manager.setPrimaryClip(clip);
+    }
+
     public static void download(Context context, String url) {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 
@@ -180,17 +194,14 @@ public class IntentManager {
         Objects.requireNonNull(manager).enqueue(request);
     }
 
-    public static void clipboard(Context context, String value) {
-        ClipboardManager manager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("saved", value);
-        manager.setPrimaryClip(clip);
-    }
-
-    public static void mediaScan(Activity activity, File file) {
-        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        intent.setData(Uri.fromFile(file));
-
-        activity.sendBroadcast(intent);
+    public static void browser(Activity activity, String url) {
+        Intent intent = null;
+        try {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://dev.risloo.ir/a.html"));
+        } catch (ActivityNotFoundException e) {
+            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityException));
+        }
+        activity.startActivity(intent);
     }
 
     /*

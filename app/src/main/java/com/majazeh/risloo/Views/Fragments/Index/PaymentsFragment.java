@@ -47,9 +47,6 @@ public class PaymentsFragment extends Fragment {
     // Adapters
     private IndexPaymentAdapter indexPaymentAdapter;
 
-    // Models
-    private PaymentModel paymentModel;
-
     // Objects
     private HashMap data, header;
 
@@ -72,8 +69,6 @@ public class PaymentsFragment extends Fragment {
         setData();
 
         getData();
-
-        setCallBack();
 
         return binding.getRoot();
     }
@@ -282,12 +277,10 @@ public class PaymentsFragment extends Fragment {
                             JSONObject responseObject = new JSONObject(response);
 
                             if (responseObject.getString("message").equals("POVERTY")) {
-                                DialogManager.dismissLoadingDialog();
+                                JSONObject paymentObject = responseObject.getJSONObject("payment");
+                                PaymentModel paymentModel = new PaymentModel(paymentObject);
 
-                                JSONObject payment = responseObject.getJSONObject("payment");
-                                String key = payment.getString("authorized_key");
-
-                                callAuth("payment", key);
+                                PaymentManager.request(requireActivity(), paymentModel);
                             } else {
                                 if (!responseObject.isNull("errors")) {
                                     JSONObject errorsObject = responseObject.getJSONObject("errors");
@@ -320,60 +313,6 @@ public class PaymentsFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    });
-                }
-            }
-        });
-    }
-
-    private void setCallBack() {
-        // TODO : Place Code Here
-    }
-
-    private void callAuth(String method, String key) {
-        DialogManager.showLoadingDialog(requireActivity(), method);
-
-        HashMap data = new HashMap<>();
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-
-        data.put("authorized_key", key);
-
-        Payment.auth(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                PaymentModel model = (PaymentModel) object;
-
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
-
-                        if (method.equals("payment")) {
-                            // TODO : Update Payment Model
-
-//                            ((MainActivity) requireActivity()).singleton.fillPayment(key, paymentModel);
-
-                            PaymentManager.request(requireActivity(), model.getRedirect());
-                        } else {
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSuccesPayment));
-
-                            binding.paymentsSingleLayout.getRoot().setVisibility(View.GONE);
-                            binding.paymentsShimmerLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.paymentsShimmerLayout.getRoot().startShimmer();
-
-                            binding.paymentsHeaderLayout.countTextView.setText("");
-
-                            getData();
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        // Place Code if Needed
                     });
                 }
             }

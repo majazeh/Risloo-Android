@@ -118,7 +118,7 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesHolder> {
         else if (fileName.contains(".content.png"))
             return ".content.png";
         else
-            return "نامغلوم";
+            return "نامعلوم";
     }
 
 }

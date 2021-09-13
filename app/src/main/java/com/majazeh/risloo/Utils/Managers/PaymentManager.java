@@ -1,35 +1,91 @@
 package com.majazeh.risloo.Utils.Managers;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
 import android.net.Uri;
 
-import androidx.navigation.NavDirections;
-
-import com.majazeh.risloo.NavigationMainDirections;
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Payment;
+import com.mre.ligheh.Model.TypeModel.PaymentModel;
+
+import java.util.HashMap;
 
 public class PaymentManager {
 
-    public static void request(Activity activity, String url) {
-        Intent intent = null;
-        try {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://dev.risloo.ir/a.html"));
-        } catch (ActivityNotFoundException e) {
-            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityException));
-        }
-        activity.startActivity(intent);
+    /*
+    ---------- Voids ----------
+    */
+
+    public static void request(Activity activity, PaymentModel model) {
+        DialogManager.showLoadingDialog(activity, "payment");
+
+        HashMap data = new HashMap<>();
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+
+        data.put("authorized_key", model.getAuthorized_key());
+
+        Payment.auth(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                PaymentModel model = (PaymentModel) object;
+
+                activity.runOnUiThread(() -> {
+                    DialogManager.dismissLoadingDialog();
+
+                    // TODO : Update & Save TypeModel
+
+                    IntentManager.browser(activity, model.getRedirect());
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                activity.runOnUiThread(() -> {
+                    // Place Code if Needed
+                });
+            }
+        });
     }
 
     public static void callback(Activity activity) {
         Uri uri = activity.getIntent().getData();
 
         if (uri != null) {
-            NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(((MainActivity) activity).singleton.getPaymentAuthScheduleModel());
-            ((MainActivity) activity).navController.navigate(action);
+            // TODO : Navigate The Previous Fragment
+
+            // TODO : Call finalize() method
         }
+    }
+
+    public static void finalize(Activity activity, PaymentModel model) {
+        DialogManager.showLoadingDialog(activity, "callback");
+
+        HashMap data = new HashMap<>();
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+
+        data.put("authorized_key", model.getAuthorized_key());
+
+        Payment.auth(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                PaymentModel model = (PaymentModel) object;
+
+                activity.runOnUiThread(() -> {
+                    DialogManager.dismissLoadingDialog();
+
+                    // TODO : Show Corresponding Message & Handle The Navigation If Needed
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                activity.runOnUiThread(() -> {
+                    // Place Code if Needed
+                });
+            }
+        });
     }
 
 }
