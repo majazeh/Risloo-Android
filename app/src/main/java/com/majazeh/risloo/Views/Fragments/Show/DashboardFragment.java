@@ -108,11 +108,21 @@ public class DashboardFragment extends Fragment {
         }).widget(binding.centerMissingLayout.actionTextView);
 
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code If Needed
+            if (schedulesTodayUrls != null && !schedulesTodayUrls.isEmpty())
+                for (String url : schedulesTodayUrls)
+                    if (url.contains(".png")) {
+                        IntentManager.display(requireActivity(), requireActivity().getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), url);
+                        return;
+                    }
         }).widget(binding.schedulesTodayLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code If Needed
+            if (schedulesTomorrowUrls != null && !schedulesTomorrowUrls.isEmpty())
+                for (String url : schedulesTomorrowUrls)
+                    if (url.contains(".png")) {
+                        IntentManager.display(requireActivity(), requireActivity().getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), url);
+                        return;
+                    }
         }).widget(binding.schedulesTomorrowLayout.getRoot());
 
         binding.schedulesTodayLayout.selectSpinner.setOnTouchListener((v, event) -> {
@@ -175,12 +185,12 @@ public class DashboardFragment extends Fragment {
             // TODO : Place Center Code Here
 
             // Schedules Data
-            if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("today") && !model.getDalilyScheduleExports().isNull("today") && model.getDalilyScheduleExports().getJSONArray("today").length() != 0) {
+            if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("today") && !model.getDalilyScheduleExports().isNull("today") && model.getDalilyScheduleExports().getJSONObject("today").length() != 0) {
                 binding.schedulesTodayLayout.getRoot().setVisibility(View.VISIBLE);
                 binding.schedulesTodayLayout.selectGroup.setVisibility(View.VISIBLE);
 
-                InitManager.txtTextColor(binding.schedulesTodayLayout.titleTextView, getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), getResources().getColor(R.color.Gray500));
-                InitManager.imgResTint(requireActivity(), binding.schedulesTodayLayout.avatarImageView, R.drawable.ic_calendar_day_light, R.color.Gray500);
+                InitManager.txtTextColor(binding.schedulesTodayLayout.titleTextView, getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), getResources().getColor(R.color.Blue700));
+                InitManager.imgResTint(requireActivity(), binding.schedulesTodayLayout.avatarImageView, R.drawable.ic_calendar_day_light, R.color.Blue600);
 
                 setDropdowns("today", model.getDalilyScheduleExports().getJSONObject("today"));
             } else {
@@ -191,12 +201,12 @@ public class DashboardFragment extends Fragment {
                 InitManager.imgResTint(requireActivity(), binding.schedulesTodayLayout.avatarImageView, R.drawable.ic_calendar_day_light, R.color.Gray400);
             }
 
-            if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("tomorrow") && !model.getDalilyScheduleExports().isNull("tomorrow") && model.getDalilyScheduleExports().getJSONArray("tomorrow").length() != 0) {
+            if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("tomorrow") && !model.getDalilyScheduleExports().isNull("tomorrow") && model.getDalilyScheduleExports().getJSONObject("tomorrow").length() != 0) {
                 binding.schedulesTomorrowLayout.getRoot().setVisibility(View.VISIBLE);
                 binding.schedulesTomorrowLayout.selectGroup.setVisibility(View.VISIBLE);
 
-                InitManager.txtTextColor(binding.schedulesTomorrowLayout.titleTextView, getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), getResources().getColor(R.color.Gray500));
-                InitManager.imgResTint(requireActivity(), binding.schedulesTomorrowLayout.avatarImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500);
+                InitManager.txtTextColor(binding.schedulesTomorrowLayout.titleTextView, getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), getResources().getColor(R.color.Blue700));
+                InitManager.imgResTint(requireActivity(), binding.schedulesTomorrowLayout.avatarImageView, R.drawable.ic_calendar_alt_light, R.color.Blue600);
 
                 setDropdowns("tomorrow", model.getDalilyScheduleExports().getJSONObject("tomorrow"));
             } else {

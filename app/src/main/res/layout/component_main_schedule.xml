@@ -6,10 +6,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:paddingBottom="@dimen/_10sdp"
-    android:paddingEnd="@dimen/_6sdp"
-    android:paddingStart="@dimen/_8sdp"
-    android:paddingTop="@dimen/_10sdp"
     android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
     tools:layout_margin="@dimen/_12sdp">
 
@@ -17,6 +13,7 @@
         android:id="@+id/avatar_imageView"
         android:layout_width="@dimen/_14sdp"
         android:layout_height="@dimen/_14sdp"
+        android:layout_marginStart="@dimen/_8sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@id/title_textView"
@@ -29,9 +26,12 @@
         android:id="@+id/title_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_6sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_8sdp"
-        android:gravity="start"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:gravity="center|start"
+        android:lines="2"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textAlignment="gravity"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toStartOf="@id/select_textView"
         app:layout_constraintStart_toEndOf="@id/avatar_imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginEnd="@dimen/_2sdp"
+        app:layout_goneMarginEnd="@dimen/_8sdp"
         tools:text="برنامه درمانی"
         tools:textColor="@color/Gray400" />
 
@@ -48,16 +48,17 @@
         android:id="@+id/select_textView"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:paddingEnd="@dimen/_18sdp"
         android:paddingStart="@dimen/_8sdp"
         android:gravity="center"
         android:text="@string/DashboardFragmentHasSchedulesAction"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
-        android:textColor="@color/White"
+        android:textColor="@color/Blue600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_demi_bold"
-        android:background="@drawable/draw_16sdp_solid_green600"
+        android:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_blue600"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="@id/select_spinner"
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
-        app:tint="@color/White" />
+        app:tint="@color/Blue600" />
 
     <Spinner
         android:id="@+id/select_spinner"
