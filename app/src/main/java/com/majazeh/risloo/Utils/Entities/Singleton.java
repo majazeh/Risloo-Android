@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -251,7 +252,14 @@ public class Singleton {
     }
 
     public String getMoney() {
-        return "";
+        int total = 0;
+        for (int i = 0; i < getUserModel().getTreasuries().data().size(); i++) {
+            TreasuriesModel treasuriesModel = (TreasuriesModel) getUserModel().getTreasuries().data().get(i);
+            if (treasuriesModel.getSymbol().equals("wallet") ||treasuriesModel.getSymbol().equals("gift") ){
+                total += treasuriesModel.getBalance();
+            }
+        }
+        return String.valueOf(total);
     }
 
 }

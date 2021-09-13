@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             String money = StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman);
             binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
         } else {
-            String money = "0" + " " + getResources().getString(R.string.MainToman);
+            String money = singleton.getMoney() + " " + getResources().getString(R.string.MainToman);
             binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
         }
 

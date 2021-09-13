@@ -35,7 +35,7 @@ public class UserModel extends TypeModel {
     private List roomList;
     private List caseList;
     private List sampleList;
-    private JSONArray treasuries;
+    private List treasuries;
     private JSONObject dalilyScheduleExports;
 
     public UserModel() {
@@ -125,9 +125,18 @@ public class UserModel extends TypeModel {
         } else {
             setSampleList(new List());
         }
-        if (!jsonObject.isNull("treasuries")){
-            setTreasuries(jsonObject.getJSONArray("treasuries"));
+
+
+        if (!jsonObject.isNull("treasuries")) {
+            List treasuries = new List();
+            for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++) {
+                treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
+            }
+            setTreasuries(treasuries);
+        } else {
+            setTreasuries(new List());
         }
+
         if (!jsonObject.isNull("dalily_schedule_exports")){
             setDalilyScheduleExports(jsonObject.getJSONObject("dalily_schedule_exports"));
         }
@@ -309,11 +318,11 @@ public class UserModel extends TypeModel {
         this.sampleList = sampleList;
     }
 
-    public JSONArray getTreasuries() {
+    public List getTreasuries() {
         return treasuries;
     }
 
-    public void setTreasuries(JSONArray treasuries) {
+    public void setTreasuries(List treasuries) {
         this.treasuries = treasuries;
     }
 

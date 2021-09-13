@@ -22,7 +22,7 @@ public class User extends Model {
         model = (UserModel) super.data;
     }
 
-    public static void list(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+    public static void list(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             Model.list(endpoint, data, header, response, UserModel.class);
         } catch (IOException e) {
@@ -38,16 +38,47 @@ public class User extends Model {
         }
     }
 
-    public static void dashboard(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
-        try {
-            Model.get(endpoint + "/" + data.get("user") + "/profile", data, header, response, UserModel.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void dashboard(HashMap<String, Object> data, HashMap<String, Object> header, Response response1) {
+        Auth.me(new HashMap<>(), header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                List treasuries = new List();
+                AuthModel authModel = (AuthModel) object;
+                if (!authModel.getUser().getTreasuries().data().isEmpty()) {
+                    treasuries = authModel.getUser().getTreasuries();
+                }
+                try {
+                    List finalTreasuries = treasuries;
+                    Model.get(endpoint + "/" + data.get("user") + "/profile", data, header, new Response() {
+                        @Override
+                        public void onOK(Object object) {
+                            UserModel userModel = (UserModel) object;
+                            userModel.setTreasuries(finalTreasuries);
+                            response1.onOK(userModel);
+                        }
+
+                        @Override
+                        public void onFailure(String response) {
+                            response1.onFailure(response);
+
+                        }
+                    }, UserModel.class);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(String response) {
+                response1.onFailure(response);
+            }
+        });
     }
 
 
-    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             Model.create(endpoint, data, header, response, UserModel.class);
         } catch (IOException e) {
@@ -63,7 +94,7 @@ public class User extends Model {
         }
     }
 
-    public static void register(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+    public static void register(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             APIRequest.post("register", setData(data), setHeader(header), response, UserModel.class);
         } catch (IOException e) {
@@ -75,12 +106,12 @@ public class User extends Model {
         try {
             if (has(header, "Authorization")) {
                 if (has(data, "id")) {
-                    Model.put(endpoint +"/"+ data.get("id"), data, header, response, AuthModel.class);
+                    Model.put(endpoint + "/" + data.get("id"), data, header, response, AuthModel.class);
                 } else {
-                    Exceptioner.make(response,"آیدی را وارد کنید");
+                    Exceptioner.make(response, "آیدی را وارد کنید");
                 }
             } else {
-                Exceptioner.make(response,"شما لاگین نیستید");
+                Exceptioner.make(response, "شما لاگین نیستید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -93,10 +124,10 @@ public class User extends Model {
                 if (has(data, "id")) {
                     Model.put(endpoint + "/" + data.get("id") + "/change-password", data, header, response, null);
                 } else {
-                    Exceptioner.make(response,"آیدی را وارد کنید");
+                    Exceptioner.make(response, "آیدی را وارد کنید");
                 }
             } else {
-                Exceptioner.make(response,"شما لاگین نیستید");
+                Exceptioner.make(response, "شما لاگین نیستید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,11 +142,11 @@ public class User extends Model {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else{
-                Exceptioner.make(response,"آیدی را وارد کنید!");
+            } else {
+                Exceptioner.make(response, "آیدی را وارد کنید!");
             }
         } else {
-            Exceptioner.make(response,"شما لاگین نیستید!");
+            Exceptioner.make(response, "شما لاگین نیستید!");
         }
     }
 
