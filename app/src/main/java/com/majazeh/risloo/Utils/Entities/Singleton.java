@@ -253,12 +253,16 @@ public class Singleton {
 
     public String getMoney() {
         int total = 0;
-        for (int i = 0; i < getUserModel().getTreasuries().data().size(); i++) {
-            TreasuriesModel treasuriesModel = (TreasuriesModel) getUserModel().getTreasuries().data().get(i);
-            if (treasuriesModel.getSymbol().equals("wallet") ||treasuriesModel.getSymbol().equals("gift") ){
-                total += treasuriesModel.getBalance();
+
+        if (getUserModel().getTreasuries() != null) {
+            for (TypeModel typeModel : getUserModel().getTreasuries().data()) {
+                TreasuriesModel model = (TreasuriesModel) typeModel;
+
+                if (model.getSymbol().equals("wallet") || model.getSymbol().equals("gift"))
+                    total += model.getBalance();
             }
         }
+
         return String.valueOf(total);
     }
 

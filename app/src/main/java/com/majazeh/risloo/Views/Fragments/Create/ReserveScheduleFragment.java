@@ -355,10 +355,10 @@ public class ReserveScheduleFragment extends Fragment {
     private void setPlatform(List platforms) {
         ArrayList<String> options = new ArrayList<>();
 
-        for (int i = 0; i < platforms.data().size(); i++) {
-            SessionPlatformModel model = (SessionPlatformModel) platforms.data().get(i);
-            options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
+        for (TypeModel typeModel : platforms.data()) {
+            SessionPlatformModel model = (SessionPlatformModel) typeModel;
 
+            options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
             platformIds.add(model.getId());
         }
 

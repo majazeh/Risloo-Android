@@ -217,11 +217,11 @@ public class MainActivity extends AppCompatActivity {
             binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         }
 
-        if (!singleton.getMoney().equals("")) {
+        if (!singleton.getMoney().equals("0")) {
             String money = StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman);
             binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
         } else {
-            String money = singleton.getMoney() + " " + getResources().getString(R.string.MainToman);
+            String money = "0" + " " + getResources().getString(R.string.MainToman);
             binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
         }
 

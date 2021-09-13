@@ -27,10 +27,14 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Payment;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
@@ -50,7 +54,8 @@ public class PaymentsFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String treasuryId = "", amount = "";
+    private ArrayList<String> treasuryIds = new ArrayList<>();
+    private String treasury = "", amount = "";
     private boolean userSelect = false, isLoading = true;
 
     @Nullable
@@ -63,6 +68,8 @@ public class PaymentsFragment extends Fragment {
         detector();
 
         listener();
+
+        setData();
 
         getData();
 
@@ -84,8 +91,6 @@ public class PaymentsFragment extends Fragment {
 
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeTreasuryHeader));
         binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 4, 12, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-
-        InitManager.normal12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, R.array.UserTypes);
 
         InitManager.txtTextColor(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White));
 
@@ -115,16 +120,7 @@ public class PaymentsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
-
-                    switch(pos) {
-                        case "":
-                            treasuryId = "";
-                            break;
-                        default:
-                            treasuryId = "";
-                            break;
-                    }
+                    treasury = treasuryIds.get(position);
 
                     userSelect = false;
                 }
@@ -170,6 +166,32 @@ public class PaymentsFragment extends Fragment {
 
             doWork();
         }).widget(binding.chargeTextView.getRoot());
+    }
+
+    private void setData() {
+        UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
+
+        if (model.getTreasuries() != null) {
+            setTreasury(model.getTreasuries());
+        }
+    }
+
+    private void setTreasury(List treasuries) {
+        ArrayList<String> options = new ArrayList<>();
+
+        for (TypeModel typeModel : treasuries.data()) {
+            TreasuriesModel model = (TreasuriesModel) typeModel;
+
+            if (model.isCreditable() && model.isMy_treasury()) {
+                options.add(model.getTitle());
+                treasuryIds.add(model.getId());
+            }
+        }
+
+        options.add("");
+        treasuryIds.add("");
+
+        InitManager.normal12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
     }
 
     private void getData() {
@@ -230,7 +252,7 @@ public class PaymentsFragment extends Fragment {
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "loading");
 
-        data.put("treasury_id", treasuryId);
+        data.put("treasury_id", treasury);
         data.put("amount", amount);
 
         Payment.post(data, header, new Response() {
