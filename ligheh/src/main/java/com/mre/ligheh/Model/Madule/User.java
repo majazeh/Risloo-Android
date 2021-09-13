@@ -42,19 +42,22 @@ public class User extends Model {
         Auth.me(new HashMap<>(), header, new Response() {
             @Override
             public void onOK(Object object) {
-                List treasuries = new List();
                 AuthModel authModel = (AuthModel) object;
-                if (!authModel.getUser().getTreasuries().data().isEmpty()) {
-                    treasuries = authModel.getUser().getTreasuries();
-                }
                 try {
-                    List finalTreasuries = treasuries;
                     Model.get(endpoint + "/" + data.get("user") + "/profile", data, header, new Response() {
                         @Override
                         public void onOK(Object object) {
-                            UserModel userModel = (UserModel) object;
-                            userModel.setTreasuries(finalTreasuries);
-                            response1.onOK(userModel);
+                            try {
+                                JSONObject json = (JSONObject) object;
+                                JSONObject jsonObject = json.getJSONObject("data");
+                                if (!authModel.getUser().object.isNull("treasuries")) {
+                                    jsonObject.put("treasuries", authModel.getUser().object.getJSONArray("treasuries"));
+                                }
+                                UserModel userModel = new UserModel(jsonObject);
+                                response1.onOK(userModel);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                         @Override
@@ -62,7 +65,7 @@ public class User extends Model {
                             response1.onFailure(response);
 
                         }
-                    }, UserModel.class);
+                    }, null);
 
                 } catch (IOException e) {
                     e.printStackTrace();
