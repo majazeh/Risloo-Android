@@ -7,14 +7,17 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     android:orientation="vertical"
-    android:padding="@dimen/_10sdp"
+    android:paddingBottom="@dimen/_10sdp"
+    android:paddingEnd="@dimen/_10sdp"
+    android:paddingStart="@dimen/_10sdp"
+    android:paddingTop="@dimen/_12sdp"
     android:background="@drawable/draw_12sdp_solid_white"
     tools:context=".Views.Dialogs.LoadingDialog">
 
     <ProgressBar
         android:id="@+id/loading_progressBar"
-        android:layout_width="@dimen/_42sdp"
-        android:layout_height="@dimen/_42sdp"
+        android:layout_width="@dimen/_38sdp"
+        android:layout_height="@dimen/_38sdp"
         android:layout_gravity="center"
         android:theme="@style/ProgressBarTheme"
         style="@style/Widget.AppCompat.ProgressBar" />
