@@ -261,6 +261,39 @@
                 app:layout_constraintTop_toBottomOf="@id/client_includeLayout" />
 
             <include
+                android:id="@+id/name_includeLayout"
+                layout="@layout/component_main_input_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/client_errorLayout" />
+
+            <include
+                android:id="@+id/name_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/name_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/name_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/name_includeLayout" />
+
+            <include
+                android:id="@+id/name_guideLayout"
+                layout="@layout/component_main_guide"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/name_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/name_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/name_errorLayout"
+                app:layout_goneMarginTop="@dimen/_6sdp" />
+
+            <include
                 android:id="@+id/problem_includeLayout"
                 layout="@layout/component_main_input_multi"
                 android:layout_width="0dp"
@@ -268,7 +301,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/field_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/client_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/name_guideLayout" />
 
             <include
                 android:id="@+id/problem_errorLayout"
@@ -301,6 +334,27 @@
                 app:layout_constraintEnd_toEndOf="@id/description_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/description_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/description_includeLayout" />
+
+            <include
+                android:id="@+id/treasury_includeLayout"
+                layout="@layout/component_main_input_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/description_errorLayout" />
+
+            <include
+                android:id="@+id/treasury_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/treasury_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/treasury_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/treasury_includeLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

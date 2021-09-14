@@ -34,6 +34,7 @@ import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -60,8 +61,8 @@ public class ReserveScheduleFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private ArrayList<String> fieldsIds = new ArrayList<>(), platformIds = new ArrayList<>();
-    public String roomId = "", field = "", platform = "", type = "center", caseId = "", referenceId = "", problem = "", description = "";
+    private ArrayList<String> fieldsIds = new ArrayList<>(), platformIds = new ArrayList<>(), treasuryIds = new ArrayList<>();
+    public String roomId = "", field = "", platform = "", type = "center", referenceId = "", caseId = "", name = "", problem = "", description = "", treasury = "";
     private boolean userSelect = false;
 
     @Nullable
@@ -95,14 +96,17 @@ public class ReserveScheduleFragment extends Fragment {
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentReferenceHeader));
         binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentCaseHeader));
         binding.clientIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentClientHeader));
+        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentNameHeader));
         binding.problemIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentProblemHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentDescriptionHeader));
+        binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentTreasuryHeader));
 
         binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.ReserveScheduleFragmentTypeReference));
         binding.typeIncludeLayout.firstRadioButton.setChecked(true);
         binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.ReserveScheduleFragmentTypeCase));
 
         binding.caseGuideLayout.guideTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentCaseGuide));
+        binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentNameGuide));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
@@ -194,6 +198,16 @@ public class ReserveScheduleFragment extends Fragment {
             DialogManager.showSearchableDialog(requireActivity(), "references");
         }).widget(binding.referenceIncludeLayout.selectTextView);
 
+        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
@@ -212,6 +226,27 @@ public class ReserveScheduleFragment extends Fragment {
 
         binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.treasuryIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        binding.treasuryIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    treasury = treasuryIds.get(position);
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
 
         CustomClickView.onDelayedListener(() -> {
@@ -303,28 +338,47 @@ public class ReserveScheduleFragment extends Fragment {
             description = model.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
         }
+
+//        if (model.getTreasuries() != null) {
+//            setTreasury(model.getTreasuries());
+//        }
     }
 
     private void setPermission() {
-        UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
-
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleClientType(model, scheduleModel))
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleClientType(scheduleModel)) {
             binding.typeIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-        else
+
+            if (type.equals("center")) {
+                binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+            } else {
+                binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
+                binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+            }
+        } else {
             binding.typeIncludeLayout.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleReference(model, scheduleModel))
-            binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-        else {
             binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
-            binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
         }
 
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleCaseGuide(model, scheduleModel))
-            if (binding.caseIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                binding.caseGuideLayout.getRoot().setVisibility(View.VISIBLE);
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleCase(scheduleModel) && binding.typeIncludeLayout.getRoot().getVisibility() != View.VISIBLE) {
+            binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.caseGuideLayout.getRoot().setVisibility(View.VISIBLE);
+        }
+
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleName(scheduleModel)) {
+            binding.nameIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.nameGuideLayout.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            binding.nameIncludeLayout.getRoot().setVisibility(View.GONE);
+            binding.nameGuideLayout.getRoot().setVisibility(View.GONE);
+        }
+
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleTreasury(scheduleModel))
+            binding.treasuryIncludeLayout.getRoot().setVisibility(View.VISIBLE);
         else
-            binding.caseGuideLayout.getRoot().setVisibility(View.GONE);
+            binding.treasuryIncludeLayout.getRoot().setVisibility(View.GONE);
     }
 
     private void setAxis(JSONArray fields) {
@@ -363,6 +417,24 @@ public class ReserveScheduleFragment extends Fragment {
         platformIds.add("");
 
         InitManager.normal12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
+    }
+
+    private void setTreasury(List treasuries) {
+        ArrayList<String> options = new ArrayList<>();
+
+        for (TypeModel typeModel : treasuries.data()) {
+            TreasuriesModel model = (TreasuriesModel) typeModel;
+
+            if (model.isCreditable() && model.isMy_treasury()) {
+                options.add(model.getTitle());
+                treasuryIds.add(model.getId());
+            }
+        }
+
+        options.add("");
+        treasuryIds.add("");
+
+        InitManager.normal12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
@@ -468,7 +540,9 @@ public class ReserveScheduleFragment extends Fragment {
                 break;
         }
 
+        data.put("nickname", name);
         data.put("description", description);
+        data.put("treasurie_id", treasury);
 
         Schedules.booking(data, header, new Response() {
             @Override
@@ -530,8 +604,14 @@ public class ReserveScheduleFragment extends Fragment {
                                                 case "problem":
                                                     ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
                                                     break;
+                                                case "nickname":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
+                                                    break;
                                                 case "description":
                                                     ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "treasurie_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 

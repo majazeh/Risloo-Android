@@ -637,13 +637,16 @@
     <string name="ReserveScheduleFragmentReferenceHeader">مراجع</string>
     <string name="ReserveScheduleFragmentCaseHeader">پرونده</string>
     <string name="ReserveScheduleFragmentClientHeader">انتخاب مراجع</string>
+    <string name="ReserveScheduleFragmentNameHeader">نام و نام خانوادگی</string>
     <string name="ReserveScheduleFragmentProblemHeader">مسئله</string>
     <string name="ReserveScheduleFragmentDescriptionHeader">توضیحات</string>
+    <string name="ReserveScheduleFragmentTreasuryHeader">نحوه پرداخت</string>
 
     <string name="ReserveScheduleFragmentTypeReference">مراجع</string>
     <string name="ReserveScheduleFragmentTypeCase">پرونده و مراجع(ین)</string>
 
     <string name="ReserveScheduleFragmentCaseGuide">اگر پرونده‌ای در جریان دارید؛ می‌توانید با انتخاب آن، این جلسه را به آن پرونده متصل نمایید.</string>
+    <string name="ReserveScheduleFragmentNameGuide">شما عضو این مرکز درمانی نیستید، پس از درخواست، عضو این مرکز خواهید شد؛ ما شما را با آن نامی که وارد می‌کنید به مرکز معرفی خواهیم کرد.</string>
 
     <string name="ReserveScheduleFragmentButton">تأیید و ثبت</string>
 
