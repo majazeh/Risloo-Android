@@ -1496,8 +1496,8 @@
 
     <string name="DialogLoadingTitle">در حال پردازش …</string>
 
-    <string name="DialogPaymentTitle">در حال اتصال به درگاه …</string>
-    <string name="DialogCallbackTitle">در حال بررسی نتیجه پرداخت …</string>
+    <string name="DialogPaymentRequest">در حال اتصال به درگاه پرداخت …</string>
+    <string name="DialogPaymentFinalize">در حال بررسی نتیجه پرداخت …</string>
 
     <string name="DialogDayTitle">روز(ها) هفته را انتخاب کنید.</string>
     <string name="DialogDayEntry">ثبت</string>

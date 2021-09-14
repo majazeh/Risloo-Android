@@ -17,7 +17,7 @@ public class PaymentManager {
     */
 
     public static void request(Activity activity, PaymentModel model) {
-        DialogManager.showLoadingDialog(activity, "");
+        DialogManager.showPaymentDialog(activity, "request", model);
 
         HashMap data = new HashMap<>();
         HashMap header = new HashMap<>();
@@ -31,7 +31,7 @@ public class PaymentManager {
                 PaymentModel model = (PaymentModel) object;
 
                 activity.runOnUiThread(() -> {
-                    DialogManager.dismissLoadingDialog();
+                    DialogManager.dismissPaymentDialog();
 
                     // TODO : Update & Save TypeModel
 
@@ -59,7 +59,7 @@ public class PaymentManager {
     }
 
     public static void finalize(Activity activity, PaymentModel model) {
-        DialogManager.showLoadingDialog(activity, "");
+        DialogManager.showPaymentDialog(activity, "finalize", model);
 
         HashMap data = new HashMap<>();
         HashMap header = new HashMap<>();
@@ -73,7 +73,7 @@ public class PaymentManager {
                 PaymentModel model = (PaymentModel) object;
 
                 activity.runOnUiThread(() -> {
-                    DialogManager.dismissLoadingDialog();
+                    DialogManager.dismissPaymentDialog();
 
                     // TODO : Show Corresponding Message & Handle The Navigation If Needed
                 });

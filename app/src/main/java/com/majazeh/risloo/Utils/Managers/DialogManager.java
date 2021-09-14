@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
+import com.majazeh.risloo.Views.Dialogs.PaymentDialog;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
+import com.mre.ligheh.Model.TypeModel.PaymentModel;
 
 public class DialogManager {
 
     // Widgets
     private static LoadingDialog loadingDialog = null;
+    private static PaymentDialog paymentDialog = null;
     private static SearchableDialog searchableDialog = null;
     private static SelectedDialog selectedDialog = null;
 
@@ -27,6 +30,15 @@ public class DialogManager {
         else if (activity instanceof FragmentActivity)
             loadingDialog.show(((FragmentActivity) activity).getSupportFragmentManager(), "loadingDialog");
         loadingDialog.setData(title);
+    }
+
+    public static void showPaymentDialog(Activity activity, String method, PaymentModel model) {
+        paymentDialog = new PaymentDialog();
+        if (activity instanceof AppCompatActivity)
+            paymentDialog.show(((AppCompatActivity) activity).getSupportFragmentManager(), "paymentDialog");
+        else if (activity instanceof FragmentActivity)
+            paymentDialog.show(((FragmentActivity) activity).getSupportFragmentManager(), "paymentDialog");
+        paymentDialog.setData(method, model);
     }
 
     public static void showSearchableDialog(Activity activity, String method) {
@@ -56,6 +68,11 @@ public class DialogManager {
             loadingDialog.dismiss();
     }
 
+    public static void dismissPaymentDialog() {
+        if (paymentDialog != null && paymentDialog.isVisible())
+            paymentDialog.dismiss();
+    }
+
     public static void dismissSearchableDialog() {
         if (searchableDialog != null && searchableDialog.isVisible())
             searchableDialog.dismiss();
@@ -73,6 +90,13 @@ public class DialogManager {
     public static LoadingDialog getLoadingDialog() {
         if (loadingDialog != null && loadingDialog.isVisible())
             return loadingDialog;
+
+        return null;
+    }
+
+    public static PaymentDialog getPaymentDialog() {
+        if (paymentDialog != null && paymentDialog.isVisible())
+            return paymentDialog;
 
         return null;
     }
