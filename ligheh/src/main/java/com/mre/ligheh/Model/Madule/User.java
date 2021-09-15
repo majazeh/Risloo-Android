@@ -42,8 +42,8 @@ public class User extends Model {
         Auth.me(new HashMap<>(), header, new Response() {
             @Override
             public void onOK(Object object) {
-                AuthModel authModel = (AuthModel) object;
                 try {
+                    AuthModel authModel = (AuthModel) object;
                     Model.get(endpoint + "/" + data.get("user") + "/profile", data, header, new Response() {
                         @Override
                         public void onOK(Object object) {

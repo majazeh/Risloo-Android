@@ -3,6 +3,7 @@ package com.mre.ligheh.Model.Madule;
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 
 import org.json.JSONObject;
 
@@ -21,7 +22,7 @@ public class Schedules extends Model {
     public static void roomList(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
-                Model.show( "rooms/" + data.get("id") + "/schedules", data, header, response, ScheduleModel.class);
+                Model.show("rooms/" + data.get("id") + "/schedules", data, header, response, ScheduleModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
@@ -32,7 +33,7 @@ public class Schedules extends Model {
     public static void centerList(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
-                Model.show( "centers/" + data.get("id") + "/schedules", data, header, response, ScheduleModel.class);
+                Model.show("centers/" + data.get("id") + "/schedules", data, header, response, ScheduleModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
@@ -41,7 +42,7 @@ public class Schedules extends Model {
     }
 
 
-    public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+    public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             Model.show(endpoint + "/" + data.get("id"), data, header, response, ScheduleModel.class);
         } catch (IOException e) {
@@ -49,7 +50,7 @@ public class Schedules extends Model {
         }
     }
 
-    public static void booking(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+    public static void booking(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
                 Model.get(endpoint + "/" + data.get("id") + "/booking", data, header, response, null);

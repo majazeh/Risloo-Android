@@ -26,6 +26,7 @@ public class ScheduleModel extends TypeModel {
     private int started_at;
     private int canceled_at;
     private JSONArray fields;
+    private List treasuries;
 
 
     public ScheduleModel(JSONObject jsonObject) {
@@ -49,6 +50,15 @@ public class ScheduleModel extends TypeModel {
                 }
             }else{
                 setSession_platforms(new List());
+            }
+
+            if (!jsonObject.isNull("treasuries") && jsonObject.getJSONArray("treasuries").length() != 0) {
+                treasuries = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++) {
+                    treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
+                }
+            }else{
+                setTreasuries(new List());
             }
             if (!jsonObject.isNull("status"))
                 setStatus(jsonObject.getString("status"));
@@ -237,5 +247,13 @@ public class ScheduleModel extends TypeModel {
 
     public void setSession_platforms(List session_platforms) {
         this.session_platforms = session_platforms;
+    }
+
+    public List getTreasuries() {
+        return treasuries;
+    }
+
+    public void setTreasuries(List treasuries) {
+        this.treasuries = treasuries;
     }
 }
