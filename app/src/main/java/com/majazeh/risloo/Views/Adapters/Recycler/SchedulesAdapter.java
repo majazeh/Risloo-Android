@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,8 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.SchedulesHolder;
+import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.SingleItemScheduleBinding;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
@@ -31,6 +34,9 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
+
+    // Fragments
+    private Fragment current;
 
     // Objects
     private Activity activity;
@@ -55,6 +61,8 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
     @Override
     public void onBindViewHolder(@NonNull SchedulesHolder holder, int i) {
         ScheduleModel model = (ScheduleModel) showingItems.get(i);
+
+        initializer();
 
         detector(holder);
 
@@ -101,6 +109,10 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         }
     }
 
+    private void initializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+    }
+
     private void detector(SchedulesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
@@ -110,6 +122,12 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
     private void listener(SchedulesHolder holder, ScheduleModel model) {
         CustomClickView.onClickListener(() -> {
             if (holder.binding.statusTextView.getText().toString().equals("در حال نوبت\u200Cگیری") && ((MainActivity) activity).permissoon.showReserveScheduleFragment(((MainActivity) activity).singleton.getUserModel(), model)) {
+
+                if (current instanceof CenterSchedulesFragment)
+                    model.setTreasuries(((CenterSchedulesFragment) current).treasuries);
+                else if (current instanceof RoomSchedulesFragment)
+                    model.setTreasuries(((RoomSchedulesFragment) current).treasuries);
+
                 NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(model);
                 ((MainActivity) activity).navController.navigate(action);
             } else {

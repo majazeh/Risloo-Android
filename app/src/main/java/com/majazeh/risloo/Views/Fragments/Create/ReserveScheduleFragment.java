@@ -339,9 +339,9 @@ public class ReserveScheduleFragment extends Fragment {
             binding.descriptionIncludeLayout.inputEditText.setText(description);
         }
 
-//        if (model.getTreasuries() != null) {
-//            setTreasury(model.getTreasuries());
-//        }
+        if (model.getTreasuries() != null) {
+            setTreasury(model.getTreasuries());
+        }
     }
 
     private void setPermission() {
@@ -425,7 +425,7 @@ public class ReserveScheduleFragment extends Fragment {
         for (TypeModel typeModel : treasuries.data()) {
             TreasuriesModel model = (TreasuriesModel) typeModel;
 
-            if (model.isCreditable() && model.isMy_treasury()) {
+            if (model.isCreditable() && model.isMy_treasury() && !model.getSymbol().equals("gift")) {
                 options.add(model.getTitle());
                 treasuryIds.add(model.getId());
             }

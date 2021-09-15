@@ -22,6 +22,7 @@ import com.majazeh.risloo.databinding.FragmentCenterSchedulesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Schedules;
+import com.mre.ligheh.Model.Madule.Treasury;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 import java.util.HashMap;
@@ -45,6 +46,7 @@ public class CenterSchedulesFragment extends Fragment {
     // Vars
     private String centerId = "", type = "";
     private long currentTimestamp = DateManager.currentTimestamp();
+    public List treasuries = new List();
 
     @Nullable
     @Override
@@ -59,7 +61,7 @@ public class CenterSchedulesFragment extends Fragment {
 
         setArgs();
 
-        getData(currentTimestamp);
+        getTreasuries();
 
         return binding.getRoot();
     }
@@ -140,7 +142,41 @@ public class CenterSchedulesFragment extends Fragment {
         Objects.requireNonNull(binding.weeksRecyclerView.getLayoutManager()).scrollToPosition(DateManager.dayNameTimestampPosition(timestamp));
     }
 
-    private void getData(long timestamp) {
+    private void getTreasuries() {
+        Treasury.list(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                treasuries = (List) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        getSchedules(currentTimestamp);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+
+                        // Schedules Data
+                        binding.schedulesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.schedulesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.schedulesShimmerLayout.getRoot().stopShimmer();
+
+                        // Weeks Data
+                        binding.weeksRecyclerView.setVisibility(View.VISIBLE);
+                        binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.weeksShimmerLayout.getRoot().stopShimmer();
+
+                    });
+                }
+            }
+        });
+    }
+
+    private void getSchedules(long timestamp) {
         data.put("time", timestamp);
 
         setSchedules(timestamp);
@@ -213,7 +249,7 @@ public class CenterSchedulesFragment extends Fragment {
         weeksAdapter.selectedTimestamp = timestamp;
         schedulesAdapter.selectedTimestamp = timestamp;
 
-        getData(timestamp);
+        getSchedules(timestamp);
     }
 
     public void responseAdapter(long timestamp) {
