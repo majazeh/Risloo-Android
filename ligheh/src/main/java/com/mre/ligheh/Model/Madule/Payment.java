@@ -37,7 +37,7 @@ public class Payment extends Model{
 
     public static void post(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.post(endpoint, data, header, response, null);
+            Model.post(endpoint, data, header, response, PaymentModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

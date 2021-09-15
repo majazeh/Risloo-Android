@@ -177,7 +177,7 @@ public class PaymentsFragment extends Fragment {
         for (TypeModel typeModel : treasuries.data()) {
             TreasuriesModel model = (TreasuriesModel) typeModel;
 
-            if (model.isCreditable() && model.isMy_treasury()) {
+            if (model.isCreditable() && model.isMy_treasury() && !model.getSymbol().equals("gift")) {
                 options.add(model.getTitle());
                 treasuryIds.add(model.getId());
             }
@@ -253,18 +253,12 @@ public class PaymentsFragment extends Fragment {
         Payment.post(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                PaymentModel paymentModel = (PaymentModel) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSuccesPayment));
-
-                        binding.paymentsSingleLayout.getRoot().setVisibility(View.GONE);
-                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.paymentsShimmerLayout.getRoot().startShimmer();
-
-                        binding.paymentsHeaderLayout.countTextView.setText("");
-
-                        getData();
+                        PaymentManager.request(requireActivity(), paymentModel);
                     });
                 }
             }
@@ -275,40 +269,32 @@ public class PaymentsFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         try {
                             JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
 
-                            if (responseObject.getString("message").equals("POVERTY")) {
-                                JSONObject paymentObject = responseObject.getJSONObject("payment");
-                                PaymentModel paymentModel = new PaymentModel(paymentObject);
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
 
-                                PaymentManager.request(requireActivity(), paymentModel);
-                            } else {
-                                if (!responseObject.isNull("errors")) {
-                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                    Iterator<String> keys = (errorsObject.keys());
-                                    StringBuilder errors = new StringBuilder();
-
-                                    while (keys.hasNext()) {
-                                        String key = keys.next();
-                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
-
-                                            switch (key) {
-                                                case "treasury_id":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "amount":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
-                                                    break;
-                                            }
-
-                                            errors.append(validation);
-                                            errors.append("\n");
+                                        switch (key) {
+                                            case "treasury_id":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "amount":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
+                                                break;
                                         }
-                                    }
 
-                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                        errors.append(validation);
+                                        errors.append("\n");
+                                    }
                                 }
+
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
