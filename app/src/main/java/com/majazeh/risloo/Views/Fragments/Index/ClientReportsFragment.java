@@ -318,6 +318,7 @@ public class ClientReportsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        isLoading = true;
         handler.removeCallbacksAndMessages(null);
     }
 

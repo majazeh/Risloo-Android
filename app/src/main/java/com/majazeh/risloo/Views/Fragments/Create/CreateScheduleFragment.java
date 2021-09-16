@@ -83,8 +83,10 @@ public class CreateScheduleFragment extends Fragment {
         TypeModel typeModel = CreateScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
-                setData((RoomModel) typeModel);
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel")) {
+                roomModel = (RoomModel) typeModel;
+                setData(roomModel);
+            }
         }
     }
 

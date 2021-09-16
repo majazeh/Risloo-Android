@@ -294,6 +294,7 @@ public class AuthPasswordChangeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        passwordVisibility = false;
     }
 
 }

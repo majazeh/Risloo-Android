@@ -276,14 +276,22 @@ public class BreadCrumb {
             case R.id.referenceFragment: {
                 TypeModel typeModel = ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel"))
-                    referenceType = "user";
-                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
-                    referenceType = "center";
-                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
-                    referenceType = "room";
+                if (typeModel != null) {
+                    if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel"))
+                        referenceType = "user";
 
-                setModels(ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
+                    setModels(typeModel);
+                } else {
+                    TypeModel centerModel = ReferenceFragmentArgs.fromBundle(arguments).getCenterModel();
+
+                    if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
+                        referenceType = "center";
+                    else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel"))
+                        referenceType = "room";
+
+                    setModels(centerModel);
+                }
+
                 return reference();
             } case R.id.roomFragment: {
                 TypeModel typeModel = RoomFragmentArgs.fromBundle(arguments).getTypeModel();

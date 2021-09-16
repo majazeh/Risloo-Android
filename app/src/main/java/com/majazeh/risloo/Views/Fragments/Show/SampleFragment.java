@@ -669,6 +669,8 @@ public class SampleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        isLoading = true;
+        userSelect = false;
     }
 
 }

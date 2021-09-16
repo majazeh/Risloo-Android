@@ -154,6 +154,7 @@ public class CenterPlatformsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        isLoading = true;
     }
 
 }

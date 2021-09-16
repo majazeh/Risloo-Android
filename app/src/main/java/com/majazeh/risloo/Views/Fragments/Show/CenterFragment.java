@@ -167,9 +167,9 @@ public class CenterFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity(), "");
-
             if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest))) {
+                DialogManager.showLoadingDialog(requireActivity(), "");
+
                 Center.request(data, header, new Response() {
                     @Override
                     public void onOK(Object object) {
@@ -488,6 +488,9 @@ public class CenterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        isLoading = true;
+        userSelect = false;
+        userScroll = false;
         handler.removeCallbacksAndMessages(null);
     }
 

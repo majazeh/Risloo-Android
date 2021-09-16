@@ -211,6 +211,7 @@ public class UsersFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        isLoading = true;
         handler.removeCallbacksAndMessages(null);
     }
 
