@@ -38,9 +38,6 @@ public class CenterTagsFragment extends Fragment {
     // Objects
     private HashMap data, header;
 
-    // Vars
-    private boolean isLoading = true;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
@@ -101,10 +98,7 @@ public class CenterTagsFragment extends Fragment {
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
-
                     });
-
-                    isLoading = false;
                 }
             }
 
@@ -115,10 +109,7 @@ public class CenterTagsFragment extends Fragment {
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
-
                     });
-
-                    isLoading = false;
                 }
             }
         });
@@ -128,7 +119,6 @@ public class CenterTagsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        isLoading = true;
     }
 
 }

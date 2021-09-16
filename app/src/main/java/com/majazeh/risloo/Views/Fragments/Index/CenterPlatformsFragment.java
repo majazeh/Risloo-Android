@@ -42,9 +42,6 @@ public class CenterPlatformsFragment extends Fragment {
     // Objects
     private HashMap data, header;
 
-    // Vars
-    private boolean isLoading = true;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
@@ -130,8 +127,6 @@ public class CenterPlatformsFragment extends Fragment {
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
                     });
-
-                    isLoading = false;
                 }
             }
 
@@ -143,8 +138,6 @@ public class CenterPlatformsFragment extends Fragment {
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
                     });
-
-                    isLoading = false;
                 }
             }
         });
@@ -154,7 +147,6 @@ public class CenterPlatformsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        isLoading = true;
     }
 
 }
