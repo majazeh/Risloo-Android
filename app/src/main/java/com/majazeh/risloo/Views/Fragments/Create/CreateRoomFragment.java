@@ -91,17 +91,14 @@ public class CreateRoomFragment extends Fragment {
     }
 
     private void setArgs() {
+        CenterModel centerModel = (CenterModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getCenterModel();
+        setData(centerModel);
+
         TypeModel typeModel = CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
-                setData((CenterModel) typeModel);
-            else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel")) {
-                centerId = CreateRoomFragmentArgs.fromBundle(getArguments()).getCenterId();
-                data.put("id", centerId);
-
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel"))
                 setData((UserModel) typeModel);
-            }
         }
     }
 

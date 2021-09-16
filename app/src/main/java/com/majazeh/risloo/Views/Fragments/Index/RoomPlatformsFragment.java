@@ -32,13 +32,12 @@ public class RoomPlatformsFragment extends Fragment {
     private RoomPlatformsAdapter adapter;
 
     // Models
-    private RoomModel roomModel;
+    public RoomModel roomModel;
 
     // Objects
     private HashMap data, header;
 
     // Vars
-    public String roomId = "", centerId = "", type = "";
     private boolean isLoading = true;
 
     @Nullable
@@ -75,16 +74,7 @@ public class RoomPlatformsFragment extends Fragment {
 
     private void setData(RoomModel model) {
         if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            roomId = model.getRoomId();
-            data.put("id", roomId);
-        }
-
-        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
-            centerId = model.getRoomCenter().getCenterId();
-        }
-
-        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
-            type = model.getRoomType();
+            data.put("id", model.getRoomId());
         }
     }
 

@@ -23,6 +23,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -155,11 +156,18 @@ public class EditCenterUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        centerId = EditCenterUserFragmentArgs.fromBundle(getArguments()).getCenterId();
-        data.put("id", centerId);
+        CenterModel centerModel = (CenterModel) EditCenterUserFragmentArgs.fromBundle(getArguments()).getCenterModel();
+        setData(centerModel);
 
         userModel = (UserModel) EditCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
         setData(userModel);
+    }
+
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            centerId = model.getCenterId();
+            data.put("id", centerId);
+        }
     }
 
     private void setData(UserModel model) {

@@ -24,6 +24,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditPlatformBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 
 import org.json.JSONException;
@@ -209,11 +210,17 @@ public class EditPlatformFragment extends Fragment {
     }
 
     private void setArgs() {
-        String centerId = EditPlatformFragmentArgs.fromBundle(getArguments()).getCenterId();
-        data.put("id", centerId);
+        CenterModel centerModel = (CenterModel) EditPlatformFragmentArgs.fromBundle(getArguments()).getCenterModel();
+        setData(centerModel);
 
         sessionPlatformModel = (SessionPlatformModel) EditPlatformFragmentArgs.fromBundle(getArguments()).getTypeModel();
         setData(sessionPlatformModel);
+    }
+
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            data.put("id", model.getCenterId());
+        }
     }
 
     private void setData(SessionPlatformModel model) {

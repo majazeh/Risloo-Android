@@ -1177,9 +1177,9 @@
     <string name="CenterFragmentTitle">مرکز درمانی</string>
 
     <string name="CenterFragmentRequest">درخواست پذیرش</string>
+    <string name="CenterFragmentSchedules">برنامه درمانی</string>
 
     <string name="CenterFragmentUsers">اعضاء</string>
-    <string name="CenterFragmentSchedules">برنامه درمانی</string>
     <string name="CenterFragmentProfile">پروفایل من</string>
     <string name="CenterFragmentEdit">ویرایش</string>
     <string name="CenterFragmentPlatforms">محل برگزاری</string>
@@ -1226,9 +1226,9 @@
     <string name="RoomFragmentTitle">اتاق درمان</string>
 
     <string name="RoomFragmentRequest">درخواست پذیرش</string>
+    <string name="RoomFragmentSchedules">برنامه درمانی</string>
 
     <string name="RoomFragmentUsers">اعضاء</string>
-    <string name="RoomFragmentSchedules">برنامه درمانی</string>
     <string name="RoomFragmentAddSchedule">تعریف برنامه درمانی</string>
     <string name="RoomFragmentProfile">پروفایل من</string>
     <string name="RoomFragmentEdit">ویرایش</string>

@@ -247,9 +247,8 @@
         android:label="@string/CreateRoomFragmentTitle"
         tools:layout="@layout/fragment_create_room" >
         <argument
-            android:name="centerId"
-            app:nullable="true"
-            app:argType="string" />
+            android:name="centerModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -446,8 +445,8 @@
         android:label="@string/EditCenterUserFragmentTitle"
         tools:layout="@layout/fragment_edit_center_user" >
         <argument
-            android:name="centerId"
-            app:argType="string" />
+            android:name="centerModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -459,8 +458,8 @@
         android:label="@string/EditPlatformFragmentTitle"
         tools:layout="@layout/fragment_edit_platform" >
         <argument
-            android:name="centerId"
-            app:argType="string" />
+            android:name="centerModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -698,9 +697,6 @@
         android:label="@string/RoomFragmentTitle"
         tools:layout="@layout/fragment_room" >
         <argument
-            android:name="type"
-            app:argType="string" />
-        <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
@@ -761,14 +757,11 @@
         android:label="@string/ReferenceFragmentTitle"
         tools:layout="@layout/fragment_reference" >
         <argument
-            android:name="type"
-            app:argType="string" />
+            android:name="centerModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
         <argument
-            android:name="centerId"
+            android:name="TypeModel"
             app:nullable="true"
-            app:argType="string" />
-        <argument
-            android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
 

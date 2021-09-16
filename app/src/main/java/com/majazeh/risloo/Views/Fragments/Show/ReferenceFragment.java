@@ -26,6 +26,8 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
@@ -48,7 +50,7 @@ public class ReferenceFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String type = "", centerId = "";
+    private String type = "";
 
     @Nullable
     @Override
@@ -112,23 +114,43 @@ public class ReferenceFragment extends Fragment {
     }
 
     private void setArgs() {
-        type = ReferenceFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel centerModel = ReferenceFragmentArgs.fromBundle(getArguments()).getCenterModel();
 
-        if (ReferenceFragmentArgs.fromBundle(getArguments()).getCenterId() != null) {
-            centerId = ReferenceFragmentArgs.fromBundle(getArguments()).getCenterId();
-            data.put("id", centerId);
+        if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel")) {
+            setData((CenterModel) centerModel);
+        } else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel"))
+            setData((RoomModel) centerModel);
 
-            userModel = (UserModel) ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
-            setData(userModel);
-        } else {
-            CenterModel centerModel = (CenterModel) ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        TypeModel typeModel = ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (centerModel.getCenterId() != null && !centerModel.getCenterId().equals("")) {
-                data.put("id", centerModel.getCenterId());
+        if (typeModel != null) {
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel")) {
+                userModel = (UserModel) typeModel;
+                setData(userModel);
             }
-
+        } else {
             userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
-            setData(centerModel);
+            setData(userModel);
+        }
+    }
+
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            data.put("id", model.getCenterId());
+        }
+
+        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
+            type = model.getCenterType();
+        }
+    }
+
+    private void setData(RoomModel model) {
+        if (model.getRoomId() != null && !model.getRoomId().equals("")) {
+            data.put("id", model.getRoomId());
+        }
+
+        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
+            type = model.getRoomType();
         }
     }
 
@@ -162,42 +184,6 @@ public class ReferenceFragment extends Fragment {
 
         if (model.getPosition() != null && !model.getPosition().equals("")) {
             binding.statusTextView.setText(SelectionManager.getReferencePosition(requireActivity(), "fa", model.getPosition()));
-            binding.statusTextView.setVisibility(View.VISIBLE);
-        } else {
-            binding.statusTextView.setVisibility(View.GONE);
-        }
-    }
-
-    private void setData(CenterModel model) {
-        if (model.getAcceptation() != null && model.getAcceptation().getId() != null && !model.getAcceptation().getId().equals("")) {
-            data.put("userId", model.getAcceptation().getId());
-        }
-
-        if (model.getAcceptation() != null && model.getAcceptation().getName() != null && !model.getAcceptation().getName().equals("")) {
-            binding.nameTextView.setText(model.getAcceptation().getName());
-        } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        }
-
-        if (userModel.getMobile() != null && !userModel.getMobile().equals("")) {
-            binding.mobileTextView.setText(userModel.getMobile());
-            binding.mobileGroup.setVisibility(View.VISIBLE);
-        } else {
-            binding.mobileGroup.setVisibility(View.GONE);
-        }
-
-        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar().getMedium().getUrl() != null) {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
-
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        }
-
-        if (model.getAcceptation() != null && model.getAcceptation().getPosition() != null && !model.getAcceptation().getPosition().equals("")) {
-            binding.statusTextView.setText(SelectionManager.getReferencePosition(requireActivity(), "fa", model.getAcceptation().getPosition()));
             binding.statusTextView.setVisibility(View.VISIBLE);
         } else {
             binding.statusTextView.setVisibility(View.GONE);

@@ -115,7 +115,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
         CustomClickView.onClickListener(() -> {
             if (current instanceof CenterPlatformsFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(((CenterPlatformsFragment) current).centerId, model);
+                NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(((CenterPlatformsFragment) current).centerModel, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.editImageView);
@@ -220,7 +220,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         DialogManager.showLoadingDialog(activity, "");
 
         if (current instanceof CenterPlatformsFragment)
-            data.put("id", ((CenterPlatformsFragment) current).centerId);
+            data.put("id", ((CenterPlatformsFragment) current).centerModel.getCenterId());
 
         data.put("platformId", model.getId());
         data.put(method, value);

@@ -79,7 +79,7 @@ public class BreadCrumb {
     private UserModel userModel;
 
     // Vars
-    private String centerType = "", sessionType = "", clientReportsType = "", referenceType = "";
+    private String roomType = "", sessionType = "", clientReportsType = "", referenceType = "";
     private ArrayList<Integer> destinationIds;
 
     public BreadCrumb(@NonNull Activity activity) {
@@ -133,7 +133,7 @@ public class BreadCrumb {
             // -------------------- Toolbar
 
             case R.id.meFragment:
-                setModels("user", MeFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(MeFragmentArgs.fromBundle(arguments).getTypeModel());
                 return me();
             case R.id.treasuriesFragment:
                 return treasuries();
@@ -198,122 +198,121 @@ public class BreadCrumb {
             case R.id.createUserFragment:
                 return createUser();
             case R.id.reserveScheduleFragment:
-                setModels("schedule", ReserveScheduleFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(ReserveScheduleFragmentArgs.fromBundle(arguments).getTypeModel());
                 return reserveSchedule();
 
             // -------------------- Edit
 
             case R.id.editCenterFragment:
-                setModels("center", EditCenterFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(EditCenterFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editCenter();
             case R.id.editCenterUserFragment:
-                setModels("user", EditCenterUserFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(EditCenterUserFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editCenterUser();
             case R.id.editPlatformFragment:
-                setModels("platform", EditPlatformFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(EditPlatformFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editPlatform();
             case R.id.editSessionFragment:
-                setModels("session", EditSessionFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(EditSessionFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editSession();
             case R.id.editTreasuryFragment:
-                setModels("treasury", EditTreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(EditTreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editTreasury();
             case R.id.editUserFragment:
-                setModels("user", EditUserFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(EditUserFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editUser();
 
             // -------------------- Index
 
             case R.id.centerPlatformsFragment:
-                setModels("center", CenterPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(CenterPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerPlatforms();
             case R.id.centerSchedulesFragment:
-                setModels("center", CenterSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(CenterSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerSchedules();
             case R.id.centerTagsFragment:
-                setModels("center", CenterTagsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(CenterTagsFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerTags();
             case R.id.centerUsersFragment:
-                setModels("center", CenterUsersFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(CenterUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerUsers();
             case R.id.clientReportsFragment:{
                 TypeModel typeModel = ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel")) {
+                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
                     clientReportsType = "case";
-                    setModels("case", typeModel);
-                } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
                     clientReportsType = "session";
-                    setModels("session", typeModel);
-                }
 
+                setModels(typeModel);
                 return clientReports();
             } case R.id.roomPlatformsFragment:
-                setModels("room", RoomPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(RoomPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomPlatforms();
             case R.id.roomSchedulesFragment:
-                setModels("room", RoomSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(RoomSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomSchedules();
             case R.id.roomTagsFragment:
-                setModels("room", RoomTagsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(RoomTagsFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomTags();
             case R.id.roomUsersFragment:
-                setModels("room", RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomUsers();
 
             // -------------------- Show
 
             case R.id.billFragment:
-                setModels("bill", BillFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(BillFragmentArgs.fromBundle(arguments).getTypeModel());
                 return bill();
             case R.id.bulkSampleFragment:
-                setModels("bulk", BulkSampleFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(BulkSampleFragmentArgs.fromBundle(arguments).getTypeModel());
                 return bulkSample();
             case R.id.caseFragment:
-                setModels("case", CaseFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(CaseFragmentArgs.fromBundle(arguments).getTypeModel());
                 return casse();
             case R.id.centerFragment:
-                setModels("center", CenterFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(CenterFragmentArgs.fromBundle(arguments).getTypeModel());
                 return center();
-            case R.id.referenceFragment:
-                String centerId = ReferenceFragmentArgs.fromBundle(arguments).getCenterId();
+            case R.id.referenceFragment: {
+                TypeModel typeModel = ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (centerId != null)
+                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel"))
                     referenceType = "user";
-                else
+                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
                     referenceType = "center";
+                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+                    referenceType = "room";
 
-                setModels(referenceType, ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
                 return reference();
-            case R.id.roomFragment:
-                centerType = RoomFragmentArgs.fromBundle(arguments).getType();
+            } case R.id.roomFragment: {
+                TypeModel typeModel = RoomFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (!centerType.equals("room"))
-                    setModels("center", RoomFragmentArgs.fromBundle(arguments).getTypeModel());
-                else
-                    setModels("room", RoomFragmentArgs.fromBundle(arguments).getTypeModel());
+                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+                    roomType = "personal_clinic";
+                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+                    roomType = "room";
 
+                setModels(typeModel);
                 return room();
-            case R.id.sampleFragment:
-                setModels("sample", SampleFragmentArgs.fromBundle(arguments).getTypeModel());
+            } case R.id.sampleFragment:
+                setModels(SampleFragmentArgs.fromBundle(arguments).getTypeModel());
                 return sample();
             case R.id.sessionFragment: {
                 TypeModel typeModel = SessionFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel")) {
+                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel"))
                     sessionType = "schedule";
-                    setModels("schedule", typeModel);
-                } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
                     sessionType = "session";
-                    setModels("session", typeModel);
-                }
 
+                setModels(typeModel);
                 return session();
             } case R.id.treasuryFragment:
-                setModels("treasury", TreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(TreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
                 return treasury();
             case R.id.userFragment:
-                setModels("user", UserFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(UserFragmentArgs.fromBundle(arguments).getTypeModel());
                 return user();
         }
 
@@ -446,16 +445,24 @@ public class BreadCrumb {
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.referenceFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerType, centerModel.getCenterId(), userModel);
+                NavDirections action;
+
+                if (referenceType.equals("user"))
+                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, userModel);
+                else if (referenceType.equals("center"))
+                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                else
+                    action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
+
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.roomFragment: {
                 NavDirections action;
 
-                if (!centerType.equals("room"))
-                    action = NavigationMainDirections.actionGlobalRoomFragment("personal_clinic", centerModel);
+                if (roomType.equals("room"))
+                    action = NavigationMainDirections.actionGlobalRoomFragment(roomModel);
                 else
-                    action = NavigationMainDirections.actionGlobalRoomFragment("room", roomModel);
+                    action = NavigationMainDirections.actionGlobalRoomFragment(centerModel);
 
                 ((MainActivity) activity).navController.navigate(action);
             } break;
@@ -466,10 +473,10 @@ public class BreadCrumb {
             case R.id.sessionFragment: {
                 NavDirections action;
 
-                if (!sessionType.equals("session"))
-                    action = NavigationMainDirections.actionGlobalSessionFragment(scheduleModel);
-                else
+                if (sessionType.equals("session"))
                     action = NavigationMainDirections.actionGlobalSessionFragment(sessionModel);
+                else
+                    action = NavigationMainDirections.actionGlobalSessionFragment(scheduleModel);
 
                 ((MainActivity) activity).navController.navigate(action);
             } break;
@@ -484,42 +491,39 @@ public class BreadCrumb {
         }
     }
 
-    private void setModels(String type, TypeModel model) {
-        switch (type) {
-            case "user":
-                userModel = (UserModel) model;
+    private void setModels(TypeModel typeModel) {
+        switch (StringManager.substring(typeModel.getClass().getName(), '.')) {
+            case "CenterModel":
+                centerModel = (CenterModel) typeModel;
+                roomType = centerModel.getCenterType();
                 break;
-            case "center":
-                centerModel = (CenterModel) model;
-                centerType = centerModel.getCenterType();
-                break;
-            case "room":
-                roomModel = (RoomModel) model;
-                centerType = roomModel.getRoomType();
+            case "RoomModel":
+                roomModel = (RoomModel) typeModel;
+                roomType = roomModel.getRoomType();
 
                 if (roomModel.getRoomCenter() != null)
                     centerModel = roomModel.getRoomCenter();
                 break;
-            case "case":
-                caseModel = (CaseModel) model;
+            case "CaseModel":
+                caseModel = (CaseModel) typeModel;
 
                 if (caseModel.getCaseRoom() != null) {
                     roomModel = caseModel.getCaseRoom();
-                    centerType = roomModel.getRoomType();
+                    roomType = roomModel.getRoomType();
 
                     if (roomModel.getRoomCenter() != null)
                         centerModel = roomModel.getRoomCenter();
                 }
                 break;
-            case "schedule":
-                scheduleModel = (ScheduleModel) model;
+            case "ScheduleModel":
+                scheduleModel = (ScheduleModel) typeModel;
 
                 if (scheduleModel.getCaseModel() != null) {
                     caseModel = scheduleModel.getCaseModel();
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
-                        centerType = roomModel.getRoomType();
+                        roomType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
@@ -527,22 +531,22 @@ public class BreadCrumb {
                 } else {
                     if (scheduleModel.getRoom() != null) {
                         roomModel = scheduleModel.getRoom();
-                        centerType = roomModel.getRoomType();
+                        roomType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
                     }
                 }
                 break;
-            case "session":
-                sessionModel = (SessionModel) model;
+            case "SessionModel":
+                sessionModel = (SessionModel) typeModel;
 
                 if (sessionModel.getCaseModel() != null) {
                     caseModel = sessionModel.getCaseModel();
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
-                        centerType = roomModel.getRoomType();
+                        roomType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
@@ -550,25 +554,25 @@ public class BreadCrumb {
                 } else {
                     if (sessionModel.getRoom() != null) {
                         roomModel = sessionModel.getRoom();
-                        centerType = roomModel.getRoomType();
+                        roomType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
                     }
                 }
                 break;
-            case "platform":
-                sessionPlatformModel = (SessionPlatformModel) model;
+            case "SessionPlatformModel":
+                sessionPlatformModel = (SessionPlatformModel) typeModel;
                 break;
-            case "sample":
-                sampleModel = (SampleModel) model;
+            case "SampleModel":
+                sampleModel = (SampleModel) typeModel;
 
                 if (sampleModel.getSampleCase() != null) {
                     caseModel = sampleModel.getSampleCase();
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
-                        centerType = roomModel.getRoomType();
+                        roomType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
@@ -576,7 +580,7 @@ public class BreadCrumb {
                 } else {
                     if (sampleModel.getSampleRoom() != null) {
                         roomModel = sampleModel.getSampleRoom();
-                        centerType = roomModel.getRoomType();
+                        roomType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
@@ -586,14 +590,17 @@ public class BreadCrumb {
                 if (sampleModel.getClient() != null)
                     userModel = sampleModel.getClient();
                 break;
-            case "bulk":
-                bulkSampleModel = (BulkSampleModel) model;
+            case "BulkSampleModel":
+                bulkSampleModel = (BulkSampleModel) typeModel;
                 break;
-            case "bill":
-                billingModel = (BillingModel) model;
+            case "BillingModel":
+                billingModel = (BillingModel) typeModel;
                 break;
-            case "treasury":
-                treasuriesModel = (TreasuriesModel) model;
+            case "TreasuriesModel":
+                treasuriesModel = (TreasuriesModel) typeModel;
+                break;
+            case "UserModel":
+                userModel = (UserModel) typeModel;
                 break;
         }
     }
@@ -1037,7 +1044,7 @@ public class BreadCrumb {
     private ArrayList<String> editCenter() {
         ArrayList<String> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = center();
         else
             list = room();
@@ -1050,7 +1057,7 @@ public class BreadCrumb {
     private ArrayList<Integer> editCenterIds() {
         ArrayList<Integer> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centerIds();
         else
             list = roomIds();
@@ -1137,7 +1144,7 @@ public class BreadCrumb {
     private ArrayList<String> centerPlatforms() {
         ArrayList<String> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = center();
         else
             list = room();
@@ -1150,7 +1157,7 @@ public class BreadCrumb {
     private ArrayList<Integer> centerPlatformsIds() {
         ArrayList<Integer> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centerIds();
         else
             list = roomIds();
@@ -1163,7 +1170,7 @@ public class BreadCrumb {
     private ArrayList<String> centerSchedules() {
         ArrayList<String> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = center();
         else
             list = room();
@@ -1176,7 +1183,7 @@ public class BreadCrumb {
     private ArrayList<Integer> centerSchedulesIds() {
         ArrayList<Integer> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centerIds();
         else
             list = roomIds();
@@ -1189,7 +1196,7 @@ public class BreadCrumb {
     private ArrayList<String> centerTags() {
         ArrayList<String> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = center();
         else
             list = room();
@@ -1202,7 +1209,7 @@ public class BreadCrumb {
     private ArrayList<Integer> centerTagsIds() {
         ArrayList<Integer> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centerIds();
         else
             list = roomIds();
@@ -1215,7 +1222,7 @@ public class BreadCrumb {
     private ArrayList<String> centerUsers() {
         ArrayList<String> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = center();
         else
             list = room();
@@ -1228,7 +1235,7 @@ public class BreadCrumb {
     private ArrayList<Integer> centerUsersIds() {
         ArrayList<Integer> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centerIds();
         else
             list = roomIds();
@@ -1409,7 +1416,7 @@ public class BreadCrumb {
     private ArrayList<String> reference() {
         ArrayList<String> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centerUsers();
         else
             list = roomUsers();
@@ -1433,7 +1440,7 @@ public class BreadCrumb {
     private ArrayList<Integer> referenceIds() {
         ArrayList<Integer> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centerUsersIds();
         else
             list = roomUsersIds();
@@ -1446,12 +1453,12 @@ public class BreadCrumb {
     private ArrayList<String> room() {
         ArrayList<String> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centers();
         else
             list = center();
 
-        if (!centerType.equals("room")) {
+        if (!roomType.equals("room")) {
             try {
                 if (centerModel != null && centerModel.getDetail() != null && !centerModel.getDetail().getString("title").equals(""))
                     list.add("کلینیک شخصی" + " " + centerModel.getDetail().getString("title"));
@@ -1477,7 +1484,7 @@ public class BreadCrumb {
     private ArrayList<Integer> roomIds() {
         ArrayList<Integer> list;
 
-        if (!centerType.equals("room"))
+        if (!roomType.equals("room"))
             list = centersIds();
         else
             list = centerIds();

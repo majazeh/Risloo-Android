@@ -132,9 +132,9 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
             selectedHolder.binding.orderProgressBar.setVisibility(View.VISIBLE);
 
         if (current instanceof CenterTagsFragment)
-            data.put("roomId", ((CenterTagsFragment) current).centerId);
+            data.put("roomId", ((CenterTagsFragment) current).centerModel.getCenterId());
         else if (current instanceof RoomTagsFragment)
-            data.put("roomId", ((RoomTagsFragment) current).roomId);
+            data.put("roomId", ((RoomTagsFragment) current).roomModel.getRoomId());
 
         data.put("id", model.getId());
         data.put("order", selectedHolder.getBindingAdapterPosition() + 1);

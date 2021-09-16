@@ -116,7 +116,7 @@ public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     private void listener(IndexRoomUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof RoomUsersFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).type, ((RoomUsersFragment) current).centerId, model);
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).roomModel, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());

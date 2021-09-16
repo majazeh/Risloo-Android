@@ -335,12 +335,12 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CenterTagsFragment) {
             if (method.equals("tags"))
-                data.put("region", ((CenterTagsFragment) current).centerId);
+                data.put("region", ((CenterTagsFragment) current).centerModel.getCenterId());
         }
 
         if (current instanceof RoomTagsFragment) {
             if (method.equals("tags"))
-                data.put("region", ((RoomTagsFragment) current).roomId);
+                data.put("region", ((RoomTagsFragment) current).roomModel.getRoomId());
         }
 
         getData();

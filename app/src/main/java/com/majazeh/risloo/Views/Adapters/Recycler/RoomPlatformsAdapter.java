@@ -286,7 +286,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         DialogManager.showLoadingDialog(activity,"");
 
         if (current instanceof RoomPlatformsFragment)
-            data.put("id", ((RoomPlatformsFragment) current).roomId);
+            data.put("id", ((RoomPlatformsFragment) current).roomModel.getRoomId());
 
         data.put("platformId", model.getId());
         data.put(method, value);

@@ -60,7 +60,6 @@ public class CenterFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String type = "counseling_center";
     private boolean isLoading = true, userSelect = false, userScroll = false;
 
     @Nullable
@@ -93,25 +92,17 @@ public class CenterFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomsAdapterHeader));
 
-        InitManager.txtTextColor(binding.requestTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
-
-        InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.roomsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-
+            binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-            binding.requestTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
         } else {
             binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-            binding.requestTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
         }
     }
 
@@ -126,6 +117,11 @@ public class CenterFragment extends Fragment {
                 }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
+
+        CustomClickView.onClickListener(() -> {
+            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.menuSpinner.selectImageView);
 
         binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
             binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
@@ -144,12 +140,8 @@ public class CenterFragment extends Fragment {
                             NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
-                        case "برنامه درمانی": {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
                         case "پروفایل من": {
-                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(type, null, centerModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
@@ -177,31 +169,36 @@ public class CenterFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             DialogManager.showLoadingDialog(requireActivity(), "");
 
-            Center.request(data, header, new Response() {
-                @Override
-                public void onOK(Object object) {
-                    centerModel = (CenterModel) object;
+            if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest))) {
+                Center.request(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        centerModel = (CenterModel) object;
 
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            setAcceptation(centerModel);
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                setAcceptation(centerModel);
 
-                            DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
-                        });
+                                DialogManager.dismissLoadingDialog();
+                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
+                            });
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(String response) {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            // Place Code if Needed
-                        });
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // Place Code if Needed
+                            });
+                        }
                     }
-                }
-            });
-        }).widget(binding.requestTextView.getRoot());
+                });
+            } else {
+                NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            }
+        }).widget(binding.actionTextView.getRoot());
 
         binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
@@ -258,7 +255,7 @@ public class CenterFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(null, centerModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(centerModel, null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }
@@ -274,15 +271,10 @@ public class CenterFragment extends Fragment {
                 data.put("id", model.getCenterId());
             }
 
-            if (model.getCenterType() != null && !model.getCenterType().equals("")) {
-                type = model.getCenterType();
-            }
-
             if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
                 binding.nameTextView.setText(model.getDetail().getString("title"));
-                binding.nameTextView.setVisibility(View.VISIBLE);
             } else {
-                binding.nameTextView.setVisibility(View.GONE);
+                binding.nameTextView.setText(model.getCenterId());
             }
 
             if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals("")) {
@@ -358,12 +350,22 @@ public class CenterFragment extends Fragment {
 
     private void setStatus(String status) {
         if (status.equals("request")) {
-            binding.requestTextView.getRoot().setVisibility(View.VISIBLE);
+            InitManager.txtTextColor(binding.actionTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
+            else
+                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
 
             binding.statusTextView.setVisibility(View.GONE);
             binding.statusTextView.setText("");
         } else {
-            binding.requestTextView.getRoot().setVisibility(View.GONE);
+            InitManager.txtTextColor(binding.actionTextView.getRoot(), getResources().getString(R.string.CenterFragmentSchedules), getResources().getColor(R.color.Blue600));
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+            else
+                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
 
             binding.statusTextView.setVisibility(View.VISIBLE);
             binding.statusTextView.setText(SelectionManager.getCenterStatus(requireActivity(), "fa", status));
@@ -379,9 +381,7 @@ public class CenterFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showCenterDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
 
-        items.add(requireActivity().getResources().getString(R.string.CenterFragmentSchedules));
-
-        if (!status.equals("request"))
+        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownProfile(status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
 
         if (((MainActivity) requireActivity()).permissoon.showCenterDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), status))
@@ -392,7 +392,17 @@ public class CenterFragment extends Fragment {
 
         items.add("");
 
-        InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        if (items.size() > 1) {
+            InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
+            InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        } else {
+            if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest))) {
+                InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500);
+                binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
+            } else {
+                binding.menuSpinner.getRoot().setVisibility(View.GONE);
+            }
+        }
     }
 
     private void setPermission(String status) {

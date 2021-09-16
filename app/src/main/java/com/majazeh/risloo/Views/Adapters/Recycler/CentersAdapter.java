@@ -89,7 +89,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersHolder> {
                 NavDirections action = NavigationMainDirections.actionGlobalCenterFragment(model);
                 ((MainActivity) activity).navController.navigate(action);
             } else {
-                NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("personal_clinic", model);
+                NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());
@@ -98,10 +98,26 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersHolder> {
     private void setData(CentersHolder holder, CenterModel model) {
         try {
             if (model.getCenterType().equals("counseling_center")) {
-                holder.binding.nameTextView.setText(model.getDetail().getString("title"));
-                holder.binding.typeTextView.setText(model.getManager().getName());
+                if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
+                    holder.binding.nameTextView.setText(model.getDetail().getString("title"));
+                else
+                    holder.binding.nameTextView.setText(model.getCenterId());
+
+                if (model.getManager() != null && !model.getManager().getName().equals(""))
+                    holder.binding.typeTextView.setText(model.getManager().getName());
+                else if (model.getManager() != null)
+                    holder.binding.typeTextView.setText(model.getManager().getId());
+                else
+                    holder.binding.typeTextView.setText("نامعلوم");
+
             } else {
-                holder.binding.nameTextView.setText(model.getManager().getName());
+                if (model.getManager() != null && !model.getManager().getName().equals(""))
+                    holder.binding.nameTextView.setText(model.getManager().getName());
+                else if (model.getManager() != null)
+                    holder.binding.nameTextView.setText(model.getManager().getId());
+                else
+                    holder.binding.nameTextView.setText("نامعلوم");
+
                 holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CentersFragmentPersonalClinic));
             }
 

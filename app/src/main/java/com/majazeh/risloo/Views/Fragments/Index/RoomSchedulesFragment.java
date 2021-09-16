@@ -44,7 +44,6 @@ public class RoomSchedulesFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String roomId = "", centerId = "", type = "";
     private long currentTimestamp = DateManager.currentTimestamp();
     public List treasuries = new List();
 
@@ -124,16 +123,7 @@ public class RoomSchedulesFragment extends Fragment {
 
     private void setData(RoomModel model) {
         if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            roomId = model.getRoomId();
-            data.put("id", roomId);
-        }
-
-        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
-            centerId = model.getRoomCenter().getCenterId();
-        }
-
-        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
-            type = model.getRoomType();
+            data.put("id", model.getRoomId());
         }
     }
 

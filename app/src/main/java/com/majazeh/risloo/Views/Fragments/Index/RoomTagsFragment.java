@@ -33,13 +33,12 @@ public class RoomTagsFragment extends Fragment {
     public TagsAdapter adapter;
 
     // Models
-    private RoomModel roomModel;
+    public RoomModel roomModel;
 
     // Objects
     private HashMap data, header;
 
     // Vars
-    public String roomId = "", centerId = "", type = "";
     private boolean isLoading = true;
 
     @Nullable
@@ -76,16 +75,7 @@ public class RoomTagsFragment extends Fragment {
 
     private void setData(RoomModel model) {
         if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            roomId = model.getRoomId();
-            data.put("id", roomId);
-        }
-
-        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
-            centerId = model.getRoomCenter().getCenterId();
-        }
-
-        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
-            type = model.getRoomType();
+            data.put("id", model.getRoomId());
         }
     }
 
@@ -111,6 +101,7 @@ public class RoomTagsFragment extends Fragment {
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
+
                     });
 
                     isLoading = false;
@@ -124,6 +115,7 @@ public class RoomTagsFragment extends Fragment {
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
+
                     });
 
                     isLoading = false;

@@ -138,7 +138,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void listener(IndexCenterUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof CenterUsersFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).type, ((CenterUsersFragment) current).centerId, model);
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).centerModel, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());
@@ -186,7 +186,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             break;
                         case "ساختن اتاق درمان": {
                             if (current instanceof CenterUsersFragment) {
-                                NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(((CenterUsersFragment) current).centerId, model);
+                                NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(((CenterUsersFragment) current).centerModel, model);
                                 ((MainActivity) activity).navController.navigate(action);
                             }
                         } break;
@@ -194,7 +194,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             try {
                                 RoomModel roomModel = new RoomModel(new JSONObject().put("id", model.getMeta().getString("room_id")).put("type", "room").put("manager", model.object));
 
-                                NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("room", roomModel);
+                                NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(roomModel);
                                 ((MainActivity) activity).navController.navigate(action);
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -202,7 +202,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         } break;
                         case "ویرایش": {
                             if (current instanceof CenterUsersFragment) {
-                                NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(((CenterUsersFragment) current).centerId, model);
+                                NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(((CenterUsersFragment) current).centerModel, model);
                                 ((MainActivity) activity).navController.navigate(action);
                             }
                         } break;
@@ -310,7 +310,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         DialogManager.showLoadingDialog(activity, "");
 
         if (current instanceof CenterUsersFragment)
-            data.put("id", ((CenterUsersFragment) current).centerId);
+            data.put("id", ((CenterUsersFragment) current).centerModel.getCenterId());
 
         if (method.equals("position")) {
             data.put("userId", model.getId());

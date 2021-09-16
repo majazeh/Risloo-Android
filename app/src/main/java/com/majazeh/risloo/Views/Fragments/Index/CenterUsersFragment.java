@@ -48,7 +48,6 @@ public class CenterUsersFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    public String centerId = "", type = "";
     private boolean isLoading = true;
 
     @Nullable
@@ -158,12 +157,7 @@ public class CenterUsersFragment extends Fragment {
 
     private void setData(CenterModel model) {
         if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-            centerId = model.getCenterId();
-            data.put("id", centerId);
-        }
-
-        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
-            type = model.getCenterType();
+            data.put("id", model.getCenterId());
         }
     }
 

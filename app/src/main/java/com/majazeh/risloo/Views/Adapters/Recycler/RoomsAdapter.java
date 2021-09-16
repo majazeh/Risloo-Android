@@ -96,7 +96,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
 
     private void listener(RoomsHolder holder, RoomModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("room", model);
+            NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
     }
@@ -104,10 +104,12 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
     private void setData(RoomsHolder holder, RoomModel model) {
         if (current instanceof DashboardFragment) {
             try {
-                if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null)
+                if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals(""))
                     holder.binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
-                else if (model.getRoomCenter() != null && model.getRoomCenter().getManager() != null)
-                    holder.binding.nameTextView.setText(model.getRoomCenter().getManager().getName());
+                else if (model.getRoomCenter() != null)
+                    holder.binding.nameTextView.setText(model.getRoomCenter().getCenterId());
+                else
+                    holder.binding.nameTextView.setText("نامعلوم");
 
                 if (model.getRoomCenter() != null && model.getRoomCenter().getDetail().has("avatar") && !model.getRoomCenter().getDetail().isNull("avatar") && model.getRoomCenter().getDetail().getJSONArray("avatar").length() != 0)
                     setAvatar(holder, model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
@@ -118,10 +120,12 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
             }
 
         } else {
-            if (!model.getRoomManager().getName().equals(""))
+            if (model.getRoomManager() != null && !model.getRoomManager().getName().equals(""))
                 holder.binding.nameTextView.setText(model.getRoomManager().getName());
-            else
+            else if (model.getRoomManager() != null)
                 holder.binding.nameTextView.setText(model.getRoomManager().getId());
+            else
+                holder.binding.nameTextView.setText("نامعلوم");
 
             if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
                 setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());

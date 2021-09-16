@@ -44,7 +44,6 @@ public class CenterSchedulesFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String centerId = "", type = "";
     private long currentTimestamp = DateManager.currentTimestamp();
     public List treasuries = new List();
 
@@ -124,12 +123,7 @@ public class CenterSchedulesFragment extends Fragment {
 
     private void setData(CenterModel model) {
         if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-            centerId = model.getCenterId();
-            data.put("id", centerId);
-        }
-
-        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
-            type = model.getCenterType();
+            data.put("id", model.getCenterId());
         }
     }
 

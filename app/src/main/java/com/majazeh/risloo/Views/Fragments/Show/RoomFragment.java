@@ -37,6 +37,7 @@ import com.mre.ligheh.Model.TypeModel.CaseModel;
 
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -99,11 +100,7 @@ public class RoomFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
 
-        InitManager.txtTextColor(binding.requestTextView.getRoot(), getResources().getString(R.string.RoomFragmentRequest), getResources().getColor(R.color.White));
-
-        InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-
         InitManager.fixedHorizontalRecyclerView(requireActivity(), binding.tagsRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
@@ -111,14 +108,10 @@ public class RoomFragment extends Fragment {
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-            binding.requestTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
         } else {
             binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-            binding.requestTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
         }
     }
 
@@ -137,6 +130,11 @@ public class RoomFragment extends Fragment {
                 }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
+
+        CustomClickView.onClickListener(() -> {
+            NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.menuSpinner.selectImageView);
 
         binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
             binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
@@ -160,28 +158,31 @@ public class RoomFragment extends Fragment {
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
                             break;
-                        case "برنامه درمانی":
-                            if (!type.equals("room")) {
-                                NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
-                            } else {
-                                NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
+                        case "تعریف برنامه درمانی":
+                            if (roomModel != null) {
+                                NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
                             break;
-                        case "تعریف برنامه درمانی": {
-                            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "پروفایل من": {
-                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(type, null, centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "ویرایش": {
-                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "محل برگزاری": {
+                        case "پروفایل من":
+                            if (!type.equals("room")) {
+                                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            } else {
+                                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            }
+                            break;
+                        case "ویرایش":
+                            if (!type.equals("room")) {
+                                NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            } else {
+                                NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            }
+                            break;
+                        case "محل برگزاری":
                             if (!type.equals("room")) {
                                 NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
@@ -189,8 +190,8 @@ public class RoomFragment extends Fragment {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
-                        } break;
-                        case "برچسب\u200Cهای مهم": {
+                            break;
+                        case "برچسب\u200Cهای مهم":
                             if (!type.equals("room")) {
                                 NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
@@ -198,7 +199,7 @@ public class RoomFragment extends Fragment {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
-                        } break;
+                            break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -216,31 +217,41 @@ public class RoomFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             DialogManager.showLoadingDialog(requireActivity(), "");
 
-            Room.request(data, header, new Response() {
-                @Override
-                public void onOK(Object object) {
-                    roomModel = (RoomModel) object;
+            if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.RoomFragmentRequest))) {
+                Room.request(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        roomModel = (RoomModel) object;
 
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            setAcceptation(roomModel);
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                setAcceptation(roomModel);
 
-                            DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
-                        });
+                                DialogManager.dismissLoadingDialog();
+                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
+                            });
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(String response) {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            // Place Code if Needed
-                        });
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // Place Code if Needed
+                            });
+                        }
                     }
+                });
+            } else {
+                if (!type.equals("room")) {
+                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                } else {
+                    NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
                 }
-            });
-        }).widget(binding.requestTextView.getRoot());
+            }
+        }).widget(binding.actionTextView.getRoot());
 
         binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
@@ -297,10 +308,7 @@ public class RoomFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            if (roomModel == null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(centerModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            } else {
+            if (roomModel != null) {
                 NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(roomModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
@@ -308,13 +316,13 @@ public class RoomFragment extends Fragment {
     }
 
     private void setArgs() {
-        type = RoomFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = RoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (!type.equals("room")) {
-            centerModel = (CenterModel) RoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel")) {
+            centerModel = (CenterModel) typeModel;
             setData(centerModel);
-        } else {
-            roomModel = (RoomModel) RoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel")) {
+            roomModel = (RoomModel) typeModel;
             setData(roomModel);
         }
     }
@@ -330,11 +338,12 @@ public class RoomFragment extends Fragment {
                 type = model.getCenterType();
             }
 
-            if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
-                binding.nameTextView.setText(model.getDetail().getString("title"));
-                binding.nameTextView.setVisibility(View.VISIBLE);
+            if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals("")) {
+                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getManager().getName());
+            } else if (model.getManager() != null) {
+                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getManager().getId());
             } else {
-                binding.nameTextView.setVisibility(View.GONE);
+                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + "نامعلوم");
             }
 
             if (model.getDetail() != null && model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
@@ -386,25 +395,21 @@ public class RoomFragment extends Fragment {
             type = model.getRoomType();
         }
 
-        if (model.getRoomManager() != null) {
-            if (!type.equals("room")) {
-                if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
-                    String name = requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName();
-                    binding.nameTextView.setText(name);
-                } else {
-                    String name = requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getId();
-                    binding.nameTextView.setText(name);
-                }
-            } else {
-                if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
-                    binding.nameTextView.setText(model.getRoomManager().getName());
-                else
-                    binding.nameTextView.setText(model.getRoomManager().getId());
-            }
+        if (!type.equals("room")) {
+            if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
+                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName());
+            else if (model.getRoomManager() != null)
+                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getId());
+            else
+                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + "نامعلوم");
 
-            binding.nameTextView.setVisibility(View.VISIBLE);
         } else {
-            binding.nameTextView.setVisibility(View.GONE);
+            if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
+                binding.nameTextView.setText(model.getRoomManager().getName());
+            else if (model.getRoomManager() != null)
+                binding.nameTextView.setText(model.getRoomManager().getId());
+            else
+                binding.nameTextView.setText("نامعلوم");
         }
 
         if (binding.descriptionTextView.getText().toString().equals(""))
@@ -423,8 +428,7 @@ public class RoomFragment extends Fragment {
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
 
-        setDropdown("");
-        setPermission("");
+        setAcceptation(model);
     }
 
     private void setAcceptation(CenterModel model) {
@@ -478,16 +482,39 @@ public class RoomFragment extends Fragment {
     }
 
     private void setStatus(String status) {
-        if (status.equals("request")) {
-            binding.requestTextView.getRoot().setVisibility(View.VISIBLE);
+        if (!type.equals("room")) {
+            if (status.equals("request")) {
+                InitManager.txtTextColor(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentRequest), getResources().getColor(R.color.White));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                    binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
+                else
+                    binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
+
+                binding.statusTextView.setVisibility(View.GONE);
+                binding.statusTextView.setText("");
+            } else {
+                InitManager.txtTextColor(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.Blue600));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                    binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+                else
+                    binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
+
+                binding.statusTextView.setVisibility(View.VISIBLE);
+                binding.statusTextView.setText(SelectionManager.getCenterStatus(requireActivity(), "fa", status));
+            }
+
+        } else {
+            InitManager.txtTextColor(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.Blue600));
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+            else
+                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
 
             binding.statusTextView.setVisibility(View.GONE);
             binding.statusTextView.setText("");
-        } else {
-            binding.requestTextView.getRoot().setVisibility(View.GONE);
-
-            binding.statusTextView.setVisibility(View.VISIBLE);
-            binding.statusTextView.setText(SelectionManager.getRoomStatus(requireActivity(), "fa", status));
         }
 
         setDropdown(status);
@@ -500,12 +527,10 @@ public class RoomFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
 
-        items.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
-
         if (type.equals("room") && ((MainActivity) requireActivity()).permissoon.showRoomDropdownCreateSchedule(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentAddSchedule));
 
-        if (!type.equals("room") && !status.equals("request"))
+        if (!type.equals("room") && ((MainActivity) requireActivity()).permissoon.showRoomDropdownProfile(status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
 
         if (!type.equals("room"))
@@ -519,7 +544,17 @@ public class RoomFragment extends Fragment {
 
         items.add("");
 
-        InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        if (items.size() > 1) {
+            InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
+            InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        } else {
+            if (type.equals("room") && binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.RoomFragmentRequest))) {
+                InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500);
+                binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
+            } else {
+                binding.menuSpinner.getRoot().setVisibility(View.GONE);
+            }
+        }
     }
 
     private void setPermission(String status) {
@@ -625,7 +660,7 @@ public class RoomFragment extends Fragment {
             data.remove("tag");
         }
 
-        // Schedules Data
+        // Cases Data
         binding.casesSingleLayout.getRoot().setVisibility(View.GONE);
         binding.casesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
         binding.casesShimmerLayout.getRoot().startShimmer();
