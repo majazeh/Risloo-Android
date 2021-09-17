@@ -38,7 +38,12 @@
         android:id="@+id/paymentsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.PaymentsFragment"
         android:label="@string/PaymentsFragmentTitle"
-        tools:layout="@layout/fragment_payments" />
+        tools:layout="@layout/fragment_payments" >
+        <argument
+            android:name="typeModel"
+            app:nullable="true"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     ---------- // Actions
 

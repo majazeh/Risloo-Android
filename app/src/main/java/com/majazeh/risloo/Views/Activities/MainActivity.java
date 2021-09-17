@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                             navController.navigate(action);
                         } break;
                         case "شارژ حساب": {
-                            NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment();
+                            NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
                             navController.navigate(action);
                         } break;
                         case "خروج": {

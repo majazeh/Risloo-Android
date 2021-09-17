@@ -346,7 +346,7 @@ public class BreadCrumb {
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.paymentsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment();
+                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
 

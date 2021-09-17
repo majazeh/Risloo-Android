@@ -58,7 +58,7 @@ public class PaymentManager {
                 NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(Paymont.getInstance().getTypeModel());
                 ((MainActivity) activity).navController.navigate(action);
             } else if (Paymont.getInstance().getDestination() == R.id.paymentsFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment();
+                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(Paymont.getInstance().getTypeModel());
                 ((MainActivity) activity).navController.navigate(action);
             }
 

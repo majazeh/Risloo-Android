@@ -66,7 +66,7 @@ public class PaymentsFragment extends Fragment {
 
         listener();
 
-        setData();
+        setArgs();
 
         getData();
 
@@ -163,9 +163,35 @@ public class PaymentsFragment extends Fragment {
         }).widget(binding.chargeTextView.getRoot());
     }
 
-    private void setData() {
-        UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
+    private void setArgs() {
+        UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
+        setData(userModel);
 
+        TypeModel typeModel = PaymentsFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        if (typeModel != null) {
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("PaymentModel"))
+                setData((PaymentModel) typeModel);
+        }
+    }
+
+    private void setData(PaymentModel model) {
+        if (model.getAmount() != 0 ) {
+            amount = String.valueOf(model.getAmount());
+            binding.amountIncludeLayout.inputEditText.setText(amount);
+        }
+
+        if (model.getTreasury() != null && model.getTreasury().getId() != null && !model.getTreasury().getId().equals("")) {
+            treasury = model.getTreasury().getId();
+            for (int i = 0; i < treasuryIds.size(); i++) {
+                if (treasuryIds.get(i).equals(treasury)) {
+                    binding.treasuryIncludeLayout.selectSpinner.setSelection(i);
+                }
+            }
+        }
+    }
+
+    private void setData(UserModel model) {
         if (model.getTreasuries() != null) {
             setTreasury(model.getTreasuries());
         }
