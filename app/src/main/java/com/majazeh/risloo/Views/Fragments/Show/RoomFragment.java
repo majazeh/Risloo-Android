@@ -558,6 +558,18 @@ public class RoomFragment extends Fragment {
 
                 binding.statusTextView.setVisibility(View.VISIBLE);
                 binding.statusTextView.setText(SelectionManager.getCenterStatus(requireActivity(), "fa", status));
+
+                switch (status) {
+                    case "accepted":
+                        binding.statusTextView.setTextColor(getResources().getColor(R.color.Green600));
+                        break;
+                    case "kicked":
+                        binding.statusTextView.setTextColor(getResources().getColor(R.color.Red600));
+                        break;
+                    default:
+                        binding.statusTextView.setTextColor(getResources().getColor(R.color.Gray600));
+                        break;
+                }
             }
 
         } else {

@@ -239,18 +239,18 @@ public class CenterFragment extends Fragment {
 
         binding.getRoot().setMOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (userScroll && !isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
-                userScroll = false;
-                isLoading = true;
-
-                if (data.containsKey("page"))
-                    data.put("page", ((int) data.get("page")) + 1);
-                else
-                    data.put("page", 1);
-
-                if (binding.roomsSingleLayout.progressBar.getVisibility() == View.GONE)
-                    binding.roomsSingleLayout.progressBar.setVisibility(View.VISIBLE);
-
-                getData();
+//                userScroll = false;
+//                isLoading = true;
+//
+//                if (data.containsKey("page"))
+//                    data.put("page", ((int) data.get("page")) + 1);
+//                else
+//                    data.put("page", 1);
+//
+//                if (binding.roomsSingleLayout.progressBar.getVisibility() == View.GONE)
+//                    binding.roomsSingleLayout.progressBar.setVisibility(View.VISIBLE);
+//
+//                getData();
             }
         });
 
@@ -369,6 +369,18 @@ public class CenterFragment extends Fragment {
 
             binding.statusTextView.setVisibility(View.VISIBLE);
             binding.statusTextView.setText(SelectionManager.getCenterStatus(requireActivity(), "fa", status));
+
+            switch (status) {
+                case "accepted":
+                    binding.statusTextView.setTextColor(getResources().getColor(R.color.Green600));
+                    break;
+                case "kicked":
+                    binding.statusTextView.setTextColor(getResources().getColor(R.color.Red600));
+                    break;
+                default:
+                    binding.statusTextView.setTextColor(getResources().getColor(R.color.Gray600));
+                    break;
+            }
         }
 
         setDropdown(status);

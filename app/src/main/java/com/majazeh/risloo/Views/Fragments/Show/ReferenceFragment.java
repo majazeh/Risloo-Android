@@ -25,6 +25,7 @@ import com.majazeh.risloo.databinding.FragmentReferenceBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.Room;
+import com.mre.ligheh.Model.TypeModel.AcceptationModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -116,9 +117,9 @@ public class ReferenceFragment extends Fragment {
     private void setArgs() {
         TypeModel centerModel = ReferenceFragmentArgs.fromBundle(getArguments()).getCenterModel();
 
-        if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel")) {
+        if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
             setData((CenterModel) centerModel);
-        } else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel"))
+        else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel"))
             setData((RoomModel) centerModel);
 
         TypeModel typeModel = ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
@@ -130,7 +131,11 @@ public class ReferenceFragment extends Fragment {
             }
         } else {
             userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
-            setData(userModel);
+
+            if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
+                setData(((CenterModel) centerModel).getAcceptation());
+            else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel"))
+                setData(((RoomModel) centerModel).getRoomAcceptation());
         }
     }
 
@@ -183,6 +188,42 @@ public class ReferenceFragment extends Fragment {
         }
 
         if (model.getPosition() != null && !model.getPosition().equals("")) {
+            binding.statusTextView.setText(SelectionManager.getReferencePosition(requireActivity(), "fa", model.getPosition()));
+            binding.statusTextView.setVisibility(View.VISIBLE);
+        } else {
+            binding.statusTextView.setVisibility(View.GONE);
+        }
+    }
+
+    private void setData(AcceptationModel model) {
+        if (model != null && model.getId() != null && !model.getId().equals("")) {
+            data.put("userId", model.getId());
+        }
+
+        if (model != null && model.getName() != null && !model.getName().equals("")) {
+            binding.nameTextView.setText(model.getName());
+        } else {
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+        }
+
+        if (userModel.getMobile() != null && !userModel.getMobile().equals("")) {
+            binding.mobileTextView.setText(userModel.getMobile());
+            binding.mobileGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.mobileGroup.setVisibility(View.GONE);
+        }
+
+        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar().getMedium().getUrl() != null) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+
+            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        }
+
+        if (model != null && model.getPosition() != null && !model.getPosition().equals("")) {
             binding.statusTextView.setText(SelectionManager.getReferencePosition(requireActivity(), "fa", model.getPosition()));
             binding.statusTextView.setVisibility(View.VISIBLE);
         } else {
