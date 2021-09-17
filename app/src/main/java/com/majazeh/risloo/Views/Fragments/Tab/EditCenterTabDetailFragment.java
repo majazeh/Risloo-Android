@@ -156,7 +156,12 @@ public class EditCenterTabDetailFragment extends Fragment {
 
     private void setData() {
         if (current instanceof EditCenterFragment) {
-            CenterModel model = ((EditCenterFragment) current).centerModel;
+            CenterModel model;
+
+            if (((EditCenterFragment) current).centerModel != null)
+                model = ((EditCenterFragment) current).centerModel;
+            else
+                model = ((EditCenterFragment) current).roomModel.getRoomCenter();
 
             try {
                 if (model.getCenterId() != null && !model.getCenterId().equals("")) {

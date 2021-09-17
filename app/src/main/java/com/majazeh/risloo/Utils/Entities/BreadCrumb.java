@@ -1467,16 +1467,12 @@ public class BreadCrumb {
             list = center();
 
         if (!roomType.equals("room")) {
-            try {
-                if (centerModel != null && centerModel.getDetail() != null && !centerModel.getDetail().getString("title").equals(""))
-                    list.add("کلینیک شخصی" + " " + centerModel.getDetail().getString("title"));
-                else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
-                    list.add("کلینیک شخصی" + " " + centerModel.getCenterId());
-                else
-                    list.add("نامعلوم");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            if (centerModel != null && centerModel.getManager() != null && centerModel.getManager().getName() != null && !centerModel.getManager().getName().equals(""))
+                list.add("کلینیک شخصی" + " " + centerModel.getManager().getName());
+            else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
+                list.add("کلینیک شخصی" + " " + centerModel.getCenterId());
+            else
+                list.add("نامعلوم");
         } else {
             if (roomModel != null && roomModel.getRoomManager() != null && roomModel.getRoomManager().getName() != null && !roomModel.getRoomManager().getName().equals(""))
                 list.add("اتاق درمان" + " " + roomModel.getRoomManager().getName());

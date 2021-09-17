@@ -132,8 +132,18 @@ public class RoomFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            if (!type.equals("room")) {
+                if (centerModel != null) {
+                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                } else {
+                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                }
+            } else {
+                NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            }
         }).widget(binding.menuSpinner.selectImageView);
 
         binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
@@ -151,55 +161,73 @@ public class RoomFragment extends Fragment {
                     switch (pos) {
                         case "اعضاء":
                             if (!type.equals("room")) {
-                                NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                if (centerModel != null) {
+                                    NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                } else {
+                                    NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                }
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
-                            }
-                            break;
-                        case "تعریف برنامه درمانی":
-                            if (roomModel != null) {
-                                NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
-                            }
-                            break;
+                            } break;
+                        case "تعریف برنامه درمانی": {
+                            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } break;
                         case "پروفایل من":
                             if (!type.equals("room")) {
-                                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                if (centerModel != null) {
+                                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                } else {
+                                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), null);
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                }
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
-                            }
-                            break;
+                            } break;
                         case "ویرایش":
                             if (!type.equals("room")) {
-                                NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                if (centerModel != null) {
+                                    NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                } else {
+                                    NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                }
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
-                            }
-                            break;
+                            } break;
                         case "محل برگزاری":
                             if (!type.equals("room")) {
-                                NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                if (centerModel != null) {
+                                    NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                } else {
+                                    NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                }
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
-                            }
-                            break;
+                            } break;
                         case "برچسب\u200Cهای مهم":
                             if (!type.equals("room")) {
-                                NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                if (centerModel != null) {
+                                    NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                } else {
+                                    NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                }
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
-                            }
-                            break;
+                            } break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -222,6 +250,7 @@ public class RoomFragment extends Fragment {
                     @Override
                     public void onOK(Object object) {
                         roomModel = (RoomModel) object;
+                        centerModel = roomModel.getRoomCenter();
 
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
@@ -244,8 +273,13 @@ public class RoomFragment extends Fragment {
                 });
             } else {
                 if (!type.equals("room")) {
-                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
+                    if (centerModel != null) {
+                        NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    } else {
+                        NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    }
                 } else {
                     NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
                     ((MainActivity) requireActivity()).navController.navigate(action);
@@ -386,49 +420,70 @@ public class RoomFragment extends Fragment {
     }
 
     private void setData(RoomModel model) {
-        if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            data.put("id", model.getRoomId());
-            data.put("session_platforms", 1);
+        try {
+            if (model.getRoomId() != null && !model.getRoomId().equals("")) {
+                data.put("id", model.getRoomId());
+                data.put("session_platforms", 1);
+            }
+
+            if (model.getRoomType() != null && !model.getRoomType().equals("")) {
+                type = model.getRoomType();
+            }
+
+            if (!type.equals("room")) {
+                if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
+                    binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName());
+                else if (model.getRoomManager() != null)
+                    binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getId());
+                else
+                    binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + "نامعلوم");
+
+            } else {
+                if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
+                    binding.nameTextView.setText(model.getRoomManager().getName());
+                else if (model.getRoomManager() != null)
+                    binding.nameTextView.setText(model.getRoomManager().getId());
+                else
+                    binding.nameTextView.setText("نامعلوم");
+            }
+
+            if (!type.equals("room") && model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("description") && !model.getRoomCenter().getDetail().isNull("description") && !model.getRoomCenter().getDetail().getString("description").equals("")) {
+                binding.descriptionTextView.setText(model.getRoomCenter().getDetail().getString("description"));
+                binding.descriptionGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.descriptionGroup.setVisibility(View.GONE);
+            }
+
+            if (!type.equals("room") && model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("phone_numbers") && !model.getRoomCenter().getDetail().isNull("phone_numbers") && model.getRoomCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
+                JSONArray phones = model.getRoomCenter().getDetail().getJSONArray("phone_numbers");
+
+                binding.mobileTextView.setText("");
+                for (int i = 0; i < phones.length(); i++) {
+                    binding.mobileTextView.append(phones.get(i).toString());
+                    if (i != phones.length() - 1) {
+                        binding.mobileTextView.append("  -  ");
+                    }
+                }
+
+                binding.mobileGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileGroup.setVisibility(View.GONE);
+            }
+
+            if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null && model.getRoomManager().getAvatar() .getMedium().getUrl() != null && !model.getRoomManager().getAvatar().getMedium().getUrl().equals("")) {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(model.getRoomManager().getAvatar() .getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            }
+
+            setAcceptation(model);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
-            type = model.getRoomType();
-        }
-
-        if (!type.equals("room")) {
-            if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
-                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName());
-            else if (model.getRoomManager() != null)
-                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getId());
-            else
-                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + "نامعلوم");
-
-        } else {
-            if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
-                binding.nameTextView.setText(model.getRoomManager().getName());
-            else if (model.getRoomManager() != null)
-                binding.nameTextView.setText(model.getRoomManager().getId());
-            else
-                binding.nameTextView.setText("نامعلوم");
-        }
-
-        if (binding.descriptionTextView.getText().toString().equals(""))
-            binding.descriptionGroup.setVisibility(View.GONE);
-
-        if (binding.mobileTextView.getText().toString().equals(""))
-            binding.mobileGroup.setVisibility(View.GONE);
-
-        if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null && model.getRoomManager().getAvatar() .getMedium().getUrl() != null && !model.getRoomManager().getAvatar().getMedium().getUrl().equals("")) {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(model.getRoomManager().getAvatar() .getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
-
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        }
-
-        setAcceptation(model);
     }
 
     private void setAcceptation(CenterModel model) {
@@ -572,6 +627,7 @@ public class RoomFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         try {
                             roomModel = new RoomModel(((JSONObject) object).getJSONObject("room"));
+                            centerModel = roomModel.getRoomCenter();
                             setData(roomModel);
 
                             List items = new List();
