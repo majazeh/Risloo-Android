@@ -3,6 +3,11 @@ package com.majazeh.risloo.Utils.Managers;
 import android.app.Activity;
 import android.net.Uri;
 
+import androidx.navigation.NavDirections;
+
+import com.majazeh.risloo.NavigationMainDirections;
+import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Payment;
@@ -32,9 +37,6 @@ public class PaymentManager {
 
                 activity.runOnUiThread(() -> {
                     DialogManager.dismissPaymentDialog();
-
-                    // TODO : Update & Save TypeModel
-
                     IntentManager.browser(activity, model.getRedirect());
                 });
             }
@@ -42,7 +44,7 @@ public class PaymentManager {
             @Override
             public void onFailure(String response) {
                 activity.runOnUiThread(() -> {
-                    // Place Code if Needed
+                    Paymont.getInstance().clearPayment();
                 });
             }
         });
@@ -52,9 +54,15 @@ public class PaymentManager {
         Uri uri = activity.getIntent().getData();
 
         if (uri != null) {
-            // TODO : Navigate The Previous Fragment
+            if (Paymont.getInstance().getDestination() == R.id.reserveScheduleFragment) {
+                NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(Paymont.getInstance().getTypeModel());
+                ((MainActivity) activity).navController.navigate(action);
+            } else if (Paymont.getInstance().getDestination() == R.id.paymentsFragment) {
+                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment();
+                ((MainActivity) activity).navController.navigate(action);
+            }
 
-            // TODO : Call finalize() method
+            // TODO : Call finalize() method and pass PaymentModel that was getted form uri
         }
     }
 
@@ -75,14 +83,18 @@ public class PaymentManager {
                 activity.runOnUiThread(() -> {
                     DialogManager.dismissPaymentDialog();
 
-                    // TODO : Show Corresponding Message & Handle The Navigation If Needed
+                    if (Paymont.getInstance().getDestination() == R.id.reserveScheduleFragment) {
+
+                    } else if (Paymont.getInstance().getDestination() == R.id.paymentsFragment) {
+
+                    }
                 });
             }
 
             @Override
             public void onFailure(String response) {
                 activity.runOnUiThread(() -> {
-                    // Place Code if Needed
+                    Paymont.getInstance().clearPayment();
                 });
             }
         });

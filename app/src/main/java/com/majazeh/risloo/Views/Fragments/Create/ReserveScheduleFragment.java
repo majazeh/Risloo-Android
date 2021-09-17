@@ -16,6 +16,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -569,6 +570,9 @@ public class ReserveScheduleFragment extends Fragment {
                                 JSONObject paymentObject = responseObject.getJSONObject("payment");
                                 PaymentModel paymentModel = new PaymentModel(paymentObject);
 
+                                // TODO : Update TypeModel
+
+                                Paymont.getInstance().insertPayment(scheduleModel, R.id.reserveScheduleFragment);
                                 PaymentManager.request(requireActivity(), paymentModel);
                             } else {
                                 if (!responseObject.isNull("errors")) {
