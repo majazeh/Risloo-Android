@@ -123,6 +123,61 @@ public class BulkSampleFragment extends Fragment {
             }
         }).widget(binding.avatarsIncludeLayout.avatarSubCircleImageView);
 
+        CustomClickView.onClickListener(() -> {
+            switch (binding.menuSpinner.selectImageView.getTag().toString()) {
+                case "لینک ثبت نام": {
+                    DialogManager.showLoadingDialog(requireActivity(), "");
+
+                    HashMap authData = new HashMap<>();
+                    authData.put("authorized_key", bulkSampleModel.getLink());
+
+                    Sample.auth(authData, header, new Response() {
+                        @Override
+                        public void onOK(Object object) {
+                            if (isAdded()) {
+                                requireActivity().runOnUiThread(() -> {
+                                    try {
+                                        JSONObject jsonObject = (JSONObject) object;
+
+                                        if (!jsonObject.getString("theory").equals("sample"))
+                                            bulkSampleModel = new BulkSampleModel(jsonObject.getJSONObject("bulk_sample"));
+
+                                        String key = jsonObject.getString("key");
+
+                                        if (key.startsWith("$")) {
+                                            DialogManager.dismissLoadingDialog();
+                                            IntentManager.test(requireActivity(), key);
+                                        } else {
+                                            DialogManager.dismissLoadingDialog();
+                                            SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(String response) {
+                            if (isAdded()) {
+                                requireActivity().runOnUiThread(() -> {
+                                    // TODO : Place Code If Needed
+                                });
+                            }
+                        }
+                    });
+                } break;
+                case "کپی کردن لینک": {
+                    IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
+                    ToastManager.showSuccesToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastLinkSaved));
+                } break;
+                case "ویرایش": {
+                    // TODO : Place Code If Needed
+                } break;
+            }
+        }).widget(binding.menuSpinner.selectImageView);
+
         binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
             binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
             userSelect = true;
@@ -270,7 +325,27 @@ public class BulkSampleFragment extends Fragment {
         items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentEdit));
         items.add("");
 
-        InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        if (items.size() > 2) {
+            InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
+            InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        } else if (items.size() == 2) {
+            switch (items.get(0)) {
+                case "لینک ثبت نام":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_link_light, R.color.Gray500, items.get(0));
+                    break;
+                case "کپی کردن لینک":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_copy_light, R.color.Gray500, items.get(0));
+                    break;
+                case "ویرایش":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, items.get(0));
+                    break;
+            }
+
+            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp));
+            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
+        } else {
+            binding.menuSpinner.getRoot().setVisibility(View.GONE);
+        }
     }
 
     private void getData() {

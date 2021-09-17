@@ -136,6 +136,23 @@ public class SessionFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        CustomClickView.onClickListener(() -> {
+            switch (binding.menuSpinner.selectImageView.getTag().toString()) {
+                case "گزارشات": {
+                    if (sessionModel != null) {
+                        NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment(sessionModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    }
+                } break;
+                case "ویرایش": {
+                    if (sessionModel != null) {
+                        NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(sessionModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    }
+                } break;
+            }
+        }).widget(binding.menuSpinner.selectImageView);
+
         binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
             binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
             userSelect = true;
@@ -465,12 +482,24 @@ public class SessionFragment extends Fragment {
 
         items.add("");
 
-        InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        if (items.size() > 2) {
+            InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
+            InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        } else if (items.size() == 2) {
+            switch (items.get(0)) {
+                case "گزارشات":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.Gray500, items.get(0));
+                    break;
+                case "ویرایش":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, items.get(0));
+                    break;
+            }
 
-        if (items.size() > 1)
-            binding.menuSpinner.getRoot().setVisibility(View.VISIBLE);
-        else
+            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp));
+            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
+        } else {
             binding.menuSpinner.getRoot().setVisibility(View.GONE);
+        }
     }
 
     private void setPermission() {
