@@ -132,17 +132,89 @@ public class RoomFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            if (!type.equals("room")) {
-                if (centerModel != null) {
-                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+            switch (binding.menuSpinner.selectImageView.getTag().toString()) {
+                case "اعضاء":
+                    if (!type.equals("room")) {
+                        if (centerModel != null) {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } else {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        }
+                    } else {
+                        NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    } break;
+                case "برنامه درمانی":
+                    if (!type.equals("room")) {
+                        if (centerModel != null) {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } else {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        }
+                    } else {
+                        NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    } break;
+                case "تعریف برنامه درمانی": {
+                    NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
                     ((MainActivity) requireActivity()).navController.navigate(action);
-                } else {
-                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                }
-            } else {
-                NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
+                } break;
+                case "پروفایل من":
+                    if (!type.equals("room")) {
+                        if (centerModel != null) {
+                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } else {
+                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), null);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        }
+                    } else {
+                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    } break;
+                case "ویرایش":
+                    if (!type.equals("room")) {
+                        if (centerModel != null) {
+                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } else {
+                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        }
+                    } else {
+                        NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    } break;
+                case "محل برگزاری":
+                    if (!type.equals("room")) {
+                        if (centerModel != null) {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } else {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        }
+                    } else {
+                        NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    } break;
+                case "برچسب\u200Cهای مهم":
+                    if (!type.equals("room")) {
+                        if (centerModel != null) {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } else {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        }
+                    } else {
+                        NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    } break;
             }
         }).widget(binding.menuSpinner.selectImageView);
 
@@ -170,6 +242,19 @@ public class RoomFragment extends Fragment {
                                 }
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            } break;
+                        case "برنامه درمانی":
+                            if (!type.equals("room")) {
+                                if (centerModel != null) {
+                                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                } else {
+                                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navController.navigate(action);
+                                }
+                            } else {
+                                NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } break;
                         case "تعریف برنامه درمانی": {
@@ -594,6 +679,9 @@ public class RoomFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
 
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownSchedules(status))
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
+
         if (type.equals("room") && ((MainActivity) requireActivity()).permissoon.showRoomDropdownCreateSchedule(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentAddSchedule));
 
@@ -611,16 +699,38 @@ public class RoomFragment extends Fragment {
 
         items.add("");
 
-        if (items.size() > 1) {
+        if (items.size() > 2) {
             InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
             InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
-        } else {
-            if (type.equals("room") && binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.RoomFragmentRequest))) {
-                InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500);
-                binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
-            } else {
-                binding.menuSpinner.getRoot().setVisibility(View.GONE);
+        } else if (items.size() == 2) {
+            switch (items.get(0)) {
+                case "اعضاء":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_users_light, R.color.Gray500, items.get(0));
+                    break;
+                case "برنامه درمانی":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500, items.get(0));
+                    break;
+                case "تعریف برنامه درمانی":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_plus_light, R.color.Gray500, items.get(0));
+                    break;
+                case "پروفایل من":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_crown_light, R.color.Gray500, items.get(0));
+                    break;
+                case "ویرایش":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, items.get(0));
+                    break;
+                case "محل برگزاری":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_map_marker_alt_light, R.color.Gray500, items.get(0));
+                    break;
+                case "برچسب\u200Cهای مهم":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_tags_light, R.color.Gray500, items.get(0));
+                    break;
             }
+
+            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp));
+            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
+        } else {
+            binding.menuSpinner.getRoot().setVisibility(View.GONE);
         }
     }
 

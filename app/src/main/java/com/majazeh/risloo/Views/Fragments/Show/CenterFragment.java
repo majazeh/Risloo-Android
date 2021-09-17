@@ -119,8 +119,28 @@ public class CenterFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            switch (binding.menuSpinner.selectImageView.getTag().toString()) {
+                case "اعضاء": {
+                    NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                } break;
+                case "برنامه درمانی": {
+                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                } break;
+                case "پروفایل من": {
+                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                } break;
+                case "ویرایش": {
+                    NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                } break;
+                case "محل برگزاری": {
+                    NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                } break;
+            }
         }).widget(binding.menuSpinner.selectImageView);
 
         binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
@@ -138,6 +158,10 @@ public class CenterFragment extends Fragment {
                     switch (pos) {
                         case "اعضاء": {
                             NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } break;
+                        case "برنامه درمانی": {
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "پروفایل من": {
@@ -393,6 +417,9 @@ public class CenterFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showCenterDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
 
+        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownSchedules(status))
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentSchedules));
+
         if (((MainActivity) requireActivity()).permissoon.showCenterDropdownProfile(status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
 
@@ -404,16 +431,32 @@ public class CenterFragment extends Fragment {
 
         items.add("");
 
-        if (items.size() > 1) {
+        if (items.size() > 2) {
             InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
             InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
-        } else {
-            if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest))) {
-                InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500);
-                binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
-            } else {
-                binding.menuSpinner.getRoot().setVisibility(View.GONE);
+        } else if (items.size() == 2) {
+            switch (items.get(0)) {
+                case "اعضاء":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_users_light, R.color.Gray500, items.get(0));
+                    break;
+                case "برنامه درمانی":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500, items.get(0));
+                    break;
+                case "پروفایل من":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_crown_light, R.color.Gray500, items.get(0));
+                    break;
+                case "ویرایش":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, items.get(0));
+                    break;
+                case "محل برگزاری":
+                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_map_marker_alt_light, R.color.Gray500, items.get(0));
+                    break;
             }
+
+            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp));
+            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
+        } else {
+            binding.menuSpinner.getRoot().setVisibility(View.GONE);
         }
     }
 

@@ -85,6 +85,13 @@ public class Permissoon {
             return false;
     }
 
+    public boolean showCenterDropdownSchedules(String position) {
+        if (!position.equals(""))
+            return position.equals("request");
+        else
+            return false;
+    }
+
     public boolean showCenterDropdownProfile(String position) {
         if (!position.equals(""))
             return !position.equals("request");
@@ -127,6 +134,13 @@ public class Permissoon {
     public boolean showRoomDropdownUsers(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
+    }
+
+    public boolean showRoomDropdownSchedules(String position) {
+        if (!position.equals(""))
+            return position.equals("request");
         else
             return false;
     }
