@@ -8,6 +8,6 @@
     android:contentDescription="@string/AppImageContent"
     android:padding="@dimen/_12sdp"
     android:scaleType="fitCenter"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray300"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300"
     tools:src="@drawable/ic_ellipsis_v_light"
     tools:tint="@color/Gray500" />

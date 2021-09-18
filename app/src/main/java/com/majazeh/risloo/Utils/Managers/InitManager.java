@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Utils.Managers;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,17 +100,10 @@ public class InitManager {
             }
 
             private void detector(View view, int position) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                } else {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white);
-                }
+                if (spinner.getSelectedItemPosition() == position)
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
             }
 
             private void setData(int position) {
@@ -164,17 +156,10 @@ public class InitManager {
             }
 
             private void detector(View view, int position) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                } else {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white);
-                }
+                if (spinner.getSelectedItemPosition() == position)
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
             }
 
             private void setData(int position) {
@@ -225,17 +210,10 @@ public class InitManager {
             }
 
             private void detector(View view, int position) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                } else {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white);
-                }
+                if (spinner.getSelectedItemPosition() == position)
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
             }
 
             private void setData(int position) {
@@ -286,17 +264,10 @@ public class InitManager {
             }
 
             private void detector(View view, int position) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                } else {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white);
-                }
+                if (spinner.getSelectedItemPosition() == position)
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
             }
 
             private void setData(int position) {
@@ -351,10 +322,7 @@ public class InitManager {
             }
 
             private void detector(View view) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white);
+                view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
             }
 
             private void setData(int position) {
@@ -400,14 +368,10 @@ public class InitManager {
             }
 
             private void detector(View view, int position) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    if (arrayList.get(position).equals("خروج"))
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_red300);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                } else {
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white);
-                }
+                if (arrayList.get(position).equals("خروج"))
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_red300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
             }
 
             private void setData(int position) {
@@ -460,10 +424,7 @@ public class InitManager {
             }
 
             private void detector(View view) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white);
+                view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
             }
 
             private void setData(int position) {
@@ -583,17 +544,10 @@ public class InitManager {
             }
 
             private void detector(View view, int position) {
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                } else {
-                    if (spinner.getSelectedItemPosition() == position)
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_gray100);
-                    else
-                        view.setBackgroundResource(R.drawable.draw_rec_solid_white);
-                }
+                if (spinner.getSelectedItemPosition() == position)
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
             }
 
             private void setData(int position) {

@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Test;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +31,6 @@ public class TestEndFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();
@@ -44,12 +41,6 @@ public class TestEndFragment extends Fragment {
     private void initializer() {
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.EndFragmentTitle));
         binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.EndFragmentDescription));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.endTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -3,7 +3,6 @@ package com.majazeh.risloo.Views.Activities;
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -91,8 +90,6 @@ public class TestActivity extends AppCompatActivity {
 
         ExtendException.activity = this;
 
-        detector();
-
         listener();
 
         setExtra();
@@ -146,15 +143,6 @@ public class TestActivity extends AppCompatActivity {
 
         InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500);
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, 180);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.backwardImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-            binding.forwardImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-
-            binding.locationIncludeLayout.selectSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

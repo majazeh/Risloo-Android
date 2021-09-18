@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.BottomSheets;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -64,8 +63,6 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
 
         listener();
 
-        detector();
-
         setDialog();
 
         return binding.getRoot();
@@ -79,12 +76,6 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._6sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.entryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -11,6 +11,6 @@
     android:textColor="@color/White"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:background="@drawable/draw_16sdp_solid_blue500"
+    android:background="@drawable/draw_16sdp_solid_blue500_ripple_blue800"
     tools:layout_margin="@dimen/_24sdp"
     tools:text="دکمه" />

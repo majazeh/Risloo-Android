@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -76,8 +75,6 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
         listener();
 
-        detector();
-
         setDialog();
 
         setRecyclerView();
@@ -97,12 +94,6 @@ public class SelectedDialog extends AppCompatDialogFragment {
         payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.entryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

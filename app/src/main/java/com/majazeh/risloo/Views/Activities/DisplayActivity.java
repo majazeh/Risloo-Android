@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -61,12 +60,10 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.returnImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
-            binding.downloadImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+        binding.returnImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+        binding.downloadImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
 
-            binding.titleTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
-        }
+        binding.titleTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
     }
 
     private void listener() {

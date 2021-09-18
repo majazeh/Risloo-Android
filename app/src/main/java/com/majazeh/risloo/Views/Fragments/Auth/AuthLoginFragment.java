@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Auth;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -51,8 +50,6 @@ public class AuthLoginFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         return binding.getRoot();
@@ -77,12 +74,6 @@ public class AuthLoginFragment extends Fragment {
         binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_001, null));
 
         InitManager.normal12sspAutoComplete(requireActivity(), binding.mobileEditText.getRoot(), ((AuthActivity) requireActivity()).singleton.getRegistMobiles());
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.buttonTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

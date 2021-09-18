@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -100,8 +99,6 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         listener();
 
-        detector();
-
         setDialog();
 
         setHashmap();
@@ -128,12 +125,6 @@ public class SearchableDialog extends AppCompatDialogFragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.entryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

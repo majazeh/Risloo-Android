@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.BottomSheets;
 
 import android.app.Dialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,8 +49,6 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
 
         listener();
 
-        detector();
-
         setDialog();
 
         return binding.getRoot();
@@ -61,12 +58,6 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.entryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
     }
 
     private void listener() {

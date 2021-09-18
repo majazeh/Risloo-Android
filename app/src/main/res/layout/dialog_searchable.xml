@@ -156,7 +156,7 @@
             android:textColor="@color/White"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_medium"
-            android:background="@drawable/draw_16sdp_solid_blue500"
+            android:background="@drawable/draw_16sdp_solid_blue500_ripple_blue800"
             app:layout_constraintEnd_toEndOf="@id/title_textView"
             app:layout_constraintStart_toStartOf="@id/title_textView"
             app:layout_constraintTop_toBottomOf="@id/bottom_barrier"

@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Auth;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -46,8 +45,6 @@ public class AuthSerialFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setData();
@@ -70,12 +67,6 @@ public class AuthSerialFragment extends Fragment {
         binding.logoutLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLogoutLink));
 
         binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_003, null));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.buttonTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

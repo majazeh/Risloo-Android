@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,8 +27,6 @@ public class IntroActivity extends AppCompatActivity {
 
         decorator();
 
-        detector();
-
         listener();
 
         setData();
@@ -45,12 +42,6 @@ public class IntroActivity extends AppCompatActivity {
             binding.headerIncludeLayout.debugTextView.setVisibility(View.VISIBLE);
         else
             binding.headerIncludeLayout.debugTextView.setVisibility(View.GONE);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.registerTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
     }
 
     private void listener() {

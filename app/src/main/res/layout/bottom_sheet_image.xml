@@ -36,6 +36,7 @@
         android:paddingTop="@dimen/_8sdp"
         android:gravity="center"
         android:orientation="horizontal"
+        android:background="@drawable/draw_4sdp_solid_white_ripple_gray300"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
         app:layout_constraintTop_toBottomOf="@id/title_textView">
@@ -75,6 +76,7 @@
         android:paddingTop="@dimen/_8sdp"
         android:gravity="center"
         android:orientation="horizontal"
+        android:background="@drawable/draw_4sdp_solid_white_ripple_gray300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/gallery_linearLayout"
         app:layout_constraintStart_toStartOf="@id/gallery_linearLayout"

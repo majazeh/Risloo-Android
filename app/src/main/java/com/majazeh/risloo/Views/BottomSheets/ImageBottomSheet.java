@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.BottomSheets;
 
 import android.app.Dialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
@@ -45,21 +43,12 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
 
         listener();
 
-        detector();
-
         return binding.getRoot();
     }
 
     private void intializer() {
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
         child = ((MainActivity) requireActivity()).fragmont.getChild();
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.galleryLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
-            binding.cameraLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
-        }
     }
 
     private void listener() {
