@@ -46,6 +46,11 @@ public class Singleton {
             setUserModel(authModel.getUser());
     }
 
+    public void params(UserModel userModel) {
+        if (userModel != null)
+            setParams(userModel);
+    }
+
     public void update(UserModel userModel) {
         if (userModel != null)
             setUserModel(userModel);
@@ -74,6 +79,22 @@ public class Singleton {
 
     private void setAuthorization(String value) {
         editor.putString("authorization", value);
+        editor.apply();
+    }
+
+    private void setParams(UserModel userModel) {
+        UserModel newModel = getUserModel();
+
+        newModel.setName(userModel.getName());
+        newModel.setMobile(userModel.getMobile());
+        newModel.setEmail(userModel.getEmail());
+        newModel.setBirthday(userModel.getBirthday());
+        newModel.setUserStatus(userModel.getUserStatus());
+        newModel.setUserType(userModel.getUserType());
+        newModel.setGender(userModel.getGender());
+        newModel.setAvatar(userModel.getAvatar());
+
+        editor.putString("usermodel", newModel.object.toString());
         editor.apply();
     }
 

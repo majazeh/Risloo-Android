@@ -166,7 +166,7 @@ public class EditUserTabAvatarFragment extends Fragment {
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.update(userModel);
+                            ((MainActivity) requireActivity()).singleton.params(userModel);
                             ((MainActivity) requireActivity()).setData();
 
                             DialogManager.dismissLoadingDialog();
