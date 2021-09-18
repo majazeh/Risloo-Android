@@ -194,7 +194,7 @@ public class Decorator {
 
                 activity.getWindow().setStatusBarColor(statusColor);
                 activity.getWindow().setNavigationBarColor(Color.BLACK);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            } else {
                 activity.getWindow().setStatusBarColor(Color.BLACK);
                 activity.getWindow().setNavigationBarColor(Color.BLACK);
             }
@@ -208,13 +208,11 @@ public class Decorator {
                         WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
                 activity.getWindow().setNavigationBarColor(navColor);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            } else {
                 activity.getWindow().setNavigationBarColor(Color.BLACK);
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                activity.getWindow().setStatusBarColor(statusColor);
-            }
+            activity.getWindow().setStatusBarColor(statusColor);
 
         } else if (lightStatus) {
 
@@ -226,19 +224,15 @@ public class Decorator {
                         WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
                 activity.getWindow().setStatusBarColor(statusColor);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            } else {
                 activity.getWindow().setStatusBarColor(Color.BLACK);
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                activity.getWindow().setNavigationBarColor(navColor);
-            }
+            activity.getWindow().setNavigationBarColor(navColor);
 
         } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                activity.getWindow().setStatusBarColor(statusColor);
-                activity.getWindow().setNavigationBarColor(navColor);
-            }
+            activity.getWindow().setStatusBarColor(statusColor);
+            activity.getWindow().setNavigationBarColor(navColor);
         }
     }
 

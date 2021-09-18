@@ -1,10 +1,11 @@
 package com.majazeh.risloo.Utils.Entities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKey;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,19 +17,34 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 public class Singleton {
 
     // Objects
-    private final SharedPreferences sharedPreferences;
-    private final SharedPreferences.Editor editor;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     public Singleton(@NonNull Activity activity) {
-        sharedPreferences = activity.getSharedPreferences("sharedPreference", Context.MODE_PRIVATE);
+        try {
+            MasterKey masterKey = new MasterKey.Builder(activity, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build();
 
-        editor = sharedPreferences.edit();
-        editor.apply();
+            sharedPreferences = EncryptedSharedPreferences.create(
+                    activity,
+                    "encrypted_shared_preferences",
+                    masterKey,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM);
+
+            editor = sharedPreferences.edit();
+            editor.apply();
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /*
