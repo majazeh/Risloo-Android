@@ -190,6 +190,8 @@ public class PaymentsFragment extends Fragment {
                 }
             }
         }
+
+        Paymont.getInstance().clearPayment();
     }
 
     private void setData(UserModel model) {
