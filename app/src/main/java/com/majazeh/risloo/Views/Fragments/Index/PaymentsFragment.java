@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.PaymentManager;
@@ -284,6 +285,8 @@ public class PaymentsFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
+
+                        Paymont.getInstance().insertPayment(paymentModel, data, R.id.paymentsFragment);
                         PaymentManager.request(requireActivity(), paymentModel);
                     });
                 }
