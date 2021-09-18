@@ -63,7 +63,7 @@ public class ReserveScheduleFragment extends Fragment {
 
     // Vars
     private ArrayList<String> fieldsIds = new ArrayList<>(), platformIds = new ArrayList<>(), treasuryIds = new ArrayList<>();
-    public String roomId = "", field = "", platform = "", type = "center", referenceId = "", caseId = "", name = "", problem = "", description = "", treasury = "";
+    public String centerId = "", roomId = "", field = "", platform = "", type = "center", referenceId = "", caseId = "", name = "", problem = "", description = "", treasury = "";
     private boolean userSelect = false;
 
     @Nullable
@@ -295,6 +295,10 @@ public class ReserveScheduleFragment extends Fragment {
             roomId = model.getRoom().getRoomId();
         }
 
+        if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getCenterId() != null && !model.getRoom().getRoomCenter().getCenterId().equals("")) {
+            centerId = model.getRoom().getRoomCenter().getCenterId();
+        }
+
         if (model.getFields() != null && model.getFields().length() != 0) {
             setAxis(model.getFields());
         }
@@ -426,7 +430,14 @@ public class ReserveScheduleFragment extends Fragment {
         for (TypeModel typeModel : treasuries.data()) {
             TreasuriesModel model = (TreasuriesModel) typeModel;
 
-            if (model.isCreditable() && model.isMy_treasury() && !model.getSymbol().equals("gift")) {
+            if (model.isCreditable() && model.getSymbol().contains(centerId.toLowerCase())) {
+                model.setTitle(requireActivity().getResources().getString(R.string.ReserveScheduleFragmentTreasuryOnline));
+
+                options.add(model.getTitle());
+                treasuryIds.add(model.getId());
+            }
+
+            if (!model.isCreditable() && model.getSymbol().contains(centerId.toLowerCase())) {
                 options.add(model.getTitle());
                 treasuryIds.add(model.getId());
             }
