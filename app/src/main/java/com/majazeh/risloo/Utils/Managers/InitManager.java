@@ -58,9 +58,16 @@ public class InitManager {
     }
 
     public static void imgResTintTag(Activity activity, ImageView img, int imgRes, int imgColor, String tag) {
-        img.setTag(tag);
         img.setImageResource(imgRes);
         ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+        img.setTag(tag);
+    }
+
+    public static void imgResTintBackgroundTag(Activity activity, ImageView img, int imgRes, int imgColor, int imgBackground, String tag) {
+        img.setImageResource(imgRes);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+        img.setBackgroundResource(imgBackground);
+        img.setTag(tag);
     }
 
     public static void imgResTintRotate(Activity activity, ImageView img, int imgRes, int imgColor, int degree) {
