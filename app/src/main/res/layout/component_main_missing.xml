@@ -37,7 +37,7 @@
         android:textColor="@color/Blue600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_blue600"
+        android:background="@drawable/draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300"
         tools:text="دکمه" />
 
 </LinearLayout>

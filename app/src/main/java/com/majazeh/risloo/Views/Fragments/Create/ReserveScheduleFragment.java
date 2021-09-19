@@ -31,6 +31,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
@@ -264,6 +265,9 @@ public class ReserveScheduleFragment extends Fragment {
     private void setArgs() {
         scheduleModel = (ScheduleModel) ReserveScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
         setData(scheduleModel);
+
+        UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
+        setData(userModel);
     }
 
     private void setData(ScheduleModel model) {
@@ -332,9 +336,18 @@ public class ReserveScheduleFragment extends Fragment {
             description = model.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
         }
+    }
 
-        if (model.getTreasuries() != null) {
-            setTreasury(model.getTreasuries());
+    private void setData(UserModel model) {
+        if (model.getCenterList() != null) {
+            for (TypeModel typeModel : model.getCenterList().data()) {
+                CenterModel centerModel = (CenterModel) typeModel;
+
+                if (centerModel != null && centerModel.getCenterId() != null && centerModel.getCenterId().equals(centerId)) {
+                    // TODO : Place Code Here
+                    break;
+                }
+            }
         }
     }
 
@@ -422,11 +435,6 @@ public class ReserveScheduleFragment extends Fragment {
             if (model.isCreditable() && model.getSymbol().contains(centerId.toLowerCase())) {
                 model.setTitle(requireActivity().getResources().getString(R.string.ReserveScheduleFragmentTreasuryOnline));
 
-                options.add(model.getTitle());
-                treasuryIds.add(model.getId());
-            }
-
-            if (!model.isCreditable() && model.getSymbol().contains(centerId.toLowerCase())) {
                 options.add(model.getTitle());
                 treasuryIds.add(model.getId());
             }
