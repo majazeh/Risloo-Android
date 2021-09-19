@@ -9,6 +9,7 @@ public class AvatarModel extends TypeModel {
     private AvatarDetail large;
     private AvatarDetail medium;
     private AvatarDetail original;
+    private AvatarDetail small;
 
     public AvatarModel(JSONArray jsonArray) throws JSONException {
         super(jsonArray);
@@ -63,7 +64,6 @@ public class AvatarModel extends TypeModel {
         this.small = small;
     }
 
-    private AvatarDetail small;
 
 
 

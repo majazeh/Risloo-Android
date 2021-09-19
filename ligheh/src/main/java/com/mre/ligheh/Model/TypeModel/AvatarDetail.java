@@ -1,9 +1,11 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import com.mre.ligheh.Model.Madule.Model;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class AvatarDetail {
+public class AvatarDetail extends TypeModel {
     private String id="";
     private String file_name="";
     private String slug="";
@@ -14,7 +16,7 @@ public class AvatarDetail {
     private String exec="";
 
     public AvatarDetail(JSONObject jsonObject) {
-
+        super(jsonObject);
         try {
             setId(jsonObject.getString("id"));
             setFile_name(jsonObject.getString("file_name"));

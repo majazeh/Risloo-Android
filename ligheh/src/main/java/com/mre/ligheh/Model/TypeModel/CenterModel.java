@@ -2,6 +2,8 @@ package com.mre.ligheh.Model.TypeModel;
 
 import androidx.annotation.NonNull;
 
+import com.mre.ligheh.Model.Madule.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +17,8 @@ public class CenterModel extends TypeModel {
     private JSONObject detail;
     private int created_at;
     private int updated_at;
+    private List treasuries;
+
 
     public CenterModel() {
         super();
@@ -37,6 +41,16 @@ public class CenterModel extends TypeModel {
             setCreated_at(jsonObject.getInt("created_at"));
         if (!jsonObject.isNull("updated_at"))
             setUpdated_at(jsonObject.getInt("updated_at"));
+
+        if (!jsonObject.isNull("treasuries")) {
+            List treasuries = new List();
+            for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++) {
+                treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
+            }
+            setTreasuries(treasuries);
+        } else {
+            setTreasuries(new List());
+        }
 
     }
 
@@ -104,7 +118,13 @@ public class CenterModel extends TypeModel {
         this.updated_at = updated_at;
     }
 
+    public List getTreasuries() {
+        return treasuries;
+    }
 
+    public void setTreasuries(List treasuries) {
+        this.treasuries = treasuries;
+    }
 
     @NonNull
     @Override

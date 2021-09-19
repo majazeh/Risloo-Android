@@ -358,27 +358,36 @@ public class UserModel extends TypeModel {
         this.dalilyScheduleExports = dalilyScheduleExports;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "UserModel{" +
-                "UserId='" + userId + '\'' +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", gender='" + gender + '\'' +
                 ", userStatus='" + userStatus + '\'' +
+                ", no_password=" + no_password +
                 ", position='" + position + '\'' +
                 ", userType='" + userType + '\'' +
                 ", groups=" + groups +
                 ", username='" + username + '\'' +
+                ", creator=" + creator +
                 ", public_key='" + public_key + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", userCreated_at=" + userCreated_at +
                 ", userUpdated_at=" + userUpdated_at +
+                ", userAccepted_at=" + userAccepted_at +
+                ", userKicked_at=" + userKicked_at +
+                ", meta=" + meta +
                 ", avatar=" + avatar +
                 ", centerList=" + centerList +
+                ", roomList=" + roomList +
+                ", caseList=" + caseList +
+                ", sampleList=" + sampleList +
+                ", treasuries=" + treasuries +
+                ", dalilyScheduleExports=" + dalilyScheduleExports +
                 '}';
     }
-
 }

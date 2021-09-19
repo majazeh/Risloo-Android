@@ -14,6 +14,7 @@ import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -99,19 +100,32 @@ public class Singleton {
     }
 
     private void setParams(UserModel userModel) {
-        UserModel newModel = getUserModel();
+        try {
+            JSONObject json = getUserModel().object;
+            json.put("name", userModel.getName());
+            json.put("mobile", userModel.getMobile());
+            json.put("email", userModel.getEmail());
+            json.put("birthday", userModel.getBirthday());
+            json.put("status", userModel.getUserStatus());
+            json.put("type", userModel.getUserType());
+            JSONArray avatar = new JSONArray();
+            JSONObject small = userModel.getAvatar().getSmall().object;
+            JSONObject medium = userModel.getAvatar().getMedium().object;
+            JSONObject original = userModel.getAvatar().getOriginal().object;
+            JSONObject large = userModel.getAvatar().getLarge().object;
+            avatar.put(small);
+            avatar.put(medium);
+            avatar.put(original);
+            avatar.put(large);
+            json.put("avatar", avatar);
 
-        newModel.setName(userModel.getName());
-        newModel.setMobile(userModel.getMobile());
-        newModel.setEmail(userModel.getEmail());
-        newModel.setBirthday(userModel.getBirthday());
-        newModel.setUserStatus(userModel.getUserStatus());
-        newModel.setUserType(userModel.getUserType());
-        newModel.setGender(userModel.getGender());
-        newModel.setAvatar(userModel.getAvatar());
-
-        editor.putString("usermodel", newModel.object.toString());
-        editor.apply();
+            System.out.println("rrrr" + userModel.getAvatar());
+            System.out.println("rrrr" + userModel.getAvatar().getClass().getName());
+            editor.putString("usermodel", json.toString());
+            editor.apply();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setUserModel(UserModel userModel) {
@@ -124,7 +138,8 @@ public class Singleton {
             ArrayList<TypeModel> models = new ArrayList<>();
 
             if (!sharedPreferences.getString("regists", "").equals("")) {
-                models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {}.getType());
+                models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {
+                }.getType());
 
                 boolean updated = false;
                 for (TypeModel model : models) {
@@ -179,13 +194,15 @@ public class Singleton {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        } return null;
+        }
+        return null;
     }
 
     public String getRegistPassword(String mobile) {
         try {
             if (!sharedPreferences.getString("regists", "").equals("")) {
-                ArrayList<TypeModel> models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {}.getType());
+                ArrayList<TypeModel> models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {
+                }.getType());
 
                 for (TypeModel model : models) {
                     if (model.object.getString("mobile").equals(mobile))
@@ -194,13 +211,15 @@ public class Singleton {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        } return "";
+        }
+        return "";
     }
 
     public ArrayList<String> getRegistMobiles() {
         try {
             if (!sharedPreferences.getString("regists", "").equals("")) {
-                ArrayList<TypeModel> models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {}.getType());
+                ArrayList<TypeModel> models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {
+                }.getType());
                 ArrayList<String> mobiles = new ArrayList<>();
 
                 for (TypeModel model : models)
@@ -210,7 +229,8 @@ public class Singleton {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        } return new ArrayList<>();
+        }
+        return new ArrayList<>();
     }
 
     /*
