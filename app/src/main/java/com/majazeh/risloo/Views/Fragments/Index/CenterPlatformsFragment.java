@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Index;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,8 +48,6 @@ public class CenterPlatformsFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();
@@ -71,14 +68,6 @@ public class CenterPlatformsFragment extends Fragment {
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterPlatformsFragmentTitle));
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.addConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_green300);
-        } else {
-            binding.addConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

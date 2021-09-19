@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Index;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -57,8 +56,6 @@ public class RoomUsersFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();
@@ -82,16 +79,8 @@ public class RoomUsersFragment extends Fragment {
 
         binding.indexShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
+        InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, 0, 0, 0, 0);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-        } else {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

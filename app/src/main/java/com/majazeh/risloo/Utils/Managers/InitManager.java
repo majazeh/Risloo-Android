@@ -51,6 +51,12 @@ public class InitManager {
         ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
     }
 
+    public static void imgResTintBackground(Activity activity, ImageView img, int imgRes, int imgColor, int imgBackground) {
+        img.setImageResource(imgRes);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+        img.setBackgroundResource(imgBackground);
+    }
+
     public static void imgResTintTag(Activity activity, ImageView img, int imgRes, int imgColor, String tag) {
         img.setTag(tag);
         img.setImageResource(imgRes);
@@ -60,6 +66,13 @@ public class InitManager {
     public static void imgResTintRotate(Activity activity, ImageView img, int imgRes, int imgColor, int degree) {
         img.setImageResource(imgRes);
         ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+        img.setRotation(img.getRotation() + degree);
+    }
+
+    public static void imgResTintBackgroundRotate(Activity activity, ImageView img, int imgRes, int imgColor, int imgBackground, int degree) {
+        img.setImageResource(imgRes);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+        img.setBackgroundResource(imgBackground);
         img.setRotation(img.getRotation() + degree);
     }
 
