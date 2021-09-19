@@ -344,7 +344,9 @@ public class ReserveScheduleFragment extends Fragment {
                 CenterModel centerModel = (CenterModel) typeModel;
 
                 if (centerModel != null && centerModel.getCenterId() != null && centerModel.getCenterId().equals(centerId)) {
-                    // TODO : Place Code Here
+                    if (centerModel.getTreasuries() != null) {
+                        setTreasury(centerModel.getTreasuries());
+                    }
                     break;
                 }
             }
