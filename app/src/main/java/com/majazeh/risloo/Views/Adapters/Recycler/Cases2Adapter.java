@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,7 +9,6 @@ import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -45,8 +43,6 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Holder> {
     public void onBindViewHolder(@NonNull Cases2Holder holder, int i) {
         CaseModel model = (CaseModel) items.get(i);
 
-        detector(holder);
-
         listener(holder, model);
 
         setData(holder, model);
@@ -72,12 +68,6 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Holder> {
         if (this.items != null) {
             this.items.clear();
             notifyDataSetChanged();
-        }
-    }
-
-    private void detector(Cases2Holder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 

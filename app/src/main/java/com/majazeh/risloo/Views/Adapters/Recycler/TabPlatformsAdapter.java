@@ -47,8 +47,6 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
     public void onBindViewHolder(@NonNull TabPlatformsHolder holder, int i) {
         SessionPlatformModel model = (SessionPlatformModel) items.get(i);
 
-        detector(holder);
-
         listener(holder, model);
 
         setData(holder, model);
@@ -81,12 +79,6 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
         if (this.items != null) {
             this.items.clear();
             notifyDataSetChanged();
-        }
-    }
-
-    private void detector(TabPlatformsHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 

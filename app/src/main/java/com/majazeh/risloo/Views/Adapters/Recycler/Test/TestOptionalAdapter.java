@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Test;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -76,17 +75,10 @@ public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder
     }
 
     private void detector(TestOptionalHolder holder, boolean selected) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            if (selected)
-                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_gray300);
-            else
-                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-        } else {
-            if (selected)
-                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue600);
-            else
-                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
-        }
+        if (selected)
+            holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_gray300);
+        else
+            holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
     }
 
     private void listener(TestOptionalHolder holder, int position) {

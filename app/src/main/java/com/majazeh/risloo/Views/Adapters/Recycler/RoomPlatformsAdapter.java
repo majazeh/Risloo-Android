@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -65,8 +64,6 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
 
         initializer(holder);
 
-        detector(holder);
-
         listener(holder, model);
 
         setData(holder, model);
@@ -105,12 +102,6 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
         InitManager.normalAdapterSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels);
-    }
-
-    private void detector(RoomPlatformsHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

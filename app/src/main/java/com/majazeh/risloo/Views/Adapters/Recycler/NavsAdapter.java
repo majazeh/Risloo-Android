@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -74,17 +73,10 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsHolder> {
     }
 
     private void detector(NavsHolder holder, int position) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            if (selectedPosition == position)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_blue500_ripple_blue800);
-            else
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_gray100_ripple_gray300);
-        } else {
-            if (selectedPosition == position)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_blue500);
-            else
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_gray100);
-        }
+        if (selectedPosition == position)
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_blue500_ripple_blue800);
+        else
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_gray100_ripple_gray300);
     }
 
     private void listener(NavsHolder holder) {

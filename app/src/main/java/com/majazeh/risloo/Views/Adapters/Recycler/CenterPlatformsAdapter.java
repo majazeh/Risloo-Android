@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,8 +60,6 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
         initializer(holder);
 
-        detector(holder);
-
         listener(holder, model);
 
         setData(holder, model);
@@ -97,14 +94,6 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
-    }
-
-    private void detector(CenterPlatformsHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-
-            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray200_ripple_gray300);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

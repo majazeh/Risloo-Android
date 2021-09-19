@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Dialog;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,17 +120,10 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
     }
 
     private void detector(DialogSearchableHolder holder, boolean selected) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            if (selected)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray200_ripple_gray300);
-            else
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-        } else {
-            if (selected)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray200);
-            else
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-        }
+        if (selected)
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray200_ripple_gray300);
+        else
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
     }
 
     private void listener(DialogSearchableHolder holder, TypeModel item) {

@@ -1,14 +1,12 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.ReferencesHolder;
 import com.majazeh.risloo.databinding.SingleItemReferenceBinding;
@@ -39,8 +37,6 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesHolder> {
     public void onBindViewHolder(@NonNull ReferencesHolder holder, int i) {
         UserModel model = (UserModel) items.get(i);
 
-        detector(holder);
-
         listener(holder, model);
 
         setData(holder, model);
@@ -66,12 +62,6 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesHolder> {
         if (this.items != null) {
             this.items.clear();
             notifyDataSetChanged();
-        }
-    }
-
-    private void detector(ReferencesHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 

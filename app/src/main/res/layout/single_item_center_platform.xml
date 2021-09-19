@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     android:paddingBottom="@dimen/_12sdp"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp">
 
@@ -120,7 +120,7 @@
         android:padding="@dimen/_7sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_pen_light"
-        android:background="@drawable/draw_oval_solid_transparent_border_1sdp_gray200"
+        android:background="@drawable/draw_oval_solid_white_border_1sdp_gray200_ripple_gray300"
         app:layout_constraintBottom_toBottomOf="@id/session_checkBox"
         app:layout_constraintRight_toLeftOf="@id/session_checkBox"
         app:layout_constraintLeft_toLeftOf="parent"

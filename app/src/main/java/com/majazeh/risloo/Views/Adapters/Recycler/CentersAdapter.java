@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +46,6 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersHolder> {
     public void onBindViewHolder(@NonNull CentersHolder holder, int i) {
         CenterModel model = (CenterModel) items.get(i);
 
-        detector(holder);
-
         listener(holder, model);
 
         setData(holder, model);
@@ -74,12 +71,6 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersHolder> {
         if (this.items != null) {
             this.items.clear();
             notifyDataSetChanged();
-        }
-    }
-
-    private void detector(CentersHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 

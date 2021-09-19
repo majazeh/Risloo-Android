@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +53,6 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
 
         initializer();
 
-        detector(holder);
-
         listener(holder, model);
 
         setData(holder, model);
@@ -86,12 +83,6 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
 
     private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
-    }
-
-    private void detector(RoomsHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-        }
     }
 
     private void listener(RoomsHolder holder, RoomModel model) {

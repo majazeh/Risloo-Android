@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -71,40 +70,21 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
     }
 
     private void detector(WeeksHolder holder, long timestamp) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            if (currentTimestamp == timestamp) {
-                if (selectedTimestamp == timestamp)
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
-                else
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-            } else if (currentTimestamp > timestamp) {
-                if (selectedTimestamp == timestamp)
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
-                else
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
-            } else {
-                if (selectedTimestamp == timestamp)
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
-                else
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-            }
+        if (currentTimestamp == timestamp) {
+            if (selectedTimestamp == timestamp)
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+            else
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+        } else if (currentTimestamp > timestamp) {
+            if (selectedTimestamp == timestamp)
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+            else
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
         } else {
-            if (currentTimestamp == timestamp) {
-                if (selectedTimestamp == timestamp)
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
-                else
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-            } else if (currentTimestamp > timestamp) {
-                if (selectedTimestamp == timestamp)
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
-                else
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
-            } else {
-                if (selectedTimestamp == timestamp)
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
-                else
-                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-            }
+            if (selectedTimestamp == timestamp)
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+            else
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 

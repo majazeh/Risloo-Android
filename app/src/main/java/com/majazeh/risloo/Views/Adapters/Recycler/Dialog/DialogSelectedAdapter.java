@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Dialog;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogSelectedHolder;
@@ -60,8 +58,6 @@ public class DialogSelectedAdapter extends RecyclerView.Adapter<DialogSelectedHo
         TypeModel model = items.get(i);
 
         intializer();
-
-        detector(holder);
 
         listener(holder, i);
 
@@ -131,14 +127,6 @@ public class DialogSelectedAdapter extends RecyclerView.Adapter<DialogSelectedHo
 
     private void intializer() {
         payment = ((MainActivity) activity).fragmont.getPayment();
-    }
-
-    private void detector(DialogSelectedHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
-
-            holder.binding.removeImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_gray50_ripple_red300);
-        }
     }
 
     private void listener(DialogSelectedHolder holder, int position) {
