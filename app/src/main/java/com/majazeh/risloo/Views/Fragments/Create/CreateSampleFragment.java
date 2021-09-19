@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Create;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
@@ -72,8 +71,6 @@ public class CreateSampleFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setClickSpan();
@@ -117,15 +114,7 @@ public class CreateSampleFragment extends Fragment {
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        } else {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
-        }
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }
 
     @SuppressLint("ClickableViewAccessibility")

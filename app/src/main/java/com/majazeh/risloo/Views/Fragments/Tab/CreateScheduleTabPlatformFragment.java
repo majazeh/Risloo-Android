@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +37,6 @@ public class CreateScheduleTabPlatformFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setData();
@@ -54,15 +51,7 @@ public class CreateScheduleTabPlatformFragment extends Fragment {
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.platformsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabPlatformButton), getResources().getColor(R.color.White));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        } else {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
-        }
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabPlatformButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }
 
     @SuppressLint("ClickableViewAccessibility")

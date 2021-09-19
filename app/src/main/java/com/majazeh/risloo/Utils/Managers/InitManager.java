@@ -36,6 +36,12 @@ public class InitManager {
         txt.setTextColor(txtColor);
     }
 
+    public static void txtTextColorBackground(TextView txt, String txtValue, int txtColor, int txtBackground) {
+        txt.setText(txtValue);
+        txt.setTextColor(txtColor);
+        txt.setBackgroundResource(txtBackground);
+    }
+
     /*
     ---------- Images ----------
     */

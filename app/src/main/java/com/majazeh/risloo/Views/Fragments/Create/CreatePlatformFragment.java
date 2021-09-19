@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Create;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -53,8 +52,6 @@ public class CreatePlatformFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();
@@ -79,15 +76,7 @@ public class CreatePlatformFragment extends Fragment {
         InitManager.normal12sspSpinner(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, R.array.PlatformSessions);
         InitManager.normal12sspSpinner(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, R.array.PlatformIndentifiers);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreatePlatformFragmentButton), getResources().getColor(R.color.White));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        } else {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
-        }
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreatePlatformFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -59,8 +58,6 @@ public class EditCenterTabDetailFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setData();
@@ -85,15 +82,7 @@ public class EditCenterTabDetailFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabDetailButton), getResources().getColor(R.color.White));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        } else {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
-        }
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabDetailButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }
 
     @SuppressLint("ClickableViewAccessibility")

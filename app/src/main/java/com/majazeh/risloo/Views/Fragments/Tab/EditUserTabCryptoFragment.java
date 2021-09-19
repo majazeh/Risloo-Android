@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -44,8 +43,6 @@ public class EditUserTabCryptoFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setData();
@@ -63,18 +60,8 @@ public class EditUserTabCryptoFragment extends Fragment {
         binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabCryptoPublicHeader));
         binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabCryptoPrivateHeader));
 
-        InitManager.txtTextColor(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White));
-        InitManager.txtTextColor(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.publicEditTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-            binding.privateEditTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        } else {
-            binding.publicEditTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
-            binding.privateEditTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
-        }
+        InitManager.txtTextColorBackground(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }
 
     @SuppressLint("ClickableViewAccessibility")
