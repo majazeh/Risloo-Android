@@ -44,7 +44,7 @@
         android:textColor="@color/Gray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_2sdp_solid_gray100"
+        android:background="@drawable/draw_2sdp_solid_gray100_ripple_gray300"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView" />
 

@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Index;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -63,8 +62,6 @@ public class PaymentsFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();
@@ -88,21 +85,13 @@ public class PaymentsFragment extends Fragment {
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeTreasuryHeader));
         binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 4, 12, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
 
-        InitManager.txtTextColor(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColorBackground(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
 
         binding.paymentsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentsFragmentPaymentHeader));
 
         binding.paymentsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.paymentsSingleLayout.recyclerView, 0, 0, 0, 0);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.chargeTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        } else {
-            binding.chargeTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

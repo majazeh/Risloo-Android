@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Index;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -54,8 +53,6 @@ public class CentersFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setPermission();
@@ -78,16 +75,8 @@ public class CentersFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
 
-        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
+        InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-        } else {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
