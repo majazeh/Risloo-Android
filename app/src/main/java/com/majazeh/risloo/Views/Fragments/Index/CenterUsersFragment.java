@@ -56,8 +56,6 @@ public class CenterUsersFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();

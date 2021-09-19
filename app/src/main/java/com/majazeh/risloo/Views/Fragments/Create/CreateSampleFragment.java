@@ -46,6 +46,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class CreateSampleFragment extends Fragment {
 
@@ -354,24 +355,18 @@ public class CreateSampleFragment extends Fragment {
                     break;
             }
         } else {
-            switch (type) {
-                case "sample":
-                    binding.typeTabLayout.getTabAt(0).select();
-
-                    this.type = "case_user";
-                    setType(this.type);
-                    break;
-                case "room":
-                    binding.typeTabLayout.getTabAt(1).select();
-
-                    this.type = "room_user";
-                    setType(this.type);
-                    break;
-                case "bulk":
+            switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getPreviousBackStackEntry()).getDestination().getId()) {
+                case R.id.bulkSamplesFragment:
                     binding.typeTabLayout.getTabAt(2).select();
 
-                    this.type = "bulk";
-                    setType(this.type);
+                    type = "bulk";
+                    setType(type);
+                    break;
+                default:
+                    binding.typeTabLayout.getTabAt(0).select();
+
+                    type = "case_user";
+                    setType(type);
                     break;
             }
 
