@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,8 +69,6 @@ public class SessionFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();
@@ -103,35 +100,16 @@ public class SessionFragment extends Fragment {
         binding.samplesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
         binding.transactionsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
-        InitManager.imgResTint(requireActivity(), binding.usersAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-        InitManager.imgResTint(requireActivity(), binding.practicesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-        InitManager.imgResTint(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-        InitManager.imgResTint(requireActivity(), binding.transactionsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
+        InitManager.imgResTintBackground(requireActivity(), binding.usersAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.practicesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.transactionsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.usersSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.practicesSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.transactionsSingleLayout.recyclerView, 0, 0, 0, 0);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-
-            binding.usersAddView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-            binding.practicesAddView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-            binding.samplesAddView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-            binding.transactionsAddView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-        } else {
-            binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-
-            binding.usersAddView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-            binding.practicesAddView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-            binding.samplesAddView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-            binding.transactionsAddView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -483,15 +461,15 @@ public class SessionFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
+            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500, R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
             InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "گزارشات":
-                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.Gray500, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
                     break;
                 case "ویرایش":
-                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
                     break;
             }
 

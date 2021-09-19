@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -69,8 +68,6 @@ public class CenterFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();
@@ -92,18 +89,8 @@ public class CenterFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomsAdapterHeader));
 
-        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
+        InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.roomsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-        } else {
-            binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -374,22 +361,12 @@ public class CenterFragment extends Fragment {
 
     private void setStatus(String status) {
         if (status.equals("request")) {
-            InitManager.txtTextColor(binding.actionTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
-
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
-            else
-                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
+            InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_green600_ripple_green800);
 
             binding.statusTextView.setVisibility(View.GONE);
             binding.statusTextView.setText("");
         } else {
-            InitManager.txtTextColor(binding.actionTextView.getRoot(), getResources().getString(R.string.CenterFragmentSchedules), getResources().getColor(R.color.Blue600));
-
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
-            else
-                binding.actionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
+            InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.CenterFragmentSchedules), getResources().getColor(R.color.Blue600), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
 
             binding.statusTextView.setVisibility(View.VISIBLE);
             binding.statusTextView.setText(SelectionManager.getCenterStatus(requireActivity(), "fa", status));
@@ -432,24 +409,24 @@ public class CenterFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
+            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500, R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
             InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "اعضاء":
-                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_users_light, R.color.Gray500, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_users_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
                     break;
                 case "برنامه درمانی":
-                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
                     break;
                 case "پروفایل من":
-                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_crown_light, R.color.Gray500, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_crown_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
                     break;
                 case "ویرایش":
-                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
                     break;
                 case "محل برگزاری":
-                    InitManager.imgResTintTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_map_marker_alt_light, R.color.Gray500, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_map_marker_alt_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
                     break;
             }
 

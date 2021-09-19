@@ -57,25 +57,13 @@
                     app:layout_constraintTop_toBottomOf="@id/background_imageView" />
 
                 <include
-                    android:id="@+id/edit_imageView"
-                    layout="@layout/component_main_button_oval_mid"
+                    android:id="@+id/menu_spinner"
+                    layout="@layout/component_main_button_oval_spinner"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
                     app:layout_constraintLeft_toLeftOf="parent" />
-
-                <include
-                    android:id="@+id/enter_imageView"
-                    layout="@layout/component_main_button_oval_mid"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginLeft="@dimen/_4sdp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
-                    app:layout_constraintLeft_toRightOf="@id/edit_imageView"
-                    app:layout_goneMarginLeft="@dimen/_8sdp"
-                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/name_textView"
@@ -88,7 +76,7 @@
                     android:textColor="@color/Gray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
-                    app:layout_constraintEnd_toEndOf="@id/edit_imageView"
+                    app:layout_constraintEnd_toEndOf="@id/menu_spinner"
                     app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
                     app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
                     tools:text="نام و نام خانوادگی" />

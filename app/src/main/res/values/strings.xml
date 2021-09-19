@@ -1298,6 +1298,9 @@
 
     <string name="UserFragmentTitle">عضو</string>
 
+    <string name="UserFragmentEdit">ویرایش</string>
+    <string name="UserFragmentEnter">ورود به کاربری</string>
+
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
 

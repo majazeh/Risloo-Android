@@ -1,11 +1,11 @@
 package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +25,7 @@ import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserFragment extends Fragment {
@@ -38,14 +39,15 @@ public class UserFragment extends Fragment {
     // Objects
     private HashMap data, header;
 
+    // Vars
+    private boolean userSelect = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
         binding = FragmentUserBinding.inflate(inflater, viewGroup, false);
 
         initializer();
-
-        detector();
 
         listener();
 
@@ -60,19 +62,6 @@ public class UserFragment extends Fragment {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-
-        InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
-        InitManager.imgResTint(requireActivity(), binding.enterImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Blue600);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
-            binding.enterImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
-        } else {
-            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
-            binding.enterImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -83,13 +72,50 @@ public class UserFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(userModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
-        }).widget(binding.editImageView.getRoot());
+            switch (binding.menuSpinner.selectImageView.getTag().toString()) {
+                case "ویرایش": {
+                    NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(userModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
+                } break;
+                case "ورود به کاربری": {
+                    // TODO : Place Code Here
+                } break;
+            }
+        }).widget(binding.menuSpinner.selectImageView);
 
-        CustomClickView.onDelayedListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.enterImageView.getRoot());
+        binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
+            binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
+            userSelect = true;
+            return false;
+        });
+
+        binding.menuSpinner.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
+
+                    switch (pos) {
+                        case "ویرایش": {
+                            NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(userModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } break;
+                        case "ورود به کاربری": {
+                            // TODO : Place Code Here
+                        } break;
+                    }
+
+                    parent.setSelection(parent.getAdapter().getCount());
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setArgs() {
@@ -131,6 +157,35 @@ public class UserFragment extends Fragment {
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
+
+        setDropdown(model);
+    }
+
+    private void setDropdown(UserModel model) {
+        ArrayList<String> items = new ArrayList<>();
+
+        items.add(requireActivity().getResources().getString(R.string.UserFragmentEdit));
+//        items.add(requireActivity().getResources().getString(R.string.UserFragmentEnter));
+        items.add("");
+
+        if (items.size() > 2) {
+            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500, R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
+            InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+        } else if (items.size() == 2) {
+            switch (items.get(0)) {
+                case "ویرایش":
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    break;
+                case "ورود به کاربری":
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_cog_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    break;
+            }
+
+            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp));
+            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
+        } else {
+            binding.menuSpinner.getRoot().setVisibility(View.GONE);
+        }
     }
 
     private void getData() {
@@ -161,6 +216,7 @@ public class UserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }

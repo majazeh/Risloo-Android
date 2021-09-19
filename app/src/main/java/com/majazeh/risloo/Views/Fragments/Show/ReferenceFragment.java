@@ -59,8 +59,6 @@ public class ReferenceFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setArgs();
