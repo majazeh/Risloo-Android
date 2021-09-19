@@ -434,12 +434,11 @@ public class ReserveScheduleFragment extends Fragment {
         for (TypeModel typeModel : treasuries.data()) {
             TreasuriesModel model = (TreasuriesModel) typeModel;
 
-            if (model.isCreditable() && model.getSymbol().contains(centerId.toLowerCase())) {
+            if (model.isCreditable() && model.getSymbol().contains(centerId.toLowerCase()))
                 model.setTitle(requireActivity().getResources().getString(R.string.ReserveScheduleFragmentTreasuryOnline));
 
-                options.add(model.getTitle());
-                treasuryIds.add(model.getId());
-            }
+            options.add(model.getTitle());
+            treasuryIds.add(model.getId());
         }
 
         options.add("");
