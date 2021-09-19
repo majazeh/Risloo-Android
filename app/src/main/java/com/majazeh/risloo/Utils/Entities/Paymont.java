@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Utils.Entities;
 
+import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public class Paymont {
 
     // Models
     private TypeModel typeModel = null;
+    private PaymentModel paymentModel = null;
 
     // Vars
     private HashMap hashmap = null;
@@ -36,14 +38,16 @@ public class Paymont {
     ---------- Setters ----------
     */
 
-    public void insertPayment(TypeModel typeModel, HashMap hashmap, int destination) {
+    public void insertPayment(TypeModel typeModel, PaymentModel paymentModel, HashMap hashmap, int destination) {
         setTypeModel(typeModel);
+        setPaymentModel(paymentModel);
         setHashmap(hashmap);
         setDestination(destination);
     }
 
     public void clearPayment() {
         this.typeModel = null;
+        this.paymentModel = null;
         this.hashmap = null;
         this.destination = 0;
     }
@@ -54,6 +58,10 @@ public class Paymont {
 
     private void setTypeModel(TypeModel typeModel) {
         this.typeModel = typeModel;
+    }
+
+    private void setPaymentModel(PaymentModel paymentModel) {
+        this.paymentModel = paymentModel;
     }
 
     private void setHashmap(HashMap hashmap) {
@@ -70,6 +78,10 @@ public class Paymont {
 
     public TypeModel getTypeModel() {
         return typeModel;
+    }
+
+    public PaymentModel getPaymentModel() {
+        return paymentModel;
     }
 
     public HashMap getHashmap() {

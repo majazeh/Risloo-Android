@@ -3,9 +3,6 @@ package com.majazeh.risloo.Utils.Managers;
 import android.app.Activity;
 import android.net.Uri;
 
-import androidx.navigation.NavDirections;
-
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -54,50 +51,19 @@ public class PaymentManager {
         Uri uri = activity.getIntent().getData();
 
         if (uri != null) {
-            if (Paymont.getInstance().getDestination() == R.id.reserveScheduleFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(Paymont.getInstance().getTypeModel());
-                ((MainActivity) activity).navController.navigate(action);
-            } else if (Paymont.getInstance().getDestination() == R.id.paymentsFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(Paymont.getInstance().getTypeModel());
-                ((MainActivity) activity).navController.navigate(action);
-            }
+            String authorizedKey = uri.getQueryParameter("authorized_key");
 
-            // TODO : Call finalize() method and pass PaymentModel that was getted form uri
+            if (authorizedKey.equals(Paymont.getInstance().getPaymentModel().getAuthorized_key())) {
+                switch (Paymont.getInstance().getDestination()) {
+                    case R.id.reserveScheduleFragment: {
+                        // TODO : Place Code Here
+                    } break;
+                    case R.id.paymentsFragment: {
+                        // TODO : Place Code Here
+                    } break;
+                }
+            }
         }
-    }
-
-    public static void finalize(Activity activity, PaymentModel model) {
-        DialogManager.showPaymentDialog(activity, "finalize", model);
-
-        HashMap data = new HashMap<>();
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
-
-        data.put("authorized_key", model.getAuthorized_key());
-
-        Payment.auth(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                PaymentModel model = (PaymentModel) object;
-
-                activity.runOnUiThread(() -> {
-                    DialogManager.dismissPaymentDialog();
-
-                    if (Paymont.getInstance().getDestination() == R.id.reserveScheduleFragment) {
-
-                    } else if (Paymont.getInstance().getDestination() == R.id.paymentsFragment) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(String response) {
-                activity.runOnUiThread(() -> {
-                    Paymont.getInstance().clearPayment();
-                });
-            }
-        });
     }
 
 }

@@ -579,7 +579,7 @@ public class ReserveScheduleFragment extends Fragment {
                                 JSONObject paymentObject = responseObject.getJSONObject("payment");
                                 PaymentModel paymentModel = new PaymentModel(paymentObject);
 
-                                Paymont.getInstance().insertPayment(scheduleModel, data, R.id.reserveScheduleFragment);
+                                Paymont.getInstance().insertPayment(scheduleModel, paymentModel, data, R.id.reserveScheduleFragment);
                                 PaymentManager.request(requireActivity(), paymentModel);
                             } else {
                                 if (!responseObject.isNull("errors")) {
