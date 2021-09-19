@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,8 +71,6 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             initializer((IndexCenterUserHolder) holder);
 
-            detector((IndexCenterUserHolder) holder);
-
             listener((IndexCenterUserHolder) holder, model);
 
             setData((IndexCenterUserHolder) holder, model);
@@ -126,12 +123,6 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
         InitManager.normalAdapterSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
-    }
-
-    private void detector(IndexCenterUserHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -244,11 +235,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         if (current instanceof CenterUsersFragment && !((CenterUsersFragment) current).centerModel.getManager().getUserId().equals(model.getUserId())) {
             holder.binding.positionSpinner.setEnabled(true);
-
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-            else
-                holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+            holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
 
             holder.binding.positionAngleImageView.setVisibility(View.VISIBLE);
         } else {

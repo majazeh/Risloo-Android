@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -51,8 +50,6 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
         } else if (holder instanceof  IndexTreasuryHolder) {
             TreasuriesModel model = (TreasuriesModel) items.get(i - 1);
 
-            detector((IndexTreasuryHolder) holder);
-
             listener((IndexTreasuryHolder) holder, model);
 
             setData((IndexTreasuryHolder) holder, model);
@@ -99,12 +96,6 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void setWidget(HeaderTreasuryHolder holder) {
         holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuriesFragmentLeft), 11, 14, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
-    }
-
-    private void detector(IndexTreasuryHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-        }
     }
 
     private void listener(IndexTreasuryHolder holder, TreasuriesModel model) {

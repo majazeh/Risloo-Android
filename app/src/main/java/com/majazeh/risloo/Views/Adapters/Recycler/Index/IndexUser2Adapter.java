@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +66,6 @@ public class IndexUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             initializer((IndexUser2Holder) holder);
 
-            detector((IndexUser2Holder) holder);
-
             listener((IndexUser2Holder) holder, model);
 
             setData((IndexUser2Holder) holder, model);
@@ -123,12 +120,6 @@ public class IndexUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         InitManager.normalAdapterSpinner(activity, holder.binding.positionSpinner, R.array.UserPosition);
     }
 
-    private void detector(IndexUser2Holder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private void listener(IndexUser2Holder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
@@ -179,11 +170,7 @@ public class IndexUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         if (enable) {
             holder.binding.positionSpinner.setEnabled(true);
-
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-            else
-                holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+            holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
 
             holder.binding.positionAngleImageView.setVisibility(View.VISIBLE);
         } else {

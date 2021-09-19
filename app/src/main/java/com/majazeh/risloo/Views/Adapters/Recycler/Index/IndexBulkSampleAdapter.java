@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +66,6 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             initializer();
 
-            detector((IndexBulkSampleHolder) holder);
-
             listener((IndexBulkSampleHolder) holder, model);
 
             setData((IndexBulkSampleHolder) holder, model);
@@ -117,12 +114,6 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
-    }
-
-    private void detector(IndexBulkSampleHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

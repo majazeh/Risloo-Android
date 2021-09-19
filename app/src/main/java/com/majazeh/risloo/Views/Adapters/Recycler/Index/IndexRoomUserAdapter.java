@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -57,8 +56,6 @@ public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             initializer((IndexRoomUserHolder) holder);
 
-            detector((IndexRoomUserHolder) holder);
-
             listener((IndexRoomUserHolder) holder, model);
 
             setData((IndexRoomUserHolder) holder, model);
@@ -105,12 +102,6 @@ public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void initializer(IndexRoomUserHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
-    }
-
-    private void detector(IndexRoomUserHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-        }
     }
 
     private void listener(IndexRoomUserHolder holder, UserModel model) {

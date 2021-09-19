@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:background="@color/White">
+    android:background="@drawable/draw_rec_solid_white_ripple_gray300">
 
     <View
         android:id="@+id/top_view"
@@ -149,6 +149,7 @@
         android:padding="@dimen/_5sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_edit_light"
+        android:background="@drawable/draw_oval_solid_white_ripple_gray300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/status_textView"

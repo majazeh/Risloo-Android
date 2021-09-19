@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -47,8 +46,6 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             setWidget((HeaderTimeHolder) holder);
         } else if (holder instanceof  IndexTimeHolder) {
             BillingModel model = (BillingModel) items.get(i - 1);
-
-            detector((IndexTimeHolder) holder);
 
             listener((IndexTimeHolder) holder, model);
 
@@ -96,12 +93,6 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void setWidget(HeaderTimeHolder holder) {
         holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TimesAdapterAmount), 5, 8, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
-    }
-
-    private void detector(IndexTimeHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-        }
     }
 
     private void listener(IndexTimeHolder holder, BillingModel model) {

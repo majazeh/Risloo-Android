@@ -1,14 +1,12 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderClientReportHolder;
@@ -47,8 +45,6 @@ public class IndexClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof  IndexClientReportHolder) {
             ReportModel model = (ReportModel) items.get(i - 1);
-
-            detector((IndexClientReportHolder) holder);
 
             listener((IndexClientReportHolder) holder, model);
 
@@ -91,12 +87,6 @@ public class IndexClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
         if (this.items != null) {
             this.items.clear();
             notifyDataSetChanged();
-        }
-    }
-
-    private void detector(IndexClientReportHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 

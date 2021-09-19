@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +62,6 @@ public class IndexSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
 
             initializer((IndexSession2Holder) holder);
 
-            detector((IndexSession2Holder) holder);
-
             listener((IndexSession2Holder) holder, model);
 
             setData((IndexSession2Holder) holder, model);
@@ -115,14 +112,6 @@ public class IndexSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
         InitManager.normalAdapterSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
-    }
-
-    private void detector(IndexSession2Holder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-
-            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -181,11 +170,7 @@ public class IndexSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
 
         if (enable) {
             holder.binding.statusSpinner.setEnabled(true);
-
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-            else
-                holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+            holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
 
             holder.binding.statusAngleImageView.setVisibility(View.VISIBLE);
         } else {

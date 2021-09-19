@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +48,6 @@ public class IndexDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof  IndexDocumentHolder) {
 //            DocumentModel model = (DocumentModel) items.get(i - 1);
 
-            detector((IndexDocumentHolder) holder);
-
             listener((IndexDocumentHolder) holder);
 
             setData((IndexDocumentHolder) holder);
@@ -92,12 +89,6 @@ public class IndexDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (this.items != null) {
             this.items.clear();
             notifyDataSetChanged();
-        }
-    }
-
-    private void detector(IndexDocumentHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 

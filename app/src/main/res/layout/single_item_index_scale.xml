@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:background="@color/White">
+    android:background="@drawable/draw_rec_solid_white_ripple_gray300">
 
     <View
         android:id="@+id/top_view"
@@ -88,7 +88,7 @@
         android:textColor="@color/Green700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_green700"
+        android:background="@drawable/draw_16sdp_solid_white_border_1sdp_green700_ripple_green300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/name_textView"

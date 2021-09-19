@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,8 +66,6 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             initializer();
 
-            detector((IndexSampleHolder) holder);
-
             listener((IndexSampleHolder) holder, model);
 
             setWidget((IndexSampleHolder) holder);
@@ -117,12 +114,6 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
-    }
-
-    private void detector(IndexSampleHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-        }
     }
 
     private void listener(IndexSampleHolder holder, SampleModel model) {
@@ -211,10 +202,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 holder.binding.statusTextView.setEnabled(true);
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
 
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
-                else
-                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
+                holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
                 break;
             default:
                 holder.binding.statusTextView.setEnabled(false);

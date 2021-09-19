@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderScaleHolder;
@@ -56,8 +54,6 @@ public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ScaleModel model = (ScaleModel) items.get(i - 1);
 
             initializer();
-
-            detector((IndexScaleHolder) holder);
 
             listener((IndexScaleHolder) holder, model);
 
@@ -107,14 +103,6 @@ public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
-    }
-
-    private void detector(IndexScaleHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-
-            holder.binding.createTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-        }
     }
 
     private void listener(IndexScaleHolder holder, ScaleModel model) {

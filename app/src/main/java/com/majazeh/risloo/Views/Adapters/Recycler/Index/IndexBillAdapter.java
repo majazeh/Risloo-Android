@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -53,8 +52,6 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (holder instanceof  IndexBillHolder) {
             BillingModel model = (BillingModel) items.get(i - 1);
 
-            detector((IndexBillHolder) holder);
-
             listener((IndexBillHolder) holder, model);
 
             setData((IndexBillHolder) holder, model);
@@ -101,12 +98,6 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void setWidget(HeaderBillHolder holder) {
         holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BillingsFragmentAmount), 5, 8, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
-    }
-
-    private void detector(IndexBillHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-        }
     }
 
     private void listener(IndexBillHolder holder, BillingModel model) {
