@@ -1,8 +1,11 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -31,6 +35,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     // Vars
     private ArrayList<TypeModel> items;
+    private boolean userSelect = false;
 
     public IndexBillAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -100,11 +105,44 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BillingsFragmentAmount), 5, 8, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(IndexBillHolder holder, BillingModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalBillFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
+
+        holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
+
+                    switch (pos) {
+                        case "پرداخت":
+                            // TODO : Place Code If Needed
+                            break;
+                        case "ویرایش":
+                            // TODO : Place Code If Needed
+                            break;
+                    }
+
+                    parent.setSelection(parent.getAdapter().getCount());
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setData(IndexBillHolder holder, BillingModel model) {
@@ -122,6 +160,20 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         holder.binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
         holder.binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
+
+        setMenu(holder, model);
+    }
+
+    private void setMenu(IndexBillHolder holder, BillingModel model) {
+        ArrayList<String> items = new ArrayList<>();
+
+        if (model.getCreditor() != null && model.getType().equals("credit"))
+            items.add(activity.getResources().getString(R.string.BillingsFragmentPay));
+
+        items.add(activity.getResources().getString(R.string.BillingsFragmentEdit));
+        items.add("");
+
+        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
     }
 
 }

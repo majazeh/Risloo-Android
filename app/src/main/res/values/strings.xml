@@ -856,6 +856,7 @@
     */
 
     <string name="BillingsFragmentTitle">صورت حساب‌ها</string>
+    <string name="BillingsFragmentTitle2">تراکنش‌ها</string>
 
     <string name="BillingsFragmentSerial">سریال</string>
     <string name="BillingsFragmentName">عنوان</string>
@@ -865,7 +866,11 @@
     <string name="BillingsFragmentAmount">مبلغ (ت)</string>
     <string name="BillingsFragmentStatus">وضعیت</string>
 
+    <string name="BillingsFragmentPay">پرداخت</string>
+    <string name="BillingsFragmentEdit">ویرایش</string>
+
     <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
+    <string name="BillingsFragmentEmpty2">هنوز تراکنشی ثبت نشده است.</string>
 
     /*
     ---------- Bulk Samples Fragment ----------
@@ -1413,25 +1418,6 @@
     <string name="TransactionsAdapterLeft">باقی‌مانده</string>
 
     <string name="TransactionsAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
-
-    /*
-    ---------- Transactions2 Adapter ----------
-    */
-
-    <string name="Transactions2AdapterHeader">تراکنش‌ها</string>
-
-    <string name="Transactions2AdapterSerial">سریال</string>
-    <string name="Transactions2AdapterName">عنوان</string>
-    <string name="Transactions2AdapterDate">تاریخ</string>
-    <string name="Transactions2AdapterCreditor">بستانکار</string>
-    <string name="Transactions2AdapterDebtor">بدهکار</string>
-    <string name="Transactions2AdapterAmount">مبلغ (ت)</string>
-    <string name="Transactions2AdapterStatus">وضعیت</string>
-
-    <string name="Transactions2AdapterPay">پرداخت</string>
-    <string name="Transactions2AdapterEdit">ویرایش</string>
-
-    <string name="Transactions2AdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
 
     /*
     ---------- Users2 Adapter ----------

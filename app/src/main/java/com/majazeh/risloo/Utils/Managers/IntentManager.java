@@ -197,7 +197,7 @@ public class IntentManager {
     public static void browser(Activity activity, String url) {
         Intent intent = null;
         try {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://dev.risloo.ir/a.html"));
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         } catch (ActivityNotFoundException e) {
             ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityException));
         }

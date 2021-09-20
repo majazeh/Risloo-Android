@@ -20,9 +20,9 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexBillAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexPracticeAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexTransaction2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexUser2Adapter;
 import com.majazeh.risloo.databinding.FragmentSessionBinding;
@@ -50,7 +50,7 @@ public class SessionFragment extends Fragment {
     private IndexUser2Adapter indexUser2Adapter;
     private IndexPracticeAdapter indexPracticeAdapter;
     private IndexSampleAdapter indexSampleAdapter;
-    private IndexTransaction2Adapter indexTransaction2Adapter;
+    private IndexBillAdapter indexBillAdapter;
 
     // Models
     public SessionModel sessionModel;
@@ -83,7 +83,7 @@ public class SessionFragment extends Fragment {
         indexUser2Adapter = new IndexUser2Adapter(requireActivity());
         indexPracticeAdapter = new IndexPracticeAdapter(requireActivity());
         indexSampleAdapter = new IndexSampleAdapter(requireActivity());
-        indexTransaction2Adapter = new IndexTransaction2Adapter(requireActivity());
+        indexBillAdapter = new IndexBillAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -93,23 +93,23 @@ public class SessionFragment extends Fragment {
         binding.usersHeaderLayout.titleTextView.setText(getResources().getString(R.string.Users2AdapterHeader));
         binding.practicesHeaderLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
-        binding.transactionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.Transactions2AdapterHeader));
+        binding.billsHeaderLayout.titleTextView.setText(getResources().getString(R.string.BillingsFragmentTitle2));
 
         binding.usersShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
         binding.practicesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
         binding.samplesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
-        binding.transactionsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
+        binding.billsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
         InitManager.imgResTintBackground(requireActivity(), binding.usersAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
         InitManager.imgResTintBackground(requireActivity(), binding.practicesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
         InitManager.imgResTintBackground(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
-        InitManager.imgResTintBackground(requireActivity(), binding.transactionsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.billsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.usersSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.practicesSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.transactionsSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.billsSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -555,22 +555,22 @@ public class SessionFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
-                        // Transactions Data
+                        // Bills Data
                         if (!sessionModel.getTransactions().data().isEmpty()) {
-                            indexTransaction2Adapter.setItems(sessionModel.getTransactions().data());
-                            binding.transactionsSingleLayout.recyclerView.setAdapter(indexTransaction2Adapter);
+                            indexBillAdapter.setItems(sessionModel.getTransactions().data());
+                            binding.billsSingleLayout.recyclerView.setAdapter(indexBillAdapter);
 
-                            binding.transactionsSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexTransaction2Adapter.getItemCount() == 0) {
-                            binding.transactionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.Transactions2AdapterEmpty));
+                            binding.billsSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (indexBillAdapter.getItemCount() == 0) {
+                            binding.billsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.billsSingleLayout.emptyView.setText(getResources().getString(R.string.BillingsFragmentEmpty2));
                         }
 
                         binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
                         binding.usersHeaderLayout.countTextView.setText(StringManager.bracing(indexUser2Adapter.itemsCount()));
                         binding.practicesHeaderLayout.countTextView.setText(StringManager.bracing(indexPracticeAdapter.itemsCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
-                        binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(indexTransaction2Adapter.itemsCount()));
+                        binding.billsHeaderLayout.countTextView.setText(StringManager.bracing(indexBillAdapter.itemsCount()));
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -592,10 +592,10 @@ public class SessionFragment extends Fragment {
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();
 
-                        // Transactions Data
-                        binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.transactionsShimmerLayout.getRoot().stopShimmer();
+                        // Bills Data
+                        binding.billsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.billsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.billsShimmerLayout.getRoot().stopShimmer();
 
                     });
                 }
@@ -626,10 +626,10 @@ public class SessionFragment extends Fragment {
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();
 
-                        // Transactions Data
-                        binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.transactionsShimmerLayout.getRoot().stopShimmer();
+                        // Bills Data
+                        binding.billsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.billsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.billsShimmerLayout.getRoot().stopShimmer();
 
                     });
                 }
