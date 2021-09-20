@@ -135,10 +135,8 @@ public class BreadCrumb {
             case R.id.meFragment:
                 setModels(MeFragmentArgs.fromBundle(arguments).getTypeModel());
                 return me();
-            case R.id.treasuriesFragment:
-                return treasuries();
-            case R.id.billingsFragment:
-                return billings();
+            case R.id.accountingFragment:
+                return accounting();
             case R.id.paymentsFragment:
                 return payments();
 
@@ -224,6 +222,8 @@ public class BreadCrumb {
 
             // -------------------- Index
 
+            case R.id.billingsFragment:
+                return billings();
             case R.id.centerPlatformsFragment:
                 setModels(CenterPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerPlatforms();
@@ -258,6 +258,8 @@ public class BreadCrumb {
             case R.id.roomUsersFragment:
                 setModels(RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomUsers();
+            case R.id.treasuriesFragment:
+                return treasuries();
 
             // -------------------- Show
 
@@ -337,12 +339,8 @@ public class BreadCrumb {
                 NavDirections action = NavigationMainDirections.actionGlobalMeFragment(((MainActivity) activity).singleton.getUserModel());
                 ((MainActivity) activity).navController.navigate(action);
             } break;
-            case R.id.treasuriesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.billingsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
+            case R.id.accountingFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalAccountingFragment();
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.paymentsFragment: {
@@ -391,6 +389,10 @@ public class BreadCrumb {
 
             // -------------------- Index
 
+            case R.id.billingsFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
             case R.id.centerPlatformsFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
                 ((MainActivity) activity).navController.navigate(action);
@@ -431,6 +433,10 @@ public class BreadCrumb {
             } break;
             case R.id.roomUsersFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.treasuriesFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
                 ((MainActivity) activity).navController.navigate(action);
             } break;
 
@@ -631,30 +637,16 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> treasuries() {
+    private ArrayList<String> accounting() {
         ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.TreasuriesFragmentTitle));
+        list.add(activity.getResources().getString(R.string.AccountingFragmentTitle));
 
-        destinationIds = treasuriesIds();
+        destinationIds = accountingIds();
         return list;
     }
-    private ArrayList<Integer> treasuriesIds() {
+    private ArrayList<Integer> accountingIds() {
         ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.treasuriesFragment);
-
-        return list;
-    }
-
-    private ArrayList<String> billings() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.BillingsFragmentTitle));
-
-        destinationIds = billingsIds();
-        return list;
-    }
-    private ArrayList<Integer> billingsIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.billingsFragment);
+        list.add(R.id.accountingFragment);
 
         return list;
     }
@@ -1149,6 +1141,20 @@ public class BreadCrumb {
     ---------- Index ----------
     */
 
+    private ArrayList<String> billings() {
+        ArrayList<String> list = dashboard();
+        list.add(activity.getResources().getString(R.string.BillingsFragmentTitle));
+
+        destinationIds = billingsIds();
+        return list;
+    }
+    private ArrayList<Integer> billingsIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.billingsFragment);
+
+        return list;
+    }
+
     private ArrayList<String> centerPlatforms() {
         ArrayList<String> list;
 
@@ -1331,6 +1337,20 @@ public class BreadCrumb {
     private ArrayList<Integer> roomUsersIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.roomUsersFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> treasuries() {
+        ArrayList<String> list = dashboard();
+        list.add(activity.getResources().getString(R.string.TreasuriesFragmentTitle));
+
+        destinationIds = treasuriesIds();
+        return list;
+    }
+    private ArrayList<Integer> treasuriesIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.treasuriesFragment);
 
         return list;
     }

@@ -162,12 +162,8 @@ public class MainActivity extends AppCompatActivity {
                             NavDirections action = NavigationMainDirections.actionGlobalMeFragment(singleton.getUserModel());
                             navController.navigate(action);
                         } break;
-                        case "کیف پول\u200Cها": {
-                            NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
-                            navController.navigate(action);
-                        } break;
-                        case "صورت حساب\u200Cها": {
-                            NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
+                        case "حسابداری": {
+                            NavDirections action = NavigationMainDirections.actionGlobalAccountingFragment();
                             navController.navigate(action);
                         } break;
                         case "شارژ حساب": {
@@ -227,8 +223,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> items = new ArrayList<>();
 
         items.add(getResources().getString(R.string.MainTitleMe));
-        items.add(getResources().getString(R.string.MainTitleTreasuries));
-        items.add(getResources().getString(R.string.MainTitleBillings));
+        items.add(getResources().getString(R.string.MainTitleAccounting));
         items.add(getResources().getString(R.string.MainTitlePayments));
         items.add(getResources().getString(R.string.MainTitleLogout));
         items.add("");

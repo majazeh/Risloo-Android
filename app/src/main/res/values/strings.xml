@@ -264,8 +264,7 @@
     <string name="MainDescBulkSamples">آزمون‌های گروهی گرفته شده</string>
 
     <string name="MainTitleMe">مشاهده پروفایل</string>
-    <string name="MainTitleTreasuries">کیف پول‌ها</string>
-    <string name="MainTitleBillings">صورت حساب‌ها</string>
+    <string name="MainTitleAccounting">حسابداری</string>
     <string name="MainTitlePayments">شارژ حساب</string>
     <string name="MainTitleLogout">خروج</string>
 
@@ -1144,6 +1143,16 @@
 
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+    ---------- Accounting Fragment ----------
+    */
+
+    <string name="AccountingFragmentTitle">حسابداری</string>
+
+    <string name="AccountingFragmentTreasuries">کیف پول‌ها</string>
+    <string name="AccountingFragmentBillings">صورت حساب‌ها</string>
+    <string name="AccountingFragmentPayments">شارژ حساب</string>
 
     /*
     ---------- Bill Fragment ----------

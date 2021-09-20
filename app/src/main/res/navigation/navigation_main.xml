@@ -23,16 +23,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/treasuriesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.TreasuriesFragment"
-        android:label="@string/TreasuriesFragmentTitle"
-        tools:layout="@layout/fragment_treasuries" />
-
-    <fragment
-        android:id="@+id/billingsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.BillingsFragment"
-        android:label="@string/BillingsFragmentTitle"
-        tools:layout="@layout/fragment_billings" />
+        android:id="@+id/accountingFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.AccountingFragment"
+        android:label="@string/AccountingFragmentTitle"
+        tools:layout="@layout/fragment_accounting" />
 
     <fragment
         android:id="@+id/paymentsFragment"
@@ -52,12 +46,8 @@
         app:destination="@id/meFragment" />
 
     <action
-        android:id="@+id/action_global_treasuriesFragment"
-        app:destination="@id/treasuriesFragment" />
-
-    <action
-        android:id="@+id/action_global_billingsFragment"
-        app:destination="@id/billingsFragment" />
+        android:id="@+id/action_global_accountingFragment"
+        app:destination="@id/accountingFragment" />
 
     <action
         android:id="@+id/action_global_paymentsFragment"
@@ -533,6 +523,12 @@
     ---------- // Fragments
 
     <fragment
+        android:id="@+id/billingsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.BillingsFragment"
+        android:label="@string/BillingsFragmentTitle"
+        tools:layout="@layout/fragment_billings" />
+
+    <fragment
         android:id="@+id/centerUsersFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment"
         android:label="@string/CenterUsersFragmentTitle"
@@ -622,7 +618,17 @@
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
 
+    <fragment
+        android:id="@+id/treasuriesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.TreasuriesFragment"
+        android:label="@string/TreasuriesFragmentTitle"
+        tools:layout="@layout/fragment_treasuries" />
+
     ---------- // Actions
+
+    <action
+        android:id="@+id/action_global_billingsFragment"
+        app:destination="@id/billingsFragment" />
 
     <action
         android:id="@+id/action_global_centerUsersFragment"
@@ -659,6 +665,10 @@
     <action
         android:id="@+id/action_global_clientReportsFragment"
         app:destination="@id/clientReportsFragment" />
+
+    <action
+        android:id="@+id/action_global_treasuriesFragment"
+        app:destination="@id/treasuriesFragment" />
 
     /*
     ---------- Show ----------
