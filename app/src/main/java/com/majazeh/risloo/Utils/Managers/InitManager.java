@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -81,6 +82,18 @@ public class InitManager {
         ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
         img.setBackgroundResource(imgBackground);
         img.setRotation(img.getRotation() + degree);
+    }
+
+    /*
+    ---------- Layouts ----------
+    */
+
+    public static void layoutTextColorResTintBackground(Activity activity, LinearLayout layout, TextView txt, ImageView img, String txtValue, int txtColor, int imgRes, int imgColor, int layoutBackground) {
+        txt.setText(txtValue);
+        txt.setTextColor(txtColor);
+        img.setImageResource(imgRes);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+        layout.setBackgroundResource(layoutBackground);
     }
 
     /*

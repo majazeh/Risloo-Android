@@ -26,50 +26,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/add_constraintLayout"
+        <include
+            android:id="@+id/add_includeLayout"
+            layout="@layout/component_main_button_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:paddingBottom="@dimen/_16sdp"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200_ripple_green300"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_includeLayout">
-
-            <ImageView
-                android:id="@+id/add_imageView"
-                android:layout_width="@dimen/_16sdp"
-                android:layout_height="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_18sdp"
-                android:contentDescription="@string/AppImageContent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_plus_light"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/Green700" />
-
-            <TextView
-                android:id="@+id/add_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:gravity="center"
-                android:text="@string/CenterPlatformsFragmentAdd"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="bold"
-                android:textColor="@color/Green700"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/add_imageView" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
 
         <include
             android:id="@+id/index_shimmerLayout"
@@ -79,7 +46,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/add_includeLayout"
             tools:visibility="gone" />
 
         <include
@@ -90,7 +57,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/add_includeLayout"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
