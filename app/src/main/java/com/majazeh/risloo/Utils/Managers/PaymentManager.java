@@ -3,6 +3,9 @@ package com.majazeh.risloo.Utils.Managers;
 import android.app.Activity;
 import android.net.Uri;
 
+import androidx.navigation.NavDirections;
+
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -55,11 +58,17 @@ public class PaymentManager {
 
             if (authorizedKey.equals(Paymont.getInstance().getPaymentModel().getAuthorized_key())) {
                 switch (Paymont.getInstance().getDestination()) {
-                    case R.id.reserveScheduleFragment: {
-                        // TODO : Place Code Here
+                    case R.id.billingsFragment: {
+                        NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
+                        ((MainActivity) activity).navController.navigate(action);
                     } break;
                     case R.id.paymentsFragment: {
-                        // TODO : Place Code Here
+                        NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
+                        ((MainActivity) activity).navController.navigate(action);
+                    } break;
+                    case R.id.sessionFragment: {
+                        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(Paymont.getInstance().getTypeModel());
+                        ((MainActivity) activity).navController.navigate(action);
                     } break;
                 }
             }

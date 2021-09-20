@@ -167,7 +167,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void setMenu(IndexBillHolder holder, BillingModel model) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (model.getCreditor() != null && model.getType().equals("credit"))
+        if (model.getDebtor() != null && model.getType().equals("credit"))
             items.add(activity.getResources().getString(R.string.BillingsFragmentPay));
 
         items.add(activity.getResources().getString(R.string.BillingsFragmentEdit));
