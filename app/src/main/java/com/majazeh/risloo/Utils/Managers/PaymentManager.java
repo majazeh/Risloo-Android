@@ -58,16 +58,13 @@ public class PaymentManager {
 
             if (authorizedKey.equals(Paymont.getInstance().getPaymentModel().getAuthorized_key())) {
                 switch (Paymont.getInstance().getDestination()) {
-                    case R.id.billingsFragment: {
-                        NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
+                    case R.id.billingsFragment:
+                    case R.id.sessionFragment: {
+                        NavDirections action = NavigationMainDirections.actionGlobalBillFragment(Paymont.getInstance().getTypeModel());
                         ((MainActivity) activity).navController.navigate(action);
                     } break;
                     case R.id.paymentsFragment: {
                         NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
-                    case R.id.sessionFragment: {
-                        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(Paymont.getInstance().getTypeModel());
                         ((MainActivity) activity).navController.navigate(action);
                     } break;
                 }

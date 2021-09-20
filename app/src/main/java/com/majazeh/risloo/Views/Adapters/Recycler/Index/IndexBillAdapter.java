@@ -8,30 +8,49 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderBillHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexBillHolder;
+import com.majazeh.risloo.Views.Fragments.Index.BillingsFragment;
+import com.majazeh.risloo.Views.Fragments.Show.SessionFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexBillBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexBillBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Billing;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
+import com.mre.ligheh.Model.TypeModel.PaymentModel;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    // Fragments
+    private Fragment current;
+
     // Objects
     private Activity activity;
+    private HashMap data, header;
 
     // Vars
     private ArrayList<TypeModel> items;
@@ -56,6 +75,8 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             setWidget((HeaderBillHolder) holder);
         } else if (holder instanceof  IndexBillHolder) {
             BillingModel model = (BillingModel) items.get(i - 1);
+
+            initializer();
 
             listener((IndexBillHolder) holder, model);
 
@@ -101,6 +122,14 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    private void initializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+    }
+
     private void setWidget(HeaderBillHolder holder) {
         holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BillingsFragmentAmount), 5, 8, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
@@ -125,7 +154,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                     switch (pos) {
                         case "پرداخت":
-                            // TODO : Place Code If Needed
+                            doWork(model);
                             break;
                         case "ویرایش":
                             // TODO : Place Code If Needed
@@ -167,13 +196,66 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void setMenu(IndexBillHolder holder, BillingModel model) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (model.getDebtor() != null && model.getType().equals("credit"))
-            items.add(activity.getResources().getString(R.string.BillingsFragmentPay));
+        if (model.getDebtor() != null && model.getType().equals("creditor")) {
+            String debtorId = model.getDebtor().getId();
+            UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
+
+            if (userModel.getTreasuries() != null) {
+                for (TypeModel typeModel : userModel.getTreasuries().data()) {
+                    TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel;
+
+                    if (treasuriesModel != null && treasuriesModel.getId() != null && treasuriesModel.getId().equals(debtorId)) {
+                        items.add(activity.getResources().getString(R.string.BillingsFragmentPay));
+                        break;
+                    }
+                }
+            }
+        }
 
         items.add(activity.getResources().getString(R.string.BillingsFragmentEdit));
         items.add("");
 
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+    }
+
+    private void doWork(BillingModel model) {
+        DialogManager.showLoadingDialog(activity, "");
+
+        data.put("id", model.getId());
+
+        Billing.settled(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                activity.runOnUiThread(() -> {
+                    DialogManager.dismissLoadingDialog();
+
+                    // TODO : Place Code If Needed
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                activity.runOnUiThread(() -> {
+                    try {
+                        JSONObject responseObject = new JSONObject(response);
+
+                        if (responseObject.getString("message").equals("POVERTY")) {
+                            JSONObject paymentObject = responseObject.getJSONObject("payment");
+                            PaymentModel paymentModel = new PaymentModel(paymentObject);
+
+                            if (current instanceof BillingsFragment)
+                                Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.billingsFragment);
+                            else if (current instanceof SessionFragment)
+                                Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.sessionFragment);
+
+                            PaymentManager.request(activity, paymentModel);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        });
     }
 
 }

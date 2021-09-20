@@ -15,11 +15,9 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -32,7 +30,6 @@ import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
-import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
@@ -574,65 +571,56 @@ public class ReserveScheduleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         try {
                             JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
 
-                            if (responseObject.getString("message").equals("POVERTY")) {
-                                JSONObject paymentObject = responseObject.getJSONObject("payment");
-                                PaymentModel paymentModel = new PaymentModel(paymentObject);
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
 
-                                Paymont.getInstance().insertPayment(scheduleModel, paymentModel, data, R.id.reserveScheduleFragment);
-                                PaymentManager.request(requireActivity(), paymentModel);
-                            } else {
-                                if (!responseObject.isNull("errors")) {
-                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                    Iterator<String> keys = (errorsObject.keys());
-                                    StringBuilder errors = new StringBuilder();
-
-                                    while (keys.hasNext()) {
-                                        String key = keys.next();
-                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
-
-                                            switch (key) {
-                                                case "field":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "session_platform":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "client_typ":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "case_id":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "client_id":
-                                                    if (type.equals("case") && clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0 && binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
-                                                    else if (type.equals("center"))
-                                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "problem":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "nickname":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "description":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "treasurie_id":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
-                                                    break;
-                                            }
-
-                                            errors.append(validation);
-                                            errors.append("\n");
+                                        switch (key) {
+                                            case "field":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "session_platform":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "client_typ":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "case_id":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "client_id":
+                                                if (type.equals("case") && clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0 && binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
+                                                else if (type.equals("center"))
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "problem":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "nickname":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "description":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "treasurie_id":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
+                                                break;
                                         }
-                                    }
 
-                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                        errors.append(validation);
+                                        errors.append("\n");
+                                    }
                                 }
+
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
