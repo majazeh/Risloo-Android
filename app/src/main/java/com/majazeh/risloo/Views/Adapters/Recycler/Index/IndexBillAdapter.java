@@ -198,7 +198,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ArrayList<String> items = new ArrayList<>();
 
         // Settled
-        if (model.getDebtor() != null && model.getType().equals("creditor")) {
+        if (model.getType().equals("creditor")) {
             String debtorId = model.getDebtor().getId();
             UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
 
@@ -219,34 +219,25 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (current instanceof SessionFragment) {
             String centerId = ((SessionFragment) current).sessionModel.getRoom().getRoomCenter().getCenterId();
 
-            if (model.getCreditor() != null && model.getType().equals("creditor")) {
-                String creditorId = model.getCreditor().getId();
+            if (model.getType().equals("creditor")) {
                 UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
 
-                if (userModel.getTreasuries() != null) {
-                    for (TypeModel typeModel : userModel.getTreasuries().data()) {
-                        TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel;
+                if (userModel.getCenterList() != null) {
+                    for (TypeModel typeModel : userModel.getCenterList().data()) {
+                        CenterModel centerModel = (CenterModel) typeModel;
 
-                        if (treasuriesModel != null && treasuriesModel.getId() != null && treasuriesModel.getId().equals(creditorId)) {
+                        if (centerModel != null && centerModel.getCenterId() != null && centerModel.getCenterId().equals(centerId)) {
+                            if (centerModel.getTreasuries() != null) {
+                                for (TypeModel typeModel2 : centerModel.getTreasuries().data()) {
+                                    TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel2;
 
-                            if (userModel.getCenterList() != null) {
-                                for (TypeModel typeModel2 : userModel.getCenterList().data()) {
-                                    CenterModel centerModel = (CenterModel) typeModel2;
+                                    if (treasuriesModel.isCreditable() && treasuriesModel.getSymbol().contains(centerId.toLowerCase()))
+                                        treasuriesModel.setTitle(activity.getResources().getString(R.string.BillingsFragmentTreasuryOnline));
 
-                                    if (centerModel != null && centerModel.getCenterId() != null && centerModel.getCenterId().equals(centerId)) {
-                                        if (centerModel.getTreasuries() != null) {
-                                            for (TypeModel typeModel3 : centerModel.getTreasuries().data()) {
-                                                TreasuriesModel treasuriesModel2 = (TreasuriesModel) typeModel3;
-
-                                                items.add(treasuriesModel2.getTitle());
-                                                treasuryIds.add(treasuriesModel2.getId());
-                                            }
-                                        }
-                                        break;
-                                    }
+                                    items.add(treasuriesModel.getTitle());
+                                    treasuryIds.add(treasuriesModel.getId());
                                 }
                             }
-
                             break;
                         }
                     }

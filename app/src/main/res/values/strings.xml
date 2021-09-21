@@ -866,6 +866,7 @@
     <string name="BillingsFragmentStatus">وضعیت</string>
 
     <string name="BillingsFragmentPay">پرداخت</string>
+    <string name="BillingsFragmentTreasuryOnline">پرداخت شده به کیف پول …</string>
 
     <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
     <string name="BillingsFragmentEmpty2">هنوز تراکنشی ثبت نشده است.</string>
