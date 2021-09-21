@@ -25,6 +25,49 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/filter_cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            app:cardCornerRadius="@dimen/_16sdp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/filter_tabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_24sdp"
+                android:layoutDirection="ltr"
+                android:background="@drawable/draw_16sdp_solid_white_border_1sdp_blue600"
+                app:tabPaddingEnd="@dimen/_8sdp"
+                app:tabPaddingStart="@dimen/_8sdp"
+                app:tabBackground="@null"
+                app:tabGravity="center"
+                app:tabMode="fixed"
+                app:tabMaxWidth="0dp"
+                app:tabTextColor="@color/Blue600"
+                app:tabSelectedTextColor="@color/White"
+                app:tabTextAppearance="@style/TabTextAppearance2"
+                app:tabRippleColor="@color/Gray300"
+                app:tabIndicatorColor="@color/Blue600"
+                app:tabIndicatorHeight="@dimen/_24sdp">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/BillingsFragmentFilterAll" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/BillingsFragmentFilterCreditor" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <include
             android:id="@+id/search_includeLayout"
             layout="@layout/component_main_index_search"
@@ -35,7 +78,7 @@
             android:layout_marginTop="@dimen/_6sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
+            app:layout_constraintTop_toBottomOf="@id/filter_cardView" />
 
         <include
             android:id="@+id/index_shimmerLayout"

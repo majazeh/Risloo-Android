@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -75,6 +76,33 @@ public class BillingsFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.filterTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                data.put("page", 1);
+
+                if (tab.getPosition() == 0)
+                    data.put("type", "");
+                else if (tab.getPosition() == 1)
+                    data.put("type", "creditor");
+
+                if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.GONE)
+                    binding.searchIncludeLayout.searchProgressBar.setVisibility(View.VISIBLE);
+
+                getData();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.searchEditText);

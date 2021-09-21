@@ -49,6 +49,12 @@
         <item name="fontFamily">@font/dana_demi_bold</item>
     </style>
 
+    <style name="TabTextAppearance2" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/_8ssp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/dana_medium</item>
+    </style>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // ProgressBar Theme

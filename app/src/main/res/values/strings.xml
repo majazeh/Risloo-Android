@@ -865,6 +865,9 @@
     <string name="BillingsFragmentAmount">مبلغ (ت)</string>
     <string name="BillingsFragmentStatus">وضعیت</string>
 
+    <string name="BillingsFragmentFilterAll">همه</string>
+    <string name="BillingsFragmentFilterCreditor">تسویه نشده</string>
+
     <string name="BillingsFragmentPay">پرداخت</string>
     <string name="BillingsFragmentTreasuryOnline">پرداخت شده به کیف پول …</string>
 
