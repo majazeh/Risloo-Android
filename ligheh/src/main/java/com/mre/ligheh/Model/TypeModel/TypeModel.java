@@ -53,4 +53,7 @@ public class TypeModel implements Parcelable {
 
     }
 
+    public void toObject(){
+    }
+
 }

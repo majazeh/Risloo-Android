@@ -77,4 +77,6 @@ public class AcceptationModel extends TypeModel {
     public void setKicked_at(String kicked_at) {
         this.kicked_at = kicked_at;
     }
+
+
 }

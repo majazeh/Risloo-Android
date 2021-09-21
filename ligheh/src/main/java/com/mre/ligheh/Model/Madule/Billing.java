@@ -35,6 +35,14 @@ public class Billing extends Model {
         }
     }
 
+    public static void finall(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.post(endpoint + "/" + data.get("billingId") + "/final", data, header, response, PaymentModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
             Model.show(endpoint + "/" + data.get("id") + "/dashboard", data, header, response, null);
