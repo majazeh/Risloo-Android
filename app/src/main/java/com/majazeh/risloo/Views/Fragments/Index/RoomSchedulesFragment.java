@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -24,6 +25,7 @@ import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.Madule.Treasury;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -88,9 +90,7 @@ public class RoomSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.filterImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), new ArrayList<>())).widget(binding.filterImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 

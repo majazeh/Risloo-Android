@@ -10,8 +10,12 @@ import com.majazeh.risloo.Views.BottomSheets.BulkSampleBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
+import com.majazeh.risloo.Views.BottomSheets.ScheduleFilterBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import java.util.ArrayList;
 
 public class SheetManager {
 
@@ -46,6 +50,12 @@ public class SheetManager {
         LogoutBottomSheet bottomSheet = new LogoutBottomSheet();
         bottomSheet.show(((AppCompatActivity) activity).getSupportFragmentManager(), "logoutBottomSheet");
         bottomSheet.setData(name, avatar);
+    }
+
+    public static void showScheduleFilterBottomSheet(Activity activity, ArrayList<TypeModel> rooms, ArrayList<String> status) {
+        ScheduleFilterBottomSheet bottomSheet = new ScheduleFilterBottomSheet();
+        bottomSheet.show(((AppCompatActivity) activity).getSupportFragmentManager(), "scheduleFilterBottomSheet");
+        bottomSheet.setData(rooms, status);
     }
 
     public static void showTimeBottomSheet(Activity activity, String timestamp, String method) {
