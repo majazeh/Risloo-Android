@@ -309,7 +309,7 @@ public class BulkSampleFragment extends Fragment {
             items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentCopy));
         }
 
-        items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentEdit));
+//        items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentEdit));
         items.add("");
 
         if (items.size() > 2) {

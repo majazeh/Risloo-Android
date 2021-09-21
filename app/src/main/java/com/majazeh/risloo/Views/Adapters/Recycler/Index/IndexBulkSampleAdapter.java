@@ -191,7 +191,7 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             items.add(activity.getResources().getString(R.string.BulkSamplesFragmentCopy));
         }
 
-        items.add(activity.getResources().getString(R.string.BulkSamplesFragmentEdit));
+//        items.add(activity.getResources().getString(R.string.BulkSamplesFragmentEdit));
         items.add("");
 
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);

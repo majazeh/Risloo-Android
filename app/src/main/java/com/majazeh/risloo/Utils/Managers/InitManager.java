@@ -526,9 +526,6 @@ public class InitManager {
                     case "گزارشات":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_clipboard_light, null));
                         break;
-                    case "پرداخت":
-                        dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_credit_card_light, null));
-                        break;
                     default:
                         if (dropdownTextView.getText().toString().contains("989")) {
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_mobile_light, null));
@@ -540,6 +537,60 @@ public class InitManager {
 
                         break;
                 }
+            }
+
+            @Override
+            public int getCount() {
+                return super.getCount() - 1;
+            }
+
+        };
+
+        spinner.setAdapter(adapter);
+        spinner.setSelection(adapter.getCount());
+    }
+
+    public static void billCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_empty, arrayList) {
+
+            private TextView dropdownTextView;
+
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                return super.getView(position, convertView, viewGroup);
+            }
+
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_bill, viewGroup, false);
+
+                initializer(view);
+
+                detector(view, position);
+
+                setData(position);
+
+                return view;
+            }
+
+            private void initializer(View view) {
+                dropdownTextView = view.findViewById(R.id.dropdown_textView);
+            }
+
+            private void detector(View view, int position) {
+                if (arrayList.get(position).equals("پرداخت"))
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_green300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            }
+
+            private void setData(int position) {
+                dropdownTextView.setText(arrayList.get(position));
+
+                if (dropdownTextView.getText().toString().equals("پرداخت"))
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Green700));
+                else
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
             }
 
             @Override

@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -32,6 +33,7 @@ import com.majazeh.risloo.databinding.SingleItemIndexBillBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Billing;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -54,6 +56,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     // Vars
     private ArrayList<TypeModel> items;
+    private ArrayList<String> treasuryIds = new ArrayList<>();
     private boolean userSelect = false;
 
     public IndexBillAdapter(@NonNull Activity activity) {
@@ -152,14 +155,10 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    switch (pos) {
-                        case "پرداخت":
-                            doWork(model);
-                            break;
-                        case "ویرایش":
-                            // TODO : Place Code If Needed
-                            break;
-                    }
+                    if (pos.equals("پرداخت"))
+                        doWork(holder, model, position, "settled");
+                    else
+                        doWork(holder, model, position, "finall");
 
                     parent.setSelection(parent.getAdapter().getCount());
 
@@ -196,6 +195,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void setMenu(IndexBillHolder holder, BillingModel model) {
         ArrayList<String> items = new ArrayList<>();
 
+        // Settled
         if (model.getDebtor() != null && model.getType().equals("creditor")) {
             String debtorId = model.getDebtor().getId();
             UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
@@ -206,56 +206,125 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                     if (treasuriesModel != null && treasuriesModel.getId() != null && treasuriesModel.getId().equals(debtorId)) {
                         items.add(activity.getResources().getString(R.string.BillingsFragmentPay));
+                        treasuryIds.add("");
                         break;
                     }
                 }
             }
         }
 
-        items.add(activity.getResources().getString(R.string.BillingsFragmentEdit));
-        items.add("");
+        // Finall
+        if (current instanceof SessionFragment) {
+            String centerId = ((SessionFragment) current).sessionModel.getRoom().getRoomCenter().getCenterId();
 
-        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+            if (model.getCreditor() != null && model.getType().equals("creditor")) {
+                String creditorId = model.getCreditor().getId();
+                UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
+
+                if (userModel.getTreasuries() != null) {
+                    for (TypeModel typeModel : userModel.getTreasuries().data()) {
+                        TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel;
+
+                        if (treasuriesModel != null && treasuriesModel.getId() != null && treasuriesModel.getId().equals(creditorId)) {
+
+                            if (userModel.getCenterList() != null) {
+                                for (TypeModel typeModel2 : userModel.getCenterList().data()) {
+                                    CenterModel centerModel = (CenterModel) typeModel2;
+
+                                    if (centerModel != null && centerModel.getCenterId() != null && centerModel.getCenterId().equals(centerId)) {
+                                        if (centerModel.getTreasuries() != null) {
+                                            for (TypeModel typeModel3 : centerModel.getTreasuries().data()) {
+                                                TreasuriesModel treasuriesModel2 = (TreasuriesModel) typeModel3;
+
+                                                items.add(treasuriesModel2.getTitle());
+                                                treasuryIds.add(treasuriesModel2.getId());
+                                            }
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        items.add("");
+        treasuryIds.add("");
+
+        if (items.size() > 1) {
+            holder.binding.menuGroup.setVisibility(View.VISIBLE);
+            InitManager.billCustomSpinner(activity, holder.binding.menuSpinner, items);
+        } else {
+            holder.binding.menuGroup.setVisibility(View.INVISIBLE);
+        }
     }
 
-    private void doWork(BillingModel model) {
+    private void doWork(IndexBillHolder holder, BillingModel model, int position, String method) {
         DialogManager.showLoadingDialog(activity, "");
 
-        data.put("id", model.getId());
+        if (method.equals("settled")) {
+            data.put("id", model.getId());
 
-        Billing.settled(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                activity.runOnUiThread(() -> {
-                    DialogManager.dismissLoadingDialog();
+            Billing.settled(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    activity.runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
 
-                    // TODO : Place Code If Needed
-                });
-            }
+                        // TODO : Place Code If Needed
+                    });
+                }
 
-            @Override
-            public void onFailure(String response) {
-                activity.runOnUiThread(() -> {
-                    try {
-                        JSONObject responseObject = new JSONObject(response);
+                @Override
+                public void onFailure(String response) {
+                    activity.runOnUiThread(() -> {
+                        try {
+                            JSONObject responseObject = new JSONObject(response);
 
-                        if (responseObject.getString("message").equals("POVERTY")) {
-                            JSONObject paymentObject = responseObject.getJSONObject("payment");
-                            PaymentModel paymentModel = new PaymentModel(paymentObject);
+                            if (responseObject.getString("message").equals("POVERTY")) {
+                                JSONObject paymentObject = responseObject.getJSONObject("payment");
+                                PaymentModel paymentModel = new PaymentModel(paymentObject);
 
-                            if (current instanceof BillingsFragment)
-                                Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.billingsFragment);
-                            else if (current instanceof SessionFragment)
-                                Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.sessionFragment);
+                                if (current instanceof BillingsFragment)
+                                    Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.billingsFragment);
+                                else if (current instanceof SessionFragment)
+                                    Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.sessionFragment);
 
-                            PaymentManager.request(activity, paymentModel);
+                                PaymentManager.request(activity, paymentModel);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        } else {
+            data.put("billingId", model.getId());
+            data.put("id", treasuryIds.get(position));
+
+            Billing.finall(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    activity.runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+
+                        holder.binding.menuGroup.setVisibility(View.INVISIBLE);
+                    });
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    activity.runOnUiThread(() -> {
+                        // Place Code if Needed
+                    });
+                }
+            });
+        }
     }
 
 }
