@@ -101,6 +101,8 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     public void setItems(ArrayList<TypeModel> items) {
+        userSelect = false;
+
         if (this.items == null)
             this.items = items;
         else

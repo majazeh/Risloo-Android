@@ -111,6 +111,8 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public void setItems(ArrayList<TypeModel> items) {
+        userSelect = false;
+
         if (this.items == null)
             this.items = items;
         else

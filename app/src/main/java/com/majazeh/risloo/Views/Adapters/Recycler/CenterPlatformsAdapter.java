@@ -74,6 +74,8 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     }
 
     public void setItems(ArrayList<TypeModel> items) {
+        userSelect = false;
+
         if (this.items == null)
             this.items = items;
         else
