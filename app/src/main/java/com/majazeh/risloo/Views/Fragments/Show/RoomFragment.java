@@ -699,7 +699,7 @@ public class RoomFragment extends Fragment {
                     break;
             }
 
-            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp), (int) getResources().getDimension(R.dimen._9sdp));
+            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp));
             binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
         } else {
             binding.menuSpinner.getRoot().setVisibility(View.GONE);

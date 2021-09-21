@@ -21,6 +21,7 @@ import androidx.navigation.NavDirections;
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -233,13 +234,11 @@ public class AuthPasswordFragment extends Fragment {
                                 } break;
                             }
                         } else {
-                            NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
-
                             ((AuthActivity) requireActivity()).singleton.login(model);
                             ((AuthActivity) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), password);
-                            ((AuthActivity) requireActivity()).navController.navigate(action);
 
                             DialogManager.dismissLoadingDialog();
+                            IntentManager.main(requireActivity());
                         }
                     });
                 }

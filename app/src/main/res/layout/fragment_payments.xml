@@ -63,7 +63,7 @@
 
             <include
                 android:id="@+id/amount_includeLayout"
-                layout="@layout/component_main_input_number"
+                layout="@layout/component_main_input_money"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"

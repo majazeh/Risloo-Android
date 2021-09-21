@@ -97,15 +97,19 @@ public class BreadCrumb {
         for (int i = 0; i < list.size(); i++) {
             String label = list.get(i);
 
+            if (list.size() == 1 && label.equals("خانه"))
+                label = activity.getResources().getString(R.string.DashboardFragmentWelcome);
+
             builder.append(label);
             if (i != list.size() - 1) {
                 builder.append("  >  ");
                 int position = i;
 
+                String finalLabel = label;
                 builder.setSpan(new ClickableSpan() {
                     @Override
                     public void onClick(@NonNull View widget) {
-                        if (!label.equals("نامعلوم"))
+                        if (!finalLabel.equals("نامعلوم"))
                             navigateTo(destinationIds.get(position));
                     }
 

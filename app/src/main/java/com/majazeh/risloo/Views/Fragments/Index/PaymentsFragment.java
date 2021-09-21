@@ -2,6 +2,8 @@ package com.majazeh.risloo.Views.Fragments.Index;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -84,6 +86,7 @@ public class PaymentsFragment extends Fragment {
 
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeTreasuryHeader));
         binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 4, 12, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
         InitManager.txtTextColorBackground(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
 
@@ -125,6 +128,29 @@ public class PaymentsFragment extends Fragment {
 
         binding.amountIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             amount = binding.amountIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.amountIncludeLayout.inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().equals("")) {
+                    String money = StringManager.separate(String.valueOf(s)) + " " + getResources().getString(R.string.MainToman);
+                    binding.amountIncludeLayout.footerTextView.setText(money);
+                } else {
+                    String money = "0" + " " + getResources().getString(R.string.MainToman);
+                    binding.amountIncludeLayout.footerTextView.setText(money);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         binding.getRoot().setMOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -169,6 +195,9 @@ public class PaymentsFragment extends Fragment {
         if (model.getAmount() != 0 ) {
             amount = String.valueOf(model.getAmount());
             binding.amountIncludeLayout.inputEditText.setText(amount);
+
+            String money = StringManager.separate(amount) + " " + getResources().getString(R.string.MainToman);
+            binding.amountIncludeLayout.footerTextView.setText(money);
         }
 
         if (model.getTreasury() != null && model.getTreasury().getId() != null && !model.getTreasury().getId().equals("")) {
@@ -205,6 +234,9 @@ public class PaymentsFragment extends Fragment {
         treasuryIds.add("");
 
         InitManager.normal12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
+
+        treasury = treasuryIds.get(0);
+        binding.treasuryIncludeLayout.selectSpinner.setSelection(0);
     }
 
     private void getData() {
