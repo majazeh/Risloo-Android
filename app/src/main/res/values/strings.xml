@@ -513,7 +513,6 @@
     <string name="CreateScheduleTabPaymentPaymentHeader">نوع دریافت</string>
 
     <string name="CreateScheduleTabPaymentAxisTotal">مبلغ جلسه</string>
-    <string name="CreateScheduleTabPaymentAxisCurrency">(تومان)</string>
 
     <string name="CreateScheduleTabPaymentButton">ساخت</string>
 
@@ -564,7 +563,6 @@
     <string name="CreateSessionTabPaymentPaymentHeader">نوع دریافت</string>
 
     <string name="CreateSessionTabPaymentAxisTotal">مبلغ جلسه</string>
-    <string name="CreateSessionTabPaymentAxisCurrency">(تومان)</string>
 
     <string name="CreateSessionTabPaymentButton">ساخت</string>
 

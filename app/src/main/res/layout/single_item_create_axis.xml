@@ -20,25 +20,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         app:layout_constraintBottom_toTopOf="@id/input_editText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/input_editText"
         tools:text="سرتيتر" />
-
-    <TextView
-        android:id="@+id/currency_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:gravity="center"
-        android:text="@string/CreateScheduleTabPaymentAxisCurrency"
-        android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray500"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_light"
-        app:layout_constraintBottom_toBottomOf="@id/header_textView"
-        app:layout_constraintStart_toEndOf="@id/header_textView"
-        app:layout_constraintTop_toTopOf="@id/header_textView" />
 
     <EditText
         android:id="@+id/input_editText"
@@ -49,7 +33,7 @@
         android:paddingStart="@dimen/_12sdp"
         android:imeOptions="actionDone"
         android:inputType="number"
-        android:gravity="center|right"
+        android:gravity="center|left"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -57,11 +41,26 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:importantForAutofill="no"
+        android:saveEnabled="false"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView"
-        tools:text="عدد"
         tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/footer_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintTop_toBottomOf="@id/input_editText"
+        app:layout_constraintEnd_toEndOf="@id/input_editText"
+        tools:text="تیتر" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

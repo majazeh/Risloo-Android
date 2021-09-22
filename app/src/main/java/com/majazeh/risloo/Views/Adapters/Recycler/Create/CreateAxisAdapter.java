@@ -2,6 +2,8 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Create;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Adapters.Holder.Create.CreateAxisHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -122,12 +125,35 @@ public class CreateAxisAdapter extends RecyclerView.Adapter<CreateAxisHolder> {
 
             amounts.set(position, value);
         });
+
+        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!s.toString().equals("")) {
+                    String money = StringManager.separate(String.valueOf(s)) + " " + activity.getResources().getString(R.string.MainToman);
+                    holder.binding.footerTextView.setText(money);
+                } else {
+                    String money = "0" + " " + activity.getResources().getString(R.string.MainToman);
+                    holder.binding.footerTextView.setText(money);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void setData(CreateAxisHolder holder, int position) {
         holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateScheduleTabPaymentAxisTotal) + " " + ids.get(position));
-
         holder.binding.inputEditText.setText(amounts.get(position));
+        holder.binding.footerTextView.setText(StringManager.separate(amounts.get(position)) + " " + activity.getResources().getString(R.string.MainToman));
     }
 
 }
