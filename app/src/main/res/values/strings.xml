@@ -1222,8 +1222,6 @@
     <string name="DashboardFragmentHasSchedulesTodayTitle">برنامه درمانی امروز</string>
     <string name="DashboardFragmentHasSchedulesTomorrowTitle">برنامه درمانی فردا</string>
 
-    <string name="DashboardFragmentHasSchedulesAction">دریافت فایل</string>
-
     <string name="DashboardFragmentSchedulesHeader">برنامه درمانی من</string>
     <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
 

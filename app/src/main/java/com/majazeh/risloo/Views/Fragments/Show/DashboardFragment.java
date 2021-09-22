@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +47,6 @@ public class DashboardFragment extends Fragment {
 
     // Vars
     private ArrayList<String> schedulesTodayUrls, schedulesTomorrowUrls;
-    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -113,52 +111,6 @@ public class DashboardFragment extends Fragment {
                         return;
                     }
         }).widget(binding.schedulesTomorrowLayout.getRoot());
-
-        binding.schedulesTodayLayout.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
-        });
-
-        binding.schedulesTodayLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userSelect) {
-                    IntentManager.download(requireContext(), schedulesTodayUrls.get(position));
-
-                    parent.setSelection(parent.getAdapter().getCount());
-
-                    userSelect = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        binding.schedulesTomorrowLayout.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
-        });
-
-        binding.schedulesTomorrowLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userSelect) {
-                    IntentManager.download(requireContext(), schedulesTomorrowUrls.get(position));
-
-                    parent.setSelection(parent.getAdapter().getCount());
-
-                    userSelect = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     private void setData(UserModel model) {
@@ -177,34 +129,22 @@ public class DashboardFragment extends Fragment {
             // Schedules Data
             if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("today") && !model.getDalilyScheduleExports().isNull("today") && model.getDalilyScheduleExports().getJSONObject("today").length() != 0) {
                 binding.schedulesTodayLayout.getRoot().setVisibility(View.VISIBLE);
-                binding.schedulesTodayLayout.selectGroup.setVisibility(View.VISIBLE);
-
-                InitManager.txtTextColor(binding.schedulesTodayLayout.titleTextView, getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), getResources().getColor(R.color.Blue700));
-                InitManager.imgResTint(requireActivity(), binding.schedulesTodayLayout.avatarImageView, R.drawable.ic_calendar_day_light, R.color.Blue600);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), getResources().getColor(R.color.Blue700), R.drawable.ic_calendar_day_light, R.color.Blue600, R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_blue300);
 
                 setDropdowns("today", model.getDalilyScheduleExports().getJSONObject("today"));
             } else {
                 binding.schedulesTodayLayout.getRoot().setVisibility(View.VISIBLE);
-                binding.schedulesTodayLayout.selectGroup.setVisibility(View.GONE);
-
-                InitManager.txtTextColor(binding.schedulesTodayLayout.titleTextView, getResources().getString(R.string.DashboardFragmentNoSchedulesTodayTitle), getResources().getColor(R.color.Gray400));
-                InitManager.imgResTint(requireActivity(), binding.schedulesTodayLayout.avatarImageView, R.drawable.ic_calendar_day_light, R.color.Gray400);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTodayTitle), getResources().getColor(R.color.Gray400), R.drawable.ic_calendar_day_light, R.color.Gray400, R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
             }
 
             if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("tomorrow") && !model.getDalilyScheduleExports().isNull("tomorrow") && model.getDalilyScheduleExports().getJSONObject("tomorrow").length() != 0) {
                 binding.schedulesTomorrowLayout.getRoot().setVisibility(View.VISIBLE);
-                binding.schedulesTomorrowLayout.selectGroup.setVisibility(View.VISIBLE);
-
-                InitManager.txtTextColor(binding.schedulesTomorrowLayout.titleTextView, getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), getResources().getColor(R.color.Blue700));
-                InitManager.imgResTint(requireActivity(), binding.schedulesTomorrowLayout.avatarImageView, R.drawable.ic_calendar_alt_light, R.color.Blue600);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), getResources().getColor(R.color.Blue700), R.drawable.ic_calendar_alt_light, R.color.Blue600, R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_blue300);
 
                 setDropdowns("tomorrow", model.getDalilyScheduleExports().getJSONObject("tomorrow"));
             } else {
                 binding.schedulesTomorrowLayout.getRoot().setVisibility(View.VISIBLE);
-                binding.schedulesTomorrowLayout.selectGroup.setVisibility(View.GONE);
-
-                InitManager.txtTextColor(binding.schedulesTomorrowLayout.titleTextView, getResources().getString(R.string.DashboardFragmentNoSchedulesTomorrowTitle), getResources().getColor(R.color.Gray400));
-                InitManager.imgResTint(requireActivity(), binding.schedulesTomorrowLayout.avatarImageView, R.drawable.ic_calendar_alt_light, R.color.Gray400);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTomorrowTitle), getResources().getColor(R.color.Gray400), R.drawable.ic_calendar_alt_light, R.color.Gray400, R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
             }
 
             // Rooms Data
@@ -255,41 +195,23 @@ public class DashboardFragment extends Fragment {
     private void setDropdowns(String day, JSONObject data) {
         try {
             if (day.equals("today")) {
-                ArrayList<String> options = new ArrayList<>();
                 schedulesTodayUrls = new ArrayList<>();
 
-                if (!data.getString("svg").equals("")) {
-                    options.add("SVG");
+                if (!data.getString("svg").equals(""))
                     schedulesTodayUrls.add(data.getString("svg"));
-                }
 
-                if (!data.getString("png").equals("")) {
-                    options.add("PNG");
+                if (!data.getString("png").equals(""))
                     schedulesTodayUrls.add(data.getString("png"));
-                }
 
-                options.add("");
-                schedulesTodayUrls.add("");
-
-                InitManager.profileCustomSpinner(requireActivity(), binding.schedulesTodayLayout.selectSpinner, options);
             } else {
-                ArrayList<String> options = new ArrayList<>();
                 schedulesTomorrowUrls = new ArrayList<>();
 
-                if (!data.getString("svg").equals("")) {
-                    options.add("SVG");
+                if (!data.getString("svg").equals(""))
                     schedulesTomorrowUrls.add(data.getString("svg"));
-                }
 
-                if (!data.getString("png").equals("")) {
-                    options.add("PNG");
+                if (!data.getString("png").equals(""))
                     schedulesTomorrowUrls.add(data.getString("png"));
-                }
 
-                options.add("");
-                schedulesTomorrowUrls.add("");
-
-                InitManager.profileCustomSpinner(requireActivity(), binding.schedulesTomorrowLayout.selectSpinner, options);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -326,7 +248,6 @@ public class DashboardFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        userSelect = false;
     }
 
 }
