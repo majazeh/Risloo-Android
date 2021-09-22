@@ -26,6 +26,7 @@ import com.mre.ligheh.Model.Madule.Treasury;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -90,7 +91,12 @@ public class CenterSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), new ArrayList<>())).widget(binding.filterImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> {
+            ArrayList<String> statusList = new ArrayList<>();
+            Collections.addAll(statusList, requireActivity().getResources().getStringArray(R.array.ScheduleStatus));
+
+            SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), statusList);
+        }).widget(binding.filterImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 

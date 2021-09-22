@@ -164,6 +164,17 @@
         <item></item>
     </array>
 
+    <array name="ScheduleStatus">
+        <item>پیش‌نویس</item>
+        <item>در حال نوبت‌گیری</item>
+        <item>در انتظار تأیید مراجع</item>
+        <item>در انتظار تشکیل جلسه</item>
+        <item>در جلسه</item>
+        <item>پایان یافته</item>
+        <item>لغو شده توسط مراجع</item>
+        <item>لغو شده توسط مرکز مشاوره</item>
+    </array>
+
     <array name="UserPosition">
         <item>مراجع</item>
         <item>درخواست</item>
