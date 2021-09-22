@@ -68,17 +68,12 @@
 
         </androidx.cardview.widget.CardView>
 
-        <include
-            android:id="@+id/search_includeLayout"
-            layout="@layout/component_main_index_search"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_28sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_cardView" />
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/index_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="header_includeLayout, filter_cardView" />
 
         <include
             android:id="@+id/index_shimmerLayout"
@@ -91,7 +86,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/index_barrier"
             tools:visibility="gone" />
 
         <include
@@ -105,7 +100,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/index_barrier"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

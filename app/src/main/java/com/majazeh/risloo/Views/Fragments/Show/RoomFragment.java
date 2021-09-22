@@ -2,11 +2,7 @@ package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -61,7 +57,6 @@ public class RoomFragment extends Fragment {
     private CenterModel centerModel;
 
     // Objects
-    private Handler handler;
     private HashMap data, header;
 
     // Vars
@@ -87,8 +82,6 @@ public class RoomFragment extends Fragment {
     private void initializer() {
         cases2Adapter = new Cases2Adapter(requireActivity());
         filterTagsAdapter = new FilterTagsAdapter(requireActivity());
-
-        handler = new Handler();
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -358,38 +351,6 @@ public class RoomFragment extends Fragment {
                 }
             }
         }).widget(binding.actionTextView.getRoot());
-
-        binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.searchEditText);
-            return false;
-        });
-
-        binding.searchIncludeLayout.searchEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(() -> {
-                    data.put("page", 1);
-                    data.put("q", String.valueOf(s));
-
-                    if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.GONE)
-                        binding.searchIncludeLayout.searchProgressBar.setVisibility(View.VISIBLE);
-
-                    getData();
-                }, 750);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         binding.getRoot().setOnTouchListener((v, event) -> {
             userScroll = true;
@@ -739,11 +700,7 @@ public class RoomFragment extends Fragment {
                                 binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (cases2Adapter.getItemCount() == 0) {
                                 binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-
-                                if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE || isFiltered)
-                                    binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
-                                else
-                                    binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.Cases2AdapterEmpty));
+                                binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.Cases2AdapterEmpty));
                             }
 
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
@@ -766,8 +723,6 @@ public class RoomFragment extends Fragment {
 
                             if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
-                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                                binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -789,8 +744,7 @@ public class RoomFragment extends Fragment {
 
                         if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
+
                     });
 
                     isLoading = false;
@@ -827,7 +781,6 @@ public class RoomFragment extends Fragment {
         userScroll = false;
         succesRequest = false;
         isFiltered = false;
-        handler.removeCallbacksAndMessages(null);
     }
 
 }

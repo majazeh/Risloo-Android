@@ -2,11 +2,7 @@ package com.majazeh.risloo.Views.Fragments.Index;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,7 +33,6 @@ public class BillingsFragment extends Fragment {
     private IndexBillAdapter adapter;
 
     // Objects
-    private Handler handler;
     private HashMap data, header;
 
     // Vars
@@ -59,8 +54,6 @@ public class BillingsFragment extends Fragment {
 
     private void initializer() {
         adapter = new IndexBillAdapter(requireActivity());
-
-        handler = new Handler();
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -86,9 +79,6 @@ public class BillingsFragment extends Fragment {
                 else if (tab.getPosition() == 1)
                     data.put("type", "creditor");
 
-                if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.GONE)
-                    binding.searchIncludeLayout.searchProgressBar.setVisibility(View.VISIBLE);
-
                 getData();
             }
 
@@ -99,38 +89,6 @@ public class BillingsFragment extends Fragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.searchEditText);
-            return false;
-        });
-
-        binding.searchIncludeLayout.searchEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(() -> {
-                    data.put("page", 1);
-                    data.put("q", String.valueOf(s));
-
-                    if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.GONE)
-                        binding.searchIncludeLayout.searchProgressBar.setVisibility(View.VISIBLE);
-
-                    getData();
-                }, 750);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
 
             }
         });
@@ -170,11 +128,7 @@ public class BillingsFragment extends Fragment {
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-
-                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
-                            else
-                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BillingsFragmentEmpty));
+                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BillingsFragmentEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
@@ -185,8 +139,6 @@ public class BillingsFragment extends Fragment {
 
                         if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
 
                     });
 
@@ -204,8 +156,6 @@ public class BillingsFragment extends Fragment {
 
                         if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
 
                     });
 
@@ -220,7 +170,6 @@ public class BillingsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
         isLoading = true;
-        handler.removeCallbacksAndMessages(null);
     }
 
 }
