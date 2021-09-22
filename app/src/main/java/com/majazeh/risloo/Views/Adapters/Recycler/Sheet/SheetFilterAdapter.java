@@ -6,11 +6,16 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Sheet.SheetFilterHolder;
+import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.SingleItemSheetFilterBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -18,6 +23,9 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 
 public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> {
+
+    // Fragments
+    private Fragment current;
 
     // Objects
     private Activity activity;
@@ -42,13 +50,17 @@ public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> 
         if (method.equals("rooms")) {
             RoomModel model = (RoomModel) rooms.get(i);
 
-            listener(holder, i);
+            intializer();
+
+            listener(holder, model);
 
             setData(holder, model);
         } else {
             String item = status.get(i);
 
-            listener(holder, i);
+            intializer();
+
+            listener(holder, item);
 
             setData(holder, item);
         }
@@ -103,10 +115,27 @@ public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> 
         }
     }
 
+    private void intializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+    }
+
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(SheetFilterHolder holder, int position) {
+    private void listener(SheetFilterHolder holder, RoomModel model) {
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code When Needed
+            if (current instanceof CenterSchedulesFragment)
+                ((CenterSchedulesFragment) current).filterSchedules(model.getRoomId(), "");
+
+        }).widget(holder.binding.getRoot());
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener(SheetFilterHolder holder, String item) {
+        CustomClickView.onClickListener(() -> {
+            if (current instanceof CenterSchedulesFragment)
+                ((CenterSchedulesFragment) current).filterSchedules("", SelectionManager.getSessionStatus2(activity, "en", item));
+            else if (current instanceof RoomSchedulesFragment)
+                ((RoomSchedulesFragment) current).filterSchedules(SelectionManager.getSessionStatus2(activity, "en", item));
+
         }).widget(holder.binding.getRoot());
     }
 

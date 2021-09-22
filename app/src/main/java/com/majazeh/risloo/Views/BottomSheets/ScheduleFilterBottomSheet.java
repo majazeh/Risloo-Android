@@ -9,12 +9,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Sheet.SheetFilterAdapter;
+import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.BottomSheetScheduleFilterBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -28,9 +32,13 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
     // Adapters
     private SheetFilterAdapter filterRoomAdapter, filterStatusAdapter;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
     private ArrayList<TypeModel> rooms;
     private ArrayList<String> status;
+    private String method;
 
     @NonNull
     @Override
@@ -56,6 +64,8 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
         filterRoomAdapter = new SheetFilterAdapter(requireActivity());
         filterStatusAdapter = new SheetFilterAdapter(requireActivity());
 
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.roomRecyclerView, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._4sdp), 0, 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.statusRecyclerView, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._4sdp), 0, 0);
     }
@@ -63,6 +73,11 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
+            if (current instanceof CenterSchedulesFragment)
+                ((CenterSchedulesFragment) current).filterSchedules("", "");
+            else if (current instanceof RoomSchedulesFragment)
+                ((RoomSchedulesFragment) current).filterSchedules("");
+
             dismiss();
         }).widget(binding.resetButton);
 
@@ -89,9 +104,16 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
             filterStatusAdapter.setStatus(status);
             binding.statusRecyclerView.setAdapter(filterStatusAdapter);
         }
+
+        if (method.equals("center")) {
+            binding.roomGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.roomGroup.setVisibility(View.GONE);
+        }
     }
 
-    public void setData(ArrayList<TypeModel> rooms, ArrayList<String> status) {
+    public void setData(ArrayList<TypeModel> rooms, ArrayList<String> status, String method) {
+        this.method = method;
         this.rooms = rooms;
         this.status = status;
     }

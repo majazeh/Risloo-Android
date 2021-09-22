@@ -95,7 +95,7 @@ public class CenterSchedulesFragment extends Fragment {
             ArrayList<String> statusList = new ArrayList<>();
             Collections.addAll(statusList, requireActivity().getResources().getStringArray(R.array.ScheduleStatus));
 
-            SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), statusList);
+            SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), statusList, "center");
         }).widget(binding.filterImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
@@ -231,6 +231,30 @@ public class CenterSchedulesFragment extends Fragment {
         schedulesAdapter.selectedTimestamp = timestamp;
 
         getSchedules(timestamp);
+    }
+
+    public void filterSchedules(String room, String status) {
+        SheetManager.dismissScheduleFilterBottomSheet();
+
+        if (!room.equals("") || !status.equals(""))
+            InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Blue600, R.drawable.draw_oval_solid_gray50_border_1sdp_blue600_ripple_blue300);
+        else
+            InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Gray500, R.drawable.draw_oval_solid_gray50_border_1sdp_gray200_ripple_gray300);
+
+        data.put("room", room);
+        data.put("status", status);
+
+        // Schedules Data
+        binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);
+        binding.schedulesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.schedulesShimmerLayout.getRoot().startShimmer();
+
+        // Weeks Data
+        binding.weeksRecyclerView.setVisibility(View.GONE);
+        binding.weeksShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.weeksShimmerLayout.getRoot().startShimmer();
+
+        getSchedules(currentTimestamp);
     }
 
     public void responseAdapter(long timestamp) {
