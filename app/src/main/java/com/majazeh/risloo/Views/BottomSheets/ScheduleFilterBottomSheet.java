@@ -36,8 +36,7 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
     private Fragment current;
 
     // Vars
-    private ArrayList<TypeModel> rooms;
-    private ArrayList<String> status;
+    private ArrayList<TypeModel> rooms, status;
     private String method;
 
     @NonNull
@@ -74,9 +73,10 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
             if (current instanceof CenterSchedulesFragment)
-                ((CenterSchedulesFragment) current).filterSchedules("", "");
-            else if (current instanceof RoomSchedulesFragment)
-                ((RoomSchedulesFragment) current).filterSchedules("");
+                ((CenterSchedulesFragment) current).responseSheet("reset", null);
+
+            if (current instanceof RoomSchedulesFragment)
+                ((RoomSchedulesFragment) current).responseSheet("reset", null);
 
             dismiss();
         }).widget(binding.resetButton);
@@ -96,12 +96,12 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
 
     private void setDialog() {
         if (rooms != null) {
-            filterRoomAdapter.setRooms(rooms);
+            filterRoomAdapter.setItems(rooms, "rooms");
             binding.roomRecyclerView.setAdapter(filterRoomAdapter);
         }
 
         if (status != null) {
-            filterStatusAdapter.setStatus(status);
+            filterStatusAdapter.setItems(status, "status");
             binding.statusRecyclerView.setAdapter(filterStatusAdapter);
         }
 
@@ -112,7 +112,7 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void setData(ArrayList<TypeModel> rooms, ArrayList<String> status, String method) {
+    public void setData(ArrayList<TypeModel> rooms, ArrayList<TypeModel> status, String method) {
         this.method = method;
         this.rooms = rooms;
         this.status = status;

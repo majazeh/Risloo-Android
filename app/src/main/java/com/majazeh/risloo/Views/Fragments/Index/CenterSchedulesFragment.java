@@ -11,10 +11,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.SheetManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SchedulesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.WeeksAdapter;
@@ -24,9 +25,13 @@ import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.Madule.Treasury;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -47,6 +52,7 @@ public class CenterSchedulesFragment extends Fragment {
 
     // Vars
     private long currentTimestamp = DateManager.currentTimestamp();
+    public String filterRoom = "", filterStatus = "";
     public List treasuries = new List();
 
     @Nullable
@@ -91,12 +97,7 @@ public class CenterSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> {
-            ArrayList<String> statusList = new ArrayList<>();
-            Collections.addAll(statusList, requireActivity().getResources().getStringArray(R.array.ScheduleStatus));
-
-            SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), statusList, "center");
-        }).widget(binding.filterImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), statusList(), "center")).widget(binding.filterImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
@@ -214,6 +215,23 @@ public class CenterSchedulesFragment extends Fragment {
         });
     }
 
+    private ArrayList<TypeModel> statusList() {
+        ArrayList<TypeModel> values = new ArrayList<>();
+        String[] statusList = requireActivity().getResources().getStringArray(R.array.ScheduleStatus);
+
+        for (String status : statusList) {
+            try {
+                TypeModel model = new TypeModel(new JSONObject().put("id", status));
+
+                values.add(model);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return values;
+    }
+
     private void doWork(long timestamp) {
 
         // Schedules Data
@@ -233,16 +251,45 @@ public class CenterSchedulesFragment extends Fragment {
         getSchedules(timestamp);
     }
 
-    public void filterSchedules(String room, String status) {
-        SheetManager.dismissScheduleFilterBottomSheet();
+    public void responseSheet(String method, TypeModel item) {
+        switch (method) {
+            case "rooms": {
+                RoomModel model = (RoomModel) item;
 
-        if (!room.equals("") || !status.equals(""))
+                if (!filterRoom.equals(model.getRoomId()))
+                    filterRoom = model.getRoomId();
+                else if (filterRoom.equals(model.getRoomId()))
+                    filterRoom = "";
+
+                data.put("room", filterRoom);
+            } break;
+            case "status": {
+                try {
+                    if (!filterStatus.equals(item.object.get("id").toString()))
+                        filterStatus = item.object.get("id").toString();
+                    else if (filterStatus.equals(item.object.get("id").toString()))
+                        filterStatus = "";
+
+                    data.put("status", SelectionManager.getSessionStatus2(requireActivity(), "en", filterStatus));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } break;
+            case "reset": {
+                filterRoom = "";
+                filterStatus = "";
+
+                data.put("room", filterRoom);
+                data.put("status", filterStatus);
+            } break;
+        }
+
+        if (!filterRoom.equals("") || !filterStatus.equals(""))
             InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Blue600, R.drawable.draw_oval_solid_gray50_border_1sdp_blue600_ripple_blue300);
         else
             InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Gray500, R.drawable.draw_oval_solid_gray50_border_1sdp_gray200_ripple_gray300);
 
-        data.put("room", room);
-        data.put("status", status);
+        SheetManager.dismissScheduleFilterBottomSheet();
 
         // Schedules Data
         binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);

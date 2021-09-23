@@ -61,7 +61,7 @@ public class SheetManager {
         logoutBottomSheet.setData(name, avatar);
     }
 
-    public static void showScheduleFilterBottomSheet(Activity activity, ArrayList<TypeModel> rooms, ArrayList<String> status, String method) {
+    public static void showScheduleFilterBottomSheet(Activity activity, ArrayList<TypeModel> rooms, ArrayList<TypeModel> status, String method) {
         scheduleFilterBottomSheet = new ScheduleFilterBottomSheet();
         scheduleFilterBottomSheet.show(((AppCompatActivity) activity).getSupportFragmentManager(), "scheduleFilterBottomSheet");
         scheduleFilterBottomSheet.setData(rooms, status, method);
