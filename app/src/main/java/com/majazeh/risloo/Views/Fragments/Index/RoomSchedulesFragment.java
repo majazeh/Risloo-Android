@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -96,9 +96,9 @@ public class RoomSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> SheetManager.showScheduleFilterBottomSheet(requireActivity(), null, statusList(), "room")).widget(binding.filterImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> DialogManager.showScheduleFilterDialog(requireActivity(), "room", null, statusList())).widget(binding.filterImageView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> responseSheet("status", null)).widget(binding.statusFilterLayout.removeImageView);
+        CustomClickView.onDelayedListener(() -> responseDialog("status", null)).widget(binding.statusFilterLayout.removeImageView);
 
         CustomClickView.onDelayedListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
@@ -252,7 +252,7 @@ public class RoomSchedulesFragment extends Fragment {
         getSchedules(timestamp);
     }
 
-    public void responseSheet(String method, TypeModel item) {
+    public void responseDialog(String method, TypeModel item) {
         switch (method) {
             case "status": {
                 try {
@@ -298,7 +298,7 @@ public class RoomSchedulesFragment extends Fragment {
             binding.filterHorizontalScrollView.setVisibility(View.GONE);
         }
 
-        SheetManager.dismissScheduleFilterBottomSheet();
+        DialogManager.dismissScheduleFilterDialog();
 
         // Schedules Data
         binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);

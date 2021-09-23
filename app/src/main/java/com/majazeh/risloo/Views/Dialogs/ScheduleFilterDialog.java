@@ -1,36 +1,40 @@
-package com.majazeh.risloo.Views.BottomSheets;
+package com.majazeh.risloo.Views.Dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Sheet.SheetFilterAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogFilterAdapter;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
-import com.majazeh.risloo.databinding.BottomSheetScheduleFilterBinding;
+import com.majazeh.risloo.databinding.DialogScheduleFilterBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
+public class ScheduleFilterDialog extends AppCompatDialogFragment {
 
     // Binding
-    private BottomSheetScheduleFilterBinding binding;
+    private DialogScheduleFilterBinding binding;
 
     // Adapters
-    private SheetFilterAdapter filterRoomAdapter, filterStatusAdapter;
+    private DialogFilterAdapter filterRoomAdapter, filterStatusAdapter;
 
     // Fragments
     private Fragment current;
@@ -42,13 +46,23 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
+        Dialog dialog = new Dialog(requireActivity(), R.style.DialogTheme);
+
+        DialogScheduleFilterBinding binding = DialogScheduleFilterBinding.inflate(LayoutInflater.from(requireActivity()));
+
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(binding.getRoot());
+        dialog.setCancelable(true);
+        dialog.getWindow().setAttributes(ParamsManager.matchWrapContent(dialog));
+
+        return dialog;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetScheduleFilterBinding.inflate(inflater, viewGroup, false);
+        binding = DialogScheduleFilterBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -60,8 +74,8 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        filterRoomAdapter = new SheetFilterAdapter(requireActivity());
-        filterStatusAdapter = new SheetFilterAdapter(requireActivity());
+        filterRoomAdapter = new DialogFilterAdapter(requireActivity());
+        filterStatusAdapter = new DialogFilterAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
@@ -73,25 +87,13 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
             if (current instanceof CenterSchedulesFragment)
-                ((CenterSchedulesFragment) current).responseSheet("reset", null);
+                ((CenterSchedulesFragment) current).responseDialog("reset", null);
 
             if (current instanceof RoomSchedulesFragment)
-                ((RoomSchedulesFragment) current).responseSheet("reset", null);
+                ((RoomSchedulesFragment) current).responseDialog("reset", null);
 
             dismiss();
         }).widget(binding.resetButton);
-
-        binding.roomRecyclerView.setOnTouchListener((v, event) -> {
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            v.onTouchEvent(event);
-            return true;
-        });
-
-        binding.statusRecyclerView.setOnTouchListener((v, event) -> {
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            v.onTouchEvent(event);
-            return true;
-        });
     }
 
     private void setDialog() {
@@ -112,7 +114,7 @@ public class ScheduleFilterBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void setData(ArrayList<TypeModel> rooms, ArrayList<TypeModel> status, String method) {
+    public void setData(String method, ArrayList<TypeModel> rooms, ArrayList<TypeModel> status) {
         this.method = method;
         this.rooms = rooms;
         this.status = status;

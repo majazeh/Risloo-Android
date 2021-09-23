@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Sheet;
+package com.majazeh.risloo.Views.Adapters.Recycler.Dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Sheet.SheetFilterHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogFilterHolder;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
-import com.majazeh.risloo.databinding.SingleItemSheetFilterBinding;
+import com.majazeh.risloo.databinding.SingleItemDialogFilterBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -23,7 +23,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> {
+public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder> {
 
     // Fragments
     private Fragment current;
@@ -35,18 +35,18 @@ public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> 
     private ArrayList<TypeModel> items;
     private String method;
 
-    public SheetFilterAdapter(@NonNull Activity activity) {
+    public DialogFilterAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SheetFilterHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SheetFilterHolder(SingleItemSheetFilterBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public DialogFilterHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new DialogFilterHolder(SingleItemDialogFilterBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SheetFilterHolder holder, int i) {
+    public void onBindViewHolder(@NonNull DialogFilterHolder holder, int i) {
         TypeModel model = items.get(i);
 
         intializer();
@@ -87,7 +87,7 @@ public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> 
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
-    private void detector(SheetFilterHolder holder, boolean selected) {
+    private void detector(DialogFilterHolder holder, boolean selected) {
         if (selected)
             holder.binding.getRoot().setTextColor(activity.getResources().getColor(R.color.Blue700));
         else
@@ -95,13 +95,13 @@ public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> 
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(SheetFilterHolder holder, TypeModel item) {
+    private void listener(DialogFilterHolder holder, TypeModel item) {
         CustomClickView.onClickListener(() -> {
-            responseSheet(item);
+            responseDialog(item);
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(SheetFilterHolder holder, TypeModel item) {
+    private void setData(DialogFilterHolder holder, TypeModel item) {
         try {
             switch (method) {
                 case "rooms": {
@@ -110,9 +110,9 @@ public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> 
                     if (model.getRoomManager() != null && !model.getRoomManager().getName().equals(""))
                         holder.binding.getRoot().setText(model.getRoomManager().getName());
                     else if (model.getRoomManager() != null)
-                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.BottomSheetScheduleFilterHint) + " " + model.getRoomManager().getId());
+                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.DialogScheduleFilterHint) + " " + model.getRoomManager().getId());
                     else
-                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.BottomSheetScheduleFilterHint) + " " + "نامعلوم");
+                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.DialogScheduleFilterHint) + " " + "نامعلوم");
                 } break;
                 case "status": {
                     String status = item.object.get("id").toString();
@@ -125,7 +125,7 @@ public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> 
         }
     }
 
-    private void setActive(SheetFilterHolder holder, TypeModel item) {
+    private void setActive(DialogFilterHolder holder, TypeModel item) {
         try {
             if (current instanceof CenterSchedulesFragment) {
                 switch (method) {
@@ -156,12 +156,12 @@ public class SheetFilterAdapter extends RecyclerView.Adapter<SheetFilterHolder> 
         }
     }
 
-    private void responseSheet(TypeModel item) {
+    private void responseDialog(TypeModel item) {
         if (current instanceof CenterSchedulesFragment)
-            ((CenterSchedulesFragment) current).responseSheet(method, item);
+            ((CenterSchedulesFragment) current).responseDialog(method, item);
 
         if (current instanceof RoomSchedulesFragment)
-            ((RoomSchedulesFragment) current).responseSheet(method, item);
+            ((RoomSchedulesFragment) current).responseDialog(method, item);
     }
 
 }

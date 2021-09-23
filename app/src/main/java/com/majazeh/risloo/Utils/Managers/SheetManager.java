@@ -10,12 +10,8 @@ import com.majazeh.risloo.Views.BottomSheets.BulkSampleBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
-import com.majazeh.risloo.Views.BottomSheets.ScheduleFilterBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
-
-import java.util.ArrayList;
 
 public class SheetManager {
 
@@ -25,7 +21,6 @@ public class SheetManager {
     private static DateBottomSheet dateBottomSheet = null;
     private static ImageBottomSheet imageBottomSheet = null;
     private static LogoutBottomSheet logoutBottomSheet = null;
-    private static ScheduleFilterBottomSheet scheduleFilterBottomSheet = null;
     private static TimeBottomSheet timeBottomSheet = null;
 
     /*
@@ -61,12 +56,6 @@ public class SheetManager {
         logoutBottomSheet.setData(name, avatar);
     }
 
-    public static void showScheduleFilterBottomSheet(Activity activity, ArrayList<TypeModel> rooms, ArrayList<TypeModel> status, String method) {
-        scheduleFilterBottomSheet = new ScheduleFilterBottomSheet();
-        scheduleFilterBottomSheet.show(((AppCompatActivity) activity).getSupportFragmentManager(), "scheduleFilterBottomSheet");
-        scheduleFilterBottomSheet.setData(rooms, status, method);
-    }
-
     public static void showTimeBottomSheet(Activity activity, String timestamp, String method) {
         timeBottomSheet = new TimeBottomSheet();
         timeBottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "timeBottomSheet");
@@ -100,11 +89,6 @@ public class SheetManager {
     public static void dismissLogoutBottomSheet() {
         if (logoutBottomSheet != null && logoutBottomSheet.isVisible())
             logoutBottomSheet.dismiss();
-    }
-
-    public static void dismissScheduleFilterBottomSheet() {
-        if (scheduleFilterBottomSheet != null && scheduleFilterBottomSheet.isVisible())
-            scheduleFilterBottomSheet.dismiss();
     }
 
     public static void dismissTimeBottomSheet() {
@@ -147,13 +131,6 @@ public class SheetManager {
     public static LogoutBottomSheet getLogoutBottomSheet() {
         if (logoutBottomSheet != null && logoutBottomSheet.isVisible())
             return logoutBottomSheet;
-
-        return null;
-    }
-
-    public static ScheduleFilterBottomSheet getScheduleFilterBottomSheet() {
-        if (scheduleFilterBottomSheet != null && scheduleFilterBottomSheet.isVisible())
-            return scheduleFilterBottomSheet;
 
         return null;
     }

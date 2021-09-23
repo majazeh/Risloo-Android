@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SchedulesAdapter;
@@ -97,11 +97,11 @@ public class CenterSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), statusList(), "center")).widget(binding.filterImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> DialogManager.showScheduleFilterDialog(requireActivity(), "center", new ArrayList<>(), statusList())).widget(binding.filterImageView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> responseSheet("rooms", null)).widget(binding.roomFilterLayout.removeImageView);
+        CustomClickView.onDelayedListener(() -> responseDialog("rooms", null)).widget(binding.roomFilterLayout.removeImageView);
 
-        CustomClickView.onDelayedListener(() -> responseSheet("status", null)).widget(binding.statusFilterLayout.removeImageView);
+        CustomClickView.onDelayedListener(() -> responseDialog("status", null)).widget(binding.statusFilterLayout.removeImageView);
 
         CustomClickView.onDelayedListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
@@ -255,7 +255,7 @@ public class CenterSchedulesFragment extends Fragment {
         getSchedules(timestamp);
     }
 
-    public void responseSheet(String method, TypeModel item) {
+    public void responseDialog(String method, TypeModel item) {
         switch (method) {
             case "rooms": {
                 if (item != null) {
@@ -330,7 +330,7 @@ public class CenterSchedulesFragment extends Fragment {
             binding.filterHorizontalScrollView.setVisibility(View.GONE);
         }
 
-        SheetManager.dismissScheduleFilterBottomSheet();
+        DialogManager.dismissScheduleFilterDialog();
 
         // Schedules Data
         binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);
