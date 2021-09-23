@@ -28,10 +28,10 @@ import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -52,8 +52,8 @@ public class CenterSchedulesFragment extends Fragment {
 
     // Vars
     private long currentTimestamp = DateManager.currentTimestamp();
+    public List treasuries = new List(), filterableRooms = new List(), filterableStatus = new List();
     public String filterRoom = "", filterStatus = "";
-    public List treasuries = new List();
 
     @Nullable
     @Override
@@ -97,7 +97,7 @@ public class CenterSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> DialogManager.showScheduleFilterDialog(requireActivity(), "center", new ArrayList<>(), statusList())).widget(binding.filterImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> DialogManager.showScheduleFilterDialog(requireActivity(), "center", filterableRooms.data(), filterableStatus.data())).widget(binding.filterImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> responseDialog("rooms", null)).widget(binding.roomFilterLayout.removeImageView);
 
@@ -174,26 +174,40 @@ public class CenterSchedulesFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        schedulesAdapter.clearItems();
+                        try {
+                            schedulesAdapter.clearItems();
 
-                        if (!items.data().isEmpty()) {
-                            schedulesAdapter.setItems(items.data(), binding.schedulesHeaderLayout.countTextView, binding.schedulesSingleLayout.emptyView);
-                            binding.schedulesSingleLayout.recyclerView.setAdapter(schedulesAdapter);
-                        } else if (schedulesAdapter.getItemCount() == 0) {
-                            binding.schedulesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.schedulesSingleLayout.emptyView.setText(getResources().getString(R.string.SchedulesAdapterWeekEmpty));
+                            filterableRooms = new List();
+                            for (int i = 0; i < ((JSONArray) items.filterAllowed("room")).length(); i++) {
+                                filterableRooms.add(new RoomModel(((JSONArray) items.filterAllowed("room")).getJSONObject(i)));
+                            }
+
+                            filterableStatus = new List();
+                            for (int i = 0; i < ((JSONArray) items.filterAllowed("status")).length(); i++) {
+                                filterableStatus.add(new TypeModel(new JSONObject().put("id", ((JSONArray) items.filterAllowed("status")).getString(i))));
+                            }
+
+                            if (!items.data().isEmpty()) {
+                                schedulesAdapter.setItems(items.data(), binding.schedulesHeaderLayout.countTextView, binding.schedulesSingleLayout.emptyView);
+                                binding.schedulesSingleLayout.recyclerView.setAdapter(schedulesAdapter);
+                            } else if (schedulesAdapter.getItemCount() == 0) {
+                                binding.schedulesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.schedulesSingleLayout.emptyView.setText(getResources().getString(R.string.SchedulesAdapterWeekEmpty));
+                            }
+
+                            // Schedules Data
+                            binding.schedulesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.schedulesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.schedulesShimmerLayout.getRoot().stopShimmer();
+
+                            // Weeks Data
+                            binding.weeksRecyclerView.setVisibility(View.VISIBLE);
+                            binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.weeksShimmerLayout.getRoot().stopShimmer();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-                        // Schedules Data
-                        binding.schedulesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.schedulesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.schedulesShimmerLayout.getRoot().stopShimmer();
-
-                        // Weeks Data
-                        binding.weeksRecyclerView.setVisibility(View.VISIBLE);
-                        binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.weeksShimmerLayout.getRoot().stopShimmer();
-
                     });
                 }
             }
@@ -217,23 +231,6 @@ public class CenterSchedulesFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private ArrayList<TypeModel> statusList() {
-        ArrayList<TypeModel> values = new ArrayList<>();
-        String[] statusList = requireActivity().getResources().getStringArray(R.array.ScheduleStatus);
-
-        for (String status : statusList) {
-            try {
-                TypeModel model = new TypeModel(new JSONObject().put("id", status));
-
-                values.add(model);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return values;
     }
 
     private void doWork(long timestamp) {
