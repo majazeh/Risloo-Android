@@ -227,7 +227,6 @@
             tools:visibility="visible">
 
             <RelativeLayout
-                android:id="@+id/filter_containerLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -238,13 +237,13 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_12sdp"
-                    android:fontFamily="@font/dana_regular"
                     android:gravity="center"
                     android:text="@string/RoomFragmentFilterByTag"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/Gray600"
                     android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray600"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_regular" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tags_recyclerView"

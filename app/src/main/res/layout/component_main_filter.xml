@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/_2sdp"
+    android:paddingEnd="@dimen/_2sdp"
+    android:paddingStart="@dimen/_6sdp"
+    android:paddingTop="@dimen/_2sdp"
+    android:background="@drawable/draw_2sdp_solid_gray50"
+    tools:layout_marginEnd="@dimen/_2sdp"
+    tools:layout_marginStart="@dimen/_2sdp">
+
+    <TextView
+        android:id="@+id/title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="عنوان" />
+
+    <ImageView
+        android:id="@+id/remove_imageView"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/AppImageContent"
+        android:padding="@dimen/_4sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_times_light"
+        android:background="@drawable/draw_2sdp_solid_gray50_ripple_red300"
+        app:tint="@color/Gray400" />
+
+</LinearLayout>

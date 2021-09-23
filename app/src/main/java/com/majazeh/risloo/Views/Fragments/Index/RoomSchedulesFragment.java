@@ -98,6 +98,8 @@ public class RoomSchedulesFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> SheetManager.showScheduleFilterBottomSheet(requireActivity(), null, statusList(), "room")).widget(binding.filterImageView.getRoot());
 
+        CustomClickView.onDelayedListener(() -> responseSheet("status", null)).widget(binding.statusFilterLayout.removeImageView);
+
         CustomClickView.onDelayedListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> doWork(DateManager.nxtJalSaturdayTimestamp(currentTimestamp))).widget(binding.forwardImageView.getRoot());
@@ -254,10 +256,24 @@ public class RoomSchedulesFragment extends Fragment {
         switch (method) {
             case "status": {
                 try {
-                    if (!filterStatus.equals(item.object.get("id").toString()))
-                        filterStatus = item.object.get("id").toString();
-                    else if (filterStatus.equals(item.object.get("id").toString()))
+                    if (item != null) {
+                        if (!filterStatus.equals(item.object.get("id").toString())) {
+                            filterStatus = item.object.get("id").toString();
+
+                            binding.statusFilterLayout.titleTextView.setText(filterStatus);
+                            binding.statusFilterLayout.getRoot().setVisibility(View.VISIBLE);
+                        } else if (filterStatus.equals(item.object.get("id").toString())) {
+                            filterStatus = "";
+
+                            binding.statusFilterLayout.titleTextView.setText("");
+                            binding.statusFilterLayout.getRoot().setVisibility(View.GONE);
+                        }
+                    } else {
                         filterStatus = "";
+
+                        binding.statusFilterLayout.titleTextView.setText("");
+                        binding.statusFilterLayout.getRoot().setVisibility(View.GONE);
+                    }
 
                     data.put("status", SelectionManager.getSessionStatus2(requireActivity(), "en", filterStatus));
                 } catch (JSONException e) {
@@ -267,14 +283,20 @@ public class RoomSchedulesFragment extends Fragment {
             case "reset": {
                 filterStatus = "";
 
+                binding.statusFilterLayout.titleTextView.setText("");
+                binding.statusFilterLayout.getRoot().setVisibility(View.GONE);
+
                 data.put("status", filterStatus);
             } break;
         }
 
-        if (!filterStatus.equals(""))
+        if (!filterStatus.equals("")) {
             InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Blue600, R.drawable.draw_oval_solid_gray50_border_1sdp_blue600_ripple_blue300);
-        else
+            binding.filterHorizontalScrollView.setVisibility(View.VISIBLE);
+        } else {
             InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Gray500, R.drawable.draw_oval_solid_gray50_border_1sdp_gray200_ripple_gray300);
+            binding.filterHorizontalScrollView.setVisibility(View.GONE);
+        }
 
         SheetManager.dismissScheduleFilterBottomSheet();
 

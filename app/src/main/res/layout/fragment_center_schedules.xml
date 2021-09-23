@@ -66,6 +66,62 @@
             app:layout_constraintEnd_toStartOf="@id/week_textView"
             app:layout_constraintTop_toTopOf="@id/week_textView" />
 
+        <HorizontalScrollView
+            android:id="@+id/filter_horizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:scrollbarSize="0dp"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/week_textView"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl">
+
+                <TextView
+                    android:id="@+id/filter_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:gravity="center"
+                    android:text="@string/CenterSchedulesFragmentFilters"
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray600"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_regular" />
+
+                <include
+                    android:id="@+id/room_filterLayout"
+                    layout="@layout/component_main_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <include
+                    android:id="@+id/status_filterLayout"
+                    layout="@layout/component_main_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
         <include
             android:id="@+id/weeks_shimmerLayout"
             layout="@layout/component_shimmer_week"
@@ -75,7 +131,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/week_textView"
+            app:layout_constraintTop_toBottomOf="@id/filter_horizontalScrollView"
             tools:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -90,7 +146,7 @@
             app:layout_constrainedHeight="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/week_textView"
+            app:layout_constraintTop_toBottomOf="@id/filter_horizontalScrollView"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/single_item_week"
             tools:itemCount="7"

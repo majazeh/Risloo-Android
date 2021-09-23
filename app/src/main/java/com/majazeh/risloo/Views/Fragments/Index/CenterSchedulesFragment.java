@@ -99,6 +99,10 @@ public class CenterSchedulesFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> SheetManager.showScheduleFilterBottomSheet(requireActivity(), new ArrayList<>(), statusList(), "center")).widget(binding.filterImageView.getRoot());
 
+        CustomClickView.onDelayedListener(() -> responseSheet("rooms", null)).widget(binding.roomFilterLayout.removeImageView);
+
+        CustomClickView.onDelayedListener(() -> responseSheet("status", null)).widget(binding.statusFilterLayout.removeImageView);
+
         CustomClickView.onDelayedListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> doWork(DateManager.nxtJalSaturdayTimestamp(currentTimestamp))).widget(binding.forwardImageView.getRoot());
@@ -254,21 +258,49 @@ public class CenterSchedulesFragment extends Fragment {
     public void responseSheet(String method, TypeModel item) {
         switch (method) {
             case "rooms": {
-                RoomModel model = (RoomModel) item;
+                if (item != null) {
+                    RoomModel model = (RoomModel) item;
 
-                if (!filterRoom.equals(model.getRoomId()))
-                    filterRoom = model.getRoomId();
-                else if (filterRoom.equals(model.getRoomId()))
+                    if (!filterRoom.equals(model.getRoomId())) {
+                        filterRoom = model.getRoomId();
+
+                        binding.roomFilterLayout.titleTextView.setText(filterRoom);
+                        binding.roomFilterLayout.getRoot().setVisibility(View.VISIBLE);
+                    } else if (filterRoom.equals(model.getRoomId())) {
+                        filterRoom = "";
+
+                        binding.roomFilterLayout.titleTextView.setText("");
+                        binding.roomFilterLayout.getRoot().setVisibility(View.GONE);
+                    }
+                } else {
                     filterRoom = "";
+
+                    binding.roomFilterLayout.titleTextView.setText("");
+                    binding.roomFilterLayout.getRoot().setVisibility(View.GONE);
+                }
 
                 data.put("room", filterRoom);
             } break;
             case "status": {
                 try {
-                    if (!filterStatus.equals(item.object.get("id").toString()))
-                        filterStatus = item.object.get("id").toString();
-                    else if (filterStatus.equals(item.object.get("id").toString()))
+                    if (item != null) {
+                        if (!filterStatus.equals(item.object.get("id").toString())) {
+                            filterStatus = item.object.get("id").toString();
+
+                            binding.statusFilterLayout.titleTextView.setText(filterStatus);
+                            binding.statusFilterLayout.getRoot().setVisibility(View.VISIBLE);
+                        } else if (filterStatus.equals(item.object.get("id").toString())) {
+                            filterStatus = "";
+
+                            binding.statusFilterLayout.titleTextView.setText("");
+                            binding.statusFilterLayout.getRoot().setVisibility(View.GONE);
+                        }
+                    } else {
                         filterStatus = "";
+
+                        binding.statusFilterLayout.titleTextView.setText("");
+                        binding.statusFilterLayout.getRoot().setVisibility(View.GONE);
+                    }
 
                     data.put("status", SelectionManager.getSessionStatus2(requireActivity(), "en", filterStatus));
                 } catch (JSONException e) {
@@ -279,15 +311,24 @@ public class CenterSchedulesFragment extends Fragment {
                 filterRoom = "";
                 filterStatus = "";
 
+                binding.roomFilterLayout.titleTextView.setText("");
+                binding.roomFilterLayout.getRoot().setVisibility(View.GONE);
+
+                binding.statusFilterLayout.titleTextView.setText("");
+                binding.statusFilterLayout.getRoot().setVisibility(View.GONE);
+
                 data.put("room", filterRoom);
                 data.put("status", filterStatus);
             } break;
         }
 
-        if (!filterRoom.equals("") || !filterStatus.equals(""))
+        if (!filterRoom.equals("") || !filterStatus.equals("")) {
             InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Blue600, R.drawable.draw_oval_solid_gray50_border_1sdp_blue600_ripple_blue300);
-        else
+            binding.filterHorizontalScrollView.setVisibility(View.VISIBLE);
+        } else {
             InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Gray500, R.drawable.draw_oval_solid_gray50_border_1sdp_gray200_ripple_gray300);
+            binding.filterHorizontalScrollView.setVisibility(View.GONE);
+        }
 
         SheetManager.dismissScheduleFilterBottomSheet();
 
