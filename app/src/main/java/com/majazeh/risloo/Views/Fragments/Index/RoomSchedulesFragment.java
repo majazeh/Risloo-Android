@@ -31,7 +31,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -253,7 +252,7 @@ public class RoomSchedulesFragment extends Fragment {
                         if (!filterStatus.equals(item.object.get("id").toString())) {
                             filterStatus = item.object.get("id").toString();
 
-                            binding.statusFilterLayout.titleTextView.setText(filterStatus);
+                            binding.statusFilterLayout.titleTextView.setText(SelectionManager.getSessionStatus2(requireActivity(), "fa", filterStatus));
                             binding.statusFilterLayout.getRoot().setVisibility(View.VISIBLE);
                         } else if (filterStatus.equals(item.object.get("id").toString())) {
                             filterStatus = "";
@@ -268,7 +267,7 @@ public class RoomSchedulesFragment extends Fragment {
                         binding.statusFilterLayout.getRoot().setVisibility(View.GONE);
                     }
 
-                    data.put("status", SelectionManager.getSessionStatus2(requireActivity(), "en", filterStatus));
+                    data.put("status", filterStatus);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

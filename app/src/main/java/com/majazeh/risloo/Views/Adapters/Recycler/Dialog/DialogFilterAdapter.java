@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogFilterHolder;
@@ -109,15 +110,13 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
 
                     if (model.getRoomManager() != null && !model.getRoomManager().getName().equals(""))
                         holder.binding.getRoot().setText(model.getRoomManager().getName());
-                    else if (model.getRoomManager() != null)
-                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.DialogScheduleFilterHint) + " " + model.getRoomManager().getId());
                     else
-                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.DialogScheduleFilterHint) + " " + "نامعلوم");
+                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.DialogScheduleFilterHint) + " " + model.getRoomId());
                 } break;
                 case "status": {
                     String status = item.object.get("id").toString();
 
-                    holder.binding.getRoot().setText(status);
+                    holder.binding.getRoot().setText(SelectionManager.getSessionStatus2(activity, "fa", status));
                 } break;
             }
         } catch (JSONException e) {

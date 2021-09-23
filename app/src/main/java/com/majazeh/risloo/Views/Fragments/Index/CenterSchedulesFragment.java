@@ -261,7 +261,11 @@ public class CenterSchedulesFragment extends Fragment {
                     if (!filterRoom.equals(model.getRoomId())) {
                         filterRoom = model.getRoomId();
 
-                        binding.roomFilterLayout.titleTextView.setText(filterRoom);
+                        if (model.getRoomManager() != null && !model.getRoomManager().getName().equals(""))
+                            binding.roomFilterLayout.titleTextView.setText(model.getRoomManager().getName());
+                        else
+                            binding.roomFilterLayout.titleTextView.setText(requireActivity().getResources().getString(R.string.DialogScheduleFilterHint) + " " + filterRoom);
+
                         binding.roomFilterLayout.getRoot().setVisibility(View.VISIBLE);
                     } else if (filterRoom.equals(model.getRoomId())) {
                         filterRoom = "";
@@ -284,7 +288,7 @@ public class CenterSchedulesFragment extends Fragment {
                         if (!filterStatus.equals(item.object.get("id").toString())) {
                             filterStatus = item.object.get("id").toString();
 
-                            binding.statusFilterLayout.titleTextView.setText(filterStatus);
+                            binding.statusFilterLayout.titleTextView.setText(SelectionManager.getSessionStatus2(requireActivity(), "fa", filterStatus));
                             binding.statusFilterLayout.getRoot().setVisibility(View.VISIBLE);
                         } else if (filterStatus.equals(item.object.get("id").toString())) {
                             filterStatus = "";
@@ -299,7 +303,7 @@ public class CenterSchedulesFragment extends Fragment {
                         binding.statusFilterLayout.getRoot().setVisibility(View.GONE);
                     }
 
-                    data.put("status", SelectionManager.getSessionStatus2(requireActivity(), "en", filterStatus));
+                    data.put("status", filterStatus);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
