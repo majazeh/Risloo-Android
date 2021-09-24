@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,30 +10,25 @@
 
     <ImageView
         android:id="@+id/error_imageView"
-        android:layout_width="@dimen/_8sdp"
-        android:layout_height="@dimen/_8sdp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_exclamation_triangle_light"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/error_textView"
         app:tint="@color/Red500" />
 
     <TextView
         android:id="@+id/error_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:gravity="right"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Red600"
+        android:textColor="@color/Red500"
         android:textAlignment="gravity"
-        android:fontFamily="@font/dana_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/error_imageView"
-        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/dana_medium"
         tools:text="متن خطا" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

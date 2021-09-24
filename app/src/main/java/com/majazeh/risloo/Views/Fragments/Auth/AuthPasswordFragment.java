@@ -12,15 +12,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -37,6 +35,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class AuthPasswordFragment extends Fragment {
 
@@ -48,7 +47,6 @@ public class AuthPasswordFragment extends Fragment {
 
     // Vars
     private String password = "", mobile = "";
-    private boolean passwordVisibility = false;
 
     @Nullable
     @Override
@@ -76,8 +74,6 @@ public class AuthPasswordFragment extends Fragment {
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
         binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
-
-        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_005, null));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -139,18 +135,12 @@ public class AuthPasswordFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (!passwordVisibility) {
-                passwordVisibility = true;
+            if (binding.passwordIncludeLayout.visibilityImageView.getTag().equals("invisible")) {
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(null);
-
-                binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
+                InitManager.imgResTintTag(requireActivity(), binding.passwordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.Risloo500, "visible");
             } else {
-                passwordVisibility = false;
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
-
-                binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
+                InitManager.imgResTintTag(requireActivity(), binding.passwordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.Gray500, "invisible");
             }
         }).widget(binding.passwordIncludeLayout.visibilityImageView);
 
@@ -188,13 +178,11 @@ public class AuthPasswordFragment extends Fragment {
     }
 
     private void setData(AuthModel model) {
-        if (model.getKey() != null && !model.getKey().equals("")) {
+        if (model.getKey() != null && !model.getKey().equals(""))
             data.put("key", model.getKey());
-        }
 
-        if (model.getCallback() != null && !model.getCallback().equals("")) {
+        if (model.getCallback() != null && !model.getCallback().equals(""))
             data.put("callback", model.getCallback());
-        }
 
         password = ((AuthActivity) requireActivity()).singleton.getRegistPassword(mobile);
         binding.passwordIncludeLayout.inputEditText.setText(password);
@@ -216,29 +204,25 @@ public class AuthPasswordFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (model.getUser() == null) {
+                            NavDirections action = null;
+
                             switch (model.getTheory()) {
-                                case "mobileCode": {
-                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
-                                    ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
-                                case "recovery": {
-                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
-                                    ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
-                                default: {
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
+                                case "mobileCode":
+                                    action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
+                                    break;
+                                case "recovery":
+                                    action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
+                                    break;
                             }
+
+                            ((AuthActivity) requireActivity()).navController.navigate(Objects.requireNonNull(action));
+                            DialogManager.dismissLoadingDialog();
                         } else {
                             ((AuthActivity) requireActivity()).singleton.login(model);
                             ((AuthActivity) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), password);
 
-                            DialogManager.dismissLoadingDialog();
                             IntentManager.main(requireActivity());
+                            DialogManager.dismissLoadingDialog();
                         }
                     });
                 }
@@ -284,7 +268,6 @@ public class AuthPasswordFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        passwordVisibility = false;
     }
 
 }

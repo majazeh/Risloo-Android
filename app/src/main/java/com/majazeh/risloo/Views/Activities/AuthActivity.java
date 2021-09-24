@@ -60,7 +60,7 @@ public class AuthActivity extends AppCompatActivity {
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             decorator.showSystemUI(false, true);
-            decorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.Gray50));
 
             binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
@@ -79,9 +79,7 @@ public class AuthActivity extends AppCompatActivity {
         validatoon = new Validatoon();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
-
         navController = Objects.requireNonNull(navHostFragment).getNavController();
-
         navGraph = navController.getNavInflater().inflate(R.navigation.navigation_auth);
 
         extras = getIntent().getExtras();

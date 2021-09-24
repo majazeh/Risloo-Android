@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Gray50"
-    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
     tools:context=".Views.Activities.AuthActivity">
 
@@ -27,18 +27,18 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_view"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/divider_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/debug_textView"
-        app:defaultNavHost="true"
         app:navGraph="@navigation/navigation_auth" />
 
-    <View
-        android:id="@+id/bottom_view"
+    <include
+        android:id="@+id/divider_view"
+        layout="@layout/component_auth_divider"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/Gray200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

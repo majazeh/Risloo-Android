@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
@@ -30,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class AuthPasswordRecoverFragment extends Fragment {
 
@@ -68,8 +68,6 @@ public class AuthPasswordRecoverFragment extends Fragment {
 
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
         binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
-
-        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_006, null));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -117,31 +115,27 @@ public class AuthPasswordRecoverFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (model.getUser() == null) {
+                            NavDirections action = null;
+
                             switch (model.getTheory()) {
-                                case "password": {
-                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
-                                    ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
-                                case "mobileCode": {
-                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
-                                    ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
-                                case "recovery": {
-                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
-                                    ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
+                                case "password":
+                                    action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
+                                    break;
+                                case "mobileCode":
+                                    action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
+                                    break;
+                                case "recovery":
+                                    action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
+                                    break;
                             }
+
+                            ((AuthActivity) requireActivity()).navController.navigate(Objects.requireNonNull(action));
+                            DialogManager.dismissLoadingDialog();
                         } else {
                             ((AuthActivity) requireActivity()).singleton.login(model);
 
-                            DialogManager.dismissLoadingDialog();
                             IntentManager.main(requireActivity());
+                            DialogManager.dismissLoadingDialog();
                         }
                     });
                 }

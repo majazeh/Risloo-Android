@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        android:background="@color/Gray200" />
+        android:background="@color/Gray100" />
 
     <TextView
         android:id="@+id/char_textView"

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
@@ -20,7 +19,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthLoginBinding;
 import com.mre.ligheh.API.Response;
@@ -32,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class AuthLoginFragment extends Fragment {
 
@@ -68,11 +67,8 @@ public class AuthLoginFragment extends Fragment {
         binding.registerHelperTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterHelper));
         binding.passwordRecoverHelperTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverHelper));
 
-        binding.registerLinkTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthRegisterLink), 0, 5, getResources().getColor(R.color.Gray800)));
-        binding.registerLinkTextView.getRoot().setTextAppearance(requireActivity(), R.style.danaDemiBoldTextStyle);
+        InitManager.txtTextAppearance(requireActivity(), binding.registerLinkTextView.getRoot(), getResources().getString(R.string.AuthRegisterLink), R.style.danaDemiBoldTextStyle);
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
-
-        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_001, null));
 
         InitManager.normal12sspAutoComplete(requireActivity(), binding.mobileEditText.getRoot(), ((AuthActivity) requireActivity()).singleton.getRegistMobiles());
     }
@@ -122,31 +118,27 @@ public class AuthLoginFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (model.getUser() == null) {
+                            NavDirections action = null;
+
                             switch (model.getTheory()) {
-                                case "password": {
-                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
-                                    ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
-                                case "mobileCode": {
-                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
-                                    ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
-                                case "recovery": {
-                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
-                                    ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                    DialogManager.dismissLoadingDialog();
-                                } break;
+                                case "password":
+                                    action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
+                                    break;
+                                case "mobileCode":
+                                    action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
+                                    break;
+                                case "recovery":
+                                    action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
+                                    break;
                             }
+
+                            ((AuthActivity) requireActivity()).navController.navigate(Objects.requireNonNull(action));
+                            DialogManager.dismissLoadingDialog();
                         } else {
                             ((AuthActivity) requireActivity()).singleton.login(model);
 
-                            DialogManager.dismissLoadingDialog();
                             IntentManager.main(requireActivity());
+                            DialogManager.dismissLoadingDialog();
                         }
                     });
                 }

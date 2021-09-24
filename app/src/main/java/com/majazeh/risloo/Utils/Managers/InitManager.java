@@ -37,6 +37,11 @@ public class InitManager {
         txt.setTextColor(txtColor);
     }
 
+    public static void txtTextAppearance(Activity activity, TextView txt, String txtValue, int txtStyle) {
+        txt.setText(txtValue);
+        txt.setTextAppearance(activity, txtStyle);
+    }
+
     public static void txtTextColorBackground(TextView txt, String txtValue, int txtColor, int txtBackground) {
         txt.setText(txtValue);
         txt.setTextColor(txtColor);

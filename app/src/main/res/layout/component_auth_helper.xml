@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,8 +7,8 @@
     android:gravity="right"
     android:textSize="@dimen/_9ssp"
     android:textStyle="normal"
-    android:textColor="@color/Gray600"
+    android:textColor="@color/Gray400"
     android:textAlignment="gravity"
-    android:fontFamily="@font/dana_light"
-    tools:text="متن مساعد"
-    tools:layout_margin="@dimen/_24sdp" />
+    android:fontFamily="@font/dana_medium"
+    tools:layout_margin="@dimen/_24sdp"
+    tools:text="متن مساعد" />

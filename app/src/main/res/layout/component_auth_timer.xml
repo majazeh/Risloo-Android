@@ -8,7 +8,7 @@
     android:layoutDirection="rtl"
     tools:layout_margin="@dimen/_24sdp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -22,10 +22,7 @@
             android:textStyle="normal"
             android:textColor="@color/Gray400"
             android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:fontFamily="@font/dana_regular" />
 
         <TextView
             android:id="@+id/countdown_textView"
@@ -34,17 +31,13 @@
             android:layout_marginStart="@dimen/_2sdp"
             android:gravity="center"
             android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
+            android:textStyle="normal"
             android:textColor="@color/Gray700"
             android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintBottom_toBottomOf="@id/hint_textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/hint_textView"
-            app:layout_constraintTop_toTopOf="@id/hint_textView"
+            android:fontFamily="@font/dana_demi_bold"
             tools:text="05:00" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/resend_textView"

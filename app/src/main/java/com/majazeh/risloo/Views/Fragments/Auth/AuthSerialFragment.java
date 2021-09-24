@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -62,11 +62,8 @@ public class AuthSerialFragment extends Fragment {
         binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.SerialFragmentGuide));
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentButton));
 
-        binding.dashboardLinkTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthDashboardLink), 0, 8, getResources().getColor(R.color.Gray800)));
-        binding.dashboardLinkTextView.getRoot().setTextAppearance(requireActivity(), R.style.danaDemiBoldTextStyle);
+        InitManager.txtTextAppearance(requireActivity(), binding.dashboardLinkTextView.getRoot(), getResources().getString(R.string.AuthDashboardLink), R.style.danaDemiBoldTextStyle);
         binding.logoutLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLogoutLink));
-
-        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_003, null));
     }
 
     @SuppressLint("ClickableViewAccessibility")

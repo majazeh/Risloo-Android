@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
@@ -37,6 +36,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AuthPinFragment extends Fragment {
 
@@ -78,8 +78,6 @@ public class AuthPinFragment extends Fragment {
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
         binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
-
-        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_007, null));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -164,20 +162,17 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void setData(AuthModel model) {
-        if (model.getKey() != null && !model.getKey().equals("")) {
+        if (model.getKey() != null && !model.getKey().equals(""))
             data.put("key", model.getKey());
-        }
 
-        if (model.getCallback() != null && !model.getCallback().equals("")) {
+        if (model.getCallback() != null && !model.getCallback().equals(""))
             data.put("callback", model.getCallback());
-        }
 
         startCountDownTimer();
     }
 
     private void startCountDownTimer() {
         binding.guideIncludeLayout.guideTextView.setText(StringManager.replace(requireActivity().getResources().getString(R.string.PinFragmentGuide), "09123456789", mobile));
-
         binding.timerViewFlipper.resendTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
 
         countDownTimer.start();
@@ -215,28 +210,24 @@ public class AuthPinFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             if (model.getUser() == null) {
+                                NavDirections action = null;
+
                                 switch (model.getTheory()) {
-                                    case "password": {
-                                        NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
-                                        ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                        DialogManager.dismissLoadingDialog();
-                                    } break;
-                                    case "recovery": {
-                                        NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
-                                        ((AuthActivity) requireActivity()).navController.navigate(action);
-
-                                        DialogManager.dismissLoadingDialog();
-                                    } break;
-                                    default: {
-                                        DialogManager.dismissLoadingDialog();
-                                    } break;
+                                    case "password":
+                                        action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
+                                        break;
+                                    case "recovery":
+                                        action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
+                                        break;
                                 }
+
+                                ((AuthActivity) requireActivity()).navController.navigate(Objects.requireNonNull(action));
+                                DialogManager.dismissLoadingDialog();
                             } else {
                                 ((AuthActivity) requireActivity()).singleton.login(model);
 
-                                DialogManager.dismissLoadingDialog();
                                 IntentManager.main(requireActivity());
+                                DialogManager.dismissLoadingDialog();
                             }
                         });
                     }
