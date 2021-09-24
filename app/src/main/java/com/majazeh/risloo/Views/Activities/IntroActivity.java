@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
@@ -51,6 +52,8 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void setData() {
+        binding.descriptionTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.IntroDescription), 72, 92, getResources().getColor(R.color.Gray800), R.style.danaDemiBoldTextStyle));
+
         String version = getResources().getString(R.string.IntroVersion) + " " + PackageManager.versionNameWithoutSuffix(this);
         binding.versionTextView.setText(version);
     }

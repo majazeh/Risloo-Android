@@ -1,126 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Gray50"
-    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:fitsSystemWindows="true"
+    android:fillViewport="true"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="never"
     android:layoutDirection="rtl"
     tools:context=".Views.Activities.IntroActivity">
 
-    <include
-        android:id="@+id/header_includeLayout"
-        layout="@layout/component_intro_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/title_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_24sdp"
-        android:layout_marginStart="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:gravity="center"
-        android:text="@string/IntroTitle"
-        android:textSize="@dimen/_13ssp"
-        android:textStyle="bold"
-        android:textColor="@color/Gray800"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_demi_bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
+        <include
+            android:id="@+id/header_includeLayout"
+            layout="@layout/component_intro_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/description_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:gravity="center"
-        android:text="@string/IntroDescription"
-        android:textSize="@dimen/_10ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray600"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toEndOf="@id/title_textView"
-        app:layout_constraintStart_toStartOf="@id/title_textView"
-        app:layout_constraintTop_toBottomOf="@id/title_textView" />
+        <TextView
+            android:id="@+id/title_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:gravity="center"
+            android:text="@string/IntroTitle"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            android:textColor="@color/Gray800"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_demi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
 
-    <TextView
-        android:id="@+id/register_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_18sdp"
-        android:paddingStart="@dimen/_24sdp"
-        android:paddingEnd="@dimen/_24sdp"
-        android:gravity="center"
-        android:text="@string/IntroRegister"
-        android:textSize="@dimen/_11ssp"
-        android:textStyle="normal"
-        android:textColor="@color/White"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_16sdp_solid_blue500_ripple_blue800"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description_textView" />
+        <TextView
+            android:id="@+id/description_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            android:text="@string/IntroDescription"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@id/title_textView"
+            app:layout_constraintStart_toStartOf="@id/title_textView"
+            app:layout_constraintTop_toBottomOf="@id/title_textView" />
 
-    <TextView
-        android:id="@+id/version_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_24sdp"
-        android:layout_marginStart="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="center"
-        android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray600"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/register_textView"
-        tools:text="نسخه 1.0.0"/>
+        <TextView
+            android:id="@+id/register_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:paddingEnd="@dimen/_24sdp"
+            android:paddingStart="@dimen/_24sdp"
+            android:gravity="center"
+            android:text="@string/IntroRegister"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="normal"
+            android:textColor="@color/White"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            android:background="@drawable/draw_24sdp_solid_risloo500_ripple_risloo700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_textView" />
 
-    <ImageView
-        android:id="@+id/pic_view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_160sdp"
-        android:layout_marginTop="@dimen/_18sdp"
-        android:padding="@dimen/_1sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/illu_all"
-        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-        app:layout_constraintEnd_toEndOf="@id/title_textView"
-        app:layout_constraintStart_toStartOf="@id/title_textView"
-        app:layout_constraintTop_toBottomOf="@id/version_textView" />
+        <TextView
+            android:id="@+id/version_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@id/title_textView"
+            app:layout_constraintStart_toStartOf="@id/title_textView"
+            app:layout_constraintTop_toBottomOf="@id/register_textView"
+            tools:text="نسخه 1.0.0" />
 
-    <include
-        android:id="@+id/trust_includeLayout"
-        layout="@layout/component_intro_trust"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/bottom_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:id="@+id/pic_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_160sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:scaleType="fitCenter"
+            android:padding="@dimen/_1sdp"
+            android:src="@drawable/illu_all"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="@id/title_textView"
+            app:layout_constraintStart_toStartOf="@id/title_textView"
+            app:layout_constraintTop_toBottomOf="@id/version_textView" />
 
-    <View
-        android:id="@+id/bottom_view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_1sdp"
-        android:background="@color/Gray200"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <include
+            android:id="@+id/trust_includeLayout"
+            layout="@layout/component_intro_trust"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintBottom_toTopOf="@id/divider_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pic_view" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/divider_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/Gray200"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

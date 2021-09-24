@@ -59,7 +59,7 @@
         android:text="@string/IntroLogin"
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold"
-        android:textColor="@color/Gray500"
+        android:textColor="@color/Gray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_demi_bold"
         app:layout_constraintBottom_toBottomOf="parent"
