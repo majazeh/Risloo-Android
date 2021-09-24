@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Entities.Decorator;
@@ -38,8 +37,6 @@ public class DisplayActivity extends AppCompatActivity {
 
         initializer();
 
-        detector();
-
         listener();
 
         setExtra();
@@ -49,32 +46,22 @@ public class DisplayActivity extends AppCompatActivity {
         Decorator decorator = new Decorator(this);
 
         decorator.showSystemUI(false, false);
-        decorator.setSystemUIColor(getResources().getColor(R.color.Gray900), getResources().getColor(R.color.Gray900));
+        decorator.setSystemUIColor(getResources().getColor(R.color.Black100p), getResources().getColor(R.color.Black100p));
     }
 
     private void initializer() {
         extras = getIntent().getExtras();
-
-        InitManager.imgResTint(this, binding.returnImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray50);
-        InitManager.imgResTint(this, binding.downloadImageView.getRoot(), R.drawable.ic_arrow_to_bottom_light, R.color.Gray50);
-    }
-
-    private void detector() {
-        binding.returnImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
-        binding.downloadImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
-
-        binding.titleTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
     }
 
     private void listener() {
         CustomClickView.onClickListener(() -> {
                 IntentManager.finish(this);
-        }).widget(binding.returnImageView.getRoot());
+        }).widget(binding.returnImageView);
 
         CustomClickView.onDelayedListener(() -> {
             if (PermissionManager.storagePermission(this))
                 IntentManager.download(this, path);
-        }).widget(binding.downloadImageView.getRoot());
+        }).widget(binding.downloadImageView);
     }
 
     private void setExtra() {
@@ -90,7 +77,7 @@ public class DisplayActivity extends AppCompatActivity {
                 path = extras.getString("path");
 
                 Picasso.get().load(path).placeholder(R.color.Gray900).into(binding.avatarZoomageView);
-                binding.downloadImageView.getRoot().setVisibility(View.VISIBLE);
+                binding.downloadImageView.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -99,15 +86,14 @@ public class DisplayActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == 200) {
-            if (grantResults.length > 0) {
-                for (int grantResult : grantResults) {
-                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                }
-                IntentManager.download(this, path);
+        if (grantResults.length > 0) {
+            for (int grantResult : grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED)
+                    return;
             }
+
+            if (requestCode == 200)
+                IntentManager.download(this, path);
         }
     }
 
