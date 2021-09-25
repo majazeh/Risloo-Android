@@ -3,10 +3,6 @@ package com.majazeh.risloo.Utils.Managers;
 import android.app.Activity;
 import android.net.Uri;
 
-import androidx.navigation.NavDirections;
-
-import com.majazeh.risloo.NavigationMainDirections;
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.mre.ligheh.API.Response;
@@ -53,33 +49,33 @@ public class PaymentManager {
     public static void callback(Activity activity) {
         Uri uri = activity.getIntent().getData();
 
-        if (uri != null) {
-            if (authorizedKey != null) {
-                System.out.println(authorizedKey);
-                if (authorizedKey.equals(Paymont.getInstance().getPaymentModel().getAuthorized_key())) {
-            switch (Paymont.getInstance().getDestination()) {
-                case R.id.billingsFragment: {
-                    NavDirections action = NavigationMainDirections.actionGlobalBillFragment(Paymont.getInstance().getTypeModel());
-                    ((MainActivity) activity).navController.navigate(action);
-                }
-                break;
-                case R.id.sessionFragment: {
-                    NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(Paymont.getInstance().getTypeModel());
-                    ((MainActivity) activity).navController.navigate(action);
-                }
-                break;
-                default: {
-                    NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-                    ((MainActivity) activity).navController.navigate(action);
-                }
-                break;
-            }
-                }
-
-            } else {
-                System.out.println("auth is null");
-            }
-        }
+//        if (uri != null) {
+//            if (authorizedKey != null) {
+//                System.out.println(authorizedKey);
+//                if (authorizedKey.equals(Paymont.getInstance().getPaymentModel().getAuthorized_key())) {
+//            switch (Paymont.getInstance().getDestination()) {
+//                case R.id.billingsFragment: {
+//                    NavDirections action = NavigationMainDirections.actionGlobalBillFragment(Paymont.getInstance().getTypeModel());
+//                    ((MainActivity) activity).navController.navigate(action);
+//                }
+//                break;
+//                case R.id.sessionFragment: {
+//                    NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(Paymont.getInstance().getTypeModel());
+//                    ((MainActivity) activity).navController.navigate(action);
+//                }
+//                break;
+//                default: {
+//                    NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
+//                    ((MainActivity) activity).navController.navigate(action);
+//                }
+//                break;
+//            }
+//                }
+//
+//            } else {
+//                System.out.println("auth is null");
+//            }
+//        }
     }
 
 }

@@ -327,7 +327,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void setWidgets() {
         String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
-        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), R.style.danaBoldTextStyle));
+        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
         binding.headerIncludeLayout.answeredProgressBar.setMax(sampleModel.getSampleForm().itemSize());
         binding.headerIncludeLayout.answeredProgressBar.setProgress(sampleModel.getSampleForm().getItemPosition());
