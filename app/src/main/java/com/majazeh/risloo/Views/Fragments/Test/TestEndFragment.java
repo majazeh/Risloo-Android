@@ -59,12 +59,12 @@ public class TestEndFragment extends Fragment {
         if (formModel == null)
             binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
         else {
-            List chains = (List) formModel.getObject();
+            List items = (List) formModel.getObject();
 
-            for (int i = 0; i < chains.data().size(); i++) {
-                ChainModel chainModel = (ChainModel) chains.data().get(i);
+            for (int i = 0; i < items.data().size(); i++) {
+                ChainModel chainModel = (ChainModel) items.data().get(i);
 
-                if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != chains.data().size()) {
+                if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != items.data().size()) {
                     binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonNext));
                     break;
                 } else {

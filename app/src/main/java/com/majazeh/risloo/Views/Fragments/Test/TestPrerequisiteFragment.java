@@ -52,10 +52,10 @@ public class TestPrerequisiteFragment extends Fragment {
     }
 
     private void setData(FormModel model) {
-        List prerequisites = (List) model.getObject();
+        List items = (List) model.getObject();
 
-        if (!prerequisites.data().isEmpty()) {
-            adapter.setItems(prerequisites.data());
+        if (!items.data().isEmpty()) {
+            adapter.setItems(items.data());
             binding.listRecyclerView.setAdapter(adapter);
         }
     }

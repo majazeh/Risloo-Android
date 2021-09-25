@@ -56,8 +56,8 @@
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_16sdp"
-                android:paddingStart="@dimen/_18sdp"
                 android:paddingEnd="@dimen/_18sdp"
+                android:paddingStart="@dimen/_18sdp"
                 android:gravity="center"
                 android:text="@string/EndFragmentButtonSample"
                 android:textSize="@dimen/_10ssp"
@@ -65,7 +65,7 @@
                 android:textColor="@color/White"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
-                android:background="@drawable/draw_16sdp_solid_blue500_ripple_blue800"
+                android:background="@drawable/draw_24sdp_solid_risloo500_ripple_risloo700"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/description_textView"
                 app:layout_constraintTop_toBottomOf="@id/description_textView" />

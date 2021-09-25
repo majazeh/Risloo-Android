@@ -64,7 +64,11 @@ public class TestPictoralFragment extends Fragment {
                 binding.entityTextView.getRoot().setVisibility(View.GONE);
             }
 
-            Picasso.get().load(item.getImage_url()).placeholder(R.color.Gray100).into(binding.questionImageView);
+            if (item.getImage_url() != null && !item.getImage_url().equals("")) {
+                Picasso.get().load(item.getImage_url()).placeholder(R.color.Gray100).into(binding.questionImageView);
+            } else {
+                Picasso.get().load(R.color.Gray100).placeholder(R.color.Gray100).into(binding.questionImageView);
+            }
 
             ArrayList<String> pics = new ArrayList<>();
             for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {

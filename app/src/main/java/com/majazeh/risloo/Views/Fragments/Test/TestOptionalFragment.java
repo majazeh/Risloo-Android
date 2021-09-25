@@ -63,7 +63,11 @@ public class TestOptionalFragment extends Fragment {
                 binding.entityTextView.getRoot().setVisibility(View.GONE);
             }
 
-            binding.titleTextView.getRoot().setText(item.getText());
+            if (item.getText() != null && !item.getText().equals("")) {
+                binding.titleTextView.getRoot().setText(item.getText());
+            } else {
+                binding.titleTextView.getRoot().setText("نامعلوم");
+            }
 
             if (item.getDescription() != null && !item.getDescription().equals("")) {
                 binding.descriptionTextView.getRoot().setText(item.getDescription());

@@ -51,10 +51,10 @@ public class TestChainFragment extends Fragment {
     }
 
     private void setData(FormModel model) {
-        List chains = (List) model.getObject();
+        List items = (List) model.getObject();
 
-        if (!chains.data().isEmpty()) {
-            adapter.setItems(chains.data());
+        if (!items.data().isEmpty()) {
+            adapter.setItems(items.data());
             binding.listRecyclerView.setAdapter(adapter);
         }
     }
