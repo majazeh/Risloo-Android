@@ -184,11 +184,11 @@ public class AuthPasswordChangeFragment extends Fragment {
         if (model.getCallback() != null && !model.getCallback().equals(""))
             data.put("callback", model.getCallback());
 
-        password = ((AuthActivity) requireActivity()).singleton.getRegistPassword(mobile);
-        binding.passwordIncludeLayout.inputEditText.setText(password);
-
-        if (!password.equals(""))
-            binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
+//        password = ((AuthActivity) requireActivity()).singleton.getRegistPassword(mobile);
+//        binding.passwordIncludeLayout.inputEditText.setText(password);
+//
+//        if (!password.equals(""))
+//            binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
     }
 
     private void doWork() {

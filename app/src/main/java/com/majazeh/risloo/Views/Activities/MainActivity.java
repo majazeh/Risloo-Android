@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             decorator.showSystemUI(false, true);
-            decorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.Gray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void responseAdapter(String item) {
         switch (item) {
-            case "پیش\u200Cخوان": {
+            case "داشبورد": {
                 NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
                 navController.navigate(action);
             } break;

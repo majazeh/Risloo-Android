@@ -104,7 +104,7 @@
     <string name="AuthLoginLink">ورود</string>
     <string name="AuthRegisterLink">عضویت</string>
     <string name="AuthPasswordRecoverLink">فراموشی کلمه عبور</string>
-    <string name="AuthDashboardLink">پیش‌خوان</string>
+    <string name="AuthDashboardLink">داشبورد</string>
     <string name="AuthLogoutLink">خروج</string>
 
     /*
@@ -244,7 +244,7 @@
     // Main Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="MainTitleDashboard">پیش‌خوان</string>
+    <string name="MainTitleDashboard">داشبورد</string>
     <string name="MainTitleCenters">مراکز درمانی</string>
     <string name="MainTitleSessions">جلسات</string>
     <string name="MainTitleUsers">اعضاء</string>
