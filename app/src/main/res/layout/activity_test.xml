@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Gray50"
-    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
     tools:context=".Views.Activities.TestActivity">
 
@@ -70,7 +70,7 @@
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_12sdp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_view"
+        app:layout_constraintBottom_toTopOf="@id/divider_view"
         app:layout_constraintStart_toStartOf="@id/header_includeLayout" />
 
     <include
@@ -85,7 +85,7 @@
 
     <include
         android:id="@+id/location_includeLayout"
-        layout="@layout/component_test_input_spinner"
+        layout="@layout/component_test_spinner"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_8sdp"
@@ -100,14 +100,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/bottom_view"
+        app:layout_constraintBottom_toTopOf="@id/divider_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
 
     <View
-        android:id="@+id/bottom_view"
+        android:id="@+id/divider_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/Gray200"

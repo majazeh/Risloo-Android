@@ -178,20 +178,12 @@
     // Test Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="TestFixed">بدون تغییر</string>
-    <string name="TestSaving">در حال ذخیره کردن …</string>
-    <string name="TestJump">پرش روی تست‌های خالی</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Test Fragments
-    //////////////////////////////////////////////////////////////////////////////////////
-
     /*
-    ---------- PsyDesc Fragment ----------
+    ---------- Test Activity ----------
     */
 
-    <string name="PsyDescFragmentTitle">توضیحات روان‌شناس</string>
+    <string name="TestFixed">بدون تغییر</string>
+    <string name="TestSaving">در حال ذخیره کردن …</string>
 
     /*
     ---------- Chain Fragment ----------
@@ -200,17 +192,21 @@
     <string name="ChainFragmentTitle">وضعیت نمونه زنجیره‌ای</string>
 
     /*
-    ---------- Prerequisite Fragment ----------
-    */
-
-    <string name="PrerequisiteFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
-    <string name="PrerequisiteFragmentDescription">بعد از تکمیل اطلاعات زیر به صفحه بعد رفته و پاسخ‌دهی را شروع کنید.</string>
-
-    /*
     ---------- Description Fragment ----------
     */
 
     <string name="DescriptionFragmentTitle">توضیحات</string>
+
+    /*
+    ---------- End Fragment ----------
+    */
+
+    <string name="EndFragmentTitle">پایان نمونه‌گیری</string>
+    <string name="EndFragmentDescription">اگر از اتمام نمونه مطمئن هستید و به تمامی گزینه‌ها پاسخ داده‌اید می‌توانید دکمه اتمام نمونه را بزنید. بعد از زدن این دکمه، دیگر قادر به ویرایش نمونه نمی‌باشید.</string>
+
+    <string name="EndFragmentButtonSample">اتمام نمونه</string>
+    <string name="EndFragmentButtonNext">اتمام و انتقال به نمونه بعدی</string>
+    <string name="EndFragmentButtonChain">اتمام نمونه زنجیره‌ای</string>
 
     /*
     ---------- Entity Fragment ----------
@@ -231,15 +227,17 @@
     <string name="PictoralFragmentTitle">تست تصویری</string>
 
     /*
-    ---------- End Fragment ----------
+    ---------- Prerequisite Fragment ----------
     */
 
-    <string name="EndFragmentTitle">پایان نمونه‌گیری</string>
-    <string name="EndFragmentDescription">اگر از اتمام نمونه مطمئن هستید و به تمامی گزینه‌ها پاسخ داده‌اید می‌توانید دکمه اتمام نمونه را بزنید. بعد از زدن این دکمه، دیگر قادر به ویرایش نمونه نمی‌باشید.</string>
+    <string name="PrerequisiteFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
+    <string name="PrerequisiteFragmentDescription">بعد از تکمیل اطلاعات زیر به صفحه بعد رفته و پاسخ‌دهی را شروع کنید.</string>
 
-    <string name="EndFragmentButtonSample">اتمام نمونه</string>
-    <string name="EndFragmentButtonNext">اتمام و انتقال به نمونه بعدی</string>
-    <string name="EndFragmentButtonChain">اتمام نمونه زنجیره‌ای</string>
+    /*
+    ---------- PsyDesc Fragment ----------
+    */
+
+    <string name="PsyDescFragmentTitle">توضیحات روان‌شناس</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
