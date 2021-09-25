@@ -8,20 +8,23 @@
     android:layoutDirection="rtl"
     android:paddingBottom="@dimen/_6sdp"
     android:paddingEnd="@dimen/_12sdp"
-    android:paddingTop="@dimen/_6sdp"
-    android:paddingStart="@dimen/_12sdp">
+    android:paddingStart="@dimen/_12sdp"
+    android:paddingTop="@dimen/_6sdp">
 
     <TextView
         android:id="@+id/dropdown_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center|start"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:gravity="center|right"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
+        app:layout_goneMarginEnd="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dropdown_imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="گزینه مورد نظر" />

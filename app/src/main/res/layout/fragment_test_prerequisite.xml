@@ -65,7 +65,7 @@
                 tools:layout_marginEnd="@dimen/_12sdp"
                 tools:layout_marginStart="@dimen/_12sdp"
                 tools:layout_marginTop="@dimen/_12sdp"
-                tools:listitem="@layout/single_item_test_prerequisite"
+                tools:listitem="@layout/single_item_test_pre_select"
                 tools:itemCount="4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

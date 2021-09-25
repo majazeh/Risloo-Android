@@ -102,16 +102,16 @@ public class TestActivity extends AppCompatActivity {
 
         if (dark) {
             decorator.showSystemUI(false, true);
-            decorator.setSystemUIColor(getResources().getColor(R.color.Blue600), getResources().getColor(R.color.Gray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Gray50));
         } else {
             if (BuildConfig.BUILD_TYPE.equals("debug")) {
                 decorator.showSystemUI(false, true);
-                decorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+                decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.Gray50));
 
                 binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
             } else {
                 decorator.showSystemUI(true, true);
-                decorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+                decorator.setSystemUIColor(getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
 
                 binding.debugTextView.getRoot().setVisibility(View.GONE);
             }
@@ -128,9 +128,7 @@ public class TestActivity extends AppCompatActivity {
         sampleAnswers = new SampleAnswers();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
-
         navController = Objects.requireNonNull(navHostFragment).getNavController();
-
         navGraph = navController.getNavInflater().inflate(R.navigation.navigation_test);
 
         extras = getIntent().getExtras();
@@ -161,6 +159,8 @@ public class TestActivity extends AppCompatActivity {
             userSelect = true;
             return false;
         });
+
+        binding.locationIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.locationIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -327,7 +327,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void setWidgets() {
         String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
-        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Blue700), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
+        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), R.style.danaBoldTextStyle));
 
         binding.headerIncludeLayout.answeredProgressBar.setMax(sampleModel.getSampleForm().itemSize());
         binding.headerIncludeLayout.answeredProgressBar.setProgress(sampleModel.getSampleForm().getItemPosition());
@@ -345,8 +345,8 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void sendPre(int key, String value) {
-        PrerequisitesModel prere = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
-        prere.setUser_answered(value);
+        PrerequisitesModel model = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
+        model.setUser_answered(value);
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
@@ -375,8 +375,9 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void sendItem(int key, String value) {
-        ItemModel item = (ItemModel) formModel.getObject();
-        item.setUser_answered(value);
+        ItemModel model = (ItemModel) formModel.getObject();
+        model.setUser_answered(value);
+
         answers.set(sampleModel.getSampleForm().getPosition(), true);
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
@@ -423,12 +424,12 @@ public class TestActivity extends AppCompatActivity {
                         DialogManager.dismissLoadingDialog();
                         IntentManager.main(TestActivity.this);
                     } else {
-                        List chains = (List) model.getObject();
+                        List items = (List) model.getObject();
 
-                        for (int i = 0; i < chains.data().size(); i++) {
-                            ChainModel chainModel = (ChainModel) chains.data().get(i);
+                        for (int i = 0; i < items.data().size(); i++) {
+                            ChainModel chainModel = (ChainModel) items.data().get(i);
 
-                            if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != chains.data().size() && !chainModel.getId().equals(data.get("id"))) {
+                            if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != items.data().size() && !chainModel.getId().equals(data.get("id"))) {
                                 DialogManager.dismissLoadingDialog();
 
                                 data.put("id", chainModel.getId());

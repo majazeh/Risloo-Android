@@ -274,7 +274,7 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue700));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
                 else
                     dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
             }
@@ -659,7 +659,7 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue700));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
                 else
                     dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 

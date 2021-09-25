@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp">
+
+    <TextView
+        android:id="@+id/header_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        tools:text="سرتيتر" />
+
+    <EditText
+        android:id="@+id/input_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:minHeight="@dimen/_36sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:gravity="center|right"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:saveEnabled="false"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+        tools:text="عنوان"
+        tools:ignore="LabelFor" />
+
+</LinearLayout>

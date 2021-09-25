@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPrerequisiteHolder;
-import com.majazeh.risloo.databinding.SingleItemTestPrerequisiteBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreInputHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreSelectHolder;
+import com.majazeh.risloo.databinding.SingleItemTestPreInputBinding;
+import com.majazeh.risloo.databinding.SingleItemTestPreSelectBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -26,7 +28,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class TestPrerequisiteAdapter extends RecyclerView.Adapter<TestPrerequisiteHolder> {
+public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -42,19 +44,51 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<TestPrerequisi
 
     @NonNull
     @Override
-    public TestPrerequisiteHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new TestPrerequisiteHolder(SingleItemTestPrerequisiteBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 1)
+            return new TestPreInputHolder(SingleItemTestPreInputBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        else if (viewType == 2)
+            return new TestPreSelectHolder(SingleItemTestPreSelectBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return  null;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestPrerequisiteHolder holder, int i) {
-        PrerequisitesModel model = (PrerequisitesModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof TestPreInputHolder) {
+            PrerequisitesModel model = (PrerequisitesModel) items.get(i);
 
-        initializer();
+            initializer();
 
-        listener(holder, i);
+            listener((TestPreInputHolder) holder, i);
 
-        setData(holder, model);
+            setData((TestPreInputHolder) holder, model);
+        } else if (holder instanceof TestPreSelectHolder) {
+            PrerequisitesModel model = (PrerequisitesModel) items.get(i);
+
+            initializer();
+
+            listener((TestPreSelectHolder) holder, i);
+
+            setData((TestPreSelectHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        PrerequisitesModel model = (PrerequisitesModel) items.get(position);
+
+        try {
+            if (model.getAnswer().getString("type").equals("text") || model.getAnswer().getString("type").equals("number"))
+                return 1;
+            else if (model.getAnswer().getString("type").equals("select"))
+                return 2;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     @Override
@@ -85,7 +119,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<TestPrerequisi
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(TestPrerequisiteHolder holder, int item) {
+    private void listener(TestPreInputHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
                 ((TestActivity) activity).inputor.select(activity, holder.binding.inputEditText);
@@ -111,11 +145,16 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<TestPrerequisi
 
             }
         });
+    }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener(TestPreSelectHolder holder, int item) {
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
+
+        holder.binding.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = true);
 
         holder.binding.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -134,19 +173,24 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<TestPrerequisi
         });
     }
 
-    private void setData(TestPrerequisiteHolder holder, PrerequisitesModel model) {
-        holder.binding.headerTextView.setText(model.getText());
+    private void setData(TestPreInputHolder holder, PrerequisitesModel model) {
+        if (!model.getText().equals(""))
+            holder.binding.headerTextView.setText(model.getText());
 
         setType(holder, model);
     }
 
-    private void setType(TestPrerequisiteHolder holder, PrerequisitesModel model) {
+    private void setData(TestPreSelectHolder holder, PrerequisitesModel model) {
+        if (!model.getText().equals(""))
+            holder.binding.headerTextView.setText(model.getText());
+
+        setType(holder, model);
+    }
+
+    private void setType(TestPreInputHolder holder, PrerequisitesModel model) {
         try {
             switch (model.getAnswer().getString("type")) {
                 case "text":
-                    holder.binding.selectGroup.setVisibility(View.GONE);
-
-                    holder.binding.inputEditText.setVisibility(View.VISIBLE);
                     holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 
                     if (!model.getUser_answered().equals(""))
@@ -154,25 +198,10 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<TestPrerequisi
 
                     break;
                 case "number":
-                    holder.binding.selectGroup.setVisibility(View.GONE);
-
-                    holder.binding.inputEditText.setVisibility(View.VISIBLE);
                     holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                     if (!model.getUser_answered().equals(""))
                         holder.binding.inputEditText.setText(model.getUser_answered());
-
-                    break;
-                case "select":
-                    holder.binding.inputEditText.setVisibility(View.GONE);
-
-                    holder.binding.selectGroup.setVisibility(View.VISIBLE);
-                    setSpinner(holder, model);
-
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
-                    else
-                        holder.binding.selectSpinner.setSelection(0);
 
                     break;
             }
@@ -181,10 +210,18 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<TestPrerequisi
         }
     }
 
-    private void setSpinner(TestPrerequisiteHolder holder, PrerequisitesModel model) {
+    private void setType(TestPreSelectHolder holder, PrerequisitesModel model) {
+        setSpinner(holder, model);
+
+        if (!model.getUser_answered().equals(""))
+            holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
+        else
+            holder.binding.selectSpinner.setSelection(0);
+    }
+
+    private void setSpinner(TestPreSelectHolder holder, PrerequisitesModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
-
             for (int i = 0; i < model.getAnswer().getJSONArray("options").length(); i++) {
                 options.add(model.getAnswer().getJSONArray("options").get(i).toString());
             }
