@@ -54,20 +54,30 @@ public class PaymentManager {
         Uri uri = activity.getIntent().getData();
 
         if (uri != null) {
-            String authorizedKey = uri.getQueryParameter("authorized_key");
-
-            if (authorizedKey.equals(Paymont.getInstance().getPaymentModel().getAuthorized_key())) {
-                switch (Paymont.getInstance().getDestination()) {
-                    case R.id.billingsFragment:
-                    case R.id.sessionFragment: {
-                        NavDirections action = NavigationMainDirections.actionGlobalBillFragment(Paymont.getInstance().getTypeModel());
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
-                    case R.id.paymentsFragment: {
-                        NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
+            if (authorizedKey != null) {
+                System.out.println(authorizedKey);
+                if (authorizedKey.equals(Paymont.getInstance().getPaymentModel().getAuthorized_key())) {
+            switch (Paymont.getInstance().getDestination()) {
+                case R.id.billingsFragment: {
+                    NavDirections action = NavigationMainDirections.actionGlobalBillFragment(Paymont.getInstance().getTypeModel());
+                    ((MainActivity) activity).navController.navigate(action);
                 }
+                break;
+                case R.id.sessionFragment: {
+                    NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(Paymont.getInstance().getTypeModel());
+                    ((MainActivity) activity).navController.navigate(action);
+                }
+                break;
+                default: {
+                    NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
+                    ((MainActivity) activity).navController.navigate(action);
+                }
+                break;
+            }
+                }
+
+            } else {
+                System.out.println("auth is null");
             }
         }
     }

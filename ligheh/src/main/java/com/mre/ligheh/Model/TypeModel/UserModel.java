@@ -10,21 +10,21 @@ import org.json.JSONObject;
 
 public class UserModel extends TypeModel {
 
-    private String id="";
-    private String userId="";
-    private String name="";
-    private String email="";
-    private String mobile="";
-    private String gender="";
-    private String userStatus="";
+    private String id = "";
+    private String userId = "";
+    private String name = "";
+    private String email = "";
+    private String mobile = "";
+    private String gender = "";
+    private String userStatus = "";
     private boolean no_password;
-    private String position="";
-    private String userType="";
+    private String position = "";
+    private String userType = "";
     private JSONObject groups;
-    private String username="";
+    private String username = "";
     private UserModel creator;
-    private String public_key="";
-    private String birthday="";
+    private String public_key = "";
+    private String birthday = "";
     private int userCreated_at;
     private int userUpdated_at;
     private int userAccepted_at;
@@ -69,8 +69,6 @@ public class UserModel extends TypeModel {
             setGroups(jsonObject.getJSONObject("groups"));
         if (!jsonObject.isNull("username"))
             setUsername(jsonObject.getString("username"));
-        if (!jsonObject.isNull("public_key"))
-            setPublic_key(jsonObject.getString("public_key"));
         if (!jsonObject.isNull("birthday"))
             setBirthday(jsonObject.getString("birthday"));
         if (!jsonObject.isNull("created_at"))
@@ -137,7 +135,7 @@ public class UserModel extends TypeModel {
             setTreasuries(new List());
         }
 
-        if (!jsonObject.isNull("dalily_schedule_exports")){
+        if (!jsonObject.isNull("dalily_schedule_exports")) {
             setDalilyScheduleExports(jsonObject.getJSONObject("dalily_schedule_exports"));
         }
     }
@@ -356,6 +354,72 @@ public class UserModel extends TypeModel {
 
     public void setDalilyScheduleExports(JSONObject dalilyScheduleExports) {
         this.dalilyScheduleExports = dalilyScheduleExports;
+    }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("user_id", getUserId());
+            super.toObject().put("name", getName());
+            super.toObject().put("email", getEmail());
+            super.toObject().put("mobile", getMobile());
+            super.toObject().put("gender", getGender());
+            super.toObject().put("status", getUserStatus());
+            super.toObject().put("position", getPosition());
+            super.toObject().put("public_key", getPublic_key());
+            super.toObject().put("no_password", isNo_password());
+            super.toObject().put("type", getUserType());
+            super.toObject().put("group", getGroups());
+            super.toObject().put("username", isNo_password());
+            super.toObject().put("birthday", getBirthday());
+            super.toObject().put("created_at", getUserCreated_at());
+            super.toObject().put("updated_at", getUserUpdated_at());
+            super.toObject().put("accepted_at", getUserAccepted_at());
+            super.toObject().put("kicked_at", getUserKicked_at());
+            super.toObject().put("meta", getMeta());
+            super.toObject().put("creator", getCreator().toObject());
+            super.toObject().put("avatar", getAvatar().toObject());
+            JSONArray centers = new JSONArray();
+            for (int i = 0; i < getCenterList().size(); i++) {
+                CenterModel centerModel = (CenterModel) getCenterList().data().get(i);
+                centers.put(centerModel.toObject());
+            }
+            super.toObject().put("centers", centers);
+
+            JSONArray rooms = new JSONArray();
+            for (int i = 0; i < getRoomList().size(); i++) {
+                RoomModel roomModel = (RoomModel) getCenterList().data().get(i);
+                rooms.put(roomModel.toObject());
+            }
+            super.toObject().put("rooms", rooms);
+
+            JSONArray cases = new JSONArray();
+            for (int i = 0; i < getCaseList().size(); i++) {
+                CaseModel caseModel = (CaseModel) getCenterList().data().get(i);
+                cases.put(caseModel.toObject());
+            }
+            super.toObject().put("cases", cases);
+
+            JSONArray samples = new JSONArray();
+            for (int i = 0; i < getSampleList().size(); i++) {
+                SampleModel sampleModel = (SampleModel) getCenterList().data().get(i);
+                samples.put(sampleModel.toObject());
+            }
+            super.toObject().put("samples", samples);
+
+            JSONArray treasuries = new JSONArray();
+            for (int i = 0; i < getTreasuries().size(); i++) {
+                TreasuriesModel treasuriesModel = (TreasuriesModel) getCenterList().data().get(i);
+                treasuries.put(treasuriesModel.toObject());
+            }
+            super.toObject().put("treasuries", treasuries);
+
+            super.toObject().put("dalily_schedule_exports", getDalilyScheduleExports());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return super.toObject();
     }
 
     @Override

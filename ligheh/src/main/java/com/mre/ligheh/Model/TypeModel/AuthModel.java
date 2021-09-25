@@ -68,6 +68,22 @@ public class AuthModel extends TypeModel {
         this.user = user;
     }
 
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("theory", getTheory());
+            super.toObject().put("key", getKey());
+            super.toObject().put("callback", getCallback());
+            super.toObject().put("token", getToken());
+            super.toObject().put("key", getKey());
+            super.toObject().put("user", getUser().toObject());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return super.toObject();
+    }
+
     @NonNull
     @Override
     public String toString() {

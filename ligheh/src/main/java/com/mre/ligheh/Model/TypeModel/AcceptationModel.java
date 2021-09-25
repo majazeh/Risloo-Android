@@ -5,26 +5,26 @@ import org.json.JSONObject;
 
 public class AcceptationModel extends TypeModel {
     private String id = "";
-    private String name="";
-    private String position="";
+    private String name = "";
+    private String position = "";
     private int created_at;
     private int accepted_at;
-    private String kicked_at="";
+    private String kicked_at = "";
 
     public AcceptationModel(JSONObject jsonObject) {
         super(jsonObject);
         try {
             setId(jsonObject.getString("id"));
-        if (!jsonObject.isNull("name"))
-            setName((jsonObject.getString("name")));
-        if (!jsonObject.isNull("position"))
-            setPosition(jsonObject.getString("position"));
-        if (!jsonObject.isNull("created_at"))
-            setCreated_at(jsonObject.getInt("created_at"));
-        if (!jsonObject.isNull("accepted_at"))
-            setAccepted_at(jsonObject.getInt("accepted_at"));
-        if (!jsonObject.isNull("kicked_at"))
-            setKicked_at(jsonObject.getString("kicked_at"));
+            if (!jsonObject.isNull("name"))
+                setName((jsonObject.getString("name")));
+            if (!jsonObject.isNull("position"))
+                setPosition(jsonObject.getString("position"));
+            if (!jsonObject.isNull("created_at"))
+                setCreated_at(jsonObject.getInt("created_at"));
+            if (!jsonObject.isNull("accepted_at"))
+                setAccepted_at(jsonObject.getInt("accepted_at"));
+            if (!jsonObject.isNull("kicked_at"))
+                setKicked_at(jsonObject.getString("kicked_at"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -79,4 +79,18 @@ public class AcceptationModel extends TypeModel {
     }
 
 
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("name", getName());
+            super.toObject().put("position", getPosition());
+            super.toObject().put("created_at", getCreated_at());
+            super.toObject().put("accepted_at", getAccepted_at());
+            super.toObject().put("kicked_at", getKicked_at());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return super.toObject();
+    }
 }
