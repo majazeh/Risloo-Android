@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPictoralHolder;
@@ -75,13 +76,6 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
         }
     }
 
-    private void detector(TestPictoralHolder holder, boolean selected) {
-        if (selected)
-            holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_gray300);
-        else
-            holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-    }
-
     private void listener(TestPictoralHolder holder, int position) {
         CustomClickView.onDelayedListener(() -> {
             answer = position;
@@ -103,15 +97,11 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
 
     private void setActive(TestPictoralHolder holder, int position) {
         if (position == answer) {
-            detector(holder, true);
-
-            holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.White));
-            holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
+            holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_gray300);
+            InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.White), R.drawable.draw_oval_solid_risloo500);
         } else {
-            detector(holder, false);
-
-            holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
-            holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);
+            holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.Gray700), R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);
 
             if (userSelect)
                 holder.binding.getRoot().setAlpha((float) 0.4);

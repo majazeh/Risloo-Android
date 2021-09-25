@@ -6,12 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestChainHolder;
 import com.majazeh.risloo.databinding.SingleItemTestChainBinding;
@@ -70,37 +68,26 @@ public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> {
 
     private void setData(TestChainHolder holder, ChainModel model) {
         if (holder.getBindingAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
+            holder.binding.dividerView.setVisibility(View.GONE);
         else
-            holder.binding.topView.setVisibility(View.VISIBLE);
+            holder.binding.dividerView.setVisibility(View.VISIBLE);
 
-        holder.binding.nameTextView.setText(model.getTitle());
+        if (!model.getTitle().equals(""))
+            holder.binding.titleTextView.setText(model.getTitle());
 
         setActive(holder, model);
     }
 
     private void setActive(TestChainHolder holder, ChainModel model) {
-        if (model.getId().equals(((TestActivity) activity).data.get("id"))) {
-            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Blue700));
-            holder.binding.nameTextView.setTextAppearance(activity, R.style.danaDemiBoldTextStyle);
-
-            holder.binding.activeImageView.setBackgroundResource(0);
-            holder.binding.activeImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_chevron_circle_left_solid, null));
-            ImageViewCompat.setImageTintList(holder.binding.activeImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
-        } else if (!model.getStatus().equals("seald") && !model.getStatus().equals("open")) {
-            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Gray300));
-            holder.binding.nameTextView.setTextAppearance(activity, R.style.danaMediumTextStyle);
-
-            holder.binding.activeImageView.setBackgroundResource(0);
-            holder.binding.activeImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_check_circle_light, null));
-            ImageViewCompat.setImageTintList(holder.binding.activeImageView, AppCompatResources.getColorStateList(activity, R.color.Gray300));
+        if (!model.getId().equals("") && model.getId().equals(((TestActivity) activity).data.get("id"))) {
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.Risloo500), R.style.danaDemiBoldTextStyle);
+            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_chevron_circle_left_solid, R.color.Risloo500, 0);
+        } else if (!model.getStatus().equals("") && !model.getStatus().equals("seald") && !model.getStatus().equals("open")) {
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.Gray300), R.style.danaMediumTextStyle);
+            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_check_circle_light, R.color.Gray300, 0);
         } else {
-            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Gray500));
-            holder.binding.nameTextView.setTextAppearance(activity, R.style.danaMediumTextStyle);
-
-            holder.binding.activeImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
-            holder.binding.activeImageView.setImageDrawable(null);
-            ImageViewCompat.setImageTintList(holder.binding.activeImageView, null);
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.Gray500), R.style.danaMediumTextStyle);
+            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, 0, 0, R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
         }
     }
 
