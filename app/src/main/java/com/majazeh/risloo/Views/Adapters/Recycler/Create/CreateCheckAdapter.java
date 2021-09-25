@@ -28,7 +28,7 @@ public class CreateCheckAdapter extends RecyclerView.Adapter<CreateCheckHolder> 
 
     // Vars
     private ArrayList<TypeModel> items;
-    private ArrayList<String> ids;
+    private ArrayList<String> ids = new ArrayList<>();
 
     public CreateCheckAdapter(@NonNull Activity activity) {
         this.activity = activity;

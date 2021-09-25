@@ -40,7 +40,7 @@ public class DialogSelectedAdapter extends RecyclerView.Adapter<DialogSelectedHo
 
     // Vars
     private ArrayList<TypeModel> items;
-    private ArrayList<String> ids;
+    private ArrayList<String> ids = new ArrayList<>();
     private String method;
 
     public DialogSelectedAdapter(@NonNull Activity activity) {
