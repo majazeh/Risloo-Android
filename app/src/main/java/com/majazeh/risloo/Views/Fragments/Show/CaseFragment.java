@@ -213,8 +213,8 @@ public class CaseFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showCaseDropdownReports(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
             items.add(requireActivity().getResources().getString(R.string.CaseFragmentReports));
 
-        if (((MainActivity) requireActivity()).permissoon.showCaseDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
-            items.add(requireActivity().getResources().getString(R.string.CaseFragmentEdit));
+//        if (((MainActivity) requireActivity()).permissoon.showCaseDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+//            items.add(requireActivity().getResources().getString(R.string.CaseFragmentEdit));
 
         items.add("");
 
@@ -239,6 +239,11 @@ public class CaseFragment extends Fragment {
     }
 
     private void setPermission() {
+        if (((MainActivity) requireActivity()).permissoon.showCaseCreateReference(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+            binding.referencesAddView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.referencesAddView.getRoot().setVisibility(View.GONE);
+
         if (((MainActivity) requireActivity()).permissoon.showCaseCreateSession(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
             binding.sessionsAddView.getRoot().setVisibility(View.VISIBLE);
         else

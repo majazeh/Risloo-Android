@@ -190,6 +190,10 @@ public class SessionFragment extends Fragment {
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
         }).widget(binding.samplesAddView.getRoot());
+
+        CustomClickView.onClickListener(() -> {
+            // TODO : Place Code When Needed
+        }).widget(binding.billsAddView.getRoot());
     }
 
     private void setArgs() {

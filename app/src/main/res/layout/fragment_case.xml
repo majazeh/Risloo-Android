@@ -307,6 +307,13 @@
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintTop_toTopOf="@id/sessions_headerLayout" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/sessions_headerBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="sessions_headerLayout, sessions_addView" />
+
         <include
             android:id="@+id/sessions_shimmerLayout"
             layout="@layout/component_shimmer_index"
@@ -316,7 +323,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/sessions_addView"
+            app:layout_constraintTop_toBottomOf="@id/sessions_headerBarrier"
             tools:visibility="gone" />
 
         <include
@@ -328,7 +335,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/sessions_addView"
+            app:layout_constraintTop_toBottomOf="@id/sessions_headerBarrier"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -356,6 +363,13 @@
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintTop_toTopOf="@id/samples_headerLayout" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/samples_headerBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="samples_headerLayout, samples_addView" />
+
         <include
             android:id="@+id/samples_shimmerLayout"
             layout="@layout/component_shimmer_index"
@@ -365,7 +379,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/samples_addView"
+            app:layout_constraintTop_toBottomOf="@id/samples_headerBarrier"
             tools:visibility="gone" />
 
         <include
@@ -377,7 +391,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/samples_addView"
+            app:layout_constraintTop_toBottomOf="@id/samples_headerBarrier"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier

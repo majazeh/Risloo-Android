@@ -651,6 +651,13 @@
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintTop_toTopOf="@id/users_headerLayout" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/users_headerBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="users_headerLayout, users_addView" />
+
         <include
             android:id="@+id/users_shimmerLayout"
             layout="@layout/component_shimmer_index"
@@ -660,7 +667,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/users_addView"
+            app:layout_constraintTop_toBottomOf="@id/users_headerBarrier"
             tools:visibility="gone" />
 
         <include
@@ -672,7 +679,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/users_addView"
+            app:layout_constraintTop_toBottomOf="@id/users_headerBarrier"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -700,6 +707,13 @@
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintTop_toTopOf="@id/practices_headerLayout" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/practices_headerBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="practices_headerLayout, practices_addView" />
+
         <include
             android:id="@+id/practices_shimmerLayout"
             layout="@layout/component_shimmer_index"
@@ -709,7 +723,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/practices_addView"
+            app:layout_constraintTop_toBottomOf="@id/practices_headerBarrier"
             tools:visibility="gone" />
 
         <include
@@ -721,7 +735,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/practices_addView"
+            app:layout_constraintTop_toBottomOf="@id/practices_headerBarrier"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -749,6 +763,13 @@
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintTop_toTopOf="@id/samples_headerLayout" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/samples_headerBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="samples_headerLayout, samples_addView" />
+
         <include
             android:id="@+id/samples_shimmerLayout"
             layout="@layout/component_shimmer_index"
@@ -758,7 +779,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/samples_addView"
+            app:layout_constraintTop_toBottomOf="@id/samples_headerBarrier"
             tools:visibility="gone" />
 
         <include
@@ -770,7 +791,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/samples_addView"
+            app:layout_constraintTop_toBottomOf="@id/samples_headerBarrier"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -798,6 +819,13 @@
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintTop_toTopOf="@id/bills_headerLayout" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/bills_headerBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="bills_headerLayout, bills_addView" />
+
         <include
             android:id="@+id/bills_shimmerLayout"
             layout="@layout/component_shimmer_index"
@@ -807,7 +835,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/bills_addView"
+            app:layout_constraintTop_toBottomOf="@id/bills_headerBarrier"
             tools:visibility="gone" />
 
         <include
@@ -819,7 +847,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/bills_addView"
+            app:layout_constraintTop_toBottomOf="@id/bills_headerBarrier"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier

@@ -256,6 +256,17 @@ public class Permissoon {
             return false;
     }
 
+    public boolean showCaseCreateReference(UserModel userModel, CaseModel caseModel) {
+        if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getRoomAcceptation() != null && caseModel.getCaseRoom().getRoomCenter() != null && caseModel.getCaseRoom().getRoomCenter().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getRoomAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getRoomCenter().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getRoomCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getRoomAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getRoomAcceptation().getPosition().equals("manager");
+        else if (userModel != null)
+            return userModel.getUserType().equals("admin");
+        else
+            return false;
+    }
+
     public boolean showCaseCreateSession(UserModel userModel, CaseModel caseModel) {
         if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getRoomAcceptation() != null && caseModel.getCaseRoom().getRoomCenter() != null && caseModel.getCaseRoom().getRoomCenter().getAcceptation() != null)
             return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getRoomAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getRoomCenter().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getRoomCenter().getAcceptation().getPosition().equals("operator");
@@ -338,7 +349,14 @@ public class Permissoon {
     }
 
     public boolean showSessionCreateBill(UserModel userModel, SessionModel sessionModel) {
-        return false;
+        if (userModel != null && sessionModel != null && sessionModel.getRoom() != null && sessionModel.getRoom().getRoomAcceptation() != null && sessionModel.getRoom().getRoomCenter() != null && sessionModel.getRoom().getRoomCenter().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || sessionModel.getRoom().getRoomAcceptation().getPosition().equals("manager") || sessionModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("manager") || sessionModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && sessionModel != null && sessionModel.getRoom() != null && sessionModel.getRoom().getRoomAcceptation() != null)
+            return userModel.getUserType().equals("admin") || sessionModel.getRoom().getRoomAcceptation().getPosition().equals("manager");
+        else if (userModel != null)
+            return userModel.getUserType().equals("admin");
+        else
+            return false;
     }
 
     /*
