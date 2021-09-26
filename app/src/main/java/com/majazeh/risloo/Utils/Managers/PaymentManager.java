@@ -75,7 +75,10 @@ public class PaymentManager {
                     }
                 }
             }
-            Paymont.getInstance().clearPayment();
+
+            if (Paymont.getInstance().getPaymentModel() != null && Paymont.getInstance().getDestination() != R.id.reserveScheduleFragment) {
+                Paymont.getInstance().clearPayment();
+            }
         }
     }
 

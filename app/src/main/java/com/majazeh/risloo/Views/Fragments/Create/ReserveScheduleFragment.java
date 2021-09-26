@@ -79,6 +79,8 @@ public class ReserveScheduleFragment extends Fragment {
 
         setPermission();
 
+        paymentCallback();
+
         return binding.getRoot();
     }
 
@@ -119,6 +121,8 @@ public class ReserveScheduleFragment extends Fragment {
             return false;
         });
 
+        binding.fieldIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         binding.fieldIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -139,6 +143,8 @@ public class ReserveScheduleFragment extends Fragment {
             userSelect = true;
             return false;
         });
+
+        binding.platformIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.platformIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -223,6 +229,8 @@ public class ReserveScheduleFragment extends Fragment {
             userSelect = true;
             return false;
         });
+
+        binding.treasuryIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.treasuryIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -641,6 +649,84 @@ public class ReserveScheduleFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void paymentCallback() {
+        if (Paymont.getInstance().getHashmap() != null) {
+
+            if (Paymont.getInstance().getHashmap().containsKey("field") && !Paymont.getInstance().getHashmap().get("field").equals("")) {
+                field = (String) Paymont.getInstance().getHashmap().get("field").toString();
+                for (int i = 0; i < fieldsIds.size(); i++) {
+                    if (fieldsIds.get(i).equals(field)) {
+                        binding.fieldIncludeLayout.selectSpinner.setSelection(i);
+                    }
+                }
+            }
+
+            if (Paymont.getInstance().getHashmap().containsKey("session_platform") && !Paymont.getInstance().getHashmap().get("session_platform").equals("")) {
+                platform = (String) Paymont.getInstance().getHashmap().get("session_platform");
+                for (int i = 0; i < platformIds.size(); i++) {
+                    if (platformIds.get(i).equals(platform)) {
+                        binding.platformIncludeLayout.selectSpinner.setSelection(i);
+                    }
+                }
+            }
+
+            if (binding.typeIncludeLayout.getRoot().getVisibility() == View.VISIBLE && Paymont.getInstance().getHashmap().containsKey("client_typ") && !Paymont.getInstance().getHashmap().get("client_typ").equals("")) {
+                type = (String) Paymont.getInstance().getHashmap().get("client_typ");
+                switch (type) {
+                    case "case":
+                        binding.typeIncludeLayout.secondRadioButton.setChecked(true);
+
+                        binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
+                        if (clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0)
+                            binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
+                        if (!caseId.equals(""))
+                            binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                        break;
+                    default:
+                        type = "center";
+                        binding.typeIncludeLayout.firstRadioButton.setChecked(true);
+
+                        binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+                        binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                        binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+
+            if (binding.problemIncludeLayout.getRoot().getVisibility() == View.VISIBLE && Paymont.getInstance().getHashmap().containsKey("problem") && !Paymont.getInstance().getHashmap().get("problem").equals("")) {
+                problem = (String) Paymont.getInstance().getHashmap().get("problem");
+                binding.problemIncludeLayout.inputEditText.setText(problem);
+            }
+
+            if (binding.nameIncludeLayout.getRoot().getVisibility() == View.VISIBLE && Paymont.getInstance().getHashmap().containsKey("nickname") && !Paymont.getInstance().getHashmap().get("nickname").equals("")) {
+                name = (String) Paymont.getInstance().getHashmap().get("nickname");
+                binding.nameIncludeLayout.inputEditText.setText(name);
+            }
+
+            if (Paymont.getInstance().getHashmap().containsKey("description") && !Paymont.getInstance().getHashmap().get("description").equals("")) {
+                description = (String) Paymont.getInstance().getHashmap().get("description");
+                binding.descriptionIncludeLayout.inputEditText.setText(description);
+            }
+
+            if (binding.treasuryIncludeLayout.getRoot().getVisibility() == View.VISIBLE && Paymont.getInstance().getHashmap().containsKey("treasurie_id") && !Paymont.getInstance().getHashmap().get("treasurie_id").equals("")) {
+                treasury = (String) Paymont.getInstance().getHashmap().get("treasurie_id");
+                for (int i = 0; i < treasuryIds.size(); i++) {
+                    if (treasuryIds.get(i).equals(treasury)) {
+                        binding.treasuryIncludeLayout.selectSpinner.setSelection(i);
+                    }
+                }
+            }
+
+            Paymont.getInstance().clearPayment();
+
+            doWork();
+        }
     }
 
     @Override
