@@ -647,6 +647,7 @@ public class ReserveScheduleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        Paymont.getInstance().clearPayment();
     }
 
 }

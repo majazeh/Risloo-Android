@@ -363,6 +363,7 @@ public class PaymentsFragment extends Fragment {
         binding = null;
         userSelect = false;
         isLoading = true;
+        Paymont.getInstance().clearPayment();
     }
 
 }

@@ -56,21 +56,23 @@ public class PaymentManager {
         if (uri != null) {
             String authorizedKey = uri.getQueryParameter("authorized_key");
 
-            if (authorizedKey != null && !authorizedKey.equals("") && authorizedKey.equals(Paymont.getInstance().getPaymentModel().getAuthorized_key())) {
-                switch (Paymont.getInstance().getDestination()) {
-                    case R.id.billingsFragment:
-                    case R.id.sessionFragment: {
-                        NavDirections action = NavigationMainDirections.actionGlobalBillFragment(Paymont.getInstance().getTypeModel());
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
-                    case R.id.paymentsFragment: {
-                        NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
-                    case R.id.reserveScheduleFragment: {
-                        NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(Paymont.getInstance().getTypeModel());
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
+            if (authorizedKey != null && !authorizedKey.equals("")) {
+                if (Paymont.getInstance().getPaymentModel() != null && Paymont.getInstance().getPaymentModel().getAuthorized_key().equals(authorizedKey)) {
+                    switch (Paymont.getInstance().getDestination()) {
+                        case R.id.billingsFragment:
+                        case R.id.sessionFragment: {
+                            NavDirections action = NavigationMainDirections.actionGlobalBillFragment(Paymont.getInstance().getTypeModel());
+                            ((MainActivity) activity).navController.navigate(action);
+                        } break;
+                        case R.id.paymentsFragment: {
+                            NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
+                            ((MainActivity) activity).navController.navigate(action);
+                        } break;
+                        case R.id.reserveScheduleFragment: {
+                            NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(Paymont.getInstance().getTypeModel());
+                            ((MainActivity) activity).navController.navigate(action);
+                        } break;
+                    }
                 }
             }
         }

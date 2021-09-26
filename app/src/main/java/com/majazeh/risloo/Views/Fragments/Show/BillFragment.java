@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Paymont;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
@@ -161,6 +162,7 @@ public class BillFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        Paymont.getInstance().clearPayment();
     }
 
 }
