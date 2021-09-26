@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         navsAdapter = new NavsAdapter(this);
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
-
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         fragmont = new Fragmont(navHostFragment);
@@ -150,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
             userSelect = true;
             return false;
         });
+
+        binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -196,26 +197,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setData() {
-        if (!singleton.getName().equals("")) {
-            binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
-        } else {
-            binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        }
+        if (!singleton.getToken().equals("")) {
+            if (!singleton.getName().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
+            } else {
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            }
 
-        if (!singleton.getMoney().equals("0")) {
-            String money = StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman);
-            binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
-        } else {
-            String money = "0" + " " + getResources().getString(R.string.MainToman);
-            binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
-        }
+            if (!singleton.getMoney().equals("0")) {
+                String money = StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman);
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
+            } else {
+                String money = "0" + " " + getResources().getString(R.string.MainToman);
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
+            }
 
-        if (!singleton.getAvatar().equals("")) {
-            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
+            if (!singleton.getAvatar().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
+            } else {
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
+            }
         } else {
-            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
+            IntentManager.auth(this, "login");
         }
     }
 
