@@ -75,6 +75,7 @@ public class PaymentManager {
                     }
                 }
             }
+            Paymont.getInstance().clearPayment();
         }
     }
 

@@ -208,8 +208,6 @@ public class PaymentsFragment extends Fragment {
                 }
             }
         }
-
-        Paymont.getInstance().clearPayment();
     }
 
     private void setData(UserModel model) {
@@ -363,7 +361,6 @@ public class PaymentsFragment extends Fragment {
         binding = null;
         userSelect = false;
         isLoading = true;
-        Paymont.getInstance().clearPayment();
     }
 
 }
