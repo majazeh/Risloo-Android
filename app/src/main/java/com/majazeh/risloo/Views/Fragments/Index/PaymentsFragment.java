@@ -253,7 +253,9 @@ public class PaymentsFragment extends Fragment {
                             binding.paymentsSingleLayout.recyclerView.setAdapter(indexPaymentAdapter);
 
                             binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexPaymentAdapter.getItemCount() == 0) {
+                        } else if (indexPaymentAdapter.itemsCount() == 0) {
+                            binding.paymentsSingleLayout.recyclerView.setAdapter(null);
+
                             binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentsFragmentPaymentEmpty));
                         }

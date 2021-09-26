@@ -166,9 +166,10 @@ public class RoomUsersFragment extends Fragment {
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (adapter.getItemCount() == 0) {
-                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                        } else if (adapter.itemsCount() == 0) {
+                            binding.indexSingleLayout.recyclerView.setAdapter(null);
 
+                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                             else
