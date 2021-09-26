@@ -38,7 +38,7 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/filter_tabLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_24sdp"
+                android:layout_height="@dimen/_28sdp"
                 android:layoutDirection="ltr"
                 android:background="@drawable/draw_16sdp_solid_white_border_1sdp_blue600"
                 app:tabPaddingEnd="@dimen/_8sdp"
@@ -52,7 +52,7 @@
                 app:tabTextAppearance="@style/TabTextAppearance2"
                 app:tabRippleColor="@color/Gray300"
                 app:tabIndicatorColor="@color/Blue600"
-                app:tabIndicatorHeight="@dimen/_24sdp">
+                app:tabIndicatorHeight="@dimen/_28sdp">
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"

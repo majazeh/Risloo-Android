@@ -495,6 +495,11 @@ public class SessionFragment extends Fragment {
             binding.samplesAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.samplesAddView.getRoot().setVisibility(View.GONE);
+
+        if (((MainActivity) requireActivity()).permissoon.showSessionCreateBill(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+            binding.billsAddView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.billsAddView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {

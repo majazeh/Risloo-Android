@@ -337,6 +337,10 @@ public class Permissoon {
             return false;
     }
 
+    public boolean showSessionCreateBill(UserModel userModel, SessionModel sessionModel) {
+        return false;
+    }
+
     /*
     ---------- Scales ----------
     */
