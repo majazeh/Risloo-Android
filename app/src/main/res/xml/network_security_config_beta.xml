@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+
+    // Domain Xml
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">dev.risloo.ir</domain>
+    </domain-config>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+</network-security-config>
