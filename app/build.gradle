@@ -3,11 +3,6 @@ plugins {
     id 'androidx.navigation.safeargs' // Navigation SafeArgs
 }
 
-def keystorePropertiesFile = rootProject.file("keystore.properties") // Initialize RootProject File
-def keystoreProperties = new Properties() // Initialize New Properties()
-
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile)) // Set KeystoreProperties Object.
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -24,10 +19,10 @@ android {
 
     signingConfigs {
         config {
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
+            storeFile file(SIGNING_STORE_FILE)
+            storePassword SIGNING_STORE_PASSWORD
+            keyAlias SIGNING_KEY_ALIAS
+            keyPassword SIGNING_KEY_PASSWORD
         }
     }
 
@@ -60,6 +55,7 @@ android {
             manifestPlaceholders.appHost = "dev.risloo.ir"
             manifestPlaceholders.appScheme = "bisloo"
             manifestPlaceholders.appNetworkSecurityConfig = "@xml/network_security_config_beta"
+
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -75,6 +71,7 @@ android {
             manifestPlaceholders.appHost = "risloo.ir"
             manifestPlaceholders.appScheme = "risloo"
             manifestPlaceholders.appNetworkSecurityConfig = "@xml/network_security_config_release"
+
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -114,7 +111,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1' // MultiDex
     implementation 'androidx.viewpager2:viewpager2:1.0.0' // ViewPager2
     implementation 'androidx.recyclerview:recyclerview:1.2.1' // RecyclerView
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0' // ConstraintLayout
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1' // ConstraintLayout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0' // SwipeRefreshLayout
     implementation 'androidx.navigation:navigation-fragment:2.3.5' // Navigation Fragment
     implementation 'androidx.navigation:navigation-ui:2.3.5' // Navigation Ui
