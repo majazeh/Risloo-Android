@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application' // Android Build Application
+    id 'com.android.application' // Android Application
     id 'androidx.navigation.safeargs' // Navigation SafeArgs
 }
 
