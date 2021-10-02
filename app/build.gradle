@@ -95,6 +95,11 @@ android {
             useLegacyPackaging = false
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
