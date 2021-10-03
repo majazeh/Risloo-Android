@@ -17,38 +17,34 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // Black Colors
+    // Black and White Colors
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <color name="Black50p">#80222222</color>
-    <color name="Black100p">#222222</color>
+    <color name="Black50p">#80000000</color>
+    <color name="White50p">#80FFFFFF</color>
 
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // White Colors
-    //////////////////////////////////////////////////////////////////////////////////////
-
+    <color name="Black">#000000</color>
     <color name="White">#FFFFFF</color>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // Gray Colors
+    // Violet Colors
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <color name="Gray50">#F9FAFB</color>
-    <color name="Gray100">#F3F4F6</color>
-    <color name="Gray200">#E5E7EB</color>
-    <color name="Gray300">#D1D5DB</color>
-    <color name="Gray400">#9CA3AF</color>
-    <color name="Gray500">#6B7280</color>
-    <color name="Gray600">#4B5563</color>
-    <color name="Gray700">#374151</color>
-    <color name="Gray800">#1F2937</color>
-    <color name="Gray900">#111827</color>
+    <color name="Violet50">#F5F3FF</color>
+    <color name="Violet100">#EDE9FE</color>
+    <color name="Violet200">#DDD6FE</color>
+    <color name="Violet300">#C4B5FD</color>
+    <color name="Violet400">#A78BFA</color>
+    <color name="Violet500">#8B5CF6</color>
+    <color name="Violet600">#7C3AED</color>
+    <color name="Violet700">#6D28D9</color>
+    <color name="Violet800">#5B21B6</color>
+    <color name="Violet900">#4C1D95</color>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // Blue Colors
+    // Light Blue Colors
     //////////////////////////////////////////////////////////////////////////////////////
 
     <color name="Blue50">#F0F9FF</color>
@@ -61,6 +57,38 @@
     <color name="Blue700">#0369A1</color>
     <color name="Blue800">#075985</color>
     <color name="Blue900">#0C4A6E</color>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Emerald Colors
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <color name="Green50">#ECFDF5</color>
+    <color name="Green100">#D1FAE5</color>
+    <color name="Green200">#A7F3D0</color>
+    <color name="Green300">#6EE7B7</color>
+    <color name="Green400">#34D399</color>
+    <color name="Green500">#10B981</color>
+    <color name="Green600">#059669</color>
+    <color name="Green700">#047857</color>
+    <color name="Green800">#065F46</color>
+    <color name="Green900">#064E3B</color>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Amber Colors
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <color name="Yellow50">#FFFBEB</color>
+    <color name="Yellow100">#FEF3C7</color>
+    <color name="Yellow200">#FDE68A</color>
+    <color name="Yellow300">#FCD34D</color>
+    <color name="Yellow400">#FBBF24</color>
+    <color name="Yellow500">#F59E0B</color>
+    <color name="Yellow600">#D97706</color>
+    <color name="Yellow700">#B45309</color>
+    <color name="Yellow800">#92400E</color>
+    <color name="Yellow900">#78350F</color>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,35 +108,19 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // Yellow Colors
+    // Cool Gray Colors
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <color name="Yellow50">#FFFBEB</color>
-    <color name="Yellow100">#FEF3C7</color>
-    <color name="Yellow200">#FDE68A</color>
-    <color name="Yellow300">#FCD34D</color>
-    <color name="Yellow400">#FBBF24</color>
-    <color name="Yellow500">#F59E0B</color>
-    <color name="Yellow600">#D97706</color>
-    <color name="Yellow700">#B45309</color>
-    <color name="Yellow800">#92400E</color>
-    <color name="Yellow900">#78350F</color>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Green Colors
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <color name="Green50">#ECFDF5</color>
-    <color name="Green100">#D1FAE5</color>
-    <color name="Green200">#A7F3D0</color>
-    <color name="Green300">#6EE7B7</color>
-    <color name="Green400">#34D399</color>
-    <color name="Green500">#10B981</color>
-    <color name="Green600">#059669</color>
-    <color name="Green700">#047857</color>
-    <color name="Green800">#065F46</color>
-    <color name="Green900">#064E3B</color>
+    <color name="Gray50">#F9FAFB</color>
+    <color name="Gray100">#F3F4F6</color>
+    <color name="Gray200">#E5E7EB</color>
+    <color name="Gray300">#D1D5DB</color>
+    <color name="Gray400">#9CA3AF</color>
+    <color name="Gray500">#6B7280</color>
+    <color name="Gray600">#4B5563</color>
+    <color name="Gray700">#374151</color>
+    <color name="Gray800">#1F2937</color>
+    <color name="Gray900">#111827</color>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

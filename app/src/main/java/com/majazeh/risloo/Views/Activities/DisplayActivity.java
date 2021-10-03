@@ -46,7 +46,7 @@ public class DisplayActivity extends AppCompatActivity {
         Decorator decorator = new Decorator(this);
 
         decorator.showSystemUI(false, false);
-        decorator.setSystemUIColor(getResources().getColor(R.color.Black100p), getResources().getColor(R.color.Black100p));
+        decorator.setSystemUIColor(getResources().getColor(R.color.Black), getResources().getColor(R.color.Black));
     }
 
     private void initializer() {
