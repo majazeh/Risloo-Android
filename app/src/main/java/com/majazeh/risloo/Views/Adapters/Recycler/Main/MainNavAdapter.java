@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.NavsHolder;
-import com.majazeh.risloo.databinding.SingleItemNavBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.MainNavHolder;
+import com.majazeh.risloo.databinding.SingleItemMainNavBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class NavsAdapter extends RecyclerView.Adapter<NavsHolder> {
+public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> {
 
     // Objects
     private Activity activity;
@@ -29,27 +29,23 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsHolder> {
     private ArrayList<TypeModel> items;
     private int selectedPosition = 0;
 
-    public NavsAdapter(@NonNull Activity activity) {
+    public MainNavAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public NavsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new NavsHolder(SingleItemNavBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public MainNavHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new MainNavHolder(SingleItemMainNavBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NavsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull MainNavHolder holder, int i) {
         TypeModel model = items.get(i);
-
-        detector(holder, i);
 
         listener(holder);
 
-        setData(holder, model);
-
-        setActive(holder, i);
+        setData(holder, model, i);
     }
 
     @Override
@@ -72,41 +68,40 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsHolder> {
         }
     }
 
-    private void detector(NavsHolder holder, int position) {
-        if (selectedPosition == position)
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_blue500_ripple_blue800);
-        else
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_gray100_ripple_gray300);
-    }
-
-    private void listener(NavsHolder holder) {
+    private void listener(MainNavHolder holder) {
         CustomClickView.onDelayedListener(() -> {
             ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString());
-        }).widget(holder.binding.getRoot());
+        }).widget(holder.itemView);
     }
 
-    private void setData(NavsHolder holder, TypeModel model) {
+    private void setData(MainNavHolder holder, TypeModel model, int position) {
         try {
             holder.binding.nameTextView.setText(model.object.get("title").toString());
             holder.binding.descriptionTextView.setText(model.object.get("description").toString());
 
             holder.binding.iconImageView.setImageResource((Integer) model.object.get("image"));
+
+            setActive(holder, position);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void setActive(NavsHolder holder, int position) {
+    private void setActive(MainNavHolder holder, int position) {
         if (selectedPosition == position) {
+            holder.itemView.setBackgroundResource(R.drawable.draw_4sdp_solid_risloo500_ripple_risloo700);
+
             holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.White));
             holder.binding.descriptionTextView.setTextColor(activity.getResources().getColor(R.color.White));
 
             ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.White));
         } else {
-            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray800));
+            holder.itemView.setBackgroundResource(R.drawable.draw_4sdp_solid_coolgray50_ripple_coolgray300);
+
+            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray900));
             holder.binding.descriptionTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
 
-            ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.CoolGray800));
+            ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.CoolGray900));
         }
     }
 

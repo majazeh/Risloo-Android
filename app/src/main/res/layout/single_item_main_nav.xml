@@ -7,56 +7,54 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     android:paddingBottom="@dimen/_2sdp"
+    android:paddingEnd="@dimen/_6sdp"
+    android:paddingStart="@dimen/_6sdp"
     android:paddingTop="@dimen/_2sdp"
-    tools:layout_marginBottom="@dimen/_4sdp">
+    tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp"
+    tools:background="@drawable/draw_4sdp_solid_coolgray50_ripple_coolgray300">
 
     <ImageView
         android:id="@+id/icon_imageView"
         android:layout_width="@dimen/_16sdp"
         android:layout_height="@dimen/_16sdp"
-        android:layout_marginStart="@dimen/_6sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/description_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:tint="@color/CoolGray800"
+        app:layout_constraintTop_toTopOf="@id/name_textView"
+        tools:tint="@color/CoolGray900"
         tools:srcCompat="@drawable/ic_tachometer_alt_light" />
 
     <TextView
         android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_12sdp"
-        android:gravity="start"
+        android:gravity="right"
         android:textSize="@dimen/_11ssp"
         android:textStyle="normal"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        app:layout_constraintBottom_toBottomOf="@id/icon_imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/icon_imageView"
-        app:layout_constraintTop_toTopOf="@id/icon_imageView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="عنوان"
-        tools:textColor="@color/CoolGray800" />
+        tools:textColor="@color/CoolGray900" />
 
     <TextView
         android:id="@+id/description_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:gravity="start"
+        android:layout_marginTop="@dimen/_minus2sdp"
+        android:gravity="right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textAlignment="gravity"
-        android:textAppearance="@style/NavigationTextAppearance"
         android:fontFamily="@font/dana_light"
-        app:layout_constraintBottom_toBottomOf="@id/icon_imageView"
         app:layout_constraintEnd_toEndOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="@id/name_textView"
-        app:layout_constraintTop_toTopOf="@id/icon_imageView"
+        app:layout_constraintTop_toBottomOf="@id/name_textView"
         tools:text="توضیحات"
         tools:textColor="@color/CoolGray600" />
 

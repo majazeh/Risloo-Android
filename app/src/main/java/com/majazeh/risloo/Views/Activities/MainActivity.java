@@ -38,7 +38,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
-import com.majazeh.risloo.Views.Adapters.Recycler.NavsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.MainNavAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     public Validatoon validatoon;
 
     // Adapters
-    private NavsAdapter navsAdapter;
+    private MainNavAdapter mainNavAdapter;
 
     // Objects
     public NavHostFragment navHostFragment;
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         validatoon = new Validatoon();
 
-        navsAdapter = new NavsAdapter(this);
+        mainNavAdapter = new MainNavAdapter(this);
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
         navController = Objects.requireNonNull(navHostFragment).getNavController();
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         fragmont = new Fragmont(navHostFragment);
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
-        InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._8sdp));
+        InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(breadCrumb.getFa(destination, arguments));
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
 
-            navsAdapter.setFocused(breadCrumb.getFa(destination, arguments).toString());
+            mainNavAdapter.setFocused(breadCrumb.getFa(destination, arguments).toString());
         });
     }
 
@@ -286,8 +286,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            navsAdapter.setItems(values);
-            binding.navIncludeLayout.listRecyclerView.setAdapter(navsAdapter);
+            mainNavAdapter.setItems(values);
+            binding.navIncludeLayout.listRecyclerView.setAdapter(mainNavAdapter);
         }
     }
 
