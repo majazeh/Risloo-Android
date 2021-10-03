@@ -8,20 +8,20 @@
     android:layoutDirection="rtl">
 
     <Spinner
-        android:id="@+id/toolbar_spinner"
+        android:id="@+id/menu_spinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="@dimen/_40sdp"
-        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/toolbar_cardView"
+        android:id="@+id/avatar_cardView"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginStart="@dimen/_6sdp"
@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
-            android:background="@color/LightBlue500" />
+            android:background="@color/CoolGray100" />
 
         <TextView
             android:id="@+id/char_textView"
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
-            android:textColor="@color/White"
+            android:textColor="@color/CoolGray400"
             android:fontFamily="@font/dana_medium"
             android:visibility="gone"
             tools:text="ال"
@@ -58,18 +58,22 @@
         android:id="@+id/name_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
+        android:gravity="center|right"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar_cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/toolbar_cardView"
-        app:layout_constraintTop_toTopOf="@id/toolbar_cardView"
+        app:layout_constrainedWidth="true"
         app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/money_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avatar_cardView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="نام و  نام خانوادگی" />
 
     <TextView
@@ -78,15 +82,22 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_14sdp"
+        android:gravity="center|right"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/Emerald500"
+        android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar_cardView"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/toolbar_cardView"
-        app:layout_constraintTop_toTopOf="@id/toolbar_cardView"
-        tools:text="100.000 تومان" />
+        app:layout_constraintStart_toEndOf="@id/avatar_cardView"
+        app:layout_constraintTop_toBottomOf="@id/name_textView"
+        tools:text="100.000 تومان"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

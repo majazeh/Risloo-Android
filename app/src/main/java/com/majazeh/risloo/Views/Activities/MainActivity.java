@@ -94,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
 
         setData();
 
-        setToolbar();
-
         setDrawer();
+
+        setToolbar();
 
         PaymentManager.callback(this);
     }
@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
         fragmont = new Fragmont(navHostFragment);
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
+        InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
+
         InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
@@ -145,14 +147,18 @@ public class MainActivity extends AppCompatActivity {
             binding.getRoot().openDrawer(GravityCompat.START);
         }).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 
-        binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnTouchListener((v, event) -> {
+        CustomClickView.onDelayedListener(() -> {
+            // TODO : Place Code When Needed
+        }).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
+
+        binding.contentIncludeLayout.toolbarIncludeLayout.menuSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
 
-        binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+        binding.contentIncludeLayout.toolbarIncludeLayout.menuSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
-        binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.contentIncludeLayout.toolbarIncludeLayout.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
@@ -205,16 +211,20 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (!singleton.getMoney().equals("0")) {
-                String money = StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman);
-                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman));
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.VISIBLE);
+
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(1);
             } else {
-                String money = "0" + " " + getResources().getString(R.string.MainToman);
-                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText("");
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
+
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(2);
             }
 
             if (!singleton.getAvatar().equals("")) {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(singleton.getAvatar()).placeholder(R.color.LightBlue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
+                Picasso.get().load(singleton.getAvatar()).placeholder(R.color.CoolGray100).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
             } else {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
@@ -222,18 +232,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             IntentManager.auth(this, "login");
         }
-    }
-
-    private void setToolbar() {
-        ArrayList<String> items = new ArrayList<>();
-
-        items.add(getResources().getString(R.string.MainTitleMe));
-        items.add(getResources().getString(R.string.MainTitleAccounting));
-        items.add(getResources().getString(R.string.MainTitlePayments));
-        items.add(getResources().getString(R.string.MainTitleLogout));
-        items.add("");
-
-        InitManager.toolbarCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, items);
     }
 
     private void setDrawer() {
@@ -289,6 +287,18 @@ public class MainActivity extends AppCompatActivity {
             mainNavAdapter.setItems(values);
             binding.navIncludeLayout.listRecyclerView.setAdapter(mainNavAdapter);
         }
+    }
+
+    private void setToolbar() {
+        ArrayList<String> items = new ArrayList<>();
+
+        items.add(getResources().getString(R.string.MainToolbarMe));
+        items.add(getResources().getString(R.string.MainToolbarAccounting));
+        items.add(getResources().getString(R.string.MainToolbarPayments));
+        items.add(getResources().getString(R.string.MainToolbarLogout));
+        items.add("");
+
+        InitManager.toolbarCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.menuSpinner, items);
     }
 
     public void responseAdapter(String item) {
@@ -372,37 +382,38 @@ public class MainActivity extends AppCompatActivity {
 
         switch (resultCode) {
             case RESULT_OK: {
-                if (fragmont.getCurrent() instanceof CreateCenterFragment) {
-                    if (requestCode == 300)
-                        ((CreateCenterFragment) fragmont.getCurrent()).responseAction("gallery", data);
-                    else if (requestCode == 400)
-                        ((CreateCenterFragment) fragmont.getCurrent()).responseAction("camera", data);
-                }
+                switch (requestCode) {
+                    case 100:
+                        if (fragmont.getCurrent() instanceof CreateDocumentFragment)
+                            ((CreateDocumentFragment) fragmont.getCurrent()).responseAction("file", data);
 
-                if (fragmont.getChild() instanceof EditCenterTabAvatarFragment) {
-                    if (requestCode == 300)
-                        ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
-                    else if (requestCode == 400)
-                        ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
-                }
+                        if (fragmont.getCurrent() instanceof CreatePracticeFragment)
+                            ((CreatePracticeFragment) fragmont.getCurrent()).responseAction("file", data);
 
-                if (fragmont.getChild() instanceof EditUserTabAvatarFragment) {
-                    if (requestCode == 300)
-                        ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
-                    else if (requestCode == 400)
-                        ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
-                }
+                        break;
+                    case 300:
+                        if (fragmont.getCurrent() instanceof CreateCenterFragment)
+                            ((CreateCenterFragment) fragmont.getCurrent()).responseAction("gallery", data);
 
-                if (fragmont.getCurrent() instanceof CreateDocumentFragment) {
-                    if (requestCode == 100)
-                        ((CreateDocumentFragment) fragmont.getCurrent()).responseAction("file", data);
-                }
+                        if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
+                            ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
 
-                if (fragmont.getCurrent() instanceof CreatePracticeFragment) {
-                    if (requestCode == 100)
-                        ((CreatePracticeFragment) fragmont.getCurrent()).responseAction("file", data);
-                }
+                        if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
+                            ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
 
+                        break;
+                    case 400:
+                        if (fragmont.getCurrent() instanceof CreateCenterFragment)
+                            ((CreateCenterFragment) fragmont.getCurrent()).responseAction("camera", data);
+
+                        if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
+                            ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+
+                        if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
+                            ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+
+                        break;
+                }
             } break;
             case RESULT_CANCELED: {
                 switch (requestCode) {
