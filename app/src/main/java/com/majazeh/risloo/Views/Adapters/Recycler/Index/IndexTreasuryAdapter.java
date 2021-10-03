@@ -95,7 +95,7 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     private void setWidget(HeaderTreasuryHolder holder) {
-        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuriesFragmentLeft), 11, 14, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuriesFragmentLeft), 11, 14, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     private void listener(IndexTreasuryHolder holder, TreasuriesModel model) {
@@ -121,11 +121,11 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getBalance())));
         if (model.getBalance() == 0)
-            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray700));
         else if (String.valueOf(model.getBalance()).contains("-"))
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
         else
-            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Emerald600));
     }
 
 }

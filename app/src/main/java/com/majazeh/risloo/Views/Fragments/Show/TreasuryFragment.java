@@ -100,11 +100,11 @@ public class TreasuryFragment extends Fragment {
             }
 
             if (model.getBalance() == 0)
-                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Gray700));
+                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.CoolGray700));
             else if (String.valueOf(model.getBalance()).contains("-"))
                 binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Red500));
             else
-                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Green600));
+                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Emerald600));
         } catch (JSONException e) {
             e.printStackTrace();
         }

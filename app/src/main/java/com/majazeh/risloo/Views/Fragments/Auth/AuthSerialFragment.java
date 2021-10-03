@@ -127,7 +127,7 @@ public class AuthSerialFragment extends Fragment {
     private void setData() {
         if (!((AuthActivity) requireActivity()).singleton.getAvatar().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.avatarIncludeLayout.avatarImageView);
+            Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.LightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             if (!((AuthActivity) requireActivity()).singleton.getName().equals(""))

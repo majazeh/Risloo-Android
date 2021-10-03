@@ -95,11 +95,11 @@
                 app:tabGravity="fill"
                 app:tabMode="fixed"
                 app:tabMaxWidth="0dp"
-                app:tabTextColor="@color/Gray400"
-                app:tabSelectedTextColor="@color/Gray900"
+                app:tabTextColor="@color/CoolGray400"
+                app:tabSelectedTextColor="@color/CoolGray900"
                 app:tabTextAppearance="@style/TabTextAppearance"
-                app:tabRippleColor="@color/Gray300"
-                app:tabIndicatorColor="@color/Blue500"
+                app:tabRippleColor="@color/CoolGray300"
+                app:tabIndicatorColor="@color/LightBlue500"
                 app:tabIndicatorHeight="@dimen/_2sdp">
 
                 <com.google.android.material.tabs.TabItem

@@ -60,12 +60,12 @@ public class AuthActivity extends AppCompatActivity {
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             decorator.showSystemUI(false, true);
-            decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.Gray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.CoolGray50));
 
             binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
             decorator.showSystemUI(true, true);
-            decorator.setSystemUIColor(getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
 
             binding.debugTextView.getRoot().setVisibility(View.GONE);
         }

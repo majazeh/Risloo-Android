@@ -10,7 +10,7 @@
     android:gravity="start"
     android:textSize="@dimen/_9ssp"
     android:textStyle="bold"
-    android:textColor="@color/Gray700"
+    android:textColor="@color/CoolGray700"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_demi_bold"
     tools:text="آدرس"

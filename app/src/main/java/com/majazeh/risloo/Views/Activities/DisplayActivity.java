@@ -76,7 +76,7 @@ public class DisplayActivity extends AppCompatActivity {
             if (!extras.getString("path").equals("")) {
                 path = extras.getString("path");
 
-                Picasso.get().load(path).placeholder(R.color.Gray900).into(binding.avatarZoomageView);
+                Picasso.get().load(path).placeholder(R.color.CoolGray900).into(binding.avatarZoomageView);
                 binding.downloadImageView.setVisibility(View.VISIBLE);
             }
         }

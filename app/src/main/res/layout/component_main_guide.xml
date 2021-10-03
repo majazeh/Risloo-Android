@@ -18,7 +18,7 @@
         android:src="@drawable/ic_info_circle_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guide_textView"
-        app:tint="@color/Gray500" />
+        app:tint="@color/CoolGray500" />
 
     <TextView
         android:id="@+id/guide_textView"
@@ -28,7 +28,7 @@
         android:gravity="right"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray600"
+        android:textColor="@color/CoolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_light"
         app:layout_constraintBottom_toBottomOf="parent"

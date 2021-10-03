@@ -23,7 +23,7 @@
         android:gravity="center"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray600"
+        android:textColor="@color/CoolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         tools:text="عنوان" />
@@ -39,6 +39,6 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_times_light"
         android:background="@drawable/draw_2sdp_solid_gray50_ripple_red300"
-        app:tint="@color/Gray400" />
+        app:tint="@color/CoolGray400" />
 
 </LinearLayout>

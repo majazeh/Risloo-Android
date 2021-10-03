@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="دکمه"
-        tools:textColor="@color/Gray500"
+        tools:textColor="@color/CoolGray500"
         tools:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_gray500" />
 
     <ImageView
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="@id/select_spinner"
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
-        app:tint="@color/Gray500" />
+        app:tint="@color/CoolGray500" />
 
     <Spinner
         android:id="@+id/select_spinner"

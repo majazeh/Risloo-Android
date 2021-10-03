@@ -22,7 +22,7 @@
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         tools:src="@drawable/ic_calendar_day_light"
-        tools:tint="@color/Gray400" />
+        tools:tint="@color/CoolGray400" />
 
     <TextView
         android:id="@+id/title_textView"
@@ -36,6 +36,6 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         tools:text="برنامه درمانی"
-        tools:textColor="@color/Gray400" />
+        tools:textColor="@color/CoolGray400" />
 
 </LinearLayout>

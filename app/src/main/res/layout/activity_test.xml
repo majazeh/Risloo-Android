@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Gray50"
+    android:background="@color/CoolGray50"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:fitsSystemWindows="true"
@@ -110,7 +110,7 @@
         android:id="@+id/divider_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/Gray200"
+        android:background="@color/CoolGray200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

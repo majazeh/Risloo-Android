@@ -38,7 +38,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Blue700"
+                android:textColor="@color/LightBlue700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/date_textView"
                 app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/date_textView"
-                app:tint="@color/Gray500" />
+                app:tint="@color/CoolGray500" />
 
             <TextView
                 android:id="@+id/date_textView"
@@ -67,7 +67,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray500"
+                android:textColor="@color/CoolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/serial_textView"
@@ -85,7 +85,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/duration_textView"
                 app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/duration_textView"
-                app:tint="@color/Gray500" />
+                app:tint="@color/CoolGray500" />
 
             <TextView
                 android:id="@+id/duration_textView"
@@ -96,7 +96,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray500"
+                android:textColor="@color/CoolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/serial_textView"

@@ -201,18 +201,18 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
 
         switch (status) {
             case "registration_awaiting":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Yellow500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_yellow600);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_yellow50);
                 break;
             case "client_awaiting":
             case "session_awaiting":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Blue500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.LightBlue500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_blue50);
                 break;
             case "in_session":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_green600);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_yellow50);
                 break;
@@ -223,7 +223,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_red50);
                 break;
             default:
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_gray400);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50);
                 break;
@@ -233,12 +233,12 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
     private void setAvatar(SchedulesHolder holder, String url) {
         if (!url.equals("")) {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(url).placeholder(R.color.CoolGray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 

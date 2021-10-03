@@ -135,7 +135,7 @@ public class CreateSampleFragment extends Fragment {
 
             @Override
             public void updateDrawState(@NonNull TextPaint textPaint) {
-                textPaint.setColor(getResources().getColor(R.color.Blue600));
+                textPaint.setColor(getResources().getColor(R.color.LightBlue600));
                 textPaint.setUnderlineText(false);
             }
         };
@@ -432,7 +432,7 @@ public class CreateSampleFragment extends Fragment {
             String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
             String secondaryText = DateManager.jalDayName(String.valueOf(model.getStarted_at())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())) + " / " + model.getDuration() + " " + "دقیقه";
 
-            binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.Gray600), (int) getResources().getDimension(R.dimen._8ssp)));
+            binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.CoolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
             binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
         }
 
@@ -569,7 +569,7 @@ public class CreateSampleFragment extends Fragment {
                         String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
                         String secondaryText = DateManager.jalDayName(String.valueOf(model.getStarted_at())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())) + " / " + model.getDuration() + " " + "دقیقه";
 
-                        binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.Gray600), (int) getResources().getDimension(R.dimen._8ssp)));
+                        binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.CoolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
                         binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
                     } else if (sessionId.equals(model.getId())) {
                         sessionId = "";

@@ -103,10 +103,10 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsHolder> {
 
             ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.White));
         } else {
-            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
-            holder.binding.descriptionTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray800));
+            holder.binding.descriptionTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
 
-            ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.Gray800));
+            ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.CoolGray800));
         }
     }
 

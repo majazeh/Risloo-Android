@@ -136,7 +136,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setWidget(HeaderBillHolder holder) {
-        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BillingsFragmentAmount), 5, 8, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BillingsFragmentAmount), 5, 8, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -15,7 +15,7 @@
         android:gravity="center"
         android:textSize="@dimen/_11ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray800"
+        android:textColor="@color/CoolGray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         app:layout_constraintBottom_toTopOf="@id/select_container"
@@ -45,7 +45,7 @@
             android:gravity="center|right"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
-            android:textColor="@color/Gray700"
+            android:textColor="@color/CoolGray700"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_medium" />
 
@@ -57,7 +57,7 @@
             android:gravity="center|right"
             android:textSize="@dimen/_8ssp"
             android:textStyle="normal"
-            android:textColor="@color/Gray600"
+            android:textColor="@color/CoolGray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular" />
 
@@ -74,6 +74,6 @@
         app:layout_constraintBottom_toBottomOf="@id/select_container"
         app:layout_constraintEnd_toEndOf="@id/select_container"
         app:layout_constraintTop_toTopOf="@id/select_container"
-        app:tint="@color/Gray600" />
+        app:tint="@color/CoolGray600" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

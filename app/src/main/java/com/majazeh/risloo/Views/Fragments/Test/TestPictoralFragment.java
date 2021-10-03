@@ -65,9 +65,9 @@ public class TestPictoralFragment extends Fragment {
             }
 
             if (item.getImage_url() != null && !item.getImage_url().equals("")) {
-                Picasso.get().load(item.getImage_url()).placeholder(R.color.Gray100).into(binding.questionImageView);
+                Picasso.get().load(item.getImage_url()).placeholder(R.color.CoolGray100).into(binding.questionImageView);
             } else {
-                Picasso.get().load(R.color.Gray100).placeholder(R.color.Gray100).into(binding.questionImageView);
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.questionImageView);
             }
 
             ArrayList<String> pics = new ArrayList<>();

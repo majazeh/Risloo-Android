@@ -97,7 +97,7 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void setWidget(HeaderPaymentHolder holder) {
-        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.PaymentsFragmentPaymentLeft), 11, 14, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.PaymentsFragmentPaymentLeft), 11, 14, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     private void listener(IndexPaymentHolder holder, PaymentModel model) {
@@ -119,11 +119,11 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         holder.binding.statusTextView.setText(SelectionManager.getPaymentType(activity, "fa", model.getStatus()));
         if (model.getStatus().equals("expired"))
-            holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
+            holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray700));
         else if (model.getStatus().equals("fail"))
             holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
         else
-            holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+            holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Emerald600));
     }
 
 }

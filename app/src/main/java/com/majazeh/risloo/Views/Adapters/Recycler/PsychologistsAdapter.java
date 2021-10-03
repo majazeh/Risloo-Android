@@ -90,12 +90,12 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsHold
     private void setAvatar(PsychologistsHolder holder, String url) {
         if (!url.equals("")) {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(url).placeholder(R.color.CoolGray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 

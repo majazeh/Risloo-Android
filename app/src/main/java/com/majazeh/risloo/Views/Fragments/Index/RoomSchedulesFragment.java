@@ -80,11 +80,11 @@ public class RoomSchedulesFragment extends Fragment {
 
         binding.schedulesHeaderLayout.titleTextView.setText(getResources().getString(R.string.RoomSchedulesFragmentTitle));
 
-        InitManager.txtTextColorBackground(binding.weekTextView.getRoot(), getResources().getString(R.string.AppDefaultWeek), getResources().getColor(R.color.Gray500), R.drawable.draw_16sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+        InitManager.txtTextColorBackground(binding.weekTextView.getRoot(), getResources().getString(R.string.AppDefaultWeek), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_gray300_ripple_gray300);
 
-        InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Gray500, R.drawable.draw_oval_solid_gray50_border_1sdp_gray200_ripple_gray300);
-        InitManager.imgResTintBackground(requireActivity(), binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
-        InitManager.imgResTintBackgroundRotate(requireActivity(), binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, 180);
+        InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.CoolGray500, R.drawable.draw_oval_solid_gray50_border_1sdp_gray200_ripple_gray300);
+        InitManager.imgResTintBackground(requireActivity(), binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
+        InitManager.imgResTintBackgroundRotate(requireActivity(), binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, 180);
 
         InitManager.fixedHorizontalRecyclerView(requireActivity(), binding.weeksRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.schedulesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
@@ -283,10 +283,10 @@ public class RoomSchedulesFragment extends Fragment {
         }
 
         if (!filterStatus.equals("")) {
-            InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Blue600, R.drawable.draw_oval_solid_gray50_border_1sdp_blue600_ripple_blue300);
+            InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.LightBlue600, R.drawable.draw_oval_solid_gray50_border_1sdp_blue600_ripple_blue300);
             binding.filterHorizontalScrollView.setVisibility(View.VISIBLE);
         } else {
-            InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.Gray500, R.drawable.draw_oval_solid_gray50_border_1sdp_gray200_ripple_gray300);
+            InitManager.imgResTintBackground(requireActivity(), binding.filterImageView.getRoot(), R.drawable.ic_filter_light, R.color.CoolGray500, R.drawable.draw_oval_solid_gray50_border_1sdp_gray200_ripple_gray300);
             binding.filterHorizontalScrollView.setVisibility(View.GONE);
         }
 

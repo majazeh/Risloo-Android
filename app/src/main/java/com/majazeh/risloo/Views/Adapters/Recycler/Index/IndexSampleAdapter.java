@@ -200,13 +200,13 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case "seald":
             case "open":
                 holder.binding.statusTextView.setEnabled(true);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.LightBlue600));
 
                 holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
                 break;
             default:
                 holder.binding.statusTextView.setEnabled(false);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray700));
 
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;

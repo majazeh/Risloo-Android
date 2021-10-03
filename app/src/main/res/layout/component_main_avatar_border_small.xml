@@ -25,7 +25,7 @@
         android:gravity="center"
         android:textSize="@dimen/_16ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray400"
+        android:textColor="@color/CoolGray400"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:visibility="gone"

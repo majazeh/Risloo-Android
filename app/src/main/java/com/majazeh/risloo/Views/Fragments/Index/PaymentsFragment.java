@@ -82,10 +82,10 @@ public class PaymentsFragment extends Fragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.chargeHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeHeader));
-        binding.chargeHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.Green700));
+        binding.chargeHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.Emerald700));
 
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeTreasuryHeader));
-        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 4, 12, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 4, 12, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
         InitManager.txtTextColorBackground(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);

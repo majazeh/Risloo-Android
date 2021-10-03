@@ -20,7 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:tint="@color/Gray800"
+        tools:tint="@color/CoolGray800"
         tools:srcCompat="@drawable/ic_tachometer_alt_light" />
 
     <TextView
@@ -40,7 +40,7 @@
         app:layout_constraintStart_toEndOf="@id/icon_imageView"
         app:layout_constraintTop_toTopOf="@id/icon_imageView"
         tools:text="عنوان"
-        tools:textColor="@color/Gray800" />
+        tools:textColor="@color/CoolGray800" />
 
     <TextView
         android:id="@+id/description_textView"
@@ -58,6 +58,6 @@
         app:layout_constraintStart_toStartOf="@id/name_textView"
         app:layout_constraintTop_toTopOf="@id/icon_imageView"
         tools:text="توضیحات"
-        tools:textColor="@color/Gray600" />
+        tools:textColor="@color/CoolGray600" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

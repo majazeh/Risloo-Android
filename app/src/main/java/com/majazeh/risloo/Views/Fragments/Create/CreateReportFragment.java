@@ -60,7 +60,7 @@ public class CreateReportFragment extends Fragment {
 
         InitManager.normal12sspSpinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates);
 
-        InitManager.txtTextColorBackground(binding.cryptoTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.Blue600), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+        InitManager.txtTextColorBackground(binding.cryptoTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }
 

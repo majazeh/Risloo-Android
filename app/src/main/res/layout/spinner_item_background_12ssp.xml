@@ -10,7 +10,7 @@
     android:gravity="center|start"
     android:textSize="@dimen/_12ssp"
     android:textStyle="normal"
-    android:textColor="@color/Gray700"
+    android:textColor="@color/CoolGray700"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
     android:layoutDirection="rtl"

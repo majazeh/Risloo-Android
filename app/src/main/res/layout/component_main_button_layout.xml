@@ -22,7 +22,7 @@
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         tools:src="@drawable/ic_plus_light"
-        tools:tint="@color/Gray500" />
+        tools:tint="@color/CoolGray500" />
 
     <TextView
         android:id="@+id/select_textView"
@@ -35,6 +35,6 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_bold"
         tools:text="دکمه"
-        tools:textColor="@color/Gray500" />
+        tools:textColor="@color/CoolGray500" />
 
 </LinearLayout>

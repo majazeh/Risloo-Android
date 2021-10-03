@@ -102,12 +102,12 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
 
         if (!avatar.equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(avatar).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(avatar).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 

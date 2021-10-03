@@ -67,7 +67,7 @@
         <item name="colorAccent">@color/White</item>
     </style>
     <style name="ProgressBarTheme3" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorAccent">@color/Gray300</item>
+        <item name="colorAccent">@color/CoolGray300</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -76,8 +76,8 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     <style name="RadioButtonTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorControlNormal">@color/Gray300</item>
-        <item name="colorControlActivated">@color/Blue500</item>
+        <item name="colorControlNormal">@color/CoolGray300</item>
+        <item name="colorControlActivated">@color/LightBlue500</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -86,8 +86,8 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     <style name="CheckBoxTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorControlNormal">@color/Gray300</item>
-        <item name="colorControlActivated">@color/Blue500</item>
+        <item name="colorControlNormal">@color/CoolGray300</item>
+        <item name="colorControlActivated">@color/LightBlue500</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -96,8 +96,8 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     <style name="SwicthCompatTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorControlNormal">@color/Gray200</item>
-        <item name="colorControlActivated">@color/Green600</item>
+        <item name="colorControlNormal">@color/CoolGray200</item>
+        <item name="colorControlActivated">@color/Emerald600</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +106,7 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     <style name="NumberPickerTheme" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/Gray200</item>
+        <item name="colorControlNormal">@color/CoolGray200</item>
         <item name="android:dividerHeight">@dimen/_1sdp</item>
     </style>
 

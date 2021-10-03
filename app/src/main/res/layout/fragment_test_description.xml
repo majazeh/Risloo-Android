@@ -33,7 +33,7 @@
             tools:text="توضیحات"
             tools:textSize="@dimen/_10ssp"
             tools:textStyle="normal"
-            tools:textColor="@color/Gray600"
+            tools:textColor="@color/CoolGray600"
             tools:textAlignment="gravity"
             tools:fontFamily="@font/dana_regular" />
 

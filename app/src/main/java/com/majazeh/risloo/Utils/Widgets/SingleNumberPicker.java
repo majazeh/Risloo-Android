@@ -49,7 +49,7 @@ public class SingleNumberPicker extends NumberPicker {
         if (view instanceof EditText) {
             ((EditText) view).setTypeface(ResourcesCompat.getFont(context, R.font.dana_bold));
             ((EditText) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen._11ssp));
-            ((EditText) view).setTextColor(getResources().getColor(R.color.Gray700));
+            ((EditText) view).setTextColor(getResources().getColor(R.color.CoolGray700));
         }
     }
 

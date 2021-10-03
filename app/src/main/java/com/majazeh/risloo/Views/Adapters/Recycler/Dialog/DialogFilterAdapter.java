@@ -90,9 +90,9 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
 
     private void detector(DialogFilterHolder holder, boolean selected) {
         if (selected)
-            holder.binding.getRoot().setTextColor(activity.getResources().getColor(R.color.Blue700));
+            holder.binding.getRoot().setTextColor(activity.getResources().getColor(R.color.LightBlue700));
         else
-            holder.binding.getRoot().setTextColor(activity.getResources().getColor(R.color.Gray600));
+            holder.binding.getRoot().setTextColor(activity.getResources().getColor(R.color.CoolGray600));
     }
 
     @SuppressLint("ClickableViewAccessibility")

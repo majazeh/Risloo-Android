@@ -167,13 +167,13 @@ public class CreatePlatformFragment extends Fragment {
                 available = "1";
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOn));
-                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Green700));
+                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Emerald700));
                 binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray300);
             } else {
                 available = "0";
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOff));
-                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
                 binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
             }
         });

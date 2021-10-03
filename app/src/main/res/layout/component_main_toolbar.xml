@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
-            android:background="@color/Blue500" />
+            android:background="@color/LightBlue500" />
 
         <TextView
             android:id="@+id/char_textView"
@@ -63,7 +63,7 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray700"
+        android:textColor="@color/CoolGray700"
         android:fontFamily="@font/dana_medium"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_cardView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
         android:layout_marginTop="@dimen/_14sdp"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Green500"
+        android:textColor="@color/Emerald500"
         android:fontFamily="@font/dana_medium"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_cardView"
         app:layout_constraintEnd_toEndOf="parent"

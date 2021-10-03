@@ -7,7 +7,7 @@
     android:gravity="right"
     android:textSize="@dimen/_10ssp"
     android:textStyle="normal"
-    android:textColor="@color/Gray600"
+    android:textColor="@color/CoolGray600"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_regular"
     tools:layout_margin="@dimen/_12sdp"

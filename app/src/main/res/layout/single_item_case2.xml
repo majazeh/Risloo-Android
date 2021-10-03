@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="@id/serial_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/serial_textView"
-        app:tint="@color/Gray700" />
+        app:tint="@color/CoolGray700" />
 
     <TextView
         android:id="@+id/serial_textView"
@@ -34,7 +34,7 @@
         android:gravity="left"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray700"
+        android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_bold"
         app:layout_constraintEnd_toStartOf="@id/serial_imageView"
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="@id/reference_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/reference_textView"
-        app:tint="@color/Gray500" />
+        app:tint="@color/CoolGray500" />
 
     <TextView
         android:id="@+id/reference_textView"
@@ -64,7 +64,7 @@
         android:gravity="right"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray500"
+        android:textColor="@color/CoolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toEndOf="@id/serial_imageView"
@@ -77,7 +77,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@color/Gray200"
+        android:background="@color/CoolGray200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reference_textView" />
@@ -93,7 +93,7 @@
         app:layout_constraintBottom_toBottomOf="@id/date_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/date_textView"
-        app:tint="@color/Gray500" />
+        app:tint="@color/CoolGray500" />
 
     <TextView
         android:id="@+id/date_textView"
@@ -105,7 +105,7 @@
         android:gravity="right"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray500"
+        android:textColor="@color/CoolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toStartOf="@id/session_count_imageView"
@@ -124,7 +124,7 @@
         app:layout_constraintBottom_toBottomOf="@id/session_count_textView"
         app:layout_constraintEnd_toStartOf="@id/session_count_textView"
         app:layout_constraintTop_toTopOf="@id/session_count_textView"
-        app:tint="@color/Gray500" />
+        app:tint="@color/CoolGray500" />
 
     <TextView
         android:id="@+id/session_count_textView"
@@ -134,7 +134,7 @@
         android:gravity="center"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray500"
+        android:textColor="@color/CoolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="@id/date_textView"

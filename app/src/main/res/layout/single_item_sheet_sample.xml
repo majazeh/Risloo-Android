@@ -12,7 +12,7 @@
     android:gravity="right"
     android:textSize="@dimen/_9ssp"
     android:textStyle="normal"
-    android:textColor="@color/Gray400"
+    android:textColor="@color/CoolGray400"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
     android:background="@drawable/draw_2sdp_solid_gray50"

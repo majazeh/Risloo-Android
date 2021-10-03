@@ -106,12 +106,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
             decorator.showSystemUI(false, true);
-            decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.Gray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.CoolGray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
             decorator.showSystemUI(true, true);
-            decorator.setSystemUIColor(Color.TRANSPARENT, getResources().getColor(R.color.Gray50));
+            decorator.setSystemUIColor(Color.TRANSPARENT, getResources().getColor(R.color.CoolGray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.GONE);
         }
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmont = new Fragmont(navHostFragment);
 
-        InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
+        InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
         InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._8sdp));
     }
 
@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (!singleton.getAvatar().equals("")) {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
+                Picasso.get().load(singleton.getAvatar()).placeholder(R.color.LightBlue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
             } else {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));

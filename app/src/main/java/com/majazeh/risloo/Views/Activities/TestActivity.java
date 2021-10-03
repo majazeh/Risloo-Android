@@ -102,16 +102,16 @@ public class TestActivity extends AppCompatActivity {
 
         if (dark) {
             decorator.showSystemUI(false, true);
-            decorator.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Gray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.CoolGray50));
         } else {
             if (BuildConfig.BUILD_TYPE.equals("debug")) {
                 decorator.showSystemUI(false, true);
-                decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.Gray50));
+                decorator.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.CoolGray50));
 
                 binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
             } else {
                 decorator.showSystemUI(true, true);
-                decorator.setSystemUIColor(getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
+                decorator.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
 
                 binding.debugTextView.getRoot().setVisibility(View.GONE);
             }
@@ -139,8 +139,8 @@ public class TestActivity extends AppCompatActivity {
         header = new HashMap<>();
         header.put("Authorization", singleton.getAuthorization());
 
-        InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500);
-        InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, 180);
+        InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500);
+        InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500, 180);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -198,7 +198,7 @@ public class TestActivity extends AppCompatActivity {
 
         if (sampleModel.getSampleEdition() != null && !sampleModel.getSampleEdition().equals("")) {
             String title = binding.headerIncludeLayout.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getSampleEdition());
-            binding.headerIncludeLayout.titleTextView.setText(StringManager.foregroundSize(title, binding.headerIncludeLayout.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.Gray400), (int) getResources().getDimension(R.dimen._9ssp)));
+            binding.headerIncludeLayout.titleTextView.setText(StringManager.foregroundSize(title, binding.headerIncludeLayout.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.CoolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
         }
 
         if (sampleModel.getSampleForm() != null && sampleModel.getSampleForm().getForms() != null && sampleModel.getSampleForm().getForms().length() != 0) {
@@ -349,7 +349,7 @@ public class TestActivity extends AppCompatActivity {
         model.setUser_answered(value);
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
-        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
+        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
         binding.statusTextView.getRoot().requestLayout();
 
         sampleAnswers.addToPrerequisites(key, value);
@@ -358,7 +358,7 @@ public class TestActivity extends AppCompatActivity {
             public void onOK(Object object) {
                 runOnUiThread(() -> {
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
                     binding.statusTextView.getRoot().requestLayout();
                 });
             }
@@ -367,7 +367,7 @@ public class TestActivity extends AppCompatActivity {
             public void onFailure(String response) {
                 runOnUiThread(() -> {
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
                     binding.statusTextView.getRoot().requestLayout();
                 });
             }
@@ -381,7 +381,7 @@ public class TestActivity extends AppCompatActivity {
         answers.set(sampleModel.getSampleForm().getPosition(), true);
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
-        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
+        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
         binding.statusTextView.getRoot().requestLayout();
 
         sampleAnswers.addToRemote(key, value);
@@ -390,7 +390,7 @@ public class TestActivity extends AppCompatActivity {
             public void onOK(Object object) {
                 runOnUiThread(() -> {
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
                     binding.statusTextView.getRoot().requestLayout();
                 });
             }
@@ -399,7 +399,7 @@ public class TestActivity extends AppCompatActivity {
             public void onFailure(String response) {
                 runOnUiThread(() -> {
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
                     binding.statusTextView.getRoot().requestLayout();
                 });
             }

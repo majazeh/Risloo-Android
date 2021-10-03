@@ -12,7 +12,7 @@
         android:id="@+id/top_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/Gray200"
+        android:background="@color/CoolGray200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +27,7 @@
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray700"
+        android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
@@ -48,7 +48,7 @@
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray700"
+        android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="@id/platform_spinner"
         app:layout_constraintEnd_toEndOf="@id/platform_spinner"
         app:layout_constraintTop_toTopOf="@id/platform_spinner"
-        app:tint="@color/Gray600" />
+        app:tint="@color/CoolGray600" />
 
     <Spinner
         android:id="@+id/position_spinner"
@@ -113,6 +113,6 @@
         app:layout_constraintBottom_toBottomOf="@id/position_spinner"
         app:layout_constraintEnd_toEndOf="@id/position_spinner"
         app:layout_constraintTop_toTopOf="@id/position_spinner"
-        app:tint="@color/Gray600" />
+        app:tint="@color/CoolGray600" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

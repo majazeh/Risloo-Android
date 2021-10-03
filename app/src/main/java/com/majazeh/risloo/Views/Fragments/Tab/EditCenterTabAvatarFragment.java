@@ -112,7 +112,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
                     avatarPath = model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url");
 
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                    Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(avatarPath).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
@@ -120,7 +120,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
                     else
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
 
-                    Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

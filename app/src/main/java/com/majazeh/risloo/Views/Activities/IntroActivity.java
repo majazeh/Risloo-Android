@@ -37,7 +37,7 @@ public class IntroActivity extends AppCompatActivity {
         Decorator decorator = new Decorator(this);
 
         decorator.showSystemUI(true, true);
-        decorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+        decorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
 
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.headerIncludeLayout.debugTextView.setVisibility(View.VISIBLE);
@@ -52,7 +52,7 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        binding.descriptionTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.IntroDescription), 72, 92, getResources().getColor(R.color.Gray800), R.style.danaDemiBoldTextStyle));
+        binding.descriptionTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.IntroDescription), 72, 92, getResources().getColor(R.color.CoolGray800), R.style.danaDemiBoldTextStyle));
 
         String version = getResources().getString(R.string.IntroVersion) + " " + PackageManager.versionNameWithoutSuffix(this);
         binding.versionTextView.setText(version);

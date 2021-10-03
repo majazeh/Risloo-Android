@@ -17,7 +17,7 @@
         android:gravity="center|start"
         android:textSize="@dimen/_11ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray800"
+        android:textColor="@color/CoolGray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         tools:text="گزینه‌ها" />
@@ -31,7 +31,7 @@
         android:gravity="center|start"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray600"
+        android:textColor="@color/CoolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         tools:text="گزینه اول"
@@ -46,7 +46,7 @@
         android:gravity="center|start"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray600"
+        android:textColor="@color/CoolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         tools:text="گزینه دوم" />
@@ -60,7 +60,7 @@
         android:gravity="center|start"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray600"
+        android:textColor="@color/CoolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         tools:text="گزینه سوم" />

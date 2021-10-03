@@ -109,7 +109,7 @@ public class EditUserTabAvatarFragment extends Fragment {
                 avatarPath = model.getAvatar().getMedium().getUrl();
 
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(avatarPath).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 if (!model.getName().equals(""))
@@ -117,7 +117,7 @@ public class EditUserTabAvatarFragment extends Fragment {
                 else
                     binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
 
-                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
         }
     }

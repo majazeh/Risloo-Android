@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -133,7 +132,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
     private void setData(TabPlatformsHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType())) ;
 
-        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.Gray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.CoolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         setIdentifier(holder, model.getId(), model.getIdentifier());
 
@@ -172,7 +171,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
             holder.binding.selectedSwitchCompat.setChecked(true);
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
-            holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
+            holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
             holder.binding.selectedSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
 
             holder.binding.roomCheckBox.setEnabled(true);
@@ -181,7 +180,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
             holder.binding.selectedSwitchCompat.setChecked(false);
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
-            holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
+            holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
             holder.binding.selectedSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
 
             holder.binding.roomCheckBox.setEnabled(false);

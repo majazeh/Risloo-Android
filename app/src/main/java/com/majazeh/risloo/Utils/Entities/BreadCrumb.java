@@ -115,7 +115,7 @@ public class BreadCrumb {
 
                     @Override
                     public void updateDrawState(@NonNull TextPaint textPaint) {
-                        textPaint.setColor(activity.getResources().getColor(R.color.Gray500));
+                        textPaint.setColor(activity.getResources().getColor(R.color.CoolGray500));
                         textPaint.setUnderlineText(false);
                     }
 

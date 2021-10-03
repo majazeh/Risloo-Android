@@ -19,7 +19,7 @@
         android:gravity="center|right"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray600"
+        android:textColor="@color/CoolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         app:layout_goneMarginEnd="0dp"
@@ -40,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="@id/dropdown_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/dropdown_textView"
-        app:tint="@color/Green600"
+        app:tint="@color/Emerald600"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

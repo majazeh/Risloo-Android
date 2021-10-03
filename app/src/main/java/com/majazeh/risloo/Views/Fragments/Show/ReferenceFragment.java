@@ -77,7 +77,7 @@ public class ReferenceFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        InitManager.imgResTintBackground(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
+        InitManager.imgResTintBackground(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
 
         binding.roomsHeaderLayout.titleTextView.setText(getResources().getString(R.string.RoomsAdapterHeader));
         binding.casesHeaderLayout.titleTextView.setText(getResources().getString(R.string.CasesFragmentTitle));
@@ -168,12 +168,12 @@ public class ReferenceFragment extends Fragment {
 
         if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
 
         if (model.getPosition() != null && !model.getPosition().equals("")) {
@@ -204,12 +204,12 @@ public class ReferenceFragment extends Fragment {
 
         if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar().getMedium().getUrl() != null) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
 
         if (model != null && model.getPosition() != null && !model.getPosition().equals("")) {

@@ -149,7 +149,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     private void setData(CenterPlatformsHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType()));
 
-        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.Gray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.CoolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         setIdentifier(holder, model);
 
@@ -190,7 +190,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             holder.binding.availableSwitchCompat.setChecked(true);
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
-            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
+            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
             holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
 
             holder.binding.sessionCheckBox.setEnabled(true);
@@ -199,7 +199,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             holder.binding.availableSwitchCompat.setChecked(false);
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
-            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
+            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
             holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
 
             holder.binding.sessionCheckBox.setEnabled(false);

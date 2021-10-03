@@ -31,7 +31,7 @@
         android:gravity="center"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray200"
+        android:textColor="@color/CoolGray200"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_demi_bold"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -39,7 +39,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/serial_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/serial_textView"
-                app:tint="@color/Blue700" />
+                app:tint="@color/LightBlue700" />
 
             <TextView
                 android:id="@+id/serial_textView"
@@ -50,7 +50,7 @@
                 android:gravity="center"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Blue700"
+                android:textColor="@color/LightBlue700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
                 app:layout_constraintEnd_toStartOf="@id/serial_imageView"
@@ -66,7 +66,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray700"
+                android:textColor="@color/CoolGray700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_demi_bold"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
@@ -84,7 +84,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/edition_textView"
                 app:layout_constraintStart_toStartOf="@id/scale_textView"
                 app:layout_constraintTop_toTopOf="@id/edition_textView"
-                app:tint="@color/Gray500" />
+                app:tint="@color/CoolGray500" />
 
             <TextView
                 android:id="@+id/edition_textView"
@@ -95,7 +95,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray500"
+                android:textColor="@color/CoolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/scale_textView"
@@ -113,7 +113,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/reference_textView"
                 app:layout_constraintStart_toStartOf="@id/edition_imageView"
                 app:layout_constraintTop_toTopOf="@id/reference_textView"
-                app:tint="@color/Gray500" />
+                app:tint="@color/CoolGray500" />
 
             <TextView
                 android:id="@+id/reference_textView"
@@ -124,7 +124,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray500"
+                android:textColor="@color/CoolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/edition_textView"
@@ -141,7 +141,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray500"
+                android:textColor="@color/CoolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toStartOf="@id/secondary_textView"
@@ -228,7 +228,7 @@
                 android:text="@string/SampleFragmentScoring"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray500"
+                android:textColor="@color/CoolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -309,7 +309,7 @@
             android:text="@string/SampleFragmentFieldEditable"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
-            android:textColor="@color/Gray600"
+            android:textColor="@color/CoolGray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
             android:theme="@style/CheckBoxTheme"

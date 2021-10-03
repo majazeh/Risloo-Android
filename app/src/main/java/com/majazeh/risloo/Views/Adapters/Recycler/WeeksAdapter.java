@@ -126,8 +126,8 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
         } else {
             detector(holder, timestamp);
 
-            holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
-            holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+            holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+            holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
         }
     }
 

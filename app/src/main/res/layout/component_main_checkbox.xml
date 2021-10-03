@@ -9,7 +9,7 @@
     android:gravity="center|start"
     android:textSize="@dimen/_10ssp"
     android:textStyle="normal"
-    android:textColor="@color/Gray600"
+    android:textColor="@color/CoolGray600"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
     android:theme="@style/CheckBoxTheme"

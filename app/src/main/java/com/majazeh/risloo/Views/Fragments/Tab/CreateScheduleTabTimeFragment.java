@@ -61,8 +61,8 @@ public class CreateScheduleTabTimeFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.dateTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabTimeDateTypeHeader));
         binding.specifiedDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabTimeSpecifiedDateHeader));
         binding.patternDaysIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabTimePatternDaysHeader));

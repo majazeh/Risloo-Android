@@ -32,7 +32,7 @@
         android:text="@string/DialogLoadingTitle"
         android:textSize="@dimen/_9ssp"
         android:textStyle="bold"
-        android:textColor="@color/Gray500"
+        android:textColor="@color/CoolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_bold" />
 

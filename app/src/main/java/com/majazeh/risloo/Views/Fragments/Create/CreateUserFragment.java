@@ -189,13 +189,13 @@ public class CreateUserFragment extends Fragment {
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(null);
 
                 binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
+                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.LightBlue800));
             } else {
                 passwordVisibility = false;
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
 
                 binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
+                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.CoolGray600));
             }
         }).widget(binding.passwordIncludeLayout.visibilityImageView);
 
