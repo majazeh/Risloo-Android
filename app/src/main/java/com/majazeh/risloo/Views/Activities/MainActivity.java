@@ -200,6 +200,16 @@ public class MainActivity extends AppCompatActivity {
 
             mainNavAdapter.setFocused(breadCrumb.getFa(destination, arguments).toString());
         });
+
+        binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            if (verticalOffset == 0) {
+                binding.contentIncludeLayout.headerAppBarLayout.setBackgroundColor(getResources().getColor(R.color.White));
+                binding.contentIncludeLayout.seperateView.setVisibility(View.GONE);
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
+                binding.contentIncludeLayout.headerAppBarLayout.setBackgroundColor(getResources().getColor(R.color.CoolGray50));
+                binding.contentIncludeLayout.seperateView.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     public void setData() {
