@@ -240,6 +240,14 @@ public class Decorator {
     ---------- System UI Extras ----------
     */
 
+    public void normalShowSystemUI() {
+        activity.getWindow().getDecorView().setSystemUiVisibility(
+                // Codes For Making The Content Appear Under System Bars.
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+    }
+
     public void leanBackHideSystemUI() {
         activity.getWindow().getDecorView().setSystemUiVisibility(
                 // Codes For Making The Content Appear Under System Bars.
