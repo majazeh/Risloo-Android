@@ -23,6 +23,8 @@
     <string name="AppDefaultCenter">مرکز آزمایشی</string>
     <string name="AppDefaultWeek">00/00 تا 00/00</string>
 
+    <string name="AppShareImage">اشتراک گذاری</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Toast Strings

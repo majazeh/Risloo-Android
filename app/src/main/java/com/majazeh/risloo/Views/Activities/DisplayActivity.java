@@ -59,6 +59,10 @@ public class DisplayActivity extends AppCompatActivity {
         }).widget(binding.returnImageView);
 
         CustomClickView.onDelayedListener(() -> {
+            IntentManager.share(this, path, getResources().getString(R.string.AppShareImage));
+        }).widget(binding.shareImageView);
+
+        CustomClickView.onDelayedListener(() -> {
             if (PermissionManager.storagePermission(this))
                 IntentManager.download(this, path);
         }).widget(binding.downloadImageView);
@@ -77,6 +81,7 @@ public class DisplayActivity extends AppCompatActivity {
                 path = extras.getString("path");
 
                 Picasso.get().load(path).placeholder(R.color.CoolGray900).into(binding.avatarZoomageView);
+                binding.shareImageView.setVisibility(View.VISIBLE);
                 binding.downloadImageView.setVisibility(View.VISIBLE);
             }
         }
