@@ -15,7 +15,7 @@
         android:id="@+id/header_appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
+        android:background="@drawable/draw_tran_rec_solid_white_coolgray50"
         app:elevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

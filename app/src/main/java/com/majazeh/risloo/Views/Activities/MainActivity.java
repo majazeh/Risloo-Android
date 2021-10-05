@@ -1,13 +1,5 @@
 package com.majazeh.risloo.Views.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,30 +12,39 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.BreadCrumb;
 import com.majazeh.risloo.Utils.Config.ExtendException;
+import com.majazeh.risloo.Utils.Entities.BreadCrumb;
+import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
+import com.majazeh.risloo.Utils.Entities.Inputor;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Entities.Validatoon;
+import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Entities.Inputor;
-import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
-import com.majazeh.risloo.Utils.Entities.Decorator;
-import com.majazeh.risloo.Utils.Entities.Validatoon;
+import com.majazeh.risloo.Utils.Managers.TransitionManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.MainNavAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
@@ -202,11 +203,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
-            if (verticalOffset == 0) {
-                binding.contentIncludeLayout.headerAppBarLayout.setBackgroundColor(getResources().getColor(R.color.White));
+            if (verticalOffset == 0 && binding.contentIncludeLayout.seperateView.getVisibility() == View.VISIBLE) {
+                TransitionManager.reverseTransition(binding.contentIncludeLayout.headerAppBarLayout);
                 binding.contentIncludeLayout.seperateView.setVisibility(View.GONE);
-            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange()) {
-                binding.contentIncludeLayout.headerAppBarLayout.setBackgroundColor(getResources().getColor(R.color.CoolGray50));
+            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange() && binding.contentIncludeLayout.seperateView.getVisibility() == View.GONE) {
+                TransitionManager.startTransition(binding.contentIncludeLayout.headerAppBarLayout);
                 binding.contentIncludeLayout.seperateView.setVisibility(View.VISIBLE);
             }
         });
