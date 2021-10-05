@@ -11,6 +11,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
+import com.majazeh.risloo.Utils.Managers.TransitionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.squareup.picasso.Picasso;
@@ -49,8 +50,8 @@ public class DisplayActivity extends AppCompatActivity {
     private void decorator() {
         decorator = new Decorator(this);
 
-        decorator.showSystemUI(false, false);
-        decorator.setSystemUIColor(getResources().getColor(R.color.Black), getResources().getColor(R.color.Black));
+        decorator.showSystemUI(true, true);
+        decorator.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
     }
 
     private void initializer() {
@@ -73,7 +74,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         CustomClickView.onClickListener(() -> {
             if (!systemUiVisibility)
-                decorator.normalShowSystemUI();
+                decorator.showSystemUI(true, true);
             else
                 decorator.immersiveHideSystemUI();
         }).widget(binding.avatarZoomageView);
@@ -81,10 +82,26 @@ public class DisplayActivity extends AppCompatActivity {
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(visibility -> {
             if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                 systemUiVisibility = true;
+
+                TransitionManager.reverseTransition(binding.getRoot());
+                TransitionManager.reverseTransition(binding.toolbarContainer);
+                TransitionManager.reverseTransition(binding.topView);
+                TransitionManager.reverseTransition(binding.bottomView);
+
                 binding.toolbarContainer.setVisibility(View.VISIBLE);
+                binding.topView.setVisibility(View.VISIBLE);
+                binding.bottomView.setVisibility(View.VISIBLE);
             } else {
                 systemUiVisibility = false;
+
+                TransitionManager.startTransition(binding.getRoot());
+                TransitionManager.startTransition(binding.toolbarContainer);
+                TransitionManager.startTransition(binding.topView);
+                TransitionManager.startTransition(binding.bottomView);
+
                 binding.toolbarContainer.setVisibility(View.GONE);
+                binding.topView.setVisibility(View.GONE);
+                binding.bottomView.setVisibility(View.GONE);
             }
         });
     }
@@ -101,7 +118,7 @@ public class DisplayActivity extends AppCompatActivity {
             if (!extras.getString("path").equals("")) {
                 path = extras.getString("path");
 
-                Picasso.get().load(path).placeholder(R.color.CoolGray900).into(binding.avatarZoomageView);
+                Picasso.get().load(path).placeholder(R.color.White).into(binding.avatarZoomageView);
                 binding.shareImageView.setVisibility(View.VISIBLE);
                 binding.downloadImageView.setVisibility(View.VISIBLE);
             }
