@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
             decorator.showSystemUI(true, true);
-            decorator.setSystemUIColor(Color.TRANSPARENT, getResources().getColor(R.color.CoolGray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.GONE);
         }
