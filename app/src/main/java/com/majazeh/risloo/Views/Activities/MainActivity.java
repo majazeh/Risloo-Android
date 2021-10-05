@@ -3,7 +3,6 @@ package com.majazeh.risloo.Views.Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -208,7 +207,9 @@ public class MainActivity extends AppCompatActivity {
             if (verticalOffset == 0 && binding.contentIncludeLayout.seperateView.getVisibility() == View.VISIBLE) {
                 TransitionManager.reverseTransition(binding.contentIncludeLayout.headerAppBarLayout);
                 binding.contentIncludeLayout.seperateView.setVisibility(View.GONE);
-            } else if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange() && binding.contentIncludeLayout.seperateView.getVisibility() == View.GONE) {
+            }
+
+            if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange() && binding.contentIncludeLayout.seperateView.getVisibility() == View.GONE) {
                 TransitionManager.startTransition(binding.contentIncludeLayout.headerAppBarLayout);
                 binding.contentIncludeLayout.seperateView.setVisibility(View.VISIBLE);
             }

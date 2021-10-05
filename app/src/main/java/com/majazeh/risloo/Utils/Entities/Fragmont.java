@@ -54,6 +54,7 @@ import com.majazeh.risloo.Views.Fragments.Index.ScalesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.SessionsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.TreasuriesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.UsersFragment;
+import com.majazeh.risloo.Views.Fragments.Show.AccountingFragment;
 import com.majazeh.risloo.Views.Fragments.Show.BillFragment;
 import com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Show.CaseFragment;
@@ -270,6 +271,9 @@ public class Fragmont {
             return fragment;
 
         // -------------------- Show
+
+        else if (fragment instanceof AccountingFragment)
+            return fragment;
 
         else if (fragment instanceof BillFragment)
             return fragment;
