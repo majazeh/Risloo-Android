@@ -196,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            binding.contentIncludeLayout.headerAppBarLayout.setExpanded(true);
+
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(breadCrumb.getFa(destination, arguments));
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
 
