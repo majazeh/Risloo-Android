@@ -1,5 +1,7 @@
 package com.majazeh.risloo.Utils.Entities;
 
+import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
@@ -18,6 +20,11 @@ public class Decorator {
 
     public Decorator(@NonNull Activity activity) {
         this.activity = activity;
+
+        // Making The Ui Not Jumping When HIding And Showing The System UI
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            activity.getWindow().getAttributes().layoutInDisplayCutoutMode = LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        }
     }
 
     /*
