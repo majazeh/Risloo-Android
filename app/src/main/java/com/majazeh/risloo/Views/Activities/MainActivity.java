@@ -30,13 +30,13 @@ import com.majazeh.risloo.Utils.Entities.Inputor;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
-import com.majazeh.risloo.Utils.Managers.TransitionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.MainNavAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
             decorator.showSystemUI(true, true);
-            decorator.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
+            decorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.GONE);
         }
@@ -205,12 +205,18 @@ public class MainActivity extends AppCompatActivity {
 
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             if (verticalOffset == 0 && binding.contentIncludeLayout.seperateView.getVisibility() == View.VISIBLE) {
-                TransitionManager.reverseTransition(binding.contentIncludeLayout.headerAppBarLayout, 500);
+                if (!BuildConfig.BUILD_TYPE.equals("debug"))
+                    AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.White));
+
+                AnimateManager.animateAppBarColor(binding.contentIncludeLayout.headerAppBarLayout, 300, getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.White));
                 binding.contentIncludeLayout.seperateView.setVisibility(View.GONE);
             }
 
             if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange() && binding.contentIncludeLayout.seperateView.getVisibility() == View.GONE) {
-                TransitionManager.startTransition(binding.contentIncludeLayout.headerAppBarLayout, 500);
+                if (!BuildConfig.BUILD_TYPE.equals("debug"))
+                    AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
+
+                AnimateManager.animateAppBarColor(binding.contentIncludeLayout.headerAppBarLayout, 300, getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
                 binding.contentIncludeLayout.seperateView.setVisibility(View.VISIBLE);
             }
         });
