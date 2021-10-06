@@ -83,10 +83,10 @@ public class DisplayActivity extends AppCompatActivity {
             if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                 systemUiVisibility = true;
 
-                TransitionManager.reverseTransition(binding.getRoot());
-                TransitionManager.reverseTransition(binding.toolbarContainer);
-                TransitionManager.reverseTransition(binding.topView);
-                TransitionManager.reverseTransition(binding.bottomView);
+                TransitionManager.reverseTransition(binding.getRoot(), 300);
+                TransitionManager.reverseTransition(binding.toolbarContainer, 300);
+                TransitionManager.reverseTransition(binding.topView, 300);
+                TransitionManager.reverseTransition(binding.bottomView, 300);
 
                 binding.toolbarContainer.setVisibility(View.VISIBLE);
                 binding.topView.setVisibility(View.VISIBLE);
@@ -94,10 +94,10 @@ public class DisplayActivity extends AppCompatActivity {
             } else {
                 systemUiVisibility = false;
 
-                TransitionManager.startTransition(binding.getRoot());
-                TransitionManager.startTransition(binding.toolbarContainer);
-                TransitionManager.startTransition(binding.topView);
-                TransitionManager.startTransition(binding.bottomView);
+                TransitionManager.startTransition(binding.getRoot(), 300);
+                TransitionManager.startTransition(binding.toolbarContainer, 300);
+                TransitionManager.startTransition(binding.topView, 300);
+                TransitionManager.startTransition(binding.bottomView, 300);
 
                 binding.toolbarContainer.setVisibility(View.GONE);
                 binding.topView.setVisibility(View.GONE);

@@ -205,12 +205,12 @@ public class MainActivity extends AppCompatActivity {
 
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             if (verticalOffset == 0 && binding.contentIncludeLayout.seperateView.getVisibility() == View.VISIBLE) {
-                TransitionManager.reverseTransition(binding.contentIncludeLayout.headerAppBarLayout);
+                TransitionManager.reverseTransition(binding.contentIncludeLayout.headerAppBarLayout, 500);
                 binding.contentIncludeLayout.seperateView.setVisibility(View.GONE);
             }
 
             if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange() && binding.contentIncludeLayout.seperateView.getVisibility() == View.GONE) {
-                TransitionManager.startTransition(binding.contentIncludeLayout.headerAppBarLayout);
+                TransitionManager.startTransition(binding.contentIncludeLayout.headerAppBarLayout, 500);
                 binding.contentIncludeLayout.seperateView.setVisibility(View.VISIBLE);
             }
         });
