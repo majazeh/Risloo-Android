@@ -20,6 +20,15 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+# Specifies not to shrink the input class files. By default,
+# shrinking is applied; all classes and class members are removed,
+# except for the ones listed by the various -keep options,
+# and the ones on which they depend, directly or indirectly.
+# A shrinking step is also applied after each optimization step,
+# since some optimizations may open the possibility to remove
+# more classes and class members
+-dontshrink
+
 # ---------- OkHttp3 Rules ---------- #
 
 -keepattributes Signature
