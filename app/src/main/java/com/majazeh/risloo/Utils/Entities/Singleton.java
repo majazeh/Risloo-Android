@@ -113,15 +113,24 @@ public class Singleton {
 
             JSONArray avatarArray = new JSONArray();
 
-            JSONObject small = userModel.getAvatar().getSmall().object;
-            JSONObject medium = userModel.getAvatar().getMedium().object;
-            JSONObject original = userModel.getAvatar().getOriginal().object;
-            JSONObject large = userModel.getAvatar().getLarge().object;
+            if (userModel.getAvatar() != null) {
+                JSONObject small = userModel.getAvatar().getSmall().object;
+                JSONObject medium = userModel.getAvatar().getMedium().object;
+                JSONObject original = userModel.getAvatar().getOriginal().object;
+                JSONObject large = userModel.getAvatar().getLarge().object;
 
-            avatarArray.put(small);
-            avatarArray.put(medium);
-            avatarArray.put(original);
-            avatarArray.put(large);
+                if (small!= null)
+                    avatarArray.put(small);
+
+                if (medium != null)
+                    avatarArray.put(medium);
+
+                if (original != null)
+                    avatarArray.put(original);
+
+                if (large != null)
+                    avatarArray.put(large);
+            }
 
             jsonObject.put("avatar", avatarArray);
 
