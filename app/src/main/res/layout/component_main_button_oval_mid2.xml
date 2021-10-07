@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:contentDescription="@string/AppImageContent"
     android:scaleType="fitCenter"
-    android:padding="@dimen/_8sdp"
+    android:padding="@dimen/_7sdp"
     tools:src="@drawable/ic_ellipsis_v_light"
     tools:tint="@color/CoolGray500"
     tools:background="@drawable/draw_oval_solid_white_border_1sdp_gray300_ripple_gray300" />

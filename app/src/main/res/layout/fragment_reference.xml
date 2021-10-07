@@ -58,7 +58,7 @@
 
                 <include
                     android:id="@+id/edit_imageView"
-                    layout="@layout/component_main_button_oval_mid2"
+                    layout="@layout/component_main_button_oval_mid3"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
