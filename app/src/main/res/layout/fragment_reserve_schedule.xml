@@ -9,7 +9,7 @@
     android:layoutDirection="rtl"
     app:fling_animation_size=".3"
     app:overscroll_animation_size=".3"
-    tools:context=".Views.Fragments.Create.ReserveScheduleFragment">
+    tools:context=".Views.Fragments.Main.Create.ReserveScheduleFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

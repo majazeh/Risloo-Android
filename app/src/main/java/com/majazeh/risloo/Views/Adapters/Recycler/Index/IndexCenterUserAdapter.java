@@ -23,7 +23,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderCenterUserHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexCenterUserHolder;
-import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.CenterUsersFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexCenterUserBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexCenterUserBinding;
 import com.mre.ligheh.API.Response;

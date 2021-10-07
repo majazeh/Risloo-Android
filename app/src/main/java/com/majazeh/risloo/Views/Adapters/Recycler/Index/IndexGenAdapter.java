@@ -20,7 +20,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderFieldHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexFieldInputHolder;
-import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexFieldInputBinding;
 

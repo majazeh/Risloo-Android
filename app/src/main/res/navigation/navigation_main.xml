@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/meFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.MeFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.MeFragment"
         android:label="@string/MeFragmentTitle"
         tools:layout="@layout/fragment_me">
         <argument
@@ -24,13 +24,13 @@
 
     <fragment
         android:id="@+id/accountingFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.AccountingFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.AccountingFragment"
         android:label="@string/AccountingFragmentTitle"
         tools:layout="@layout/fragment_accounting" />
 
     <fragment
         android:id="@+id/paymentsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.PaymentsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.PaymentsFragment"
         android:label="@string/PaymentsFragmentTitle"
         tools:layout="@layout/fragment_payments" >
         <argument
@@ -61,55 +61,55 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.DashboardFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.DashboardFragment"
         android:label="@string/DashboardFragmentTitle"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/centersFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.CentersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CentersFragment"
         android:label="@string/CentersFragmentTitle"
         tools:layout="@layout/fragment_centers" />
 
     <fragment
         android:id="@+id/casesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.CasesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CasesFragment"
         android:label="@string/CasesFragmentTitle"
         tools:layout="@layout/fragment_cases" />
 
     <fragment
         android:id="@+id/sessionsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.SessionsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.SessionsFragment"
         android:label="@string/SessionsFragmentTitle"
         tools:layout="@layout/fragment_sessions" />
 
     <fragment
         android:id="@+id/usersFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.UsersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.UsersFragment"
         android:label="@string/UsersFragmentTitle"
         tools:layout="@layout/fragment_users" />
 
     <fragment
         android:id="@+id/scalesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.ScalesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.ScalesFragment"
         android:label="@string/ScalesFragmentTitle"
         tools:layout="@layout/fragment_scales" />
 
     <fragment
         android:id="@+id/samplesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.SamplesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.SamplesFragment"
         android:label="@string/SamplesFragmentTitle"
         tools:layout="@layout/fragment_samples" />
 
     <fragment
         android:id="@+id/bulkSamplesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.BulkSamplesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.BulkSamplesFragment"
         android:label="@string/BulkSamplesFragmentTitle"
         tools:layout="@layout/fragment_bulk_samples" />
 
     <fragment
         android:id="@+id/documentsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.DocumentsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.DocumentsFragment"
         android:label="@string/DocumentsFragmentTitle"
         tools:layout="@layout/fragment_documents" />
 
@@ -161,7 +161,7 @@
 
     <fragment
         android:id="@+id/createCaseFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateCaseFragment"
         android:label="@string/CreateCaseFragmentTitle"
         tools:layout="@layout/fragment_create_case" >
         <argument
@@ -172,7 +172,7 @@
 
     <fragment
         android:id="@+id/createCaseUserFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateCaseUserFragment"
         android:label="@string/CreateCaseUserFragmentTitle"
         tools:layout="@layout/fragment_create_case_user" >
         <argument
@@ -183,7 +183,7 @@
 
     <fragment
         android:id="@+id/createCenterFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment"
         android:label="@string/CreateCenterFragmentTitle"
         tools:layout="@layout/fragment_create_center" >
         <argument
@@ -194,7 +194,7 @@
 
     <fragment
         android:id="@+id/createCenterUserFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterUserFragment"
         android:label="@string/CreateCenterUserFragmentTitle"
         tools:layout="@layout/fragment_create_center_user" >
         <argument
@@ -205,7 +205,7 @@
 
     <fragment
         android:id="@+id/createDocumentFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateDocumentFragment"
         android:label="@string/CreateDocumentFragmentTitle"
         tools:layout="@layout/fragment_create_document" >
         <argument
@@ -216,7 +216,7 @@
 
     <fragment
         android:id="@+id/createPracticeFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment"
         android:label="@string/CreatePracticeFragmentTitle"
         tools:layout="@layout/fragment_create_practice" >
         <argument
@@ -227,7 +227,7 @@
 
     <fragment
         android:id="@+id/createReportFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateReportFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateReportFragment"
         android:label="@string/CreateReportFragmentTitle"
         tools:layout="@layout/fragment_create_report" >
         <argument
@@ -238,7 +238,7 @@
 
     <fragment
         android:id="@+id/createRoomFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateRoomFragment"
         android:label="@string/CreateRoomFragmentTitle"
         tools:layout="@layout/fragment_create_room" >
         <argument
@@ -252,7 +252,7 @@
 
     <fragment
         android:id="@+id/createRoomUserFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateRoomUserFragment"
         android:label="@string/CreateRoomUserFragmentTitle"
         tools:layout="@layout/fragment_create_room_user" >
         <argument
@@ -263,7 +263,7 @@
 
     <fragment
         android:id="@+id/createPlatformFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreatePlatformFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreatePlatformFragment"
         android:label="@string/CreatePlatformFragmentTitle"
         tools:layout="@layout/fragment_create_platform" >
         <argument
@@ -274,7 +274,7 @@
 
     <fragment
         android:id="@+id/createSampleFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateSampleFragment"
         android:label="@string/CreateSampleFragmentTitle"
         tools:layout="@layout/fragment_create_sample" >
         <argument
@@ -285,7 +285,7 @@
 
     <fragment
         android:id="@+id/createScheduleFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateScheduleFragment"
         android:label="@string/CreateScheduleFragmentTitle"
         tools:layout="@layout/fragment_create_schedule" >
         <argument
@@ -296,7 +296,7 @@
 
     <fragment
         android:id="@+id/createSessionFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateSessionFragment"
         android:label="@string/CreateSessionFragmentTitle"
         tools:layout="@layout/fragment_create_session" >
         <argument
@@ -307,7 +307,7 @@
 
     <fragment
         android:id="@+id/createSessionUserFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSessionUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateSessionUserFragment"
         android:label="@string/CreateSessionUserFragmentTitle"
         tools:layout="@layout/fragment_create_session_user" >
         <argument
@@ -318,7 +318,7 @@
 
     <fragment
         android:id="@+id/createTreasuryFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateTreasuryFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateTreasuryFragment"
         android:label="@string/CreateTreasuryFragmentTitle"
         tools:layout="@layout/fragment_create_treasury" >
         <argument
@@ -329,7 +329,7 @@
 
     <fragment
         android:id="@+id/createUserFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateUserFragment"
         android:label="@string/CreateUserFragmentTitle"
         tools:layout="@layout/fragment_create_user" >
         <argument
@@ -340,7 +340,7 @@
 
     <fragment
         android:id="@+id/reserveScheduleFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.ReserveScheduleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.ReserveScheduleFragment"
         android:label="@string/ReserveScheduleFragmentTitle"
         tools:layout="@layout/fragment_reserve_schedule" >
         <argument
@@ -426,7 +426,7 @@
 
     <fragment
         android:id="@+id/editCenterFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterFragment"
         android:label="@string/EditCenterFragmentTitle"
         tools:layout="@layout/fragment_edit_center" >
         <argument
@@ -436,7 +436,7 @@
 
     <fragment
         android:id="@+id/editCenterUserFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterUserFragment"
         android:label="@string/EditCenterUserFragmentTitle"
         tools:layout="@layout/fragment_edit_center_user" >
         <argument
@@ -449,7 +449,7 @@
 
     <fragment
         android:id="@+id/editPlatformFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditPlatformFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Edit.EditPlatformFragment"
         android:label="@string/EditPlatformFragmentTitle"
         tools:layout="@layout/fragment_edit_platform" >
         <argument
@@ -462,7 +462,7 @@
 
     <fragment
         android:id="@+id/editSessionFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Edit.EditSessionFragment"
         android:label="@string/EditSessionFragmentTitle"
         tools:layout="@layout/fragment_edit_session" >
         <argument
@@ -472,7 +472,7 @@
 
     <fragment
         android:id="@+id/editTreasuryFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditTreasuryFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Edit.EditTreasuryFragment"
         android:label="@string/EditTreasuryFragmentTitle"
         tools:layout="@layout/fragment_edit_treasury" >
         <argument
@@ -482,7 +482,7 @@
 
     <fragment
         android:id="@+id/editUserFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Edit.EditUserFragment"
         android:label="@string/EditUserFragmentTitle"
         tools:layout="@layout/fragment_edit_user" >
         <argument
@@ -524,13 +524,13 @@
 
     <fragment
         android:id="@+id/billingsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.BillingsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.BillingsFragment"
         android:label="@string/BillingsFragmentTitle"
         tools:layout="@layout/fragment_billings" />
 
     <fragment
         android:id="@+id/centerUsersFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CenterUsersFragment"
         android:label="@string/CenterUsersFragmentTitle"
         tools:layout="@layout/fragment_center_users" >
         <argument
@@ -540,7 +540,7 @@
 
     <fragment
         android:id="@+id/centerPlatformsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CenterPlatformsFragment"
         android:label="@string/CenterPlatformsFragmentTitle"
         tools:layout="@layout/fragment_center_platforms" >
         <argument
@@ -550,7 +550,7 @@
 
     <fragment
         android:id="@+id/centerSchedulesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CenterSchedulesFragment"
         android:label="@string/CenterSchedulesFragmentTitle"
         tools:layout="@layout/fragment_center_schedules" >
         <argument
@@ -560,7 +560,7 @@
 
     <fragment
         android:id="@+id/centerTagsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CenterTagsFragment"
         android:label="@string/CenterTagsFragmentTitle"
         tools:layout="@layout/fragment_center_tags" >
         <argument
@@ -570,7 +570,7 @@
 
     <fragment
         android:id="@+id/roomUsersFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.RoomUsersFragment"
         android:label="@string/RoomUsersFragmentTitle"
         tools:layout="@layout/fragment_room_users" >
         <argument
@@ -580,7 +580,7 @@
 
     <fragment
         android:id="@+id/roomPlatformsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.RoomPlatformsFragment"
         android:label="@string/RoomPlatformsFragmentTitle"
         tools:layout="@layout/fragment_room_platforms" >
         <argument
@@ -590,7 +590,7 @@
 
     <fragment
         android:id="@+id/roomSchedulesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragment"
         android:label="@string/RoomSchedulesFragmentTitle"
         tools:layout="@layout/fragment_room_schedules" >
         <argument
@@ -600,7 +600,7 @@
 
     <fragment
         android:id="@+id/roomTagsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.RoomTagsFragment"
         android:label="@string/RoomTagsFragmentTitle"
         tools:layout="@layout/fragment_room_tags" >
         <argument
@@ -610,7 +610,7 @@
 
     <fragment
         android:id="@+id/clientReportsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.ClientReportsFragment"
         android:label="@string/ClientReportsFragmentTitle"
         tools:layout="@layout/fragment_client_reports" >
         <argument
@@ -620,7 +620,7 @@
 
     <fragment
         android:id="@+id/treasuriesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.TreasuriesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.TreasuriesFragment"
         android:label="@string/TreasuriesFragmentTitle"
         tools:layout="@layout/fragment_treasuries" />
 
@@ -678,7 +678,7 @@
 
     <fragment
         android:id="@+id/treasuryFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.TreasuryFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.TreasuryFragment"
         android:label="@string/TreasuryFragmentTitle"
         tools:layout="@layout/fragment_treasury" >
         <argument
@@ -688,7 +688,7 @@
 
     <fragment
         android:id="@+id/billFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.BillFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.BillFragment"
         android:label="@string/BillFragmentTitle"
         tools:layout="@layout/fragment_bill" >
         <argument
@@ -698,7 +698,7 @@
 
     <fragment
         android:id="@+id/centerFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.CenterFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CenterFragment"
         android:label="@string/CenterFragmentTitle"
         tools:layout="@layout/fragment_center" >
         <argument
@@ -708,7 +708,7 @@
 
     <fragment
         android:id="@+id/roomFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.RoomFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.RoomFragment"
         android:label="@string/RoomFragmentTitle"
         tools:layout="@layout/fragment_room" >
         <argument
@@ -718,7 +718,7 @@
 
     <fragment
         android:id="@+id/caseFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.CaseFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CaseFragment"
         android:label="@string/CaseFragmentTitle"
         tools:layout="@layout/fragment_case" >
         <argument
@@ -728,7 +728,7 @@
 
     <fragment
         android:id="@+id/sessionFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.SessionFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.SessionFragment"
         android:label="@string/SessionFragmentTitle"
         tools:layout="@layout/fragment_session" >
         <argument
@@ -738,7 +738,7 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.UserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.UserFragment"
         android:label="@string/UserFragmentTitle"
         tools:layout="@layout/fragment_user" >
         <argument
@@ -748,7 +748,7 @@
 
     <fragment
         android:id="@+id/sampleFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.SampleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment"
         android:label="@string/SampleFragmentTitle"
         tools:layout="@layout/fragment_sample" >
         <argument
@@ -758,7 +758,7 @@
 
     <fragment
         android:id="@+id/bulkSampleFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragment"
         android:label="@string/BulkSampleFragmentTitle"
         tools:layout="@layout/fragment_bulk_sample" >
         <argument
@@ -768,7 +768,7 @@
 
     <fragment
         android:id="@+id/referenceFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.ReferenceFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.ReferenceFragment"
         android:label="@string/ReferenceFragmentTitle"
         tools:layout="@layout/fragment_reference" >
         <argument

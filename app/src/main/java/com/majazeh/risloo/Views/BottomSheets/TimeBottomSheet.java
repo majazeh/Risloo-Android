@@ -16,12 +16,12 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.BottomSheetTimeBinding;
 
 import java.util.Date;

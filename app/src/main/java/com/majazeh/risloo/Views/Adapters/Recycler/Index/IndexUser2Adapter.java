@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderUser2Holder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexUser2Holder;
-import com.majazeh.risloo.Views.Fragments.Show.SessionFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Show.SessionFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexUser2Binding;
 import com.majazeh.risloo.databinding.SingleItemIndexUser2Binding;
 import com.mre.ligheh.API.Response;

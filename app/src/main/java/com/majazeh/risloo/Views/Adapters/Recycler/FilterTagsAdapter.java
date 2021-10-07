@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.FilterTagsHolder;
-import com.majazeh.risloo.Views.Fragments.Show.RoomFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Show.RoomFragment;
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

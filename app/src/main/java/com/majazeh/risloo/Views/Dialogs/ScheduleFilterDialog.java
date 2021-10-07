@@ -21,8 +21,8 @@ import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogFilterAdapter;
-import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
-import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.CenterSchedulesFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.DialogScheduleFilterBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 

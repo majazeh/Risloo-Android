@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.EditCenterTabAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.EditCenterTabDetailFragment;
 
 import java.util.HashMap;
 

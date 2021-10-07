@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPlatformFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabPlatformFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabPaymentFragment;
 
 import java.util.HashMap;
 

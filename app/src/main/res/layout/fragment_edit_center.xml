@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@null"
     android:layoutDirection="rtl"
-    tools:context=".Views.Fragments.Edit.EditCenterFragment">
+    tools:context=".Views.Fragments.Main.Edit.EditCenterFragment">
 
     <include
         android:id="@+id/tabLayout"

@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderFieldHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexFieldSelectHolder;
-import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexFieldSelectBinding;
 import com.mre.ligheh.Model.TypeModel.ItemModel;

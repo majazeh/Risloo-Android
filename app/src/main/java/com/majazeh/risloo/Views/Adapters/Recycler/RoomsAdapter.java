@@ -16,7 +16,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.RoomsHolder;
-import com.majazeh.risloo.Views.Fragments.Show.DashboardFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Show.DashboardFragment;
 import com.majazeh.risloo.databinding.SingleItemRoomBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

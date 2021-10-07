@@ -24,7 +24,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.RoomPlatformsHolder;
-import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.RoomPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemRoomPlatformBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;

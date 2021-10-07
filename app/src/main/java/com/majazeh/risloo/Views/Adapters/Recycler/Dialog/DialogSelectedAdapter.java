@@ -18,8 +18,8 @@ import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabPaymentFragment;
 import com.majazeh.risloo.databinding.SingleItemDialogSelectedBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 

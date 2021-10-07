@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabCryptoFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabPasswordFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabPersonalFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabCryptoFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabPasswordFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabPersonalFragment;
 
 import java.util.HashMap;
 

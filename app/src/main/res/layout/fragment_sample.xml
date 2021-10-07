@@ -9,7 +9,7 @@
     android:layoutDirection="rtl"
     app:fling_animation_size=".3"
     app:overscroll_animation_size=".3"
-    tools:context=".Views.Fragments.Show.SampleFragment">
+    tools:context=".Views.Fragments.Main.Show.SampleFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderRoomUserHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexRoomUserHolder;
-import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.RoomUsersFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexRoomUserBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexRoomUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

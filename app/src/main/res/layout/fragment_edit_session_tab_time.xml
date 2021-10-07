@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
-    tools:context=".Views.Fragments.Tab.EditSessionTabTimeFragment">
+    tools:context=".Views.Fragments.Main.Tab.EditSessionTabTimeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
