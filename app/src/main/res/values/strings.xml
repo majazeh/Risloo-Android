@@ -285,6 +285,10 @@
     ***/
 
 
+    ---------- // EditUserFragment
+
+    <string name="EditUserFragmentTitle">ویرایش عضو</string>
+
 
     /***
     ---------- Index Fragments ----------
@@ -295,6 +299,7 @@
     /***
     ---------- Show Fragments ----------
     ***/
+
 
     ---------- // AccountingFragment
 
@@ -319,6 +324,75 @@
     ---------- Tab Fragments ----------
     ***/
 
+
+    ---------- // EditUserTabAvatar
+
+    <string name="EditUserTabAvatarAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+
+    <string name="EditUserTabAvatarButton">ویرایش</string>
+
+
+    ---------- // EditUserTabCrypto
+
+    <string name="EditUserTabCryptoPublicDescription">در این قسمت شما می‌توانید با استفاده از دراختیار قراردادن کلید عمومی رمزگذاری نامتقارن خود، داده‌های خود را در ریسلو کدگذاری کنید و تنها خودتان به آن‌ها دسترسی خواهید داشت.</string>
+    <string name="EditUserTabCryptoPrivateDescription">برای این‌که بتوانید راحت و در خود سرویس ریسلو متون کدگذاری‌شده خود را ببینید، می‌توانید کلید خصوصی خود را در زیر قرار دهید:</string>
+
+    <string name="EditUserTabCryptoPublicQuestion1">فایده این کار چیست؟</string>
+    <string name="EditUserTabCryptoPublicQuestion2">چه چیزهایی رمزگذاری می‌شوند؟</string>
+    <string name="EditUserTabCryptoPublicQuestion3">آیا می‌توانم کلید عمومی خودم را ویرایش کنم؟</string>
+
+    <string name="EditUserTabCryptoPublicAnswer1Header1">- کلید عمومی: این کلید در اختیار ما قرار می‌گیرد و با این کلید تنها می‌توان داده‌های ارسالی شما را رمزگذاری کرد.</string>
+    <string name="EditUserTabCryptoPublicAnswer1Header1Item1">+ توجه داشته باشید که با این کلید نمی‌توان داده‌های رمزگذاری‌شده را خواند.</string>
+    <string name="EditUserTabCryptoPublicAnswer1Header1Item2">+ ما به شما این اطمینان را می‌دهیم که داده‌های شما قبل از ارسال به سمت ریسلو، در مرورگر خود شما رمزگذاری شده و ما از آن‌ها بی‌اطلاع خواهیم بود، تنها داده رمزگذاری‌شده را در سیستم ذخیره می‌کنیم.</string>
+
+    <string name="EditUserTabCryptoPublicAnswer1Header2">- کلید خصوصی: این کلید تنها در اختیار خود شما باقی می‌ماند و ما از آن بی‌اطلاع هستیم، شما با این کلید می‌توانید داده‌های رمزگذاری‌شده خودتان را مشاهده نمایید.</string>
+    <string name="EditUserTabCryptoPublicAnswer1Header2Item1">+ بدانید که ارزش این کلید به آن است که فقط و فقط در اختیار خود شما باشد، اگر این کلید در دست حتی یک نفر دیگر غیر از خود شما باشد، ارزش امنیتی آن صفر است.</string>
+    <string name="EditUserTabCryptoPublicAnswer1Header2Item2">+ از آن‌جا که کلید خصوصی تنها در اختیار خود شماست و ریسلو از آن بی‌اطلاع است، در حفظ و نگهداری آن کوشا باشید، در غیر این‌صورت اگر کلید خصوصی را به هر صورتی از دست دادید، داده‌های رمزگذاری‌شده شما غیر قابل بازگشت خواهد بود.</string>
+
+    <string name="EditUserTabCryptoPublicAnswer2">گزارش جلسات درمانی.</string>
+    <string name="EditUserTabCryptoPublicAnswer3">درحال حاضر این امکان برای شما مهیا نیست.</string>
+
+    <string name="EditUserTabCryptoPrivateItem1">- می‌توانید به ما اطمینان نکنید و کلید خصوصی را نزد خود نگهداری کنید و به صورت دستی محتواهای کدگذاری‌شده را بازگشایی کنیدکلید خصوصی.</string>
+    <string name="EditUserTabCryptoPrivateItem2">- ما کلید خصوصی شما را در حافظه مرورگر خودتان نگهداری می‌کنیم و این کلید اصلا به سمت ریسلو ارسال نخواهد شد.</string>
+    <string name="EditUserTabCryptoPrivateItem3">- کلید خصوصی را تنها زمانی که رایانه متعلق به شماست وارد کنید؛ زیرا دیگران می‌توانند به کلید خصوصی شما از طریق آن رایانه دسترسی داشته باشند.</string>
+
+    <string name="EditUserTabCryptoPublicHeader">کلید عمومی</string>
+    <string name="EditUserTabCryptoPrivateHeader">کلید خصوصی</string>
+
+    <string name="EditUserTabCryptoFragmentButton">تنظيم</string>
+
+
+    ---------- // EditUserTabPassword
+
+    <string name="EditUserTabPasswordCurrentPasswordHeader">کلمه عبور فعلی</string>
+    <string name="EditUserTabPasswordNewPasswordHeader">کلمه عبور جدید</string>
+
+    <string name="EditUserTabPasswordNewPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
+
+    <string name="EditUserTabPasswordButton">تغییر</string>
+
+
+    ---------- // EditUserTabPersonal
+
+    <string name="EditUserTabPersonalNameHeader">نام و نام خانوادگی</string>
+    <string name="EditUserTabPersonalMobileHeader">موبایل</string>
+    <string name="EditUserTabPersonalEmailHeader">رایانامه</string>
+    <string name="EditUserTabPersonalBirthdayHeader">تاریخ تولد</string>
+    <string name="EditUserTabPersonalStatusHeader">وضعیت</string>
+    <string name="EditUserTabPersonalTypeHeader">نوع کاربر</string>
+    <string name="EditUserTabPersonalGenderHeader">جنسیت</string>
+
+    <string name="EditUserTabPersonalStatusActive">فعال</string>
+    <string name="EditUserTabPersonalStatusWaiting">در انتظار</string>
+    <string name="EditUserTabPersonalStatusClosed">بسته شده</string>
+
+    <string name="EditUserTabPersonalTypeAdmin">ادمین</string>
+    <string name="EditUserTabPersonalTypeClient">عضو</string>
+
+    <string name="EditUserTabPersonalGenderMale">مرد</string>
+    <string name="EditUserTabPersonalGenderFemale">زن</string>
+
+    <string name="EditUserTabPersonalButton">ویرایش</string>
 
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -942,78 +1016,6 @@
     <string name="EditTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
 
     <string name="EditTreasuryFragmentButton">ویرایش</string>
-
-    /*
-    ---------- EditUser Fragment ----------
-    */
-
-    <string name="EditUserFragmentTitle">ویرایش عضو</string>
-
-    ---------- // EditUserTabPersonal
-
-    <string name="EditUserTabPersonalNameHeader">نام و نام خانوادگی</string>
-    <string name="EditUserTabPersonalMobileHeader">موبایل</string>
-    <string name="EditUserTabPersonalEmailHeader">رایانامه</string>
-    <string name="EditUserTabPersonalBirthdayHeader">تاریخ تولد</string>
-    <string name="EditUserTabPersonalStatusHeader">وضعیت</string>
-    <string name="EditUserTabPersonalTypeHeader">نوع کاربر</string>
-    <string name="EditUserTabPersonalGenderHeader">جنسیت</string>
-
-    <string name="EditUserTabPersonalStatusActive">فعال</string>
-    <string name="EditUserTabPersonalStatusWaiting">در انتظار</string>
-    <string name="EditUserTabPersonalStatusClosed">بسته شده</string>
-
-    <string name="EditUserTabPersonalTypeAdmin">ادمین</string>
-    <string name="EditUserTabPersonalTypeClient">عضو</string>
-
-    <string name="EditUserTabPersonalGenderMale">مرد</string>
-    <string name="EditUserTabPersonalGenderFemale">زن</string>
-
-    <string name="EditUserTabPersonalButton">ویرایش</string>
-
-    ---------- // EditUserTabPassword
-
-    <string name="EditUserTabPasswordCurrentPasswordHeader">کلمه عبور فعلی</string>
-    <string name="EditUserTabPasswordNewPasswordHeader">کلمه عبور جدید</string>
-
-    <string name="EditUserTabPasswordNewPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
-
-    <string name="EditUserTabPasswordButton">تغییر</string>
-
-    ---------- // EditUserTabAvatar
-
-    <string name="EditUserTabAvatarAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
-
-    <string name="EditUserTabAvatarButton">ویرایش</string>
-
-    ---------- // EditUserTabCrypto
-
-    <string name="EditUserTabCryptoPublicDescription">در این قسمت شما می‌توانید با استفاده از دراختیار قراردادن کلید عمومی رمزگذاری نامتقارن خود، داده‌های خود را در ریسلو کدگذاری کنید و تنها خودتان به آن‌ها دسترسی خواهید داشت.</string>
-    <string name="EditUserTabCryptoPrivateDescription">برای این‌که بتوانید راحت و در خود سرویس ریسلو متون کدگذاری‌شده خود را ببینید، می‌توانید کلید خصوصی خود را در زیر قرار دهید:</string>
-
-    <string name="EditUserTabCryptoPublicQuestion1">فایده این کار چیست؟</string>
-    <string name="EditUserTabCryptoPublicQuestion2">چه چیزهایی رمزگذاری می‌شوند؟</string>
-    <string name="EditUserTabCryptoPublicQuestion3">آیا می‌توانم کلید عمومی خودم را ویرایش کنم؟</string>
-
-    <string name="EditUserTabCryptoPublicAnswer1Header1">- کلید عمومی: این کلید در اختیار ما قرار می‌گیرد و با این کلید تنها می‌توان داده‌های ارسالی شما را رمزگذاری کرد.</string>
-    <string name="EditUserTabCryptoPublicAnswer1Header1Item1">+ توجه داشته باشید که با این کلید نمی‌توان داده‌های رمزگذاری‌شده را خواند.</string>
-    <string name="EditUserTabCryptoPublicAnswer1Header1Item2">+ ما به شما این اطمینان را می‌دهیم که داده‌های شما قبل از ارسال به سمت ریسلو، در مرورگر خود شما رمزگذاری شده و ما از آن‌ها بی‌اطلاع خواهیم بود، تنها داده رمزگذاری‌شده را در سیستم ذخیره می‌کنیم.</string>
-
-    <string name="EditUserTabCryptoPublicAnswer1Header2">- کلید خصوصی: این کلید تنها در اختیار خود شما باقی می‌ماند و ما از آن بی‌اطلاع هستیم، شما با این کلید می‌توانید داده‌های رمزگذاری‌شده خودتان را مشاهده نمایید.</string>
-    <string name="EditUserTabCryptoPublicAnswer1Header2Item1">+ بدانید که ارزش این کلید به آن است که فقط و فقط در اختیار خود شما باشد، اگر این کلید در دست حتی یک نفر دیگر غیر از خود شما باشد، ارزش امنیتی آن صفر است.</string>
-    <string name="EditUserTabCryptoPublicAnswer1Header2Item2">+ از آن‌جا که کلید خصوصی تنها در اختیار خود شماست و ریسلو از آن بی‌اطلاع است، در حفظ و نگهداری آن کوشا باشید، در غیر این‌صورت اگر کلید خصوصی را به هر صورتی از دست دادید، داده‌های رمزگذاری‌شده شما غیر قابل بازگشت خواهد بود.</string>
-
-    <string name="EditUserTabCryptoPublicAnswer2">گزارش جلسات درمانی.</string>
-    <string name="EditUserTabCryptoPublicAnswer3">درحال حاضر این امکان برای شما مهیا نیست.</string>
-
-    <string name="EditUserTabCryptoPrivateItem1">- می‌توانید به ما اطمینان نکنید و کلید خصوصی را نزد خود نگهداری کنید و به صورت دستی محتواهای کدگذاری‌شده را بازگشایی کنیدکلید خصوصی.</string>
-    <string name="EditUserTabCryptoPrivateItem2">- ما کلید خصوصی شما را در حافظه مرورگر خودتان نگهداری می‌کنیم و این کلید اصلا به سمت ریسلو ارسال نخواهد شد.</string>
-    <string name="EditUserTabCryptoPrivateItem3">- کلید خصوصی را تنها زمانی که رایانه متعلق به شماست وارد کنید؛ زیرا دیگران می‌توانند به کلید خصوصی شما از طریق آن رایانه دسترسی داشته باشند.</string>
-
-    <string name="EditUserTabCryptoPublicHeader">کلید عمومی</string>
-    <string name="EditUserTabCryptoPrivateHeader">کلید خصوصی</string>
-
-    <string name="EditUserTabCryptoFragmentButton">تنظيم</string>
 
     // Index Fragments
     //////////////////////////////////////////////////////////////////////////////////////

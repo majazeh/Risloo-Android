@@ -11,9 +11,11 @@
         android:id="@+id/avatar_circleImageView"
         android:layout_width="@dimen/_42sdp"
         android:layout_height="@dimen/_42sdp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/draw_oval_solid_gray50" />
+        tools:background="@drawable/draw_oval_solid_gray100" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar_sub_circleImageView"
@@ -25,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="@id/avatar_circleImageView"
         app:layout_constraintStart_toEndOf="@id/avatar_circleImageView"
         app:layout_constraintTop_toBottomOf="@id/avatar_circleImageView"
-        tools:background="@drawable/draw_oval_solid_gray50_border_2sdp_white" />
+        tools:background="@drawable/draw_oval_solid_coolgray100_border_2sdp_white" />
 
     <TextView
         android:id="@+id/char_textView"
@@ -38,6 +40,8 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:visibility="gone"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="ال"

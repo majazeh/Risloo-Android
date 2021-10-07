@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/_32sdp"
     android:layout_gravity="center"
-    android:paddingStart="@dimen/_32sdp"
     android:paddingEnd="@dimen/_32sdp"
+    android:paddingStart="@dimen/_32sdp"
     android:gravity="center"
     android:textSize="@dimen/_11ssp"
     android:textStyle="normal"
@@ -14,4 +13,4 @@
     android:fontFamily="@font/dana_medium"
     tools:text="دکمه"
     tools:textColor="@color/CoolGray500"
-    tools:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_gray500" />
+    tools:background="@drawable/draw_16sdp_solid_white_border_1sdp_gray300_ripple_gray300" />
