@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_32sdp"
     android:layout_gravity="center"
-    android:background="@drawable/draw_line_solid_transparent_border_bottom_2sdp_gray200"
+    android:background="@drawable/draw_line_solid_transparent_border_bottom_2sdp_coolgray200"
     android:layoutDirection="rtl"
     app:tabBackground="@null"
     app:tabGravity="fill"
@@ -15,6 +15,6 @@
     app:tabSelectedTextColor="@color/CoolGray900"
     app:tabTextAppearance="@style/TabTextAppearance"
     app:tabRippleColor="@color/CoolGray300"
-    app:tabIndicatorColor="@color/LightBlue500"
+    app:tabIndicatorColor="@color/Risloo500"
     app:tabIndicatorHeight="@dimen/_2sdp"
     tools:layout_margin="@dimen/_12sdp" />

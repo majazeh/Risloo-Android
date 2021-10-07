@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@drawable/draw_oval_solid_gray100" />
+        tools:background="@drawable/draw_oval_solid_coolgray100" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar_sub_circleImageView"

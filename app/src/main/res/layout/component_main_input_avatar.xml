@@ -28,7 +28,7 @@
         android:layout_width="@dimen/_64sdp"
         android:layout_height="@dimen/_64sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:background="@drawable/draw_oval_solid_gray100"
+        android:background="@drawable/draw_oval_solid_coolgray100"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView" />
 
