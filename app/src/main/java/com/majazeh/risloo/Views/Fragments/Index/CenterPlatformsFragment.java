@@ -67,7 +67,7 @@ public class CenterPlatformsFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterPlatformsFragmentTitle));
 
-        InitManager.layoutTextColorResTintBackground(requireActivity(), binding.addIncludeLayout.getRoot(), binding.addIncludeLayout.selectTextView, binding.addIncludeLayout.selectImageView, getResources().getString(R.string.CenterPlatformsFragmentAdd), getResources().getColor(R.color.Emerald700), R.drawable.ic_plus_light, R.color.Emerald700, R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_green300);
+        InitManager.layoutTextColorResTintBackground(requireActivity(), binding.addIncludeLayout.getRoot(), binding.addIncludeLayout.selectTextView, binding.addIncludeLayout.selectImageView, getResources().getString(R.string.CenterPlatformsFragmentAdd), getResources().getColor(R.color.Emerald700), R.drawable.ic_plus_light, R.color.Emerald700, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_emerald200);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }

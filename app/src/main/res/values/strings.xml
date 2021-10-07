@@ -296,6 +296,14 @@
     ---------- Show Fragments ----------
     ***/
 
+    ---------- // AccountingFragment
+
+    <string name="AccountingFragmentTitle">حسابداری</string>
+
+    <string name="AccountingFragmentTreasuries">کیف پول‌ها</string>
+    <string name="AccountingFragmentBillings">صورت حساب‌ها</string>
+    <string name="AccountingFragmentPayments">شارژ حساب</string>
+
 
     ---------- // MeFragment
 
@@ -1311,15 +1319,7 @@
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
-    /*
-    ---------- Accounting Fragment ----------
-    */
 
-    <string name="AccountingFragmentTitle">حسابداری</string>
-
-    <string name="AccountingFragmentTreasuries">کیف پول‌ها</string>
-    <string name="AccountingFragmentBillings">صورت حساب‌ها</string>
-    <string name="AccountingFragmentPayments">شارژ حساب</string>
 
     /*
     ---------- Bill Fragment ----------
