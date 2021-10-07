@@ -48,6 +48,8 @@ public class MeFragment extends Fragment {
 
         setArgs();
 
+        setPermission();
+
         getData();
 
         return binding.getRoot();
@@ -72,6 +74,14 @@ public class MeFragment extends Fragment {
             NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(userModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.editImageView.getRoot());
+
+        CustomClickView.onDelayedListener(() -> {
+            IntentManager.phone(requireActivity(), binding.mobileTextView.getText().toString());
+        }).widget(binding.mobileTextView);
+
+        CustomClickView.onDelayedListener(() -> {
+            IntentManager.email(requireActivity(), new String[]{binding.emailTextView.getText().toString()}, "", "", "");
+        }).widget(binding.emailTextView);
     }
 
     private void setArgs() {
@@ -86,8 +96,10 @@ public class MeFragment extends Fragment {
 
         if (model.getName() != null && !model.getName().equals("")) {
             binding.nameTextView.setText(model.getName());
+        } else if (model.getId() != null && !model.getId().equals("")) {
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUser) + " " + model.getId());
         } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
         }
 
         if (model.getMobile() != null && !model.getMobile().equals("")) {
@@ -113,6 +125,13 @@ public class MeFragment extends Fragment {
 
             Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
+    }
+
+    private void setPermission() {
+        if (((MainActivity) requireActivity()).permissoon.showMeEdit(userModel))
+            binding.editImageView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.editImageView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {

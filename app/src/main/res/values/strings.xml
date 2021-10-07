@@ -19,6 +19,8 @@
     <string name="AppSwicthOn">فعال</string>
     <string name="AppSwicthOff">غیر فعال</string>
 
+    <string name="AppDefaultUnknown">نامعلوم</string>
+    <string name="AppDefaultUser">عضو</string>
     <string name="AppDefaultName">عضو آزمایشی</string>
     <string name="AppDefaultCenter">مرکز آزمایشی</string>
     <string name="AppDefaultWeek">00/00 تا 00/00</string>
@@ -294,6 +296,15 @@
     ---------- Show Fragments ----------
     ***/
 
+
+    ---------- // MeFragment
+
+    <string name="MeFragmentTitle">من</string>
+
+
+    ---------- // UserFragment
+
+    <string name="UserFragmentTitle">عضو</string>
 
 
     /***
@@ -1378,11 +1389,7 @@
     <string name="DashboardFragmentSchedulesHeader">برنامه درمانی من</string>
     <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
 
-    /*
-    ---------- Me Fragment ----------
-    */
 
-    <string name="MeFragmentTitle">من</string>
 
     /*
     ---------- Reference Fragment ----------
@@ -1460,15 +1467,6 @@
     <string name="TreasuryFragmentTitle">کیف پول</string>
 
     <string name="TreasuryFragmentLeft">باقی مانده</string>
-
-    /*
-    ---------- User Fragment ----------
-    */
-
-    <string name="UserFragmentTitle">عضو</string>
-
-    <string name="UserFragmentEdit">ویرایش</string>
-    <string name="UserFragmentEnter">ورود به کاربری</string>
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////

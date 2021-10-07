@@ -21,7 +21,7 @@
         android:id="@+id/avatar_view"
         android:layout_width="@dimen/_86sdp"
         android:layout_height="@dimen/_86sdp"
-        android:background="@drawable/draw_oval_solid_gray50_border_4sdp_white"
+        android:background="@drawable/draw_oval_solid_coolgray100_border_4sdp_white"
         app:layout_constraintBottom_toBottomOf="@id/background_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

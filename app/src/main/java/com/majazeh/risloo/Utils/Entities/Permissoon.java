@@ -14,6 +14,26 @@ public class Permissoon {
     }
 
     /*
+    ---------- Me ----------
+    */
+
+    public boolean showMeEdit(UserModel model) {
+        return true;
+    }
+
+    /*
+    ---------- User ----------
+    */
+
+    public boolean showUserLogin(UserModel model) {
+        return false;
+    }
+
+    public boolean showUserEdit(UserModel model) {
+        return true;
+    }
+
+    /*
     ---------- EditUserTabPersonal ----------
     */
 

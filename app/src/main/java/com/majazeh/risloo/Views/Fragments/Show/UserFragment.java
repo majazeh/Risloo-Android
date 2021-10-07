@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +24,6 @@ import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserFragment extends Fragment {
@@ -39,9 +37,6 @@ public class UserFragment extends Fragment {
     // Objects
     private HashMap data, header;
 
-    // Vars
-    private boolean userSelect = false;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -53,6 +48,8 @@ public class UserFragment extends Fragment {
 
         setArgs();
 
+        setPermission();
+
         getData();
 
         return binding.getRoot();
@@ -62,6 +59,9 @@ public class UserFragment extends Fragment {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        InitManager.imgResTintBackground(requireActivity(), binding.loginImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Risloo500, R.drawable.draw_oval_solid_white_border_1sdp_risloo500_ripple_risloo50);
+        InitManager.imgResTintBackground(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -72,50 +72,21 @@ public class UserFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            switch (binding.menuSpinner.selectImageView.getTag().toString()) {
-                case "ویرایش": {
-                    NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(userModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
-                case "ورود به کاربری": {
-                    // TODO : Place Code Here
-                } break;
-            }
-        }).widget(binding.menuSpinner.selectImageView);
+            // TODO : Place Code When Needed
+        }).widget(binding.loginImageView.getRoot());
 
-        binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
-            binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
-            userSelect = true;
-            return false;
-        });
+        CustomClickView.onClickListener(() -> {
+            NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(userModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.editImageView.getRoot());
 
-        binding.menuSpinner.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
+        CustomClickView.onDelayedListener(() -> {
+            IntentManager.phone(requireActivity(), binding.mobileTextView.getText().toString());
+        }).widget(binding.mobileTextView);
 
-                    switch (pos) {
-                        case "ویرایش": {
-                            NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(userModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "ورود به کاربری": {
-                            // TODO : Place Code Here
-                        } break;
-                    }
-
-                    parent.setSelection(parent.getAdapter().getCount());
-
-                    userSelect = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        CustomClickView.onDelayedListener(() -> {
+            IntentManager.email(requireActivity(), new String[]{binding.emailTextView.getText().toString()}, "", "", "");
+        }).widget(binding.emailTextView);
     }
 
     private void setArgs() {
@@ -130,8 +101,10 @@ public class UserFragment extends Fragment {
 
         if (model.getName() != null && !model.getName().equals("")) {
             binding.nameTextView.setText(model.getName());
+        } else if (model.getId() != null && !model.getId().equals("")) {
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUser) + " " + model.getId());
         } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
         }
 
         if (model.getMobile() != null && !model.getMobile().equals("")) {
@@ -157,35 +130,18 @@ public class UserFragment extends Fragment {
 
             Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
-
-        setDropdown(model);
     }
 
-    private void setDropdown(UserModel model) {
-        ArrayList<String> items = new ArrayList<>();
+    private void setPermission() {
+        if (((MainActivity) requireActivity()).permissoon.showUserLogin(userModel))
+            binding.loginImageView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.loginImageView.getRoot().setVisibility(View.GONE);
 
-        items.add(requireActivity().getResources().getString(R.string.UserFragmentEdit));
-//        items.add(requireActivity().getResources().getString(R.string.UserFragmentEnter));
-        items.add("");
-
-        if (items.size() > 2) {
-            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-            InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
-        } else if (items.size() == 2) {
-            switch (items.get(0)) {
-                case "ویرایش":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
-                    break;
-                case "ورود به کاربری":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_cog_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
-                    break;
-            }
-
-            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp));
-            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
-        } else {
-            binding.menuSpinner.getRoot().setVisibility(View.GONE);
-        }
+        if (((MainActivity) requireActivity()).permissoon.showUserEdit(userModel))
+            binding.editImageView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.editImageView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {
@@ -216,7 +172,6 @@ public class UserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        userSelect = false;
     }
 
 }

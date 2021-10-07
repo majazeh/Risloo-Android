@@ -41,7 +41,7 @@
                     android:layout_margin="@dimen/_1sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
-                    android:background="@drawable/draw_grad_2sdp_solid_lightblue100_lightblue50_border_bottom_2sdp_gray200"
+                    android:background="@drawable/draw_grad_rec_solid_lightblue100_lightblue50_border_bottom_1sdp_coolgray200"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
