@@ -109,45 +109,45 @@
     <string name="AuthDashboardLink">داشبورد</string>
     <string name="AuthLogoutLink">خروج</string>
 
-    /*
-    ---------- Login Fragment ----------
-    */
+
+    /***
+    ---------- Auth Fragments ----------
+    ***/
+
+
+    ---------- // LoginFragment
 
     <string name="LoginFragmentTitle">ورود</string>
     <string name="LoginFragmentInput">موبایل</string>
     <string name="LoginFragmentGuide">برای ورود به ریسلو موبایل خود را در فیلد بالا وارد کرده و روی دکمه ادامه کلیک کنید.</string>
     <string name="LoginFragmentButton">ادامه</string>
 
-    /*
-    ---------- PasswordChange Fragment ----------
-    */
+
+    ---------- // PasswordChangeFragment
 
     <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
     <string name="PasswordChangeFragmentInput">کلمه عبور جديد</string>
     <string name="PasswordChangeFragmentGuide">کلمه عبور جدید خود را وارد کرده و روی دکمه تغییر کلیک کنید.</string>
     <string name="PasswordChangeFragmentButton">تغییر</string>
 
-    /*
-    ---------- Password Fragment ----------
-    */
+
+    ---------- // PasswordFragment
 
     <string name="PasswordFragmentTitle">کلمه عبور</string>
     <string name="PasswordFragmentInput">کلمه عبور</string>
     <string name="PasswordFragmentGuide">کلمه عبور خود را وارد کرده و روی دکمه ورود کلیک کنید.</string>
     <string name="PasswordFragmentButton">ورود</string>
 
-    /*
-    ---------- PasswordRecover Fragment ----------
-    */
+
+    ---------- // PasswordRecoverFragment
 
     <string name="PasswordRecoverFragmentTitle">فراموشی کلمه عبور</string>
     <string name="PasswordRecoverFragmentInput">موبایل</string>
     <string name="PasswordRecoverFragmentGuide">اگر کلمه عبور خود را فراموش کرده‌اید، موبایل خود را در فیلد بالا وارد کرده و روی دکمه دریافت کد پیامکی کلیک کنید.</string>
     <string name="PasswordRecoverFragmentButton">دریافت کد پیامکی</string>
 
-    /*
-    ---------- Pin Fragment ----------
-    */
+
+    ---------- // PinFragment
 
     <string name="PinFragmentTitle">تأیید موبایل</string>
     <string name="PinFragmentInput">کد پیامکی</string>
@@ -157,23 +157,22 @@
     <string name="PinFragmentResend">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>
     <string name="PinFragmentTimer">کد پیامکی برای شما ارسال شد :</string>
 
-    /*
-    ---------- Register Fragment ----------
-    */
+
+    ---------- // RegisterFragment
 
     <string name="RegisterFragmentTitle">عضویت</string>
     <string name="RegisterFragmentMobile">موبایل</string>
     <string name="RegisterFragmentGuide">برای عضویت در ریسلو موبایل خود را در فیلد بالا وارد کرده و روی دکمه ادامه کلیک کنید.</string>
     <string name="RegisterFragmentButton">ادامه</string>
 
-    /*
-    ---------- Serial Fragment ----------
-    */
+
+    ---------- // SerialFragment
 
     <string name="SerialFragmentTitle">ورود</string>
     <string name="SerialFragmentInput">دستور ورودی</string>
     <string name="SerialFragmentGuide">برای شروع آزمون دستور ورودی خود را در فیلد بالا وارد کرده و روی دکمه بررسی کلیک کنید.</string>
     <string name="SerialFragmentButton">بررسی</string>
+
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -187,21 +186,23 @@
     <string name="TestFixed">بدون تغییر</string>
     <string name="TestSaving">در حال ذخیره کردن …</string>
 
-    /*
-    ---------- Chain Fragment ----------
-    */
+
+    /***
+    ---------- Test Fragments ----------
+    ***/
+
+
+    ---------- // ChainFragment
 
     <string name="ChainFragmentTitle">وضعیت نمونه زنجیره‌ای</string>
 
-    /*
-    ---------- Description Fragment ----------
-    */
+
+    ---------- // DescriptionFragment
 
     <string name="DescriptionFragmentTitle">توضیحات</string>
 
-    /*
-    ---------- End Fragment ----------
-    */
+
+    ---------- // EndFragment
 
     <string name="EndFragmentTitle">پایان نمونه‌گیری</string>
     <string name="EndFragmentDescription">اگر از اتمام نمونه مطمئن هستید و به تمامی گزینه‌ها پاسخ داده‌اید می‌توانید دکمه اتمام نمونه را بزنید. بعد از زدن این دکمه، دیگر قادر به ویرایش نمونه نمی‌باشید.</string>
@@ -210,36 +211,32 @@
     <string name="EndFragmentButtonNext">اتمام و انتقال به نمونه بعدی</string>
     <string name="EndFragmentButtonChain">اتمام نمونه زنجیره‌ای</string>
 
-    /*
-    ---------- Entity Fragment ----------
-    */
+
+    ---------- // EntityFragment
 
     <string name="EntityFragmentTitle">بخش</string>
 
-    /*
-    ---------- Optional Fragment ----------
-    */
+
+    ---------- // OptionalFragment
 
     <string name="OptionalFragmentTitle">تست متنی</string>
 
-    /*
-    ---------- Pictoral Fragment ----------
-    */
+
+    ---------- // PictoralFragment
 
     <string name="PictoralFragmentTitle">تست تصویری</string>
 
-    /*
-    ---------- Prerequisite Fragment ----------
-    */
+
+    ---------- // PrerequisiteFragment
 
     <string name="PrerequisiteFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
     <string name="PrerequisiteFragmentDescription">بعد از تکمیل اطلاعات زیر به صفحه بعد رفته و پاسخ‌دهی را شروع کنید.</string>
 
-    /*
-    ---------- PsyDesc Fragment ----------
-    */
+
+    ---------- // PsyDescFragment
 
     <string name="PsyDescFragmentTitle">توضیحات روان‌شناس</string>
+
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -274,7 +271,158 @@
     <string name="MainHeader">ریسلو</string>
     <string name="MainToman">تومان</string>
 
+
+    /***
+    ---------- Create Fragments ----------
+    ***/
+
+
+
+    /***
+    ---------- Edit Fragments ----------
+    ***/
+
+
+
+    /***
+    ---------- Index Fragments ----------
+    ***/
+
+
+
+    /***
+    ---------- Show Fragments ----------
+    ***/
+
+
+
+    /***
+    ---------- Tab Fragments ----------
+    ***/
+
+
+
     //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Create Fragments
     //////////////////////////////////////////////////////////////////////////////////////
