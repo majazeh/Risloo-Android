@@ -60,8 +60,8 @@ public class EditUserTabCryptoFragment extends Fragment {
         binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabCryptoPublicHeader));
         binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabCryptoPrivateHeader));
 
-        InitManager.txtTextColorBackground(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        InitManager.txtTextColorBackground(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -72,14 +72,14 @@ public class EditUserTabCryptoFragment extends Fragment {
             return false;
         });
 
-        binding.publicIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.privateIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.privateIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.privateIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.publicIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.privateIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {

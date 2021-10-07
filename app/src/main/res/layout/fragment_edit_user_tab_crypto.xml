@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.factor.bouncy.BouncyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@null"
     android:fillViewport="true"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="always"
     android:layoutDirection="rtl"
-    app:fling_animation_size=".3"
-    app:overscroll_animation_size=".3"
     tools:context=".Views.Fragments.Main.Tab.EditUserTabCryptoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:paddingBottom="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
@@ -375,4 +375,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</com.factor.bouncy.BouncyNestedScrollView>
+</androidx.core.widget.NestedScrollView>

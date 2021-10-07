@@ -36,9 +36,6 @@ public class EditUserFragment extends Fragment {
     // Objects
     private TabLayoutMediator tabLayoutMediator;
 
-    // Vars
-    private ArrayList<Integer> images = new ArrayList<>();
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -56,6 +53,8 @@ public class EditUserFragment extends Fragment {
     private void initializer() {
         adapter = new EditUserAdapter(requireActivity());
 
+        ArrayList<Integer> images = new ArrayList<>();
+
         images.add(R.drawable.ic_address_card_light);
         images.add(R.drawable.ic_unlock_alt_light);
         images.add(R.drawable.ic_user_circle_light);
@@ -72,7 +71,7 @@ public class EditUserFragment extends Fragment {
         binding.tabLayout.getRoot().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.LightBlue600), PorterDuff.Mode.SRC_IN);
+                Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.Risloo600), PorterDuff.Mode.SRC_IN);
             }
 
             @Override

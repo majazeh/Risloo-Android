@@ -48,10 +48,10 @@ public class EditUserTabAvatarFragment extends Fragment {
     private Fragment current;
 
     // Objects
-    private Bitmap avatarBitmap = null;
     private HashMap data, header;
 
     // Vars
+    private Bitmap avatarBitmap = null;
     public String avatarPath = "";
 
     @Nullable
@@ -77,7 +77,7 @@ public class EditUserTabAvatarFragment extends Fragment {
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserTabAvatarAvatarGuide));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabAvatarButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabAvatarButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {
@@ -109,15 +109,17 @@ public class EditUserTabAvatarFragment extends Fragment {
                 avatarPath = model.getAvatar().getMedium().getUrl();
 
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(avatarPath).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(avatarPath).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                if (!model.getName().equals(""))
+                if (model.getName() != null && !model.getName().equals(""))
                     binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getName()));
+                else if (model.getId() != null && !model.getId().equals(""))
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getId()));
                 else
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
 
-                Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
         }
     }
@@ -183,11 +185,8 @@ public class EditUserTabAvatarFragment extends Fragment {
                                         for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
                                             String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                            switch (key) {
-                                                case "avatar":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
-                                                    break;
-                                            }
+                                            if (key.equals("avatar"))
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
 
                                             errors.append(validation);
                                             errors.append("\n");
@@ -234,11 +233,8 @@ public class EditUserTabAvatarFragment extends Fragment {
                                         for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
                                             String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                            switch (key) {
-                                                case "avatar":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
-                                                    break;
-                                            }
+                                            if (key.equals("avatar"))
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
 
                                             errors.append(validation);
                                             errors.append("\n");

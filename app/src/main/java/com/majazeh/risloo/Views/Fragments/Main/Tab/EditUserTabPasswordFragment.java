@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -51,8 +48,7 @@ public class EditUserTabPasswordFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String mobile = "", currentPassword = "", newPassword = "";
-    private boolean currentPasswordVisibility = false, newPasswordVisibility = false;
+    private String currentPassword = "", newPassword = "", mobile = "";
 
     @Nullable
     @Override
@@ -82,7 +78,7 @@ public class EditUserTabPasswordFragment extends Fragment {
 
         binding.newPasswordGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserTabPasswordNewPasswordGuide));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabPasswordButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabPasswordButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -93,14 +89,14 @@ public class EditUserTabPasswordFragment extends Fragment {
             return false;
         });
 
-        binding.currentPasswordIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            currentPassword = binding.currentPasswordIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.newPasswordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.newPasswordIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.newPasswordIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.currentPasswordIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            currentPassword = binding.currentPasswordIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.newPasswordIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -200,51 +196,32 @@ public class EditUserTabPasswordFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (!currentPasswordVisibility) {
-                currentPasswordVisibility = true;
+            if (binding.currentPasswordIncludeLayout.visibilityImageView.getTag().equals("invisible")) {
                 binding.currentPasswordIncludeLayout.inputEditText.setTransformationMethod(null);
-
-                binding.currentPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
-                ImageViewCompat.setImageTintList(binding.currentPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.LightBlue800));
+                InitManager.imgResTintTag(requireActivity(), binding.currentPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.Risloo500, "visible");
             } else {
-                currentPasswordVisibility = false;
                 binding.currentPasswordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
-
-                binding.currentPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
-                ImageViewCompat.setImageTintList(binding.currentPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.CoolGray600));
+                InitManager.imgResTintTag(requireActivity(), binding.currentPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.CoolGray500, "invisible");
             }
         }).widget(binding.currentPasswordIncludeLayout.visibilityImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            if (!newPasswordVisibility) {
-                newPasswordVisibility = true;
+            if (binding.newPasswordIncludeLayout.visibilityImageView.getTag().equals("invisible")) {
                 binding.newPasswordIncludeLayout.inputEditText.setTransformationMethod(null);
-
-                binding.newPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
-                ImageViewCompat.setImageTintList(binding.newPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.LightBlue800));
+                InitManager.imgResTintTag(requireActivity(), binding.newPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.Risloo500, "visible");
             } else {
-                newPasswordVisibility = false;
                 binding.newPasswordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
-
-                binding.newPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
-                ImageViewCompat.setImageTintList(binding.newPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.CoolGray600));
+                InitManager.imgResTintTag(requireActivity(), binding.newPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.CoolGray500, "invisible");
             }
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
-                if (binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).validatoon.hideValid(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
-                if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).validatoon.hideValid(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
+            if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId()) && binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
+            if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
 
-                doWork();
-            } else {
-                if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).validatoon.hideValid(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
-
-                doWork();
-            }
+            doWork();
         }).widget(binding.editTextView.getRoot());
     }
 
@@ -273,6 +250,16 @@ public class EditUserTabPasswordFragment extends Fragment {
         }
     }
 
+    private void resetInputs() {
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
+            currentPassword = "";
+            binding.currentPasswordIncludeLayout.inputEditText.setText(currentPassword);
+        }
+
+        newPassword = "";
+        binding.newPasswordIncludeLayout.inputEditText.setText(newPassword);
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
@@ -286,6 +273,7 @@ public class EditUserTabPasswordFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), newPassword);
+                            resetInputs();
 
                             DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
@@ -341,6 +329,8 @@ public class EditUserTabPasswordFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
+                            resetInputs();
+
                             DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
@@ -364,11 +354,8 @@ public class EditUserTabPasswordFragment extends Fragment {
                                         for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
                                             String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                            switch (key) {
-                                                case "new_password":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
-                                                    break;
-                                            }
+                                            if (key.equals("new_password"))
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
 
                                             errors.append(validation);
                                             errors.append("\n");

@@ -89,7 +89,7 @@ public class EditUserTabPersonalFragment extends Fragment {
         binding.genderIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalGenderMale));
         binding.genderIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalGenderFemale));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabPersonalButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabPersonalButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -100,24 +100,24 @@ public class EditUserTabPersonalFragment extends Fragment {
             return false;
         });
 
-        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
             return false;
         });
 
-        binding.mobileIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.emailIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.mobileIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.emailIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -300,12 +300,18 @@ public class EditUserTabPersonalFragment extends Fragment {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
         data.put("name", name);
-        data.put("mobile", mobile);
-        data.put("email", email);
-        data.put("birthday", birthday);
-        data.put("status", status);
-        data.put("type", type);
         data.put("gender", gender);
+
+        if (binding.mobileIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+            data.put("mobile", mobile);
+        if (binding.emailIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+            data.put("email", email);
+        if (binding.birthdayIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+            data.put("birthday", birthday);
+        if (binding.statusIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+            data.put("status", status);
+        if (binding.typeIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+            data.put("type", type);
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             Auth.editProfile(data, header, new Response() {

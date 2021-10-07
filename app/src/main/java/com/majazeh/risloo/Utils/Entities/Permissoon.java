@@ -52,10 +52,7 @@ public class Permissoon {
     }
 
     public boolean showEditUserTabPersonalBirthday(UserModel model) {
-        if (model != null)
-            return model.getUserType().equals("admin");
-        else
-            return false;
+        return false;
     }
 
     public boolean showEditUserTabPersonalStatus(UserModel model) {
