@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditUserAdapter;
 import com.majazeh.risloo.databinding.FragmentEditUserBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -96,6 +97,10 @@ public class EditUserFragment extends Fragment {
         binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
 
         tabLayoutMediator.attach();
+
+        if (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getPreviousBackStackEntry()).getDestination().getId() == R.id.dashboardFragment) {
+            binding.viewPager.getRoot().setCurrentItem(1);
+        }
     }
 
     @Override
