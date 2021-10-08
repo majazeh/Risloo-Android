@@ -18,9 +18,10 @@
         android:textColor="@color/CoolGray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        app:layout_constraintBottom_toTopOf="@id/select_spinner"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/select_spinner"
         tools:text="سرتيتر" />
 
     <Spinner
@@ -31,7 +32,7 @@
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="@dimen/_40sdp"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView" />
@@ -47,6 +48,6 @@
         app:layout_constraintBottom_toBottomOf="@id/select_spinner"
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
-        app:tint="@color/CoolGray600" />
+        app:tint="@color/CoolGray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

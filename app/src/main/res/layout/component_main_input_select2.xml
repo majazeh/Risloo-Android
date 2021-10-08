@@ -18,9 +18,10 @@
         android:textColor="@color/CoolGray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        app:layout_constraintBottom_toTopOf="@id/select_container"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/select_container"
         tools:text="سرتيتر" />
 
     <LinearLayout
@@ -28,12 +29,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
+        android:paddingEnd="@dimen/_28sdp"
         android:paddingStart="@dimen/_12sdp"
-        android:paddingEnd="@dimen/_26sdp"
         android:minHeight="@dimen/_36sdp"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView" >
@@ -74,6 +75,6 @@
         app:layout_constraintBottom_toBottomOf="@id/select_container"
         app:layout_constraintEnd_toEndOf="@id/select_container"
         app:layout_constraintTop_toTopOf="@id/select_container"
-        app:tint="@color/CoolGray600" />
+        app:tint="@color/CoolGray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
