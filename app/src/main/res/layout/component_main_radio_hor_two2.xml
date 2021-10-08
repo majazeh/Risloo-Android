@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,6 +13,7 @@
         android:id="@+id/second_radioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center|start"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
@@ -27,6 +27,7 @@
         android:id="@+id/first_radioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center|start"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
@@ -40,7 +41,7 @@
     <CheckBox
         android:id="@+id/header_checkBox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:checked="false"
         android:gravity="center|start"
         android:textSize="@dimen/_11ssp"
@@ -48,8 +49,8 @@
         android:textColor="@color/CoolGray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:layoutDirection="rtl"
         android:theme="@style/CheckBoxTheme"
+        android:layoutDirection="rtl"
         tools:text="گزینه‌ها" />
 
 </RadioGroup>

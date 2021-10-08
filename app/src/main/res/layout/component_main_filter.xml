@@ -35,8 +35,8 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_gravity="center"
         android:contentDescription="@string/AppImageContent"
-        android:padding="@dimen/_4sdp"
         android:scaleType="fitCenter"
+        android:padding="@dimen/_4sdp"
         android:src="@drawable/ic_times_light"
         android:background="@drawable/draw_2sdp_solid_gray50_ripple_red300"
         app:tint="@color/CoolGray400" />

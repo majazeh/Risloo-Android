@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="دکمه"
         tools:textColor="@color/CoolGray500"
-        tools:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_gray500" />
+        tools:background="@drawable/draw_24sdp_solid_white_border_1sdp_gray300_ripple_gray300" />
 
     <ImageView
         android:id="@+id/angle_imageView"

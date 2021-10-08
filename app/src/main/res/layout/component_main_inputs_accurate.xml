@@ -12,15 +12,15 @@
         android:id="@+id/time_textView"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
-        android:paddingStart="@dimen/_12sdp"
         android:paddingEnd="@dimen/_28sdp"
+        android:paddingStart="@dimen/_12sdp"
         android:gravity="center|start"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,22 +36,22 @@
         app:layout_constraintBottom_toBottomOf="@id/time_textView"
         app:layout_constraintEnd_toEndOf="@id/time_textView"
         app:layout_constraintTop_toTopOf="@id/time_textView"
-        app:tint="@color/CoolGray600" />
+        app:tint="@color/CoolGray500" />
 
     <TextView
         android:id="@+id/date_textView"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:paddingStart="@dimen/_12sdp"
         android:paddingEnd="@dimen/_28sdp"
+        android:paddingStart="@dimen/_12sdp"
         android:gravity="center|start"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/time_textView" />
@@ -67,6 +67,6 @@
         app:layout_constraintBottom_toBottomOf="@id/date_textView"
         app:layout_constraintEnd_toEndOf="@id/date_textView"
         app:layout_constraintTop_toTopOf="@id/date_textView"
-        app:tint="@color/CoolGray600" />
+        app:tint="@color/CoolGray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

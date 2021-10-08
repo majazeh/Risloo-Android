@@ -11,15 +11,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/AppImageContent"
-        android:padding="@dimen/_6sdp"
         android:scaleType="fitCenter"
+        android:padding="@dimen/_6sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_ellipsis_v_light"
         tools:tint="@color/CoolGray500"
-        tools:background="@drawable/draw_oval_solid_transparent_border_1sdp_gray500"/>
+        tools:background="@drawable/draw_oval_solid_white_border_1sdp_gray300_ripple_gray300" />
 
     <Spinner
         android:id="@+id/select_spinner"
