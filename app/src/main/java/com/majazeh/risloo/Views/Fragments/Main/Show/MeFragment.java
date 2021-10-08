@@ -97,7 +97,7 @@ public class MeFragment extends Fragment {
         if (model.getName() != null && !model.getName().equals("")) {
             binding.nameTextView.setText(model.getName());
         } else if (model.getId() != null && !model.getId().equals("")) {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUser) + " " + model.getId());
+            binding.nameTextView.setText(model.getId());
         } else {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
         }

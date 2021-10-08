@@ -21,6 +21,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.databinding.FragmentDashboardBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -98,7 +99,7 @@ public class DashboardFragment extends Fragment {
             if (schedulesTodayUrls != null && !schedulesTodayUrls.isEmpty())
                 for (String url : schedulesTodayUrls)
                     if (url.contains(".png")) {
-                        IntentManager.display(requireActivity(), requireActivity().getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), url);
+                        IntentManager.display(requireActivity(), binding.schedulesTodayLayout.titleTextView.getText().toString(), url);
                         return;
                     }
         }).widget(binding.schedulesTodayLayout.getRoot());
@@ -107,7 +108,7 @@ public class DashboardFragment extends Fragment {
             if (schedulesTomorrowUrls != null && !schedulesTomorrowUrls.isEmpty())
                 for (String url : schedulesTomorrowUrls)
                     if (url.contains(".png")) {
-                        IntentManager.display(requireActivity(), requireActivity().getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), url);
+                        IntentManager.display(requireActivity(), binding.schedulesTomorrowLayout.titleTextView.getText().toString(), url);
                         return;
                     }
         }).widget(binding.schedulesTomorrowLayout.getRoot());
@@ -115,21 +116,32 @@ public class DashboardFragment extends Fragment {
 
     private void setData(UserModel model) {
         try {
-            ((MainActivity) requireActivity()).singleton.update(model);
-            ((MainActivity) requireActivity()).setData();
 
-            // Missings Data
-            if (model.isNo_password())
-                binding.passwordMissingLayout.getRoot().setVisibility(View.VISIBLE);
-            else
+            //  Password Missings Data
+            if (!model.isNo_password()) {
                 binding.passwordMissingLayout.getRoot().setVisibility(View.GONE);
+            } else {
+                binding.passwordMissingLayout.getRoot().setVisibility(View.VISIBLE);
+            }
 
-            // TODO : Place Center Code Here
+            //  Center Missings Data
+            if (model.getCenterList() != null && !model.getCenterList().data().isEmpty()) {
+                for (TypeModel typeModel : model.getCenterList().data()) {
+                    CenterModel centerModel = (CenterModel) typeModel;
 
-            // Schedules Data
+                    if (centerModel != null && centerModel.getAcceptation() != null && centerModel.getAcceptation().getAccepted_at() != 0) {
+                        binding.centerMissingLayout.getRoot().setVisibility(View.GONE);
+                        break;
+                    }
+                }
+            } else {
+                binding.centerMissingLayout.getRoot().setVisibility(View.VISIBLE);
+            }
+
+            //  Today Schedules Data
             if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("today") && !model.getDalilyScheduleExports().isNull("today") && model.getDalilyScheduleExports().getJSONObject("today").length() != 0) {
                 binding.schedulesTodayLayout.getRoot().setVisibility(View.VISIBLE);
-                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), getResources().getColor(R.color.LightBlue700), R.drawable.ic_calendar_day_light, R.color.LightBlue600, R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), getResources().getColor(R.color.Risloo500), R.drawable.ic_calendar_day_light, R.color.Risloo500, R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 setDropdowns("today", model.getDalilyScheduleExports().getJSONObject("today"));
             } else {
@@ -137,9 +149,10 @@ public class DashboardFragment extends Fragment {
                 InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTodayTitle), getResources().getColor(R.color.CoolGray400), R.drawable.ic_calendar_day_light, R.color.CoolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
             }
 
+            //  Tomorrow Schedules Data
             if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("tomorrow") && !model.getDalilyScheduleExports().isNull("tomorrow") && model.getDalilyScheduleExports().getJSONObject("tomorrow").length() != 0) {
                 binding.schedulesTomorrowLayout.getRoot().setVisibility(View.VISIBLE);
-                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), getResources().getColor(R.color.LightBlue700), R.drawable.ic_calendar_alt_light, R.color.LightBlue600, R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), getResources().getColor(R.color.Risloo500), R.drawable.ic_calendar_alt_light, R.color.Risloo500, R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 setDropdowns("tomorrow", model.getDalilyScheduleExports().getJSONObject("tomorrow"));
             } else {
@@ -147,18 +160,18 @@ public class DashboardFragment extends Fragment {
                 InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTomorrowTitle), getResources().getColor(R.color.CoolGray400), R.drawable.ic_calendar_alt_light, R.color.CoolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
             }
 
-            // Rooms Data
-            if (!model.getRoomList().data().isEmpty()) {
-                ArrayList<TypeModel> myRooms = new ArrayList<>();
+            //  Rooms Data
+            if (model.getRoomList() != null && !model.getRoomList().data().isEmpty()) {
+                ArrayList<TypeModel> items = new ArrayList<>();
 
                 for (TypeModel typeModel : model.getRoomList().data()) {
                     RoomModel roomModel = (RoomModel) typeModel;
 
                     if (roomModel != null && roomModel.getRoomAcceptation() != null && roomModel.getRoomAcceptation().getPosition().equals("manager"))
-                        myRooms.add(roomModel);
+                        items.add(roomModel);
                 }
 
-                roomsAdapter.setItems(myRooms);
+                roomsAdapter.setItems(items);
                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
                 if (roomsAdapter.getItemCount() == 0)
@@ -170,18 +183,19 @@ public class DashboardFragment extends Fragment {
                 binding.roomsGroup.setVisibility(View.GONE);
             }
 
-            // Header Visibility
+            //  Schedules Header Visibility
             if (binding.schedulesTodayLayout.getRoot().getVisibility() == View.VISIBLE || binding.schedulesTomorrowLayout.getRoot().getVisibility() == View.VISIBLE)
                 binding.schedulesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.schedulesHeaderLayout.getRoot().setVisibility(View.GONE);
 
-            // Space Visibility
+            //  Missing Space Visibility
             if (binding.passwordMissingLayout.getRoot().getVisibility() == View.VISIBLE || binding.centerMissingLayout.getRoot().getVisibility() == View.VISIBLE)
                 binding.missingSpace.setVisibility(View.VISIBLE);
             else
                 binding.missingSpace.setVisibility(View.GONE);
 
+            //  Schedules Space Visibility
             if (binding.passwordMissingLayout.getRoot().getVisibility() == View.VISIBLE || binding.centerMissingLayout.getRoot().getVisibility() == View.VISIBLE || binding.schedulesHeaderLayout.getRoot().getVisibility() == View.VISIBLE || binding.schedulesTodayLayout.getRoot().getVisibility() == View.VISIBLE || binding.schedulesTomorrowLayout.getRoot().getVisibility() == View.VISIBLE)
                 binding.schedulesSpace.setVisibility(View.VISIBLE);
             else
@@ -218,6 +232,11 @@ public class DashboardFragment extends Fragment {
         }
     }
 
+    private void setPermission() {
+        if (((MainActivity) requireActivity()).permissoon.showDashboardData(userModel))
+            setData(userModel);
+    }
+
     private void getData() {
         User.dashboard(data, header, new Response() {
             @Override
@@ -226,7 +245,10 @@ public class DashboardFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        setData(userModel);
+                        ((MainActivity) requireActivity()).singleton.update(userModel);
+                        ((MainActivity) requireActivity()).setData();
+
+                        setPermission();
 
                         binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
                     });
@@ -237,7 +259,7 @@ public class DashboardFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        // TODO : Place Code If Needed
+                        binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
                     });
                 }
             }

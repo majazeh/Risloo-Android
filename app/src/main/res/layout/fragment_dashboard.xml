@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,10 +52,10 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:visibility="gone"
+            app:layout_goneMarginTop="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_missingLayout"
-            app:layout_goneMarginTop="0dp"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -77,14 +78,16 @@
         <include
             android:id="@+id/schedules_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_18sdp"
             android:visibility="gone"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_goneMarginTop="@dimen/_12sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/missing_space"
-            app:layout_goneMarginTop="0dp"
             tools:visibility="visible" />
 
         <include
@@ -110,10 +113,10 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:visibility="gone"
+            app:layout_goneMarginTop="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/schedules_todayLayout"
-            app:layout_goneMarginTop="@dimen/_12sdp"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -136,13 +139,15 @@
         <include
             android:id="@+id/rooms_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/schedules_space"
-            app:layout_goneMarginTop="0dp" />
+            app:layout_goneMarginTop="@dimen/_12sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/schedules_space" />
 
         <include
             android:id="@+id/rooms_singleLayout"

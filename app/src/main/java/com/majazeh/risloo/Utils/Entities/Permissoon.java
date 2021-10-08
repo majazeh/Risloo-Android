@@ -14,6 +14,17 @@ public class Permissoon {
     }
 
     /*
+    ---------- Dashboard ----------
+    */
+
+    public boolean showDashboardData(UserModel model) {
+        if (model != null)
+            return !model.getUserType().equals("admin");
+        else
+            return false;
+    }
+
+    /*
     ---------- Me ----------
     */
 

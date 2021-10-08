@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,7 +14,7 @@
         android:id="@+id/title_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
+        android:gravity="right"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray600"
@@ -27,17 +26,17 @@
         android:id="@+id/action_textView"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_28sdp"
-        android:layout_gravity="start"
+        android:layout_gravity="right"
         android:layout_marginTop="@dimen/_12sdp"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingStart="@dimen/_12sdp"
         android:gravity="center"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/LightBlue600"
+        android:textColor="@color/Risloo500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300"
+        android:background="@drawable/draw_24sdp_solid_white_border_1sdp_risloo500_ripple_risloo50"
         tools:text="دکمه" />
 
 </LinearLayout>

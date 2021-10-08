@@ -226,8 +226,10 @@ public class MainActivity extends AppCompatActivity {
         if (!singleton.getToken().equals("")) {
             if (!singleton.getName().equals("")) {
                 binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
+            } else if (!singleton.getId().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getId());
             } else {
-                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             }
 
             if (!singleton.getMoney().equals("0")) {

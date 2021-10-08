@@ -310,6 +310,27 @@
     <string name="AccountingFragmentPayments">شارژ حساب</string>
 
 
+    ---------- // DashboardFragment
+
+    <string name="DashboardFragmentTitle">خانه</string>
+    <string name="DashboardFragmentWelcome">به ریسلو خوش آمدید</string>
+
+    <string name="DashboardFragmentNoPasswordTitle">شما برای حساب کاربری خود کلمه عبور تنظیم نکرده‌اید. جهت افزایش امنیت حساب کاربری، کلمه عبور تنظیم نمایید.</string>
+    <string name="DashboardFragmentNoCenterTitle">شما عضو هیچ یک از مراکز درمانی نیستید. جهت ادامه روند درمان، به یکی از مراکز درمانی موجود در ریسلو درخواست پذیرش دهید.</string>
+
+    <string name="DashboardFragmentNoPasswordAction">تنظیم کلمه عبور</string>
+    <string name="DashboardFragmentNoCenterAction">مراکز درمانی</string>
+
+    <string name="DashboardFragmentNoSchedulesTodayTitle">برنامه‌ای برای امروز ندارید!</string>
+    <string name="DashboardFragmentNoSchedulesTomorrowTitle">برنامه‌ای برای فردا ثبت نشده است!</string>
+
+    <string name="DashboardFragmentHasSchedulesTodayTitle">برنامه درمانی امروز</string>
+    <string name="DashboardFragmentHasSchedulesTomorrowTitle">برنامه درمانی فردا</string>
+
+    <string name="DashboardFragmentSchedulesHeader">برنامه درمانی من</string>
+    <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
+
+
     ---------- // MeFragment
 
     <string name="MeFragmentTitle">من</string>
@@ -1369,27 +1390,7 @@
     <string name="CenterFragmentEdit">ویرایش</string>
     <string name="CenterFragmentPlatforms">محل برگزاری</string>
 
-    /*
-    ---------- Dashboard Fragment ----------
-    */
 
-    <string name="DashboardFragmentTitle">خانه</string>
-    <string name="DashboardFragmentWelcome">به ریسلو خوش آمدید</string>
-
-    <string name="DashboardFragmentNoPasswordTitle">شما برای حساب کاربری خود کلمه عبور تنظیم نکرده‌اید. جهت افزایش امنیت حساب کاربری، کلمه عبور تنظیم نمایید.</string>
-    <string name="DashboardFragmentNoCenterTitle">شما عضو هیچ یک از مراکز درمانی نیستید. جهت ادامه روند درمان، به یکی از مراکز درمانی موجود در ریسلو درخواست پذیرش دهید.</string>
-
-    <string name="DashboardFragmentNoPasswordAction">تنظیم کلمه عبور</string>
-    <string name="DashboardFragmentNoCenterAction">مراکز درمانی</string>
-
-    <string name="DashboardFragmentNoSchedulesTodayTitle">برنامه‌ای برای امروز ندارید!</string>
-    <string name="DashboardFragmentNoSchedulesTomorrowTitle">برنامه‌ای برای فردا ثبت نشده است!</string>
-
-    <string name="DashboardFragmentHasSchedulesTodayTitle">برنامه درمانی امروز</string>
-    <string name="DashboardFragmentHasSchedulesTomorrowTitle">برنامه درمانی فردا</string>
-
-    <string name="DashboardFragmentSchedulesHeader">برنامه درمانی من</string>
-    <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
 
 
 
