@@ -65,7 +65,7 @@ public class EditTreasuryFragment extends Fragment {
 
         binding.titleGuideLayout.guideTextView.setText(getResources().getString(R.string.EditTreasuryFragmentNameGuide));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditTreasuryFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditTreasuryFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -116,6 +116,8 @@ public class EditTreasuryFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
@@ -137,11 +139,8 @@ public class EditTreasuryFragment extends Fragment {
                                     for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
                                         String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                        switch (key) {
-                                            case "title":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
-                                                break;
-                                        }
+                                        if (key.equals("title"))
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
 
                                         errors.append(validation);
                                         errors.append("\n");

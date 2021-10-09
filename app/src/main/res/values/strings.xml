@@ -280,9 +280,33 @@
 
 
 
+    ---------- // CreateTreasuryFragment
+
+    <string name="CreateTreasuryFragmentTitle">ساخت کیف پول جدید</string>
+
+    <string name="CreateTreasuryFragmentNameHeader">عنوان</string>
+    <string name="CreateTreasuryFragmentRegionHeader">بستر</string>
+
+    <string name="CreateTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
+
+    <string name="CreateTreasuryFragmentButton">ساخت</string>
+
+
     /***
     ---------- Edit Fragments ----------
     ***/
+
+
+
+    ---------- // EditTreasuryFragment
+
+    <string name="EditTreasuryFragmentTitle">ویرایش کیف پول</string>
+
+    <string name="EditTreasuryFragmentNameHeader">عنوان</string>
+
+    <string name="EditTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
+
+    <string name="EditTreasuryFragmentButton">ویرایش</string>
 
 
     ---------- // EditUserFragment
@@ -845,19 +869,6 @@
     <string name="CreateSessionUserFragmentButton">ثبت</string>
 
     /*
-    ---------- CreateTreasury Fragment ----------
-    */
-
-    <string name="CreateTreasuryFragmentTitle">ساخت کیف پول جدید</string>
-
-    <string name="CreateTreasuryFragmentNameHeader">عنوان</string>
-    <string name="CreateTreasuryFragmentRegionHeader">بستر</string>
-
-    <string name="CreateTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
-
-    <string name="CreateTreasuryFragmentButton">ساخت</string>
-
-    /*
     ---------- CreateUser Fragment ----------
     */
 
@@ -1025,18 +1036,6 @@
     <string name="EditSessionTabPaymentPaymentHeader">نوع دریافت</string>
 
     <string name="EditSessionTabPaymentButton">ویرایش</string>
-
-    /*
-    ---------- EditTreasury Fragment ----------
-    */
-
-    <string name="EditTreasuryFragmentTitle">ویرایش کیف پول</string>
-
-    <string name="EditTreasuryFragmentNameHeader">عنوان</string>
-
-    <string name="EditTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
-
-    <string name="EditTreasuryFragmentButton">ویرایش</string>
 
     // Index Fragments
     //////////////////////////////////////////////////////////////////////////////////////

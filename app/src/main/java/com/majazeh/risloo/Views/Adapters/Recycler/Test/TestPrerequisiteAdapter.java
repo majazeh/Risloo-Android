@@ -154,7 +154,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
             return false;
         });
 
-        holder.binding.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = true);
+        holder.binding.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         holder.binding.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
