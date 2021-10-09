@@ -96,7 +96,7 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void setWidget(HeaderTransactionHolder holder) {
-        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuriesFragmentLeft), 11, 14, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuryAdapterLeft), 11, 14, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     private void listener(IndexTransactionHolder holder, TransactionModel model) {

@@ -119,7 +119,7 @@ public class Singleton {
                 JSONObject original = userModel.getAvatar().getOriginal().object;
                 JSONObject large = userModel.getAvatar().getLarge().object;
 
-                if (small!= null)
+                if (small != null)
                     avatarArray.put(small);
 
                 if (medium != null)

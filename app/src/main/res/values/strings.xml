@@ -320,6 +320,12 @@
 
 
 
+    ---------- // TreasuriesFragment
+
+    <string name="TreasuriesFragmentTitle">کیف پول‌ها</string>
+
+    <string name="TreasuriesFragmentEmpty">هنوز کیف پولی ثبت نشده است.</string>
+
     /***
     ---------- Show Fragments ----------
     ***/
@@ -442,6 +448,19 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Adapter Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+    ---------- // TreasuryAdapter
+
+    <string name="TreasuryAdapterSerial">سریال</string>
+    <string name="TreasuryAdapterName">عنوان</string>
+    <string name="TreasuryAdapterCredit">اعتبار</string>
+    <string name="TreasuryAdapterLeft">باقی‌مانده (تومان)</string>
+
+    <string name="TreasuryAdapterCreditValid">معتبر</string>
+    <string name="TreasuryAdapterCreditInvalid">نامعتبر</string>
 
 
 
@@ -453,12 +472,7 @@
 
 
 
-
-
-
-
-
-
+    //////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1305,22 +1319,6 @@
     <string name="SessionsFragmentCase">پرونده</string>
 
     <string name="SessionsFragmentEmpty">هنوز جلسه‌‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- Treasuries Fragment ----------
-    */
-
-    <string name="TreasuriesFragmentTitle">کیف پول‌ها</string>
-
-    <string name="TreasuriesFragmentSerial">سریال</string>
-    <string name="TreasuriesFragmentName">عنوان</string>
-    <string name="TreasuriesFragmentCredit">اعتبار</string>
-    <string name="TreasuriesFragmentLeft">باقی‌مانده (ت)</string>
-
-    <string name="TreasuriesFragmentCreditTrue">معتبر</string>
-    <string name="TreasuriesFragmentCreditFalse">نامعتبر</string>
-
-    <string name="TreasuriesFragmentEmpty">هنوز کیف پولی ثبت نشده است.</string>
 
     /*
     ---------- Users Fragment ----------

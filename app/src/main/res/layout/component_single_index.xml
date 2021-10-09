@@ -18,8 +18,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/single_item_index_treasury"
-        tools:itemCount="4" />
+        tools:padding="@dimen/_6sdp"
+        tools:layoutDirection="rtl"
+        tools:itemCount="8" />
 
     <TextView
         android:id="@+id/emptyView"
@@ -45,7 +46,7 @@
         android:layout_marginBottom="@dimen/_6sdp"
         android:padding="@dimen/_6sdp"
         android:theme="@style/ProgressBarTheme2"
-        android:background="@drawable/draw_oval_solid_blue600"
+        android:background="@drawable/draw_oval_solid_risloo500"
         android:visibility="gone"
         app:elevation="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"

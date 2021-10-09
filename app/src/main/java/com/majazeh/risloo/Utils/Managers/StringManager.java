@@ -69,6 +69,11 @@ public class StringManager {
         return decimalFormat.format(Double.parseDouble(value));
     }
 
+    public static String minusSeparate(String value) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
+        return "(" + decimalFormat.format(Double.parseDouble(value.substring(1))) + ")";
+    }
+
     public static String persian(String value) {
         String[] persianNumbers = new String[]{"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
         StringBuilder output = new StringBuilder();
