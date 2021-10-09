@@ -113,10 +113,6 @@ public class BillFragment extends Fragment {
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
                                 times.add(new BillingModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
 
-                            JSONObject meta = ((JSONObject) object).getJSONObject("meta");
-                            if (meta.has("total") && !meta.isNull("total"))
-                                binding.timesHeaderLayout.countTextView.setText(StringManager.bracing(meta.getString("total")));
-
                             // Times Data
                             if (!times.data().isEmpty()) {
                                 indexTimeAdapter.setItems(times.data());
@@ -129,6 +125,8 @@ public class BillFragment extends Fragment {
                                 binding.timesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.timesSingleLayout.emptyView.setText(getResources().getString(R.string.TimeAdapterEmpty));
                             }
+
+                            binding.timesHeaderLayout.countTextView.setText(StringManager.bracing(indexTimeAdapter.itemsCount()));
 
                             hideShimmer();
                         } catch (JSONException e) {

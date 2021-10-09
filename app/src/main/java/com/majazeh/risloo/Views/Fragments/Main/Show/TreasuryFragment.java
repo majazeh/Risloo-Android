@@ -121,10 +121,6 @@ public class TreasuryFragment extends Fragment {
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
                                 transactions.add(new TransactionModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
 
-                            JSONObject meta = ((JSONObject) object).getJSONObject("meta");
-                            if (meta.has("total") && !meta.isNull("total"))
-                                binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(meta.getString("total")));
-
                             // Transactions Data
                             if (!transactions.data().isEmpty()) {
                                 indexTransactionAdapter.setItems(transactions.data());
@@ -137,6 +133,8 @@ public class TreasuryFragment extends Fragment {
                                 binding.transactionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.TransactionAdapterEmpty));
                             }
+
+                            binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(indexTransactionAdapter.itemsCount()));
 
                             hideShimmer();
                         } catch (JSONException e) {
