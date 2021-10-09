@@ -366,6 +366,13 @@
     <string name="MeFragmentTitle">من</string>
 
 
+    ---------- // TreasuryFragment
+
+    <string name="TreasuryFragmentTitle">کیف پول</string>
+
+    <string name="TreasuryFragmentLeft">باقی مانده</string>
+
+
     ---------- // UserFragment
 
     <string name="UserFragmentTitle">عضو</string>
@@ -450,6 +457,19 @@
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
+
+
+    ---------- // TransactionAdapter
+
+    <string name="TransactionAdapterHeader">تراکنش‌ها</string>
+
+    <string name="TransactionAdapterSerial">سریال</string>
+    <string name="TransactionAdapterDate">تاریخ</string>
+    <string name="TransactionAdapterCreditor">بستانکار</string>
+    <string name="TransactionAdapterDebtor">بدهکار</string>
+    <string name="TransactionAdapterLeft">باقی‌مانده (تومان)</string>
+
+    <string name="TransactionAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
 
 
     ---------- // TreasuryAdapter
@@ -1460,14 +1480,6 @@
     <string name="SessionFragmentReports">گزارشات</string>
     <string name="SessionFragmentEdit">ویرایش</string>
 
-    /*
-    ---------- Treasury Fragment ----------
-    */
-
-    <string name="TreasuryFragmentTitle">کیف پول</string>
-
-    <string name="TreasuryFragmentLeft">باقی مانده</string>
-
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1566,20 +1578,6 @@
     <string name="TimesAdapterAmount">مبلغ (ت)</string>
 
     <string name="TimesAdapterEmpty">هنوز موردی ثبت نشده است.</string>
-
-    /*
-    ---------- Transactions Adapter ----------
-    */
-
-    <string name="TransactionsAdapterHeader">تراکنش‌ها</string>
-
-    <string name="TransactionsAdapterSerial">سریال</string>
-    <string name="TransactionsAdapterDate">تاریخ</string>
-    <string name="TransactionsAdapterCreditor">بستانکار</string>
-    <string name="TransactionsAdapterDebtor">بدهکار</string>
-    <string name="TransactionsAdapterLeft">باقی‌مانده</string>
-
-    <string name="TransactionsAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
 
     /*
     ---------- Users2 Adapter ----------

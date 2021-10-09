@@ -96,7 +96,7 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void setWidget(HeaderTransactionHolder holder) {
-        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuryAdapterLeft), 11, 14, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TransactionAdapterLeft), 11, 18, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     private void listener(IndexTransactionHolder holder, TransactionModel model) {
@@ -117,13 +117,16 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
         holder.binding.creditorTextView.setText(StringManager.separate(model.getCredit()));
         holder.binding.debtorTextView.setText(StringManager.separate(model.getDebt()));
 
-        holder.binding.leftTextView.setText(StringManager.separate(model.getBalance()));
-        if (model.getBalance().equals("0"))
+        if (model.getBalance().equals("0")) {
+            holder.binding.leftTextView.setText(String.valueOf(model.getBalance()));
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray700));
-        else if (String.valueOf(model.getBalance()).contains("-"))
-            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
-        else
+        } else if (String.valueOf(model.getBalance()).contains("-")) {
+            holder.binding.leftTextView.setText(StringManager.minusSeparate(String.valueOf(model.getBalance())));
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Red600));
+        } else {
+            holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getBalance())));
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Emerald600));
+        }
     }
 
 }

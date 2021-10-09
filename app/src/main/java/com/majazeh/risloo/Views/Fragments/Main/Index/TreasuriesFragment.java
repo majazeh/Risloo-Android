@@ -108,7 +108,7 @@ public class TreasuriesFragment extends Fragment {
                             if (Objects.equals(data.get("page"), 1))
                                 adapter.clearItems();
 
-                            if (items.meta().has("total"))
+                            if (items.meta().has("total") && !items.meta().isNull("total"))
                                 binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.meta().getString("total")));
 
                             if (!items.data().isEmpty()) {

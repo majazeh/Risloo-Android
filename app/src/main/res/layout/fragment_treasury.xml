@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:paddingBottom="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="center"
                 android:textSize="@dimen/_10ssp"
@@ -53,7 +55,9 @@
                 android:textColor="@color/LightBlue700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
+                app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintEnd_toStartOf="@id/serial_imageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="سریال" />
 
@@ -127,22 +131,24 @@
                 android:gravity="left"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Emerald700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                 app:layout_constraintStart_toEndOf="@id/left_textView"
                 app:layout_constraintTop_toBottomOf="@id/center_textView"
-                tools:text="100.000 تومان" />
+                tools:text="100.000 تومان"
+                tools:textColor="@color/Emerald600" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
             android:id="@+id/transactions_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
 
@@ -160,7 +166,7 @@
 
         <include
             android:id="@+id/transactions_singleLayout"
-            layout="@layout/component_single_transaction"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"

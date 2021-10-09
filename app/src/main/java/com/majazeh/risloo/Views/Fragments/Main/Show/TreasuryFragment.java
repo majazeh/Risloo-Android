@@ -61,7 +61,7 @@ public class TreasuryFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.transactionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.TransactionsAdapterHeader));
+        binding.transactionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.TransactionAdapterHeader));
 
         binding.transactionsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
@@ -91,20 +91,17 @@ public class TreasuryFragment extends Fragment {
                 binding.centerTextView.setVisibility(View.GONE);
             }
 
-            if (model.getBalance() != 0) {
-                String amount = StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman);
-                binding.amountTextView.setText(amount);
+            if (model.getBalance() == 0) {
+                binding.amountTextView.setText(model.getBalance() + " " + getResources().getString(R.string.MainToman));
+                binding.amountTextView.setTextColor(getResources().getColor(R.color.CoolGray700));
+            } else if (String.valueOf(model.getBalance()).contains("-")) {
+                binding.amountTextView.setText(StringManager.minusSeparate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
+                binding.amountTextView.setTextColor(getResources().getColor(R.color.Red600));
             } else {
-                String amount = "0" + " " + getResources().getString(R.string.MainToman);
-                binding.amountTextView.setText(amount);
+                binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
+                binding.amountTextView.setTextColor(getResources().getColor(R.color.Emerald600));
             }
 
-            if (model.getBalance() == 0)
-                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.CoolGray700));
-            else if (String.valueOf(model.getBalance()).contains("-"))
-                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Red500));
-            else
-                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Emerald600));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -121,9 +118,12 @@ public class TreasuryFragment extends Fragment {
                             setData(treasuriesModel);
 
                             List transactions = new List();
-                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
+                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
                                 transactions.add(new TransactionModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
-                            }
+
+                            JSONObject meta = ((JSONObject) object).getJSONObject("meta");
+                            if (meta.has("total") && !meta.isNull("total"))
+                                binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(meta.getString("total")));
 
                             // Transactions Data
                             if (!transactions.data().isEmpty()) {
@@ -132,17 +132,13 @@ public class TreasuryFragment extends Fragment {
 
                                 binding.transactionsSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (indexTransactionAdapter.getItemCount() == 0) {
+                                binding.transactionsSingleLayout.recyclerView.setAdapter(null);
+
                                 binding.transactionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                                binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.TransactionsAdapterEmpty));
+                                binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.TransactionAdapterEmpty));
                             }
 
-                            binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(indexTransactionAdapter.itemsCount()));
-
-                            // Transactions Data
-                            binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.transactionsShimmerLayout.getRoot().stopShimmer();
-
+                            hideShimmer();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -154,16 +150,20 @@ public class TreasuryFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-
-                        // Transactions Data
-                        binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.transactionsShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+
+        // Transactions Data
+        binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.transactionsShimmerLayout.getRoot().stopShimmer();
+
     }
 
     @Override
