@@ -18,7 +18,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexCaseAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexCaseAdapter;
 import com.majazeh.risloo.databinding.FragmentCasesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;

@@ -13,7 +13,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.TagsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.TagsAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterTagsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;

@@ -15,7 +15,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexTimeAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexTimeAdapter;
 import com.majazeh.risloo.databinding.FragmentBillBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Billing;

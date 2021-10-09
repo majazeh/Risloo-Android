@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexClientReportAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexClientReportAdapter;
 import com.majazeh.risloo.databinding.FragmentClientReportsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;

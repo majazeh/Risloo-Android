@@ -23,7 +23,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Views.Adapters.Recycler.Create.CreateCheckAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Create.CreateCheckAdapter;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
