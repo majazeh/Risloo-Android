@@ -19,9 +19,14 @@
         <include
             android:id="@+id/header_includeLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_4sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_goneMarginEnd="@dimen/_12sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toStartOf="@id/filter_cardView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,8 +37,9 @@
             android:layout_marginEnd="@dimen/_12sdp"
             app:cardCornerRadius="@dimen/_16sdp"
             app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/header_includeLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@id/header_includeLayout">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/filter_tabLayout"
@@ -44,14 +50,14 @@
                 app:tabPaddingEnd="@dimen/_8sdp"
                 app:tabPaddingStart="@dimen/_8sdp"
                 app:tabBackground="@null"
-                app:tabGravity="center"
+                app:tabGravity="start"
                 app:tabMode="fixed"
                 app:tabMaxWidth="0dp"
-                app:tabTextColor="@color/LightBlue600"
+                app:tabTextColor="@color/Risloo500"
                 app:tabSelectedTextColor="@color/White"
                 app:tabTextAppearance="@style/TabTextAppearance2"
                 app:tabRippleColor="@color/CoolGray300"
-                app:tabIndicatorColor="@color/LightBlue600"
+                app:tabIndicatorColor="@color/Risloo500"
                 app:tabIndicatorHeight="@dimen/_28sdp">
 
                 <com.google.android.material.tabs.TabItem
@@ -91,7 +97,7 @@
 
         <include
             android:id="@+id/index_singleLayout"
-            layout="@layout/component_single_bill"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"

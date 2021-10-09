@@ -136,7 +136,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setWidget(HeaderBillHolder holder) {
-        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BillingsFragmentAmount), 5, 8, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BillAdapterAmount), 5, 12, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -150,6 +150,8 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             userSelect = true;
             return false;
         });
+
+        holder.binding.menuSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -207,7 +209,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel;
 
                     if (treasuriesModel != null && treasuriesModel.getId() != null && treasuriesModel.getId().equals(debtorId)) {
-                        items.add(activity.getResources().getString(R.string.BillingsFragmentPay));
+                        items.add(activity.getResources().getString(R.string.BillAdapterPay));
                         treasuryIds.add("");
                         break;
                     }
@@ -232,7 +234,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                     TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel2;
 
                                     if (treasuriesModel.isCreditable() && treasuriesModel.getSymbol().contains(centerId.toLowerCase()))
-                                        treasuriesModel.setTitle(activity.getResources().getString(R.string.BillingsFragmentTreasuryOnline));
+                                        treasuriesModel.setTitle(activity.getResources().getString(R.string.BillAdapterTreasury));
 
                                     items.add(treasuriesModel.getTitle());
                                     treasuryIds.add(treasuriesModel.getId());

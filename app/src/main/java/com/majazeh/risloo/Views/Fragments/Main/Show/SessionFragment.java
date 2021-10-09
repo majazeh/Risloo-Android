@@ -93,7 +93,7 @@ public class SessionFragment extends Fragment {
         binding.usersHeaderLayout.titleTextView.setText(getResources().getString(R.string.Users2AdapterHeader));
         binding.practicesHeaderLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
-        binding.billsHeaderLayout.titleTextView.setText(getResources().getString(R.string.BillingsFragmentTitle2));
+        binding.billsHeaderLayout.titleTextView.setText(getResources().getString(R.string.BillAdapterTitle));
 
         binding.usersShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
         binding.practicesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
@@ -572,7 +572,7 @@ public class SessionFragment extends Fragment {
                             binding.billsSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (indexBillAdapter.getItemCount() == 0) {
                             binding.billsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.billsSingleLayout.emptyView.setText(getResources().getString(R.string.BillingsFragmentEmpty2));
+                            binding.billsSingleLayout.emptyView.setText(getResources().getString(R.string.BillAdapterEmpty));
                         }
 
                         binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));

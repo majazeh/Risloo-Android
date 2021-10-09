@@ -62,7 +62,7 @@ public class BillFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.timesHeaderLayout.titleTextView.setText(getResources().getString(R.string.TimesAdapterHeader));
+        binding.timesHeaderLayout.titleTextView.setText(getResources().getString(R.string.TimeAdapterHeader));
 
         binding.timesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
@@ -93,11 +93,9 @@ public class BillFragment extends Fragment {
         }
 
         if (model.getAmount() != 0) {
-            String amount = StringManager.separate(String.valueOf(model.getAmount())) + " " + getResources().getString(R.string.MainToman);
-            binding.amountTextView.setText(amount);
+            binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())) + " " + getResources().getString(R.string.MainToman));
         } else {
-            String amount = "0" + " " + getResources().getString(R.string.MainToman);
-            binding.amountTextView.setText(amount);
+            binding.amountTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
         }
     }
 
@@ -111,29 +109,28 @@ public class BillFragment extends Fragment {
                             billingModel = new BillingModel(((JSONObject) object).getJSONObject("billing"));
                             setData(billingModel);
 
-                            List items = new List();
-                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
-                                items.add(new BillingModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
-                            }
+                            List times = new List();
+                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
+                                times.add(new BillingModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
 
-                            // Items Data
-                            if (!items.data().isEmpty()) {
-                                indexTimeAdapter.setItems(items.data());
+                            JSONObject meta = ((JSONObject) object).getJSONObject("meta");
+                            if (meta.has("total") && !meta.isNull("total"))
+                                binding.timesHeaderLayout.countTextView.setText(StringManager.bracing(meta.getString("total")));
+
+                            // Times Data
+                            if (!times.data().isEmpty()) {
+                                indexTimeAdapter.setItems(times.data());
                                 binding.timesSingleLayout.recyclerView.setAdapter(indexTimeAdapter);
 
                                 binding.timesSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (indexTimeAdapter.getItemCount() == 0) {
+                                binding.timesSingleLayout.recyclerView.setAdapter(null);
+
                                 binding.timesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                                binding.timesSingleLayout.emptyView.setText(getResources().getString(R.string.TimesAdapterEmpty));
+                                binding.timesSingleLayout.emptyView.setText(getResources().getString(R.string.TimeAdapterEmpty));
                             }
 
-                            binding.timesHeaderLayout.countTextView.setText(StringManager.bracing(indexTimeAdapter.itemsCount()));
-
-                            // Items Data
-                            binding.timesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.timesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.timesShimmerLayout.getRoot().stopShimmer();
-
+                            hideShimmer();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -145,16 +142,20 @@ public class BillFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-
-                        // Items Data
-                        binding.timesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.timesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.timesShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+
+        // Times Data
+        binding.timesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.timesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.timesShimmerLayout.getRoot().stopShimmer();
+
     }
 
     @Override

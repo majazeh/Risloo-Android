@@ -603,7 +603,7 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (dropdownTextView.getText().toString().equals("پرداخت"))
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Emerald700));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Emerald600));
                 else
                     dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
             }

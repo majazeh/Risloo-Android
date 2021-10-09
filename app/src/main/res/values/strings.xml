@@ -320,6 +320,16 @@
 
 
 
+    ---------- // BillingsFragment
+
+    <string name="BillingsFragmentTitle">صورت حساب‌ها</string>
+
+    <string name="BillingsFragmentFilterAll">همه</string>
+    <string name="BillingsFragmentFilterCreditor">تسویه نشده</string>
+
+    <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
+
+
     ---------- // TreasuriesFragment
 
     <string name="TreasuriesFragmentTitle">کیف پول‌ها</string>
@@ -338,6 +348,15 @@
     <string name="AccountingFragmentTreasuries">کیف پول‌ها</string>
     <string name="AccountingFragmentBillings">صورت حساب‌ها</string>
     <string name="AccountingFragmentPayments">شارژ حساب</string>
+
+
+    ---------- // BillFragment
+
+    <string name="BillFragmentTitle">صورت حساب</string>
+
+    <string name="BillFragmentDebtor">بدهکار</string>
+    <string name="BillFragmentCreditor">بستانکار</string>
+    <string name="BillFragmentFinal">نهایی</string>
 
 
     ---------- // DashboardFragment
@@ -459,6 +478,37 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
 
+    ---------- // BillAdapter
+
+    <string name="BillAdapterTitle">تراکنش‌ها</string>
+
+    <string name="BillAdapterSerial">سریال</string>
+    <string name="BillAdapterName">عنوان</string>
+    <string name="BillAdapterDate">تاریخ</string>
+    <string name="BillAdapterCreditor">بستانکار</string>
+    <string name="BillAdapterDebtor">بدهکار</string>
+    <string name="BillAdapterAmount">مبلغ (تومان)</string>
+    <string name="BillAdapterStatus">وضعیت</string>
+
+    <string name="BillAdapterPay">پرداخت</string>
+    <string name="BillAdapterTreasury">پرداخت شده به کیف پول …</string>
+
+    <string name="BillAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
+
+
+    ---------- // TimeAdapter
+
+    <string name="TimeAdapterHeader">موارد</string>
+
+    <string name="TimeAdapterSerial">سریال</string>
+    <string name="TimeAdapterName">عنوان</string>
+    <string name="TimeAdapterCreditor">بستانکار</string>
+    <string name="TimeAdapterDebtor">بدهکار</string>
+    <string name="TimeAdapterAmount">مبلغ (تومان)</string>
+
+    <string name="TimeAdapterEmpty">هنوز موردی ثبت نشده است.</string>
+
+
     ---------- // TransactionAdapter
 
     <string name="TransactionAdapterHeader">تراکنش‌ها</string>
@@ -493,17 +543,6 @@
 
 
     //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1075,30 +1114,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- Billings Fragment ----------
-    */
-
-    <string name="BillingsFragmentTitle">صورت حساب‌ها</string>
-    <string name="BillingsFragmentTitle2">تراکنش‌ها</string>
-
-    <string name="BillingsFragmentSerial">سریال</string>
-    <string name="BillingsFragmentName">عنوان</string>
-    <string name="BillingsFragmentDate">تاریخ</string>
-    <string name="BillingsFragmentCreditor">بستانکار</string>
-    <string name="BillingsFragmentDebtor">بدهکار</string>
-    <string name="BillingsFragmentAmount">مبلغ (ت)</string>
-    <string name="BillingsFragmentStatus">وضعیت</string>
-
-    <string name="BillingsFragmentFilterAll">همه</string>
-    <string name="BillingsFragmentFilterCreditor">تسویه نشده</string>
-
-    <string name="BillingsFragmentPay">پرداخت</string>
-    <string name="BillingsFragmentTreasuryOnline">پرداخت شده به کیف پول …</string>
-
-    <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
-    <string name="BillingsFragmentEmpty2">هنوز تراکنشی ثبت نشده است.</string>
-
-    /*
     ---------- Bulk Samples Fragment ----------
     */
 
@@ -1359,18 +1374,6 @@
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
-
-
-    /*
-    ---------- Bill Fragment ----------
-    */
-
-    <string name="BillFragmentTitle">صورت حساب</string>
-
-    <string name="BillFragmentDebtor">بدهکار</string>
-    <string name="BillFragmentCreditor">بستانکار</string>
-    <string name="BillFragmentFinal">نهایی</string>
-
     /*
     ---------- Bulk Sample Fragment ----------
     */
@@ -1564,20 +1567,6 @@
     <string name="Sessions2AdapterStatus">وضعیت</string>
 
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- Times Adapter ----------
-    */
-
-    <string name="TimesAdapterHeader">موارد</string>
-
-    <string name="TimesAdapterSerial">سریال</string>
-    <string name="TimesAdapterName">عنوان</string>
-    <string name="TimesAdapterCreditor">بستانکار</string>
-    <string name="TimesAdapterDebtor">بدهکار</string>
-    <string name="TimesAdapterAmount">مبلغ (ت)</string>
-
-    <string name="TimesAdapterEmpty">هنوز موردی ثبت نشده است.</string>
 
     /*
     ---------- Users2 Adapter ----------

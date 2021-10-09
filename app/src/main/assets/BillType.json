@@ -6,5 +6,9 @@
   {
     "fa_title": "بستانکار",
     "en_title": "creditor"
+  },
+  {
+    "fa_title": "بدهکار",
+    "en_title": "debtor"
   }
 ]
