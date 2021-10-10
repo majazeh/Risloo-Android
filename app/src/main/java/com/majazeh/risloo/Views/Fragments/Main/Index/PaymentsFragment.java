@@ -82,15 +82,15 @@ public class PaymentsFragment extends Fragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.chargeHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeHeader));
-        binding.chargeHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.Emerald700));
+        binding.chargeHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.Emerald600));
 
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeTreasuryHeader));
-        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 4, 12, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 5, 12, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
-        InitManager.txtTextColorBackground(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
 
-        binding.paymentsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentsFragmentPaymentHeader));
+        binding.paymentsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentAdapterHeader));
 
         binding.paymentsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
@@ -103,6 +103,8 @@ public class PaymentsFragment extends Fragment {
             userSelect = true;
             return false;
         });
+
+        binding.treasuryIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.treasuryIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -245,30 +247,29 @@ public class PaymentsFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (Objects.equals(data.get("page"), 1))
-                            indexPaymentAdapter.clearItems();
+                        try {
+                            if (Objects.equals(data.get("page"), 1))
+                                indexPaymentAdapter.clearItems();
 
-                        if (!items.data().isEmpty()) {
-                            indexPaymentAdapter.setItems(items.data());
-                            binding.paymentsSingleLayout.recyclerView.setAdapter(indexPaymentAdapter);
+                            if (items.meta().has("total") && !items.meta().isNull("total"))
+                                binding.paymentsHeaderLayout.countTextView.setText(StringManager.bracing(items.meta().getString("total")));
 
-                            binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexPaymentAdapter.itemsCount() == 0) {
-                            binding.paymentsSingleLayout.recyclerView.setAdapter(null);
+                            if (!items.data().isEmpty()) {
+                                indexPaymentAdapter.setItems(items.data());
+                                binding.paymentsSingleLayout.recyclerView.setAdapter(indexPaymentAdapter);
 
-                            binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentsFragmentPaymentEmpty));
+                                binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
+                            } else if (indexPaymentAdapter.itemsCount() == 0) {
+                                binding.paymentsSingleLayout.recyclerView.setAdapter(null);
+
+                                binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentAdapterEmpty));
+                            }
+
+                            hideShimmer();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-                        binding.paymentsHeaderLayout.countTextView.setText(StringManager.bracing(indexPaymentAdapter.itemsCount()));
-
-                        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.paymentsShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
-
                     });
 
                     isLoading = false;
@@ -279,13 +280,7 @@ public class PaymentsFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.paymentsShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
-
+                        hideShimmer();
                     });
 
                     isLoading = false;
@@ -355,6 +350,18 @@ public class PaymentsFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+
+        // Payments Data
+        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.paymentsShimmerLayout.getRoot().stopShimmer();
+
+        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
+
     }
 
     @Override

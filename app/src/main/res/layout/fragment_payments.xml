@@ -19,9 +19,13 @@
         <include
             android:id="@+id/charge_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,16 +93,20 @@
             layout="@layout/component_main_button_rect_big"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintRight_toRightOf="@id/charge_constraintLayout"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/charge_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/charge_constraintLayout" />
 
         <include
             android:id="@+id/payments_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_24sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/charge_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/charge_textView" />
 
@@ -116,7 +124,7 @@
 
         <include
             android:id="@+id/payments_singleLayout"
-            layout="@layout/component_single_payment"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"

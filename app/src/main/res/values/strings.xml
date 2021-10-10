@@ -330,6 +330,18 @@
     <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
 
 
+    ---------- // PaymentsFragment
+
+    <string name="PaymentsFragmentTitle">شارژ حساب</string>
+
+    <string name="PaymentsFragmentChargeHeader">افزایش اعتبار</string>
+
+    <string name="PaymentsFragmentChargeTreasuryHeader">کیف پول</string>
+    <string name="PaymentsFragmentChargeAmountHeader">مبلغ (تومان)</string>
+
+    <string name="PaymentsFragmentChargeButton">انتقال به درگاه پرداخت</string>
+
+
     ---------- // TreasuriesFragment
 
     <string name="TreasuriesFragmentTitle">کیف پول‌ها</string>
@@ -494,6 +506,20 @@
     <string name="BillAdapterTreasury">پرداخت شده به کیف پول …</string>
 
     <string name="BillAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
+
+
+    ---------- // PaymentAdapter
+
+    <string name="PaymentAdapterHeader">گزارش پرداخت‌ها</string>
+
+    <string name="PaymentAdapterSerial">سریال</string>
+    <string name="PaymentAdapterLeft">باقی‌مانده (تومان)</string>
+    <string name="PaymentAdapterTreasury">کیف پول</string>
+    <string name="PaymentAdapterDescription">توضیحات</string>
+    <string name="PaymentAdapterDate">تاریخ</string>
+    <string name="PaymentAdapterStatus">وضعیت</string>
+
+    <string name="PaymentAdapterEmpty">هنوز پرداختی ثبت نشده است.</string>
 
 
     ---------- // TimeAdapter
@@ -1239,29 +1265,6 @@
     <string name="DocumentsFragmentDownload">دانلود فایل</string>
 
     <string name="DocumentsFragmentEmpty">هنوز مدرکی ثبت نشده است.</string>
-
-    /*
-    ---------- Payments Fragment ----------
-    */
-
-    <string name="PaymentsFragmentTitle">شارژ حساب</string>
-
-    <string name="PaymentsFragmentChargeHeader">افزایش اعتبار</string>
-
-    <string name="PaymentsFragmentChargeTreasuryHeader">کیف پول</string>
-    <string name="PaymentsFragmentChargeAmountHeader">مبلغ (تومان)</string>
-
-    <string name="PaymentsFragmentChargeButton">انتقال به درگاه پرداخت</string>
-
-    <string name="PaymentsFragmentPaymentHeader">گزارش پرداخت‌ها</string>
-
-    <string name="PaymentsFragmentPaymentSerial">سریال</string>
-    <string name="PaymentsFragmentPaymentDescription">توضیحات</string>
-    <string name="PaymentsFragmentPaymentDate">تاریخ</string>
-    <string name="PaymentsFragmentPaymentLeft">باقی‌مانده (ت)</string>
-    <string name="PaymentsFragmentPaymentStatus">وضعیت</string>
-
-    <string name="PaymentsFragmentPaymentEmpty">هنوز پرداختی ثبت نشده است.</string>
 
     /*
     ---------- RoomPlatforms Fragment ----------

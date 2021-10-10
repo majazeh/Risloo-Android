@@ -20,10 +20,11 @@
     <TextView
         android:id="@+id/serial_textView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:minLines="2"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -32,16 +33,15 @@
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/description_textView"
+        app:layout_constraintEnd_toStartOf="@id/left_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="سریال" />
 
     <TextView
-        android:id="@+id/description_textView"
+        android:id="@+id/left_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
@@ -50,8 +50,42 @@
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@id/left_textView"
+        app:layout_constraintEnd_toStartOf="@id/description_textView"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        tools:text="باقی‌مانده" />
+
+    <TextView
+        android:id="@+id/treasury_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/left_textView"
+        app:layout_constraintStart_toStartOf="@id/left_textView"
+        app:layout_constraintTop_toBottomOf="@id/left_textView"
+        tools:text="کیف پول" />
+
+    <TextView
+        android:id="@+id/description_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintEnd_toStartOf="@id/status_textView"
+        app:layout_constraintStart_toEndOf="@id/left_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="توضیحات" />
 
@@ -73,52 +107,24 @@
         tools:text="تاریخ" />
 
     <TextView
-        android:id="@+id/left_textView"
+        android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:minLines="2"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@id/treasury_imageView"
-        app:layout_constraintStart_toEndOf="@id/description_textView"
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="باقی‌مانده" />
-
-    <TextView
-        android:id="@+id/status_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="center|right"
-        android:textSize="@dimen/_7ssp"
-        android:textStyle="normal"
-        android:textColor="@color/CoolGray500"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/left_textView"
-        app:layout_constraintStart_toStartOf="@id/left_textView"
-        app:layout_constraintTop_toBottomOf="@id/left_textView"
-        tools:text="وضعیت" />
-
-    <ImageView
-        android:id="@+id/treasury_imageView"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:padding="@dimen/_5sdp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_wallet_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/left_textView"
+        app:layout_constraintStart_toEndOf="@id/description_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view"
-        app:tint="@color/CoolGray500" />
+        tools:text="وضعیت" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
