@@ -88,13 +88,37 @@ public class AuthSerialFragment extends Fragment {
                 ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
-                doWork();
+                doWork("serial");
             }
         }).widget(binding.buttonTextView.getRoot());
 
         CustomClickView.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> doWork("logout")).widget(binding.logoutLinkTextView.getRoot());
+    }
+
+    private void setData() {
+        if (!((AuthActivity) requireActivity()).singleton.getAvatar().equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.LightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
+        } else {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            if (!((AuthActivity) requireActivity()).singleton.getName().equals(""))
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
+            else
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
+        }
+    }
+
+    private void doWork(String method) {
+        if (method.equals("serial")) {
+            DialogManager.showLoadingDialog(requireActivity(), "");
+
+            data.put("authorized_key", serial);
+
+            // Todo : Place Code Here
+
+        } else if (method.equals("logout")) {
             DialogManager.showLoadingDialog(requireActivity(), "");
 
             Auth.logout(new HashMap<>(), header, new Response() {
@@ -121,28 +145,7 @@ public class AuthSerialFragment extends Fragment {
                     }
                 }
             });
-        }).widget(binding.logoutLinkTextView.getRoot());
-    }
-
-    private void setData() {
-        if (!((AuthActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.LightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (!((AuthActivity) requireActivity()).singleton.getName().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
-            else
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
         }
-    }
-
-    private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
-
-        data.put("authorized_key", serial);
-
-        // Todo : Place Code Here
     }
 
     @Override
