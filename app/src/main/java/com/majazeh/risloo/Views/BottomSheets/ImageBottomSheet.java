@@ -52,15 +52,15 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void listener() {
-        CustomClickView.onDelayedListener(() -> {
+        CustomClickView.onClickListener(() -> {
             if (PermissionManager.galleryPermission(requireActivity())) {
                 IntentManager.gallery(requireActivity());
             }
 
             dismiss();
-        }).widget(binding.galleryLinearLayout);
+        }).widget(binding.galleryButton);
 
-        CustomClickView.onDelayedListener(() -> {
+        CustomClickView.onClickListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
                 if (current instanceof CreateCenterFragment)
                     ((CreateCenterFragment) current).avatarPath = IntentManager.camera(requireActivity());
@@ -73,7 +73,9 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
             }
 
             dismiss();
-        }).widget(binding.cameraLinearLayout);
+        }).widget(binding.cameraButton);
+
+        CustomClickView.onClickListener(this::dismiss).widget(binding.returnButton);
     }
 
     @Override

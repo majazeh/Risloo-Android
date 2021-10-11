@@ -27,84 +27,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/gallery_linearLayout"
+    <TextView
+        android:id="@+id/gallery_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_8sdp"
-        android:paddingTop="@dimen/_8sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_24sdp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:background="@drawable/draw_4sdp_solid_white_ripple_gray300"
+        android:text="@string/BottomSheetImageGallery"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Risloo500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_24sdp_solid_coolgray100_ripple_coolgray300"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
-        app:layout_constraintTop_toBottomOf="@id/title_textView">
+        app:layout_constraintTop_toBottomOf="@id/title_textView" />
 
-        <ImageView
-            android:layout_width="@dimen/_22sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:contentDescription="@string/AppImageContent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_images_regular"
-            android:padding="@dimen/_4sdp"
-            android:background="@drawable/draw_4sdp_solid_blue500"
-            app:tint="@color/White" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="@string/BottomSheetImageGallery"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="normal"
-            android:textColor="@color/CoolGray600"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/camera_linearLayout"
+    <TextView
+        android:id="@+id/camera_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:paddingBottom="@dimen/_8sdp"
-        android:paddingTop="@dimen/_8sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:background="@drawable/draw_4sdp_solid_white_ripple_gray300"
+        android:text="@string/BottomSheetImageCamera"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Risloo500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_24sdp_solid_coolgray100_ripple_coolgray300"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/gallery_button" />
+
+    <TextView
+        android:id="@+id/return_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center"
+        android:text="@string/BottomSheetLogoutReturn"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_24sdp_solid_white_border_1sdp_gray200_ripple_gray300"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/gallery_linearLayout"
-        app:layout_constraintStart_toStartOf="@id/gallery_linearLayout"
-        app:layout_constraintTop_toBottomOf="@id/gallery_linearLayout">
-
-        <ImageView
-            android:layout_width="@dimen/_22sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:contentDescription="@string/AppImageContent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_camera_regular"
-            android:padding="@dimen/_4sdp"
-            android:background="@drawable/draw_4sdp_solid_blue500"
-            app:tint="@color/White" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="@string/BottomSheetImageCamera"
-            android:textSize="@dimen/_13ssp"
-            android:textStyle="normal"
-            android:textColor="@color/CoolGray600"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular" />
-
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/camera_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
