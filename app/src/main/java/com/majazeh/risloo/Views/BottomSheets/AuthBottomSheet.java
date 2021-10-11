@@ -19,6 +19,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.BottomSheetAuthBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -28,11 +29,14 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
     // Binding
     private BottomSheetAuthBinding binding;
 
+    // Models
+    private UserModel userModel;
+
     // Objects
     private HashMap data, header;
 
     // Vars
-    private String key, name, avatar;
+    private String key;
 
     @NonNull
     @Override
@@ -61,60 +65,65 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void listener() {
-        CustomClickView.onDelayedListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity(), "");
+        CustomClickView.onDelayedListener(this::doWork).widget(binding.entryButton);
 
-            data.put("key", key);
-
-            Center.theory(data, header, new Response() {
-                @Override
-                public void onOK(Object object) {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
-
-                            ((MainActivity) requireActivity()).navController.navigateUp();
-
-                            dismiss();
-                        });
-                    }
-                }
-
-                @Override
-                public void onFailure(String response) {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            // Place Code if Needed
-                        });
-                    }
-                }
-            });
-        }).widget(binding.entryButton);
+        CustomClickView.onClickListener(this::dismiss).widget(binding.returnButton);
     }
 
     private void setDialog() {
-        if (!name.equals("")) {
-            binding.nameTextView.setText(name);
+        if (userModel.getName() != null && !userModel.getName().equals("")) {
+            binding.nameTextView.setText(userModel.getName());
+        } else if (userModel.getId() != null && !userModel.getId().equals("")) {
+            binding.nameTextView.setText(userModel.getId());
         } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
         }
 
-        if (!avatar.equals("")) {
+        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar().getMedium().getUrl() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(avatar).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 
-    public void setData(String key, String name, String avatar) {
+    public void setData(String key, UserModel userModel) {
         this.key = key;
-        this.name = name;
-        this.avatar = avatar;
+        this.userModel = userModel;
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        data.put("key", key);
+
+        Center.theory(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
+
+                        dismiss();
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Place Code if Needed
+                    });
+                }
+            }
+        });
     }
 
     @Override

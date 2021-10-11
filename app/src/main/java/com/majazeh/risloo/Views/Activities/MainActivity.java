@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                             navController.navigate(action);
                         } break;
                         case "خروج": {
-                            SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getName(), singleton.getAvatar());
+                            SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
                         } break;
                     }
 

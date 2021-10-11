@@ -12,6 +12,7 @@ import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class SheetManager {
 
@@ -27,10 +28,10 @@ public class SheetManager {
     ---------- Show ----------
     */
 
-    public static void showAuthBottomSheet(Activity activity, String key, String name, String avatar) {
+    public static void showAuthBottomSheet(Activity activity, String key, UserModel userModel) {
         authBottomSheet = new AuthBottomSheet();
         authBottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "authBottomSheet");
-        authBottomSheet.setData(key, name, avatar);
+        authBottomSheet.setData(key, userModel);
     }
 
     public static void showBulkSampleBottomSheet(Activity activity, String key, String name, String avatar, BulkSampleModel model) {
@@ -50,10 +51,10 @@ public class SheetManager {
         imageBottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "imageBottomSheet");
     }
 
-    public static void showLogoutBottomSheet(Activity activity, String name, String avatar) {
+    public static void showLogoutBottomSheet(Activity activity, UserModel userModel) {
         logoutBottomSheet = new LogoutBottomSheet();
         logoutBottomSheet.show(((AppCompatActivity) activity).getSupportFragmentManager(), "logoutBottomSheet");
-        logoutBottomSheet.setData(name, avatar);
+        logoutBottomSheet.setData(userModel);
     }
 
     public static void showTimeBottomSheet(Activity activity, String timestamp, String method) {

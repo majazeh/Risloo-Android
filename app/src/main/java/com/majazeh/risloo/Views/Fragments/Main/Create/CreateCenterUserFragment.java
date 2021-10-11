@@ -249,7 +249,7 @@ public class CreateCenterUserFragment extends Fragment {
 
                             DialogManager.dismissLoadingDialog();
 
-                            SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
+                            SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getUserModel());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

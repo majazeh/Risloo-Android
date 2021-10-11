@@ -19,6 +19,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.BottomSheetLogoutBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -28,11 +29,11 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     // Binding
     private BottomSheetLogoutBinding binding;
 
+    // Models
+    private UserModel userModel;
+
     // Objects
     private HashMap data, header;
-
-    // Vars
-    private String name, avatar;
 
     @NonNull
     @Override
@@ -61,57 +62,62 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void listener() {
-        CustomClickView.onDelayedListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity(), "");
+        CustomClickView.onDelayedListener(this::doWork).widget(binding.entryButton);
 
-            Auth.logout(data, header, new Response() {
-                @Override
-                public void onOK(Object object) {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.logout();
-                            DialogManager.dismissLoadingDialog();
-
-                            IntentManager.auth(requireActivity(), "login");
-
-                            dismiss();
-                        });
-                    }
-                }
-
-                @Override
-                public void onFailure(String response) {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            // Place Code if Needed
-                        });
-                    }
-                }
-            });
-        }).widget(binding.entryButton);
+        CustomClickView.onClickListener(this::dismiss).widget(binding.returnButton);
     }
 
     private void setDialog() {
-        if (!name.equals("")) {
-            binding.nameTextView.setText(name);
+        if (userModel.getName() != null && !userModel.getName().equals("")) {
+            binding.nameTextView.setText(userModel.getName());
+        } else if (userModel.getId() != null && !userModel.getId().equals("")) {
+            binding.nameTextView.setText(userModel.getId());
         } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
         }
 
-        if (!avatar.equals("")) {
+        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar().getMedium().getUrl() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(avatar).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 
-    public void setData(String name, String avatar) {
-        this.name = name;
-        this.avatar = avatar;
+    public void setData(UserModel userModel) {
+        this.userModel = userModel;
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        Auth.logout(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).singleton.logout();
+                        DialogManager.dismissLoadingDialog();
+
+                        IntentManager.auth(requireActivity(), "login");
+
+                        dismiss();
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Place Code if Needed
+                    });
+                }
+            }
+        });
     }
 
     @Override
