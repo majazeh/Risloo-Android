@@ -34,10 +34,10 @@ public class SheetManager {
         authBottomSheet.setData(key, userModel);
     }
 
-    public static void showBulkSampleBottomSheet(Activity activity, String key, String name, String avatar, BulkSampleModel model) {
+    public static void showBulkSampleBottomSheet(Activity activity, String key, UserModel userModel, BulkSampleModel bulkSampleModel) {
         bulkSampleBottomSheet = new BulkSampleBottomSheet();
         bulkSampleBottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "bulkSampleBottomSheet");
-        bulkSampleBottomSheet.setData(key, name, avatar, model);
+        bulkSampleBottomSheet.setData(key, userModel, bulkSampleModel);
     }
 
     public static void showDateBottomSheet(Activity activity, String timestamp, String method) {

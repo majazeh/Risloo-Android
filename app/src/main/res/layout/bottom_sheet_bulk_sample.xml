@@ -1,201 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
-    android:fillViewport="true"
-    android:scrollbarSize="0dp"
-    android:overScrollMode="always"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
     tools:context=".Views.BottomSheets.BulkSampleBottomSheet">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/_16sdp">
+    <ImageView
+        android:id="@+id/background_imageView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_48sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:background="@drawable/draw_grad_12sdp_solid_coolgray200_coolgray100_border_bottom_2sdp_gray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/background_imageView"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_48sdp"
-            android:contentDescription="@string/AppImageContent"
-            android:scaleType="fitCenter"
-            android:background="@drawable/draw_grad_12sdp_solid_coolgray200_coolgray100_border_bottom_2sdp_gray200"
-            app:layout_constraintEnd_toEndOf="parent"
+    <include
+        android:id="@+id/avatar_includeLayout"
+        layout="@layout/component_main_avatar_border_small"
+        android:layout_width="@dimen/_66sdp"
+        android:layout_height="@dimen/_66sdp"
+        app:layout_constraintBottom_toBottomOf="@id/background_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_imageView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/info_constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout">
+
+        <include
+            android:id="@+id/avatars_includeLayout"
+            layout="@layout/component_main_avatar_multi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/avatar_includeLayout"
-            layout="@layout/component_main_avatar_border_small"
-            android:layout_width="@dimen/_66sdp"
-            android:layout_height="@dimen/_66sdp"
-            app:layout_constraintBottom_toBottomOf="@id/background_imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/background_imageView" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/info_constraintLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout">
-
-            <include
-                android:id="@+id/avatars_includeLayout"
-                layout="@layout/component_main_avatar_multi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_4sdp"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:layout_marginTop="@dimen/_4sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/center_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:gravity="right"
-                android:textSize="@dimen/_9ssp"
-                android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_bold"
-                app:layout_constraintBottom_toTopOf="@id/psychology_textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/avatars_includeLayout"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="مرکز درمانی" />
-
-            <TextView
-                android:id="@+id/psychology_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:gravity="right"
-                android:textSize="@dimen/_8ssp"
-                android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_regular"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/center_textView"
-                app:layout_constraintStart_toStartOf="@id/center_textView"
-                app:layout_constraintTop_toBottomOf="@id/center_textView"
-                tools:text="روان‌شناس" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <TextView
-            android:id="@+id/list_textView"
+            android:id="@+id/center_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:gravity="right"
-            android:text="@string/BottomSheetBulkSampleList"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold"
-            android:textColor="@color/CoolGray600"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_bold"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:layoutDirection="rtl"
-            app:layout_constrainedHeight="true"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/list_textView"
-            tools:layout_marginTop="@dimen/_4sdp"
-            tools:listitem="@layout/single_item_sheet_sample"
-            tools:itemCount="4" />
-
-        <TextView
-            android:id="@+id/description_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:gravity="right"
             android:textSize="@dimen/_9ssp"
             android:textStyle="normal"
             android:textColor="@color/CoolGray500"
             android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/list_recyclerView"
-            tools:text="توضیحات" />
-
-        <TextView
-            android:id="@+id/nickname_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:gravity="right"
-            android:text="@string/BottomSheetBulkSampleNickname"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="bold"
-            android:textColor="@color/CoolGray600"
-            android:textAlignment="gravity"
             android:fontFamily="@font/dana_bold"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/description_textView" />
-
-        <include
-            android:id="@+id/nickname_editText"
-            layout="@layout/component_auth_input_text"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/nickname_textView" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/nickname_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="nickname_textView, nickname_editText" />
+            app:layout_goneMarginBottom="@dimen/_8sdp"
+            app:layout_constraintBottom_toTopOf="@id/psychology_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/avatars_includeLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="مرکز درمانی" />
 
         <TextView
-            android:id="@+id/entry_button"
+            android:id="@+id/psychology_textView"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_marginTop="@dimen/_18sdp"
-            android:gravity="center"
-            android:text="@string/BottomSheetBulkSampleEntry"
-            android:textSize="@dimen/_12ssp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:gravity="right"
+            android:textSize="@dimen/_8ssp"
             android:textStyle="normal"
-            android:textColor="@color/White"
+            android:textColor="@color/CoolGray500"
             android:textAlignment="gravity"
-            android:fontFamily="@font/dana_medium"
-            android:background="@drawable/draw_16sdp_solid_blue500_ripple_blue800"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/nickname_editText" />
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/center_textView"
+            app:layout_constraintStart_toStartOf="@id/center_textView"
+            app:layout_constraintTop_toBottomOf="@id/center_textView"
+            tools:text="روان‌شناس" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/list_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:gravity="right"
+        android:text="@string/BottomSheetBulkSampleList"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="bold"
+        android:textColor="@color/CoolGray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="@dimen/_100sdp"
+        android:overScrollMode="always"
+        android:layoutDirection="rtl"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintTop_toBottomOf="@id/list_textView"
+        tools:layout_marginTop="@dimen/_4sdp"
+        tools:listitem="@layout/single_item_sheet_sample"
+        tools:itemCount="4" />
+
+    <TextView
+        android:id="@+id/description_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="right"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintTop_toBottomOf="@id/list_recyclerView"
+        tools:text="توضیحات" />
+
+    <TextView
+        android:id="@+id/nickname_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:gravity="right"
+        android:text="@string/BottomSheetBulkSampleNickname"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="bold"
+        android:textColor="@color/CoolGray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintTop_toBottomOf="@id/description_textView" />
+
+    <include
+        android:id="@+id/nickname_editText"
+        layout="@layout/component_auth_input_text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintTop_toBottomOf="@id/nickname_textView" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/nickname_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="nickname_textView, nickname_editText" />
+
+    <TextView
+        android:id="@+id/entry_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:gravity="center"
+        android:text="@string/BottomSheetBulkSampleEntry"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/White"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_24sdp_solid_risloo500_ripple_risloo700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintTop_toBottomOf="@id/nickname_editText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

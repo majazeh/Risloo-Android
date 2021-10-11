@@ -222,7 +222,7 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             IntentManager.test(activity, key);
                         } else {
                             DialogManager.dismissLoadingDialog();
-                            SheetManager.showBulkSampleBottomSheet(activity, key, ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), bulkSampleModel);
+                            SheetManager.showBulkSampleBottomSheet(activity, key, ((MainActivity) activity).singleton.getUserModel(), bulkSampleModel);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

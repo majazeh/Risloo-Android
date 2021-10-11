@@ -111,7 +111,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        // Place Code if Needed
+                        // TODO : Place Code If Needed
                     });
                 }
             }

@@ -29,46 +29,6 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // Toast Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="ToastRequestSucces">شما مورد پذیرش قرار گرفته اید.</string>
-    <string name="ToastChangesSaved">تغییرات ثبت شد.</string>
-    <string name="ToastFeatureNotAddedYet">این دستور هنوز اضافه نشده است.</string>
-    <string name="ToastDoubleBackPressed">برای خروج از نمونه مجددا کلیک کنید.</string>
-    <string name="ToastLinkSaved">لینک ذخیره شد.</string>
-
-    <string name="ToastNewImageNotSelected">عکس جدیدی انتخاب نشده است.</string>
-    <string name="ToastImageIsEmpty">عکسی انتخاب نشده است.</string>
-
-    <string name="ToastFileException">ریسلو به انتخاب فایل دسترسی ندارد.</string>
-    <string name="ToastStorageException">ریسلو به حافظه گوشی دسترسی ندارد.</string>
-    <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
-    <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
-    <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
-
-    <string name="ToastHavePhone">این شماره در لیست انتخابی شما وجود داد.</string>
-    <string name="ToastHaveAxis">این محور در لیست انتخابی شما وجود داد.</string>
-
-    <string name="ToastNewCaseAdded">پرونده جدید افزوده شد.</string>
-    <string name="ToastNewReportAdded">گزارش جدید افزوده شد.</string>
-    <string name="ToastNewSampleAdded">نمونه جدید افزوده شد.</string>
-    <string name="ToastNewBulkSampleAdded">نمونه گروهی جدید افزوده شد.</string>
-    <string name="ToastNewReferenceAdded">عضو جدید افزوده شد.</string>
-    <string name="ToastNewSessionAdded">جلسه جدید افزوده شد.</string>
-    <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>
-    <string name="ToastNewCenterAdded">مرکز جدید افزوده شد.</string>
-    <string name="ToastNewPlatformAdded">محل برگزاری جدید افزوده شد.</string>
-    <string name="ToastNewRoomAdded">اتاق جدید افزوده شد.</string>
-    <string name="ToastNewUserAdded">کاربر جدید افزوده شد.</string>
-    <string name="ToastNewDocumentAdded">مدرک جدید افزوده شد.</string>
-    <string name="ToastNewTreasuryAdded">کیف پول جدید افزوده شد.</string>
-    <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
-    <string name="ToastNewScheduleReserved">برنامه درمانی رزرو شد.</string>
-    <string name="ToastNewSuccesPayment">پرداخت انجام شد.</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
     // Splash Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -559,15 +519,6 @@
     <string name="TreasuryAdapterCreditInvalid">نامعتبر</string>
 
 
-
-
-
-
-
-
-
-
-
     //////////////////////////////////////////////////////////////////////////////////////
 
     // BottomSheet Strings
@@ -580,7 +531,14 @@
 
     ---------- // BulkSampleBottomSheet
 
+    <string name="BottomSheetBulkSampleList">لیست آزمون‌ها</string>
 
+    <string name="BottomSheetBulkSampleDescription1">در این فرایند، آزمون‌های فوق برای شما فعال شده و می‌توانید آن‌ها را تکمیل کنید.</string>
+    <string name="BottomSheetBulkSampleDescription2">پس از این مرحله، شما عضو این مرکز درمانی و اتاق درمان خواهید شد و مدیران قادر به دیدن شماره تماس شما می‌باشند.</string>
+
+    <string name="BottomSheetBulkSampleNickname">نام مستعار من در این مرکز</string>
+
+    <string name="BottomSheetBulkSampleEntry">تأیید و ادامه</string>
 
 
     ---------- // DateBottomSheet
@@ -621,38 +579,6 @@
 
     <string name="BottomSheetTimeEntry">ثبت</string>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <string name="BottomSheetBulkSampleList">لیست آزمون‌ها</string>
-    <string name="BottomSheetBulkSampleDescription1">در این فرایند، آزمون‌های فوق برای شما فعال شده و می‌توانید آن‌ها را تکمیل کنید.</string>
-    <string name="BottomSheetBulkSampleDescription2">پس از این مرحله، شما عضو این مرکز درمانی و اتاق درمان خواهید شد و مدیران قادر به دیدن شماره تماس شما می‌باشند.</string>
-    <string name="BottomSheetBulkSampleNickname">نام مستعار من در این مرکز</string>
-    <string name="BottomSheetBulkSampleEntry">تأیید و ادامه</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1736,6 +1662,46 @@
     <string name="HourHint">ساعت و</string>
     <string name="MinuteStartHint">دقیقه قبل تشکیل جلسه</string>
     <string name="MinuteEndHint">دقیقه بعد اتمام جلسه</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Toast Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="ToastRequestSucces">شما مورد پذیرش قرار گرفته اید.</string>
+    <string name="ToastChangesSaved">تغییرات ثبت شد.</string>
+    <string name="ToastFeatureNotAddedYet">این دستور هنوز اضافه نشده است.</string>
+    <string name="ToastDoubleBackPressed">برای خروج از نمونه مجددا کلیک کنید.</string>
+    <string name="ToastLinkSaved">لینک ذخیره شد.</string>
+
+    <string name="ToastNewImageNotSelected">عکس جدیدی انتخاب نشده است.</string>
+    <string name="ToastImageIsEmpty">عکسی انتخاب نشده است.</string>
+
+    <string name="ToastFileException">ریسلو به انتخاب فایل دسترسی ندارد.</string>
+    <string name="ToastStorageException">ریسلو به حافظه گوشی دسترسی ندارد.</string>
+    <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
+    <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
+    <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
+
+    <string name="ToastHavePhone">این شماره در لیست انتخابی شما وجود داد.</string>
+    <string name="ToastHaveAxis">این محور در لیست انتخابی شما وجود داد.</string>
+
+    <string name="ToastNewCaseAdded">پرونده جدید افزوده شد.</string>
+    <string name="ToastNewReportAdded">گزارش جدید افزوده شد.</string>
+    <string name="ToastNewSampleAdded">نمونه جدید افزوده شد.</string>
+    <string name="ToastNewBulkSampleAdded">نمونه گروهی جدید افزوده شد.</string>
+    <string name="ToastNewReferenceAdded">عضو جدید افزوده شد.</string>
+    <string name="ToastNewSessionAdded">جلسه جدید افزوده شد.</string>
+    <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>
+    <string name="ToastNewCenterAdded">مرکز جدید افزوده شد.</string>
+    <string name="ToastNewPlatformAdded">محل برگزاری جدید افزوده شد.</string>
+    <string name="ToastNewRoomAdded">اتاق جدید افزوده شد.</string>
+    <string name="ToastNewUserAdded">کاربر جدید افزوده شد.</string>
+    <string name="ToastNewDocumentAdded">مدرک جدید افزوده شد.</string>
+    <string name="ToastNewTreasuryAdded">کیف پول جدید افزوده شد.</string>
+    <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
+    <string name="ToastNewScheduleReserved">برنامه درمانی رزرو شد.</string>
+    <string name="ToastNewSuccesPayment">پرداخت انجام شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
