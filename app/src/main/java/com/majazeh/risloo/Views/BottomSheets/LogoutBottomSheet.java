@@ -64,7 +64,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     private void listener() {
         CustomClickView.onDelayedListener(this::doWork).widget(binding.entryButton);
 
-        CustomClickView.onDelayedListener(this::dismiss).widget(binding.returnButton);
+        CustomClickView.onClickListener(this::dismiss).widget(binding.returnButton);
     }
 
     private void setDialog() {

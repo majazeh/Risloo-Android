@@ -21,8 +21,6 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Billing;
 import com.mre.ligheh.Model.Madule.List;
 
-import org.json.JSONException;
-
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -120,29 +118,24 @@ public class BillingsFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        try {
-                            if (Objects.equals(data.get("page"), 1))
-                                adapter.clearItems();
+                        if (Objects.equals(data.get("page"), 1))
+                            adapter.clearItems();
 
-                            if (items.meta().has("total") && !items.meta().isNull("total"))
-                                binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.meta().getString("total")));
+                        if (!items.data().isEmpty()) {
+                            adapter.setItems(items.data());
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
-                            if (!items.data().isEmpty()) {
-                                adapter.setItems(items.data());
-                                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (adapter.itemsCount() == 0) {
+                            binding.indexSingleLayout.recyclerView.setAdapter(null);
 
-                                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (adapter.itemsCount() == 0) {
-                                binding.indexSingleLayout.recyclerView.setAdapter(null);
-
-                                binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BillingsFragmentEmpty));
-                            }
-
-                            hideShimmer();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BillingsFragmentEmpty));
                         }
+
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
+
+                        hideShimmer();
                     });
 
                     isLoading = false;

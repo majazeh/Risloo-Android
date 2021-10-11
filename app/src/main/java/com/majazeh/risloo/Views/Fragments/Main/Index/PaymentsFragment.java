@@ -247,29 +247,24 @@ public class PaymentsFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        try {
-                            if (Objects.equals(data.get("page"), 1))
-                                indexPaymentAdapter.clearItems();
+                        if (Objects.equals(data.get("page"), 1))
+                            indexPaymentAdapter.clearItems();
 
-                            if (items.meta().has("total") && !items.meta().isNull("total"))
-                                binding.paymentsHeaderLayout.countTextView.setText(StringManager.bracing(items.meta().getString("total")));
+                        if (!items.data().isEmpty()) {
+                            indexPaymentAdapter.setItems(items.data());
+                            binding.paymentsSingleLayout.recyclerView.setAdapter(indexPaymentAdapter);
 
-                            if (!items.data().isEmpty()) {
-                                indexPaymentAdapter.setItems(items.data());
-                                binding.paymentsSingleLayout.recyclerView.setAdapter(indexPaymentAdapter);
+                            binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (indexPaymentAdapter.itemsCount() == 0) {
+                            binding.paymentsSingleLayout.recyclerView.setAdapter(null);
 
-                                binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (indexPaymentAdapter.itemsCount() == 0) {
-                                binding.paymentsSingleLayout.recyclerView.setAdapter(null);
-
-                                binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                                binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentAdapterEmpty));
-                            }
-
-                            hideShimmer();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentAdapterEmpty));
                         }
+
+                        binding.paymentsHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
+
+                        hideShimmer();
                     });
 
                     isLoading = false;
