@@ -77,8 +77,6 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
 
             dismiss();
         }).widget(binding.cameraButton);
-
-        CustomClickView.onClickListener(this::dismiss).widget(binding.returnButton);
     }
 
     private void setDialog() {

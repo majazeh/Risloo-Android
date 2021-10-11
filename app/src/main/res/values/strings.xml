@@ -576,7 +576,6 @@
     ---------- // AuthBottomSheet
 
     <string name="BottomSheetAuthEntry">ورود</string>
-    <string name="BottomSheetAuthReturn">انصراف</string>
 
 
     ---------- // BulkSampleBottomSheet
@@ -597,13 +596,11 @@
 
     <string name="BottomSheetImageGallery">البوم</string>
     <string name="BottomSheetImageCamera">دوربین</string>
-    <string name="BottomSheetImageReturn">انصراف</string>
 
 
     ---------- // LogoutBottomSheet
 
     <string name="BottomSheetLogoutEntry">خروج</string>
-    <string name="BottomSheetLogoutReturn">انصراف</string>
 
 
     ---------- // TimeBottomSheet
