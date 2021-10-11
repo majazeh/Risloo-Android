@@ -68,7 +68,7 @@ public class List {
         try {
             if (meta() != null && !meta().isNull("current_page"))
                 return meta().getInt("current_page");
-             else
+            else
                 return page;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -76,11 +76,21 @@ public class List {
         }
     }
 
+    public int getTotal() {
+        try {
+            if (meta() != null && !meta().isNull("total"))
+                return meta().getInt("total");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     public JSONObject filters() {
         try {
             if (meta() != null)
                 return meta().getJSONObject("filters");
-             else
+            else
                 return null;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -183,7 +193,7 @@ public class List {
         return null;
     }
 
-    public JSONArray toObject(){
+    public JSONArray toObject() {
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < size(); i++) {
             jsonArray.put(data().get(i).toObject());
