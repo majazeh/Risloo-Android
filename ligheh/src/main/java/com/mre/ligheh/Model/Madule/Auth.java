@@ -3,6 +3,7 @@ package com.mre.ligheh.Model.Madule;
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.VersionModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +42,7 @@ public class Auth extends Model {
             if (has(header, "Authorization")) {
                 Model.get("me", data, header, response, AuthModel.class);
             } else {
-                Exceptioner.make(response,"شما لاگین نیستید");
+                Exceptioner.make(response, "شما لاگین نیستید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,7 +54,7 @@ public class Auth extends Model {
             if (has(header, "Authorization")) {
                 Model.put("me", data, header, response, AuthModel.class);
             } else {
-                Exceptioner.make(response,"شما لاگین نیستید");
+                Exceptioner.make(response, "شما لاگین نیستید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,10 +67,10 @@ public class Auth extends Model {
                 if (has(data, "id")) {
                     Model.put("users/" + data.get("id") + "/change-password", data, header, response, null);
                 } else {
-                    Exceptioner.make(response,"آیدی را وارد کنید");
+                    Exceptioner.make(response, "آیدی را وارد کنید");
                 }
             } else {
-                Exceptioner.make(response,"شما لاگین نیستید");
+                Exceptioner.make(response, "شما لاگین نیستید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,7 +82,7 @@ public class Auth extends Model {
             if (has(data, "mobile")) {
                 Model.create("register?key=register", data, header, response, AuthModel.class);
             } else {
-                Exceptioner.make(response,"شماره موبایل الزامی است");
+                Exceptioner.make(response, "شماره موبایل الزامی است");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,19 +97,19 @@ public class Auth extends Model {
                 e.printStackTrace();
             }
         } else {
-            Exceptioner.make(response,"شماره موبایل الزامی است");
+            Exceptioner.make(response, "شماره موبایل الزامی است");
         }
     }
 
     public static void recovery(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         if (has(data, "mobile")) {
             try {
-                Model.post(endpoint+"/recovery?key=recovery", data, header, response, AuthModel.class);
+                Model.post(endpoint + "/recovery?key=recovery", data, header, response, AuthModel.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
-            Exceptioner.make(response,"شماره موبایل الزامی است");
+            Exceptioner.make(response, "شماره موبایل الزامی است");
         }
     }
 
@@ -120,9 +121,10 @@ public class Auth extends Model {
                 e.printStackTrace();
             }
         } else {
-            Exceptioner.make(response,"شما لاگین نیستید!");
+            Exceptioner.make(response, "شما لاگین نیستید!");
         }
     }
+
     public static void changeAvatar(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         if (has(header, "Authorization")) {
             if (has(data, "id")) {
@@ -131,13 +133,20 @@ public class Auth extends Model {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }else{
-                Exceptioner.make(response,"آیدی را وارد کنید!");
+            } else {
+                Exceptioner.make(response, "آیدی را وارد کنید!");
             }
         } else {
-            Exceptioner.make(response,"شما لاگین نیستید!");
+            Exceptioner.make(response, "شما لاگین نیستید!");
         }
     }
 
+    public static void explode(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.get("explode", data, header, response, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
