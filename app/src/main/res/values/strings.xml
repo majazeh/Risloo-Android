@@ -591,7 +591,9 @@
 
     ---------- // ImageBottomSheet
 
-    <string name="BottomSheetImageTitle">انتخاب عکس</string>
+    <string name="BottomSheetImageCreateCenterTitle">انتخاب تصویر مرکز</string>
+    <string name="BottomSheetImageEditCenterTitle">ویرایش تصویر مرکز</string>
+    <string name="BottomSheetImageEditUserTitle">ویرایش تصویر من</string>
 
     <string name="BottomSheetImageGallery">البوم</string>
     <string name="BottomSheetImageCamera">دوربین</string>

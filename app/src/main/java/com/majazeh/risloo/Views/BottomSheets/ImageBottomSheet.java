@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
@@ -42,6 +43,8 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
         intializer();
 
         listener();
+
+        setDialog();
 
         return binding.getRoot();
     }
@@ -76,6 +79,17 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
         }).widget(binding.cameraButton);
 
         CustomClickView.onClickListener(this::dismiss).widget(binding.returnButton);
+    }
+
+    private void setDialog() {
+        if (current instanceof CreateCenterFragment)
+            binding.titleTextView.setText(getResources().getString(R.string.BottomSheetImageCreateCenterTitle));
+
+        if (child instanceof EditCenterTabAvatarFragment)
+            binding.titleTextView.setText(getResources().getString(R.string.BottomSheetImageEditCenterTitle));
+
+        if (child instanceof EditUserTabAvatarFragment)
+            binding.titleTextView.setText(getResources().getString(R.string.BottomSheetImageEditUserTitle));
     }
 
     @Override
