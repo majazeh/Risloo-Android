@@ -585,7 +585,16 @@
 
     ---------- // DateBottomSheet
 
+    <string name="BottomSheetMeBirthDateTitle">تاریخ تولد خود را انتخاب کنید.</string>
+    <string name="BottomSheetUserBirthDateTitle">تاریخ تولد عضو را انتخاب کنید.</string>
+    <string name="BottomSheetSessionStartDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
+    <string name="BottomSheetAccurateStartDateTitle">تاریخ دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetAccurateEndDateTitle">تاریخ دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetPeriodStartDateTitle">تاریخ شروع بازه زمانی را انتخاب کنید.</string>
+    <string name="BottomSheetPeriodEndDateTitle">تاریخ پایان بازه زمانی را انتخاب کنید.</string>
+    <string name="BottomSheetSpecifiedDateTitle">تاریخ مشخص را انتخاب کنید.</string>
 
+    <string name="BottomSheetDateEntry">ثبت</string>
 
 
     ---------- // ImageBottomSheet
@@ -605,40 +614,39 @@
 
     ---------- // TimeBottomSheet
 
-
-
-
-
-
-    <string name="BottomSheetBirthdayTitle">تاریخ تولد خود را انتخاب کنید.</string>
-    <string name="BottomSheetBirthdayEntry">ثبت</string>
-
-    <string name="BottomSheetStartDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
-    <string name="BottomSheetStartDateEntry">ثبت</string>
-
-    <string name="BottomSheetStartTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
-    <string name="BottomSheetStartTimeEntry">ثبت</string>
-
-    <string name="BottomSheetAccurateStartDateTitle">تاریخ دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetAccurateStartDateEntry">ثبت</string>
-
+    <string name="BottomSheetScheduleStartTimeTitle">زمان شروع برنامه را انتخاب کنید.</string>
+    <string name="BottomSheetSessionStartTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
     <string name="BottomSheetAccurateStartTimeTitle">زمان دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetAccurateStartTimeEntry">ثبت</string>
-
-    <string name="BottomSheetAccurateEndDateTitle">تاریخ دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetAccurateEndDateEntry">ثبت</string>
-
     <string name="BottomSheetAccurateEndTimeTitle">زمان دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetAccurateEndTimeEntry">ثبت</string>
 
-    <string name="BottomSheetPeriodStartDateTitle">تاریخ شروع بازه زمانی را انتخاب کنید.</string>
-    <string name="BottomSheetPeriodStartDateEntry">ثبت</string>
+    <string name="BottomSheetTimeEntry">ثبت</string>
 
-    <string name="BottomSheetPeriodEndDateTitle">تاریخ پایان بازه زمانی را انتخاب کنید.</string>
-    <string name="BottomSheetPeriodEndDateEntry">ثبت</string>
 
-    <string name="BottomSheetSpecifiedDateTitle">تاریخ مشخص را انتخاب کنید.</string>
-    <string name="BottomSheetSpecifiedDateEntry">ثبت</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <string name="BottomSheetBulkSampleList">لیست آزمون‌ها</string>
     <string name="BottomSheetBulkSampleDescription1">در این فرایند، آزمون‌های فوق برای شما فعال شده و می‌توانید آن‌ها را تکمیل کنید.</string>

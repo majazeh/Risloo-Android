@@ -74,17 +74,17 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            if (child instanceof CreateSessionTabTimeFragment)
-                ((CreateSessionTabTimeFragment) child).responseBottomSheet(method, getTime());
-
-            if (child instanceof CreateSessionTabSessionFragment)
-                ((CreateSessionTabSessionFragment) child).responseBottomSheet(method, getTime());
-
             if (child instanceof CreateScheduleTabTimeFragment)
                 ((CreateScheduleTabTimeFragment) child).responseBottomSheet(method, getTime());
 
             if (child instanceof CreateScheduleTabSessionFragment)
                 ((CreateScheduleTabSessionFragment) child).responseBottomSheet(method, getTime());
+
+            if (child instanceof CreateSessionTabTimeFragment)
+                ((CreateSessionTabTimeFragment) child).responseBottomSheet(method, getTime());
+
+            if (child instanceof CreateSessionTabSessionFragment)
+                ((CreateSessionTabSessionFragment) child).responseBottomSheet(method, getTime());
 
             if (child instanceof EditSessionTabTimeFragment)
                 ((EditSessionTabTimeFragment) child).responseBottomSheet(method, getTime());
@@ -99,16 +99,18 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     private void setDialog() {
         switch (method) {
             case "startTime":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartTimeTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartTimeEntry));
+                if (child instanceof CreateScheduleTabTimeFragment)
+                    binding.titleTextView.setText(getResources().getString(R.string.BottomSheetScheduleStartTimeTitle));
+
+                if (child instanceof CreateSessionTabTimeFragment || child instanceof EditSessionTabTimeFragment)
+                    binding.titleTextView.setText(getResources().getString(R.string.BottomSheetSessionStartTimeTitle));
+
                 break;
             case "accurateStartTime":
                 binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateStartTimeTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetAccurateStartTimeEntry));
                 break;
             case "accurateEndTime":
                 binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateEndTimeTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetAccurateEndTimeEntry));
                 break;
         }
     }

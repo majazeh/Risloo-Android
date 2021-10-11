@@ -265,6 +265,13 @@ public class CreateUserFragment extends Fragment {
         TypeModel typeModel = CreateUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         // TODO : Place Code When Needed
+
+        setData();
+    }
+
+    private void setData() {
+        birthday = String.valueOf(DateManager.currentTimestamp());
+        binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
     }
 
     public void responseBottomSheet(String method, String data) {
