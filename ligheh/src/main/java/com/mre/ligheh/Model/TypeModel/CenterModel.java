@@ -12,7 +12,7 @@ public class CenterModel extends TypeModel {
     private String CenterId="";
     private String centerStatus="";
     private String centerType="";
-    private UserModel manager;
+    private UserModel2 manager;
     private AcceptationModel acceptation;
     private JSONObject detail;
     private int created_at;
@@ -28,7 +28,7 @@ public class CenterModel extends TypeModel {
         super(jsonObject);
         setCenterId(jsonObject.getString("id"));
         if (!jsonObject.isNull("manager"))
-            setManager(new UserModel(jsonObject.getJSONObject("manager")));
+            setManager(new UserModel2(jsonObject.getJSONObject("manager")));
         if (!jsonObject.isNull("acceptation"))
             setAcceptation(new AcceptationModel(jsonObject.getJSONObject("acceptation")));
         if (!jsonObject.isNull("status"))
@@ -78,11 +78,11 @@ public class CenterModel extends TypeModel {
         this.centerType = centerType;
     }
 
-    public UserModel getManager() {
+    public UserModel2 getManager() {
         return manager;
     }
 
-    public void setManager(UserModel manager) {
+    public void setManager(UserModel2 manager) {
         this.manager = manager;
     }
 
@@ -124,6 +124,12 @@ public class CenterModel extends TypeModel {
 
     public void setTreasuries(List treasuries) {
         this.treasuries = treasuries;
+    }
+
+
+    @Override
+    public JSONObject toObject() {
+        return super.toObject();
     }
 
     @NonNull

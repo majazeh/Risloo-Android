@@ -29,11 +29,13 @@ public class ScaleModel extends TypeModel {
                 setEdition_version(jsonObject.getInt("edition_version"));
             if (!jsonObject.isNull("filler"))
                 setFiller(jsonObject.getString("filler"));
+            if (!jsonObject.isNull("sclae")){
             JSONObject scale = jsonObject.getJSONObject("scale");
             if (!jsonObject.isNull("ScaleId"))
                 setScaleId(scale.getString("ScaleId"));
             if (!jsonObject.isNull("ScaleTitle"))
                 setScaleTitle(scale.getString("ScaleTitle"));
+            }
             if (!jsonObject.isNull("status"))
                 setStatus(jsonObject.getString("status"));
         } catch (JSONException e) {

@@ -2,8 +2,10 @@ package com.mre.ligheh.Model.Madule;
 
 import androidx.annotation.NonNull;
 
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -179,6 +181,14 @@ public class List {
             }
         }
         return null;
+    }
+
+    public JSONArray toObject(){
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < size(); i++) {
+            jsonArray.put(data().get(i).toObject());
+        }
+        return jsonArray;
     }
 
 
