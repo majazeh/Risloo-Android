@@ -57,6 +57,30 @@ public class StringManager {
         } return value;
     }
 
+    public static int compareVersionNames(String oldVersionName, String newVersionName) {
+        int res = 0;
+
+        String[] oldNumbers = oldVersionName.split("\\.");
+        String[] newNumbers = newVersionName.split("\\.");
+
+        int maxIndex = Math.min(oldNumbers.length, newNumbers.length);
+
+        for (int i = 0; i < maxIndex; i ++) {
+            int oldVersionNumber = Integer.parseInt(oldNumbers[i]);
+            int newVersionNumber = Integer.parseInt(newNumbers[i]);
+
+            if (oldVersionNumber < newVersionNumber) {
+                res = 1;
+                break;
+            } else if (oldVersionNumber > newVersionNumber) {
+                res = -1;
+                break;
+            }
+        }
+
+        return res;
+    }
+
     public static String mobileConvert(String value) {
         if (!value.equals("")) {
             if (value.startsWith("989"))

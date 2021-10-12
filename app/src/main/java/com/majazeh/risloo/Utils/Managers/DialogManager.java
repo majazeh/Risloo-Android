@@ -10,8 +10,10 @@ import com.majazeh.risloo.Views.Dialogs.PaymentDialog;
 import com.majazeh.risloo.Views.Dialogs.ScheduleFilterDialog;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
+import com.majazeh.risloo.Views.Dialogs.VersionDialog;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.VersionModel;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class DialogManager {
     private static ScheduleFilterDialog scheduleFilterDialog = null;
     private static SearchableDialog searchableDialog = null;
     private static SelectedDialog selectedDialog = null;
+    private static VersionDialog versionDialog = null;
 
     /*
     ---------- Show ----------
@@ -73,6 +76,15 @@ public class DialogManager {
         selectedDialog.setData(method);
     }
 
+    public static void showVersionDialog(Activity activity, String method, VersionModel model) {
+        versionDialog = new VersionDialog();
+        if (activity instanceof AppCompatActivity)
+            versionDialog.show(((AppCompatActivity) activity).getSupportFragmentManager(), "versionDialog");
+        else if (activity instanceof FragmentActivity)
+            versionDialog.show(((FragmentActivity) activity).getSupportFragmentManager(), "versionDialog");
+        versionDialog.setData(method, model);
+    }
+
     /*
     ---------- Dismiss ----------
     */
@@ -101,6 +113,12 @@ public class DialogManager {
         if (selectedDialog != null && selectedDialog.isVisible())
             selectedDialog.dismiss();
     }
+
+    public static void dismissVersionDialog() {
+        if (versionDialog != null && versionDialog.isVisible())
+            versionDialog.dismiss();
+    }
+
 
     /*
     ---------- Getter ----------
@@ -137,6 +155,13 @@ public class DialogManager {
     public static SelectedDialog getSelectedDialog() {
         if (selectedDialog != null && selectedDialog.isVisible())
             return selectedDialog;
+
+        return null;
+    }
+
+    public static VersionDialog getVersionDialog() {
+        if (versionDialog != null && versionDialog.isVisible())
+            return versionDialog;
 
         return null;
     }

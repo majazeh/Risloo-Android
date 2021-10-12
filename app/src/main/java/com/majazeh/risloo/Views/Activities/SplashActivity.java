@@ -3,16 +3,24 @@ package com.majazeh.risloo.Views.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
 import com.majazeh.risloo.Utils.Entities.Decorator;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.databinding.ActivitySplashBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.VersionModel;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -23,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
     private Singleton singleton;
 
     // Objects
-    private Handler handler;
+    private HashMap data, header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
 
         setData();
 
-        navigator();
+        getData();
     }
 
     private void decorator() {
@@ -56,7 +64,8 @@ public class SplashActivity extends AppCompatActivity {
     private void initializer() {
         singleton = new Singleton(this);
 
-        handler = new Handler();
+        data = new HashMap<>();
+        header = new HashMap<>();
     }
 
     private void setData() {
@@ -64,19 +73,54 @@ public class SplashActivity extends AppCompatActivity {
         binding.versionTextView.setText(version);
     }
 
-    private void navigator() {
-        handler.postDelayed(() -> {
-            if (!singleton.getToken().equals(""))
-                IntentManager.main(this);
-            else
-                IntentManager.auth(this, "login");
-        }, 1000);
+    private void getData() {
+        Auth.explode(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                VersionModel model = new VersionModel((JSONObject) object);
+
+                runOnUiThread(() -> {
+                    if (model.getAndroid() != null && model.getAndroid().getForce() != null) {
+                        if (StringManager.compareVersionNames(PackageManager.versionNameWithoutSuffix(SplashActivity.this), model.getAndroid().getForce()) == 1) {
+                            DialogManager.showVersionDialog(SplashActivity.this, "force", model);
+                            return;
+                        }
+                    }
+
+                    navigate();
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                runOnUiThread(() -> {
+                    navigate();
+                });
+            }
+        });
+    }
+
+    private void navigate() {
+        if (!singleton.getToken().equals(""))
+            IntentManager.main(this);
+        else
+            IntentManager.auth(this, "login");
+    }
+
+    public void responseDialog(String method) {
+        switch (method) {
+            case "force":
+                IntentManager.finish(this);
+                break;
+            case "current":
+                navigate();
+                break;
+        }
     }
 
     @Override
     public void finish() {
         super.finish();
-        handler.removeCallbacksAndMessages(null);
     }
 
 }

@@ -656,11 +656,23 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Dialog Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    ---------- // VersionDialog
+
+    <string name="DialogVersionTitle">نسخه جدید</string>
+
+    <string name="DialogVersionForceDesc">این یک به روز رسانی اجباری است و برای استفاده از برنامه لطفا هم اکنون به روز رسانی کنید.</string>
+    <string name="DialogVersionCurrentDesc">این یک به روز رسانی اجباری نیست و شما می توانید اکنون یا بعدن به روز رسانی کنید.</string>
+
+    <string name="DialogVersionDownload">به روز رسانی</string>
+
+    <string name="DialogVersionForceReturn">خروج از برنامه</string>
+    <string name="DialogVersionCurrentReturn">ادامه با این نسخه</string>
 
 
-
-
-
+    //////////////////////////////////////////////////////////////////////////////////////
 
 
 

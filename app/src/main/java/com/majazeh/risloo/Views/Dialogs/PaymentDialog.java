@@ -40,8 +40,9 @@ public class PaymentDialog extends AppCompatDialogFragment {
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(binding.getRoot());
-        dialog.setCancelable(false);
         dialog.getWindow().setAttributes(ParamsManager.matchWrapContent(dialog));
+
+        setCancelable(false);
 
         return dialog;
     }
