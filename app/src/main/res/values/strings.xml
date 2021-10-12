@@ -252,6 +252,34 @@
     <string name="CreateTreasuryFragmentButton">ساخت</string>
 
 
+    ---------- // CreateUserFragment
+
+    <string name="CreateUserFragmentTitle">ایجاد عضو جدید</string>
+
+    <string name="CreateUserFragmentNameHeader">نام و نام خانوادگی</string>
+    <string name="CreateUserFragmentMobileHeader">موبایل</string>
+    <string name="CreateUserFragmentEmailHeader">رایانامه</string>
+    <string name="CreateUserFragmentPasswordHeader">کلمه عبور</string>
+    <string name="CreateUserFragmentBirthdayHeader">تاریخ تولد</string>
+    <string name="CreateUserFragmentStatusHeader">وضعیت</string>
+    <string name="CreateUserFragmentTypeHeader">نوع کاربر</string>
+    <string name="CreateUserFragmentGenderHeader">جنسیت</string>
+
+    <string name="CreateUserFragmentPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
+
+    <string name="CreateUserFragmentStatusActive">فعال</string>
+    <string name="CreateUserFragmentStatusWaiting">در انتظار</string>
+    <string name="CreateUserFragmentStatusClosed">بسته شده</string>
+
+    <string name="CreateUserFragmentTypeAdmin">ادمین</string>
+    <string name="CreateUserFragmentTypeClient">عضو</string>
+
+    <string name="CreateUserFragmentGenderMale">مرد</string>
+    <string name="CreateUserFragmentGenderFemale">زن</string>
+
+    <string name="CreateUserFragmentButton">ایجاد</string>
+
+
     /***
     ---------- Edit Fragments ----------
     ***/
@@ -976,35 +1004,6 @@
     <string name="CreateSessionUserFragmentDescriptionHeader">توضیحات</string>
 
     <string name="CreateSessionUserFragmentButton">ثبت</string>
-
-    /*
-    ---------- CreateUser Fragment ----------
-    */
-
-    <string name="CreateUserFragmentTitle">ثبت عضو جدید</string>
-
-    <string name="CreateUserFragmentNameHeader">نام و نام خانوادگی</string>
-    <string name="CreateUserFragmentMobileHeader">موبایل</string>
-    <string name="CreateUserFragmentEmailHeader">رایانامه</string>
-    <string name="CreateUserFragmentPasswordHeader">کلمه عبور</string>
-    <string name="CreateUserFragmentBirthdayHeader">تاریخ تولد</string>
-    <string name="CreateUserFragmentStatusHeader">وضعیت</string>
-    <string name="CreateUserFragmentTypeHeader">نوع کاربر</string>
-    <string name="CreateUserFragmentGenderHeader">جنسیت</string>
-
-    <string name="CreateUserFragmentPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
-
-    <string name="CreateUserFragmentStatusActive">فعال</string>
-    <string name="CreateUserFragmentStatusWaiting">در انتظار</string>
-    <string name="CreateUserFragmentStatusClosed">بسته شده</string>
-
-    <string name="CreateUserFragmentTypeAdmin">ادمین</string>
-    <string name="CreateUserFragmentTypeClient">عضو</string>
-
-    <string name="CreateUserFragmentGenderMale">مرد</string>
-    <string name="CreateUserFragmentGenderFemale">زن</string>
-
-    <string name="CreateUserFragmentButton">ثبت</string>
 
     /*
     ---------- ReserveSchedule Fragment ----------

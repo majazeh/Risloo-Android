@@ -92,6 +92,14 @@ public class Permissoon {
     }
 
     /*
+    ---------- CreateUser ----------
+    */
+
+    public boolean showCreateUserBirthday() {
+        return false;
+    }
+
+    /*
     ---------- Centers ----------
     */
 

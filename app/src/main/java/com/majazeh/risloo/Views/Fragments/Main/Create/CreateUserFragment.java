@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -46,8 +43,7 @@ public class CreateUserFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String name = "", mobile = "", email = "", password = "", birthday = "", status = "active", type = "user", gender = "male";
-    private boolean passwordVisibility = false;
+    private String name = "", mobile = "", email = "", password = "", birthday = "", status = "", type = "", gender = "";
 
     @Nullable
     @Override
@@ -59,6 +55,8 @@ public class CreateUserFragment extends Fragment {
         listener();
 
         setArgs();
+
+        setPermission();
 
         return binding.getRoot();
     }
@@ -80,19 +78,16 @@ public class CreateUserFragment extends Fragment {
         binding.passwordGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateUserFragmentPasswordGuide));
 
         binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateUserFragmentStatusActive));
-        binding.statusIncludeLayout.firstRadioButton.setChecked(true);
         binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateUserFragmentStatusWaiting));
         binding.statusIncludeLayout.thirdRadioButton.setText(getResources().getString(R.string.CreateUserFragmentStatusClosed));
 
         binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateUserFragmentTypeAdmin));
         binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateUserFragmentTypeClient));
-        binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
         binding.genderIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateUserFragmentGenderMale));
-        binding.genderIncludeLayout.firstRadioButton.setChecked(true);
         binding.genderIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateUserFragmentGenderFemale));
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -103,18 +98,10 @@ public class CreateUserFragment extends Fragment {
             return false;
         });
 
-        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
             return false;
-        });
-
-        binding.mobileIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -123,14 +110,22 @@ public class CreateUserFragment extends Fragment {
             return false;
         });
 
-        binding.emailIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.passwordIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.mobileIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.emailIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.passwordIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -184,18 +179,12 @@ public class CreateUserFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (!passwordVisibility) {
-                passwordVisibility = true;
+            if (binding.passwordIncludeLayout.visibilityImageView.getTag().equals("invisible")) {
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(null);
-
-                binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.LightBlue800));
+                InitManager.imgResTintTag(requireActivity(), binding.passwordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.Risloo500, "visible");
             } else {
-                passwordVisibility = false;
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
-
-                binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.CoolGray600));
+                InitManager.imgResTintTag(requireActivity(), binding.passwordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.CoolGray500, "invisible");
             }
         }).widget(binding.passwordIncludeLayout.visibilityImageView);
 
@@ -264,14 +253,21 @@ public class CreateUserFragment extends Fragment {
     private void setArgs() {
         TypeModel typeModel = CreateUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        // TODO : Place Code When Needed
-
-        setData();
+        if (typeModel == null) {
+            setData();
+        }
     }
 
     private void setData() {
         birthday = String.valueOf(DateManager.currentTimestamp());
         binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
+    }
+
+    private void setPermission() {
+        if (((MainActivity) requireActivity()).permissoon.showCreateUserBirthday())
+            binding.birthdayIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.birthdayIncludeLayout.getRoot().setVisibility(View.GONE);
     }
 
     public void responseBottomSheet(String method, String data) {
@@ -290,10 +286,12 @@ public class CreateUserFragment extends Fragment {
         data.put("mobile", mobile);
         data.put("email", email);
         data.put("password", password);
-        data.put("birthday", birthday);
         data.put("status", status);
         data.put("type", type);
         data.put("gender", gender);
+
+        if (binding.birthdayIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+            data.put("birthday", birthday);
 
         User.create(data, header, new Response() {
             @Override
