@@ -276,7 +276,7 @@ public class EditUserTabPasswordFragment extends Fragment {
                             resetInputs();
 
                             DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
                 }
@@ -332,7 +332,7 @@ public class EditUserTabPasswordFragment extends Fragment {
                             resetInputs();
 
                             DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
                 }

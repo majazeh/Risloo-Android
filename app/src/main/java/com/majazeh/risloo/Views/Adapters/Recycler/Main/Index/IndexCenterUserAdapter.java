@@ -310,7 +310,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                     });
                 }
 
@@ -334,7 +334,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         setAcceptation(holder, userModel);
 
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                     });
                 }
 

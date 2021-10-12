@@ -221,7 +221,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     DialogManager.dismissLoadingDialog();
-                    SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                    SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                 });
             }
 

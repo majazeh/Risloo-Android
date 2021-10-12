@@ -85,9 +85,9 @@ public class EditCenterTabAvatarFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             if (avatarBitmap == null) {
                 if (!avatarPath.equals(""))
-                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastNewImageNotSelected));
+                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastImageNewNotSelected));
                 else
-                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastImageIsEmpty));
+                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastImageNotSelected));
             } else {
                 doWork();
             }
@@ -158,7 +158,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                     });
 
                     FileManager.deleteFileFromCache(requireActivity(), "image");

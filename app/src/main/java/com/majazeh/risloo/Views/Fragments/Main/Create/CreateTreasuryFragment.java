@@ -178,7 +178,7 @@ public class CreateTreasuryFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewTreasuryAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewTreasury));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });

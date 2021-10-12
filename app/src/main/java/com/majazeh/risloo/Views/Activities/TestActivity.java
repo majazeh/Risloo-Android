@@ -488,7 +488,7 @@ public class TestActivity extends AppCompatActivity {
             doubleBackPressed = true;
             handler.postDelayed(() -> doubleBackPressed = false, 2000);
 
-            ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastDoubleBackPressed));
+            ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
         }
     }
 

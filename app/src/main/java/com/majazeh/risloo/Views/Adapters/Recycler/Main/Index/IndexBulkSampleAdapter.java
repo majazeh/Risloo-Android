@@ -142,7 +142,7 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             break;
                         case "کپی کردن لینک":
                             IntentManager.clipboard(activity, model.getLink());
-                            ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastLinkSaved));
+                            ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastSampleLinkSaved));
                             break;
                         case "ویرایش":
                             // TODO : Place Code If Needed

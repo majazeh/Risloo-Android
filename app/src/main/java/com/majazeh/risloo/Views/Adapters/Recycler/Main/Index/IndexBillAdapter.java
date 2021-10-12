@@ -306,7 +306,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
 
                         holder.binding.menuGroup.setVisibility(View.INVISIBLE);
                     });

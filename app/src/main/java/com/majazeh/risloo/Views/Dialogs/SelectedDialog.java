@@ -174,7 +174,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                     if (!((CreateCenterFragment) current).phonesAdapter.getIds().contains(item.object.getString("id")))
                         ((CreateCenterFragment) current).phonesAdapter.addItem(item);
                     else
-                        ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHavePhone));
+                        ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHadSelectedPhone));
             }
 
             if (child instanceof CreateScheduleTabSessionFragment) {
@@ -184,7 +184,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                         addPayment(item);
                     } else
-                        ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHaveAxis));
+                        ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHadSelectedAxis));
             }
 
             if (child instanceof CreateSessionTabSessionFragment) {
@@ -194,7 +194,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                         addPayment(item);
                     } else
-                        ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHaveAxis));
+                        ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHadSelectedAxis));
             }
 
             if (child instanceof EditCenterTabDetailFragment) {
@@ -202,7 +202,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                     if (!((EditCenterTabDetailFragment) child).phonesAdapter.getIds().contains(item.object.getString("id")))
                         ((EditCenterTabDetailFragment) child).phonesAdapter.addItem(item);
                     else
-                        ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHavePhone));
+                        ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHadSelectedPhone));
             }
 
             calculateCount();

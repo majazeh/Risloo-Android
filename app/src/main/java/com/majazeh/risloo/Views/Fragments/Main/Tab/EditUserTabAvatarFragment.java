@@ -88,9 +88,9 @@ public class EditUserTabAvatarFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             if (avatarBitmap == null) {
                 if (!avatarPath.equals(""))
-                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastNewImageNotSelected));
+                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastImageNewNotSelected));
                 else
-                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastImageIsEmpty));
+                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastImageNotSelected));
             } else {
                 doWork();
             }
@@ -161,7 +161,7 @@ public class EditUserTabAvatarFragment extends Fragment {
                             ((MainActivity) requireActivity()).setData();
 
                             DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
 
                         FileManager.deleteFileFromCache(requireActivity(), "image");
@@ -209,7 +209,7 @@ public class EditUserTabAvatarFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
 
                         FileManager.deleteFileFromCache(requireActivity(), "image");

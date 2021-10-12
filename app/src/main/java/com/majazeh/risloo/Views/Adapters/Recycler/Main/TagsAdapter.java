@@ -146,7 +146,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
                     List tags = (List) object;
 
                     activity.runOnUiThread(() -> {
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
 
                         items.clear();
                         if (!tags.data().isEmpty())
@@ -174,7 +174,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
                     List tags = (List) object;
 
                     activity.runOnUiThread(() -> {
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
 
                         items.clear();
                         if (!tags.data().isEmpty())

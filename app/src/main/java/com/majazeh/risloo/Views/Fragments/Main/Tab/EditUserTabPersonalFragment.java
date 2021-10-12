@@ -326,7 +326,7 @@ public class EditUserTabPersonalFragment extends Fragment {
                             ((MainActivity) requireActivity()).setData();
 
                             DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
                 }
@@ -393,7 +393,7 @@ public class EditUserTabPersonalFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
                 }

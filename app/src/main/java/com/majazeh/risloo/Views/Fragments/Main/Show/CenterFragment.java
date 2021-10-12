@@ -191,7 +191,7 @@ public class CenterFragment extends Fragment {
                                 setAcceptation(centerModel);
 
                                 DialogManager.dismissLoadingDialog();
-                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
+                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSuccesAcceptation));
                             });
                         }
                     }
