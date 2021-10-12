@@ -1,18 +1,19 @@
 package com.majazeh.risloo.Views.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
+import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
-import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.databinding.ActivitySplashBinding;
 import com.mre.ligheh.API.Response;
@@ -33,6 +34,7 @@ public class SplashActivity extends AppCompatActivity {
 
     // Objects
     private HashMap data, header;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,8 @@ public class SplashActivity extends AppCompatActivity {
 
         data = new HashMap<>();
         header = new HashMap<>();
+
+        handler = new Handler();
     }
 
     private void setData() {
@@ -77,12 +81,17 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void getData() {
+        handler.postDelayed(() -> binding.explodeProgressBar.setVisibility(View.VISIBLE), 500);
+
         Auth.explode(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 VersionModel model = new VersionModel((JSONObject) object);
 
                 runOnUiThread(() -> {
+                    if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
+                        binding.explodeProgressBar.setVisibility(View.GONE);
+
                     if (model.getAndroid() != null && model.getAndroid().getForce() != null) {
                         if (StringManager.compareVersionNames(PackageManager.versionNameWithoutSuffix(SplashActivity.this), model.getAndroid().getForce()) == 1) {
                             DialogManager.showVersionDialog(SplashActivity.this, "force", model);
@@ -97,6 +106,9 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onFailure(String response) {
                 runOnUiThread(() -> {
+                    if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
+                        binding.explodeProgressBar.setVisibility(View.GONE);
+
                     navigate();
                 });
             }
@@ -124,6 +136,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
+        handler.removeCallbacksAndMessages(null);
     }
 
 }

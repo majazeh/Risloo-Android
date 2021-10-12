@@ -67,8 +67,6 @@ public class VersionDialog extends AppCompatDialogFragment {
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
             IntentManager.googlePlay(requireActivity());
-
-            dismiss();
         }).widget(binding.downloadButton);
 
         CustomClickView.onDelayedListener(() -> {
