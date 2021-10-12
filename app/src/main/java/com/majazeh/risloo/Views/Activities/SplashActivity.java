@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -43,6 +44,8 @@ public class SplashActivity extends AppCompatActivity {
         decorator();
 
         initializer();
+
+        ExtendException.activity = this;
 
         setData();
 

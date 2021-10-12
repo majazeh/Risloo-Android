@@ -59,15 +59,17 @@ public class PaymentDialog extends AppCompatDialogFragment {
 
     private void setDialog() {
         if (method.equals("request")) {
-            binding.loadingTextView.setText(requireActivity().getResources().getString(R.string.DialogPaymentRequest));
+            binding.loadingTextView.setText(requireActivity().getResources().getString(R.string.DialogPaymentRequestLoading));
         } else {
-            binding.loadingTextView.setText(requireActivity().getResources().getString(R.string.DialogPaymentFinalize));
+            binding.loadingTextView.setText(requireActivity().getResources().getString(R.string.DialogPaymentFinalizeLoading));
         }
 
         if (paymentModel.getTitle() != null && !paymentModel.getTitle().equals("")) {
             binding.titleTextView.setText(paymentModel.getTitle());
+        } else if (paymentModel.getId() != null && !paymentModel.getId().equals("")) {
+            binding.titleTextView.setText(paymentModel.getId());
         } else {
-            binding.titleTextView.setText("نامعلوم");
+            binding.titleTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
         }
 
         if (paymentModel.getAmount() != 0) {

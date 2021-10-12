@@ -83,7 +83,7 @@ public class VersionDialog extends AppCompatDialogFragment {
             binding.titleTextView.setText(requireActivity().getResources().getString(R.string.DialogVersionTitle) + " " + versionModel.getAndroid().getForce());
             binding.descTextView.setText(requireActivity().getResources().getString(R.string.DialogVersionForceDesc));
 
-            InitManager.txtTextColorBackground(binding.returnButton, getResources().getString(R.string.DialogVersionForceReturn), getResources().getColor(R.color.Red600), R.drawable.draw_24sdp_solid_white_border_1sdp_gray200_ripple_red300);
+            InitManager.txtTextColorBackground(binding.returnButton, getResources().getString(R.string.DialogVersionForceReturn), getResources().getColor(R.color.Red600), R.drawable.draw_24sdp_solid_white_border_1sdp_red600_ripple_red300);
         } else {
             binding.titleTextView.setText(requireActivity().getResources().getString(R.string.DialogVersionTitle) + " " + versionModel.getAndroid().getCurrent());
             binding.descTextView.setText(requireActivity().getResources().getString(R.string.DialogVersionCurrentDesc));

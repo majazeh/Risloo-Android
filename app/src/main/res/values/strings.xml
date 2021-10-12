@@ -29,6 +29,22 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Scheduled Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="StartTime">زمان شروع نوبت‌گیری</string>
+    <string name="EndTime">زمان بستن نوبت‌گیری</string>
+
+    <string name="AccurateTime">زمان دقیق</string>
+    <string name="RelativeTime">زمان نسبی</string>
+
+    <string name="DayHint">روز و</string>
+    <string name="HourHint">ساعت و</string>
+    <string name="MinuteStartHint">دقیقه قبل تشکیل جلسه</string>
+    <string name="MinuteEndHint">دقیقه بعد اتمام جلسه</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // Snack Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -659,6 +675,17 @@
     // Dialog Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
+    ---------- // LoadingDialog
+
+    <string name="DialogLoadingTitle">در حال پردازش …</string>
+
+
+    ---------- // PaymentDialog
+
+    <string name="DialogPaymentRequestLoading">در حال اتصال به درگاه پرداخت …</string>
+    <string name="DialogPaymentFinalizeLoading">در حال بررسی نتیجه پرداخت …</string>
+
+
     ---------- // VersionDialog
 
     <string name="DialogVersionTitle">نسخه جدید</string>
@@ -673,8 +700,6 @@
 
 
     //////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 
@@ -1625,11 +1650,6 @@
     // Dialog Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="DialogLoadingTitle">در حال پردازش …</string>
-
-    <string name="DialogPaymentRequest">در حال اتصال به درگاه پرداخت …</string>
-    <string name="DialogPaymentFinalize">در حال بررسی نتیجه پرداخت …</string>
-
     <string name="DialogDayTitle">روز(ها) هفته را انتخاب کنید.</string>
     <string name="DialogDayEntry">ثبت</string>
 
@@ -1672,22 +1692,6 @@
     <string name="DialogScheduleFilterStatus">بر اساس وضعیت</string>
     <string name="DialogScheduleFilterReset">پاک کردن همه فیلترها</string>
     <string name="DialogScheduleFilterHint">اتاق درمان</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // ScheduledGroup Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="StartTime">زمان شروع نوبت‌گیری</string>
-    <string name="EndTime">زمان بستن نوبت‌گیری</string>
-
-    <string name="AccurateTime">زمان دقیق</string>
-    <string name="RelativeTime">زمان نسبی</string>
-
-    <string name="DayHint">روز و</string>
-    <string name="HourHint">ساعت و</string>
-    <string name="MinuteStartHint">دقیقه قبل تشکیل جلسه</string>
-    <string name="MinuteEndHint">دقیقه بعد اتمام جلسه</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
