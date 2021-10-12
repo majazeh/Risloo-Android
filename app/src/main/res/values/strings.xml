@@ -29,6 +29,14 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Toast and Snack Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // Splash Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -336,6 +344,14 @@
 
     <string name="TreasuriesFragmentEmpty">هنوز کیف پولی ثبت نشده است.</string>
 
+
+    ---------- // UsersFragment
+
+    <string name="UsersFragmentTitle">اعضاء</string>
+
+    <string name="UsersFragmentEmpty">هنوز عضوی ثبت نشده است.</string>
+
+
     /***
     ---------- Show Fragments ----------
     ***/
@@ -547,6 +563,17 @@
     <string name="TreasuryAdapterCreditInvalid">نامعتبر</string>
 
 
+    ---------- // UserAdapter
+
+    <string name="UserAdapterSerial">سریال</string>
+    <string name="UserAdapterName">نام و نام خانوادگی</string>
+    <string name="UserAdapterType">نوع</string>
+    <string name="UserAdapterStatus">وضعیت</string>
+
+    <string name="UserAdapterLogin">ورود به کاربری</string>
+    <string name="UserAdapterEdit">ویرایش</string>
+
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // BottomSheet Strings
@@ -609,13 +636,6 @@
 
 
     //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
 
 
 
@@ -1366,22 +1386,6 @@
     <string name="SessionsFragmentCase">پرونده</string>
 
     <string name="SessionsFragmentEmpty">هنوز جلسه‌‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- Users Fragment ----------
-    */
-
-    <string name="UsersFragmentTitle">اعضاء</string>
-
-    <string name="UsersFragmentSerial">سریال</string>
-    <string name="UsersFragmentName">نام و نام خانوادگی</string>
-    <string name="UsersFragmentType">نوع</string>
-    <string name="UsersFragmentStatus">وضعیت</string>
-
-    <string name="UsersFragmentEnter">ورود به کاربری</string>
-    <string name="UsersFragmentEdit">ویرایش</string>
-
-    <string name="UsersFragmentEmpty">هنوز عضوی ثبت نشده است.</string>
 
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////

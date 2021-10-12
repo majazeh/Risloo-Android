@@ -159,17 +159,9 @@ public class UsersFragment extends Fragment {
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.UsersFragmentEmpty));
                         }
 
-                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-
+                        hideShimmer();
                     });
 
                     isLoading = false;
@@ -180,21 +172,24 @@ public class UsersFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-
+                        hideShimmer();
                     });
 
                     isLoading = false;
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
     }
 
     @Override

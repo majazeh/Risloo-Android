@@ -112,17 +112,19 @@ public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return false;
         });
 
+        holder.binding.menuSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    if (pos.contains("989")) {
+                    if (pos.contains("989"))
                         IntentManager.phone(activity, pos);
-                    } else if (pos.contains("@")) {
+                    else if (pos.contains("@"))
                         IntentManager.email(activity, new String[]{pos}, "", "", "");
-                    } else if (pos.equals("ورود به کاربری")) {
+                    else if (pos.equals("ورود به کاربری")) {
                         // TODO : Place Code When Needed
                     } else if (pos.equals("ویرایش")) {
                         NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(model);
@@ -160,10 +162,16 @@ public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (!model.getEmail().equals(""))
             items.add(model.getEmail());
 
-        items.add(activity.getResources().getString(R.string.UsersFragmentEdit));
+//        items.add(activity.getResources().getString(R.string.UserAdapterLogin));
+        items.add(activity.getResources().getString(R.string.UserAdapterEdit));
         items.add("");
 
-        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+        if (items.size() > 1) {
+            holder.binding.menuGroup.setVisibility(View.VISIBLE);
+            InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+        } else {
+            holder.binding.menuGroup.setVisibility(View.INVISIBLE);
+        }
     }
 
 }
