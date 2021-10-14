@@ -64,12 +64,11 @@
                 android:id="@+id/title_imageView"
                 android:layout_width="@dimen/_12sdp"
                 android:layout_height="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
                 android:contentDescription="@string/AppImageContent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_file_invoice_light"
                 app:layout_constraintBottom_toBottomOf="@id/title_textView"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/title_textView"
                 app:tint="@color/CoolGray700" />
 
@@ -98,7 +97,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_calendar_alt_light"
                 app:layout_constraintBottom_toBottomOf="@id/date_textView"
-                app:layout_constraintStart_toStartOf="@id/title_imageView"
+                app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/date_textView"
                 app:tint="@color/CoolGray500" />
 
@@ -130,7 +129,7 @@
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintBottom_toBottomOf="@id/amount_textView"
-                app:layout_constraintStart_toStartOf="@id/title_imageView"
+                app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/amount_textView"
                 tools:text="وضعیت" />
 

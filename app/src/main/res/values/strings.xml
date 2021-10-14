@@ -417,6 +417,14 @@
     <string name="BillFragmentFinal">نهایی</string>
 
 
+    ---------- // BulkSampleFragment
+
+    <string name="BulkSampleFragmentTitle">نمونه گروهی</string>
+
+    <string name="BulkSampleFragmentLink">لینک ثبت نام</string>
+    <string name="BulkSampleFragmentCopy">کپی کردن لینک</string>
+
+
     ---------- // DashboardFragment
 
     <string name="DashboardFragmentTitle">خانه</string>
@@ -1440,16 +1448,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- Bulk Sample Fragment ----------
-    */
-
-    <string name="BulkSampleFragmentTitle">نمونه گروهی</string>
-
-    <string name="BulkSampleFragmentLink">لینک ثبت نام</string>
-    <string name="BulkSampleFragmentCopy">کپی کردن لینک</string>
-    <string name="BulkSampleFragmentEdit">ویرایش</string>
-
-    /*
     ---------- Case Fragment ----------
     */
 
@@ -1474,10 +1472,6 @@
     <string name="CenterFragmentProfile">پروفایل من</string>
     <string name="CenterFragmentEdit">ویرایش</string>
     <string name="CenterFragmentPlatforms">محل برگزاری</string>
-
-
-
-
 
     /*
     ---------- Reference Fragment ----------

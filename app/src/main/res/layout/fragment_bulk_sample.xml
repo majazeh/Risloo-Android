@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:paddingBottom="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,17 +44,19 @@
 
             <TextView
                 android:id="@+id/serial_textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:gravity="center"
+                android:gravity="left"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
                 android:textColor="@color/LightBlue700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
                 app:layout_constraintEnd_toStartOf="@id/serial_imageView"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="سریال" />
 
@@ -62,9 +65,8 @@
                 layout="@layout/component_main_avatar_multi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="@id/psychology_textView"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/center_textView" />
 
             <TextView
@@ -100,6 +102,13 @@
                 app:layout_constraintTop_toBottomOf="@id/center_textView"
                 tools:text="روان‌شناس" />
 
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/avatars_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="avatars_includeLayout, psychology_textView" />
+
             <ImageView
                 android:id="@+id/case_imageView"
                 android:layout_width="@dimen/_12sdp"
@@ -108,7 +117,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_clipboard_light"
                 app:layout_constraintBottom_toBottomOf="@id/case_textView"
-                app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/case_textView"
                 app:tint="@color/CoolGray500" />
 
@@ -126,7 +135,7 @@
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                 app:layout_constraintStart_toEndOf="@id/case_imageView"
-                app:layout_constraintTop_toBottomOf="@id/avatars_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/avatars_barrier"
                 tools:text="پرونده" />
 
             <TextView
@@ -141,10 +150,10 @@
                 android:textColor="@color/CoolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
-                app:layout_constraintEnd_toStartOf="@id/menu_spinner"
-                app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/case_textView"
                 app:layout_goneMarginEnd="0dp"
+                app:layout_constraintEnd_toStartOf="@id/menu_spinner"
+                app:layout_constraintStart_toStartOf="@id/serial_textView"
+                app:layout_constraintTop_toBottomOf="@id/case_textView"
                 tools:text="وضعیت" />
 
             <include
@@ -161,9 +170,11 @@
         <include
             android:id="@+id/references_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
 
@@ -199,9 +210,11 @@
         <include
             android:id="@+id/scales_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/references_barrier"
             tools:layout_marginTop="@dimen/_6sdp" />
@@ -220,7 +233,7 @@
 
         <include
             android:id="@+id/scales_singleLayout"
-            layout="@layout/component_single_scale"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -240,9 +253,11 @@
         <include
             android:id="@+id/samples_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/scales_barrier" />
 
@@ -260,7 +275,7 @@
 
         <include
             android:id="@+id/samples_singleLayout"
-            layout="@layout/component_single_sample"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -269,13 +284,6 @@
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/samples_headerLayout"
             tools:visibility="visible" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/samples_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="samples_shimmerLayout, samples_singleLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

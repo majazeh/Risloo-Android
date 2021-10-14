@@ -105,63 +105,19 @@ public class BulkSampleFragment extends Fragment {
         }).widget(binding.avatarsIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.avatarsIncludeLayout.charSubTextView.getVisibility() == View.GONE) {
+            if (binding.avatarsIncludeLayout.charSubTextView.getVisibility() == View.GONE)
                 IntentManager.display(requireActivity(), binding.psychologyTextView.getText().toString(), bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
-            }
         }).widget(binding.avatarsIncludeLayout.avatarSubCircleImageView);
 
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
-                case "لینک ثبت نام": {
-                    DialogManager.showLoadingDialog(requireActivity(), "");
-
-                    HashMap authData = new HashMap<>();
-                    authData.put("authorized_key", bulkSampleModel.getLink());
-
-                    Sample.auth(authData, header, new Response() {
-                        @Override
-                        public void onOK(Object object) {
-                            if (isAdded()) {
-                                requireActivity().runOnUiThread(() -> {
-                                    try {
-                                        JSONObject jsonObject = (JSONObject) object;
-
-                                        if (!jsonObject.getString("theory").equals("sample"))
-                                            bulkSampleModel = new BulkSampleModel(jsonObject.getJSONObject("bulk_sample"));
-
-                                        String key = jsonObject.getString("key");
-
-                                        if (key.startsWith("$")) {
-                                            DialogManager.dismissLoadingDialog();
-                                            IntentManager.test(requireActivity(), key);
-                                        } else {
-                                            DialogManager.dismissLoadingDialog();
-                                            SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getUserModel(), bulkSampleModel);
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(String response) {
-                            if (isAdded()) {
-                                requireActivity().runOnUiThread(() -> {
-                                    // TODO : Place Code If Needed
-                                });
-                            }
-                        }
-                    });
-                } break;
-                case "کپی کردن لینک": {
+                case "لینک ثبت نام":
+                    doWork();
+                    break;
+                case "کپی کردن لینک":
                     IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
                     ToastManager.showSuccesToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastSampleLinkSaved));
-                } break;
-                case "ویرایش": {
-                    // TODO : Place Code If Needed
-                } break;
+                    break;
             }
         }).widget(binding.menuSpinner.selectImageView);
 
@@ -171,6 +127,8 @@ public class BulkSampleFragment extends Fragment {
             return false;
         });
 
+        binding.menuSpinner.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         binding.menuSpinner.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -178,56 +136,13 @@ public class BulkSampleFragment extends Fragment {
                     String pos = parent.getItemAtPosition(position).toString();
 
                     switch (pos) {
-                        case "لینک ثبت نام": {
-                            DialogManager.showLoadingDialog(requireActivity(), "");
-
-                            HashMap authData = new HashMap<>();
-                            authData.put("authorized_key", bulkSampleModel.getLink());
-
-                            Sample.auth(authData, header, new Response() {
-                                @Override
-                                public void onOK(Object object) {
-                                    if (isAdded()) {
-                                        requireActivity().runOnUiThread(() -> {
-                                            try {
-                                                JSONObject jsonObject = (JSONObject) object;
-
-                                                if (!jsonObject.getString("theory").equals("sample"))
-                                                    bulkSampleModel = new BulkSampleModel(jsonObject.getJSONObject("bulk_sample"));
-
-                                                String key = jsonObject.getString("key");
-
-                                                if (key.startsWith("$")) {
-                                                    DialogManager.dismissLoadingDialog();
-                                                    IntentManager.test(requireActivity(), key);
-                                                } else {
-                                                    DialogManager.dismissLoadingDialog();
-                                                    SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getUserModel(), bulkSampleModel);
-                                                }
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-                                        });
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(String response) {
-                                    if (isAdded()) {
-                                        requireActivity().runOnUiThread(() -> {
-                                            // TODO : Place Code If Needed
-                                        });
-                                    }
-                                }
-                            });
-                        } break;
-                        case "کپی کردن لینک": {
+                        case "لینک ثبت نام":
+                            doWork();
+                            break;
+                        case "کپی کردن لینک":
                             IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
                             ToastManager.showSuccesToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastSampleLinkSaved));
-                        } break;
-                        case "ویرایش": {
-                            // TODO : Place Code If Needed
-                        } break;
+                            break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -263,8 +178,29 @@ public class BulkSampleFragment extends Fragment {
                 binding.psychologyTextView.setText(model.getRoom().getRoomManager().getName());
             }
 
-            if (model.getMembers_count() != -1 && model.getJoined() != -1) {
-                binding.referencesHeaderLayout.countTextView.setText("(" + model.getMembers_count() + " / " + model.getJoined() + ")");
+            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("avatar") && !model.getRoom().getRoomCenter().getDetail().getString("avatar").equals("") && model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
+                binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
+
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+            }
+
+            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null && model.getRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
+                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
+                Picasso.get().load(model.getRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+            } else {
+                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
+                binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
+
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+            }
+
+            if (model.getRoom() != null && model.getRoom().getRoomType() != null && model.getRoom().getRoomType().equals("personal_clinic")) {
+                binding.psychologyTextView.setVisibility(View.GONE);
+                binding.avatarsIncludeLayout.subGroup.setVisibility(View.GONE);
             }
 
             if (model.getCase_status() != null && !model.getCase_status().equals("")) {
@@ -275,24 +211,8 @@ public class BulkSampleFragment extends Fragment {
                 binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", model.getStatus()));
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("avatar") && !model.getRoom().getRoomCenter().getDetail().getString("avatar").equals("") && model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
-                binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
-            } else {
-                binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
-
-                Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
-            }
-
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null && model.getRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
-                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
-            } else {
-                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
-                binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
-
-                Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+            if (model.getMembers_count() != -1 && model.getJoined() != -1) {
+                binding.referencesHeaderLayout.countTextView.setText("(" + model.getMembers_count() + " / " + model.getJoined() + ")");
             }
 
             setDropdown(model);
@@ -304,16 +224,15 @@ public class BulkSampleFragment extends Fragment {
     private void setDropdown(BulkSampleModel model) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (!model.getLink().equals("")) {
+        if (!model.getLink().equals("") && !model.getStatus().equals("closed")) {
             items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentLink));
             items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentCopy));
         }
 
-//        items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentEdit));
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
+            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
             InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
@@ -323,12 +242,9 @@ public class BulkSampleFragment extends Fragment {
                 case "کپی کردن لینک":
                     InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_copy_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
                     break;
-                case "ویرایش":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
-                    break;
             }
 
-            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp));
+            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._7sdp), (int) getResources().getDimension(R.dimen._7sdp), (int) getResources().getDimension(R.dimen._7sdp), (int) getResources().getDimension(R.dimen._7sdp));
             binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
         } else {
             binding.menuSpinner.getRoot().setVisibility(View.GONE);
@@ -352,6 +268,8 @@ public class BulkSampleFragment extends Fragment {
 
                             binding.referencesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (referencesAdapter.getItemCount() == 0) {
+                            binding.referencesSingleLayout.recyclerView.setAdapter(null);
+
                             binding.referencesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.referencesSingleLayout.emptyView.setText(getResources().getString(R.string.ReferencesAdapterEmpty));
                         }
@@ -363,8 +281,9 @@ public class BulkSampleFragment extends Fragment {
 
                             binding.scalesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (indexScaleAdapter.getItemCount() == 0) {
-                            binding.scalesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.scalesSingleLayout.recyclerView.setAdapter(null);
 
+                            binding.scalesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.scalesSingleLayout.emptyView.setText(getResources().getString(R.string.ScalesFragmentEmpty));
                         }
 
@@ -375,29 +294,16 @@ public class BulkSampleFragment extends Fragment {
 
                             binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (indexSampleAdapter.getItemCount() == 0) {
-                            binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.recyclerView.setAdapter(null);
 
+                            binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
                         binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(indexScaleAdapter.itemsCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
 
-                        // References Data
-                        binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.referencesShimmerLayout.getRoot().stopShimmer();
-
-                        // Scales Data
-                        binding.scalesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.scalesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.scalesShimmerLayout.getRoot().stopShimmer();
-
-                        // Samples Data
-                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.samplesShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
@@ -406,26 +312,74 @@ public class BulkSampleFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-
-                        // References Data
-                        binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.referencesShimmerLayout.getRoot().stopShimmer();
-
-                        // Scales Data
-                        binding.scalesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.scalesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.scalesShimmerLayout.getRoot().stopShimmer();
-
-                        // Samples Data
-                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.samplesShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
         });
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        HashMap authData = new HashMap<>();
+        authData.put("authorized_key", bulkSampleModel.getLink());
+
+        Sample.auth(authData, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = (JSONObject) object;
+
+                            if (!jsonObject.getString("theory").equals("sample"))
+                                bulkSampleModel = new BulkSampleModel(jsonObject.getJSONObject("bulk_sample"));
+
+                            String key = jsonObject.getString("key");
+
+                            if (key.startsWith("$")) {
+                                DialogManager.dismissLoadingDialog();
+                                IntentManager.test(requireActivity(), key);
+                            } else {
+                                DialogManager.dismissLoadingDialog();
+                                SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getUserModel(), bulkSampleModel);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
+    }
+
+    private void hideShimmer() {
+
+        // References Data
+        binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.referencesShimmerLayout.getRoot().stopShimmer();
+
+        // Scales Data
+        binding.scalesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.scalesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.scalesShimmerLayout.getRoot().stopShimmer();
+
+        // Samples Data
+        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.samplesShimmerLayout.getRoot().stopShimmer();
+
     }
 
     @Override
