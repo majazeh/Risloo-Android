@@ -315,7 +315,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onFailure(String response) {
                     activity.runOnUiThread(() -> {
-                        // Place Code if Needed
+                        // TODO : Place Code If Needed
                     });
                 }
             });

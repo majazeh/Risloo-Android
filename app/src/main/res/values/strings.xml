@@ -361,6 +361,13 @@
     <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
 
 
+    ---------- // BulkSamplesFragment
+
+    <string name="BulkSamplesFragmentTitle">نمونه‌های گروهی</string>
+
+    <string name="BulkSamplesFragmentEmpty">هنوز نمونه‌ گروهی ثبت نشده است.</string>
+
+
     ---------- // PaymentsFragment
 
     <string name="PaymentsFragmentTitle">شارژ حساب</string>
@@ -545,6 +552,20 @@
     <string name="BillAdapterTreasury">پرداخت شده به کیف پول …</string>
 
     <string name="BillAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
+
+
+    ---------- // BulkSampleAdapter
+
+    <string name="BulkSampleAdapterSerial">سریال</string>
+    <string name="BulkSampleAdapterName">عنوان</string>
+    <string name="BulkSampleAdapterCase">پرونده</string>
+    <string name="BulkSampleAdapterRoom">اتاق درمان</string>
+    <string name="BulkSampleAdapterCenter">مرکز درمانی</string>
+    <string name="BulkSampleAdapterStatus">وضعیت</string>
+    <string name="BulkSampleAdapterReference">اعضا</string>
+
+    <string name="BulkSampleAdapterLink">لینک ثبت نام</string>
+    <string name="BulkSampleAdapterCopy">کپی کردن لینک</string>
 
 
     ---------- // PaymentAdapter
@@ -1215,26 +1236,6 @@
 
     // Index Fragments
     //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- Bulk Samples Fragment ----------
-    */
-
-    <string name="BulkSamplesFragmentTitle">نمونه‌های گروهی</string>
-
-    <string name="BulkSamplesFragmentSerial">سریال</string>
-    <string name="BulkSamplesFragmentName">عنوان</string>
-    <string name="BulkSamplesFragmentCase">پرونده</string>
-    <string name="BulkSamplesFragmentRoom">اتاق درمان</string>
-    <string name="BulkSamplesFragmentCenter">مرکز درمانی</string>
-    <string name="BulkSamplesFragmentStatus">وضعیت</string>
-    <string name="BulkSamplesFragmentReference">اعضا</string>
-
-    <string name="BulkSamplesFragmentLink">لینک ثبت نام</string>
-    <string name="BulkSamplesFragmentCopy">کپی کردن لینک</string>
-    <string name="BulkSamplesFragmentEdit">ویرایش</string>
-
-    <string name="BulkSamplesFragmentEmpty">هنوز نمونه‌ گروهی ثبت نشده است.</string>
 
     /*
     ---------- Cases Fragment ----------

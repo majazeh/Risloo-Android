@@ -130,6 +130,8 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             return false;
         });
 
+        holder.binding.menuSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -143,9 +145,6 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         case "کپی کردن لینک":
                             IntentManager.clipboard(activity, model.getLink());
                             ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastSampleLinkSaved));
-                            break;
-                        case "ویرایش":
-                            // TODO : Place Code If Needed
                             break;
                     }
 
@@ -168,13 +167,14 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             holder.binding.nameTextView.setText(model.getTitle());
             holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCase_status()));
 
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null) {
+            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getName() != null)
                 holder.binding.roomTextView.setText(model.getRoom().getRoomManager().getName());
-            }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().isNull("title")) {
+            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().getString("title").equals(""))
                 holder.binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
-            }
+
+            if (model.getRoom() != null && model.getRoom().getRoomType() != null && model.getRoom().getRoomType().equals("personal_clinic"))
+                holder.binding.centerTextView.setVisibility(View.GONE);
 
             holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getStatus()));
             holder.binding.referenceTextView.setText(model.getMembers_count() + " / " + model.getJoined());
@@ -188,15 +188,19 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void setMenu(IndexBulkSampleHolder holder, BulkSampleModel model) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (!model.getLink().equals("")) {
-            items.add(activity.getResources().getString(R.string.BulkSamplesFragmentLink));
-            items.add(activity.getResources().getString(R.string.BulkSamplesFragmentCopy));
+        if (!model.getLink().equals("") && !model.getStatus().equals("closed")) {
+            items.add(activity.getResources().getString(R.string.BulkSampleAdapterLink));
+            items.add(activity.getResources().getString(R.string.BulkSampleAdapterCopy));
         }
 
-//        items.add(activity.getResources().getString(R.string.BulkSamplesFragmentEdit));
         items.add("");
 
-        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+        if (items.size() > 1) {
+            holder.binding.menuGroup.setVisibility(View.VISIBLE);
+            InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+        } else {
+            holder.binding.menuGroup.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void doWork(BulkSampleModel model) {
