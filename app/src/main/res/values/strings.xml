@@ -380,6 +380,13 @@
     <string name="PaymentsFragmentChargeButton">انتقال به درگاه پرداخت</string>
 
 
+    ---------- // SamplesFragment
+
+    <string name="SamplesFragmentTitle">نمونه‌ها</string>
+
+    <string name="SamplesFragmentEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
+
+
     ---------- // ScalesFragment
 
     <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
@@ -456,6 +463,30 @@
     ---------- // MeFragment
 
     <string name="MeFragmentTitle">من</string>
+
+
+    ---------- // SampleFragment
+
+    <string name="SampleFragmentTitle">نمونه</string>
+
+    <string name="SampleFragmentOpen">باز کردن</string>
+    <string name="SampleFragmentClose">بستن</string>
+    <string name="SampleFragmentScore">نمره‌دهی</string>
+    <string name="SampleFragmentProfiles">خروجی‌ها</string>
+
+    <string name="SampleFragmentScoring">درحال نمره‌دهی و ساخت فایل‌ها …</string>
+
+    <string name="SampleFragmentProfileHalfHeader">نیم‌رخ‌ها</string>
+    <string name="SampleFragmentProfileExtraHeader">مقیاس‌های افزوده شده</string>
+
+    <string name="SampleFragmentFieldHeader">مواد نمونه</string>
+    <string name="SampleFragmentFieldEditable">قابلیت ویرایش فرم</string>
+
+    <string name="SampleFragmentFieldGen">عمومی</string>
+    <string name="SampleFragmentFieldPre">پیش نیاز‌ها</string>
+    <string name="SampleFragmentFieldItem">گویه‌ها</string>
+
+    <string name="SampleFragmentFieldTime">زمان انجام (دقیقه)</string>
 
 
     ---------- // TreasuryFragment
@@ -595,6 +626,18 @@
     <string name="PaymentAdapterStatus">وضعیت</string>
 
     <string name="PaymentAdapterEmpty">هنوز پرداختی ثبت نشده است.</string>
+
+
+    ---------- // SampleAdapter
+
+    <string name="SampleAdapterSerial">سریال</string>
+    <string name="SampleAdapterName">مقیاس</string>
+    <string name="SampleAdapterRoom">اتاق درمان</string>
+    <string name="SampleAdapterCase">پرونده</string>
+    <string name="SampleAdapterReference">مراجع</string>
+    <string name="SampleAdapterStatus">وضعیت</string>
+
+    <string name="SampleAdapterBulk">نمو‌نه‌های زنجیره‌ای</string>
 
 
     ---------- // ScaleAdapter
@@ -1508,21 +1551,6 @@
     <string name="RoomUsersFragmentEmpty">هنوز عضوی برای اتاق ثبت نشده است.</string>
 
     /*
-    ---------- Samples Fragment ----------
-    */
-
-    <string name="SamplesFragmentTitle">نمونه‌ها</string>
-
-    <string name="SamplesFragmentSerial">سریال</string>
-    <string name="SamplesFragmentName">مقیاس</string>
-    <string name="SamplesFragmentRoom">اتاق درمان</string>
-    <string name="SamplesFragmentCase">پرونده</string>
-    <string name="SamplesFragmentReference">مراجع</string>
-    <string name="SamplesFragmentStatus">وضعیت</string>
-
-    <string name="SamplesFragmentEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
-
-    /*
     ---------- Sessions Fragment ----------
     */
 
@@ -1591,32 +1619,6 @@
 
     <string name="RoomFragmentPersonalClinic">کلینیک شخصی</string>
     <string name="RoomFragmentFilterByTag">فیلتر بر اساس برچسب‌ها:</string>
-
-    /*
-    ---------- Sample Fragment ----------
-    */
-
-    <string name="SampleFragmentTitle">نمونه</string>
-
-    <string name="SampleFragmentOpen">باز کردن آزمون</string>
-    <string name="SampleFragmentClose">بستن آزمون</string>
-    <string name="SampleFragmentScore">نمره‌دهی</string>
-    <string name="SampleFragmentFill">پرکردن</string>
-    <string name="SampleFragmentProfiles">خروجی‌ها</string>
-
-    <string name="SampleFragmentScoring">درحال نمره‌دهی و ساخت فایل‌ها …</string>
-
-    <string name="SampleFragmentProfileHalfHeader">نیم‌رخ‌ها</string>
-    <string name="SampleFragmentProfileExtraHeader">مقیاس‌های افزوده شده</string>
-
-    <string name="SampleFragmentFieldHeader">مواد نمونه</string>
-    <string name="SampleFragmentFieldEditable">قابلیت ویرایش فرم</string>
-
-    <string name="SampleFragmentFieldGen">عمومی</string>
-    <string name="SampleFragmentFieldPre">پیش نیاز‌ها</string>
-    <string name="SampleFragmentFieldItem">گویه‌ها</string>
-
-    <string name="SampleFragmentFieldTime">زمان انجام (دقیقه)</string>
 
     /*
     ---------- Session Fragment ----------

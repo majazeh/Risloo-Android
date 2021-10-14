@@ -117,6 +117,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.5' // Navigation Ui
     implementation 'androidx.security:security-crypto:1.1.0-alpha03' // Encrypted SharedPreference
 
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.3' // Crashlytics
+    implementation 'com.google.firebase:firebase-analytics:19.0.2' // Analytics
+
     implementation 'com.google.android.material:material:1.4.0' // Google Materials
     implementation 'com.google.code.gson:gson:2.8.7' // Google GSON
 

@@ -129,10 +129,14 @@ public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getTitle());
 
-        if (!model.getEdition().equals(""))
+        if (!model.getEdition().equals("") && !model.getVersion().equals(""))
             holder.binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
-        else
+        else if (!model.getVersion().equals(""))
             holder.binding.editionTextView.setText("نسخه " + model.getVersion());
+        else if (!model.getEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getEdition());
+        else
+            holder.binding.editionTextView.setText("-");
     }
 
 }

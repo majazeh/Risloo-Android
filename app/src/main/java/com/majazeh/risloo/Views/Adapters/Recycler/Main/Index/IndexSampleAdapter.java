@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
@@ -26,10 +27,13 @@ import com.majazeh.risloo.Views.Fragments.Main.Show.ReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SessionFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexSampleBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexSampleBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -38,6 +42,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     // Objects
     private Activity activity;
+    private HashMap data, header;
 
     // Vars
     private ArrayList<TypeModel> items;
@@ -66,7 +71,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             initializer();
 
-            listener((IndexSampleHolder) holder, model);
+            listener((IndexSampleHolder) holder, model, i);
 
             setWidget((IndexSampleHolder) holder);
 
@@ -114,17 +119,28 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
     }
 
-    private void listener(IndexSampleHolder holder, SampleModel model) {
+    private void listener(IndexSampleHolder holder, SampleModel model, int position) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            IntentManager.test(activity, model.getSampleId());
+            if (model.getSampleStatus().equals("closed"))
+                doWork(holder, model, position);
+            else
+                IntentManager.test(activity, model.getSampleId());
         }).widget(holder.binding.statusTextView);
+
+        CustomClickView.onClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(holder.binding.bulkTextView);
     }
 
     private void setWidget(HeaderSampleHolder holder) {
@@ -177,18 +193,24 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
         else if (model.getSampleVersion() != 0)
             holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
+        else if (!model.getSampleEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getSampleEdition());
+        else
+            holder.binding.editionTextView.setText("-");
 
-        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
+        if (model.getChainId() != null)
+            holder.binding.bulkTextView.setVisibility(View.VISIBLE);
+        else
+            holder.binding.bulkTextView.setVisibility(View.GONE);
+
+        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null)
             holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
-        }
 
-        if (model.getSampleCase() != null) {
-            holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
-        }
+        if (model.getSampleCase() != null)
+            holder.binding.caseTextView.setText("پرونده " + model.getSampleCase().getCaseId());
 
-        if (model.getClient() != null) {
+        if (model.getClient() != null)
             holder.binding.referenceTextView.setText(model.getClient().getName());
-        }
 
         setStatus(holder, model.getSampleStatus());
     }
@@ -199,10 +221,18 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         switch (status) {
             case "seald":
             case "open":
+            case "closed":
                 holder.binding.statusTextView.setEnabled(true);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.LightBlue600));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
 
-                holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+                holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+                break;
+            case "scoring":
+            case "creating_files":
+                holder.binding.statusTextView.setEnabled(false);
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
+
+                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;
             default:
                 holder.binding.statusTextView.setEnabled(false);
@@ -211,6 +241,32 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;
         }
+    }
+
+    private void doWork(IndexSampleHolder holder, SampleModel model, int position) {
+        DialogManager.showLoadingDialog(activity, "");
+
+        data.put("id", model.getSampleId());
+
+        Sample.score(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                SampleModel sampleModel = (SampleModel) object;
+                items.add(position, sampleModel);
+
+                activity.runOnUiThread(() -> {
+                    DialogManager.dismissLoadingDialog();
+                    setStatus(holder, sampleModel.getSampleStatus());
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                activity.runOnUiThread(() -> {
+                    // TODO : Place Code If Needed
+                });
+            }
+        });
     }
 
 }
