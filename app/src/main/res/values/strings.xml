@@ -380,6 +380,13 @@
     <string name="PaymentsFragmentChargeButton">انتقال به درگاه پرداخت</string>
 
 
+    ---------- // ScalesFragment
+
+    <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
+
+    <string name="ScalesFragmentEmpty">هنوز مقیاسی ثبت نشده است.</string>
+
+
     ---------- // TreasuriesFragment
 
     <string name="TreasuriesFragmentTitle">کیف پول‌ها</string>
@@ -590,6 +597,15 @@
     <string name="PaymentAdapterEmpty">هنوز پرداختی ثبت نشده است.</string>
 
 
+    ---------- // ScaleAdapter
+
+    <string name="ScaleAdapterSerial">سریال</string>
+    <string name="ScaleAdapterName">مقیاس</string>
+    <string name="ScaleAdapterEdition">ویرایش - نسخه</string>
+
+    <string name="ScaleAdapterCreate">ساختن نمونه</string>
+
+
     ---------- // TimeAdapter
 
     <string name="TimeAdapterHeader">موارد</string>
@@ -729,6 +745,98 @@
 
 
     //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1413,20 +1521,6 @@
     <string name="SamplesFragmentStatus">وضعیت</string>
 
     <string name="SamplesFragmentEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- Scales Fragment ----------
-    */
-
-    <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
-
-    <string name="ScalesFragmentSerial">سریال</string>
-    <string name="ScalesFragmentName">مقیاس</string>
-    <string name="ScalesFragmentEdition">ویرایش - نسخه</string>
-
-    <string name="ScalesFragmentCreate">ساختن نمونه</string>
-
-    <string name="ScalesFragmentEmpty">هنوز مقیاسی ثبت نشده است.</string>
 
     /*
     ---------- Sessions Fragment ----------
