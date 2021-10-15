@@ -469,8 +469,9 @@
 
     <string name="SampleFragmentTitle">نمونه</string>
 
-    <string name="SampleFragmentOpen">باز کردن</string>
+    <string name="SampleFragmentOpen">بازکردن</string>
     <string name="SampleFragmentClose">بستن</string>
+    <string name="SampleFragmentFill">پرکردن</string>
     <string name="SampleFragmentScore">نمره‌دهی</string>
     <string name="SampleFragmentProfiles">خروجی‌ها</string>
 
