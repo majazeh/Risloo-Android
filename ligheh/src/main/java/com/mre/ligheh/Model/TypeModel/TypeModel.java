@@ -81,7 +81,7 @@ public class TypeModel implements Parcelable {
 
     }
 
-    public static final Creator<TypeModel> CREATOR = new Creator<>() {
+    public static final Creator<TypeModel> CREATOR = new Creator<TypeModel>() {
         @Override
         public TypeModel createFromParcel(Parcel in) {
             return new TypeModel(in);
