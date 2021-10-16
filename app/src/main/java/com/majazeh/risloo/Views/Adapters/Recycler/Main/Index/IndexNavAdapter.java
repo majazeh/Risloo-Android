@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.MainNavHolder;
-import com.majazeh.risloo.databinding.SingleItemMainNavBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexNavHolder;
+import com.majazeh.risloo.databinding.SingleItemIndexNavBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> {
+public class IndexNavAdapter extends RecyclerView.Adapter<IndexNavHolder> {
 
     // Objects
     private Activity activity;
@@ -29,18 +29,18 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> {
     private ArrayList<TypeModel> items;
     private int selectedPosition = 0;
 
-    public MainNavAdapter(@NonNull Activity activity) {
+    public IndexNavAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public MainNavHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new MainNavHolder(SingleItemMainNavBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexNavHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexNavHolder(SingleItemIndexNavBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainNavHolder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexNavHolder holder, int i) {
         TypeModel model = items.get(i);
 
         listener(holder);
@@ -68,13 +68,13 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> {
         }
     }
 
-    private void listener(MainNavHolder holder) {
+    private void listener(IndexNavHolder holder) {
         CustomClickView.onDelayedListener(() -> {
             ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString());
         }).widget(holder.itemView);
     }
 
-    private void setData(MainNavHolder holder, TypeModel model, int position) {
+    private void setData(IndexNavHolder holder, TypeModel model, int position) {
         try {
             holder.binding.nameTextView.setText(model.object.get("title").toString());
             holder.binding.descriptionTextView.setText(model.object.get("description").toString());
@@ -87,7 +87,7 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> {
         }
     }
 
-    private void setActive(MainNavHolder holder, int position) {
+    private void setActive(IndexNavHolder holder, int position) {
         if (selectedPosition == position) {
             holder.itemView.setBackgroundResource(R.drawable.draw_4sdp_solid_risloo500_ripple_risloo700);
 

@@ -38,7 +38,7 @@ import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.MainNavAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexNavAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     public Validatoon validatoon;
 
     // Adapters
-    private MainNavAdapter mainNavAdapter;
+    private IndexNavAdapter indexNavAdapter;
 
     // Objects
     public NavHostFragment navHostFragment;
@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         validatoon = new Validatoon();
 
-        mainNavAdapter = new MainNavAdapter(this);
+        indexNavAdapter = new IndexNavAdapter(this);
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
         navController = Objects.requireNonNull(navHostFragment).getNavController();
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(breadCrumb.getFa(destination, arguments));
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
 
-            mainNavAdapter.setFocused(breadCrumb.getFa(destination, arguments).toString());
+            indexNavAdapter.setFocused(breadCrumb.getFa(destination, arguments).toString());
         });
 
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
@@ -306,8 +306,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            mainNavAdapter.setItems(values);
-            binding.navIncludeLayout.listRecyclerView.setAdapter(mainNavAdapter);
+            indexNavAdapter.setItems(values);
+            binding.navIncludeLayout.listRecyclerView.setAdapter(indexNavAdapter);
         }
     }
 
