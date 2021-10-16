@@ -15,12 +15,12 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.PermissionManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexProfileAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableGenAdapter;
@@ -264,7 +264,7 @@ public class SampleFragment extends Fragment {
                 break;
             case "done":
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
-                binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
+                binding.secondaryTextView.getRoot().setVisibility(View.GONE);
 
                 InitManager.txtTextColorBackground(binding.profilesTextView.selectTextView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
                 InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
@@ -360,7 +360,7 @@ public class SampleFragment extends Fragment {
         for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
             ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
 
-            items.add(profile.getFile_name());
+            items.add(StringManager.profileMode(profile.getMode()));
             profileUrls.add(profile.getUrl());
         }
 

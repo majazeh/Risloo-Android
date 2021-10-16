@@ -81,6 +81,13 @@ public class StringManager {
         return res;
     }
 
+    public static String profileMode(String value) {
+        if (!value.equals("")) {
+            if (value.startsWith("profile_"))
+                return value.substring(8).replaceAll("_", " ").toUpperCase();
+        } return value;
+    }
+
     public static String mobileConvert(String value) {
         if (!value.equals("")) {
             if (value.startsWith("989"))
