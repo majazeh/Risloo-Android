@@ -42,6 +42,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexNavAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.EditCenterTabAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
@@ -379,6 +380,11 @@ public class MainActivity extends AppCompatActivity {
             switch (requestCode) {
                 case 100:
                     IntentManager.file(this);
+                    break;
+                case 200:
+                    if (fragmont.getCurrent() instanceof SampleFragment)
+                        IntentManager.download(this, ((SampleFragment) fragmont.getCurrent()).selectedProfileUrl);
+
                     break;
                 case 300:
                     IntentManager.gallery(this);

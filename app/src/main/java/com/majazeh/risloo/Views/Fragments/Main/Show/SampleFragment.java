@@ -65,6 +65,7 @@ public class SampleFragment extends Fragment {
     // Vars
     private ArrayList<String> profileUrls;
     private boolean isLoading = true, userSelect = false;
+    public String selectedProfileUrl = "";
 
     @Nullable
     @Override
@@ -148,8 +149,10 @@ public class SampleFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
+                    selectedProfileUrl = profileUrls.get(position);
+
                     if (PermissionManager.storagePermission(requireActivity()))
-                        IntentManager.download(requireContext(), profileUrls.get(position));
+                        IntentManager.download(requireContext(), selectedProfileUrl);
 
                     parent.setSelection(parent.getAdapter().getCount());
 
