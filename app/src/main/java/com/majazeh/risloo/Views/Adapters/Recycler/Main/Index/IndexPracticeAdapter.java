@@ -14,9 +14,9 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderPracticeHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexPracticeHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexPracticeBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexPracticeBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TablePracticeHolder;
+import com.majazeh.risloo.databinding.HeaderItemTablePracticeBinding;
+import com.majazeh.risloo.databinding.SingleItemTablePracticeBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -38,19 +38,19 @@ public class IndexPracticeAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderPracticeHolder(HeaderItemIndexPracticeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderPracticeHolder(HeaderItemTablePracticeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexPracticeHolder(SingleItemIndexPracticeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TablePracticeHolder(SingleItemTablePracticeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof IndexPracticeHolder) {
+        if (holder instanceof TablePracticeHolder) {
 //            PracticeModel model = (PracticeModel) items.get(i - 1);
 
-            listener((IndexPracticeHolder) holder);
+            listener((TablePracticeHolder) holder);
 
-            setData((IndexPracticeHolder) holder);
+            setData((TablePracticeHolder) holder);
         }
     }
 
@@ -95,7 +95,7 @@ public class IndexPracticeAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexPracticeHolder holder) {
+    private void listener(TablePracticeHolder holder) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -133,7 +133,7 @@ public class IndexPracticeAdapter extends RecyclerView.Adapter<RecyclerView.View
         });
     }
 
-    private void setData(IndexPracticeHolder holder) {
+    private void setData(TablePracticeHolder holder) {
         holder.binding.serialTextView.setText("P966663D");
         holder.binding.nameTextView.setText("تمرین abc");
         holder.binding.descriptionTextView.setText("چرا عاقل کند کاری که بازآید به کنعان غم مخور");
@@ -141,7 +141,7 @@ public class IndexPracticeAdapter extends RecyclerView.Adapter<RecyclerView.View
         setMenu(holder);
     }
 
-    private void setMenu(IndexPracticeHolder holder) {
+    private void setMenu(TablePracticeHolder holder) {
         ArrayList<String> items = new ArrayList<>();
 
         items.add(activity.getResources().getString(R.string.PracticesAdapterAttachment));

@@ -22,9 +22,9 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderBulkSampleHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexBulkSampleHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexBulkSampleBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexBulkSampleBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableBulkSampleHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableBulkSampleBinding;
+import com.majazeh.risloo.databinding.SingleItemTableBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
@@ -54,21 +54,21 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderBulkSampleHolder(HeaderItemIndexBulkSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderBulkSampleHolder(HeaderItemTableBulkSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexBulkSampleHolder(SingleItemIndexBulkSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableBulkSampleHolder(SingleItemTableBulkSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexBulkSampleHolder) {
+        if (holder instanceof TableBulkSampleHolder) {
             BulkSampleModel model = (BulkSampleModel) items.get(i - 1);
 
             initializer();
 
-            listener((IndexBulkSampleHolder) holder, model);
+            listener((TableBulkSampleHolder) holder, model);
 
-            setData((IndexBulkSampleHolder) holder, model);
+            setData((TableBulkSampleHolder) holder, model);
         }
     }
 
@@ -119,7 +119,7 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexBulkSampleHolder holder, BulkSampleModel model) {
+    private void listener(TableBulkSampleHolder holder, BulkSampleModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -161,7 +161,7 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         });
     }
 
-    private void setData(IndexBulkSampleHolder holder, BulkSampleModel model) {
+    private void setData(TableBulkSampleHolder holder, BulkSampleModel model) {
         try {
             holder.binding.serialTextView.setText(model.getId());
             holder.binding.nameTextView.setText(model.getTitle());
@@ -185,7 +185,7 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    private void setMenu(IndexBulkSampleHolder holder, BulkSampleModel model) {
+    private void setMenu(TableBulkSampleHolder holder, BulkSampleModel model) {
         ArrayList<String> items = new ArrayList<>();
 
         if (!model.getLink().equals("") && !model.getStatus().equals("closed")) {

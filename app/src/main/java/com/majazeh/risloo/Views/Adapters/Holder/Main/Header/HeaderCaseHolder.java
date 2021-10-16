@@ -2,14 +2,14 @@ package com.majazeh.risloo.Views.Adapters.Holder.Main.Header;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.databinding.HeaderItemIndexCaseBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableCaseBinding;
 
 public class HeaderCaseHolder extends RecyclerView.ViewHolder {
 
     // Binding
-    public HeaderItemIndexCaseBinding binding;
+    public HeaderItemTableCaseBinding binding;
 
-    public HeaderCaseHolder(HeaderItemIndexCaseBinding binding) {
+    public HeaderCaseHolder(HeaderItemTableCaseBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
     }

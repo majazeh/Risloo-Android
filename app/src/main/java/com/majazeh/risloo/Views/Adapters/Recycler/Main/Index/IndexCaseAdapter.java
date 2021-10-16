@@ -12,9 +12,9 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderCaseHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexCaseHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexCaseBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexCaseBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableCaseHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableCaseBinding;
+import com.majazeh.risloo.databinding.SingleItemTableCaseBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -40,19 +40,19 @@ public class IndexCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderCaseHolder(HeaderItemIndexCaseBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderCaseHolder(HeaderItemTableCaseBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexCaseHolder(SingleItemIndexCaseBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableCaseHolder(SingleItemTableCaseBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexCaseHolder) {
+        if (holder instanceof TableCaseHolder) {
             CaseModel model = (CaseModel) items.get(i - 1);
 
-            listener((IndexCaseHolder) holder, model);
+            listener((TableCaseHolder) holder, model);
 
-            setData((IndexCaseHolder) holder, model);
+            setData((TableCaseHolder) holder, model);
         }
     }
 
@@ -94,14 +94,14 @@ public class IndexCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void listener(IndexCaseHolder holder, CaseModel model) {
+    private void listener(TableCaseHolder holder, CaseModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexCaseHolder holder, CaseModel model) {
+    private void setData(TableCaseHolder holder, CaseModel model) {
         try {
             holder.binding.serialTextView.setText(model.getCaseId());
 
@@ -119,7 +119,7 @@ public class IndexCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void setClients(IndexCaseHolder holder, List clients) {
+    private void setClients(TableCaseHolder holder, List clients) {
         if (clients != null && clients.data().size() != 0) {
             holder.binding.referenceTextView.setText("");
             for (int i = 0; i < clients.data().size(); i++) {

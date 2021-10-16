@@ -16,10 +16,10 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderRoomUserHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexRoomUserHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableRoomUserHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomUsersFragment;
-import com.majazeh.risloo.databinding.HeaderItemIndexRoomUserBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexRoomUserBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableRoomUserBinding;
+import com.majazeh.risloo.databinding.SingleItemTableRoomUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -44,21 +44,21 @@ public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderRoomUserHolder(HeaderItemIndexRoomUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderRoomUserHolder(HeaderItemTableRoomUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexRoomUserHolder(SingleItemIndexRoomUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableRoomUserHolder(SingleItemTableRoomUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexRoomUserHolder) {
+        if (holder instanceof TableRoomUserHolder) {
             UserModel model = (UserModel) items.get(i - 1);
 
-            initializer((IndexRoomUserHolder) holder);
+            initializer((TableRoomUserHolder) holder);
 
-            listener((IndexRoomUserHolder) holder, model);
+            listener((TableRoomUserHolder) holder, model);
 
-            setData((IndexRoomUserHolder) holder, model);
+            setData((TableRoomUserHolder) holder, model);
         }
     }
 
@@ -100,11 +100,11 @@ public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    private void initializer(IndexRoomUserHolder holder) {
+    private void initializer(TableRoomUserHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
-    private void listener(IndexRoomUserHolder holder, UserModel model) {
+    private void listener(TableRoomUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof RoomUsersFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).roomModel, model);
@@ -113,7 +113,7 @@ public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexRoomUserHolder holder, UserModel model) {
+    private void setData(TableRoomUserHolder holder, UserModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
@@ -122,7 +122,7 @@ public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
         setAcceptation(holder, model);
     }
 
-    private void setAcceptation(IndexRoomUserHolder holder, UserModel model) {
+    private void setAcceptation(TableRoomUserHolder holder, UserModel model) {
         if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusKicked));
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));

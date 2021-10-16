@@ -25,11 +25,11 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderBillHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexBillHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableBillHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.BillingsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SessionFragment;
-import com.majazeh.risloo.databinding.HeaderItemIndexBillBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexBillBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableBillBinding;
+import com.majazeh.risloo.databinding.SingleItemTableBillBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Billing;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
@@ -67,23 +67,23 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderBillHolder(HeaderItemIndexBillBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderBillHolder(HeaderItemTableBillBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexBillHolder(SingleItemIndexBillBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableBillHolder(SingleItemTableBillBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderBillHolder) {
             setWidget((HeaderBillHolder) holder);
-        } else if (holder instanceof  IndexBillHolder) {
+        } else if (holder instanceof TableBillHolder) {
             BillingModel model = (BillingModel) items.get(i - 1);
 
             initializer();
 
-            listener((IndexBillHolder) holder, model);
+            listener((TableBillHolder) holder, model);
 
-            setData((IndexBillHolder) holder, model);
+            setData((TableBillHolder) holder, model);
         }
     }
 
@@ -140,7 +140,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexBillHolder holder, BillingModel model) {
+    private void listener(TableBillHolder holder, BillingModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalBillFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -177,7 +177,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         });
     }
 
-    private void setData(IndexBillHolder holder, BillingModel model) {
+    private void setData(TableBillHolder holder, BillingModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.titleTextView.setText(model.getTitle());
         holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
@@ -196,7 +196,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         setMenu(holder, model);
     }
 
-    private void setMenu(IndexBillHolder holder, BillingModel model) {
+    private void setMenu(TableBillHolder holder, BillingModel model) {
         ArrayList<String> items = new ArrayList<>();
 
         // Settled
@@ -258,7 +258,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void doWork(IndexBillHolder holder, BillingModel model, int position, String method) {
+    private void doWork(TableBillHolder holder, BillingModel model, int position, String method) {
         DialogManager.showLoadingDialog(activity, "");
 
         if (method.equals("settled")) {

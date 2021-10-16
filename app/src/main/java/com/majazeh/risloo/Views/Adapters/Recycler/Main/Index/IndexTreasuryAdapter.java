@@ -14,9 +14,9 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderTreasuryHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexTreasuryHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexTreasuryBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexTreasuryBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableTreasuryHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableTreasuryBinding;
+import com.majazeh.risloo.databinding.SingleItemTableTreasuryBinding;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -38,21 +38,21 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderTreasuryHolder(HeaderItemIndexTreasuryBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderTreasuryHolder(HeaderItemTableTreasuryBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexTreasuryHolder(SingleItemIndexTreasuryBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableTreasuryHolder(SingleItemTableTreasuryBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderTreasuryHolder) {
             setWidget((HeaderTreasuryHolder) holder);
-        } else if (holder instanceof  IndexTreasuryHolder) {
+        } else if (holder instanceof TableTreasuryHolder) {
             TreasuriesModel model = (TreasuriesModel) items.get(i - 1);
 
-            listener((IndexTreasuryHolder) holder, model);
+            listener((TableTreasuryHolder) holder, model);
 
-            setData((IndexTreasuryHolder) holder, model);
+            setData((TableTreasuryHolder) holder, model);
         }
     }
 
@@ -98,7 +98,7 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
         holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuryAdapterLeft), 11, 18, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
-    private void listener(IndexTreasuryHolder holder, TreasuriesModel model) {
+    private void listener(TableTreasuryHolder holder, TreasuriesModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -110,7 +110,7 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
         }).widget(holder.binding.editImageView);
     }
 
-    private void setData(IndexTreasuryHolder holder, TreasuriesModel model) {
+    private void setData(TableTreasuryHolder holder, TreasuriesModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.titleTextView.setText(model.getTitle());
 

@@ -19,9 +19,9 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderUserHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexUserHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexUserBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexUserBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableUserHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableUserBinding;
+import com.majazeh.risloo.databinding.SingleItemTableUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -44,19 +44,19 @@ public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderUserHolder(HeaderItemIndexUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderUserHolder(HeaderItemTableUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexUserHolder(SingleItemIndexUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableUserHolder(SingleItemTableUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexUserHolder) {
+        if (holder instanceof TableUserHolder) {
             UserModel model = (UserModel) items.get(i - 1);
 
-            listener((IndexUserHolder) holder, model);
+            listener((TableUserHolder) holder, model);
 
-            setData((IndexUserHolder) holder, model);
+            setData((TableUserHolder) holder, model);
         }
     }
 
@@ -101,7 +101,7 @@ public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexUserHolder holder, UserModel model) {
+    private void listener(TableUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalUserFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -144,7 +144,7 @@ public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         });
     }
 
-    private void setData(IndexUserHolder holder, UserModel model) {
+    private void setData(TableUserHolder holder, UserModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
@@ -153,7 +153,7 @@ public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         setMenu(holder, model);
     }
 
-    private void setMenu(IndexUserHolder holder, UserModel model) {
+    private void setMenu(TableUserHolder holder, UserModel model) {
         ArrayList<String> items = new ArrayList<>();
 
         if (!model.getMobile().equals(""))

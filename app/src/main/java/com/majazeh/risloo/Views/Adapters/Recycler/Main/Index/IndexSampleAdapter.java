@@ -18,15 +18,15 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderSampleHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexSampleHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableSampleHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.SamplesFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CaseFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.DashboardFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.ReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SessionFragment;
-import com.majazeh.risloo.databinding.HeaderItemIndexSampleBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexSampleBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableSampleBinding;
+import com.majazeh.risloo.databinding.SingleItemTableSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -55,9 +55,9 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderSampleHolder(HeaderItemIndexSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderSampleHolder(HeaderItemTableSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexSampleHolder(SingleItemIndexSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableSampleHolder(SingleItemTableSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
@@ -66,16 +66,16 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             initializer();
 
             setWidget((HeaderSampleHolder) holder);
-        } else if (holder instanceof  IndexSampleHolder) {
+        } else if (holder instanceof TableSampleHolder) {
             SampleModel model = (SampleModel) items.get(i - 1);
 
             initializer();
 
-            listener((IndexSampleHolder) holder, model, i);
+            listener((TableSampleHolder) holder, model, i);
 
-            setWidget((IndexSampleHolder) holder);
+            setWidget((TableSampleHolder) holder);
 
-            setData((IndexSampleHolder) holder, model);
+            setData((TableSampleHolder) holder, model);
         }
     }
 
@@ -125,7 +125,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
     }
 
-    private void listener(IndexSampleHolder holder, SampleModel model, int position) {
+    private void listener(TableSampleHolder holder, SampleModel model, int position) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -162,7 +162,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    private void setWidget(IndexSampleHolder holder) {
+    private void setWidget(TableSampleHolder holder) {
         if (current instanceof SamplesFragment || current instanceof DashboardFragment) {
             holder.binding.roomTextView.setVisibility(View.VISIBLE);
             holder.binding.caseTextView.setVisibility(View.VISIBLE);
@@ -181,7 +181,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    private void setData(IndexSampleHolder holder, SampleModel model) {
+    private void setData(TableSampleHolder holder, SampleModel model) {
         holder.binding.serialTextView.setText(model.getSampleId());
 
         if (!model.getSampleScaleTitle().equals(""))
@@ -215,7 +215,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         setStatus(holder, model.getSampleStatus());
     }
 
-    private void setStatus(IndexSampleHolder holder, String status) {
+    private void setStatus(TableSampleHolder holder, String status) {
         holder.binding.statusTextView.setText(SelectionManager.getSampleStatus2(activity, "fa", status));
 
         switch (status) {
@@ -243,7 +243,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    private void doWork(IndexSampleHolder holder, SampleModel model, int position) {
+    private void doWork(TableSampleHolder holder, SampleModel model, int position) {
         DialogManager.showLoadingDialog(activity, "");
 
         data.put("id", model.getSampleId());

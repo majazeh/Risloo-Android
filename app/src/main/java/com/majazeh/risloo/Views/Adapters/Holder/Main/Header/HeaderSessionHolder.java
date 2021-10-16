@@ -2,14 +2,14 @@ package com.majazeh.risloo.Views.Adapters.Holder.Main.Header;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.databinding.HeaderItemIndexSessionBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableSessionBinding;
 
 public class HeaderSessionHolder extends RecyclerView.ViewHolder {
 
     // Binding
-    public HeaderItemIndexSessionBinding binding;
+    public HeaderItemTableSessionBinding binding;
 
-    public HeaderSessionHolder(HeaderItemIndexSessionBinding binding) {
+    public HeaderSessionHolder(HeaderItemTableSessionBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
     }

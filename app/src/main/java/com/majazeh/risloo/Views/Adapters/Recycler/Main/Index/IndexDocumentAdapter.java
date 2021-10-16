@@ -14,9 +14,9 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderDocumentHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexDocumentHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexDocumentBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexDocumentBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableDocumentHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableDocumentBinding;
+import com.majazeh.risloo.databinding.SingleItemTableDocumentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -38,19 +38,19 @@ public class IndexDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderDocumentHolder(HeaderItemIndexDocumentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderDocumentHolder(HeaderItemTableDocumentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexDocumentHolder(SingleItemIndexDocumentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableDocumentHolder(SingleItemTableDocumentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexDocumentHolder) {
+        if (holder instanceof TableDocumentHolder) {
 //            DocumentModel model = (DocumentModel) items.get(i - 1);
 
-            listener((IndexDocumentHolder) holder);
+            listener((TableDocumentHolder) holder);
 
-            setData((IndexDocumentHolder) holder);
+            setData((TableDocumentHolder) holder);
         }
     }
 
@@ -95,7 +95,7 @@ public class IndexDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexDocumentHolder holder) {
+    private void listener(TableDocumentHolder holder) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -136,7 +136,7 @@ public class IndexDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
         });
     }
 
-    private void setData(IndexDocumentHolder holder) {
+    private void setData(TableDocumentHolder holder) {
         holder.binding.serialTextView.setText("P-96666DD");
         holder.binding.nameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
         holder.binding.statusTextView.setText("تأیید شده");
@@ -144,7 +144,7 @@ public class IndexDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
         setMenu(holder);
     }
 
-    private void setMenu(IndexDocumentHolder holder) {
+    private void setMenu(TableDocumentHolder holder) {
         ArrayList<String> items = new ArrayList<>();
 
         items.add(activity.getResources().getString(R.string.DocumentsFragmentAccept));

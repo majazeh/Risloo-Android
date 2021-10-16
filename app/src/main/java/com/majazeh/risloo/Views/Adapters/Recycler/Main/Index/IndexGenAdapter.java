@@ -18,10 +18,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderFieldHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexFieldInputHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldInputHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
-import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexFieldInputBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldInputBinding;
 
 import java.util.ArrayList;
 
@@ -46,23 +46,23 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderFieldHolder(HeaderItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderFieldHolder(HeaderItemTableFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexFieldInputHolder(SingleItemIndexFieldInputBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableFieldInputHolder(SingleItemTableFieldInputBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderFieldHolder) {
             setData((HeaderFieldHolder) holder);
-        } else if (holder instanceof IndexFieldInputHolder) {
+        } else if (holder instanceof TableFieldInputHolder) {
             String item = items.get(i - 1);
 
             intializer();
 
-            listener((IndexFieldInputHolder) holder, i);
+            listener((TableFieldInputHolder) holder, i);
 
-            setData((IndexFieldInputHolder) holder, item);
+            setData((TableFieldInputHolder) holder, item);
         }
     }
 
@@ -116,7 +116,7 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexFieldInputHolder holder, int item) {
+    private void listener(TableFieldInputHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
@@ -153,7 +153,7 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.binding.countTextView.setText(StringManager.bracing(itemsCount()));
     }
 
-    private void setData(IndexFieldInputHolder holder, String item) {
+    private void setData(TableFieldInputHolder holder, String item) {
         holder.binding.headerTextView.setText(activity.getResources().getString(R.string.SampleFragmentFieldTime));
 
         setType(holder, item);
@@ -161,14 +161,14 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         setClickable(holder);
     }
 
-    private void setType(IndexFieldInputHolder holder, String item) {
+    private void setType(TableFieldInputHolder holder, String item) {
         holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         if (!item.equals(""))
             holder.binding.inputEditText.setText(item);
     }
 
-    private void setClickable(IndexFieldInputHolder holder) {
+    private void setClickable(TableFieldInputHolder holder) {
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.getRoot().setAlpha((float) 1);

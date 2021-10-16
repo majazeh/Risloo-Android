@@ -14,9 +14,9 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderSessionHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexSessionHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexSessionBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexSessionBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableSessionHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableSessionBinding;
+import com.majazeh.risloo.databinding.SingleItemTableSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -40,19 +40,19 @@ public class IndexSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderSessionHolder(HeaderItemIndexSessionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderSessionHolder(HeaderItemTableSessionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexSessionHolder(SingleItemIndexSessionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableSessionHolder(SingleItemTableSessionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexSessionHolder) {
+        if (holder instanceof TableSessionHolder) {
             SessionModel model = (SessionModel) items.get(i - 1);
 
-            listener((IndexSessionHolder) holder, model);
+            listener((TableSessionHolder) holder, model);
 
-            setData((IndexSessionHolder) holder, model);
+            setData((TableSessionHolder) holder, model);
         }
     }
 
@@ -94,7 +94,7 @@ public class IndexSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    private void listener(IndexSessionHolder holder, SessionModel model) {
+    private void listener(TableSessionHolder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalSessionFragment( model);
             ((MainActivity) activity).navController.navigate(action);
@@ -106,7 +106,7 @@ public class IndexSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }).widget(holder.binding.editImageView);
     }
 
-    private void setData(IndexSessionHolder holder, SessionModel model) {
+    private void setData(TableSessionHolder holder, SessionModel model) {
         try {
             holder.binding.serialTextView.setText(model.getId());
 

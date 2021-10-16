@@ -21,12 +21,12 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderFieldHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexFieldInputHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexFieldSelectHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldInputHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldSelectHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
-import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexFieldInputBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexFieldSelectBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldInputBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -55,33 +55,33 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 1)
-            return new IndexFieldInputHolder(SingleItemIndexFieldInputBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new TableFieldInputHolder(SingleItemTableFieldInputBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
         else if (viewType == 2)
-            return new IndexFieldSelectHolder(SingleItemIndexFieldSelectBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new TableFieldSelectHolder(SingleItemTableFieldSelectBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new HeaderFieldHolder(HeaderItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new HeaderFieldHolder(HeaderItemTableFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderFieldHolder) {
             setData((HeaderFieldHolder) holder);
-        } else if (holder instanceof IndexFieldInputHolder) {
+        } else if (holder instanceof TableFieldInputHolder) {
             ItemModel model = (ItemModel) items.get(i - 1);
 
             intializer();
 
-            listener((IndexFieldInputHolder) holder, i);
+            listener((TableFieldInputHolder) holder, i);
 
-            setData((IndexFieldInputHolder) holder, model);
-        } else if (holder instanceof IndexFieldSelectHolder) {
+            setData((TableFieldInputHolder) holder, model);
+        } else if (holder instanceof TableFieldSelectHolder) {
             ItemModel model = (ItemModel) items.get(i - 1);
 
             intializer();
 
-            listener((IndexFieldSelectHolder) holder, i);
+            listener((TableFieldSelectHolder) holder, i);
 
-            setData((IndexFieldSelectHolder) holder, model);
+            setData((TableFieldSelectHolder) holder, model);
         }
     }
 
@@ -142,7 +142,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexFieldInputHolder holder, int item) {
+    private void listener(TableFieldInputHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
@@ -175,7 +175,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexFieldSelectHolder holder, int item) {
+    private void listener(TableFieldSelectHolder holder, int item) {
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
@@ -206,7 +206,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.binding.countTextView.setText(StringManager.bracing(itemsCount()));
     }
 
-    private void setData(IndexFieldInputHolder holder, ItemModel model) {
+    private void setData(TableFieldInputHolder holder, ItemModel model) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
         setType(holder, model);
@@ -214,7 +214,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         setClickable(holder);
     }
 
-    private void setData(IndexFieldSelectHolder holder, ItemModel model) {
+    private void setData(TableFieldSelectHolder holder, ItemModel model) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
         setType(holder, model);
@@ -222,7 +222,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         setClickable(holder);
     }
 
-    private void setType(IndexFieldInputHolder holder, ItemModel model) {
+    private void setType(TableFieldInputHolder holder, ItemModel model) {
         switch (model.getAnswer().getType()) {
             case "text":
                 holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -241,7 +241,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void setType(IndexFieldSelectHolder holder, ItemModel model) {
+    private void setType(TableFieldSelectHolder holder, ItemModel model) {
         setSpinner(holder, model);
 
         if (!model.getUser_answered().equals(""))
@@ -250,7 +250,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             holder.binding.selectSpinner.setSelection(holder.binding.selectSpinner.getCount());
     }
 
-    private void setClickable(IndexFieldInputHolder holder) {
+    private void setClickable(TableFieldInputHolder holder) {
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.getRoot().setAlpha((float) 1);
@@ -260,7 +260,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void setClickable(IndexFieldSelectHolder holder) {
+    private void setClickable(TableFieldSelectHolder holder) {
         if (editable) {
             holder.binding.selectSpinner.setEnabled(true);
             holder.binding.getRoot().setAlpha((float) 1);
@@ -270,7 +270,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void setSpinner(IndexFieldSelectHolder holder, ItemModel model) {
+    private void setSpinner(TableFieldSelectHolder holder, ItemModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
             for (int i = 0; i < model.getAnswer().getAnswer().length(); i++) {

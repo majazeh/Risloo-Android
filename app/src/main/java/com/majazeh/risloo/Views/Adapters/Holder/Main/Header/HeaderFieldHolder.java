@@ -2,14 +2,14 @@ package com.majazeh.risloo.Views.Adapters.Holder.Main.Header;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
 
 public class HeaderFieldHolder extends RecyclerView.ViewHolder {
 
     // Binding
-    public HeaderItemIndexFieldBinding binding;
+    public HeaderItemTableFieldBinding binding;
 
-    public HeaderFieldHolder(HeaderItemIndexFieldBinding binding) {
+    public HeaderFieldHolder(HeaderItemTableFieldBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
     }

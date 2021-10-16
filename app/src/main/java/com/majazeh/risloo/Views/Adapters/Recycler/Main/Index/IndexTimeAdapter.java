@@ -11,9 +11,9 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderTimeHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexTimeHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexTimeBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexTimeBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableTimeHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableTimeBinding;
+import com.majazeh.risloo.databinding.SingleItemTableTimeBinding;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -35,21 +35,21 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderTimeHolder(HeaderItemIndexTimeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderTimeHolder(HeaderItemTableTimeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexTimeHolder(SingleItemIndexTimeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableTimeHolder(SingleItemTableTimeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderTimeHolder) {
             setWidget((HeaderTimeHolder) holder);
-        } else if (holder instanceof  IndexTimeHolder) {
+        } else if (holder instanceof TableTimeHolder) {
             BillingModel model = (BillingModel) items.get(i - 1);
 
-            listener((IndexTimeHolder) holder, model);
+            listener((TableTimeHolder) holder, model);
 
-            setData((IndexTimeHolder) holder, model);
+            setData((TableTimeHolder) holder, model);
         }
     }
 
@@ -95,13 +95,13 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TimeAdapterAmount), 5, 12, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
-    private void listener(IndexTimeHolder holder, BillingModel model) {
+    private void listener(TableTimeHolder holder, BillingModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexTimeHolder holder, BillingModel model) {
+    private void setData(TableTimeHolder holder, BillingModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.titleTextView.setText(model.getTitle());
 

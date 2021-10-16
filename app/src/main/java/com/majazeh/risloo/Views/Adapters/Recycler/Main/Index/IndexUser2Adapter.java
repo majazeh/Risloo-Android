@@ -21,10 +21,10 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderUser2Holder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexUser2Holder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableUser2Holder;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SessionFragment;
-import com.majazeh.risloo.databinding.HeaderItemIndexUser2Binding;
-import com.majazeh.risloo.databinding.SingleItemIndexUser2Binding;
+import com.majazeh.risloo.databinding.HeaderItemTableUser2Binding;
+import com.majazeh.risloo.databinding.SingleItemTableUser2Binding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -54,21 +54,21 @@ public class IndexUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderUser2Holder(HeaderItemIndexUser2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderUser2Holder(HeaderItemTableUser2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexUser2Holder(SingleItemIndexUser2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableUser2Holder(SingleItemTableUser2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexUser2Holder) {
+        if (holder instanceof TableUser2Holder) {
             UserModel model = (UserModel) items.get(i - 1);
 
-            initializer((IndexUser2Holder) holder);
+            initializer((TableUser2Holder) holder);
 
-            listener((IndexUser2Holder) holder, model);
+            listener((TableUser2Holder) holder, model);
 
-            setData((IndexUser2Holder) holder, model);
+            setData((TableUser2Holder) holder, model);
         }
     }
 
@@ -112,7 +112,7 @@ public class IndexUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    private void initializer(IndexUser2Holder holder) {
+    private void initializer(TableUser2Holder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
@@ -123,7 +123,7 @@ public class IndexUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexUser2Holder holder, UserModel model) {
+    private void listener(TableUser2Holder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalUserFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -153,14 +153,14 @@ public class IndexUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         });
     }
 
-    private void setData(IndexUser2Holder holder, UserModel model) {
+    private void setData(TableUser2Holder holder, UserModel model) {
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.fieldTextView.setText("-");
 
         setPosition(holder, model);
     }
 
-    private void setPosition(IndexUser2Holder holder, UserModel model) {
+    private void setPosition(TableUser2Holder holder, UserModel model) {
         String position = SelectionManager.getUserPosition(activity, "fa", model.getPosition());
         for (int i=0; i<holder.binding.positionSpinner.getCount(); i++) {
             if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {

@@ -14,10 +14,10 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderScaleHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexScaleHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableScaleHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.ScalesFragment;
-import com.majazeh.risloo.databinding.HeaderItemIndexScaleBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexScaleBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableScaleBinding;
+import com.majazeh.risloo.databinding.SingleItemTableScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -43,23 +43,23 @@ public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderScaleHolder(HeaderItemIndexScaleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderScaleHolder(HeaderItemTableScaleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexScaleHolder(SingleItemIndexScaleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableScaleHolder(SingleItemTableScaleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexScaleHolder) {
+        if (holder instanceof TableScaleHolder) {
             ScaleModel model = (ScaleModel) items.get(i - 1);
 
             initializer();
 
-            listener((IndexScaleHolder) holder, model);
+            listener((TableScaleHolder) holder, model);
 
-            setPermission((IndexScaleHolder) holder);
+            setPermission((TableScaleHolder) holder);
 
-            setData((IndexScaleHolder) holder, model);
+            setData((TableScaleHolder) holder, model);
         }
     }
 
@@ -105,7 +105,7 @@ public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
-    private void listener(IndexScaleHolder holder, ScaleModel model) {
+    private void listener(TableScaleHolder holder, ScaleModel model) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -116,7 +116,7 @@ public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }).widget(holder.binding.createTextView);
     }
 
-    private void setPermission(IndexScaleHolder holder) {
+    private void setPermission(TableScaleHolder holder) {
         UserModel model = ((MainActivity) activity).singleton.getUserModel();
 
         if (current instanceof ScalesFragment && ((MainActivity) activity).permissoon.showScalesCreateSample(model))
@@ -125,7 +125,7 @@ public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             holder.binding.createTextView.setVisibility(View.GONE);
     }
 
-    private void setData(IndexScaleHolder holder, ScaleModel model) {
+    private void setData(TableScaleHolder holder, ScaleModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getTitle());
 

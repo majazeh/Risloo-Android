@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderClientReportHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexClientReportHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexClientReportBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexClientReportBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableClientReportHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableClientReportBinding;
+import com.majazeh.risloo.databinding.SingleItemTableClientReportBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.ReportModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -36,19 +36,19 @@ public class IndexClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderClientReportHolder(HeaderItemIndexClientReportBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderClientReportHolder(HeaderItemTableClientReportBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexClientReportHolder(SingleItemIndexClientReportBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableClientReportHolder(SingleItemTableClientReportBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexClientReportHolder) {
+        if (holder instanceof TableClientReportHolder) {
             ReportModel model = (ReportModel) items.get(i - 1);
 
-            listener((IndexClientReportHolder) holder, model);
+            listener((TableClientReportHolder) holder, model);
 
-            setData((IndexClientReportHolder) holder, model);
+            setData((TableClientReportHolder) holder, model);
         }
     }
 
@@ -90,13 +90,13 @@ public class IndexClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private void listener(IndexClientReportHolder holder, ReportModel model) {
+    private void listener(TableClientReportHolder holder, ReportModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexClientReportHolder holder, ReportModel model) {
+    private void setData(TableClientReportHolder holder, ReportModel model) {
         holder.binding.nameTextView.setText(model.getTitle());
         holder.binding.timeTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(model.getReported_at()), "-"));
 
@@ -104,7 +104,7 @@ public class IndexClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
         setViewers(holder, model.getViewers());
     }
 
-    private void setClients(IndexClientReportHolder holder, List clients) {
+    private void setClients(TableClientReportHolder holder, List clients) {
         if (clients != null && clients.data().size() != 0) {
             holder.binding.referenceTextView.setText("");
             for (int i = 0; i < clients.data().size(); i++) {
@@ -119,7 +119,7 @@ public class IndexClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private void setViewers(IndexClientReportHolder holder, List viewers) {
+    private void setViewers(TableClientReportHolder holder, List viewers) {
         if (viewers != null && viewers.data().size() != 0) {
             holder.binding.readersTextView.setText("");
             for (int i = 0; i < viewers.data().size(); i++) {

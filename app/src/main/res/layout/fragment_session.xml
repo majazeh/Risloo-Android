@@ -672,7 +672,7 @@
 
         <include
             android:id="@+id/users_singleLayout"
-            layout="@layout/component_single_user2"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -728,7 +728,7 @@
 
         <include
             android:id="@+id/practices_singleLayout"
-            layout="@layout/component_single_practice"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -784,7 +784,7 @@
 
         <include
             android:id="@+id/samples_singleLayout"
-            layout="@layout/component_single_sample"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -840,7 +840,7 @@
 
         <include
             android:id="@+id/bills_singleLayout"
-            layout="@layout/component_single_bill"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"

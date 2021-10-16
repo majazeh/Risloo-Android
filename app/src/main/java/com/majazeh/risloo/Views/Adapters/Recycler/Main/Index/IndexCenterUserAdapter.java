@@ -22,10 +22,10 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderCenterUserHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexCenterUserHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableCenterUserHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterUsersFragment;
-import com.majazeh.risloo.databinding.HeaderItemIndexCenterUserBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexCenterUserBinding;
+import com.majazeh.risloo.databinding.HeaderItemTableCenterUserBinding;
+import com.majazeh.risloo.databinding.SingleItemTableCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -59,21 +59,21 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderCenterUserHolder(HeaderItemIndexCenterUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderCenterUserHolder(HeaderItemTableCenterUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexCenterUserHolder(SingleItemIndexCenterUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableCenterUserHolder(SingleItemTableCenterUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexCenterUserHolder) {
+        if (holder instanceof TableCenterUserHolder) {
             UserModel model = (UserModel) items.get(i - 1);
 
-            initializer((IndexCenterUserHolder) holder);
+            initializer((TableCenterUserHolder) holder);
 
-            listener((IndexCenterUserHolder) holder, model);
+            listener((TableCenterUserHolder) holder, model);
 
-            setData((IndexCenterUserHolder) holder, model);
+            setData((TableCenterUserHolder) holder, model);
         }
     }
 
@@ -117,7 +117,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    private void initializer(IndexCenterUserHolder holder) {
+    private void initializer(TableCenterUserHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
@@ -128,7 +128,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexCenterUserHolder holder, UserModel model) {
+    private void listener(TableCenterUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof CenterUsersFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).centerModel, model);
@@ -217,7 +217,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         });
     }
 
-    private void setData(IndexCenterUserHolder holder, UserModel model) {
+    private void setData(TableCenterUserHolder holder, UserModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
@@ -227,7 +227,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         setAcceptation(holder, model);
     }
 
-    private void setPosition(IndexCenterUserHolder holder, UserModel model) {
+    private void setPosition(TableCenterUserHolder holder, UserModel model) {
         String position = SelectionManager.getUserType(activity, "fa", model.getPosition());
         for (int i=0; i<holder.binding.positionSpinner.getCount(); i++) {
             if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
@@ -248,7 +248,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    private void setAcceptation(IndexCenterUserHolder holder, UserModel model) {
+    private void setAcceptation(TableCenterUserHolder holder, UserModel model) {
         ArrayList<String> items = new ArrayList<>();
 
         if (model.getMeta() != null) {
@@ -295,7 +295,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
     }
 
-    private void doWork(IndexCenterUserHolder holder, UserModel model, String value, String method) {
+    private void doWork(TableCenterUserHolder holder, UserModel model, String value, String method) {
         DialogManager.showLoadingDialog(activity, "");
 
         if (current instanceof CenterUsersFragment)

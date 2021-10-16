@@ -202,7 +202,7 @@
 
         <include
             android:id="@+id/cases_singleLayout"
-            layout="@layout/component_single_case"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -242,7 +242,7 @@
 
         <include
             android:id="@+id/samples_singleLayout"
-            layout="@layout/component_single_sample"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"

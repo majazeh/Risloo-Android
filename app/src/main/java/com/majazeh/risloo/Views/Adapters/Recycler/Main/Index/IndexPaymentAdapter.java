@@ -13,9 +13,9 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderPaymentHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexPaymentHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexPaymentBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexPaymentBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TablePaymentHolder;
+import com.majazeh.risloo.databinding.HeaderItemTablePaymentBinding;
+import com.majazeh.risloo.databinding.SingleItemTablePaymentBinding;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -37,21 +37,21 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderPaymentHolder(HeaderItemIndexPaymentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderPaymentHolder(HeaderItemTablePaymentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexPaymentHolder(SingleItemIndexPaymentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TablePaymentHolder(SingleItemTablePaymentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderPaymentHolder) {
             setWidget((HeaderPaymentHolder) holder);
-        } else if (holder instanceof  IndexPaymentHolder) {
+        } else if (holder instanceof TablePaymentHolder) {
             PaymentModel model = (PaymentModel) items.get(i - 1);
 
-            listener((IndexPaymentHolder) holder, model);
+            listener((TablePaymentHolder) holder, model);
 
-            setData((IndexPaymentHolder) holder, model);
+            setData((TablePaymentHolder) holder, model);
         }
     }
 
@@ -97,13 +97,13 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.PaymentAdapterLeft), 11, 18, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
-    private void listener(IndexPaymentHolder holder, PaymentModel model) {
+    private void listener(TablePaymentHolder holder, PaymentModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexPaymentHolder holder, PaymentModel model) {
+    private void setData(TablePaymentHolder holder, PaymentModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
 

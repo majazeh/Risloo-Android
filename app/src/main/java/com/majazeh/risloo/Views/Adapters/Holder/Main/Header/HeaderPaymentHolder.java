@@ -2,14 +2,14 @@ package com.majazeh.risloo.Views.Adapters.Holder.Main.Header;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.databinding.HeaderItemIndexPaymentBinding;
+import com.majazeh.risloo.databinding.HeaderItemTablePaymentBinding;
 
 public class HeaderPaymentHolder extends RecyclerView.ViewHolder {
 
     // Binding
-    public HeaderItemIndexPaymentBinding binding;
+    public HeaderItemTablePaymentBinding binding;
 
-    public HeaderPaymentHolder(HeaderItemIndexPaymentBinding binding) {
+    public HeaderPaymentHolder(HeaderItemTablePaymentBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
     }

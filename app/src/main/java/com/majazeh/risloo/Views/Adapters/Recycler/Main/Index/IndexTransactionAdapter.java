@@ -15,9 +15,9 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderTransactionHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexTransactionHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexTransactionBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexTransactionBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableTransactionHolder;
+import com.majazeh.risloo.databinding.HeaderItemTableTransactionBinding;
+import com.majazeh.risloo.databinding.SingleItemTableTransactionBinding;
 import com.mre.ligheh.Model.TypeModel.TransactionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -39,21 +39,21 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderTransactionHolder(HeaderItemIndexTransactionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderTransactionHolder(HeaderItemTableTransactionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexTransactionHolder(SingleItemIndexTransactionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new TableTransactionHolder(SingleItemTableTransactionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderTransactionHolder) {
             setWidget((HeaderTransactionHolder) holder);
-        } else if (holder instanceof  IndexTransactionHolder) {
+        } else if (holder instanceof TableTransactionHolder) {
             TransactionModel model = (TransactionModel) items.get(i - 1);
 
-            listener((IndexTransactionHolder) holder, model);
+            listener((TableTransactionHolder) holder, model);
 
-            setData((IndexTransactionHolder) holder, model);
+            setData((TableTransactionHolder) holder, model);
         }
     }
 
@@ -99,7 +99,7 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
         holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TransactionAdapterLeft), 11, 18, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
-    private void listener(IndexTransactionHolder holder, TransactionModel model) {
+    private void listener(TableTransactionHolder holder, TransactionModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -110,7 +110,7 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
         }).widget(holder.binding.billImageView);
     }
 
-    private void setData(IndexTransactionHolder holder, TransactionModel model) {
+    private void setData(TableTransactionHolder holder, TransactionModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
 
