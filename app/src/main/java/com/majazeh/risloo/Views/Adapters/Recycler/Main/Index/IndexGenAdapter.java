@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexFieldInputHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
@@ -37,7 +36,7 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     // Vars
     private ArrayList<String> items;
-    private boolean userSelect = false, editable = false;
+    private boolean editable = false;
 
     public IndexGenAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -121,7 +120,7 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((TestActivity) activity).inputor.select(activity, holder.binding.inputEditText);
+                    ((MainActivity) activity).inputor.select(activity, holder.binding.inputEditText);
             return false;
         });
 

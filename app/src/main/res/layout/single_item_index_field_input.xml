@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,9 +11,9 @@
 
     <TextView
         android:id="@+id/header_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="start"
+        android:gravity="right"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray600"
@@ -27,9 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
+        android:minHeight="@dimen/_36sdp"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingStart="@dimen/_12sdp"
-        android:minHeight="@dimen/_36sdp"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:gravity="center|right"
@@ -41,7 +40,7 @@
         android:fontFamily="@font/dana_medium"
         android:importantForAutofill="no"
         android:saveEnabled="false"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray300"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
         tools:text="عنوان"
         tools:ignore="LabelFor" />
 

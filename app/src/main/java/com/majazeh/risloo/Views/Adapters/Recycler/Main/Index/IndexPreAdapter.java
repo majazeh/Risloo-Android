@@ -20,7 +20,6 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexFieldInputHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexFieldSelectHolder;
@@ -152,7 +151,7 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((TestActivity) activity).inputor.select(activity, holder.binding.inputEditText);
+                    ((MainActivity) activity).inputor.select(activity, holder.binding.inputEditText);
             return false;
         });
 
@@ -186,6 +185,8 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             userSelect = true;
             return false;
         });
+
+        holder.binding.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         holder.binding.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -281,7 +282,6 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void setSpinner(IndexFieldSelectHolder holder, PrerequisitesModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
-
             for (int i = 0; i < model.getAnswer().getJSONArray("options").length(); i++) {
                 options.add(model.getAnswer().getJSONArray("options").get(i).toString());
             }
