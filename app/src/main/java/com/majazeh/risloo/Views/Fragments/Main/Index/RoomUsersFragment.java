@@ -77,10 +77,10 @@ public class RoomUsersFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomUsersFragmentTitle));
 
-        binding.indexShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
+        binding.tableShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
         InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -126,8 +126,8 @@ public class RoomUsersFragment extends Fragment {
                 else
                     data.put("page", 1);
 
-                if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
-                    binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                if (binding.tableSingleLayout.progressBar.getVisibility() == View.GONE)
+                    binding.tableSingleLayout.progressBar.setVisibility(View.VISIBLE);
 
                 getData();
             }
@@ -163,27 +163,27 @@ public class RoomUsersFragment extends Fragment {
 
                         if (!items.data().isEmpty()) {
                             adapter.setItems(items.data());
-                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                            binding.tableSingleLayout.recyclerView.setAdapter(adapter);
 
-                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                            binding.tableSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.itemsCount() == 0) {
-                            binding.indexSingleLayout.recyclerView.setAdapter(null);
+                            binding.tableSingleLayout.recyclerView.setAdapter(null);
 
-                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.tableSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
+                                binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                             else
-                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.RoomUsersFragmentEmpty));
+                                binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.RoomUsersFragmentEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
 
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.tableShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
 
@@ -197,12 +197,12 @@ public class RoomUsersFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.tableShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
 

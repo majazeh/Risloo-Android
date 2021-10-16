@@ -41,14 +41,14 @@
             app:layout_constraintTop_toTopOf="@id/header_includeLayout" />
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/index_barrier"
+            android:id="@+id/table_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="header_includeLayout, add_imageView" />
 
         <include
-            android:id="@+id/index_shimmerLayout"
+            android:id="@+id/table_shimmerLayout"
             layout="@layout/component_shimmer_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -58,11 +58,11 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/index_barrier"
+            app:layout_constraintTop_toBottomOf="@id/table_barrier"
             tools:visibility="gone" />
 
         <include
-            android:id="@+id/index_singleLayout"
+            android:id="@+id/table_singleLayout"
             layout="@layout/component_single_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/index_barrier"
+            app:layout_constraintTop_toBottomOf="@id/table_barrier"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

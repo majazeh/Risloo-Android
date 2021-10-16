@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
 
         <include
-            android:id="@+id/index_shimmerLayout"
+            android:id="@+id/table_shimmerLayout"
             layout="@layout/component_shimmer_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             tools:visibility="gone" />
 
         <include
-            android:id="@+id/index_singleLayout"
+            android:id="@+id/table_singleLayout"
             layout="@layout/component_single_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
