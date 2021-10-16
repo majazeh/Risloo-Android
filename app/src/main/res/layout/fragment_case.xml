@@ -316,7 +316,7 @@
 
         <include
             android:id="@+id/sessions_shimmerLayout"
-            layout="@layout/component_shimmer_index"
+            layout="@layout/component_shimmer_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -328,7 +328,7 @@
 
         <include
             android:id="@+id/sessions_singleLayout"
-            layout="@layout/component_single_index"
+            layout="@layout/component_single_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -372,7 +372,7 @@
 
         <include
             android:id="@+id/samples_shimmerLayout"
-            layout="@layout/component_shimmer_index"
+            layout="@layout/component_shimmer_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -384,7 +384,7 @@
 
         <include
             android:id="@+id/samples_singleLayout"
-            layout="@layout/component_single_index"
+            layout="@layout/component_single_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"

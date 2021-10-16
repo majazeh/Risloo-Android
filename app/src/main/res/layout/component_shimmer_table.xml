@@ -19,22 +19,22 @@
 
         <include
             android:id="@+id/shimmer_item1"
-            layout="@layout/shimmer_item_index"
+            layout="@layout/shimmer_item_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/shimmer_item_index"
+            layout="@layout/shimmer_item_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/shimmer_item_index"
+            layout="@layout/shimmer_item_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/shimmer_item_index"
+            layout="@layout/shimmer_item_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
