@@ -54,6 +54,11 @@
     <string name="SnackCreatedNewTreasury">کیف پول جدید ساخته شد.</string>
     <string name="SnackCreatedNewUser">کاربر جدید ایجاد شد.</string>
 
+    <string name="SnackSampleScored">نمونه نمره‌دهی شد.</string>
+    <string name="SnackSampleFilled">نمونه پر شد.</string>
+    <string name="SnackSampleClosed">نمونه بسته شد.</string>
+    <string name="SnackSampleOpened">نمونه باز شد.</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Toast Strings

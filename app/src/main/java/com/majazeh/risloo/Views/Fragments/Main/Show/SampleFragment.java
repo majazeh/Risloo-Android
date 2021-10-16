@@ -19,6 +19,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -37,9 +38,11 @@ import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class SampleFragment extends Fragment {
 
@@ -461,6 +464,8 @@ public class SampleFragment extends Fragment {
                     public void onOK(Object object) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
+                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleScored));
+
                                 setStatus("done");
                             });
                         }
@@ -470,7 +475,29 @@ public class SampleFragment extends Fragment {
                     public void onFailure(String response) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
+                                try {
+                                    JSONObject responseObject = new JSONObject(response);
+                                    if (!responseObject.isNull("errors")) {
+                                        JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                        Iterator<String> keys = (errorsObject.keys());
+                                        StringBuilder errors = new StringBuilder();
+
+                                        while (keys.hasNext()) {
+                                            String key = keys.next();
+                                            for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                                String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                                errors.append(validation);
+                                                errors.append("\n");
+                                            }
+                                        }
+
+                                        SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             });
                         }
                     }
@@ -485,6 +512,7 @@ public class SampleFragment extends Fragment {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
                                 DialogManager.dismissLoadingDialog();
+                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleFilled));
 
                                 // TODO : Place Code If Needed
                             });
@@ -495,7 +523,29 @@ public class SampleFragment extends Fragment {
                     public void onFailure(String response) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
+                                try {
+                                    JSONObject responseObject = new JSONObject(response);
+                                    if (!responseObject.isNull("errors")) {
+                                        JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                        Iterator<String> keys = (errorsObject.keys());
+                                        StringBuilder errors = new StringBuilder();
+
+                                        while (keys.hasNext()) {
+                                            String key = keys.next();
+                                            for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                                String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                                errors.append(validation);
+                                                errors.append("\n");
+                                            }
+                                        }
+
+                                        SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             });
                         }
                     }
@@ -510,6 +560,7 @@ public class SampleFragment extends Fragment {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
                                 DialogManager.dismissLoadingDialog();
+                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleClosed));
 
                                 setStatus("closed");
                             });
@@ -520,7 +571,29 @@ public class SampleFragment extends Fragment {
                     public void onFailure(String response) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
+                                try {
+                                    JSONObject responseObject = new JSONObject(response);
+                                    if (!responseObject.isNull("errors")) {
+                                        JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                        Iterator<String> keys = (errorsObject.keys());
+                                        StringBuilder errors = new StringBuilder();
+
+                                        while (keys.hasNext()) {
+                                            String key = keys.next();
+                                            for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                                String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                                errors.append(validation);
+                                                errors.append("\n");
+                                            }
+                                        }
+
+                                        SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             });
                         }
                     }
@@ -535,6 +608,7 @@ public class SampleFragment extends Fragment {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
                                 DialogManager.dismissLoadingDialog();
+                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleOpened));
 
                                 setStatus("open");
                             });
@@ -545,7 +619,29 @@ public class SampleFragment extends Fragment {
                     public void onFailure(String response) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
+                                try {
+                                    JSONObject responseObject = new JSONObject(response);
+                                    if (!responseObject.isNull("errors")) {
+                                        JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                        Iterator<String> keys = (errorsObject.keys());
+                                        StringBuilder errors = new StringBuilder();
+
+                                        while (keys.hasNext()) {
+                                            String key = keys.next();
+                                            for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                                String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                                errors.append(validation);
+                                                errors.append("\n");
+                                            }
+                                        }
+
+                                        SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             });
                         }
                     }
@@ -572,7 +668,29 @@ public class SampleFragment extends Fragment {
                     public void onFailure(String response) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
+                                try {
+                                    JSONObject responseObject = new JSONObject(response);
+                                    if (!responseObject.isNull("errors")) {
+                                        JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                        Iterator<String> keys = (errorsObject.keys());
+                                        StringBuilder errors = new StringBuilder();
+
+                                        while (keys.hasNext()) {
+                                            String key = keys.next();
+                                            for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                                String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                                errors.append(validation);
+                                                errors.append("\n");
+                                            }
+                                        }
+
+                                        SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             });
                         }
                     }

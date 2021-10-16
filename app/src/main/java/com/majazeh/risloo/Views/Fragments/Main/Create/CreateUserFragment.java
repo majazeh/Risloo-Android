@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
@@ -27,6 +29,7 @@ import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -296,12 +299,15 @@ public class CreateUserFragment extends Fragment {
         User.create(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                UserModel userModel = (UserModel) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewUser));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        NavDirections action = NavigationMainDirections.actionGlobalUserFragment(userModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
             }
