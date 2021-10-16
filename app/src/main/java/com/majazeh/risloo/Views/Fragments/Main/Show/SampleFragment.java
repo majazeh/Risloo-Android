@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.ProfilesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexProfileAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableGenAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableItemAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TablePreAdapter;
@@ -47,7 +47,7 @@ public class SampleFragment extends Fragment {
     private FragmentSampleBinding binding;
 
     // Adapters
-    private ProfilesAdapter profileHalfsAdapter, profileExtrasAdapter;
+    private IndexProfileAdapter indexHalfAdapter, indexExtraAdapter;
     private TableGenAdapter tableGenAdapter;
     private TablePreAdapter tablePreAdapter;
     private TableItemAdapter tableItemAdapter;
@@ -80,8 +80,8 @@ public class SampleFragment extends Fragment {
     }
 
     private void initializer() {
-        profileHalfsAdapter = new ProfilesAdapter(requireActivity());
-        profileExtrasAdapter = new ProfilesAdapter(requireActivity());
+        indexHalfAdapter = new IndexProfileAdapter(requireActivity());
+        indexExtraAdapter = new IndexProfileAdapter(requireActivity());
         tableGenAdapter = new TableGenAdapter(requireActivity());
         tablePreAdapter = new TablePreAdapter(requireActivity());
         tableItemAdapter = new TableItemAdapter(requireActivity());
@@ -92,12 +92,12 @@ public class SampleFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.profileHalfsHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHalfHeader));
-        binding.profileExtrasHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
+        binding.halfsHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHalfHeader));
+        binding.extrasHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
         binding.fieldsHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileHalfsRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileExtrasRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.halfsRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.extrasRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.generalRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.prerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.itemRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
@@ -318,37 +318,37 @@ public class SampleFragment extends Fragment {
 
                 // Profile Half
                 if (sampleModel.getProfilesHalf() != null && !sampleModel.getProfilesHalf().data().isEmpty()) {
-                    profileHalfsAdapter.setItems(sampleModel.getProfilesHalf().data(), false);
-                    binding.profileHalfsRecyclerView.setAdapter(profileHalfsAdapter);
+                    indexHalfAdapter.setItems(sampleModel.getProfilesHalf().data(), false);
+                    binding.halfsRecyclerView.setAdapter(indexHalfAdapter);
 
-                    binding.profileHalfsGroup.setVisibility(View.VISIBLE);
-                } else if (profileHalfsAdapter.getItemCount() == 0) {
-                    binding.profileHalfsRecyclerView.setAdapter(null);
+                    binding.halfsGroup.setVisibility(View.VISIBLE);
+                } else if (indexHalfAdapter.getItemCount() == 0) {
+                    binding.halfsRecyclerView.setAdapter(null);
 
-                    binding.profileHalfsGroup.setVisibility(View.GONE);
+                    binding.halfsGroup.setVisibility(View.GONE);
                 }
 
-                // Profile Extra
+                // Profile Extras
                 if (sampleModel.getProfilesExtra() != null && !sampleModel.getProfilesExtra().data().isEmpty()) {
-                    profileExtrasAdapter.setItems(sampleModel.getProfilesExtra().data(), true);
-                    binding.profileExtrasRecyclerView.setAdapter(profileExtrasAdapter);
+                    indexExtraAdapter.setItems(sampleModel.getProfilesExtra().data(), true);
+                    binding.extrasRecyclerView.setAdapter(indexExtraAdapter);
 
-                    binding.profileExtrasGroup.setVisibility(View.VISIBLE);
-                } else if (profileExtrasAdapter.getItemCount() == 0) {
-                    binding.profileExtrasRecyclerView.setAdapter(null);
+                    binding.extrasGroup.setVisibility(View.VISIBLE);
+                } else if (indexExtraAdapter.getItemCount() == 0) {
+                    binding.extrasRecyclerView.setAdapter(null);
 
-                    binding.profileExtrasGroup.setVisibility(View.GONE);
+                    binding.extrasGroup.setVisibility(View.GONE);
                 }
 
-                binding.profileHalfsHeaderLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));
-                binding.profileExtrasHeaderLayout.countTextView.setText(StringManager.bracing(profileExtrasAdapter.getItemCount()));
+                binding.halfsHeaderLayout.countTextView.setText(StringManager.bracing(indexHalfAdapter.getItemCount()));
+                binding.extrasHeaderLayout.countTextView.setText(StringManager.bracing(indexExtraAdapter.getItemCount()));
 
                 break;
             default:
                 binding.profilesTextView.getRoot().setVisibility(View.GONE);
 
-                binding.profileHalfsGroup.setVisibility(View.GONE);
-                binding.profileExtrasGroup.setVisibility(View.GONE);
+                binding.halfsGroup.setVisibility(View.GONE);
+                binding.extrasGroup.setVisibility(View.GONE);
                 break;
         }
     }

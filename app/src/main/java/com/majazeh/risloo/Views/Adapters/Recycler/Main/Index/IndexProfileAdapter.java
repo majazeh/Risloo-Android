@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,15 +12,15 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.ProfilesHolder;
-import com.majazeh.risloo.databinding.SingleItemProfileBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexProfileHolder;
+import com.majazeh.risloo.databinding.SingleItemIndexProfileBinding;
 import com.mre.ligheh.Model.TypeModel.ProfileModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesHolder> {
+public class IndexProfileAdapter extends RecyclerView.Adapter<IndexProfileHolder> {
 
     // Objects
     private Activity activity;
@@ -29,18 +29,18 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesHolder> {
     private ArrayList<TypeModel> items;
     private boolean showTitle = false;
 
-    public ProfilesAdapter(@NonNull Activity activity) {
+    public IndexProfileAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public ProfilesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ProfilesHolder(SingleItemProfileBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexProfileHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexProfileHolder(SingleItemIndexProfileBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProfilesHolder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexProfileHolder holder, int i) {
         ProfileModel model = (ProfileModel) items.get(i);
 
         listener(holder, model);
@@ -73,13 +73,13 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesHolder> {
         }
     }
 
-    private void listener(ProfilesHolder holder, ProfileModel model) {
+    private void listener(IndexProfileHolder holder, ProfileModel model) {
         CustomClickView.onDelayedListener(() -> {
             IntentManager.display(activity, SelectionManager.getProfileExtras(activity, "fa", getFileNameSub(model.getFile_name())), model.getUrl());
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(ProfilesHolder holder, ProfileModel model) {
+    private void setData(IndexProfileHolder holder, ProfileModel model) {
         Picasso.get().load(model.getUrl()).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
 
         if (showTitle) {

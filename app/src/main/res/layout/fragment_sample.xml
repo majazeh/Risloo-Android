@@ -240,7 +240,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
-            android:id="@+id/profile_halfs_headerLayout"
+            android:id="@+id/halfs_headerLayout"
             layout="@layout/component_main_index_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -251,31 +251,31 @@
             app:layout_constraintTop_toBottomOf="@id/scoring_constraintLayout" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/profile_halfs_recyclerView"
+            android:id="@+id/halfs_recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
             app:layout_constrainedHeight="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_halfs_headerLayout"
+            app:layout_constraintTop_toBottomOf="@id/halfs_headerLayout"
             tools:layout_marginEnd="@dimen/_12sdp"
             tools:layout_marginStart="@dimen/_12sdp"
             tools:layout_marginTop="@dimen/_8sdp"
-            tools:listitem="@layout/single_item_profile"
+            tools:listitem="@layout/single_item_index_profile"
             tools:itemCount="4"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Group
-            android:id="@+id/profile_halfs_group"
+            android:id="@+id/halfs_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="profile_halfs_headerLayout, profile_halfs_recyclerView"
+            app:constraint_referenced_ids="halfs_headerLayout, halfs_recyclerView"
             tools:visibility="visible" />
 
         <include
-            android:id="@+id/profile_extras_headerLayout"
+            android:id="@+id/extras_headerLayout"
             layout="@layout/component_main_index_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -283,31 +283,31 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/profile_halfs_recyclerView"
+            app:layout_constraintTop_toBottomOf="@id/halfs_recyclerView"
             tools:layout_marginTop="@dimen/_14sdp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/profile_extras_recyclerView"
+            android:id="@+id/extras_recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
             app:layout_constrainedHeight="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_extras_headerLayout"
+            app:layout_constraintTop_toBottomOf="@id/extras_headerLayout"
             tools:layout_marginEnd="@dimen/_12sdp"
             tools:layout_marginStart="@dimen/_12sdp"
             tools:layout_marginTop="@dimen/_8sdp"
-            tools:listitem="@layout/single_item_profile"
+            tools:listitem="@layout/single_item_index_profile"
             tools:itemCount="4"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Group
-            android:id="@+id/profile_extras_group"
+            android:id="@+id/extras_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="profile_extras_headerLayout, profile_extras_recyclerView"
+            app:constraint_referenced_ids="extras_headerLayout, extras_recyclerView"
             tools:visibility="visible" />
 
         <include
@@ -319,7 +319,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/profile_extras_recyclerView"
+            app:layout_constraintTop_toBottomOf="@id/extras_recyclerView"
             tools:layout_marginTop="@dimen/_14sdp" />
 
         <CheckBox
