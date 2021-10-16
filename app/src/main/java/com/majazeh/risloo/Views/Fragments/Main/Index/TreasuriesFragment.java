@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexTreasuryAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableTreasuryAdapter;
 import com.majazeh.risloo.databinding.FragmentTreasuriesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -32,7 +32,7 @@ public class TreasuriesFragment extends Fragment {
     private FragmentTreasuriesBinding binding;
 
     // Adapters
-    private IndexTreasuryAdapter adapter;
+    private TableTreasuryAdapter adapter;
 
     // Objects
     private HashMap data, header;
@@ -55,7 +55,7 @@ public class TreasuriesFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexTreasuryAdapter(requireActivity());
+        adapter = new TableTreasuryAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);

@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexCenterUserAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableCenterUserAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterUsersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -37,7 +37,7 @@ public class CenterUsersFragment extends Fragment {
     private FragmentCenterUsersBinding binding;
 
     // Adapters
-    private IndexCenterUserAdapter adapter;
+    private TableCenterUserAdapter adapter;
 
     // Models
     public CenterModel centerModel;
@@ -66,7 +66,7 @@ public class CenterUsersFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexCenterUserAdapter(requireActivity());
+        adapter = new TableCenterUserAdapter(requireActivity());
 
         handler = new Handler();
 

@@ -23,9 +23,9 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.ProfilesAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexGenAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexItemAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexPreAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableGenAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableItemAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TablePreAdapter;
 import com.majazeh.risloo.databinding.FragmentSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -48,9 +48,9 @@ public class SampleFragment extends Fragment {
 
     // Adapters
     private ProfilesAdapter profileHalfsAdapter, profileExtrasAdapter;
-    private IndexGenAdapter indexGenAdapter;
-    private IndexPreAdapter indexPreAdapter;
-    private IndexItemAdapter indexItemAdapter;
+    private TableGenAdapter tableGenAdapter;
+    private TablePreAdapter tablePreAdapter;
+    private TableItemAdapter tableItemAdapter;
 
     // Models
     private SampleAnswers sampleAnswers;
@@ -82,9 +82,9 @@ public class SampleFragment extends Fragment {
     private void initializer() {
         profileHalfsAdapter = new ProfilesAdapter(requireActivity());
         profileExtrasAdapter = new ProfilesAdapter(requireActivity());
-        indexGenAdapter = new IndexGenAdapter(requireActivity());
-        indexPreAdapter = new IndexPreAdapter(requireActivity());
-        indexItemAdapter = new IndexItemAdapter(requireActivity());
+        tableGenAdapter = new TableGenAdapter(requireActivity());
+        tablePreAdapter = new TablePreAdapter(requireActivity());
+        tableItemAdapter = new TableItemAdapter(requireActivity());
 
         sampleAnswers = new SampleAnswers();
 
@@ -164,15 +164,15 @@ public class SampleFragment extends Fragment {
             if (isChecked) {
                 binding.fieldsCheckBox.setTextColor(getResources().getColor(R.color.CoolGray900));
 
-                indexGenAdapter.setEditable(true);
-                indexPreAdapter.setEditable(true);
-                indexItemAdapter.setEditable(true);
+                tableGenAdapter.setEditable(true);
+                tablePreAdapter.setEditable(true);
+                tableItemAdapter.setEditable(true);
             } else {
                 binding.fieldsCheckBox.setTextColor(getResources().getColor(R.color.CoolGray600));
 
-                indexGenAdapter.setEditable(false);
-                indexPreAdapter.setEditable(false);
-                indexItemAdapter.setEditable(false);
+                tableGenAdapter.setEditable(false);
+                tablePreAdapter.setEditable(false);
+                tableItemAdapter.setEditable(false);
             }
         });
     }
@@ -301,9 +301,9 @@ public class SampleFragment extends Fragment {
                 if (binding.fieldsCheckBox.isChecked()) {
                     binding.fieldsCheckBox.setChecked(false);
 
-                    indexGenAdapter.setEditable(false);
-                    indexPreAdapter.setEditable(false);
-                    indexItemAdapter.setEditable(false);
+                    tableGenAdapter.setEditable(false);
+                    tablePreAdapter.setEditable(false);
+                    tableItemAdapter.setEditable(false);
                 }
                 break;
         }
@@ -392,9 +392,9 @@ public class SampleFragment extends Fragment {
 
                             // Gens Data
                             if (generals.size() != 0) {
-                                indexGenAdapter.setItems(generals);
-                                binding.generalRecyclerView.setAdapter(indexGenAdapter);
-                            } else if (indexGenAdapter.getItemCount() == 0) {
+                                tableGenAdapter.setItems(generals);
+                                binding.generalRecyclerView.setAdapter(tableGenAdapter);
+                            } else if (tableGenAdapter.getItemCount() == 0) {
                                 binding.generalRecyclerView.setAdapter(null);
 
                                 binding.generalRecyclerView.setVisibility(View.GONE);
@@ -414,9 +414,9 @@ public class SampleFragment extends Fragment {
 
                             // Prerequisite Data
                             if (!prerequisites.data().isEmpty()) {
-                                indexPreAdapter.setItems(prerequisites.data());
-                                binding.prerequisiteRecyclerView.setAdapter(indexPreAdapter);
-                            } else if (indexPreAdapter.getItemCount() == 0) {
+                                tablePreAdapter.setItems(prerequisites.data());
+                                binding.prerequisiteRecyclerView.setAdapter(tablePreAdapter);
+                            } else if (tablePreAdapter.getItemCount() == 0) {
                                 binding.prerequisiteRecyclerView.setAdapter(null);
 
                                 binding.prerequisiteRecyclerView.setVisibility(View.GONE);
@@ -424,9 +424,9 @@ public class SampleFragment extends Fragment {
 
                             // Items Data
                             if (!items.data().isEmpty()) {
-                                indexItemAdapter.setItems(items.data());
-                                binding.itemRecyclerView.setAdapter(indexItemAdapter);
-                            } else if (indexItemAdapter.getItemCount() == 0) {
+                                tableItemAdapter.setItems(items.data());
+                                binding.itemRecyclerView.setAdapter(tableItemAdapter);
+                            } else if (tableItemAdapter.getItemCount() == 0) {
                                 binding.itemRecyclerView.setAdapter(null);
 
                                 binding.itemRecyclerView.setVisibility(View.GONE);

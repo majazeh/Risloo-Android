@@ -23,7 +23,7 @@ import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexPaymentAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TablePaymentAdapter;
 import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -47,7 +47,7 @@ public class PaymentsFragment extends Fragment {
     private FragmentPaymentsBinding binding;
 
     // Adapters
-    private IndexPaymentAdapter indexPaymentAdapter;
+    private TablePaymentAdapter adapter;
 
     // Objects
     private HashMap data, header;
@@ -74,7 +74,7 @@ public class PaymentsFragment extends Fragment {
     }
 
     private void initializer() {
-        indexPaymentAdapter = new IndexPaymentAdapter(requireActivity());
+        adapter = new TablePaymentAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -90,11 +90,11 @@ public class PaymentsFragment extends Fragment {
 
         InitManager.txtTextColorBackground(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
 
-        binding.paymentsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentAdapterHeader));
+        binding.tableHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentAdapterHeader));
 
-        binding.paymentsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
+        binding.tableShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.paymentsSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -164,8 +164,8 @@ public class PaymentsFragment extends Fragment {
                 else
                     data.put("page", 1);
 
-                if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.GONE)
-                    binding.paymentsSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                if (binding.tableSingleLayout.progressBar.getVisibility() == View.GONE)
+                    binding.tableSingleLayout.progressBar.setVisibility(View.VISIBLE);
 
                 getData();
             }
@@ -249,21 +249,21 @@ public class PaymentsFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (Objects.equals(data.get("page"), 1))
-                            indexPaymentAdapter.clearItems();
+                            adapter.clearItems();
 
                         if (!items.data().isEmpty()) {
-                            indexPaymentAdapter.setItems(items.data());
-                            binding.paymentsSingleLayout.recyclerView.setAdapter(indexPaymentAdapter);
+                            adapter.setItems(items.data());
+                            binding.tableSingleLayout.recyclerView.setAdapter(adapter);
 
-                            binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexPaymentAdapter.itemsCount() == 0) {
-                            binding.paymentsSingleLayout.recyclerView.setAdapter(null);
+                            binding.tableSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (adapter.itemsCount() == 0) {
+                            binding.tableSingleLayout.recyclerView.setAdapter(null);
 
-                            binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentAdapterEmpty));
+                            binding.tableSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentAdapterEmpty));
                         }
 
-                        binding.paymentsHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
+                        binding.tableHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 
                         hideShimmer();
                     });
@@ -349,15 +349,12 @@ public class PaymentsFragment extends Fragment {
     }
 
     private void hideShimmer() {
+        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.tableShimmerLayout.getRoot().stopShimmer();
 
-        // Payments Data
-        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
-        binding.paymentsShimmerLayout.getRoot().stopShimmer();
-
-        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
-
+        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
     }
 
     @Override

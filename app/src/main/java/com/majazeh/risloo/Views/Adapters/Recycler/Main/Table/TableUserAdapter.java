@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -27,7 +27,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -36,7 +36,7 @@ public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public IndexUserAdapter(@NonNull Activity activity) {
+    public TableUserAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

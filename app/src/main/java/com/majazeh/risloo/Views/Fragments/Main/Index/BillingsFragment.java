@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexBillAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableBillAdapter;
 import com.majazeh.risloo.databinding.FragmentBillingsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Billing;
@@ -30,7 +30,7 @@ public class BillingsFragment extends Fragment {
     private FragmentBillingsBinding binding;
 
     // Adapters
-    private IndexBillAdapter adapter;
+    private TableBillAdapter adapter;
 
     // Objects
     private HashMap data, header;
@@ -53,7 +53,7 @@ public class BillingsFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexBillAdapter(requireActivity());
+        adapter = new TableBillAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);

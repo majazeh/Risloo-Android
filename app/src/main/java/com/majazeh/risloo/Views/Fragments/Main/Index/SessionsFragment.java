@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexSessionAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSessionAdapter;
 import com.majazeh.risloo.databinding.FragmentSessionsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -29,7 +29,7 @@ public class SessionsFragment extends Fragment {
     private FragmentSessionsBinding binding;
 
     // Adapters
-    private IndexSessionAdapter adapter;
+    private TableSessionAdapter adapter;
 
     // Objects
     private HashMap data, header;
@@ -52,7 +52,7 @@ public class SessionsFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexSessionAdapter(requireActivity());
+        adapter = new TableSessionAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);

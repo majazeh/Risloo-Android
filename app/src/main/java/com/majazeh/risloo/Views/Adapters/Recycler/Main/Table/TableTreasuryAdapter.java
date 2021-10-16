@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -22,7 +22,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -30,7 +30,7 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
     // Vars
     private ArrayList<TypeModel> items;
 
-    public IndexTreasuryAdapter(@NonNull Activity activity) {
+    public TableTreasuryAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

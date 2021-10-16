@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -27,14 +27,14 @@ import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
 import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldInputBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
-import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
+import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -47,7 +47,7 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ArrayList<TypeModel> items;
     private boolean userSelect = false, editable = false;
 
-    public IndexPreAdapter(@NonNull Activity activity) {
+    public TableItemAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
@@ -67,7 +67,7 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (holder instanceof HeaderFieldHolder) {
             setData((HeaderFieldHolder) holder);
         } else if (holder instanceof TableFieldInputHolder) {
-            PrerequisitesModel model = (PrerequisitesModel) items.get(i - 1);
+            ItemModel model = (ItemModel) items.get(i - 1);
 
             intializer();
 
@@ -75,7 +75,7 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             setData((TableFieldInputHolder) holder, model);
         } else if (holder instanceof TableFieldSelectHolder) {
-            PrerequisitesModel model = (PrerequisitesModel) items.get(i - 1);
+            ItemModel model = (ItemModel) items.get(i - 1);
 
             intializer();
 
@@ -90,17 +90,12 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (position == 0)
             return 0;
 
-        PrerequisitesModel model = (PrerequisitesModel) items.get(position - 1);
+        ItemModel model = (ItemModel) items.get(position - 1);
 
-        try {
-            if (model.getAnswer().getString("type").equals("text") || model.getAnswer().getString("type").equals("number"))
-                return 1;
-            else if (model.getAnswer().getString("type").equals("select"))
-                return 2;
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        if (model.getAnswer().getType().equals("text") || model.getAnswer().getType().equals("number"))
+            return 1;
+        else if (model.getAnswer().getType().equals("select"))
+            return 2;
 
         return 0;
     }
@@ -167,7 +162,7 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     handler.removeCallbacksAndMessages(null);
                     handler.postDelayed(() -> {
                         if (current instanceof SampleFragment)
-                            ((SampleFragment) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString());
+                            ((SampleFragment) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString());
                     }, 750);
                 }
             }
@@ -193,7 +188,7 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
                     if (current instanceof SampleFragment)
-                        ((SampleFragment) current).sendPre(item + 1, String.valueOf(position + 1));
+                        ((SampleFragment) current).sendItem(item + 1, String.valueOf(position + 1));
 
                     userSelect = false;
                 }
@@ -207,11 +202,11 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void setData(HeaderFieldHolder holder) {
-        holder.binding.titleTextView.setText(activity.getResources().getString(R.string.SampleFragmentFieldPre));
+        holder.binding.titleTextView.setText(activity.getResources().getString(R.string.SampleFragmentFieldItem));
         holder.binding.countTextView.setText(StringManager.bracing(itemsCount()));
     }
 
-    private void setData(TableFieldInputHolder holder, PrerequisitesModel model) {
+    private void setData(TableFieldInputHolder holder, ItemModel model) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
         setType(holder, model);
@@ -219,7 +214,7 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         setClickable(holder);
     }
 
-    private void setData(TableFieldSelectHolder holder, PrerequisitesModel model) {
+    private void setData(TableFieldSelectHolder holder, ItemModel model) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
         setType(holder, model);
@@ -227,30 +222,26 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         setClickable(holder);
     }
 
-    private void setType(TableFieldInputHolder holder, PrerequisitesModel model) {
-        try {
-            switch (model.getAnswer().getString("type")) {
-                case "text":
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+    private void setType(TableFieldInputHolder holder, ItemModel model) {
+        switch (model.getAnswer().getType()) {
+            case "text":
+                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.inputEditText.setText(model.getUser_answered());
+                if (!model.getUser_answered().equals(""))
+                    holder.binding.inputEditText.setText(model.getUser_answered());
 
-                    break;
-                case "number":
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                break;
+            case "number":
+                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.inputEditText.setText(model.getUser_answered());
+                if (!model.getUser_answered().equals(""))
+                    holder.binding.inputEditText.setText(model.getUser_answered());
 
-                    break;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+                break;
         }
     }
 
-    private void setType(TableFieldSelectHolder holder, PrerequisitesModel model) {
+    private void setType(TableFieldSelectHolder holder, ItemModel model) {
         setSpinner(holder, model);
 
         if (!model.getUser_answered().equals(""))
@@ -279,11 +270,11 @@ public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    private void setSpinner(TableFieldSelectHolder holder, PrerequisitesModel model) {
+    private void setSpinner(TableFieldSelectHolder holder, ItemModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
-            for (int i = 0; i < model.getAnswer().getJSONArray("options").length(); i++) {
-                options.add(model.getAnswer().getJSONArray("options").get(i).toString());
+            for (int i = 0; i < model.getAnswer().getAnswer().length(); i++) {
+                options.add(model.getAnswer().getAnswer().get(i).toString());
             }
 
             options.add("");

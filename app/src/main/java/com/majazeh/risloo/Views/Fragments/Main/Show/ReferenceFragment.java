@@ -17,8 +17,8 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexCaseAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexSampleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableCaseAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.RoomsAdapter;
 import com.majazeh.risloo.databinding.FragmentReferenceBinding;
 import com.mre.ligheh.API.Response;
@@ -40,8 +40,8 @@ public class ReferenceFragment extends Fragment {
 
     // Adapters
     private RoomsAdapter roomsAdapter;
-    private IndexCaseAdapter indexCaseAdapter;
-    private IndexSampleAdapter indexSampleAdapter;
+    private TableCaseAdapter tableCaseAdapter;
+    private TableSampleAdapter tableSampleAdapter;
 
     // Models
     private UserModel userModel;
@@ -70,8 +70,8 @@ public class ReferenceFragment extends Fragment {
 
     private void initializer() {
         roomsAdapter = new RoomsAdapter(requireActivity());
-        indexCaseAdapter = new IndexCaseAdapter(requireActivity());
-        indexSampleAdapter = new IndexSampleAdapter(requireActivity());
+        tableCaseAdapter = new TableCaseAdapter(requireActivity());
+        tableSampleAdapter = new TableSampleAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -244,11 +244,11 @@ public class ReferenceFragment extends Fragment {
 
                             // Cases Data
                             if (!userModel.getCaseList().data().isEmpty()) {
-                                indexCaseAdapter.setItems(userModel.getCaseList().data());
-                                binding.casesSingleLayout.recyclerView.setAdapter(indexCaseAdapter);
+                                tableCaseAdapter.setItems(userModel.getCaseList().data());
+                                binding.casesSingleLayout.recyclerView.setAdapter(tableCaseAdapter);
 
                                 binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (indexCaseAdapter.getItemCount() == 0) {
+                            } else if (tableCaseAdapter.getItemCount() == 0) {
                                 binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                                 binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.CasesFragmentEmpty));
@@ -256,19 +256,19 @@ public class ReferenceFragment extends Fragment {
 
                             // Samples Data
                             if (!userModel.getSampleList().data().isEmpty()) {
-                                indexSampleAdapter.setItems(userModel.getSampleList().data());
-                                binding.samplesSingleLayout.recyclerView.setAdapter(indexSampleAdapter);
+                                tableSampleAdapter.setItems(userModel.getSampleList().data());
+                                binding.samplesSingleLayout.recyclerView.setAdapter(tableSampleAdapter);
 
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (indexSampleAdapter.getItemCount() == 0) {
+                            } else if (tableSampleAdapter.getItemCount() == 0) {
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                                 binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                             }
 
                             binding.roomsHeaderLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
-                            binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(indexCaseAdapter.itemsCount()));
-                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
+                            binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(tableCaseAdapter.itemsCount()));
+                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
 
                             // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -336,11 +336,11 @@ public class ReferenceFragment extends Fragment {
 
                             // Cases Data
                             if (!userModel.getCaseList().data().isEmpty()) {
-                                indexCaseAdapter.setItems(userModel.getCaseList().data());
-                                binding.casesSingleLayout.recyclerView.setAdapter(indexCaseAdapter);
+                                tableCaseAdapter.setItems(userModel.getCaseList().data());
+                                binding.casesSingleLayout.recyclerView.setAdapter(tableCaseAdapter);
 
                                 binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (indexCaseAdapter.getItemCount() == 0) {
+                            } else if (tableCaseAdapter.getItemCount() == 0) {
                                 binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                                 binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.CasesFragmentEmpty));
@@ -348,19 +348,19 @@ public class ReferenceFragment extends Fragment {
 
                             // Samples Data
                             if (!userModel.getSampleList().data().isEmpty()) {
-                                indexSampleAdapter.setItems(userModel.getSampleList().data());
-                                binding.samplesSingleLayout.recyclerView.setAdapter(indexSampleAdapter);
+                                tableSampleAdapter.setItems(userModel.getSampleList().data());
+                                binding.samplesSingleLayout.recyclerView.setAdapter(tableSampleAdapter);
 
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (indexSampleAdapter.getItemCount() == 0) {
+                            } else if (tableSampleAdapter.getItemCount() == 0) {
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                                 binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                             }
 
                             binding.roomsHeaderLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
-                            binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(indexCaseAdapter.itemsCount()));
-                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
+                            binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(tableCaseAdapter.itemsCount()));
+                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
 
                             // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);

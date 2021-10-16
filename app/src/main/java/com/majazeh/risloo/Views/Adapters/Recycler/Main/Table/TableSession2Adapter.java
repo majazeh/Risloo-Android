@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -32,7 +32,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class IndexSession2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -42,7 +42,7 @@ public class IndexSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public IndexSession2Adapter(@NonNull Activity activity) {
+    public TableSession2Adapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

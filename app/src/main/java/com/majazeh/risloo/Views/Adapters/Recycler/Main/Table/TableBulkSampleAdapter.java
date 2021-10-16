@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -36,7 +36,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -46,7 +46,7 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public IndexBulkSampleAdapter(@NonNull Activity activity) {
+    public TableBulkSampleAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

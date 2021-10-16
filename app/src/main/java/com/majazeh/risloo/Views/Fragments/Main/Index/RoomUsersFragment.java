@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexRoomUserAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableRoomUserAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomUsersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -37,7 +37,7 @@ public class RoomUsersFragment extends Fragment {
     private FragmentRoomUsersBinding binding;
 
     // Adapters
-    private IndexRoomUserAdapter adapter;
+    private TableRoomUserAdapter adapter;
 
     // Models
     public RoomModel roomModel;
@@ -66,7 +66,7 @@ public class RoomUsersFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexRoomUserAdapter(requireActivity());
+        adapter = new TableRoomUserAdapter(requireActivity());
 
         handler = new Handler();
 

@@ -100,7 +100,7 @@
             app:layout_constraintTop_toBottomOf="@id/charge_constraintLayout" />
 
         <include
-            android:id="@+id/payments_headerLayout"
+            android:id="@+id/table_headerLayout"
             layout="@layout/component_main_index_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@id/charge_textView" />
 
         <include
-            android:id="@+id/payments_shimmerLayout"
+            android:id="@+id/table_shimmerLayout"
             layout="@layout/component_shimmer_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -119,11 +119,11 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/charge_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/payments_headerLayout"
+            app:layout_constraintTop_toBottomOf="@id/table_headerLayout"
             tools:visibility="gone" />
 
         <include
-            android:id="@+id/payments_singleLayout"
+            android:id="@+id/table_singleLayout"
             layout="@layout/component_single_table"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/charge_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/payments_headerLayout"
+            app:layout_constraintTop_toBottomOf="@id/table_headerLayout"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

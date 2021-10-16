@@ -15,7 +15,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexTimeAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableTimeAdapter;
 import com.majazeh.risloo.databinding.FragmentBillBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Billing;
@@ -33,7 +33,7 @@ public class BillFragment extends Fragment {
     private FragmentBillBinding binding;
 
     // Adapters
-    private IndexTimeAdapter indexTimeAdapter;
+    private TableTimeAdapter tableTimeAdapter;
 
     // Models
     private BillingModel billingModel;
@@ -56,7 +56,7 @@ public class BillFragment extends Fragment {
     }
 
     private void initializer() {
-        indexTimeAdapter = new IndexTimeAdapter(requireActivity());
+        tableTimeAdapter = new TableTimeAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -115,18 +115,18 @@ public class BillFragment extends Fragment {
 
                             // Times Data
                             if (!times.data().isEmpty()) {
-                                indexTimeAdapter.setItems(times.data());
-                                binding.timesSingleLayout.recyclerView.setAdapter(indexTimeAdapter);
+                                tableTimeAdapter.setItems(times.data());
+                                binding.timesSingleLayout.recyclerView.setAdapter(tableTimeAdapter);
 
                                 binding.timesSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (indexTimeAdapter.getItemCount() == 0) {
+                            } else if (tableTimeAdapter.getItemCount() == 0) {
                                 binding.timesSingleLayout.recyclerView.setAdapter(null);
 
                                 binding.timesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.timesSingleLayout.emptyView.setText(getResources().getString(R.string.TimeAdapterEmpty));
                             }
 
-                            binding.timesHeaderLayout.countTextView.setText(StringManager.bracing(indexTimeAdapter.itemsCount()));
+                            binding.timesHeaderLayout.countTextView.setText(StringManager.bracing(tableTimeAdapter.itemsCount()));
 
                             hideShimmer();
                         } catch (JSONException e) {

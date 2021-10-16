@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -25,7 +25,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -36,7 +36,7 @@ public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     // Vars
     private ArrayList<TypeModel> items;
 
-    public IndexRoomUserAdapter(@NonNull Activity activity) {
+    public TableRoomUserAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

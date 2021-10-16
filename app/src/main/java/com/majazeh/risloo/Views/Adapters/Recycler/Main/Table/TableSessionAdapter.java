@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -24,7 +24,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class IndexSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -32,7 +32,7 @@ public class IndexSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     // Vars
     private ArrayList<TypeModel> items;
 
-    public IndexSessionAdapter(@NonNull Activity activity) {
+    public TableSessionAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

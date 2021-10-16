@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -45,7 +45,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -59,7 +59,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private ArrayList<String> treasuryIds = new ArrayList<>();
     private boolean userSelect = false;
 
-    public IndexBillAdapter(@NonNull Activity activity) {
+    public TableBillAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

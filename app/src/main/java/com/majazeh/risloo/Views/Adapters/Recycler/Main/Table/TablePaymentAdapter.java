@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -21,7 +21,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TablePaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -29,7 +29,7 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     // Vars
     private ArrayList<TypeModel> items;
 
-    public IndexPaymentAdapter(@NonNull Activity activity) {
+    public TablePaymentAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

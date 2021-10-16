@@ -20,7 +20,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexDocumentAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableDocumentAdapter;
 import com.majazeh.risloo.databinding.FragmentDocumentsBinding;
 
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class DocumentsFragment extends Fragment {
     private FragmentDocumentsBinding binding;
 
     // Adapters
-    private IndexDocumentAdapter adapter;
+    private TableDocumentAdapter adapter;
 
     // Objects
     private Handler handler;
@@ -56,7 +56,7 @@ public class DocumentsFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexDocumentAdapter(requireActivity());
+        adapter = new TableDocumentAdapter(requireActivity());
 
         handler = new Handler();
 

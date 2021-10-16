@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexUserAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableUserAdapter;
 import com.majazeh.risloo.databinding.FragmentUsersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -36,7 +36,7 @@ public class UsersFragment extends Fragment {
     private FragmentUsersBinding binding;
 
     // Adapters
-    private IndexUserAdapter adapter;
+    private TableUserAdapter adapter;
 
     // Objects
     private Handler handler;
@@ -60,7 +60,7 @@ public class UsersFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexUserAdapter(requireActivity());
+        adapter = new TableUserAdapter(requireActivity());
 
         handler = new Handler();
 

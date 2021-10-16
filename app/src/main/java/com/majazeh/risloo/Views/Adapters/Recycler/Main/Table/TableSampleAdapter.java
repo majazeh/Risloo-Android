@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -35,7 +35,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -47,7 +47,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     // Vars
     private ArrayList<TypeModel> items;
 
-    public IndexSampleAdapter(@NonNull Activity activity) {
+    public TableSampleAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

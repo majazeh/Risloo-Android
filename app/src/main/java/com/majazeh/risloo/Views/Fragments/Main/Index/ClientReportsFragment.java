@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexClientReportAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableClientReportAdapter;
 import com.majazeh.risloo.databinding.FragmentClientReportsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
@@ -40,7 +40,7 @@ public class ClientReportsFragment extends Fragment {
     private FragmentClientReportsBinding binding;
 
     // Adapters
-    private IndexClientReportAdapter adapter;
+    private TableClientReportAdapter adapter;
 
     // Models
     private CaseModel caseModel;
@@ -71,7 +71,7 @@ public class ClientReportsFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexClientReportAdapter(requireActivity());
+        adapter = new TableClientReportAdapter(requireActivity());
 
         handler = new Handler();
 

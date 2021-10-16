@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexBulkSampleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableBulkSampleAdapter;
 import com.majazeh.risloo.databinding.FragmentBulkSamplesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -36,7 +36,7 @@ public class BulkSamplesFragment extends Fragment {
     private FragmentBulkSamplesBinding binding;
 
     // Adapters
-    private IndexBulkSampleAdapter adapter;
+    private TableBulkSampleAdapter adapter;
 
     // Objects
     private Handler handler;
@@ -60,7 +60,7 @@ public class BulkSamplesFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexBulkSampleAdapter(requireActivity());
+        adapter = new TableBulkSampleAdapter(requireActivity());
 
         handler = new Handler();
 

@@ -21,9 +21,9 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexSampleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.ReferencesAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexScaleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableScaleAdapter;
 import com.majazeh.risloo.databinding.FragmentBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -43,8 +43,8 @@ public class BulkSampleFragment extends Fragment {
 
     // Adapters
     private ReferencesAdapter referencesAdapter;
-    private IndexScaleAdapter indexScaleAdapter;
-    private IndexSampleAdapter indexSampleAdapter;
+    private TableScaleAdapter tableScaleAdapter;
+    private TableSampleAdapter tableSampleAdapter;
 
     // Models
     private BulkSampleModel bulkSampleModel;
@@ -73,8 +73,8 @@ public class BulkSampleFragment extends Fragment {
 
     private void initializer() {
         referencesAdapter = new ReferencesAdapter(requireActivity());
-        indexScaleAdapter = new IndexScaleAdapter(requireActivity());
-        indexSampleAdapter = new IndexSampleAdapter(requireActivity());
+        tableScaleAdapter = new TableScaleAdapter(requireActivity());
+        tableSampleAdapter = new TableSampleAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -276,11 +276,11 @@ public class BulkSampleFragment extends Fragment {
 
                         // Scales Data
                         if (!bulkSampleModel.getScales().data().isEmpty()) {
-                            indexScaleAdapter.setItems(bulkSampleModel.getScales().data());
-                            binding.scalesSingleLayout.recyclerView.setAdapter(indexScaleAdapter);
+                            tableScaleAdapter.setItems(bulkSampleModel.getScales().data());
+                            binding.scalesSingleLayout.recyclerView.setAdapter(tableScaleAdapter);
 
                             binding.scalesSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexScaleAdapter.getItemCount() == 0) {
+                        } else if (tableScaleAdapter.getItemCount() == 0) {
                             binding.scalesSingleLayout.recyclerView.setAdapter(null);
 
                             binding.scalesSingleLayout.emptyView.setVisibility(View.VISIBLE);
@@ -289,19 +289,19 @@ public class BulkSampleFragment extends Fragment {
 
                         // Samples Data
                         if (!bulkSampleModel.getSamples().data().isEmpty()) {
-                            indexSampleAdapter.setItems(bulkSampleModel.getSamples().data());
-                            binding.samplesSingleLayout.recyclerView.setAdapter(indexSampleAdapter);
+                            tableSampleAdapter.setItems(bulkSampleModel.getSamples().data());
+                            binding.samplesSingleLayout.recyclerView.setAdapter(tableSampleAdapter);
 
                             binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexSampleAdapter.getItemCount() == 0) {
+                        } else if (tableSampleAdapter.getItemCount() == 0) {
                             binding.samplesSingleLayout.recyclerView.setAdapter(null);
 
                             binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
-                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(indexScaleAdapter.itemsCount()));
-                        binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
+                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(tableScaleAdapter.itemsCount()));
+                        binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
 
                         hideShimmer();
                     });

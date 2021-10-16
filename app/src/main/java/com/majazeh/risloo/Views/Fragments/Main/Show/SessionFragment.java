@@ -20,11 +20,11 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexBillAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexSampleAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexPracticeAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableBillAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TablePracticeAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.PsychologistsAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexUser2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableUser2Adapter;
 import com.majazeh.risloo.databinding.FragmentSessionBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -47,10 +47,10 @@ public class SessionFragment extends Fragment {
 
     // Adapters
     private PsychologistsAdapter psychologistsAdapter;
-    private IndexUser2Adapter indexUser2Adapter;
-    private IndexPracticeAdapter indexPracticeAdapter;
-    private IndexSampleAdapter indexSampleAdapter;
-    private IndexBillAdapter indexBillAdapter;
+    private TableUser2Adapter tableUser2Adapter;
+    private TablePracticeAdapter tablePracticeAdapter;
+    private TableSampleAdapter tableSampleAdapter;
+    private TableBillAdapter tableBillAdapter;
 
     // Models
     public SessionModel sessionModel;
@@ -80,10 +80,10 @@ public class SessionFragment extends Fragment {
 
     private void initializer() {
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
-        indexUser2Adapter = new IndexUser2Adapter(requireActivity());
-        indexPracticeAdapter = new IndexPracticeAdapter(requireActivity());
-        indexSampleAdapter = new IndexSampleAdapter(requireActivity());
-        indexBillAdapter = new IndexBillAdapter(requireActivity());
+        tableUser2Adapter = new TableUser2Adapter(requireActivity());
+        tablePracticeAdapter = new TablePracticeAdapter(requireActivity());
+        tableSampleAdapter = new TableSampleAdapter(requireActivity());
+        tableBillAdapter = new TableBillAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -533,11 +533,11 @@ public class SessionFragment extends Fragment {
 
                         // Users Data
                         if (sessionModel.getClients() != null && sessionModel.getClients().data().size() != 0) {
-                            indexUser2Adapter.setItems(sessionModel.getClients().data());
-                            binding.usersSingleLayout.recyclerView.setAdapter(indexUser2Adapter);
+                            tableUser2Adapter.setItems(sessionModel.getClients().data());
+                            binding.usersSingleLayout.recyclerView.setAdapter(tableUser2Adapter);
 
                             binding.usersSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexUser2Adapter.getItemCount() == 0) {
+                        } else if (tableUser2Adapter.getItemCount() == 0) {
                             binding.usersSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.usersSingleLayout.emptyView.setText(getResources().getString(R.string.Users2AdapterEmpty));
                         }
@@ -555,31 +555,31 @@ public class SessionFragment extends Fragment {
 
                         // Samples Data
                         if (!sessionModel.getSamples().data().isEmpty()) {
-                            indexSampleAdapter.setItems(sessionModel.getSamples().data());
-                            binding.samplesSingleLayout.recyclerView.setAdapter(indexSampleAdapter);
+                            tableSampleAdapter.setItems(sessionModel.getSamples().data());
+                            binding.samplesSingleLayout.recyclerView.setAdapter(tableSampleAdapter);
 
                             binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexSampleAdapter.getItemCount() == 0) {
+                        } else if (tableSampleAdapter.getItemCount() == 0) {
                             binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
                         // Bills Data
                         if (!sessionModel.getTransactions().data().isEmpty()) {
-                            indexBillAdapter.setItems(sessionModel.getTransactions().data());
-                            binding.billsSingleLayout.recyclerView.setAdapter(indexBillAdapter);
+                            tableBillAdapter.setItems(sessionModel.getTransactions().data());
+                            binding.billsSingleLayout.recyclerView.setAdapter(tableBillAdapter);
 
                             binding.billsSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexBillAdapter.getItemCount() == 0) {
+                        } else if (tableBillAdapter.getItemCount() == 0) {
                             binding.billsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.billsSingleLayout.emptyView.setText(getResources().getString(R.string.BillAdapterEmpty));
                         }
 
                         binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
-                        binding.usersHeaderLayout.countTextView.setText(StringManager.bracing(indexUser2Adapter.itemsCount()));
-                        binding.practicesHeaderLayout.countTextView.setText(StringManager.bracing(indexPracticeAdapter.itemsCount()));
-                        binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
-                        binding.billsHeaderLayout.countTextView.setText(StringManager.bracing(indexBillAdapter.itemsCount()));
+                        binding.usersHeaderLayout.countTextView.setText(StringManager.bracing(tableUser2Adapter.itemsCount()));
+                        binding.practicesHeaderLayout.countTextView.setText(StringManager.bracing(tablePracticeAdapter.itemsCount()));
+                        binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
+                        binding.billsHeaderLayout.countTextView.setText(StringManager.bracing(tableBillAdapter.itemsCount()));
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);

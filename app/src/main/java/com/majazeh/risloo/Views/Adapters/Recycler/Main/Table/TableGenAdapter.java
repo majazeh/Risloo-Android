@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,7 +25,7 @@ import com.majazeh.risloo.databinding.SingleItemTableFieldInputBinding;
 
 import java.util.ArrayList;
 
-public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -38,7 +38,7 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ArrayList<String> items;
     private boolean editable = false;
 
-    public IndexGenAdapter(@NonNull Activity activity) {
+    public TableGenAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

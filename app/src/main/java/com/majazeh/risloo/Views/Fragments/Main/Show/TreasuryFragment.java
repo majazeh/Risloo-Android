@@ -13,7 +13,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexTransactionAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableTransactionAdapter;
 import com.majazeh.risloo.databinding.FragmentTreasuryBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -32,7 +32,7 @@ public class TreasuryFragment extends Fragment {
     private FragmentTreasuryBinding binding;
 
     // Adapters
-    private IndexTransactionAdapter indexTransactionAdapter;
+    private TableTransactionAdapter tableTransactionAdapter;
 
     // Models
     private TreasuriesModel treasuriesModel;
@@ -55,7 +55,7 @@ public class TreasuryFragment extends Fragment {
     }
 
     private void initializer() {
-        indexTransactionAdapter = new IndexTransactionAdapter(requireActivity());
+        tableTransactionAdapter = new TableTransactionAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -123,18 +123,18 @@ public class TreasuryFragment extends Fragment {
 
                             // Transactions Data
                             if (!transactions.data().isEmpty()) {
-                                indexTransactionAdapter.setItems(transactions.data());
-                                binding.transactionsSingleLayout.recyclerView.setAdapter(indexTransactionAdapter);
+                                tableTransactionAdapter.setItems(transactions.data());
+                                binding.transactionsSingleLayout.recyclerView.setAdapter(tableTransactionAdapter);
 
                                 binding.transactionsSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (indexTransactionAdapter.getItemCount() == 0) {
+                            } else if (tableTransactionAdapter.getItemCount() == 0) {
                                 binding.transactionsSingleLayout.recyclerView.setAdapter(null);
 
                                 binding.transactionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.TransactionAdapterEmpty));
                             }
 
-                            binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(indexTransactionAdapter.itemsCount()));
+                            binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(tableTransactionAdapter.itemsCount()));
 
                             hideShimmer();
                         } catch (JSONException e) {
