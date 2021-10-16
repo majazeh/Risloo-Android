@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -110,10 +111,10 @@ public class SampleFragment extends Fragment {
             switch (status) {
                 case "seald":
                 case "open":
-                    fillSample();
+                    doWork("fillSample");
                     break;
                 case "closed":
-                    openSample();
+                    doWork("openSample");
                     break;
             }
         }).widget(binding.primaryTextView.getRoot());
@@ -124,11 +125,11 @@ public class SampleFragment extends Fragment {
             switch (status) {
                 case "seald":
                 case "open":
-                    closeSample();
+                    doWork("closeSample");
                     break;
                 case "closed":
                 case "done":
-                    scoreSample();
+                    doWork("scoreSample");
                     break;
             }
         }).widget(binding.secondaryTextView.getRoot());
@@ -138,11 +139,14 @@ public class SampleFragment extends Fragment {
             return false;
         });
 
+        binding.profilesTextView.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         binding.profilesTextView.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    IntentManager.download(requireContext(), profileUrls.get(position));
+                    if (PermissionManager.storagePermission(requireActivity()))
+                        IntentManager.download(requireContext(), profileUrls.get(position));
 
                     parent.setSelection(parent.getAdapter().getCount());
 
@@ -189,10 +193,14 @@ public class SampleFragment extends Fragment {
             binding.scaleTextView.setText(model.getSampleScaleTitle());
         }
 
-        if (model.getSampleEdition() != null && !model.getSampleEdition().equals("")) {
+        if (model.getSampleScaleTitle() != null && !model.getSampleEdition().equals("") && model.getSampleVersion() != 0) {
             binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
-        } else {
+        } else if (model.getSampleVersion() != 0) {
             binding.editionTextView.setText("نسخه " + model.getSampleVersion());
+        } else if (model.getSampleScaleTitle() != null && !model.getSampleEdition().equals("")) {
+            binding.editionTextView.setText(model.getSampleEdition());
+        } else {
+            binding.editionTextView.setText("-");
         }
 
         if (model.getClient() != null) {
@@ -234,10 +242,10 @@ public class SampleFragment extends Fragment {
         switch (status) {
             case "seald":
             case "open":
-                binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
+                binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
 
-//                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
                 InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentClose), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
 
                 break;
@@ -245,8 +253,8 @@ public class SampleFragment extends Fragment {
                 binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
 
-                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentOpen), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
-                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentOpen), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
 
                 break;
             case "scoring":
@@ -258,87 +266,111 @@ public class SampleFragment extends Fragment {
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
 
-                InitManager.txtTextColorBackground(binding.profilesTextView.selectTextView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
-                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+                InitManager.txtTextColorBackground(binding.profilesTextView.selectTextView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
 
-                ImageViewCompat.setImageTintList(binding.profilesTextView.angleImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.LightBlue600));
+                ImageViewCompat.setImageTintList(binding.profilesTextView.angleImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Risloo500));
 
                 break;
         }
     }
 
     private void setScoring(String status) {
-        if (status.equals("scoring") || status.equals("creating_files")) {
-            binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
-            getScore();
-        } else {
-            binding.scoringConstraintLayout.setVisibility(View.GONE);
+        switch (status) {
+            case "scoring":
+            case "creating_files":
+                binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
+
+                doWork("getScore");
+                break;
+            default:
+                binding.scoringConstraintLayout.setVisibility(View.GONE);
+                break;
         }
     }
 
     private void setEditable(String status) {
-        if (status.equals("seald") || status.equals("open")) {
-            binding.fieldsCheckBox.setVisibility(View.VISIBLE);
-        } else {
-            binding.fieldsCheckBox.setVisibility(View.GONE);
+        switch (status) {
+            case "seald":
+            case "open":
+                binding.fieldsCheckBox.setVisibility(View.VISIBLE);
+                break;
+            default:
+                binding.fieldsCheckBox.setVisibility(View.GONE);
 
-            if (binding.fieldsCheckBox.isChecked()) {
-                binding.fieldsCheckBox.setChecked(false);
+                if (binding.fieldsCheckBox.isChecked()) {
+                    binding.fieldsCheckBox.setChecked(false);
 
-                indexGenAdapter.setEditable(false);
-                indexPreAdapter.setEditable(false);
-                indexItemAdapter.setEditable(false);
-            }
+                    indexGenAdapter.setEditable(false);
+                    indexPreAdapter.setEditable(false);
+                    indexItemAdapter.setEditable(false);
+                }
+                break;
         }
     }
 
     private void setProfiles(String status) {
-        if (status.equals("done")) {
-            binding.profilesTextView.getRoot().setVisibility(View.VISIBLE);
+        switch (status) {
+            case "done":
+                binding.profilesTextView.getRoot().setVisibility(View.VISIBLE);
 
-            ArrayList<String> options = new ArrayList<>();
-            profileUrls = new ArrayList<>();
+                setDropdown();
 
-            for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
-                ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
+                // Profile Half
+                if (sampleModel.getProfilesHalf() != null && !sampleModel.getProfilesHalf().data().isEmpty()) {
+                    profileHalfsAdapter.setItems(sampleModel.getProfilesHalf().data(), false);
+                    binding.profileHalfsRecyclerView.setAdapter(profileHalfsAdapter);
 
-                options.add(profile.getFile_name());
-                profileUrls.add(profile.getUrl());
-            }
+                    binding.profileHalfsGroup.setVisibility(View.VISIBLE);
+                } else if (profileHalfsAdapter.getItemCount() == 0) {
+                    binding.profileHalfsRecyclerView.setAdapter(null);
 
-            options.add("");
-            profileUrls.add("");
+                    binding.profileHalfsGroup.setVisibility(View.GONE);
+                }
 
-            InitManager.profileCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, options);
+                // Profile Extra
+                if (sampleModel.getProfilesExtra() != null && !sampleModel.getProfilesExtra().data().isEmpty()) {
+                    profileExtrasAdapter.setItems(sampleModel.getProfilesExtra().data(), true);
+                    binding.profileExtrasRecyclerView.setAdapter(profileExtrasAdapter);
 
-            // Profile Half
-            if (sampleModel.getProfilesHalf() != null && !sampleModel.getProfilesHalf().data().isEmpty()) {
-                profileHalfsAdapter.setItems(sampleModel.getProfilesHalf().data(), false);
-                binding.profileHalfsRecyclerView.setAdapter(profileHalfsAdapter);
+                    binding.profileExtrasGroup.setVisibility(View.VISIBLE);
+                } else if (profileExtrasAdapter.getItemCount() == 0) {
+                    binding.profileExtrasRecyclerView.setAdapter(null);
 
-                binding.profileHalfsGroup.setVisibility(View.VISIBLE);
-            } else if (profileHalfsAdapter.getItemCount() == 0) {
+                    binding.profileExtrasGroup.setVisibility(View.GONE);
+                }
+
+                binding.profileHalfsHeaderLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));
+                binding.profileExtrasHeaderLayout.countTextView.setText(StringManager.bracing(profileExtrasAdapter.getItemCount()));
+
+                break;
+            default:
+                binding.profilesTextView.getRoot().setVisibility(View.GONE);
+
                 binding.profileHalfsGroup.setVisibility(View.GONE);
-            }
-
-            // Profile Extra
-            if (sampleModel.getProfilesExtra() != null && !sampleModel.getProfilesExtra().data().isEmpty()) {
-                profileExtrasAdapter.setItems(sampleModel.getProfilesExtra().data(), true);
-                binding.profileExtrasRecyclerView.setAdapter(profileExtrasAdapter);
-
-                binding.profileExtrasGroup.setVisibility(View.VISIBLE);
-            } else if (profileExtrasAdapter.getItemCount() == 0) {
                 binding.profileExtrasGroup.setVisibility(View.GONE);
-            }
+                break;
+        }
+    }
 
-            binding.profileHalfsHeaderLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));
-            binding.profileExtrasHeaderLayout.countTextView.setText(StringManager.bracing(profileExtrasAdapter.getItemCount()));
+    private void setDropdown() {
+        ArrayList<String> items = new ArrayList<>();
+        profileUrls = new ArrayList<>();
 
+        for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
+            ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
+
+            items.add(profile.getFile_name());
+            profileUrls.add(profile.getUrl());
+        }
+
+        items.add("");
+        profileUrls.add("");
+
+        if (items.size() > 2) {
+            InitManager.profileCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, items);
         } else {
             binding.profilesTextView.getRoot().setVisibility(View.GONE);
-
-            binding.profileHalfsGroup.setVisibility(View.GONE);
-            binding.profileExtrasGroup.setVisibility(View.GONE);
         }
     }
 
@@ -363,6 +395,8 @@ public class SampleFragment extends Fragment {
                                 indexGenAdapter.setItems(generals);
                                 binding.generalRecyclerView.setAdapter(indexGenAdapter);
                             } else if (indexGenAdapter.getItemCount() == 0) {
+                                binding.generalRecyclerView.setAdapter(null);
+
                                 binding.generalRecyclerView.setVisibility(View.GONE);
                             }
 
@@ -383,6 +417,8 @@ public class SampleFragment extends Fragment {
                                 indexPreAdapter.setItems(prerequisites.data());
                                 binding.prerequisiteRecyclerView.setAdapter(indexPreAdapter);
                             } else if (indexPreAdapter.getItemCount() == 0) {
+                                binding.prerequisiteRecyclerView.setAdapter(null);
+
                                 binding.prerequisiteRecyclerView.setVisibility(View.GONE);
                             }
 
@@ -391,24 +427,12 @@ public class SampleFragment extends Fragment {
                                 indexItemAdapter.setItems(items.data());
                                 binding.itemRecyclerView.setAdapter(indexItemAdapter);
                             } else if (indexItemAdapter.getItemCount() == 0) {
+                                binding.itemRecyclerView.setAdapter(null);
+
                                 binding.itemRecyclerView.setVisibility(View.GONE);
                             }
 
-                            // Generals Data
-                            binding.generalRecyclerView.setVisibility(View.VISIBLE);
-                            binding.generalShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.generalShimmerLayout.getRoot().stopShimmer();
-
-                            // Prerequisites Data
-                            binding.prerequisiteRecyclerView.setVisibility(View.VISIBLE);
-                            binding.prerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.prerequisiteShimmerLayout.getRoot().stopShimmer();
-
-                            // Items Data
-                            binding.itemRecyclerView.setVisibility(View.VISIBLE);
-                            binding.itemShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.itemShimmerLayout.getRoot().stopShimmer();
-
+                            hideShimmer();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -418,153 +442,162 @@ public class SampleFragment extends Fragment {
 
             @Override
             public void onFailure(String response) {
+                isLoading = false;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        isLoading = false;
-
-                        // Generals Data
-                        binding.generalRecyclerView.setVisibility(View.VISIBLE);
-                        binding.generalShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.generalShimmerLayout.getRoot().stopShimmer();
-
-                        // Prerequisites Data
-                        binding.prerequisiteRecyclerView.setVisibility(View.VISIBLE);
-                        binding.prerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.prerequisiteShimmerLayout.getRoot().stopShimmer();
-
-                        // Items Data
-                        binding.itemRecyclerView.setVisibility(View.VISIBLE);
-                        binding.itemShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.itemShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
         });
     }
 
-    private void getScore() {
-        Sample.getScore(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        setStatus("done");
-                    });
-                }
-            }
+    private void doWork(String method) {
+        switch (method) {
+            case "getScore":
+                Sample.getScore(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                setStatus("done");
+                            });
+                        }
+                    }
 
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        // TODO : Place Code If Needed
-                    });
-                }
-            }
-        });
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "fillSample":
+                DialogManager.showLoadingDialog(requireActivity(), "");
+
+                Sample.fill(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                DialogManager.dismissLoadingDialog();
+
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "closeSample":
+                DialogManager.showLoadingDialog(requireActivity(), "");
+
+                Sample.close(sampleAnswers, data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                DialogManager.dismissLoadingDialog();
+
+                                setStatus("closed");
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "openSample":
+                DialogManager.showLoadingDialog(requireActivity(), "");
+
+                Sample.open(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                DialogManager.dismissLoadingDialog();
+
+                                setStatus("open");
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "scoreSample":
+                DialogManager.showLoadingDialog(requireActivity(), "");
+
+                Sample.score(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        sampleModel = (SampleModel) object;
+
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                DialogManager.dismissLoadingDialog();
+
+                                setStatus(sampleModel.getSampleStatus());
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+        }
     }
 
-    private void fillSample() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+    private void hideShimmer() {
 
-        Sample.fill(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
-                        // TODO : Place Code If Needed
-                    });
-                }
-            }
+        // Generals Data
+        binding.generalRecyclerView.setVisibility(View.VISIBLE);
+        binding.generalShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.generalShimmerLayout.getRoot().stopShimmer();
 
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        // TODO : Place Code If Needed
-                    });
-                }
-            }
-        });
-    }
+        // Prerequisites Data
+        binding.prerequisiteRecyclerView.setVisibility(View.VISIBLE);
+        binding.prerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.prerequisiteShimmerLayout.getRoot().stopShimmer();
 
-    private void closeSample() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        // Items Data
+        binding.itemRecyclerView.setVisibility(View.VISIBLE);
+        binding.itemShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.itemShimmerLayout.getRoot().stopShimmer();
 
-        Sample.close(sampleAnswers, data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
-                        setStatus("closed");
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        // TODO : Place Code If Needed
-                    });
-                }
-            }
-        });
-    }
-
-    private void openSample() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
-
-        Sample.open(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
-                        setStatus("open");
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        // TODO : Place Code If Needed
-                    });
-                }
-            }
-        });
-    }
-
-    private void scoreSample() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
-
-        Sample.score(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                sampleModel = (SampleModel) object;
-
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
-                        setStatus(sampleModel.getSampleStatus());
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        // TODO : Place Code If Needed
-                    });
-                }
-            }
-        });
     }
 
     public void sendGen(String key, String value) {
