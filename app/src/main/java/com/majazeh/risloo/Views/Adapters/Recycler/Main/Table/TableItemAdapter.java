@@ -94,7 +94,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         if (model.getAnswer().getType().equals("text") || model.getAnswer().getType().equals("number"))
             return 1;
-        else if (model.getAnswer().getType().equals("select"))
+        else if (model.getAnswer().getType().equals("optional"))
             return 2;
 
         return 0;
