@@ -348,6 +348,58 @@ public class InitManager {
     ---------- Spinners - Custom ----------
     */
 
+    public static void treasuryCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, ArrayList<String> arrayList2) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
+
+            private TextView primaryTextView;
+            private TextView secondaryTextView;
+
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                return super.getView(position, convertView, viewGroup);
+            }
+
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_treasury, viewGroup, false);
+
+                initializer(view);
+
+                detector(view, position);
+
+                setData(position);
+
+                return view;
+            }
+
+            private void initializer(View view) {
+                primaryTextView = view.findViewById(R.id.primary_textView);
+                secondaryTextView = view.findViewById(R.id.secondary_textView);
+            }
+
+            private void detector(View view, int position) {
+                if (spinner.getSelectedItemPosition() == position)
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            }
+
+            private void setData(int position) {
+                primaryTextView.setText(arrayList.get(position));
+                secondaryTextView.setText(StringManager.foreground(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.Emerald600)));
+            }
+
+            @Override
+            public int getCount() {
+                return super.getCount() - 1;
+            }
+
+        };
+
+        spinner.setAdapter(adapter);
+        spinner.setSelection(adapter.getCount());
+    }
+
     public static void profileCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
 

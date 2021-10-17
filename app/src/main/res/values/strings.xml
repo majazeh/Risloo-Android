@@ -413,6 +413,8 @@
     <string name="PaymentsFragmentChargeTreasuryHeader">کیف پول</string>
     <string name="PaymentsFragmentChargeAmountHeader">مبلغ (تومان)</string>
 
+    <string name="PaymentsFragmentChargeBalanceHint">تراز مالی :</string>
+
     <string name="PaymentsFragmentChargeButton">انتقال به درگاه پرداخت</string>
 
 

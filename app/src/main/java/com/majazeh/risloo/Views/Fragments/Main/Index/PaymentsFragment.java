@@ -219,21 +219,24 @@ public class PaymentsFragment extends Fragment {
     }
 
     private void setTreasury(List treasuries) {
-        ArrayList<String> options = new ArrayList<>();
+        ArrayList<String> titles = new ArrayList<>();
+        ArrayList<String> balances = new ArrayList<>();
 
         for (TypeModel typeModel : treasuries.data()) {
             TreasuriesModel model = (TreasuriesModel) typeModel;
 
             if (model.isCreditable() && model.isMy_treasury() && !model.getSymbol().equals("gift")) {
-                options.add(model.getTitle());
+                titles.add(model.getTitle());
+                balances.add(getResources().getString(R.string.PaymentsFragmentChargeBalanceHint) + " " + StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
                 treasuryIds.add(model.getId());
             }
         }
 
-        options.add("");
+        titles.add("");
+        balances.add("");
         treasuryIds.add("");
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
+        InitManager.treasuryCustomSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, titles, balances);
 
         // Select First Treasury Item
         treasury = treasuryIds.get(0);

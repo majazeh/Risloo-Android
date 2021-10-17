@@ -87,7 +87,7 @@
         android:ellipsize="end"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Emerald500"
+        android:textColor="@color/Emerald600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:visibility="gone"
