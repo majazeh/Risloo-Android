@@ -169,8 +169,10 @@ public class CreateTreasuryFragment extends Fragment {
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("title", title);
-        data.put("region_id", regionId);
+        if (!title.equals(""))
+            data.put("title", title);
+        if (!regionId.equals(""))
+            data.put("region_id", regionId);
 
         Treasury.create(data, header, new Response() {
             @Override

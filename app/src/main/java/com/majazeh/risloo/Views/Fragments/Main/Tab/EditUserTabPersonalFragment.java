@@ -299,18 +299,20 @@ public class EditUserTabPersonalFragment extends Fragment {
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("name", name);
-        data.put("gender", gender);
+        if (!name.equals(""))
+            data.put("name", name);
+        if (!gender.equals(""))
+            data.put("gender", gender);
 
-        if (binding.mobileIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+        if (!mobile.equals("") && binding.mobileIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("mobile", mobile);
-        if (binding.emailIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+        if (!email.equals("") && binding.emailIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("email", email);
-        if (binding.birthdayIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+        if (!birthday.equals("") && binding.birthdayIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("birthday", birthday);
-        if (binding.statusIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+        if (!status.equals("") && binding.statusIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("status", status);
-        if (binding.typeIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+        if (!type.equals("") && binding.typeIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("type", type);
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {

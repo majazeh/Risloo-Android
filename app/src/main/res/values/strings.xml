@@ -287,6 +287,35 @@
     ***/
 
 
+    ---------- // CreateSampleFragment
+
+    <string name="CreateSampleFragmentTitle">ساخت نمونه جدید</string>
+
+    <string name="CreateSampleFragmentScaleHeader">مقیاس</string>
+    <string name="CreateSampleFragmentRoomHeader">اتاق درمان</string>
+    <string name="CreateSampleFragmentTitleHeader">عنوان</string>
+    <string name="CreateSampleFragmentMembersCountHeader">تعداد اعضاء</string>
+    <string name="CreateSampleFragmentCaseStatusHeader">وضعیت پرونده</string>
+    <string name="CreateSampleFragmentProblemHeader">مسئله</string>
+    <string name="CreateSampleFragmentCaseHeader">پرونده</string>
+    <string name="CreateSampleFragmentClientHeader">انتخاب مراجع</string>
+    <string name="CreateSampleFragmentSessionHeader">جلسه</string>
+    <string name="CreateSampleFragmentReferenceHeader">مراجع(ین)</string>
+    <string name="CreateSampleFragmentPsychologyDescriptionHeader">توضیحات روان‌شناس</string>
+
+    <string name="CreateSampleFragmentTabCaseUser">پرونده</string>
+    <string name="CreateSampleFragmentTabRoomUser">اتاق درمان</string>
+    <string name="CreateSampleFragmentTabBulk">گروهی</string>
+
+    <string name="CreateSampleFragmentBulkHelper">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
+
+    <string name="CreateSampleFragmentScaleGuide">در این قسمت لیست آزمون‌های پُر کاربرد را مشاهده می‌کنید. جهت انتخاب آزمونی که در این لیست وجود ندارد، عنوان آزمون مد نظر را جست‌وجو کرده و آن را انتخاب نمایید. شما می‌توانید لیست تمام آزمون‌های موجود در سامانه را نیز در این صفحه مشاهده نمایید.</string>
+    <string name="CreateSampleFragmentTitleGuide">کمک می‌کند تا نمونه‌های شما یک نام مشترک داشته باشند و راحت‌تر آن‌ها را پیدا کنید.</string>
+    <string name="CreateSampleFragmentMembersCountGuide">تعداد اعضائی که قصد دارند نمونه(ها) را انجام دهند.</string>
+    <string name="CreateSampleFragmentPsychologyDescriptionGuide">در این قسمت شما می‌توانید توضیحاتی را اضافه بر توضیحات یک نمونه وارد کنید تا مراجع قبل از انجام نمونه(ها) این توضیحات را مشاهده کند.</string>
+
+    <string name="CreateSampleFragmentButton">ساخت</string>
+
 
     ---------- // CreateTreasuryFragment
 
@@ -1097,37 +1126,6 @@
     <string name="CreateRoomUserFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
 
     <string name="CreateRoomUserFragmentButton">ثبت</string>
-
-    /*
-    ---------- CreateSample Fragment ----------
-    */
-
-    <string name="CreateSampleFragmentTitle">ساخت نمونه جدید</string>
-
-    <string name="CreateSampleFragmentScaleHeader">مقیاس</string>
-    <string name="CreateSampleFragmentRoomHeader">اتاق درمان</string>
-    <string name="CreateSampleFragmentTitleHeader">عنوان</string>
-    <string name="CreateSampleFragmentMembersCountHeader">تعداد اعضاء</string>
-    <string name="CreateSampleFragmentCaseStatusHeader">وضعیت پرونده</string>
-    <string name="CreateSampleFragmentProblemHeader">مسئله</string>
-    <string name="CreateSampleFragmentCaseHeader">پرونده</string>
-    <string name="CreateSampleFragmentClientHeader">انتخاب مراجع</string>
-    <string name="CreateSampleFragmentSessionHeader">جلسه</string>
-    <string name="CreateSampleFragmentReferenceHeader">مراجع(ین)</string>
-    <string name="CreateSampleFragmentPsychologyDescriptionHeader">توضیحات روان‌شناس</string>
-
-    <string name="CreateSampleFragmentTabCaseUser">پرونده</string>
-    <string name="CreateSampleFragmentTabRoomUser">اتاق درمان</string>
-    <string name="CreateSampleFragmentTabBulk">گروهی</string>
-
-    <string name="CreateSampleFragmentBulkHelper">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
-
-    <string name="CreateSampleFragmentScaleGuide">در این قسمت لیست آزمون‌های پُر کاربرد را مشاهده می‌کنید. جهت انتخاب آزمونی که در این لیست وجود ندارد، عنوان آزمون مد نظر را جست‌وجو کرده و آن را انتخاب نمایید. شما می‌توانید لیست تمام آزمون‌های موجود در سامانه را نیز در این صفحه مشاهده نمایید.</string>
-    <string name="CreateSampleFragmentTitleGuide">کمک می‌کند تا نمونه‌های شما یک نام مشترک داشته باشند و راحت‌تر آن‌ها را پیدا کنید.</string>
-    <string name="CreateSampleFragmentMembersCountGuide">تعداد اعضائی که قصد دارند نمونه(ها) را انجام دهند.</string>
-    <string name="CreateSampleFragmentPsychologyDescriptionGuide">در این قسمت شما می‌توانید توضیحاتی را اضافه بر توضیحات یک نمونه وارد کنید تا مراجع قبل از انجام نمونه(ها) این توضیحات را مشاهده کند.</string>
-
-    <string name="CreateSampleFragmentButton">ساخت</string>
 
     /*
     ---------- CreateSchedule Fragment ----------

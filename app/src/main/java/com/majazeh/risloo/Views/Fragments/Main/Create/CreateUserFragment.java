@@ -285,15 +285,22 @@ public class CreateUserFragment extends Fragment {
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("name", name);
-        data.put("mobile", mobile);
-        data.put("email", email);
-        data.put("password", password);
-        data.put("status", status);
-        data.put("type", type);
-        data.put("gender", gender);
+        if (!name.equals(""))
+            data.put("name", name);
+        if (!mobile.equals(""))
+            data.put("mobile", mobile);
+        if (!email.equals(""))
+            data.put("email", email);
+        if (!password.equals(""))
+            data.put("password", password);
+        if (!status.equals(""))
+            data.put("status", status);
+        if (!type.equals(""))
+            data.put("type", type);
+        if (!gender.equals(""))
+            data.put("gender", gender);
 
-        if (binding.birthdayIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+        if (!birthday.equals("") && binding.birthdayIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("birthday", birthday);
 
         User.create(data, header, new Response() {

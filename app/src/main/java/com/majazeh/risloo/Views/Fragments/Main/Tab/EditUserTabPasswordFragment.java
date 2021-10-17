@@ -264,8 +264,10 @@ public class EditUserTabPasswordFragment extends Fragment {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
-            data.put("password",  currentPassword);
-            data.put("new_password", newPassword);
+            if (!currentPassword.equals(""))
+                data.put("password", currentPassword);
+            if (!newPassword.equals(""))
+                data.put("new_password", newPassword);
 
             Auth.editPassword(data, header, new Response() {
                 @Override
@@ -322,7 +324,8 @@ public class EditUserTabPasswordFragment extends Fragment {
                 }
             });
         } else {
-            data.put("new_password", newPassword);
+            if (!newPassword.equals(""))
+                data.put("new_password", newPassword);
 
             User.editPassword(data, header, new Response() {
                 @Override

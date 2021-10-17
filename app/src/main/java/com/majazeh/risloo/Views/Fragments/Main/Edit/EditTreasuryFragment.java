@@ -107,7 +107,8 @@ public class EditTreasuryFragment extends Fragment {
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("title", title);
+        if (!title.equals(""))
+            data.put("title", title);
 
         Treasury.edit(data, header, new Response() {
             @Override
