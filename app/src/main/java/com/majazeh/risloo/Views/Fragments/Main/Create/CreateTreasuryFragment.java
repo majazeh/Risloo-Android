@@ -171,8 +171,8 @@ public class CreateTreasuryFragment extends Fragment {
 
         if (!title.equals(""))
             data.put("title", title);
-        if (!regionId.equals(""))
-            data.put("region_id", regionId);
+
+        data.put("region_id", regionId);
 
         Treasury.create(data, header, new Response() {
             @Override
