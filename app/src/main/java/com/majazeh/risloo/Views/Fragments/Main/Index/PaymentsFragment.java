@@ -285,11 +285,19 @@ public class PaymentsFragment extends Fragment {
         });
     }
 
+    private void setHashmap() {
+        data.put("treasury_id", treasury);
+
+        if (!amount.equals(""))
+            data.put("amount", amount);
+        else
+            data.remove("amount");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("treasury_id", treasury);
-        data.put("amount", amount);
+        setHashmap();
 
         Payment.post(data, header, new Response() {
             @Override
