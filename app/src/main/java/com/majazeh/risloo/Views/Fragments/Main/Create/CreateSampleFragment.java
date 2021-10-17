@@ -21,9 +21,15 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Create.CreateCheckAdapter;
+import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -32,12 +38,6 @@ import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
-import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -73,8 +73,6 @@ public class CreateSampleFragment extends Fragment {
         initializer();
 
         listener();
-
-        setClickSpan();
 
         setArgs();
 
@@ -115,17 +113,11 @@ public class CreateSampleFragment extends Fragment {
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.scaleIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "scales");
-            return false;
-        });
-
         assessmentLinkSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
@@ -135,14 +127,74 @@ public class CreateSampleFragment extends Fragment {
 
             @Override
             public void updateDrawState(@NonNull TextPaint textPaint) {
-                textPaint.setColor(getResources().getColor(R.color.LightBlue600));
+                textPaint.setColor(getResources().getColor(R.color.Risloo500));
                 textPaint.setUnderlineText(false);
             }
         };
 
+        binding.scaleIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "scales");
+            return false;
+        });
+
+        binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "references");
+            return false;
+        });
+
         CustomClickView.onDelayedListener(() -> {
             DialogManager.showSearchableDialog(requireActivity(), "rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
+
+        CustomClickView.onDelayedListener(() -> {
+            DialogManager.showSearchableDialog(requireActivity(), "cases");
+        }).widget(binding.caseIncludeLayout.selectContainer);
+
+        CustomClickView.onDelayedListener(() -> {
+            DialogManager.showSearchableDialog(requireActivity(), "sessions");
+        }).widget(binding.sessionIncludeLayout.selectContainer);
+
+        binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.membersCountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.membersCountIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.membersCountIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.psychologyDescriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.psychologyDescriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.membersCountIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            membersCount = binding.membersCountIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.psychologyDescriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            psychologyDescription = binding.psychologyDescriptionIncludeLayout.inputEditText.getText().toString().trim();
+        });
 
         binding.typeTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -170,30 +222,12 @@ public class CreateSampleFragment extends Fragment {
             }
         });
 
-        binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
-        binding.membersCountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.membersCountIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.membersCountIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.membersCountIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            membersCount = binding.membersCountIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.caseStatusIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
+
+        binding.caseStatusIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.caseStatusIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -217,7 +251,7 @@ public class CreateSampleFragment extends Fragment {
                             break;
                         case "افزودن در پرونده انتخابی":
                             binding.caseIncludeLayout.selectContainer.setEnabled(true);
-                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray500);
 
                             binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
                             break;
@@ -231,40 +265,6 @@ public class CreateSampleFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-
-        binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
-        CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "cases");
-        }).widget(binding.caseIncludeLayout.selectContainer);
-
-        CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "sessions");
-        }).widget(binding.sessionIncludeLayout.selectContainer);
-
-        binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "references");
-            return false;
-        });
-
-        binding.psychologyDescriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.psychologyDescriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.psychologyDescriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            psychologyDescription = binding.psychologyDescriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         CustomClickView.onDelayedListener(() -> {
@@ -297,10 +297,6 @@ public class CreateSampleFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setClickSpan() {
-        binding.scaleGuideLayout.guideTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.CreateSampleFragmentScaleGuide), 220, 228, assessmentLinkSpan));
-    }
-
     private void setType(String type) {
         switch (type) {
             case "case_user":
@@ -309,12 +305,13 @@ public class CreateSampleFragment extends Fragment {
                 binding.bulkGroup.setVisibility(View.GONE);
 
                 binding.caseIncludeLayout.selectContainer.setEnabled(true);
-                binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+                binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray500);
 
                 if (clientsAdapter.getItemCount() != 0)
                     binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                 else
                     binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+
                 break;
             case "room_user":
                 binding.caseUserGroup.setVisibility(View.GONE);
@@ -323,6 +320,7 @@ public class CreateSampleFragment extends Fragment {
 
                 if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
                     binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+
                 break;
             case "bulk":
                 binding.caseUserGroup.setVisibility(View.GONE);
@@ -330,11 +328,13 @@ public class CreateSampleFragment extends Fragment {
                 binding.bulkGroup.setVisibility(View.VISIBLE);
 
                 binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
                 binding.caseIncludeLayout.selectContainer.setEnabled(false);
                 binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
                 if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
                     binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+
                 break;
         }
     }
@@ -373,6 +373,8 @@ public class CreateSampleFragment extends Fragment {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
         }
+
+        binding.scaleGuideLayout.guideTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.CreateSampleFragmentScaleGuide), 220, 228, assessmentLinkSpan));
     }
 
     private void setData(ScaleModel model) {
@@ -459,18 +461,18 @@ public class CreateSampleFragment extends Fragment {
 
     private void setClients(List clients) {
         if (clients != null && clients.data().size() != 0) {
-            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.VISIBLE);
-
             ArrayList<TypeModel> items = new ArrayList<>();
 
+            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.VISIBLE);
             binding.caseIncludeLayout.secondaryTextView.setText("");
+
             for (int i = 0; i < clients.data().size(); i++) {
                 UserModel user = (UserModel) clients.data().get(i);
                 if (user != null) {
                     binding.caseIncludeLayout.secondaryTextView.append(user.getName());
-                    if (i != clients.data().size() - 1) {
+                    if (i != clients.data().size() - 1)
                         binding.caseIncludeLayout.secondaryTextView.append("  -  ");
-                    }
+
                     items.add(new TypeModel(clients.data().get(i).object));
                 }
             }
@@ -586,36 +588,82 @@ public class CreateSampleFragment extends Fragment {
         }
     }
 
-    private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+    private void setHashmap() {
+        if (!scalesAdapter.getIds().isEmpty())
+            data.put("scale_id", scalesAdapter.getIds());
+        else
+            data.remove("scale_id");
 
-        data.put("scale_id", scalesAdapter.getIds());
-        data.put("room_id", roomId);
+        if (!roomId.equals(""))
+            data.put("room_id", roomId);
+        else
+            data.remove("room_id");
+
         data.put("type", type);
 
         switch (type) {
             case "case_user":
-                data.put("case_id", caseId);
-                data.put("client_id", clientsAdapter.getIds());
-                data.put("session_id", sessionId);
+                if (!caseId.equals(""))
+                    data.put("case_id", caseId);
+                else
+                    data.remove("case_id");
+
+                if (!clientsAdapter.getIds().isEmpty())
+                    data.put("client_id", clientsAdapter.getIds());
+                else
+                    data.remove("client_id");
+
+                if (!sessionId.equals(""))
+                    data.put("session_id", sessionId);
+                else
+                    data.remove("session_id");
+
                 break;
             case "room_user":
-                data.put("client_id", referencesAdapter.getIds());
+                if (!referencesAdapter.getIds().isEmpty())
+                    data.put("client_id", referencesAdapter.getIds());
+                else
+                    data.remove("client_id");
+
                 break;
             case "bulk":
-                data.put("title", title);
-                data.put("members_count", membersCount);
-                data.put("case_status", SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus));
+                if (!title.equals(""))
+                    data.put("title", title);
+                else
+                    data.remove("title");
 
-                if (data.get("case_status").equals("group") || data.get("case_status").equals("personal"))
-                    data.put("problem", problem);
-                else if (data.get("case_status").equals("exist"))
-                    data.put("case_id", caseId);
+                if (!membersCount.equals(""))
+                    data.put("members_count", membersCount);
+                else
+                    data.remove("members_count");
+
+                if (!caseStatus.equals("")) {
+                    data.put("case_status", SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus));
+
+                    if (data.get("case_status").equals("group") || data.get("case_status").equals("personal"))
+                        data.put("problem", problem);
+                    else if (data.get("case_status").equals("exist"))
+                        data.put("case_id", caseId);
+
+                } else {
+                    data.remove("case_status");
+                    data.remove("problem");
+                    data.remove("case_id");
+                }
 
                 break;
         }
 
-        data.put("psychologist_description", psychologyDescription);
+        if (!psychologyDescription.equals(""))
+            data.put("psychologist_description", psychologyDescription);
+        else
+            data.remove("psychologist_description");
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
 
         Sample.create(data, header, new Response() {
             @Override
@@ -623,10 +671,18 @@ public class CreateSampleFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        if (type.equals("bulk"))
+
+                        if (type.equals("bulk")) {
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewBulkSampleAdded));
-                        else
+
+//                            NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment();
+//                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } else {
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSampleAdded));
+
+//                            NavDirections action = NavigationMainDirections.actionGlobalSampleFragment();
+//                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        }
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });
@@ -683,6 +739,7 @@ public class CreateSampleFragment extends Fragment {
                                                     ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
                                                 else if (type.equals("room_user"))
                                                     ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+
                                                 break;
                                             case "psychologist_description":
                                                 ((MainActivity) requireActivity()).validatoon.showValid(binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, validation);
@@ -709,6 +766,7 @@ public class CreateSampleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }
