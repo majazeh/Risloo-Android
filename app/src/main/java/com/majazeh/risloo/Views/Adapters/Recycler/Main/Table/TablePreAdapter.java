@@ -265,7 +265,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.binding.getRoot().setAlpha((float) 1);
         } else {
             holder.binding.inputEditText.setFocusableInTouchMode(false);
-            holder.binding.getRoot().setAlpha((float) 0.5);
+            holder.binding.getRoot().setAlpha((float) 0.6);
         }
     }
 
@@ -275,7 +275,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.binding.getRoot().setAlpha((float) 1);
         } else {
             holder.binding.selectSpinner.setEnabled(false);
-            holder.binding.getRoot().setAlpha((float) 0.5);
+            holder.binding.getRoot().setAlpha((float) 0.6);
         }
     }
 
