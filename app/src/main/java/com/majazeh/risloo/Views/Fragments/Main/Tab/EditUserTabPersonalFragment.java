@@ -296,24 +296,47 @@ public class EditUserTabPersonalFragment extends Fragment {
         }
     }
 
-    private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
-
+    private void setHashmap() {
         if (!name.equals(""))
             data.put("name", name);
-        if (!gender.equals(""))
-            data.put("gender", gender);
+        else
+            data.remove("name");
 
         if (!mobile.equals("") && binding.mobileIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("mobile", mobile);
+        else
+            data.remove("mobile");
+
         if (!email.equals("") && binding.emailIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("email", email);
+        else
+            data.remove("email");
+
         if (!birthday.equals("") && binding.birthdayIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("birthday", birthday);
+        else
+            data.remove("birthday");
+
         if (!status.equals("") && binding.statusIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("status", status);
+        else
+            data.remove("status");
+
         if (!type.equals("") && binding.typeIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("type", type);
+        else
+            data.remove("type");
+
+        if (!gender.equals(""))
+            data.put("gender", gender);
+        else
+            data.remove("gender");
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             Auth.editProfile(data, header, new Response() {

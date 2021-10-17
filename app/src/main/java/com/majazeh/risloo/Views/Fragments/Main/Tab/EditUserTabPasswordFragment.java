@@ -260,15 +260,26 @@ public class EditUserTabPasswordFragment extends Fragment {
         binding.newPasswordIncludeLayout.inputEditText.setText(newPassword);
     }
 
-    private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
-
+    private void setHashmap() {
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             if (!currentPassword.equals(""))
                 data.put("password", currentPassword);
-            if (!newPassword.equals(""))
-                data.put("new_password", newPassword);
+            else
+                data.remove("password");
+        }
 
+        if (!newPassword.equals(""))
+            data.put("new_password", newPassword);
+        else
+            data.remove("new_password");
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
+
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             Auth.editPassword(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -324,9 +335,6 @@ public class EditUserTabPasswordFragment extends Fragment {
                 }
             });
         } else {
-            if (!newPassword.equals(""))
-                data.put("new_password", newPassword);
-
             User.editPassword(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {

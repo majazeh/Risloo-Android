@@ -166,13 +166,19 @@ public class CreateTreasuryFragment extends Fragment {
         binding.regionIncludeLayout.selectSpinner.setSelection(0);
     }
 
+    private void setHashmap() {
+        if (!title.equals(""))
+            data.put("title", title);
+        else
+            data.remove("title");
+
+        data.put("region_id", regionId);
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        if (!title.equals(""))
-            data.put("title", title);
-
-        data.put("region_id", regionId);
+        setHashmap();
 
         Treasury.create(data, header, new Response() {
             @Override

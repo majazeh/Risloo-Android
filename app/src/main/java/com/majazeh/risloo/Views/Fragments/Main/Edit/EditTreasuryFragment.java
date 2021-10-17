@@ -104,11 +104,17 @@ public class EditTreasuryFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!title.equals(""))
+            data.put("title", title);
+        else
+            data.remove("title");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        if (!title.equals(""))
-            data.put("title", title);
+        setHashmap();
 
         Treasury.edit(data, header, new Response() {
             @Override

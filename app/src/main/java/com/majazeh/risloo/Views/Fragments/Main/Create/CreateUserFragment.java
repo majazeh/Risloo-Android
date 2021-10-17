@@ -282,26 +282,52 @@ public class CreateUserFragment extends Fragment {
         }
     }
 
-    private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
-
+    private void setHashmap() {
         if (!name.equals(""))
             data.put("name", name);
+        else
+            data.remove("name");
+
         if (!mobile.equals(""))
             data.put("mobile", mobile);
+        else
+            data.remove("mobile");
+
         if (!email.equals(""))
             data.put("email", email);
-        if (!password.equals(""))
-            data.put("password", password);
-        if (!status.equals(""))
-            data.put("status", status);
-        if (!type.equals(""))
-            data.put("type", type);
-        if (!gender.equals(""))
-            data.put("gender", gender);
+        else
+            data.remove("email");
 
         if (!birthday.equals("") && binding.birthdayIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("birthday", birthday);
+        else
+            data.remove("birthday");
+
+        if (!password.equals(""))
+            data.put("password", password);
+        else
+            data.remove("password");
+
+        if (!status.equals(""))
+            data.put("status", status);
+        else
+            data.remove("status");
+
+        if (!type.equals(""))
+            data.put("type", type);
+        else
+            data.remove("type");
+
+        if (!gender.equals(""))
+            data.put("gender", gender);
+        else
+            data.remove("gender");
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
 
         User.create(data, header, new Response() {
             @Override

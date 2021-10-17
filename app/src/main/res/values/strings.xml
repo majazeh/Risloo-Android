@@ -51,6 +51,8 @@
     <string name="SnackSuccesAcceptation">پذیرش ثبت شد.</string>
     <string name="SnackChangesSaved">تغییرات ثبت شد.</string>
 
+    <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
+    <string name="SnackCreatedNewSample">نمونه جدید ساخته شد.</string>
     <string name="SnackCreatedNewTreasury">کیف پول جدید ساخته شد.</string>
     <string name="SnackCreatedNewUser">کاربر جدید ایجاد شد.</string>
 
@@ -1801,8 +1803,6 @@
 
     <string name="ToastNewCaseAdded">پرونده جدید افزوده شد.</string>
     <string name="ToastNewReportAdded">گزارش جدید افزوده شد.</string>
-    <string name="ToastNewSampleAdded">نمونه جدید افزوده شد.</string>
-    <string name="ToastNewBulkSampleAdded">نمونه گروهی جدید افزوده شد.</string>
     <string name="ToastNewReferenceAdded">عضو جدید افزوده شد.</string>
     <string name="ToastNewSessionAdded">جلسه جدید افزوده شد.</string>
     <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>

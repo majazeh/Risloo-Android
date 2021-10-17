@@ -141,12 +141,19 @@ public class EditUserTabAvatarFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+
+        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+            data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+        else
+            data.remove("avatar");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
-            data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+        setHashmap();
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             Auth.changeAvatar(data, header, new Response() {

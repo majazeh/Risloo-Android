@@ -673,12 +673,12 @@ public class CreateSampleFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
 
                         if (type.equals("bulk")) {
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewBulkSampleAdded));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBulkSample));
 
 //                            NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment();
 //                            ((MainActivity) requireActivity()).navController.navigate(action);
                         } else {
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSampleAdded));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
 
 //                            NavDirections action = NavigationMainDirections.actionGlobalSampleFragment();
 //                            ((MainActivity) requireActivity()).navController.navigate(action);
