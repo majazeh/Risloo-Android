@@ -13,9 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateReportBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -60,8 +61,8 @@ public class CreateReportFragment extends Fragment {
 
         InitManager.input12sspSpinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates);
 
-        InitManager.txtTextColorBackground(binding.cryptoTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.cryptoTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -70,6 +71,8 @@ public class CreateReportFragment extends Fragment {
             userSelect = true;
             return false;
         });
+
+        binding.encryptionIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.encryptionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -143,19 +146,30 @@ public class CreateReportFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!encryption.equals(""))
+            data.put("encryption", SelectionManager.getEncryption(requireActivity(), "en", encryption));
+        else
+            data.remove("encryption");
+
+        if (!description.equals(""))
+            data.put("description", description);
+        else
+            data.remove("description");
+    }
+
     private void doWork() {
-//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+//        DialogManager.showLoadingDialog(requireActivity(), "");
 //
-//        data.put("encryption", SelectionManager.getEncryption(requireActivity(), "en", encryption));
-//        data.put("description", description);
+//        setHashmap();
 //
 //        Session.addReport(data, header, new Response() {
 //            @Override
 //            public void onOK(Object object) {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
-//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewReportAdded));
+//                        DialogManager.dismissLoadingDialog();
+//                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewReport));
 //
 //                        ((MainActivity) requireActivity()).navController.navigateUp();
 //                    });
@@ -181,10 +195,10 @@ public class CreateReportFragment extends Fragment {
 //
 //                                        switch (key) {
 //                                            case "encryption":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView, validation);
 //                                                break;
 //                                            case "description":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.descriptionIncludeLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
 //
@@ -193,7 +207,7 @@ public class CreateReportFragment extends Fragment {
 //                                    }
 //                                }
 //
-//                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+//                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
 //                            }
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();
@@ -208,6 +222,7 @@ public class CreateReportFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }

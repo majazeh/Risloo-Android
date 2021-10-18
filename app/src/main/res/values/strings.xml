@@ -54,6 +54,7 @@
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
     <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
+    <string name="SnackCreatedNewReport">گزارش جدید ساخته شد.</string>
     <string name="SnackCreatedNewSample">نمونه جدید ساخته شد.</string>
     <string name="SnackCreatedNewTreasury">کیف پول جدید ساخته شد.</string>
     <string name="SnackCreatedNewUser">کاربر جدید ایجاد شد.</string>
@@ -311,6 +312,19 @@
     <string name="CreatePracticeFragmentFileHeader">پیوست</string>
 
     <string name="CreatePracticeFragmentButton">ساخت</string>
+
+
+    ---------- // CreateReportFragment
+
+    <string name="CreateReportFragmentTitle">ساخت گزارش جدید</string>
+
+    <string name="CreateReportFragmentEncryptionHeader">نوع رمزگذاری</string>
+    <string name="CreateReportFragmentDescriptionHeader">متن گزارش</string>
+
+    <string name="CreateReportFragmentCryptoHint">متن گزارش که قصد دارید ثبت کنید بدون کدگذاری ذخیره خواهد شد؛ برای این‌که مطمئن باشید هیچ فردی، حتی سرویس ریسلو دسترسی به متن گزارش شما نداشته باشد، برای ما کلید عمومی رمزگذاری خود را ارسال کنید.</string>
+    <string name="CreateReportFragmentCryptoButton">ارسال کلید عمومی من</string>
+
+    <string name="CreateReportFragmentButton">ساخت</string>
 
 
     ---------- // CreateSampleFragment
@@ -1131,20 +1145,6 @@
     <string name="CreatePlatformFragmentButton">ساخت</string>
 
     /*
-    ---------- CreateReport Fragment ----------
-    */
-
-    <string name="CreateReportFragmentTitle">ساخت گزارش جلسه</string>
-
-    <string name="CreateReportFragmentEncryptionHeader">نوع رمزگذاری</string>
-    <string name="CreateReportFragmentDescriptionHeader">متن گزارش</string>
-
-    <string name="CreateReportFragmentCryptoHint">متن گزارش جلسه‌ای که قصد دارید ثبت کنید بدون کدگذاری ذخیره خواهد شد؛ برای این‌که مطمئن باشید هیچ فردی، حتی سرویس ریسلو دسترسی به متن گزارش جلسات درمانی شما نداشته باشد، برای ما کلید عمومی رمزگذاری خود را ارسال کنید.</string>
-    <string name="CreateReportFragmentCryptoButton">ارسال کلید عمومی من</string>
-
-    <string name="CreateReportFragmentButton">ساخت</string>
-
-    /*
     ---------- CreateRoom Fragment ----------
     */
 
@@ -1810,7 +1810,6 @@
     <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
 
     <string name="ToastNewCaseAdded">پرونده جدید افزوده شد.</string>
-    <string name="ToastNewReportAdded">گزارش جدید افزوده شد.</string>
     <string name="ToastNewReferenceAdded">عضو جدید افزوده شد.</string>
     <string name="ToastNewSessionAdded">جلسه جدید افزوده شد.</string>
     <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>

@@ -174,7 +174,7 @@ public class ClientReportsFragment extends Fragment {
 
     private void setData(SessionModel model) {
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ClientReportsFragmentSessionTitle));
-        
+
         if (model.getId() != null && !model.getId().equals("")) {
             data.put("id", model.getId());
         }
