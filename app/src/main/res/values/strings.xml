@@ -52,6 +52,8 @@
     <string name="SnackChangesSaved">تغییرات ثبت شد.</string>
 
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
+    <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
+    <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
     <string name="SnackCreatedNewSample">نمونه جدید ساخته شد.</string>
     <string name="SnackCreatedNewTreasury">کیف پول جدید ساخته شد.</string>
     <string name="SnackCreatedNewUser">کاربر جدید ایجاد شد.</string>
@@ -287,6 +289,28 @@
     /***
     ---------- Create Fragments ----------
     ***/
+
+
+    ---------- // CreateDocumentFragment
+
+    <string name="CreateDocumentFragmentTitle">ساخت مدرک جدید</string>
+
+    <string name="CreateDocumentFragmentNameHeader">عنوان</string>
+    <string name="CreateDocumentFragmentDescriptionHeader">توضیحات</string>
+    <string name="CreateDocumentFragmentFileHeader">پیوست</string>
+
+    <string name="CreateDocumentFragmentButton">ساخت</string>
+
+
+    ---------- // CreatePracticeFragment
+
+    <string name="CreatePracticeFragmentTitle">ساخت کاربرگ جدید</string>
+
+    <string name="CreatePracticeFragmentNameHeader">عنوان</string>
+    <string name="CreatePracticeFragmentDescriptionHeader">محتوا</string>
+    <string name="CreatePracticeFragmentFileHeader">پیوست</string>
+
+    <string name="CreatePracticeFragmentButton">ساخت</string>
 
 
     ---------- // CreateSampleFragment
@@ -1073,18 +1097,6 @@
     <string name="CreateCenterUserFragmentButton">ثبت</string>
 
     /*
-    ---------- CreateDocument Fragment ----------
-    */
-
-    <string name="CreateDocumentFragmentTitle">ساخت مدرک جدید</string>
-
-    <string name="CreateDocumentFragmentNameHeader">عنوان</string>
-    <string name="CreateDocumentFragmentDescriptionHeader">توضیحات</string>
-    <string name="CreateDocumentFragmentFileHeader">پیوست</string>
-
-    <string name="CreateDocumentFragmentButton">ساخت</string>
-
-    /*
     ---------- CreatePlatform Fragment ----------
     */
 
@@ -1100,18 +1112,6 @@
     <string name="CreatePlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
 
     <string name="CreatePlatformFragmentButton">ساخت</string>
-
-    /*
-    ---------- CreatePractice Fragment ----------
-    */
-
-    <string name="CreatePracticeFragmentTitle">ساخت کاربرگ جدید</string>
-
-    <string name="CreatePracticeFragmentNameHeader">عنوان</string>
-    <string name="CreatePracticeFragmentDescriptionHeader">محتوا</string>
-    <string name="CreatePracticeFragmentFileHeader">پیوست</string>
-
-    <string name="CreatePracticeFragmentButton">ساخت</string>
 
     /*
     ---------- CreateReport Fragment ----------
@@ -1813,8 +1813,6 @@
     <string name="ToastNewCenterAdded">مرکز جدید افزوده شد.</string>
     <string name="ToastNewPlatformAdded">محل برگزاری جدید افزوده شد.</string>
     <string name="ToastNewRoomAdded">اتاق جدید افزوده شد.</string>
-    <string name="ToastNewDocumentAdded">مدرک جدید افزوده شد.</string>
-    <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
     <string name="ToastNewScheduleReserved">برنامه درمانی رزرو شد.</string>
     <string name="ToastNewSuccesPayment">پرداخت انجام شد.</string>
 

@@ -13,13 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreatePracticeBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -61,7 +61,7 @@ public class CreatePracticeFragment extends Fragment {
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreatePracticeFragmentDescriptionHeader));
         binding.fileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreatePracticeFragmentFileHeader));
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreatePracticeFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreatePracticeFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -72,14 +72,14 @@ public class CreatePracticeFragment extends Fragment {
             return false;
         });
 
-        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -128,20 +128,35 @@ public class CreatePracticeFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!name.equals(""))
+            data.put("name", name);
+        else
+            data.remove("name");
+
+        if (!description.equals(""))
+            data.put("description", description);
+        else
+            data.remove("description");
+
+        if (!filePath.equals(""))
+            data.put("file", filePath);
+        else
+            data.remove("file");
+    }
+
     private void doWork() {
-//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+//        DialogManager.showLoadingDialog(requireActivity(), "");
 //
-//        data.put("name", name);
-//        data.put("description", description);
-//        data.put("file", filePath);
+//        setHashmap();
 //
 //        Session.addPractice(data, header, new Response() {
 //            @Override
 //            public void onOK(Object object) {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
-//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewPracticeAdded));
+//                        DialogManager.dismissLoadingDialog();
+//                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewPractice));
 //
 //                        ((MainActivity) requireActivity()).navController.navigateUp();
 //                    });
@@ -167,13 +182,13 @@ public class CreatePracticeFragment extends Fragment {
 //
 //                                        switch (key) {
 //                                            case "name":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
 //                                                break;
 //                                            case "description":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
 //                                                break;
 //                                            case "file":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
 //
@@ -182,7 +197,7 @@ public class CreatePracticeFragment extends Fragment {
 //                                    }
 //                                }
 //
-//                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+//                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
 //                            }
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();
@@ -197,7 +212,6 @@ public class CreatePracticeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-
         FileManager.deleteFolderFromCache(requireActivity(), "documents");
     }
 
