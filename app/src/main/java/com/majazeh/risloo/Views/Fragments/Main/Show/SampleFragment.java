@@ -370,7 +370,7 @@ public class SampleFragment extends Fragment {
         profileUrls.add("");
 
         if (items.size() > 2) {
-            InitManager.profileCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, items);
+            InitManager.selectProfileSpinner(requireActivity(), binding.profilesTextView.selectSpinner, items);
         } else {
             binding.profilesTextView.getRoot().setVisibility(View.GONE);
         }

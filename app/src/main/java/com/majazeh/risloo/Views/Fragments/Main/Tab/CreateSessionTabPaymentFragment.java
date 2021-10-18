@@ -58,7 +58,7 @@ public class CreateSessionTabPaymentFragment extends Fragment {
 
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabPaymentPaymentHeader));
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentStatus);
+        InitManager.input12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentStatus);
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), 0);
 

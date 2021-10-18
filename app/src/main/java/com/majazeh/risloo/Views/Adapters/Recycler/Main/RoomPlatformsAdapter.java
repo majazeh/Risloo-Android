@@ -103,7 +103,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.normalAdapterSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels);
+        InitManager.input8sspSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels);
     }
 
     @SuppressLint("ClickableViewAccessibility")

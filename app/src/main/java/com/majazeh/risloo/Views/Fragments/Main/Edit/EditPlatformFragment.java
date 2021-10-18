@@ -75,8 +75,8 @@ public class EditPlatformFragment extends Fragment {
 
         binding.sessionCheckBox.getRoot().setText(getResources().getString(R.string.EditPlatformFragmentSessionCheckbox));
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, R.array.PlatformSessions);
-        InitManager.normal12sspSpinner(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, R.array.PlatformIndentifiers);
+        InitManager.input12sspSpinner(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, R.array.PlatformSessions);
+        InitManager.input12sspSpinner(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, R.array.PlatformIndentifiers);
 
         InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditPlatformFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }

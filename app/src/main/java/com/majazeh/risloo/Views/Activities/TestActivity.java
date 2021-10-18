@@ -214,7 +214,7 @@ public class TestActivity extends AppCompatActivity {
                 options.add("");
                 answers.add(false);
 
-                InitManager.testCustomSpinner(this, binding.locationIncludeLayout.selectSpinner, options, answers);
+                InitManager.inputCustomTestSpinner(this, binding.locationIncludeLayout.selectSpinner, options, answers);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

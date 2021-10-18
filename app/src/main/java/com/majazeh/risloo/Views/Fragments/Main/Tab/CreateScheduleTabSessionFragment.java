@@ -90,7 +90,7 @@ public class CreateScheduleTabSessionFragment extends Fragment {
         binding.endRelativeIncludeLayout.hourTextView.setText(getResources().getString(R.string.HourHint));
         binding.endRelativeIncludeLayout.minuteTextView.setText(getResources().getString(R.string.MinuteEndHint));
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
+        InitManager.input12sspSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 

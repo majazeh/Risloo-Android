@@ -73,8 +73,8 @@ public class CreatePlatformFragment extends Fragment {
 
         binding.sessionCheckBox.getRoot().setText(getResources().getString(R.string.CreatePlatformFragmentSessionCheckbox));
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, R.array.PlatformSessions);
-        InitManager.normal12sspSpinner(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, R.array.PlatformIndentifiers);
+        InitManager.input12sspSpinner(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, R.array.PlatformSessions);
+        InitManager.input12sspSpinner(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, R.array.PlatformIndentifiers);
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreatePlatformFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }

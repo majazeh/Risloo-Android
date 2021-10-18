@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(getResources().getString(R.string.MainToolbarLogout));
         items.add("");
 
-        InitManager.toolbarCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, items);
+        InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, items);
     }
 
     public void responseAdapter(String item) {

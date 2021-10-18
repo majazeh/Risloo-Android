@@ -228,7 +228,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
             options.add("");
 
-            InitManager.normal10sspSpinner(activity, holder.binding.selectSpinner, options);
+            InitManager.input10sspSpinner(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
         }

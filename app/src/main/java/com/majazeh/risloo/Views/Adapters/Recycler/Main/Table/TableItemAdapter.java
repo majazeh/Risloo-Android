@@ -279,7 +279,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             options.add("");
 
-            InitManager.normal10sspSpinner(activity, holder.binding.selectSpinner, options);
+            InitManager.input10sspSpinner(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -64,7 +64,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
         binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.CreateScheduleTabReferenceCheckbox));
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes);
+        InitManager.input12sspSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes);
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabReferenceButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
     }
@@ -183,7 +183,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
         options.add("");
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, options);
+        InitManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, options);
     }
 
     private void setClients(com.mre.ligheh.Model.Madule.List clients) {

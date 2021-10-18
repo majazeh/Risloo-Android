@@ -70,7 +70,7 @@ public class AuthLoginFragment extends Fragment {
         InitManager.txtTextAppearance(requireActivity(), binding.registerLinkTextView.getRoot(), getResources().getString(R.string.AuthRegisterLink), R.style.danaDemiBoldTextStyle);
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
 
-        InitManager.normal12sspAutoComplete(requireActivity(), binding.mobileEditText.getRoot(), ((AuthActivity) requireActivity()).singleton.getRegistMobiles());
+        InitManager.input12sspAutoComplete(requireActivity(), binding.mobileEditText.getRoot(), ((AuthActivity) requireActivity()).singleton.getRegistMobiles());
     }
 
     @SuppressLint("ClickableViewAccessibility")

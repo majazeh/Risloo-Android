@@ -417,7 +417,7 @@ public class ReserveScheduleFragment extends Fragment {
         options.add("");
         fieldsIds.add("");
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.fieldIncludeLayout.selectSpinner, options);
+        InitManager.input12sspSpinner(requireActivity(), binding.fieldIncludeLayout.selectSpinner, options);
     }
 
     private void setPlatform(List platforms) {
@@ -433,7 +433,7 @@ public class ReserveScheduleFragment extends Fragment {
         options.add("");
         platformIds.add("");
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
+        InitManager.input12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
     private void setTreasury(List treasuries) {
@@ -452,7 +452,7 @@ public class ReserveScheduleFragment extends Fragment {
         options.add("");
         treasuryIds.add("");
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
+        InitManager.input12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {

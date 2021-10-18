@@ -149,7 +149,7 @@ public class TablePracticeAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         items.add("");
 
-        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+        InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
     }
 
 }

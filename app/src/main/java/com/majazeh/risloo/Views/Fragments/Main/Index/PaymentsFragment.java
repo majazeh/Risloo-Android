@@ -236,7 +236,7 @@ public class PaymentsFragment extends Fragment {
         balances.add("");
         treasuryIds.add("");
 
-        InitManager.treasuryCustomSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, titles, balances);
+        InitManager.inputCustomTreasurySpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, titles, balances);
 
         // Select First Treasury Item
         treasury = treasuryIds.get(0);

@@ -119,7 +119,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.normalAdapterSpinner(activity, holder.binding.positionSpinner, R.array.UserPosition);
+        InitManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserPosition);
     }
 
     @SuppressLint("ClickableViewAccessibility")

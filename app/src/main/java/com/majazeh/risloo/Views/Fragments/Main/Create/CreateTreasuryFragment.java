@@ -159,7 +159,7 @@ public class CreateTreasuryFragment extends Fragment {
 
         options.add("");
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.regionIncludeLayout.selectSpinner, options);
+        InitManager.input12sspSpinner(requireActivity(), binding.regionIncludeLayout.selectSpinner, options);
 
         // Select First Treasury Item
         regionId = "";

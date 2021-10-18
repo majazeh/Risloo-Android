@@ -466,7 +466,7 @@ public class SessionFragment extends Fragment {
 
         if (items.size() > 2) {
             InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
-            InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+            InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "گزارشات":

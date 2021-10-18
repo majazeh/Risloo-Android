@@ -252,7 +252,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         if (items.size() > 1) {
             holder.binding.menuGroup.setVisibility(View.VISIBLE);
-            InitManager.billCustomSpinner(activity, holder.binding.menuSpinner, items);
+            InitManager.selectBillSpinner(activity, holder.binding.menuSpinner, items);
         } else {
             holder.binding.menuGroup.setVisibility(View.INVISIBLE);
         }

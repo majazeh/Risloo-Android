@@ -124,7 +124,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.normalAdapterSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
+        InitManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -292,7 +292,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 //        items.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
         items.add("");
 
-        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+        InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
     }
 
     private void doWork(TableCenterUserHolder holder, UserModel model, String value, String method) {

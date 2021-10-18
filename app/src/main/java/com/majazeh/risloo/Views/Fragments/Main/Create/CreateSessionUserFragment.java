@@ -204,7 +204,7 @@ public class CreateSessionUserFragment extends Fragment {
         options.add("");
         axisIds.add("");
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options);
+        InitManager.input12sspSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options);
     }
 
     private void setPlatform(List platforms) {
@@ -220,7 +220,7 @@ public class CreateSessionUserFragment extends Fragment {
         options.add("");
         platformIds.add("");
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
+        InitManager.input12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
     private void setClients(List clients) {

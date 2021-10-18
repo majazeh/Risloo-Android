@@ -168,7 +168,7 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         if (items.size() > 1) {
             holder.binding.menuGroup.setVisibility(View.VISIBLE);
-            InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
+            InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
         } else {
             holder.binding.menuGroup.setVisibility(View.INVISIBLE);
         }

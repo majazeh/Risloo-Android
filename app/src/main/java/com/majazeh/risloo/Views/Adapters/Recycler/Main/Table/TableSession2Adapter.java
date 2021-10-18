@@ -113,7 +113,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.normalAdapterSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
+        InitManager.input8sspSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -107,7 +107,7 @@ public class CreateSampleFragment extends Fragment {
         binding.membersCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentMembersCountGuide));
         binding.psychologyDescriptionGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionGuide));
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, R.array.CaseStatus);
+        InitManager.input12sspSpinner(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, R.array.CaseStatus);
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
