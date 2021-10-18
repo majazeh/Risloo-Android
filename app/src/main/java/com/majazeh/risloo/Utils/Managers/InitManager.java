@@ -558,25 +558,34 @@ public class InitManager {
     }
 
     public static void inputCustomTreasurySpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, ArrayList<String> arrayList2) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_12ssp, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_treasury, arrayList) {
 
             private TextView primaryTextView;
             private TextView secondaryTextView;
 
+            private TextView dropdownPrimaryTextView;
+            private TextView dropdownSecondaryTextView;
+
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                return super.getView(position, convertView, viewGroup);
+                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_background_treasury, null, false);
+
+                initializer(view);
+
+                setData(position);
+
+                return view;
             }
 
             @Override
             public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
                 View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_treasury, viewGroup, false);
 
-                initializer(view);
+                initializerDropDown(view);
 
-                detector(view, position);
+                detectorDropDown(view, position);
 
-                setData(position);
+                setDataDropDown(position);
 
                 return view;
             }
@@ -586,7 +595,12 @@ public class InitManager {
                 secondaryTextView = view.findViewById(R.id.secondary_textView);
             }
 
-            private void detector(View view, int position) {
+            private void initializerDropDown(View view) {
+                dropdownPrimaryTextView = view.findViewById(R.id.primary_textView);
+                dropdownSecondaryTextView = view.findViewById(R.id.secondary_textView);
+            }
+
+            private void detectorDropDown(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
                     view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
                 else
@@ -596,6 +610,11 @@ public class InitManager {
             private void setData(int position) {
                 primaryTextView.setText(arrayList.get(position));
                 secondaryTextView.setText(StringManager.foreground(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.Emerald600)));
+            }
+
+            private void setDataDropDown(int position) {
+                dropdownPrimaryTextView.setText(arrayList.get(position));
+                dropdownSecondaryTextView.setText(StringManager.foreground(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.Emerald600)));
             }
 
             @Override

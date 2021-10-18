@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    android:paddingBottom="@dimen/_6sdp"
+    android:paddingEnd="@dimen/_12sdp"
+    android:paddingStart="@dimen/_12sdp"
+    android:paddingTop="@dimen/_6sdp">
+
+    <TextView
+        android:id="@+id/primary_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|right"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        tools:text="عنوان" />
+
+    <TextView
+        android:id="@+id/secondary_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_minus2sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="تراز مالی" />
+
+</LinearLayout>
