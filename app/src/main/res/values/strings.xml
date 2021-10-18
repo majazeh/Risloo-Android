@@ -428,6 +428,15 @@
     <string name="BulkSamplesFragmentEmpty">هنوز نمونه‌ گروهی ثبت نشده است.</string>
 
 
+    ---------- // ClientReportsFragment
+
+    <string name="ClientReportsFragmentCaseTitle">گزارشات پرونده</string>
+    <string name="ClientReportsFragmentSessionTitle">گزارشات جلسه</string>
+
+    <string name="ClientReportsFragmentCaseEmpty">هنوز گزارشی برای پرونده ثبت نشده است.</string>
+    <string name="ClientReportsFragmentSessionEmpty">هنوز گزارشی برای جلسه ثبت نشده است.</string>
+
+
     ---------- // DocumentsFragment
 
     <string name="DocumentsFragmentTitle">مدارک</string>
@@ -682,6 +691,14 @@
 
     <string name="BulkSampleAdapterLink">لینک ثبت نام</string>
     <string name="BulkSampleAdapterCopy">کپی کردن لینک</string>
+
+
+    ---------- // ClientReportAdapter
+
+    <string name="ClientReportAdapterName">عنوان</string>
+    <string name="ClientReportAdapterTime">زمان</string>
+    <string name="ClientReportAdapterReference">مراجعین</string>
+    <string name="ClientReportAdapterReader">خوانندگان</string>
 
 
     ---------- // DocumentAdapter
@@ -1499,19 +1516,6 @@
     <string name="CenterUsersFragmentEnter">ورود به کاربری</string>
 
     <string name="CenterUsersFragmentEmpty">هنوز عضوی برای مرکز ثبت نشده است.</string>
-
-    /*
-    ---------- ClientReports Fragment ----------
-    */
-
-    <string name="ClientReportsFragmentTitle">گزارشات</string>
-
-    <string name="ClientReportsFragmentName">عنوان</string>
-    <string name="ClientReportsFragmentTime">زمان</string>
-    <string name="ClientReportsFragmentReference">مراجعین</string>
-    <string name="ClientReportsFragmentReaders">خوانندگان</string>
-
-    <string name="ClientReportsFragmentEmpty">هنوز گزارشی ثبت نشده است.</string>
 
     /*
     ---------- RoomPlatforms Fragment ----------

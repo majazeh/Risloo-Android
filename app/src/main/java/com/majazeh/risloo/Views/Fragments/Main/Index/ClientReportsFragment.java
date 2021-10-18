@@ -80,8 +80,6 @@ public class ClientReportsFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ClientReportsFragmentTitle));
-
         binding.tableShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
         InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
@@ -139,13 +137,14 @@ public class ClientReportsFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            if (type.equals("case")) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateReportFragment(caseModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            } else {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateReportFragment(sessionModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            }
+            NavDirections action;
+
+            if (type.equals("case"))
+                action = NavigationMainDirections.actionGlobalCreateReportFragment(caseModel);
+            else
+                action = NavigationMainDirections.actionGlobalCreateReportFragment(sessionModel);
+
+            ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }
 
@@ -166,19 +165,23 @@ public class ClientReportsFragment extends Fragment {
     }
 
     private void setData(CaseModel model) {
+        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ClientReportsFragmentCaseTitle));
+
         if (model.getCaseId() != null && !model.getCaseId().equals("")) {
             data.put("id", model.getCaseId());
         }
     }
 
     private void setData(SessionModel model) {
+        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ClientReportsFragmentSessionTitle));
+        
         if (model.getId() != null && !model.getId().equals("")) {
             data.put("id", model.getId());
         }
     }
 
     private void getData() {
-        if (type.equals("case")) {
+        if (type.equals("case"))
             Case.reports(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -196,25 +199,17 @@ public class ClientReportsFragment extends Fragment {
                                 binding.tableSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (adapter.itemsCount() == 0) {
                                 binding.tableSingleLayout.recyclerView.setAdapter(null);
-                                
+
                                 binding.tableSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
                                     binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                                 else
-                                    binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.ClientReportsFragmentEmpty));
+                                    binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.ClientReportsFragmentCaseEmpty));
                             }
 
-                            binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+                            binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 
-                            binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.tableShimmerLayout.getRoot().stopShimmer();
-
-                            if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                                binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-
+                            hideShimmer();
                         });
 
                         isLoading = false;
@@ -225,22 +220,14 @@ public class ClientReportsFragment extends Fragment {
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.tableShimmerLayout.getRoot().stopShimmer();
-
-                            if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                                binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-
+                            hideShimmer();
                         });
 
                         isLoading = false;
                     }
                 }
             });
-        } else {
+        else
             Session.reports(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -262,20 +249,12 @@ public class ClientReportsFragment extends Fragment {
                                 if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
                                     binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                                 else
-                                    binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.ClientReportsFragmentEmpty));
+                                    binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.ClientReportsFragmentSessionEmpty));
                             }
 
-                            binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+                            binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 
-                            binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.tableShimmerLayout.getRoot().stopShimmer();
-
-                            if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                                binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-
+                            hideShimmer();
                         });
 
                         isLoading = false;
@@ -286,22 +265,24 @@ public class ClientReportsFragment extends Fragment {
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.tableShimmerLayout.getRoot().stopShimmer();
-
-                            if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                                binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-
+                            hideShimmer();
                         });
 
                         isLoading = false;
                     }
                 }
             });
-        }
+    }
+
+    private void hideShimmer() {
+        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.tableShimmerLayout.getRoot().stopShimmer();
+
+        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
+        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
     }
 
     @Override
