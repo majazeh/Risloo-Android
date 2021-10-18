@@ -105,6 +105,8 @@ public class TableDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
             return false;
         });
 
+        holder.binding.menuSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -112,7 +114,7 @@ public class TableDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
                     String pos = parent.getItemAtPosition(position).toString();
 
                     switch (pos) {
-                        case "تأیید":
+                        case "تأیید کردن":
                             // TODO : Place Code Here
                             break;
                         case "رد کردن":
@@ -147,13 +149,17 @@ public class TableDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
     private void setMenu(TableDocumentHolder holder) {
         ArrayList<String> items = new ArrayList<>();
 
-        items.add(activity.getResources().getString(R.string.DocumentsFragmentAccept));
-        items.add(activity.getResources().getString(R.string.DocumentsFragmentKick));
-        items.add(activity.getResources().getString(R.string.DocumentsFragmentDownload));
-
+        items.add(activity.getResources().getString(R.string.DocumentAdapterAccept));
+        items.add(activity.getResources().getString(R.string.DocumentAdapterKick));
+        items.add(activity.getResources().getString(R.string.DocumentAdapterDownload));
         items.add("");
 
-        InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
+        if (items.size() > 1) {
+            holder.binding.menuGroup.setVisibility(View.VISIBLE);
+            InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
+        } else {
+            holder.binding.menuGroup.setVisibility(View.INVISIBLE);
+        }
     }
 
 }

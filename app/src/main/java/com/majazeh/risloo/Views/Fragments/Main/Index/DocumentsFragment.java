@@ -17,8 +17,8 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableDocumentAdapter;
 import com.majazeh.risloo.databinding.FragmentDocumentsBinding;
@@ -155,17 +155,9 @@ public class DocumentsFragment extends Fragment {
 //                                binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.DocumentsFragmentEmpty));
 //                        }
 //
-//                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+//                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 //
-//                        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.tableShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-//                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-//                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-//
+//                        hideShimmer();
 //                    });
 //
 //                    isLoading = false;
@@ -176,21 +168,24 @@ public class DocumentsFragment extends Fragment {
 //            public void onFailure(String response) {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
-//                        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.tableShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-//                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-//                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-//
+//                        hideShimmer();
 //                    });
 //
 //                    isLoading = false;
 //                }
 //            }
 //        });
+    }
+
+    private void hideShimmer() {
+        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.tableShimmerLayout.getRoot().stopShimmer();
+
+        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
+        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
     }
 
     @Override

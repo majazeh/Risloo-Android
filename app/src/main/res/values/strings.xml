@@ -404,6 +404,13 @@
     <string name="BulkSamplesFragmentEmpty">هنوز نمونه‌ گروهی ثبت نشده است.</string>
 
 
+    ---------- // DocumentsFragment
+
+    <string name="DocumentsFragmentTitle">مدارک</string>
+
+    <string name="DocumentsFragmentEmpty">هنوز مدرکی ثبت نشده است.</string>
+
+
     ---------- // PaymentsFragment
 
     <string name="PaymentsFragmentTitle">شارژ حساب</string>
@@ -651,6 +658,17 @@
 
     <string name="BulkSampleAdapterLink">لینک ثبت نام</string>
     <string name="BulkSampleAdapterCopy">کپی کردن لینک</string>
+
+
+    ---------- // DocumentAdapter
+
+    <string name="DocumentAdapterSerial">سریال</string>
+    <string name="DocumentAdapterName">عنوان</string>
+    <string name="DocumentAdapterStatus">وضعیت</string>
+
+    <string name="DocumentAdapterAccept">تأیید کردن</string>
+    <string name="DocumentAdapterKick">رد کردن</string>
+    <string name="DocumentAdapterDownload">دانلود فایل</string>
 
 
     ---------- // PaymentAdapter
@@ -1494,22 +1512,6 @@
     <string name="ClientReportsFragmentReaders">خوانندگان</string>
 
     <string name="ClientReportsFragmentEmpty">هنوز گزارشی ثبت نشده است.</string>
-
-    /*
-    ---------- Documents Fragment ----------
-    */
-
-    <string name="DocumentsFragmentTitle">مدارک</string>
-
-    <string name="DocumentsFragmentSerial">سریال</string>
-    <string name="DocumentsFragmentName">عنوان</string>
-    <string name="DocumentsFragmentStatus">وضعیت</string>
-
-    <string name="DocumentsFragmentAccept">تأیید</string>
-    <string name="DocumentsFragmentKick">رد کردن</string>
-    <string name="DocumentsFragmentDownload">دانلود فایل</string>
-
-    <string name="DocumentsFragmentEmpty">هنوز مدرکی ثبت نشده است.</string>
 
     /*
     ---------- RoomPlatforms Fragment ----------
