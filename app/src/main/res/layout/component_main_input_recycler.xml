@@ -49,7 +49,7 @@
         android:minHeight="@dimen/_36sdp"
         android:padding="@dimen/_6sdp"
         android:overScrollMode="never"
-        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray500"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray500_ripple_coolgray300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView" />
