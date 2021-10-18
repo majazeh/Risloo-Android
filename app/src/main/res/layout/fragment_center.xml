@@ -59,7 +59,7 @@
 
                 <include
                     android:id="@+id/menu_spinner"
-                    layout="@layout/component_main_button_oval_spinner"
+                    layout="@layout/component_main_spinner_oval"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"

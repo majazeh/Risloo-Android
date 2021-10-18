@@ -152,14 +152,14 @@ public class MainActivity extends AppCompatActivity {
             // TODO : Place Code When Needed
         }).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
 
-        binding.contentIncludeLayout.toolbarIncludeLayout.menuSpinner.setOnTouchListener((v, event) -> {
+        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
 
-        binding.contentIncludeLayout.toolbarIncludeLayout.menuSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
-        binding.contentIncludeLayout.toolbarIncludeLayout.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
@@ -321,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(getResources().getString(R.string.MainToolbarLogout));
         items.add("");
 
-        InitManager.toolbarCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.menuSpinner, items);
+        InitManager.toolbarCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, items);
     }
 
     public void responseAdapter(String item) {

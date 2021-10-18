@@ -8,7 +8,7 @@
     android:layoutDirection="rtl">
 
     <Spinner
-        android:id="@+id/menu_spinner"
+        android:id="@+id/select_spinner"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:singleLine="true"
