@@ -9,8 +9,6 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -272,10 +270,8 @@ public class SampleFragment extends Fragment {
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.GONE);
 
-                InitManager.txtTextColorBackground(binding.profilesTextView.selectTextView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
                 InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
-
-                ImageViewCompat.setImageTintList(binding.profilesTextView.angleImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Risloo500));
+                InitManager.spinnerTextColorResTintBackground(requireActivity(), binding.profilesTextView.selectSpinner, binding.profilesTextView.selectTextView, binding.profilesTextView.angleImageView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Risloo500), R.color.Risloo500, R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 break;
         }

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dropdown_textView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:paddingBottom="@dimen/_6sdp"
     android:paddingEnd="@dimen/_12sdp"
     android:paddingStart="@dimen/_12sdp"
@@ -15,7 +16,4 @@
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
     android:layoutDirection="rtl"
-    tools:text="گزینه مورد نظر"
-    tools:layout_width="wrap_content"
-    tools:layout_height="wrap_content"
-    tools:layout_gravity="center" />
+    tools:text="عنوان" />

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layoutDirection="rtl"
     android:paddingBottom="@dimen/_6sdp"
-    android:paddingEnd="@dimen/_28sdp"
+    android:paddingEnd="@dimen/_12sdp"
     android:paddingStart="@dimen/_12sdp"
     android:paddingTop="@dimen/_6sdp">
 

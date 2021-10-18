@@ -7,6 +7,19 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl">
 
+    <Spinner
+        android:id="@+id/select_spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:singleLine="true"
+        android:spinnerMode="dropdown"
+        android:dropDownVerticalOffset="@dimen/_32sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/draw_16sdp_solid_white_border_1sdp_gray300_ripple_gray300" />
+
     <TextView
         android:id="@+id/select_textView"
         android:layout_width="wrap_content"
@@ -14,6 +27,7 @@
         android:layout_gravity="center"
         android:paddingEnd="@dimen/_24sdp"
         android:paddingStart="@dimen/_12sdp"
+        android:maxLines="1"
         android:gravity="center"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
@@ -25,8 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="دکمه"
-        tools:textColor="@color/CoolGray500"
-        tools:background="@drawable/draw_24sdp_solid_white_border_1sdp_gray300_ripple_gray300" />
+        tools:textColor="@color/CoolGray500" />
 
     <ImageView
         android:id="@+id/angle_imageView"
@@ -36,22 +49,9 @@
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_angle_down_light"
-        app:layout_constraintBottom_toBottomOf="@id/select_spinner"
-        app:layout_constraintEnd_toEndOf="@id/select_spinner"
-        app:layout_constraintTop_toTopOf="@id/select_spinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/CoolGray500" />
-
-    <Spinner
-        android:id="@+id/select_spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:singleLine="true"
-        android:spinnerMode="dropdown"
-        android:dropDownVerticalOffset="@dimen/_32sdp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@id/select_textView"
-        app:layout_constraintEnd_toEndOf="@id/select_textView"
-        app:layout_constraintStart_toStartOf="@id/select_textView"
-        app:layout_constraintTop_toTopOf="@id/select_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
