@@ -49,7 +49,6 @@
         android:minHeight="@dimen/_36sdp"
         android:padding="@dimen/_6sdp"
         android:overScrollMode="never"
-        android:background="null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView" />

@@ -34,7 +34,7 @@
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="@dimen/_40sdp"
-        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView" />
