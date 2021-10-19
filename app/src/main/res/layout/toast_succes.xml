@@ -16,5 +16,5 @@
     android:textColor="@color/Emerald800"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:background="@drawable/draw_16sdp_solid_green100"
+    android:background="@drawable/draw_16sdp_solid_emerald100"
     tools:text="پیغام موفقیت" />

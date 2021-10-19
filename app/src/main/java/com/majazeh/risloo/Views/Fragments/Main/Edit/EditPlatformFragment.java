@@ -78,7 +78,7 @@ public class EditPlatformFragment extends Fragment {
         InitManager.input12sspSpinner(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, R.array.PlatformSessions);
         InitManager.input12sspSpinner(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, R.array.PlatformIndentifiers);
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditPlatformFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditPlatformFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
     }
 
     @SuppressLint("ClickableViewAccessibility")

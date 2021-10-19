@@ -58,7 +58,7 @@
         android:padding="@dimen/_5sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_times_light"
-        android:background="@drawable/draw_16sdp_solid_gray50_ripple_red300"
+        android:background="@drawable/draw_16sdp_solid_coolgray50_ripple_red300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/title_textView"

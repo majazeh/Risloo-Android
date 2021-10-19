@@ -11,7 +11,7 @@
     android:paddingEnd="@dimen/_2sdp"
     android:paddingStart="@dimen/_6sdp"
     android:paddingTop="@dimen/_2sdp"
-    android:background="@drawable/draw_2sdp_solid_gray50"
+    android:background="@drawable/draw_2sdp_solid_coolgray50"
     tools:layout_marginEnd="@dimen/_2sdp"
     tools:layout_marginStart="@dimen/_2sdp">
 

@@ -16,5 +16,5 @@
     android:textColor="@color/CoolGray100"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:background="@drawable/draw_16sdp_solid_gray500"
+    android:background="@drawable/draw_16sdp_solid_coolgray500"
     tools:text="پیغام عادی" />

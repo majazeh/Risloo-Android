@@ -74,7 +74,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterTabAvatarAvatarGuide));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabAvatarButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabAvatarButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
     }
 
     private void listener() {

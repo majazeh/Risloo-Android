@@ -11,6 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_36sdp"
         android:layout_margin="@dimen/_6sdp"
-        android:background="@drawable/draw_2sdp_solid_gray50" />
+        android:background="@drawable/draw_2sdp_solid_coolgray50" />
 
 </FrameLayout>

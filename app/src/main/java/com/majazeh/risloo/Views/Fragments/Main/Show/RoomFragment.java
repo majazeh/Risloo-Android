@@ -572,7 +572,7 @@ public class RoomFragment extends Fragment {
     private void setStatus(String status) {
         if (!type.equals("room")) {
             if (status.equals("request")) {
-                InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentRequest), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_green600_ripple_green800);
+                InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentRequest), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_emerald600_ripple_emerald800);
 
                 binding.statusTextView.setVisibility(View.GONE);
                 binding.statusTextView.setText("");

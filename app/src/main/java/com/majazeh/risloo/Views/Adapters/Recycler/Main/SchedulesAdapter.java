@@ -202,8 +202,8 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         switch (status) {
             case "registration_awaiting":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
-                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_yellow600);
-                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_yellow50);
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_amber600);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_amber50);
                 break;
             case "client_awaiting":
             case "session_awaiting":
@@ -213,8 +213,8 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
                 break;
             case "in_session":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
-                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_green600);
-                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_yellow50);
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_emerald600);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_amber50);
                 break;
             case "canceled_by_client":
             case "canceled_by_center":
@@ -225,7 +225,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
             default:
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_gray400);
-                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray50);
                 break;
         }
     }

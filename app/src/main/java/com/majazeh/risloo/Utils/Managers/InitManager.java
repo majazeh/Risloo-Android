@@ -195,9 +195,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -249,9 +249,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -305,9 +305,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -359,9 +359,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -415,9 +415,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -469,9 +469,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -527,9 +527,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -602,9 +602,9 @@ public class InitManager {
 
             private void detectorDropDown(View view, int position) {
                 if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -660,9 +660,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (arrayList.get(position).equals("پرداخت"))
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_green300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_emerald300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -714,7 +714,7 @@ public class InitManager {
             }
 
             private void detector(View view) {
-                view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray50_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -762,9 +762,9 @@ public class InitManager {
 
             private void detector(View view, int position) {
                 if (arrayList.get(position).equals("خروج"))
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_red300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray50_ripple_coolred300);
                 else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray50_ripple_coolgray300);
             }
 
             private void setData(int position) {
@@ -819,7 +819,7 @@ public class InitManager {
             }
 
             private void detector(View view) {
-                view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
 
             private void setData(int position) {

@@ -430,7 +430,7 @@ public class SessionFragment extends Fragment {
         switch (status) {
             case "registration_awaiting":
                 binding.statusTextView.setTextColor(getResources().getColor(R.color.Amber500));
-                binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_yellow600);
+                binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_amber600);
                 break;
             case "client_awaiting":
             case "session_awaiting":
@@ -439,7 +439,7 @@ public class SessionFragment extends Fragment {
                 break;
             case "in_session":
                 binding.statusTextView.setTextColor(getResources().getColor(R.color.Emerald500));
-                binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_green600);
+                binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_emerald600);
                 break;
             case "canceled_by_client":
             case "canceled_by_center":
