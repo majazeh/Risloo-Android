@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    android:padding="@dimen/_8sdp"
+    android:background="@drawable/draw_2sdp_solid_gray50_border_left_2dp_gray300"
+    tools:layout_margin="@dimen/_12sdp">
+
+    <TextView
+        android:id="@+id/hint_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="توضیحات" />
+
+    <TextView
+        android:id="@+id/select_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_28sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_gravity="right"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        tools:text="دکمه"
+        tools:textColor="@color/CoolGray500"
+        tools:background="@drawable/draw_16sdp_solid_white_border_1sdp_gray300_ripple_gray300" />
+
+</LinearLayout>

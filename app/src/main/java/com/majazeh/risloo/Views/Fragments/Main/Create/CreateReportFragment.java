@@ -59,9 +59,11 @@ public class CreateReportFragment extends Fragment {
         binding.encryptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentEncryptionHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentDescriptionHeader));
 
+        binding.cryptoIncludeLayout.hintTextView.setText(getResources().getString(R.string.CreateReportFragmentCryptoHint));
+
         InitManager.input12sspSpinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates);
 
-        InitManager.txtTextColorBackground(binding.cryptoTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+        InitManager.txtTextColorBackground(binding.cryptoIncludeLayout.selectTextView, getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
@@ -82,10 +84,10 @@ public class CreateReportFragment extends Fragment {
 
                     switch(encryption) {
                         case "با رمزگذاری":
-                            binding.cryptoConstraintLayout.setVisibility(View.GONE);
+                            binding.cryptoIncludeLayout.getRoot().setVisibility(View.GONE);
                             break;
                         default:
-                            binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
+                            binding.cryptoIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                             break;
                     }
 
@@ -111,7 +113,7 @@ public class CreateReportFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
-        }).widget(binding.cryptoTextView.getRoot());
+        }).widget(binding.cryptoIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.encryptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)

@@ -52,44 +52,28 @@
                 app:layout_constraintStart_toStartOf="@id/encryption_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/encryption_includeLayout" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/crypto_constraintLayout"
+            <include
+                android:id="@+id/crypto_includeLayout"
+                layout="@layout/component_main_button_hint"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:padding="@dimen/_8sdp"
-                android:background="@drawable/draw_2sdp_solid_gray50_border_left_2dp_gray300"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/encryption_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/encryption_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/encryption_errorLayout"
-                tools:visibility="visible">
+                app:layout_constraintTop_toTopOf="@id/encryption_errorLayout"
+                tools:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/hint_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:text="@string/CreateReportFragmentCryptoHint"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/CoolGray600"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_regular"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <include
-                    android:id="@+id/crypto_textView"
-                    layout="@layout/component_main_button_rect_mid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_32sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/hint_textView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:id="@+id/crypto_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/crypto_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/crypto_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/crypto_includeLayout" />
 
             <include
                 android:id="@+id/description_includeLayout"
@@ -99,7 +83,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/encryption_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/encryption_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/crypto_constraintLayout" />
+                app:layout_constraintTop_toBottomOf="@id/crypto_errorLayout" />
 
             <include
                 android:id="@+id/description_errorLayout"
