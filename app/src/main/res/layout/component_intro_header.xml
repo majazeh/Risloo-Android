@@ -10,7 +10,7 @@
     android:paddingStart="@dimen/_12sdp"
     android:paddingTop="@dimen/_6sdp"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_bottom_solid_white_border_gray200">
+    android:background="@drawable/draw_2sdp_bottom_solid_white_border_coolgray200">
 
     <TextView
         android:id="@+id/risloo_textView"

@@ -12,6 +12,6 @@
     android:textColor="@color/CoolGray400"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:background="@drawable/draw_2sdp_solid_gray100_border_1sdp_gray200"
+    android:background="@drawable/draw_2sdp_solid_coolgray100_border_1sdp_coolgray200"
     tools:layout_margin="@dimen/_24sdp"
     tools:text="عنوان" />

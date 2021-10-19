@@ -105,7 +105,7 @@
             android:scaleType="fitCenter"
             android:padding="@dimen/_1sdp"
             android:src="@drawable/illu_all"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
             app:layout_constraintEnd_toEndOf="@id/title_textView"
             app:layout_constraintStart_toStartOf="@id/title_textView"
             app:layout_constraintTop_toBottomOf="@id/version_textView" />

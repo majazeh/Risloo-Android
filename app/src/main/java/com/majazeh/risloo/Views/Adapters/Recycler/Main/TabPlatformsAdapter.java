@@ -172,7 +172,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
             holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
-            holder.binding.selectedSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+            holder.binding.selectedSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50_border_1sdp_coolgray200);
 
             holder.binding.roomCheckBox.setEnabled(true);
             holder.binding.roomCheckBox.setAlpha((float) 1);
@@ -181,7 +181,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
             holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
-            holder.binding.selectedSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            holder.binding.selectedSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200);
 
             holder.binding.roomCheckBox.setEnabled(false);
             holder.binding.roomCheckBox.setAlpha((float) 0.6);

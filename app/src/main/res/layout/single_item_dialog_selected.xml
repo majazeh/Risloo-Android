@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300"
+    android:background="@drawable/draw_2sdp_solid_coolgray50_border_1sdp_coolgray200_ripple_coolgray300"
     tools:layout_marginBottom="@dimen/_2sdp"
     tools:layout_marginTop="@dimen/_2sdp">
 

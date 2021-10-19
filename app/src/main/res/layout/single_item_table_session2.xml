@@ -82,7 +82,7 @@
         android:minHeight="@dimen/_26sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_coolgray200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/edit_imageView"
         app:layout_constraintStart_toEndOf="@id/start_time_textView"

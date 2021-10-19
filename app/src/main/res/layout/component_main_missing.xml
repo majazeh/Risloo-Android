@@ -7,7 +7,7 @@
     android:layoutDirection="rtl"
     android:orientation="vertical"
     android:padding="@dimen/_12sdp"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
     tools:layout_margin="@dimen/_12sdp">
 
     <TextView

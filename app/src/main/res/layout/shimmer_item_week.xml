@@ -5,7 +5,7 @@
     android:layout_width="@dimen/_100sdp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200">
 
     <View
         android:layout_width="match_parent"

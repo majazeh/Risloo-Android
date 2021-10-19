@@ -96,7 +96,7 @@ public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder
 
     private void setActive(TestOptionalHolder holder, int position) {
         if (position == answer) {
-            holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_gray300);
+            holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_coolgray300);
             InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.White), R.drawable.draw_oval_solid_risloo500);
         } else {
             holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);

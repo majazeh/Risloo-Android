@@ -38,7 +38,7 @@
         android:scaleType="fitCenter"
         android:padding="@dimen/_4sdp"
         android:src="@drawable/ic_times_light"
-        android:background="@drawable/draw_2sdp_solid_gray50_ripple_red300"
+        android:background="@drawable/draw_2sdp_solid_coolgray50_ripple_red300"
         app:tint="@color/CoolGray400" />
 
 </LinearLayout>

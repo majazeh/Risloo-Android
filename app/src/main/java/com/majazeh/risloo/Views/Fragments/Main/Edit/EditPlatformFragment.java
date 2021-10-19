@@ -170,13 +170,13 @@ public class EditPlatformFragment extends Fragment {
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOn));
                 binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Emerald700));
-                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray300);
+                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50_border_1sdp_coolgray300);
             } else {
                 available = "0";
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOff));
                 binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
+                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_coolgray300);
             }
         });
 
@@ -263,7 +263,7 @@ public class EditPlatformFragment extends Fragment {
 
             binding.availableSwitchCompat.getRoot().setText(requireActivity().getResources().getString(R.string.AppSwicthOn));
             binding.availableSwitchCompat.getRoot().setTextColor(requireActivity().getResources().getColor(R.color.Emerald700));
-            binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+            binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50_border_1sdp_coolgray200);
         }
 
         if (model.isSelected()) {

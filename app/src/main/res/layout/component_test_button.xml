@@ -7,6 +7,6 @@
     android:contentDescription="@string/AppImageContent"
     android:scaleType="fitCenter"
     android:padding="@dimen/_12sdp"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray300_ripple_coolgray300"
     tools:src="@drawable/ic_ellipsis_v_light"
     tools:tint="@color/CoolGray500" />

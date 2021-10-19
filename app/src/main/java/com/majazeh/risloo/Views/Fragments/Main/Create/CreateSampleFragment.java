@@ -238,20 +238,20 @@ public class CreateSampleFragment extends Fragment {
                     switch (caseStatus) {
                         case "بدون پرونده":
                             binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray100_border_1sdp_coolgray500);
 
                             binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
                             break;
                         case "ساخت پرونده مجزا برای هر فرد":
                         case "ساخت یک پرونده گروهی برای همه افراد":
                             binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray100_border_1sdp_coolgray500);
 
                             binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                             break;
                         case "افزودن در پرونده انتخابی":
                             binding.caseIncludeLayout.selectContainer.setEnabled(true);
-                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray500);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray500);
 
                             binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
                             break;
@@ -305,7 +305,7 @@ public class CreateSampleFragment extends Fragment {
                 binding.bulkGroup.setVisibility(View.GONE);
 
                 binding.caseIncludeLayout.selectContainer.setEnabled(true);
-                binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray500);
+                binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray500);
 
                 if (clientsAdapter.getItemCount() != 0)
                     binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
@@ -330,7 +330,7 @@ public class CreateSampleFragment extends Fragment {
                 binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
 
                 binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray100_border_1sdp_coolgray500);
 
                 if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
                     binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);

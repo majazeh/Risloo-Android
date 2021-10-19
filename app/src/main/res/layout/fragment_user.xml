@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200">
 
                 <ImageView
                     android:id="@+id/background_imageView"

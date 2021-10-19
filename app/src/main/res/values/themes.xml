@@ -122,7 +122,7 @@
     </style>
 
     <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/draw_12sdp_top_solid_white_border_2dp_gray200</item>
+        <item name="android:background">@drawable/draw_12sdp_top_solid_white_border_2dp_coolgray200</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////

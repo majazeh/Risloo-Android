@@ -248,7 +248,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
-            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50_border_1sdp_coolgray200);
 
             holder.binding.centerCheckBox.setEnabled(true);
             holder.binding.centerCheckBox.setAlpha((float) 1);
@@ -261,7 +261,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
-            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200);
 
             holder.binding.centerCheckBox.setEnabled(false);
             holder.binding.centerCheckBox.setAlpha((float) 0.6);

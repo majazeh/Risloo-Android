@@ -35,7 +35,7 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
             app:layout_goneMarginTop="@dimen/_12sdp"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"

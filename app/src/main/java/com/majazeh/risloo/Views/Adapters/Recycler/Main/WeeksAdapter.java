@@ -79,7 +79,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
             if (selectedTimestamp == timestamp)
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);
             else
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray50_border_1sdp_coolgray200_ripple_coolgray300);
         } else {
             if (selectedTimestamp == timestamp)
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);

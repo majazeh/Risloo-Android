@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
+    android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_coolgray200"
     tools:context=".Views.BottomSheets.AuthBottomSheet">
 
     <ImageView

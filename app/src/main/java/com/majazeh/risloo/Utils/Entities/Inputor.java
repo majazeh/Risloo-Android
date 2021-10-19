@@ -36,9 +36,9 @@ public class Inputor {
         if (activity instanceof AuthActivity)
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500);
         else if (activity instanceof MainActivity)
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_lightblue500);
         else if (activity instanceof TestActivity)
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_lightblue500);
     }
 
     public void clear(Activity activity, EditText editText) {

@@ -66,6 +66,6 @@
         android:fontFamily="@font/dana_medium"
         tools:text="انصراف"
         tools:textColor="@color/CoolGray400"
-        tools:background="@drawable/draw_24sdp_solid_white_border_1sdp_gray200_ripple_gray300" />
+        tools:background="@drawable/draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300" />
 
 </LinearLayout>

@@ -24,7 +24,7 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:paddingBottom="@dimen/_12sdp"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -267,7 +267,7 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:paddingBottom="@dimen/_12sdp"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/public_edit_textView">
