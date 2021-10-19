@@ -9,7 +9,7 @@
     android:padding="@dimen/_8sdp"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp"
-    tools:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300">
+    tools:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300">
 
     <TextView
         android:id="@+id/number_textView"

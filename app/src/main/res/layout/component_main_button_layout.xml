@@ -10,7 +10,7 @@
     android:paddingEnd="@dimen/_12sdp"
     android:paddingStart="@dimen/_12sdp"
     android:paddingTop="@dimen/_16sdp"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
     tools:layout_margin="@dimen/_12sdp">
 
     <ImageView

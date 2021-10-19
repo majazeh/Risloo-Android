@@ -172,7 +172,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
 
         if (enable) {
             holder.binding.statusSpinner.setEnabled(true);
-            holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
 
             holder.binding.statusAngleImageView.setVisibility(View.VISIBLE);
         } else {

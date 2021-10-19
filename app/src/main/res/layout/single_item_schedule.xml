@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     android:paddingBottom="@dimen/_12sdp"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp">
 

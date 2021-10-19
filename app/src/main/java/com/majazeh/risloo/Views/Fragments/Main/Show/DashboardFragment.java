@@ -146,7 +146,7 @@ public class DashboardFragment extends Fragment {
                 setDropdowns("today", model.getDalilyScheduleExports().getJSONObject("today"));
             } else {
                 binding.schedulesTodayLayout.getRoot().setVisibility(View.VISIBLE);
-                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTodayTitle), getResources().getColor(R.color.CoolGray400), R.drawable.ic_calendar_day_light, R.color.CoolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTodayTitle), getResources().getColor(R.color.CoolGray400), R.drawable.ic_calendar_day_light, R.color.CoolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
             }
 
             //  Tomorrow Schedules Data
@@ -157,7 +157,7 @@ public class DashboardFragment extends Fragment {
                 setDropdowns("tomorrow", model.getDalilyScheduleExports().getJSONObject("tomorrow"));
             } else {
                 binding.schedulesTomorrowLayout.getRoot().setVisibility(View.VISIBLE);
-                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTomorrowTitle), getResources().getColor(R.color.CoolGray400), R.drawable.ic_calendar_alt_light, R.color.CoolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTomorrowTitle), getResources().getColor(R.color.CoolGray400), R.drawable.ic_calendar_alt_light, R.color.CoolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
             }
 
             //  Rooms Data

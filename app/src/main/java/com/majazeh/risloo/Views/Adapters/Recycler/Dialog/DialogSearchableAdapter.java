@@ -123,7 +123,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
         if (selected)
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray100_border_1sdp_coolgray200_ripple_coolgray300);
         else
-            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
     }
 
     private void listener(DialogSearchableHolder holder, TypeModel item) {
