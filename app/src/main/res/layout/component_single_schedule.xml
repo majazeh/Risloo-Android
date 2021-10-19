@@ -49,7 +49,7 @@
         android:layout_marginBottom="@dimen/_6sdp"
         android:padding="@dimen/_6sdp"
         android:theme="@style/ProgressBarTheme2"
-        android:background="@drawable/draw_oval_solid_blue600"
+        android:background="@drawable/draw_oval_solid_lightblue600"
         android:visibility="gone"
         app:elevation="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"

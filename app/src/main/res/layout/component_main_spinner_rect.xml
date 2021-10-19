@@ -14,7 +14,7 @@
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="@dimen/_32sdp"
-        android:background="@drawable/draw_16sdp_solid_white_border_1sdp_gray300_ripple_gray300"
+        android:background="@drawable/draw_16sdp_solid_white_border_1sdp_coolgray300_ripple_coolgray300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

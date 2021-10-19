@@ -232,15 +232,15 @@ public class BulkSampleFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
+            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
             InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "لینک ثبت نام":
-                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_link_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_link_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "کپی کردن لینک":
-                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_copy_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_copy_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
             }
         } else {

@@ -91,7 +91,7 @@
         android:textColor="@color/Emerald700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_16sdp_solid_white_border_1sdp_green700_ripple_green300"
+        android:background="@drawable/draw_16sdp_solid_white_border_1sdp_emerald700_ripple_emerald300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/name_textView"

@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layoutDirection="ltr"
-                android:background="@drawable/draw_16sdp_solid_white_border_1sdp_blue600"
+                android:background="@drawable/draw_16sdp_solid_white_border_1sdp_lightblue600"
                 app:tabPaddingEnd="@dimen/_8sdp"
                 app:tabPaddingStart="@dimen/_8sdp"
                 app:tabBackground="@null"

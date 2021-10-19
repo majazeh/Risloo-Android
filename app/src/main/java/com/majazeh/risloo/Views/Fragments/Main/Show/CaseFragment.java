@@ -89,9 +89,9 @@ public class CaseFragment extends Fragment {
         binding.sessionsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
         binding.samplesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.imgResTintBackground(requireActivity(), binding.referencesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
-        InitManager.imgResTintBackground(requireActivity(), binding.sessionsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
-        InitManager.imgResTintBackground(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.referencesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.sessionsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.referencesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
@@ -219,15 +219,15 @@ public class CaseFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
+            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray300);
             InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "گزارشات":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "ویرایش":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
             }
 

@@ -90,7 +90,7 @@ public class RoomFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
 
-        InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_green600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
         InitManager.fixedHorizontalRecyclerView(requireActivity(), binding.tagsRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
@@ -577,7 +577,7 @@ public class RoomFragment extends Fragment {
                 binding.statusTextView.setVisibility(View.GONE);
                 binding.statusTextView.setText("");
             } else {
-                InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+                InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_lightblue600_ripple_lightblue300);
 
                 binding.statusTextView.setVisibility(View.VISIBLE);
                 binding.statusTextView.setText(SelectionManager.getCenterStatus(requireActivity(), "fa", status));
@@ -596,7 +596,7 @@ public class RoomFragment extends Fragment {
             }
 
         } else {
-            InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+            InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_lightblue600_ripple_lightblue300);
 
             binding.statusTextView.setVisibility(View.GONE);
             binding.statusTextView.setText("");
@@ -633,30 +633,30 @@ public class RoomFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
+            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray300);
             InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "اعضاء":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_users_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_users_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "برنامه درمانی":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "تعریف برنامه درمانی":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_plus_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_plus_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "پروفایل من":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "ویرایش":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "محل برگزاری":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_map_marker_alt_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_map_marker_alt_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "برچسب\u200Cهای مهم":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_tags_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300, items.get(0));
+                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_tags_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
             }
 

@@ -72,17 +72,17 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
     private void detector(WeeksHolder holder, long timestamp) {
         if (currentTimestamp == timestamp) {
             if (selectedTimestamp == timestamp)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);
             else
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         } else if (currentTimestamp > timestamp) {
             if (selectedTimestamp == timestamp)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);
             else
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
         } else {
             if (selectedTimestamp == timestamp)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);
             else
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }

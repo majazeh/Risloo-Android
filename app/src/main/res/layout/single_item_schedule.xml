@@ -62,7 +62,7 @@
         android:layout_height="@dimen/_6sdp"
         android:layout_marginEnd="@dimen/_6sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:background="@drawable/draw_oval_solid_gray400"
+        android:background="@drawable/draw_oval_solid_coolgray400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

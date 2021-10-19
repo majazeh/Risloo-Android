@@ -120,7 +120,7 @@
                 android:id="@+id/status_circle"
                 android:layout_width="@dimen/_6sdp"
                 android:layout_height="@dimen/_6sdp"
-                android:background="@drawable/draw_oval_solid_gray400"
+                android:background="@drawable/draw_oval_solid_coolgray400"
                 app:layout_constraintBottom_toBottomOf="@id/status_textView"
                 app:layout_constraintStart_toStartOf="@id/date_imageView"
                 app:layout_constraintTop_toTopOf="@id/status_textView" />

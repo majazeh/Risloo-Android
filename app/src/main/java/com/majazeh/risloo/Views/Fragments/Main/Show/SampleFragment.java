@@ -249,8 +249,8 @@ public class SampleFragment extends Fragment {
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
 
-                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentClose), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_coolgray500_ripple_coolgray300);
+                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentClose), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_coolgray500_ripple_coolgray300);
 
                 break;
             case "closed":

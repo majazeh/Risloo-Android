@@ -13,7 +13,7 @@
     <View
         android:layout_width="@dimen/_52sdp"
         android:layout_height="@dimen/_52sdp"
-        android:background="@drawable/draw_oval_solid_gray50" />
+        android:background="@drawable/draw_oval_solid_coolgray50" />
 
     <View
         android:layout_width="match_parent"

@@ -61,7 +61,7 @@ public class UserFragment extends Fragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         InitManager.imgResTintBackground(requireActivity(), binding.loginImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Risloo500, R.drawable.draw_oval_solid_white_border_1sdp_risloo500_ripple_risloo50);
-        InitManager.imgResTintBackground(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_gray300_ripple_gray300);
+        InitManager.imgResTintBackground(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
     }
 
     @SuppressLint("ClickableViewAccessibility")

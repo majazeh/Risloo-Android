@@ -9,4 +9,4 @@
     android:padding="@dimen/_8sdp"
     tools:src="@drawable/ic_ellipsis_v_light"
     tools:tint="@color/CoolGray500"
-    tools:background="@drawable/draw_oval_solid_white_border_1sdp_gray300_ripple_gray300" />
+    tools:background="@drawable/draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300" />

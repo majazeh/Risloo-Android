@@ -19,7 +19,7 @@
         android:id="@+id/background_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/draw_6sdp_solid_gray50_border_1sdp_gray200"
+        android:background="@drawable/draw_6sdp_solid_coolgray50_border_1sdp_coolgray200"
         app:layout_constraintBottom_toBottomOf="@id/amount_textView"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"

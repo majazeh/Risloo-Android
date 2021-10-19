@@ -208,8 +208,8 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
             case "client_awaiting":
             case "session_awaiting":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.LightBlue500));
-                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
-                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_blue50);
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_lightblue600);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue50);
                 break;
             case "in_session":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
@@ -224,7 +224,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
                 break;
             default:
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
-                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_gray400);
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_coolgray400);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray50);
                 break;
         }

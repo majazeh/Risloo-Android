@@ -101,7 +101,7 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
             InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.White), R.drawable.draw_oval_solid_risloo500);
         } else {
             holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-            InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.CoolGray700), R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);
+            InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.CoolGray700), R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray200);
 
             if (userSelect)
                 holder.binding.getRoot().setAlpha((float) 0.4);
