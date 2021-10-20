@@ -1,24 +1,25 @@
 package com.majazeh.risloo.Views.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
-import com.majazeh.risloo.Utils.Entities.Singleton;
-import com.majazeh.risloo.Utils.Entities.Inputor;
-import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Entities.Decorator;
+import com.majazeh.risloo.Utils.Entities.Fragmont;
+import com.majazeh.risloo.Utils.Entities.Inputor;
+import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class AuthActivity extends AppCompatActivity {
     private ActivityAuthBinding binding;
 
     // Entities
+    public Fragmont fragmont;
     public Inputor inputor;
     public Singleton singleton;
     public Validatoon validatoon;
@@ -81,6 +83,8 @@ public class AuthActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         navGraph = navController.getNavInflater().inflate(R.navigation.navigation_auth);
+
+        fragmont = new Fragmont(navHostFragment);
 
         extras = getIntent().getExtras();
     }

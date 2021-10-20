@@ -16,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.google.android.gms.auth.api.phone.SmsRetriever;
+import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
+import com.google.android.gms.tasks.Task;
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
@@ -61,6 +64,8 @@ public class AuthPinFragment extends Fragment {
         listener();
 
         setArgs();
+
+        startSmsRetriver();
 
         return binding.getRoot();
     }
@@ -194,6 +199,19 @@ public class AuthPinFragment extends Fragment {
 
             binding.timerViewFlipper.getRoot().showNext();
         }
+    }
+
+    private void startSmsRetriver() {
+        SmsRetrieverClient client = SmsRetriever.getClient(requireActivity());
+        Task<Void> task = client.startSmsRetriever();
+
+        task.addOnSuccessListener(aVoid -> {
+            // Note : Successfully started retriever, expect broadcast intent
+        });
+
+        task.addOnFailureListener(e -> {
+            // Note : Failed to start retriever, inspect Exception for more details
+        });
     }
 
     private void doWork(String method) {
