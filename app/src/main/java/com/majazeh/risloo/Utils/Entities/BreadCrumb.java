@@ -1271,7 +1271,7 @@ public class BreadCrumb {
         else
             list = session();
 
-        list.add(activity.getResources().getString(R.string.ClientReportsFragmentTitle));
+        list.add(activity.getResources().getString(R.string.ClientReportsFragmentCaseTitle));
 
         destinationIds = clientReportsIds();
         return list;

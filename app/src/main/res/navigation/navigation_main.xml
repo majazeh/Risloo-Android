@@ -611,7 +611,7 @@
     <fragment
         android:id="@+id/clientReportsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Index.ClientReportsFragment"
-        android:label="@string/ClientReportsFragmentTitle"
+        android:label="@string/ClientReportsFragmentCaseTitle"
         tools:layout="@layout/fragment_client_reports" >
         <argument
             android:name="typeModel"
