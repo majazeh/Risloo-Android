@@ -27,6 +27,7 @@
         tools:ignore="UnusedAttribute"
         tools:replace="android:label">
 
+        <!-- Codes For File Provider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${appAuthorities}"
@@ -36,6 +37,17 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
+
+        <!-- Codes For Sms Verification -->
+        <receiver
+            android:name=".Utils.Config.SmsBroadcastReceiver"
+            android:exported="true"
+            android:permission="com.google.android.gms.auth.api.phone.permission.SEND">
+            <intent-filter>
+                <action
+                    android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".Views.Activities.SplashActivity"
