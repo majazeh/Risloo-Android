@@ -181,7 +181,7 @@ public class ClientReportsFragment extends Fragment {
     }
 
     private void getData() {
-        if (type.equals("case"))
+        if (type.equals("case")) {
             Case.reports(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -227,7 +227,7 @@ public class ClientReportsFragment extends Fragment {
                     }
                 }
             });
-        else
+        } else {
             Session.reports(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -272,6 +272,7 @@ public class ClientReportsFragment extends Fragment {
                     }
                 }
             });
+        }
     }
 
     private void hideShimmer() {

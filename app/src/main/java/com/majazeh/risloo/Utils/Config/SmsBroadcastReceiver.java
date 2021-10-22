@@ -30,8 +30,9 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
                     if (context instanceof AuthActivity) {
                         Fragment current = ((AuthActivity) context).fragmont.getCurrent();
 
-                        if (current instanceof AuthPinFragment)
-                        // TODO : Extract the code from the message and pass to the input here
+                        if (current instanceof AuthPinFragment) {
+                            // TODO : Extract the code from the message and pass to the input here
+                        }
                     }
                     break;
                 case CommonStatusCodes.TIMEOUT:
