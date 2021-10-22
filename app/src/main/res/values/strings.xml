@@ -560,6 +560,17 @@
     <string name="BulkSampleFragmentCopy">کپی کردن لینک</string>
 
 
+    ---------- // CaseFragment
+
+    <string name="CaseFragmentTitle">پرونده</string>
+
+    <string name="CaseFragmentProblemHeader">مسئله :</string>
+    <string name="CaseFragmentTagHeader">برچسب‌ها :</string>
+
+    <string name="CaseFragmentReports">گزارشات</string>
+    <string name="CaseFragmentEdit">ویرایش</string>
+
+
     ---------- // DashboardFragment
 
     <string name="DashboardFragmentTitle">خانه</string>
@@ -609,6 +620,23 @@
     <string name="SampleFragmentFieldItem">گویه‌ها</string>
 
     <string name="SampleFragmentFieldTime">زمان انجام (دقیقه)</string>
+
+
+    ---------- // SessionFragment
+
+    <string name="SessionFragmentTitle">جلسه</string>
+
+    <string name="SessionFragmentReferenceHeader">مراجعین :</string>
+    <string name="SessionFragmentAxisHeader">محورها :</string>
+    <string name="SessionFragmentPlatformHeader">بسترها :</string>
+
+    <string name="SessionFragmentPaymentHeader">نوع پرداخت :</string>
+    <string name="SessionFragmentClientHeader">نوع مراجعین درخواست دهنده :</string>
+    <string name="SessionFragmentStartTimeHeader">زمان شروع نوبت‌گیری :</string>
+    <string name="SessionFragmentEndTimeHeader">زمان بستن نوبت‌گیری :</string>
+
+    <string name="SessionFragmentReports">گزارشات</string>
+    <string name="SessionFragmentEdit">ویرایش</string>
 
 
     ---------- // TreasuryFragment
@@ -1588,18 +1616,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- Case Fragment ----------
-    */
-
-    <string name="CaseFragmentTitle">پرونده</string>
-
-    <string name="CaseFragmentProblemHeader">مسئله</string>
-    <string name="CaseFragmentTagHeader">برچسب‌ها :</string>
-
-    <string name="CaseFragmentReports">گزارشات</string>
-    <string name="CaseFragmentEdit">ویرایش</string>
-
-    /*
     ---------- Center Fragment ----------
     */
 
@@ -1637,24 +1653,6 @@
 
     <string name="RoomFragmentPersonalClinic">کلینیک شخصی</string>
     <string name="RoomFragmentFilterByTag">فیلتر بر اساس برچسب‌ها:</string>
-
-    /*
-    ---------- Session Fragment ----------
-    */
-
-    <string name="SessionFragmentTitle">جلسه</string>
-
-    <string name="SessionFragmentReferenceHeader">مراجعین :</string>
-    <string name="SessionFragmentAxisHeader">محورها :</string>
-    <string name="SessionFragmentPlatformHeader">بسترها :</string>
-
-    <string name="SessionFragmentPaymentHeader">نوع پرداخت :</string>
-    <string name="SessionFragmentClientHeader">نوع مراجعین درخواست دهنده :</string>
-    <string name="SessionFragmentStartTimeHeader">زمان شروع نوبت‌گیری :</string>
-    <string name="SessionFragmentEndTimeHeader">زمان بستن نوبت‌گیری :</string>
-
-    <string name="SessionFragmentReports">گزارشات</string>
-    <string name="SessionFragmentEdit">ویرایش</string>
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////

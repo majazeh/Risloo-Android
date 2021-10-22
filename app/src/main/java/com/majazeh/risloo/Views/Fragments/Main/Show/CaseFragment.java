@@ -119,6 +119,8 @@ public class CaseFragment extends Fragment {
             return false;
         });
 
+        binding.menuSpinner.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         binding.menuSpinner.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -176,7 +178,7 @@ public class CaseFragment extends Fragment {
                 data.put("session_platforms", 1);
             }
 
-            if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().isNull("problem")) {
+            if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().getString("problem").equals("")) {
                 binding.problemTextView.setText(model.getDetail().getString("problem"));
             }
 
@@ -210,8 +212,8 @@ public class CaseFragment extends Fragment {
     private void setDropdown() {
         ArrayList<String> items = new ArrayList<>();
 
-        if (((MainActivity) requireActivity()).permissoon.showCaseDropdownReports(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
-            items.add(requireActivity().getResources().getString(R.string.CaseFragmentReports));
+//        if (((MainActivity) requireActivity()).permissoon.showCaseDropdownReports(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+//            items.add(requireActivity().getResources().getString(R.string.CaseFragmentReports));
 
 //        if (((MainActivity) requireActivity()).permissoon.showCaseDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
 //            items.add(requireActivity().getResources().getString(R.string.CaseFragmentEdit));
@@ -219,20 +221,17 @@ public class CaseFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray300);
+            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
             InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "گزارشات":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "ویرایش":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
             }
-
-            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp));
-            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
         } else {
             binding.menuSpinner.getRoot().setVisibility(View.GONE);
         }
@@ -276,6 +275,8 @@ public class CaseFragment extends Fragment {
 
                             binding.psychologistsSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (psychologistsAdapter.getItemCount() == 0) {
+                            binding.psychologistsSingleLayout.recyclerView.setAdapter(null);
+
                             binding.psychologistsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.psychologistsSingleLayout.emptyView.setText(getResources().getString(R.string.PsychologistsAdapterEmpty));
                         }
@@ -287,6 +288,8 @@ public class CaseFragment extends Fragment {
 
                             binding.referencesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (referencesAdapter.getItemCount() == 0) {
+                            binding.referencesSingleLayout.recyclerView.setAdapter(null);
+
                             binding.referencesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.referencesSingleLayout.emptyView.setText(getResources().getString(R.string.ReferencesAdapterEmpty));
                         }
@@ -298,6 +301,8 @@ public class CaseFragment extends Fragment {
 
                             binding.sessionsSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (tableSession2Adapter.getItemCount() == 0) {
+                            binding.sessionsSingleLayout.recyclerView.setAdapter(null);
+
                             binding.sessionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.sessionsSingleLayout.emptyView.setText(getResources().getString(R.string.Sessions2AdapterEmpty));
                         }
@@ -309,6 +314,8 @@ public class CaseFragment extends Fragment {
 
                             binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (tableSampleAdapter.getItemCount() == 0) {
+                            binding.samplesSingleLayout.recyclerView.setAdapter(null);
+
                             binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
@@ -318,26 +325,7 @@ public class CaseFragment extends Fragment {
                         binding.sessionsHeaderLayout.countTextView.setText(StringManager.bracing(tableSession2Adapter.itemsCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
 
-                        // Psychologists Data
-                        binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.psychologistsShimmerLayout.getRoot().stopShimmer();
-
-                        // References Data
-                        binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.referencesShimmerLayout.getRoot().stopShimmer();
-
-                        // Sessions Data
-                        binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.sessionsShimmerLayout.getRoot().stopShimmer();
-
-                        // Samples Data
-                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.samplesShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
@@ -346,31 +334,35 @@ public class CaseFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-
-                        // Psychologists Data
-                        binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.psychologistsShimmerLayout.getRoot().stopShimmer();
-
-                        // References Data
-                        binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.referencesShimmerLayout.getRoot().stopShimmer();
-
-                        // Sessions Data
-                        binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.sessionsShimmerLayout.getRoot().stopShimmer();
-
-                        // Samples Data
-                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.samplesShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+
+        // Psychologists Data
+        binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.psychologistsShimmerLayout.getRoot().stopShimmer();
+
+        // References Data
+        binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.referencesShimmerLayout.getRoot().stopShimmer();
+
+        // Sessions Data
+        binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.sessionsShimmerLayout.getRoot().stopShimmer();
+
+        // Samples Data
+        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.samplesShimmerLayout.getRoot().stopShimmer();
+
     }
 
     @Override

@@ -137,6 +137,8 @@ public class SessionFragment extends Fragment {
             return false;
         });
 
+        binding.menuSpinner.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         binding.menuSpinner.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -434,8 +436,8 @@ public class SessionFragment extends Fragment {
                 break;
             case "client_awaiting":
             case "session_awaiting":
-                binding.statusTextView.setTextColor(getResources().getColor(R.color.LightBlue500));
-                binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_lightblue600);
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.Risloo500));
+                binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_risloo500);
                 break;
             case "in_session":
                 binding.statusTextView.setTextColor(getResources().getColor(R.color.Emerald500));
@@ -456,8 +458,8 @@ public class SessionFragment extends Fragment {
     private void setDropdown() {
         ArrayList<String> items = new ArrayList<>();
 
-        if (((MainActivity) requireActivity()).permissoon.showSessionDropdownReports(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
-            items.add(requireActivity().getResources().getString(R.string.SessionFragmentReports));
+//        if (((MainActivity) requireActivity()).permissoon.showSessionDropdownReports(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+//            items.add(requireActivity().getResources().getString(R.string.SessionFragmentReports));
 
         if (((MainActivity) requireActivity()).permissoon.showSessionDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
             items.add(requireActivity().getResources().getString(R.string.SessionFragmentEdit));
@@ -465,20 +467,17 @@ public class SessionFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray300);
+            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
             InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "گزارشات":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "ویرایش":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
             }
-
-            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp));
-            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
         } else {
             binding.menuSpinner.getRoot().setVisibility(View.GONE);
         }
@@ -527,6 +526,8 @@ public class SessionFragment extends Fragment {
 
                             binding.psychologistsSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (psychologistsAdapter.getItemCount() == 0) {
+                            binding.psychologistsSingleLayout.recyclerView.setAdapter(null);
+
                             binding.psychologistsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.psychologistsSingleLayout.emptyView.setText(getResources().getString(R.string.PsychologistsAdapterEmpty));
                         }
@@ -538,6 +539,8 @@ public class SessionFragment extends Fragment {
 
                             binding.usersSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (tableUser2Adapter.getItemCount() == 0) {
+                            binding.usersSingleLayout.recyclerView.setAdapter(null);
+
                             binding.usersSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.usersSingleLayout.emptyView.setText(getResources().getString(R.string.Users2AdapterEmpty));
                         }
@@ -549,6 +552,8 @@ public class SessionFragment extends Fragment {
 //
 //                            binding.practicesSingleLayout.emptyView.setVisibility(View.GONE);
 //                        } else if (indexPracticeAdapter.getItemCount() == 0) {
+                            binding.practicesSingleLayout.recyclerView.setAdapter(null);
+
                             binding.practicesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.practicesSingleLayout.emptyView.setText(getResources().getString(R.string.PracticesAdapterEmpty));
 //                        }
@@ -560,6 +565,8 @@ public class SessionFragment extends Fragment {
 
                             binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (tableSampleAdapter.getItemCount() == 0) {
+                            binding.samplesSingleLayout.recyclerView.setAdapter(null);
+
                             binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
@@ -571,6 +578,8 @@ public class SessionFragment extends Fragment {
 
                             binding.billsSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (tableBillAdapter.getItemCount() == 0) {
+                            binding.billsSingleLayout.recyclerView.setAdapter(null);
+
                             binding.billsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.billsSingleLayout.emptyView.setText(getResources().getString(R.string.BillAdapterEmpty));
                         }
@@ -581,31 +590,7 @@ public class SessionFragment extends Fragment {
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
                         binding.billsHeaderLayout.countTextView.setText(StringManager.bracing(tableBillAdapter.itemsCount()));
 
-                        // Psychologists Data
-                        binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.psychologistsShimmerLayout.getRoot().stopShimmer();
-
-                        // Users Data
-                        binding.usersSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.usersShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.usersShimmerLayout.getRoot().stopShimmer();
-
-                        // Practices Data
-                        binding.practicesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.practicesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.practicesShimmerLayout.getRoot().stopShimmer();
-
-                        // Samples Data
-                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.samplesShimmerLayout.getRoot().stopShimmer();
-
-                        // Bills Data
-                        binding.billsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.billsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.billsShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
@@ -614,36 +599,40 @@ public class SessionFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-
-                        // Psychologists Data
-                        binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.psychologistsShimmerLayout.getRoot().stopShimmer();
-
-                        // Users Data
-                        binding.usersSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.usersShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.usersShimmerLayout.getRoot().stopShimmer();
-
-                        // Practices Data
-                        binding.practicesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.practicesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.practicesShimmerLayout.getRoot().stopShimmer();
-
-                        // Samples Data
-                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.samplesShimmerLayout.getRoot().stopShimmer();
-
-                        // Bills Data
-                        binding.billsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.billsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.billsShimmerLayout.getRoot().stopShimmer();
-
+                        hideShimmer();
                     });
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+
+        // Psychologists Data
+        binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.psychologistsShimmerLayout.getRoot().stopShimmer();
+
+        // Users Data
+        binding.usersSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.usersShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.usersShimmerLayout.getRoot().stopShimmer();
+
+        // Practices Data
+        binding.practicesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.practicesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.practicesShimmerLayout.getRoot().stopShimmer();
+
+        // Samples Data
+        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.samplesShimmerLayout.getRoot().stopShimmer();
+
+        // Bills Data
+        binding.billsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.billsShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.billsShimmerLayout.getRoot().stopShimmer();
+
     }
 
     @Override
