@@ -110,21 +110,18 @@ public class TableSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         try {
             holder.binding.serialTextView.setText(model.getId());
 
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null) {
+            if (model.getRoom() != null && model.getRoom().getRoomManager() != null)
                 holder.binding.roomTextView.setText(model.getRoom().getRoomManager().getName());
-            }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().isNull("title")) {
+            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().getString("title").equals(""))
                 holder.binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
-            }
 
             holder.binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getStarted_at()), " "));
             holder.binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
             holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
 
-            if (model.getCaseModel() != null) {
+            if (model.getCaseModel() != null)
                 holder.binding.caseTextView.setText(model.getCaseModel().getCaseId());
-            }
 
         } catch (JSONException e) {
             e.printStackTrace();

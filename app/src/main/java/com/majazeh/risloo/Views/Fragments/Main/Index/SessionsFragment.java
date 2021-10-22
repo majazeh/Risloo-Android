@@ -109,15 +109,9 @@ public class SessionsFragment extends Fragment {
                             binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.SessionsFragmentEmpty));
                         }
 
-                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 
-                        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.tableShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-
+                        hideShimmer();
                     });
 
                     isLoading = false;
@@ -128,19 +122,22 @@ public class SessionsFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.tableShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-
+                        hideShimmer();
                     });
 
                     isLoading = false;
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.tableShimmerLayout.getRoot().stopShimmer();
+
+        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
     }
 
     @Override

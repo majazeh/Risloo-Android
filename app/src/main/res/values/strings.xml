@@ -442,6 +442,13 @@
     <string name="BulkSamplesFragmentEmpty">هنوز نمونه‌ گروهی ثبت نشده است.</string>
 
 
+    ---------- // CasesFragment
+
+    <string name="CasesFragmentTitle">پرونده‌ها</string>
+
+    <string name="CasesFragmentEmpty">هنوز پرونده‌‌ی ثبت نشده است.</string>
+
+
     ---------- // ClientReportsFragment
 
     <string name="ClientReportsFragmentCaseTitle">گزارشات پرونده</string>
@@ -484,6 +491,13 @@
     <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
 
     <string name="ScalesFragmentEmpty">هنوز مقیاسی ثبت نشده است.</string>
+
+
+    ---------- // SessionsFragment
+
+    <string name="SessionsFragmentTitle">جلسات</string>
+
+    <string name="SessionsFragmentEmpty">هنوز جلسه‌‌ی ثبت نشده است.</string>
 
 
     ---------- // TreasuriesFragment
@@ -707,6 +721,14 @@
     <string name="BulkSampleAdapterCopy">کپی کردن لینک</string>
 
 
+    ---------- // CaseAdapter
+
+    <string name="CaseAdapterSerial">سریال</string>
+    <string name="CaseAdapterRoom">اتاق درمان</string>
+    <string name="CaseAdapterCenter">مرکز درمانی</string>
+    <string name="CaseAdapterReference">مراجعین</string>
+
+
     ---------- // ClientReportAdapter
 
     <string name="ClientReportAdapterName">عنوان</string>
@@ -759,6 +781,17 @@
     <string name="ScaleAdapterEdition">ویرایش - نسخه</string>
 
     <string name="ScaleAdapterCreate">ساختن نمونه</string>
+
+
+    ---------- // SessionAdapter
+
+    <string name="SessionAdapterSerial">سریال</string>
+    <string name="SessionAdapterRoom">اتاق درمان</string>
+    <string name="SessionAdapterCenter">مرکز درمانی</string>
+    <string name="SessionAdapterStartTime">زمان شروع</string>
+    <string name="SessionAdapterDuration">مدت‌زمان جلسه</string>
+    <string name="SessionAdapterStatus">وضعیت</string>
+    <string name="SessionAdapterCase">پرونده</string>
 
 
     ---------- // TimeAdapter
@@ -1440,19 +1473,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- Cases Fragment ----------
-    */
-
-    <string name="CasesFragmentTitle">پرونده‌ها</string>
-
-    <string name="CasesFragmentSerial">سریال</string>
-    <string name="CasesFragmentRoom">اتاق درمان</string>
-    <string name="CasesFragmentCenter">مرکز درمانی</string>
-    <string name="CasesFragmentReference">مراجعین</string>
-
-    <string name="CasesFragmentEmpty">هنوز پرونده‌‌ای ثبت نشده است.</string>
-
-    /*
     ---------- Centers Fragment ----------
     */
 
@@ -1563,22 +1583,6 @@
     <string name="RoomUsersFragmentStatusWaiting">در انتظار</string>
 
     <string name="RoomUsersFragmentEmpty">هنوز عضوی برای اتاق ثبت نشده است.</string>
-
-    /*
-    ---------- Sessions Fragment ----------
-    */
-
-    <string name="SessionsFragmentTitle">جلسات</string>
-
-    <string name="SessionsFragmentSerial">سریال</string>
-    <string name="SessionsFragmentRoom">اتاق درمان</string>
-    <string name="SessionsFragmentCenter">مرکز درمانی</string>
-    <string name="SessionsFragmentStartTime">زمان شروع</string>
-    <string name="SessionsFragmentDuration">مدت‌زمان جلسه</string>
-    <string name="SessionsFragmentStatus">وضعیت</string>
-    <string name="SessionsFragmentCase">پرونده</string>
-
-    <string name="SessionsFragmentEmpty">هنوز جلسه‌‌ای ثبت نشده است.</string>
 
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////

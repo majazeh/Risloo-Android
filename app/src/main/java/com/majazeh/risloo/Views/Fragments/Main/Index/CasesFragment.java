@@ -2,11 +2,7 @@ package com.majazeh.risloo.Views.Fragments.Main.Index;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -36,7 +32,6 @@ public class CasesFragment extends Fragment {
     private TableCaseAdapter adapter;
 
     // Objects
-    private Handler handler;
     private HashMap data, header;
 
     // Vars
@@ -59,8 +54,6 @@ public class CasesFragment extends Fragment {
     private void initializer() {
         adapter = new TableCaseAdapter(requireActivity());
 
-        handler = new Handler();
-
         data = new HashMap<>();
         data.put("page", 1);
         header = new HashMap<>();
@@ -75,38 +68,6 @@ public class CasesFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.searchEditText);
-            return false;
-        });
-
-        binding.searchIncludeLayout.searchEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(() -> {
-                    data.put("page", 1);
-                    data.put("q", String.valueOf(s));
-
-                    if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.GONE)
-                        binding.searchIncludeLayout.searchProgressBar.setVisibility(View.VISIBLE);
-
-                    getData();
-                }, 750);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
         binding.getRoot().setMOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (!isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
                 isLoading = true;
@@ -144,23 +105,12 @@ public class CasesFragment extends Fragment {
                             binding.tableSingleLayout.recyclerView.setAdapter(null);
 
                             binding.tableSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                                binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
-                            else
-                                binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.CasesFragmentEmpty));
+                            binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.CasesFragmentEmpty));
                         }
 
-                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 
-                        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.tableShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-
+                        hideShimmer();
                     });
 
                     isLoading = false;
@@ -171,15 +121,7 @@ public class CasesFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.tableShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-
+                        hideShimmer();
                     });
 
                     isLoading = false;
@@ -188,12 +130,20 @@ public class CasesFragment extends Fragment {
         });
     }
 
+    private void hideShimmer() {
+        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.tableShimmerLayout.getRoot().stopShimmer();
+
+        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
         isLoading = true;
-        handler.removeCallbacksAndMessages(null);
     }
 
 }
