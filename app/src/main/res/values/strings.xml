@@ -52,6 +52,7 @@
     <string name="SnackChangesSaved">تغییرات ثبت شد.</string>
 
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
+    <string name="SnackCreatedNewCase">پرونده جدید ساخته شد.</string>
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
     <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
     <string name="SnackCreatedNewReport">گزارش جدید ساخته شد.</string>
@@ -290,6 +291,20 @@
     /***
     ---------- Create Fragments ----------
     ***/
+
+
+    ---------- // CreateCaseFragment
+
+    <string name="CreateCaseFragmentTitle">ساخت پرونده جدید</string>
+
+    <string name="CreateCaseFragmentTitleHeader">عنوان یا سریال داخلی</string>
+    <string name="CreateCaseFragmentReferenceHeader">مراجع(ین)</string>
+    <string name="CreateCaseFragmentProblemHeader">مسئله</string>
+    <string name="CreateCaseFragmentTagsHeader">برچسب‌(ها)</string>
+
+    <string name="CreateCaseFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
+
+    <string name="CreateCaseFragmentButton">ساخت</string>
 
 
     ---------- // CreateDocumentFragment
@@ -1096,21 +1111,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- CreateCase Fragment ----------
-    */
-
-    <string name="CreateCaseFragmentTitle">ساخت پرونده جدید</string>
-
-    <string name="CreateCaseFragmentTitleHeader">عنوان یا سریال داخلی</string>
-    <string name="CreateCaseFragmentReferenceHeader">مراجع(ین)</string>
-    <string name="CreateCaseFragmentProblemHeader">مسئله</string>
-    <string name="CreateCaseFragmentTagsHeader">برچسب‌(ها)</string>
-
-    <string name="CreateCaseFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
-
-    <string name="CreateCaseFragmentButton">ساخت</string>
-
-    /*
     ---------- CreateCaseUser Fragment ----------
     */
 
@@ -1813,7 +1813,6 @@
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
     <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
 
-    <string name="ToastNewCaseAdded">پرونده جدید افزوده شد.</string>
     <string name="ToastNewReferenceAdded">عضو جدید افزوده شد.</string>
     <string name="ToastNewSessionAdded">جلسه جدید افزوده شد.</string>
     <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>
