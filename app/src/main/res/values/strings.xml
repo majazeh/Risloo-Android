@@ -597,6 +597,11 @@
     <string name="MeFragmentTitle">من</string>
 
 
+    ---------- // ReferenceFragment
+
+    <string name="ReferenceFragmentTitle">مراجع</string>
+
+
     ---------- // SampleFragment
 
     <string name="SampleFragmentTitle">نمونه</string>
@@ -1628,12 +1633,6 @@
     <string name="CenterFragmentProfile">پروفایل من</string>
     <string name="CenterFragmentEdit">ویرایش</string>
     <string name="CenterFragmentPlatforms">محل برگزاری</string>
-
-    /*
-    ---------- Reference Fragment ----------
-    */
-
-    <string name="ReferenceFragmentTitle">مراجع</string>
 
     /*
     ---------- Room Fragment ----------

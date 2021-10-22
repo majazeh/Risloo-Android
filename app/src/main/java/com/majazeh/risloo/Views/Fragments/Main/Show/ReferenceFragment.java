@@ -101,6 +101,14 @@ public class ReferenceFragment extends Fragment {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(binding.editImageView.getRoot());
+
+        CustomClickView.onDelayedListener(() -> {
+            IntentManager.phone(requireActivity(), binding.mobileTextView.getText().toString());
+        }).widget(binding.mobileTextView);
+
+        CustomClickView.onDelayedListener(() -> {
+            IntentManager.email(requireActivity(), new String[]{binding.emailTextView.getText().toString()}, "", "", "");
+        }).widget(binding.emailTextView);
     }
 
     private void setArgs() {
@@ -155,8 +163,10 @@ public class ReferenceFragment extends Fragment {
 
         if (model.getName() != null && !model.getName().equals("")) {
             binding.nameTextView.setText(model.getName());
+        } else if (model.getId() != null && !model.getId().equals("")) {
+            binding.nameTextView.setText(model.getId());
         } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
         }
 
         if (model.getMobile() != null && !model.getMobile().equals("")) {
@@ -166,14 +176,21 @@ public class ReferenceFragment extends Fragment {
             binding.mobileGroup.setVisibility(View.GONE);
         }
 
-        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null) {
+        if (model.getEmail() != null && !model.getEmail().equals("")) {
+            binding.emailTextView.setText(model.getEmail());
+            binding.emailGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.emailGroup.setVisibility(View.GONE);
+        }
+
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
 
         if (model.getPosition() != null && !model.getPosition().equals("")) {
@@ -191,8 +208,10 @@ public class ReferenceFragment extends Fragment {
 
         if (model != null && model.getName() != null && !model.getName().equals("")) {
             binding.nameTextView.setText(model.getName());
+        } else if (model != null && model.getId() != null && !model.getId().equals("")) {
+            binding.nameTextView.setText(model.getId());
         } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
         }
 
         if (userModel.getMobile() != null && !userModel.getMobile().equals("")) {
@@ -202,14 +221,21 @@ public class ReferenceFragment extends Fragment {
             binding.mobileGroup.setVisibility(View.GONE);
         }
 
-        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar().getMedium().getUrl() != null) {
+        if (userModel.getEmail() != null && !userModel.getEmail().equals("")) {
+            binding.emailTextView.setText(userModel.getEmail());
+            binding.emailGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.emailGroup.setVisibility(View.GONE);
+        }
+
+        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar().getMedium().getUrl() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
 
         if (model != null && model.getPosition() != null && !model.getPosition().equals("")) {
@@ -238,6 +264,8 @@ public class ReferenceFragment extends Fragment {
 
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
+                                binding.roomsSingleLayout.recyclerView.setAdapter(null);
+
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.RoomsAdapterEmpty));
                             }
@@ -249,8 +277,9 @@ public class ReferenceFragment extends Fragment {
 
                                 binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (tableCaseAdapter.getItemCount() == 0) {
-                                binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.casesSingleLayout.recyclerView.setAdapter(null);
 
+                                binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.CasesFragmentEmpty));
                             }
 
@@ -261,8 +290,9 @@ public class ReferenceFragment extends Fragment {
 
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (tableSampleAdapter.getItemCount() == 0) {
-                                binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.samplesSingleLayout.recyclerView.setAdapter(null);
 
+                                binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                             }
 
@@ -270,21 +300,7 @@ public class ReferenceFragment extends Fragment {
                             binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(tableCaseAdapter.itemsCount()));
                             binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
 
-                            // Rooms Data
-                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.roomsShimmerLayout.getRoot().stopShimmer();
-
-                            // Cases Data
-                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.casesShimmerLayout.getRoot().stopShimmer();
-
-                            // Samples Data
-                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.samplesShimmerLayout.getRoot().stopShimmer();
-
+                            hideShimmer();
                         });
                     }
                 }
@@ -293,22 +309,7 @@ public class ReferenceFragment extends Fragment {
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-
-                            // Rooms Data
-                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.roomsShimmerLayout.getRoot().stopShimmer();
-
-                            // Cases Data
-                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.casesShimmerLayout.getRoot().stopShimmer();
-
-                            // Samples Data
-                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.samplesShimmerLayout.getRoot().stopShimmer();
-
+                            hideShimmer();
                         });
                     }
                 }
@@ -330,6 +331,8 @@ public class ReferenceFragment extends Fragment {
 
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
+                                binding.roomsSingleLayout.recyclerView.setAdapter(null);
+
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.RoomsAdapterEmpty));
                             }
@@ -341,8 +344,9 @@ public class ReferenceFragment extends Fragment {
 
                                 binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (tableCaseAdapter.getItemCount() == 0) {
-                                binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.casesSingleLayout.recyclerView.setAdapter(null);
 
+                                binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.CasesFragmentEmpty));
                             }
 
@@ -353,8 +357,9 @@ public class ReferenceFragment extends Fragment {
 
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (tableSampleAdapter.getItemCount() == 0) {
-                                binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.samplesSingleLayout.recyclerView.setAdapter(null);
 
+                                binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                             }
 
@@ -362,21 +367,7 @@ public class ReferenceFragment extends Fragment {
                             binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(tableCaseAdapter.itemsCount()));
                             binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
 
-                            // Rooms Data
-                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.roomsShimmerLayout.getRoot().stopShimmer();
-
-                            // Cases Data
-                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.casesShimmerLayout.getRoot().stopShimmer();
-
-                            // Samples Data
-                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.samplesShimmerLayout.getRoot().stopShimmer();
-
+                            hideShimmer();
                         });
                     }
                 }
@@ -385,27 +376,31 @@ public class ReferenceFragment extends Fragment {
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-
-                            // Rooms Data
-                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.roomsShimmerLayout.getRoot().stopShimmer();
-
-                            // Cases Data
-                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.casesShimmerLayout.getRoot().stopShimmer();
-
-                            // Samples Data
-                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.samplesShimmerLayout.getRoot().stopShimmer();
-
+                            hideShimmer();
                         });
                     }
                 }
             });
         }
+    }
+
+    private void hideShimmer() {
+
+        // Rooms Data
+        binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.roomsShimmerLayout.getRoot().stopShimmer();
+
+        // Cases Data
+        binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.casesShimmerLayout.getRoot().stopShimmer();
+
+        // Samples Data
+        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.samplesShimmerLayout.getRoot().stopShimmer();
+
     }
 
     @Override
