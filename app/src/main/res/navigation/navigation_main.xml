@@ -226,10 +226,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/createReportFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateReportFragment"
-        android:label="@string/CreateReportFragmentTitle"
-        tools:layout="@layout/fragment_create_report" >
+        android:id="@+id/createClientReportFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateClientReportFragment"
+        android:label="@string/CreateClientReportFragmentTitle"
+        tools:layout="@layout/fragment_create_client_report" >
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -376,7 +376,7 @@
 
     <action
         android:id="@+id/action_global_createReportFragment"
-        app:destination="@id/createReportFragment" />
+        app:destination="@id/createClientReportFragment" />
 
     <action
         android:id="@+id/action_global_createRoomFragment"

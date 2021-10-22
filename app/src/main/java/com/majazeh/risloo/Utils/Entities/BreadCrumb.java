@@ -177,7 +177,7 @@ public class BreadCrumb {
                 return createCenterUser();
             case R.id.createDocumentFragment:
                 return createDocument();
-            case R.id.createReportFragment:
+            case R.id.createClientReportFragment:
                 return createReport();
             case R.id.createPracticeFragment:
                 return createPractice();
@@ -903,14 +903,14 @@ public class BreadCrumb {
 
     private ArrayList<String> createReport() {
         ArrayList<String> list = clientReports();
-        list.add(activity.getResources().getString(R.string.CreateReportFragmentTitle));
+        list.add(activity.getResources().getString(R.string.CreateClientReportFragmentTitle));
 
         destinationIds = createReportIds();
         return list;
     }
     private ArrayList<Integer> createReportIds() {
         ArrayList<Integer> list = clientReportsIds();
-        list.add(R.id.createReportFragment);
+        list.add(R.id.createClientReportFragment);
 
         return list;
     }

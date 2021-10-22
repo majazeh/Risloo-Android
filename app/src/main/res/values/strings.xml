@@ -314,17 +314,17 @@
     <string name="CreatePracticeFragmentButton">ساخت</string>
 
 
-    ---------- // CreateReportFragment
+    ---------- // CreateClientReportFragment
 
-    <string name="CreateReportFragmentTitle">ساخت گزارش جدید</string>
+    <string name="CreateClientReportFragmentTitle">ساخت گزارش جدید</string>
 
-    <string name="CreateReportFragmentEncryptionHeader">نوع رمزگذاری</string>
-    <string name="CreateReportFragmentDescriptionHeader">متن گزارش</string>
+    <string name="CreateClientReportFragmentEncryptionHeader">نوع رمزگذاری</string>
+    <string name="CreateClientReportFragmentDescriptionHeader">متن گزارش</string>
 
-    <string name="CreateReportFragmentCryptoHint">متن گزارش که قصد دارید ثبت کنید بدون کدگذاری ذخیره خواهد شد؛ برای این‌که مطمئن باشید هیچ فردی، حتی سرویس ریسلو دسترسی به متن گزارش شما نداشته باشد، برای ما کلید عمومی رمزگذاری خود را ارسال کنید.</string>
-    <string name="CreateReportFragmentCryptoButton">ارسال کلید عمومی من</string>
+    <string name="CreateClientReportFragmentCryptoHint">متن گزارش که قصد دارید ثبت کنید بدون کدگذاری ذخیره خواهد شد؛ برای این‌که مطمئن باشید هیچ فردی، حتی سرویس ریسلو دسترسی به متن گزارش شما نداشته باشد، برای ما کلید عمومی رمزگذاری خود را ارسال کنید.</string>
+    <string name="CreateClientReportFragmentCryptoButton">ارسال کلید عمومی من</string>
 
-    <string name="CreateReportFragmentButton">ساخت</string>
+    <string name="CreateClientReportFragmentButton">ساخت</string>
 
 
     ---------- // CreateSampleFragment

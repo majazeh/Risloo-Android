@@ -18,7 +18,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreatePlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Create.CreateReportFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Create.CreateClientReportFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateSampleFragment;
@@ -158,7 +158,7 @@ public class Fragmont {
         else if (fragment instanceof CreatePracticeFragment)
             return fragment;
 
-        else if (fragment instanceof CreateReportFragment)
+        else if (fragment instanceof CreateClientReportFragment)
             return fragment;
 
         else if (fragment instanceof CreateRoomFragment)

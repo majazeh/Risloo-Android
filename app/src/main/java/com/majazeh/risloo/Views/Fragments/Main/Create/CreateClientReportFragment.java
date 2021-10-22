@@ -25,7 +25,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.HashMap;
 
-public class CreateReportFragment extends Fragment {
+public class CreateClientReportFragment extends Fragment {
 
     // Binding
     private FragmentCreateReportBinding binding;
@@ -56,15 +56,15 @@ public class CreateReportFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.encryptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentEncryptionHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentDescriptionHeader));
+        binding.encryptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateClientReportFragmentEncryptionHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateClientReportFragmentDescriptionHeader));
 
-        binding.cryptoIncludeLayout.hintTextView.setText(getResources().getString(R.string.CreateReportFragmentCryptoHint));
+        binding.cryptoIncludeLayout.hintTextView.setText(getResources().getString(R.string.CreateClientReportFragmentCryptoHint));
 
         InitManager.input12sspSpinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates);
 
-        InitManager.txtTextColorBackground(binding.cryptoIncludeLayout.selectTextView, getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.cryptoIncludeLayout.selectTextView, getResources().getString(R.string.CreateClientReportFragmentCryptoButton), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateClientReportFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
