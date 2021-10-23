@@ -167,6 +167,8 @@ public class BreadCrumb {
 
             // -------------------- Create
 
+            case R.id.createBillFragment:
+                return createBill();
             case R.id.createCaseFragment:
                 return createCase();
             case R.id.createCaseUserFragment:
@@ -802,6 +804,20 @@ public class BreadCrumb {
     /*
     ---------- Create ----------
     */
+
+    private ArrayList<String> createBill() {
+        ArrayList<String> list = session();
+        list.add(activity.getResources().getString(R.string.CreateBillFragmentTitle));
+
+        destinationIds = createBillIds();
+        return list;
+    }
+    private ArrayList<Integer> createBillIds() {
+        ArrayList<Integer> list = sessionIds();
+        list.add(R.id.createBillFragment);
+
+        return list;
+    }
 
     private ArrayList<String> createCase() {
         ArrayList<String> list = room();

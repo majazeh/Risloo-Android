@@ -51,6 +51,7 @@
     <string name="SnackSuccesAcceptation">پذیرش ثبت شد.</string>
     <string name="SnackChangesSaved">تغییرات ثبت شد.</string>
 
+    <string name="SnackCreatedNewBill">فاکتور جدید ساخته شد.</string>
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
     <string name="SnackCreatedNewCase">پرونده جدید ساخته شد.</string>
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
@@ -291,6 +292,19 @@
     /***
     ---------- Create Fragments ----------
     ***/
+
+
+    ---------- // CreateBillFragment
+
+    <string name="CreateBillFragmentTitle">ساخت فاکتور جدید</string>
+
+    <string name="CreateBillFragmentTitleHeader">عنوان</string>
+    <string name="CreateBillFragmentReferenceHeader">طرف صورت‌حساب</string>
+    <string name="CreateBillFragmentTypeHeader">موقعیت نسبت به فاکتور</string>
+    <string name="CreateBillFragmentTreasuryHeader">خزانه صورت‌حساب</string>
+    <string name="CreateBillFragmentAmountHeader">مبلغ (تومان)</string>
+
+    <string name="CreateBillFragmentButton">ساخت</string>
 
 
     ---------- // CreateCaseFragment

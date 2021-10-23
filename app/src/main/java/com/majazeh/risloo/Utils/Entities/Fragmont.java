@@ -11,14 +11,15 @@ import com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordRecoverFragment;
 import com.majazeh.risloo.Views.Fragments.Auth.AuthPinFragment;
 import com.majazeh.risloo.Views.Fragments.Auth.AuthRegisterFragment;
 import com.majazeh.risloo.Views.Fragments.Auth.AuthSerialFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Create.CreateBillFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterUserFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Create.CreateClientReportFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreatePlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Create.CreateClientReportFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateSampleFragment;
@@ -136,6 +137,9 @@ public class Fragmont {
             return fragment;
 
         // -------------------- Create
+
+        else if (fragment instanceof CreateBillFragment)
+            return fragment;
 
         else if (fragment instanceof CreateCaseFragment)
             return fragment;

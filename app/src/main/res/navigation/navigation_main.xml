@@ -160,6 +160,17 @@
     ---------- // Fragments
 
     <fragment
+        android:id="@+id/createBillFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateBillFragment"
+        android:label="@string/CreateBillFragmentTitle"
+        tools:layout="@layout/fragment_create_bill" >
+        <argument
+            android:name="typeModel"
+            app:nullable="true"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/createCaseFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateCaseFragment"
         android:label="@string/CreateCaseFragmentTitle"
@@ -349,6 +360,10 @@
     </fragment>
 
     ---------- // Actions
+
+    <action
+        android:id="@+id/action_global_createBillFragment"
+        app:destination="@id/createBillFragment" />
 
     <action
         android:id="@+id/action_global_createCaseFragment"
