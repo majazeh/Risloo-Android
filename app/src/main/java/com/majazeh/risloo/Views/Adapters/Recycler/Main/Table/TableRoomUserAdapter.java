@@ -10,10 +10,9 @@ import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
-import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderRoomUserHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableRoomUserHolder;
@@ -124,16 +123,16 @@ public class TableRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void setAcceptation(TableRoomUserHolder holder, UserModel model) {
         if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusKicked));
+            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
         } else if (model.getUserKicked_at() != 0) {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusKicked));
+            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
         } else if (model.getUserAccepted_at() != 0) {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusAccepted));
+            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "accepted"));
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
         } else {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusWaiting));
+            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "waiting"));
             holder.binding.acceptedTextView.setText("");
         }
     }

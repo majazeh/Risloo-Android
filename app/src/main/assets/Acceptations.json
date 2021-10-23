@@ -1,14 +1,14 @@
 [
     {
         "fa_title": "پذیرش شده",
-        "en_title": "accept"
+        "en_title": "accepted"
     },
     {
         "fa_title": "تعلیق شده",
-        "en_title": "kick"
+        "en_title": "kicked"
     },
     {
         "fa_title": "در انتظار",
-        "en_title": "none"
+        "en_title": "waiting"
     }
 ]

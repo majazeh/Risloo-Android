@@ -141,6 +141,15 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             return false;
         });
 
+        holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.positionSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        holder.binding.menuSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         holder.binding.positionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -157,11 +166,6 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-
-        holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
         });
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -252,43 +256,43 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         ArrayList<String> items = new ArrayList<>();
 
         if (model.getMeta() != null) {
-            items.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
+            items.add(activity.getResources().getString(R.string.CenterUserAdapterRoom));
         } else {
             if (!model.getPosition().equals("client"))
-                items.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
+                items.add(activity.getResources().getString(R.string.CenterUserAdapterCreateRoom));
         }
 
         if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
+            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
 
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
             holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
 
-            items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+            items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
         } else if (model.getUserKicked_at() != 0) {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
+            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
 
             holder.binding.acceptedTextView.setText("");
             holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
 
-            items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+            items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
         } else if (model.getUserAccepted_at() != 0) {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusAccepted));
+            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "accepted"));
 
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
             holder.binding.kickedTextView.setText("");
 
-            items.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
+            items.add(activity.getResources().getString(R.string.CenterUserAdapterKick));
         } else {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusWaiting));
+            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "waiting"));
 
             holder.binding.acceptedTextView.setText("");
             holder.binding.kickedTextView.setText("");
 
-            items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+            items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
         }
 
-        items.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
+        items.add(activity.getResources().getString(R.string.CenterUserAdapterEdit));
 //        items.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
         items.add("");
 
@@ -317,7 +321,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 @Override
                 public void onFailure(String response) {
                     activity.runOnUiThread(() -> {
-                        // Place Code if Needed
+                        // TODO : Place Code If Needed
                     });
                 }
             });
@@ -341,7 +345,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 @Override
                 public void onFailure(String response) {
                     activity.runOnUiThread(() -> {
-                        // Place Code if Needed
+                        // TODO : Place Code If Needed
                     });
                 }
             });
