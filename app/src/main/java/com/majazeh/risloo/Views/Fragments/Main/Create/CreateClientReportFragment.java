@@ -18,7 +18,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.FragmentCreateReportBinding;
+import com.majazeh.risloo.databinding.FragmentCreateClientReportBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class CreateClientReportFragment extends Fragment {
 
     // Binding
-    private FragmentCreateReportBinding binding;
+    private FragmentCreateClientReportBinding binding;
 
     // Objects
     private HashMap data, header;
@@ -40,7 +40,7 @@ public class CreateClientReportFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentCreateReportBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCreateClientReportBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -126,7 +126,7 @@ public class CreateClientReportFragment extends Fragment {
     }
 
     private void setArgs() {
-        TypeModel typeModel = CreateReportFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        TypeModel typeModel = CreateClientReportFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
             if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))

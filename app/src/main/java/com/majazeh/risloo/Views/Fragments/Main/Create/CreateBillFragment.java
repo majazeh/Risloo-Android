@@ -16,12 +16,15 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateBillBinding;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +67,8 @@ public class CreateBillFragment extends Fragment {
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateBillFragmentTreasuryHeader));
         binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateBillFragmentAmountHeader), 5, 12, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
+
+        InitManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.BillStatus);
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateBillFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
@@ -138,13 +143,7 @@ public class CreateBillFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
-
-                    switch(pos) {
-                        case "":
-
-                            break;
-                    }
+                    reference = referenceIds.get(position);
 
                     userSelect = false;
                 }
@@ -160,13 +159,7 @@ public class CreateBillFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
-
-                    switch(pos) {
-                        case "":
-
-                            break;
-                    }
+                    type = parent.getItemAtPosition(position).toString();
 
                     userSelect = false;
                 }
@@ -229,6 +222,26 @@ public class CreateBillFragment extends Fragment {
         if (model.getId() != null && !model.getId().equals("")) {
             data.put("id", model.getId());
         }
+
+        if (model.getClients() != null && model.getClients().size() != 0) {
+            setClients(model.getClients());
+        }
+    }
+
+    private void setClients(List clients) {
+        ArrayList<String> options = new ArrayList<>();
+
+        for (TypeModel typeModel : clients.data()) {
+            UserModel model = (UserModel) typeModel;
+
+            options.add(model.getName());
+            referenceIds.add(model.getId());
+        }
+
+        options.add("");
+        referenceIds.add("");
+
+        InitManager.input12sspSpinner(requireActivity(), binding.referenceIncludeLayout.selectSpinner, options);
     }
 
     private void setHashmap() {
@@ -243,7 +256,7 @@ public class CreateBillFragment extends Fragment {
             data.remove("user_id");
 
         if (!type.equals(""))
-            data.put("type", type);
+            data.put("type", SelectionManager.getBillType(requireActivity(), "en", type));
         else
             data.remove("type");
 

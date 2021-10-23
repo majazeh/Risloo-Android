@@ -194,7 +194,10 @@ public class SessionFragment extends Fragment {
         }).widget(binding.samplesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code When Needed
+            if (sessionModel != null) {
+                NavDirections action = NavigationMainDirections.actionGlobalCreateBillFragment(sessionModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            }
         }).widget(binding.billsAddView.getRoot());
     }
 

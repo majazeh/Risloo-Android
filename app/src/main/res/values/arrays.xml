@@ -106,6 +106,12 @@
     // Spinner Arrays
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <array name="BillStatus">
+        <item>بستانکار</item>
+        <item>بدهکار</item>
+        <item></item>
+    </array>
+
     <array name="CaseStatus">
         <item>بدون پرونده</item>
         <item>ساخت پرونده مجزا برای هر فرد</item>
