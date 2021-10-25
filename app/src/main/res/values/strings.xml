@@ -55,11 +55,13 @@
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
     <string name="SnackCreatedNewCase">پرونده جدید ساخته شد.</string>
     <string name="SnackCreatedNewCaseUser">عضو جدید پرونده ثبت شد.</string>
+    <string name="SnackCreatedNewCenterUser">عضو جدید مرکز ثبت شد.</string>
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
     <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
     <string name="SnackCreatedNewReport">گزارش جدید ساخته شد.</string>
     <string name="SnackCreatedNewRoomUser">عضو جدید اتاق ثبت شد.</string>
     <string name="SnackCreatedNewSample">نمونه جدید ساخته شد.</string>
+    <string name="SnackCreatedNewSessionUser">عضو جدید جلسه ثبت شد.</string>
     <string name="SnackCreatedNewTreasury">کیف پول جدید ساخته شد.</string>
     <string name="SnackCreatedNewUser">کاربر جدید ایجاد شد.</string>
 
@@ -424,6 +426,18 @@
     <string name="CreateSampleFragmentPsychologyDescriptionGuide">در این قسمت شما می‌توانید توضیحاتی را اضافه بر توضیحات یک نمونه وارد کنید تا مراجع قبل از انجام نمونه(ها) این توضیحات را مشاهده کند.</string>
 
     <string name="CreateSampleFragmentButton">ساخت</string>
+
+
+    ---------- // CreateSessionUserFragment
+
+    <string name="CreateSessionUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateSessionUserFragmentAxisHeader">محور جلسه</string>
+    <string name="CreateSessionUserFragmentPlatformHeader">محل برگزاری جلسه</string>
+    <string name="CreateSessionUserFragmentClientHeader">انتخاب مراجع</string>
+    <string name="CreateSessionUserFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="CreateSessionUserFragmentButton">ثبت</string>
 
 
     ---------- // CreateTreasuryFragment
@@ -1403,19 +1417,6 @@
     <string name="CreateSessionTabPaymentAxisTotal">مبلغ جلسه</string>
 
     <string name="CreateSessionTabPaymentButton">ساخت</string>
-
-    /*
-    ---------- CreateSessionUser Fragment ----------
-    */
-
-    <string name="CreateSessionUserFragmentTitle">ثبت عضو جدید</string>
-
-    <string name="CreateSessionUserFragmentAxisHeader">محور جلسه</string>
-    <string name="CreateSessionUserFragmentPlatformHeader">محل برگزاری جلسه</string>
-    <string name="CreateSessionUserFragmentClientHeader">انتخاب مراجع</string>
-    <string name="CreateSessionUserFragmentDescriptionHeader">توضیحات</string>
-
-    <string name="CreateSessionUserFragmentButton">ثبت</string>
 
     /*
     ---------- ReserveSchedule Fragment ----------

@@ -11,7 +11,9 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -45,6 +47,9 @@ public class CreateSessionUserFragment extends Fragment {
 
     // Adapters
     public CreateCheckAdapter clientsAdapter;
+
+    // Models
+    public SessionModel sessionModel;
 
     // Objects
     private HashMap data, header;
@@ -82,7 +87,7 @@ public class CreateSessionUserFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -102,6 +107,15 @@ public class CreateSessionUserFragment extends Fragment {
             return false;
         });
 
+        binding.platformIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        binding.axisIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        binding.platformIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         binding.axisIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -116,11 +130,6 @@ public class CreateSessionUserFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-
-        binding.platformIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
         });
 
         binding.platformIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -157,8 +166,10 @@ public class CreateSessionUserFragment extends Fragment {
         TypeModel typeModel = CreateSessionUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
-                setData((SessionModel) typeModel);
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+                sessionModel = (SessionModel) typeModel;
+                setData(sessionModel);
+            }
         }
     }
 
@@ -175,7 +186,7 @@ public class CreateSessionUserFragment extends Fragment {
             setPlatform(model.getSession_platforms());
         }
 
-        if (model.getCaseModel() != null && model.getCaseModel().getClients() != null && model.getCaseModel().getClients().size() != 0) {
+        if (model.getCaseModel() != null) {
             setClients(model.getCaseModel().getClients());
         }
 
@@ -190,7 +201,7 @@ public class CreateSessionUserFragment extends Fragment {
 
         for (int i = 0; i < fields.length(); i++) {
             try {
-                if (fields.getJSONObject(i).has("amount"))
+                if (fields.getJSONObject(i).has("amount") && !fields.getJSONObject(i).isNull("amount"))
                     options.add(fields.getJSONObject(i).getString("title") + " | " + fields.getJSONObject(i).getString("amount"));
                 else
                     options.add(fields.getJSONObject(i).getString("title"));
@@ -210,10 +221,10 @@ public class CreateSessionUserFragment extends Fragment {
     private void setPlatform(List platforms) {
         ArrayList<String> options = new ArrayList<>();
 
-        for (int i = 0; i < platforms.data().size(); i++) {
-            SessionPlatformModel model = (SessionPlatformModel) platforms.data().get(i);
-            options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
+        for (TypeModel typeModel : platforms.data()) {
+            SessionPlatformModel model = (SessionPlatformModel) typeModel;
 
+            options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
             platformIds.add(model.getId());
         }
 
@@ -227,11 +238,10 @@ public class CreateSessionUserFragment extends Fragment {
         if (clients != null && clients.data().size() != 0) {
             ArrayList<TypeModel> items = new ArrayList<>();
 
-            for (int i = 0; i < clients.data().size(); i++) {
-                UserModel user = (UserModel) clients.data().get(i);
-                if (user != null) {
-                    items.add(new TypeModel(clients.data().get(i).object));
-                }
+            for (TypeModel typeModel : clients.data()) {
+                UserModel model = (UserModel) typeModel;
+
+                items.add(model);
             }
 
             setRecyclerView(items, new ArrayList<>(), "clients");
@@ -251,23 +261,45 @@ public class CreateSessionUserFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!axis.equals(""))
+            data.put("field", axis);
+        else
+            data.remove("field");
+
+        if (!platform.equals(""))
+            data.put("session_platform", platform);
+        else
+            data.remove("session_platform");
+
+        if (!clientsAdapter.getIds().isEmpty())
+            data.put("client_id", clientsAdapter.getIds());
+        else
+            data.remove("client_id");
+
+        if (!description.equals(""))
+            data.put("description", description);
+        else
+            data.remove("description");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("field", axis);
-        data.put("session_platform", platform);
-        data.put("client_id", clientsAdapter.getIds());
-        data.put("description", description);
+        setHashmap();
 
         Session.addUser(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                UserModel userModel = (UserModel) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSessionUser));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(sessionModel, userModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
             }
@@ -324,6 +356,7 @@ public class CreateSessionUserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }
