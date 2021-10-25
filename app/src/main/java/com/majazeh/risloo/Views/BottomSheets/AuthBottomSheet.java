@@ -104,7 +104,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCenterUser));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
 

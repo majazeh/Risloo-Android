@@ -50,6 +50,7 @@
 
     <string name="SnackSuccesAcceptation">پذیرش ثبت شد.</string>
     <string name="SnackChangesSaved">تغییرات ثبت شد.</string>
+    <string name="SnackScheduleReserved">برنامه درمانی رزرو شد.</string>
 
     <string name="SnackCreatedNewBill">فاکتور جدید ساخته شد.</string>
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
@@ -509,6 +510,33 @@
     <string name="CreateUserFragmentGenderFemale">زن</string>
 
     <string name="CreateUserFragmentButton">ایجاد</string>
+
+
+    ---------- // ReserveScheduleFragment
+
+    <string name="ReserveScheduleFragmentTitle">رزرو برنامه درمانی</string>
+
+    <string name="ReserveScheduleFragmentSerialHeader">رزرو جلسه درمانی</string>
+    <string name="ReserveScheduleFragmentFieldHeader">محور جلسه</string>
+    <string name="ReserveScheduleFragmentPlatformHeader">محل برگزاری جلسه</string>
+    <string name="ReserveScheduleFragmentTypeHeader">انتخاب نوع کاربر</string>
+    <string name="ReserveScheduleFragmentReferenceHeader">مراجع</string>
+    <string name="ReserveScheduleFragmentCaseHeader">پرونده</string>
+    <string name="ReserveScheduleFragmentClientHeader">انتخاب مراجع</string>
+    <string name="ReserveScheduleFragmentNameHeader">نام و نام خانوادگی</string>
+    <string name="ReserveScheduleFragmentProblemHeader">مسئله</string>
+    <string name="ReserveScheduleFragmentDescriptionHeader">توضیحات</string>
+    <string name="ReserveScheduleFragmentTreasuryHeader">نحوه پرداخت</string>
+
+    <string name="ReserveScheduleFragmentTypeReference">مراجع</string>
+    <string name="ReserveScheduleFragmentTypeCase">پرونده و مراجع(ین)</string>
+
+    <string name="ReserveScheduleFragmentCaseGuide">اگر پرونده‌ای در جریان دارید؛ می‌توانید با انتخاب آن، این جلسه را به آن پرونده متصل نمایید.</string>
+    <string name="ReserveScheduleFragmentNameGuide">شما عضو این مرکز درمانی نیستید، پس از درخواست، عضو این مرکز خواهید شد؛ ما شما را با آن نامی که وارد می‌کنید به مرکز معرفی خواهیم کرد.</string>
+
+    <string name="ReserveScheduleFragmentTreasuryOnline">آنلاین | نسیه</string>
+
+    <string name="ReserveScheduleFragmentButton">تأیید و ثبت</string>
 
 
     /***
@@ -1511,34 +1539,6 @@
 
     <string name="CreateSessionTabPaymentButton">ساخت</string>
 
-    /*
-    ---------- ReserveSchedule Fragment ----------
-    */
-
-    <string name="ReserveScheduleFragmentTitle">رزرو برنامه درمانی</string>
-
-    <string name="ReserveScheduleFragmentSerialHeader">رزرو جلسه درمانی</string>
-    <string name="ReserveScheduleFragmentFieldHeader">محور جلسه</string>
-    <string name="ReserveScheduleFragmentPlatformHeader">محل برگزاری جلسه</string>
-    <string name="ReserveScheduleFragmentTypeHeader">انتخاب نوع کاربر</string>
-    <string name="ReserveScheduleFragmentReferenceHeader">مراجع</string>
-    <string name="ReserveScheduleFragmentCaseHeader">پرونده</string>
-    <string name="ReserveScheduleFragmentClientHeader">انتخاب مراجع</string>
-    <string name="ReserveScheduleFragmentNameHeader">نام و نام خانوادگی</string>
-    <string name="ReserveScheduleFragmentProblemHeader">مسئله</string>
-    <string name="ReserveScheduleFragmentDescriptionHeader">توضیحات</string>
-    <string name="ReserveScheduleFragmentTreasuryHeader">نحوه پرداخت</string>
-
-    <string name="ReserveScheduleFragmentTypeReference">مراجع</string>
-    <string name="ReserveScheduleFragmentTypeCase">پرونده و مراجع(ین)</string>
-
-    <string name="ReserveScheduleFragmentCaseGuide">اگر پرونده‌ای در جریان دارید؛ می‌توانید با انتخاب آن، این جلسه را به آن پرونده متصل نمایید.</string>
-    <string name="ReserveScheduleFragmentNameGuide">شما عضو این مرکز درمانی نیستید، پس از درخواست، عضو این مرکز خواهید شد؛ ما شما را با آن نامی که وارد می‌کنید به مرکز معرفی خواهیم کرد.</string>
-
-    <string name="ReserveScheduleFragmentTreasuryOnline">آنلاین | نسیه</string>
-
-    <string name="ReserveScheduleFragmentButton">تأیید و ثبت</string>
-
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1874,11 +1874,9 @@
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
     <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
 
-    <string name="ToastNewReferenceAdded">عضو جدید افزوده شد.</string>
     <string name="ToastNewSessionAdded">جلسه جدید افزوده شد.</string>
     <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>
     <string name="ToastNewPlatformAdded">محل برگزاری جدید افزوده شد.</string>
-    <string name="ToastNewScheduleReserved">برنامه درمانی رزرو شد.</string>
     <string name="ToastNewSuccesPayment">پرداخت انجام شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////

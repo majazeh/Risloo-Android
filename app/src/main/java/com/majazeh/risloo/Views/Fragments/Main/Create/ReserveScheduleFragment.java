@@ -111,57 +111,11 @@ public class ReserveScheduleFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.reserveTextView.getRoot(), getResources().getString(R.string.ReserveScheduleFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.reserveTextView.getRoot(), getResources().getString(R.string.ReserveScheduleFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.fieldIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
-        });
-
-        binding.fieldIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
-
-        binding.fieldIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userSelect) {
-                    field = fieldsIds.get(position);
-
-                    userSelect = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        binding.platformIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
-        });
-
-        binding.platformIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
-
-        binding.platformIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userSelect) {
-                    platform = platformIds.get(position);
-
-                    userSelect = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         binding.typeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.first_radioButton:
@@ -171,6 +125,7 @@ public class ReserveScheduleFragment extends Fragment {
                     binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
                     binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
                     binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
                     break;
                 case R.id.second_radioButton:
                     type = "case";
@@ -183,6 +138,7 @@ public class ReserveScheduleFragment extends Fragment {
 
                     if (!caseId.equals(""))
                         binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
                     break;
             }
         });
@@ -201,18 +157,10 @@ public class ReserveScheduleFragment extends Fragment {
             return false;
         });
 
-        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
             return false;
-        });
-
-        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -221,8 +169,26 @@ public class ReserveScheduleFragment extends Fragment {
             return false;
         });
 
+        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.fieldIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        binding.platformIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
         });
 
         binding.treasuryIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
@@ -230,7 +196,43 @@ public class ReserveScheduleFragment extends Fragment {
             return false;
         });
 
+        binding.fieldIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        binding.platformIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         binding.treasuryIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        binding.fieldIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    field = fieldsIds.get(position);
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.platformIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    platform = platformIds.get(position);
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         binding.treasuryIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -403,7 +405,7 @@ public class ReserveScheduleFragment extends Fragment {
 
         for (int i = 0; i < fields.length(); i++) {
             try {
-                if (fields.getJSONObject(i).has("amount"))
+                if (fields.getJSONObject(i).has("amount") && !fields.getJSONObject(i).isNull("amount"))
                     options.add(fields.getJSONObject(i).getString("title") + " | " + fields.getJSONObject(i).getString("amount"));
                 else
                     options.add(fields.getJSONObject(i).getString("title"));
@@ -426,8 +428,10 @@ public class ReserveScheduleFragment extends Fragment {
         for (TypeModel typeModel : platforms.data()) {
             SessionPlatformModel model = (SessionPlatformModel) typeModel;
 
-            options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
-            platformIds.add(model.getId());
+            if (model != null) {
+                options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
+                platformIds.add(model.getId());
+            }
         }
 
         options.add("");
@@ -442,11 +446,13 @@ public class ReserveScheduleFragment extends Fragment {
         for (TypeModel typeModel : treasuries.data()) {
             TreasuriesModel model = (TreasuriesModel) typeModel;
 
-            if (model.isCreditable() && model.getSymbol().contains(centerId.toLowerCase()))
-                model.setTitle(requireActivity().getResources().getString(R.string.ReserveScheduleFragmentTreasuryOnline));
+            if (model != null) {
+                if (model.isCreditable() && model.getSymbol().contains(centerId.toLowerCase()))
+                    model.setTitle(requireActivity().getResources().getString(R.string.ReserveScheduleFragmentTreasuryOnline));
 
-            options.add(model.getTitle());
-            treasuryIds.add(model.getId());
+                options.add(model.getTitle());
+                treasuryIds.add(model.getId());
+            }
         }
 
         options.add("");
@@ -466,18 +472,19 @@ public class ReserveScheduleFragment extends Fragment {
 
     private void setClients(List clients) {
         if (clients != null && clients.data().size() != 0) {
-            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.VISIBLE);
-
             ArrayList<TypeModel> items = new ArrayList<>();
 
+            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.VISIBLE);
             binding.caseIncludeLayout.secondaryTextView.setText("");
+
             for (int i = 0; i < clients.data().size(); i++) {
                 UserModel user = (UserModel) clients.data().get(i);
+
                 if (user != null) {
                     binding.caseIncludeLayout.secondaryTextView.append(user.getName());
-                    if (i != clients.data().size() - 1) {
+                    if (i != clients.data().size() - 1)
                         binding.caseIncludeLayout.secondaryTextView.append("  -  ");
-                    }
+
                     items.add(new TypeModel(clients.data().get(i).object));
                 }
             }
@@ -486,6 +493,7 @@ public class ReserveScheduleFragment extends Fragment {
             binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
         } else {
             binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
+            binding.caseIncludeLayout.secondaryTextView.setText("");
 
             clientsAdapter.clearItems();
             binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
@@ -535,32 +543,76 @@ public class ReserveScheduleFragment extends Fragment {
         }
     }
 
-    private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+    private void setHashmap() {
+        if (!field.equals(""))
+            data.put("field", field);
+        else
+            data.remove("field");
 
-        data.put("field", field);
-        data.put("session_platform", platform);
-        data.put("client_typ", type);
+        if (!platform.equals(""))
+            data.put("session_platform", platform);
+        else
+            data.remove("session_platform");
+
+        if (!type.equals(""))
+            data.put("client_typ", type);
+        else
+            data.remove("client_typ");
 
         switch (type) {
             case "case":
-                data.put("case_id", caseId);
+                if (!caseId.equals(""))
+                    data.put("case_id", caseId);
+                else
+                    data.remove("case_id");
 
-                if (clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0)
+                if (!clientsAdapter.getIds().isEmpty())
                     data.put("client_id", clientsAdapter.getIds());
+                else
+                    data.remove("client_id");
 
-                if (caseId.equals(""))
-                    data.put("problem", problem);
+                if (caseId.equals("")) {
+                    if (!problem.equals(""))
+                        data.put("problem", problem);
+                    else
+                        data.remove("problem");
+                }
+
                 break;
             case "center":
-                data.put("client_id", referenceId);
-                data.put("problem", problem);
+                if (!referenceId.equals(""))
+                    data.put("client_id", referenceId);
+                else
+                    data.remove("client_id");
+
+                if (!problem.equals(""))
+                    data.put("problem", problem);
+                else
+                    data.remove("problem");
+
                 break;
         }
 
-        data.put("nickname", name);
-        data.put("description", description);
-        data.put("treasurie_id", treasury);
+        if (!name.equals(""))
+            data.put("nickname", name);
+        else
+            data.remove("nickname");
+
+        if (!description.equals(""))
+            data.put("description", description);
+        else
+            data.remove("description");
+
+        if (!treasury.equals(""))
+            data.put("treasurie_id", treasury);
+        else
+            data.remove("treasurie_id");
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
 
         Schedules.booking(data, header, new Response() {
             @Override
@@ -568,7 +620,7 @@ public class ReserveScheduleFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackScheduleReserved));
 
                         NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(scheduleModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
@@ -655,7 +707,7 @@ public class ReserveScheduleFragment extends Fragment {
         if (Paymont.getInstance().getHashmap() != null) {
 
             if (Paymont.getInstance().getHashmap().containsKey("field") && !Paymont.getInstance().getHashmap().get("field").equals("")) {
-                field = (String) Paymont.getInstance().getHashmap().get("field").toString();
+                field = (String) Paymont.getInstance().getHashmap().get("field");
                 for (int i = 0; i < fieldsIds.size(); i++) {
                     if (fieldsIds.get(i).equals(field)) {
                         binding.fieldIncludeLayout.selectSpinner.setSelection(i);
@@ -733,6 +785,7 @@ public class ReserveScheduleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }
