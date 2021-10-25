@@ -59,6 +59,7 @@
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
     <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
     <string name="SnackCreatedNewReport">گزارش جدید ساخته شد.</string>
+    <string name="SnackCreatedNewRoom">اتاق درمان جدید ساخته شد.</string>
     <string name="SnackCreatedNewRoomUser">عضو جدید اتاق ثبت شد.</string>
     <string name="SnackCreatedNewSample">نمونه جدید ساخته شد.</string>
     <string name="SnackCreatedNewSessionUser">عضو جدید جلسه ثبت شد.</string>
@@ -372,6 +373,15 @@
     <string name="CreatePracticeFragmentFileHeader">پیوست</string>
 
     <string name="CreatePracticeFragmentButton">ساخت</string>
+
+
+    ---------- // CreateRoomFragment
+
+    <string name="CreateRoomFragmentTitle">ساخت اتاق درمان جدید</string>
+
+    <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
+
+    <string name="CreateRoomFragmentButton">ساخت</string>
 
 
     ---------- // CreateRoomUserFragment
@@ -1307,16 +1317,6 @@
     <string name="CreatePlatformFragmentButton">ساخت</string>
 
     /*
-    ---------- CreateRoom Fragment ----------
-    */
-
-    <string name="CreateRoomFragmentTitle">ساخت اتاق درمان جدید</string>
-
-    <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
-
-    <string name="CreateRoomFragmentButton">ساخت</string>
-
-    /*
     ---------- CreateSchedule Fragment ----------
     */
 
@@ -1823,7 +1823,6 @@
     <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>
     <string name="ToastNewCenterAdded">مرکز جدید افزوده شد.</string>
     <string name="ToastNewPlatformAdded">محل برگزاری جدید افزوده شد.</string>
-    <string name="ToastNewRoomAdded">اتاق جدید افزوده شد.</string>
     <string name="ToastNewScheduleReserved">برنامه درمانی رزرو شد.</string>
     <string name="ToastNewSuccesPayment">پرداخت انجام شد.</string>
 

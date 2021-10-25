@@ -276,7 +276,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CreateRoomFragment) {
             if (method.equals("psychologies")) {
-                data.put("id", ((CreateRoomFragment) current).centerId);
+                data.put("id", ((CreateRoomFragment) current).centerModel.getCenterId());
                 data.put("has_room", "no");
                 data.put("position", "manager,operator,psychologist,under_supervision");
             }

@@ -9,19 +9,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -35,11 +38,14 @@ public class CreateRoomFragment extends Fragment {
     // Binding
     private FragmentCreateRoomBinding binding;
 
+    // Models
+    public CenterModel centerModel;
+
     // Objects
     private HashMap data, header;
 
     // Vars
-    public String centerId = "", psychologyId = "";
+    public String psychologyId = "";
 
     @Nullable
     @Override
@@ -62,7 +68,7 @@ public class CreateRoomFragment extends Fragment {
 
         binding.psychologyIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomFragmentPsychologyHeader));
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -80,7 +86,7 @@ public class CreateRoomFragment extends Fragment {
     }
 
     private void setArgs() {
-        CenterModel centerModel = (CenterModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getCenterModel();
+        centerModel = (CenterModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getCenterModel();
         setData(centerModel);
 
         TypeModel typeModel = CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
@@ -93,8 +99,7 @@ public class CreateRoomFragment extends Fragment {
 
     private void setData(CenterModel model) {
         if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-            centerId = model.getCenterId();
-            data.put("id", centerId);
+            data.put("id", model.getCenterId());
         }
     }
 
@@ -128,20 +133,30 @@ public class CreateRoomFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!psychologyId.equals(""))
+            data.put("psychologist_id", psychologyId);
+        else
+            data.remove("psychologist_id");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("psychologist_id", psychologyId);
+        setHashmap();
 
         Room.create(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                RoomModel roomModel = (RoomModel) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoom));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(roomModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
             }
