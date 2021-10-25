@@ -516,6 +516,11 @@
     ***/
 
 
+    ---------- // EditCenterFragment
+
+    <string name="EditCenterFragmentTitle">ویرایش مرکز درمانی</string>
+
+
     ---------- // EditCenterUserFragment
 
     <string name="EditCenterUserFragmentTitle">ویرایش عضو</string>
@@ -787,6 +792,24 @@
     /***
     ---------- Tab Fragments ----------
     ***/
+
+
+    ---------- // EditCenterTabAvatar
+
+    <string name="EditCenterTabAvatarAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+
+    <string name="EditCenterTabAvatarButton">ویرایش</string>
+
+
+    ---------- // EditCenterTabDetail
+
+    <string name="EditCenterTabDetailManagerHeader">مدیر</string>
+    <string name="EditCenterTabDetailTitleHeader">عنوان</string>
+    <string name="EditCenterTabDetailAddressHeader">آدرس</string>
+    <string name="EditCenterTabDetailPhonesHeader">شماره تلفن(ها)</string>
+    <string name="EditCenterTabDetailDescriptionHeader">توضیحات</string>
+
+    <string name="EditCenterTabDetailButton">ویرایش</string>
 
 
     ---------- // EditUserTabAvatar
@@ -1518,28 +1541,6 @@
 
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- EditCenter Fragment ----------
-    */
-
-    <string name="EditCenterFragmentTitle">ویرایش مرکز درمانی</string>
-
-    ---------- // EditCenterTabDetail
-
-    <string name="EditCenterTabDetailManagerHeader">مدیر</string>
-    <string name="EditCenterTabDetailTitleHeader">عنوان</string>
-    <string name="EditCenterTabDetailAddressHeader">آدرس</string>
-    <string name="EditCenterTabDetailPhonesHeader">شماره تلفن(ها)</string>
-    <string name="EditCenterTabDetailDescriptionHeader">توضیحات</string>
-
-    <string name="EditCenterTabDetailButton">ویرایش</string>
-
-    ---------- // EditCenterTabAvatar
-
-    <string name="EditCenterTabAvatarAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
-
-    <string name="EditCenterTabAvatarButton">ویرایش</string>
 
     /*
     ---------- EditPlatform Fragment ----------

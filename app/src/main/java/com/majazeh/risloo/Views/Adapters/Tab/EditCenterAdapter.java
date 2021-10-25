@@ -12,11 +12,11 @@ import java.util.HashMap;
 
 public class EditCenterAdapter extends FragmentStateAdapter {
 
-    // Vars
-    private String type;
-
     // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
+
+    // Vars
+    private String type;
 
     public EditCenterAdapter(@NonNull FragmentActivity fragment, String type) {
         super(fragment);

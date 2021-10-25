@@ -45,10 +45,10 @@ public class EditCenterTabAvatarFragment extends Fragment {
     private Fragment current;
 
     // Objects
-    private Bitmap avatarBitmap = null;
     private HashMap data, header;
 
     // Vars
+    private Bitmap avatarBitmap = null;
     public String avatarPath = "";
 
     @Nullable
@@ -74,7 +74,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterTabAvatarAvatarGuide));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabAvatarButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabAvatarButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {
@@ -112,15 +112,17 @@ public class EditCenterTabAvatarFragment extends Fragment {
                     avatarPath = model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url");
 
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                    Picasso.get().load(avatarPath).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(avatarPath).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getDetail().getString("title")));
+                    else if (model.getCenterId() != null && !model.getCenterId().equals(""))
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getCenterId()));
                     else
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
 
-                    Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -145,12 +147,19 @@ public class EditCenterTabAvatarFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+
+        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+            data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+        else
+            data.remove("avatar");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
-            data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+        setHashmap();
 
         Center.editAvatar(data, header, new Response() {
             @Override

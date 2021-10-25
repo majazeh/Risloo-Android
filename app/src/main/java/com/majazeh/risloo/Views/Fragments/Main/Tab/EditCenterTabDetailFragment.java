@@ -13,17 +13,17 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
+import com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.FragmentEditCenterTabDetailBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
-import com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterFragment;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONArray;
@@ -82,11 +82,17 @@ public class EditCenterTabDetailFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabDetailButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabDetailButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSelectedDialog(requireActivity(), "phones");
+            return false;
+        });
+
         CustomClickView.onDelayedListener(() -> {
             DialogManager.showSearchableDialog(requireActivity(), "managers");
         }).widget(binding.managerIncludeLayout.selectTextView);
@@ -97,23 +103,9 @@ public class EditCenterTabDetailFragment extends Fragment {
             return false;
         });
 
-        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.addressIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.addressIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.addressIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
-        binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSelectedDialog(requireActivity(), "phones");
             return false;
         });
 
@@ -121,6 +113,14 @@ public class EditCenterTabDetailFragment extends Fragment {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.addressIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -242,16 +242,40 @@ public class EditCenterTabDetailFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!managerId.equals(""))
+            data.put("manager_id", managerId);
+        else
+            data.remove("manager_id");
+
+        if (!address.equals(""))
+            data.put("address", address);
+        else
+            data.remove("address");
+
+        if (!description.equals(""))
+            data.put("description", description);
+        else
+            data.remove("description");
+
+        if (!phonesAdapter.getIds().isEmpty())
+            data.put("phone_numbers", phonesAdapter.getIds());
+        else
+            data.remove("phone_numbers");
+
+        if (type.equals("counseling_center")) {
+            if (!title.equals(""))
+                data.put("title", title);
+            else
+                data.remove("title");
+        }
+
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("manager_id", managerId);
-        data.put("address", address);
-        data.put("description", description);
-        data.put("phone_numbers", phonesAdapter.getIds());
-
-        if (type.equals("counseling_center"))
-            data.put("title", title);
+        setHashmap();
 
         Center.edit(data, header, new Response() {
             @Override
