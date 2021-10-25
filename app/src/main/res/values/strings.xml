@@ -55,6 +55,7 @@
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
     <string name="SnackCreatedNewCase">پرونده جدید ساخته شد.</string>
     <string name="SnackCreatedNewCaseUser">عضو جدید پرونده ثبت شد.</string>
+    <string name="SnackCreatedNewCenter">مرکز درمانی جدید ساخته شد.</string>
     <string name="SnackCreatedNewCenterUser">عضو جدید مرکز ثبت شد.</string>
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
     <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
@@ -335,6 +336,26 @@
     <string name="CreateCaseUserFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
 
     <string name="CreateCaseUserFragmentButton">ثبت</string>
+
+
+    ---------- // CreateCenterFragment
+
+    <string name="CreateCenterFragmentTitle">ساخت مرکز درمانی جدید</string>
+
+    <string name="CreateCenterFragmentTypeHeader">نوع مرکز درمانی</string>
+    <string name="CreateCenterFragmentManagerHeader">مدیر</string>
+    <string name="CreateCenterFragmentTitleHeader">عنوان</string>
+    <string name="CreateCenterFragmentAvatarHeader">تصویر نمایشی</string>
+    <string name="CreateCenterFragmentAddressHeader">آدرس</string>
+    <string name="CreateCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
+    <string name="CreateCenterFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="CreateCenterFragmentAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+
+    <string name="CreateCenterFragmentPersonalClinic">شخصی</string>
+    <string name="CreateCenterFragmentCounselingCenter">مرکز مشاوره</string>
+
+    <string name="CreateCenterFragmentButton">ساخت</string>
 
 
     ---------- // CreateCenterUserFragment
@@ -1275,29 +1296,63 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Create Fragments
     //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- CreateCenter Fragment ----------
-    */
-
-    <string name="CreateCenterFragmentTitle">ساخت مرکز درمانی جدید</string>
-
-    <string name="CreateCenterFragmentTypeHeader">نوع مرکز درمانی</string>
-    <string name="CreateCenterFragmentManagerHeader">مدیر</string>
-    <string name="CreateCenterFragmentTitleHeader">عنوان</string>
-    <string name="CreateCenterFragmentAvatarHeader">تصویر نمایشی</string>
-    <string name="CreateCenterFragmentAddressHeader">آدرس</string>
-    <string name="CreateCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
-    <string name="CreateCenterFragmentDescriptionHeader">توضیحات</string>
-
-    <string name="CreateCenterFragmentAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
-
-    <string name="CreateCenterFragmentPersonalClinic">شخصی</string>
-    <string name="CreateCenterFragmentCounselingCenter">مرکز مشاوره</string>
-
-    <string name="CreateCenterFragmentButton">ساخت</string>
 
     /*
     ---------- CreatePlatform Fragment ----------
@@ -1821,7 +1876,6 @@
     <string name="ToastNewReferenceAdded">عضو جدید افزوده شد.</string>
     <string name="ToastNewSessionAdded">جلسه جدید افزوده شد.</string>
     <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>
-    <string name="ToastNewCenterAdded">مرکز جدید افزوده شد.</string>
     <string name="ToastNewPlatformAdded">محل برگزاری جدید افزوده شد.</string>
     <string name="ToastNewScheduleReserved">برنامه درمانی رزرو شد.</string>
     <string name="ToastNewSuccesPayment">پرداخت انجام شد.</string>

@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_12sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:paddingBottom="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
             app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +100,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintRight_toRightOf="@id/type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/title_errorLayout" />
 
             <include
@@ -118,10 +120,10 @@
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/avatar_errorLayout"
-                app:layout_goneMarginTop="@dimen/_6sdp" />
+                app:layout_constraintTop_toBottomOf="@id/avatar_errorLayout" />
 
             <include
                 android:id="@+id/address_includeLayout"
@@ -201,7 +203,9 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintRight_toRightOf="@id/container_constraintLayout"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/container_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/container_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/container_constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
