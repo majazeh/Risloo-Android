@@ -166,7 +166,7 @@ public class CreateCaseUserFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCaseUser));
 
                         NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(caseModel, userModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);

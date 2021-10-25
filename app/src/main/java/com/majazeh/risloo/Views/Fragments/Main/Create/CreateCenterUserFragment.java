@@ -14,20 +14,20 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,11 +40,14 @@ public class CreateCenterUserFragment extends Fragment {
     // Binding
     private FragmentCreateCenterUserBinding binding;
 
+    // Models
+    public CenterModel centerModel;
+
     // Objects
     private HashMap data, header;
 
     // Vars
-    public String centerId = "", type = "", mobile = "", position = "", roomId = "", nickname = "", createCase = "0";
+    private String type = "", mobile = "", position = "", roomId = "", nickname = "", createCase = "0";
     private boolean userSelect = false;
 
     @Nullable
@@ -77,7 +80,7 @@ public class CreateCenterUserFragment extends Fragment {
 
         InitManager.input12sspSpinner(requireActivity(), binding.positionIncludeLayout.selectSpinner, R.array.UserTypes);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -88,14 +91,33 @@ public class CreateCenterUserFragment extends Fragment {
             return false;
         });
 
+        binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
+            return false;
+        });
+
         binding.mobileIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.nicknameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked)
+                createCase = "1";
+            else
+                createCase = "0";
         });
 
         binding.positionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
+
+        binding.positionIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.positionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -130,23 +152,6 @@ public class CreateCenterUserFragment extends Fragment {
             DialogManager.showSearchableDialog(requireActivity(), "rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
 
-        binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.nicknameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
-        binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked)
-                createCase = "1";
-            else
-                createCase = "0";
-        });
-
         CustomClickView.onDelayedListener(() -> {
             if (binding.mobileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
@@ -167,15 +172,16 @@ public class CreateCenterUserFragment extends Fragment {
         TypeModel typeModel = CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
-                setData((CenterModel) typeModel);
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel")) {
+                centerModel = (CenterModel) typeModel;
+                setData(centerModel);
+            }
         }
     }
 
     private void setData(CenterModel model) {
         if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-            centerId = model.getCenterId();
-            data.put("id", centerId);
+            data.put("id", model.getCenterId());
         }
 
         if (model.getCenterType() != null && !model.getCenterType().equals("")) {
@@ -221,23 +227,52 @@ public class CreateCenterUserFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!mobile.equals(""))
+            data.put("mobile", mobile);
+        else
+            data.remove("mobile");
+
+        if (type.equals("counseling_center")) {
+            if (!position.equals(""))
+                data.put("position", SelectionManager.getUserType(requireActivity(), "en", position));
+            else
+                data.remove("position");
+
+            if (position.equals("مراجع")) {
+                if (!roomId.equals(""))
+                    data.put("room_id", roomId);
+                else
+                    data.remove("room_id");
+
+                if (!nickname.equals(""))
+                    data.put("nickname", nickname);
+                else
+                    data.remove("nickname");
+
+                if (!createCase.equals(""))
+                    data.put("create_case", createCase);
+                else
+                    data.remove("create_case");
+            }
+
+        } else {
+            if (!nickname.equals(""))
+                data.put("nickname", nickname);
+            else
+                data.remove("nickname");
+
+            if (!createCase.equals(""))
+                data.put("create_case", createCase);
+            else
+                data.remove("create_case");
+        }
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("mobile", mobile);
-
-        if (type.equals("counseling_center")) {
-            data.put("position", SelectionManager.getUserType(requireActivity(), "en", position));
-
-            if (position.equals("مراجع")) {
-                data.put("room_id", roomId);
-                data.put("nickname", nickname);
-                data.put("create_case", createCase);
-            }
-        } else {
-            data.put("nickname", nickname);
-            data.put("create_case", createCase);
-        }
+        setHashmap();
 
         Center.createUser(data, header, new Response() {
             @Override
@@ -248,7 +283,6 @@ public class CreateCenterUserFragment extends Fragment {
                             AuthModel model = new AuthModel((JSONObject) object);
 
                             DialogManager.dismissLoadingDialog();
-
                             SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getUserModel());
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -312,6 +346,7 @@ public class CreateCenterUserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }

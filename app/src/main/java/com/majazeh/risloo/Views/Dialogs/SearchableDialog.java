@@ -253,7 +253,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CreateCenterUserFragment) {
             if (method.equals("rooms")) {
-                data.put("center", ((CreateCenterUserFragment) current).centerId);
+                data.put("center", ((CreateCenterUserFragment) current).centerModel.getCenterId());
             }
         }
 

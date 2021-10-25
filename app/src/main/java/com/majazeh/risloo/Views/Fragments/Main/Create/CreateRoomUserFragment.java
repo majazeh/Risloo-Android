@@ -166,7 +166,7 @@ public class CreateRoomUserFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoomUser));
 
                         NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, userModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);

@@ -334,6 +334,22 @@
     <string name="CreateCaseUserFragmentButton">ثبت</string>
 
 
+    ---------- // CreateCenterUserFragment
+
+    <string name="CreateCenterUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateCenterUserFragmentMobileHeader">موبایل</string>
+    <string name="CreateCenterUserFragmentPositionHeader">موقعیت</string>
+    <string name="CreateCenterUserFragmentRoomHeader">اتاق درمان</string>
+    <string name="CreateCenterUserFragmentNicknameHeader">نام مراجع</string>
+
+    <string name="CreateCenterUserFragmentNicknameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+
+    <string name="CreateCenterUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
+
+    <string name="CreateCenterUserFragmentButton">ثبت</string>
+
+
     ---------- // CreateDocumentFragment
 
     <string name="CreateDocumentFragmentTitle">ساخت مدرک جدید</string>
@@ -1243,23 +1259,6 @@
     <string name="CreateCenterFragmentCounselingCenter">مرکز مشاوره</string>
 
     <string name="CreateCenterFragmentButton">ساخت</string>
-
-    /*
-    ---------- CreateCenterUser Fragment ----------
-    */
-
-    <string name="CreateCenterUserFragmentTitle">ثبت عضو جدید</string>
-
-    <string name="CreateCenterUserFragmentMobileHeader">موبایل</string>
-    <string name="CreateCenterUserFragmentPositionHeader">موقعیت</string>
-    <string name="CreateCenterUserFragmentRoomHeader">اتاق درمان</string>
-    <string name="CreateCenterUserFragmentNicknameHeader">نام مراجع</string>
-
-    <string name="CreateCenterUserFragmentNicknameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
-
-    <string name="CreateCenterUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
-
-    <string name="CreateCenterUserFragmentButton">ثبت</string>
 
     /*
     ---------- CreatePlatform Fragment ----------
