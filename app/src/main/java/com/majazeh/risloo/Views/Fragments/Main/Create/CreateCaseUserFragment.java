@@ -168,7 +168,7 @@ public class CreateCaseUserFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCaseUser));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(caseModel, userModel);
+                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(caseModel.getCaseRoom(), userModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }

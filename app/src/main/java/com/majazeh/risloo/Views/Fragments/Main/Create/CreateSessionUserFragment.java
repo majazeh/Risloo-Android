@@ -302,7 +302,7 @@ public class CreateSessionUserFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSessionUser));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(sessionModel, userModel);
+                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(sessionModel.getCaseModel().getCaseRoom(), userModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
