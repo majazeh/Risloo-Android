@@ -43,6 +43,14 @@ public class Session extends Model {
         }
     }
 
+    public static void showDashboradWithFillAccount(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.show(endpoint + "/" + data.get("id") + "/dashboard?fillAccounting=1", data, header, response, SessionModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
             Model.post("rooms/" + data.get("id") + "/schedules", data, header, response, null);

@@ -51,4 +51,12 @@ public class Billing extends Model {
         }
     }
 
+    public static void addBill(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.post(endpoint + "/" + data.get("id"), data, header, response, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
