@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
@@ -47,6 +48,8 @@ import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -226,11 +229,25 @@ public class SearchableDialog extends AppCompatDialogFragment {
         if (current instanceof CreateCaseFragment) {
             switch (method) {
                 case "references":
-                    data.put("id", ((CreateCaseFragment) current).roomId);
+                    if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
+                        CenterModel centerModel = (CenterModel) ((CreateCaseFragment) current).typeModel;
+                        data.put("id", centerModel.getCenterId());
+                    } else if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
+                        RoomModel roomModel = (RoomModel) ((CreateCaseFragment) current).typeModel;
+                        data.put("id", roomModel.getRoomId());
+                    }
+
                     data.put("usage", "create_case");
                     break;
                 case "tags":
-                    data.put("region", ((CreateCaseFragment) current).centerId);
+                    if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
+                        CenterModel centerModel = (CenterModel) ((CreateCaseFragment) current).typeModel;
+                        data.put("region", centerModel.getCenterId());
+                    } else if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
+                        RoomModel roomModel = (RoomModel) ((CreateCaseFragment) current).typeModel;
+                        data.put("region", roomModel.getRoomCenter().getCenterId());
+                    }
+
                     break;
             }
         }

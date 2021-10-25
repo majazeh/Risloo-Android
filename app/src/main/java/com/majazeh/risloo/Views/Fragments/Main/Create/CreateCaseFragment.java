@@ -46,11 +46,14 @@ public class CreateCaseFragment extends Fragment {
     // Adapters
     public DialogSelectedAdapter referencesAdapter, tagsAdapter;
 
+    // Models
+    public TypeModel typeModel;
+
     // Objects
     private HashMap data, header;
 
     // Vars
-    public String roomId = "", centerId = "", title = "", problem = "";
+    private String title = "", problem = "";
 
     @Nullable
     @Override
@@ -136,7 +139,7 @@ public class CreateCaseFragment extends Fragment {
     }
 
     private void setArgs() {
-        TypeModel typeModel = CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        typeModel = CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
             if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
@@ -152,10 +155,7 @@ public class CreateCaseFragment extends Fragment {
 
     private void setData(CenterModel model) {
         if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-            roomId = model.getCenterId();
-            data.put("id", roomId);
-
-            centerId = roomId;
+            data.put("id", model.getCenterId());
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
@@ -164,12 +164,7 @@ public class CreateCaseFragment extends Fragment {
 
     private void setData(RoomModel model) {
         if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            roomId = model.getRoomId();
-            data.put("id", roomId);
-        }
-
-        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
-            centerId = model.getRoomCenter().getCenterId();
+            data.put("id", model.getRoomId());
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
