@@ -9,17 +9,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.RoomsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableCaseAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.RoomsAdapter;
 import com.majazeh.risloo.databinding.FragmentReferenceBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -45,6 +47,8 @@ public class ReferenceFragment extends Fragment {
 
     // Models
     private UserModel userModel;
+    private CenterModel centerModel;
+    private RoomModel roomModel;
 
     // Objects
     private HashMap data, header;
@@ -99,7 +103,14 @@ public class ReferenceFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code Here
+            NavDirections action;
+
+            if (!type.equals("room"))
+                action = NavigationMainDirections.actionGlobalEditCenterUserFragment(centerModel, userModel);
+            else
+                action = NavigationMainDirections.actionGlobalEditCenterUserFragment(roomModel, userModel);
+
+            ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.editImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
@@ -114,10 +125,13 @@ public class ReferenceFragment extends Fragment {
     private void setArgs() {
         TypeModel centerModel = ReferenceFragmentArgs.fromBundle(getArguments()).getCenterModel();
 
-        if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
-            setData((CenterModel) centerModel);
-        else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel"))
-            setData((RoomModel) centerModel);
+        if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel")) {
+            this.centerModel = (CenterModel) centerModel;
+            setData(this.centerModel);
+        } else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel")) {
+            this.roomModel = (RoomModel) centerModel;
+            setData(this.roomModel);
+        }
 
         TypeModel typeModel = ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
@@ -129,10 +143,10 @@ public class ReferenceFragment extends Fragment {
         } else {
             userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
 
-            if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
-                setData(((CenterModel) centerModel).getAcceptation());
-            else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel"))
-                setData(((RoomModel) centerModel).getRoomAcceptation());
+            if (!type.equals("room"))
+                setData(this.centerModel.getAcceptation());
+            else
+                setData(this.roomModel.getRoomAcceptation());
         }
     }
 
