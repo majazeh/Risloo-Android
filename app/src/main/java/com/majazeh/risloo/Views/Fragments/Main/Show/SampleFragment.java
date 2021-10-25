@@ -222,7 +222,7 @@ public class SampleFragment extends Fragment {
         setScoring(status);
 
         if (!isLoading) {
-            setEditable(status);
+//            setEditable(status);
 
             setProfiles(status);
         }
