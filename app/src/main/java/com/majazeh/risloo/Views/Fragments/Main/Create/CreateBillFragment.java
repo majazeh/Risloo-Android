@@ -234,8 +234,10 @@ public class CreateBillFragment extends Fragment {
         for (TypeModel typeModel : clients.data()) {
             UserModel model = (UserModel) typeModel;
 
-            options.add(model.getName());
-            referenceIds.add(model.getId());
+            if (model != null) {
+                options.add(model.getName());
+                referenceIds.add(model.getId());
+            }
         }
 
         options.add("");

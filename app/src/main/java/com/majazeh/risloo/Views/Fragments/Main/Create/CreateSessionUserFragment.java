@@ -224,8 +224,10 @@ public class CreateSessionUserFragment extends Fragment {
         for (TypeModel typeModel : platforms.data()) {
             SessionPlatformModel model = (SessionPlatformModel) typeModel;
 
-            options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
-            platformIds.add(model.getId());
+            if (model != null) {
+                options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
+                platformIds.add(model.getId());
+            }
         }
 
         options.add("");
@@ -241,7 +243,9 @@ public class CreateSessionUserFragment extends Fragment {
             for (TypeModel typeModel : clients.data()) {
                 UserModel model = (UserModel) typeModel;
 
-                items.add(model);
+                if (model != null) {
+                    items.add(model);
+                }
             }
 
             setRecyclerView(items, new ArrayList<>(), "clients");

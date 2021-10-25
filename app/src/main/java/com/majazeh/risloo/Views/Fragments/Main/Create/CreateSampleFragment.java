@@ -467,9 +467,10 @@ public class CreateSampleFragment extends Fragment {
             binding.caseIncludeLayout.secondaryTextView.setText("");
 
             for (int i = 0; i < clients.data().size(); i++) {
-                UserModel user = (UserModel) clients.data().get(i);
-                if (user != null) {
-                    binding.caseIncludeLayout.secondaryTextView.append(user.getName());
+                UserModel model = (UserModel) clients.data().get(i);
+
+                if (model != null) {
+                    binding.caseIncludeLayout.secondaryTextView.append(model.getName());
                     if (i != clients.data().size() - 1)
                         binding.caseIncludeLayout.secondaryTextView.append("  -  ");
 
@@ -481,6 +482,7 @@ public class CreateSampleFragment extends Fragment {
             binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
         } else {
             binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
+            binding.caseIncludeLayout.secondaryTextView.setText("");
 
             clientsAdapter.clearItems();
             binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);

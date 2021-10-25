@@ -108,9 +108,9 @@ public class TableClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
         if (clients != null && clients.data().size() != 0) {
             holder.binding.referenceTextView.setText("");
             for (int i = 0; i < clients.data().size(); i++) {
-                UserModel user = (UserModel) clients.data().get(i);
-                if (user != null) {
-                    holder.binding.referenceTextView.append(user.getName());
+                UserModel model = (UserModel) clients.data().get(i);
+                if (model != null) {
+                    holder.binding.referenceTextView.append(model.getName());
                     if (i != clients.data().size() - 1) {
                         holder.binding.referenceTextView.append("\n");
                     }
@@ -123,9 +123,9 @@ public class TableClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
         if (viewers != null && viewers.data().size() != 0) {
             holder.binding.readersTextView.setText("");
             for (int i = 0; i < viewers.data().size(); i++) {
-                UserModel user = (UserModel) viewers.data().get(i);
-                if (user != null) {
-                    holder.binding.readersTextView.append(user.getName());
+                UserModel model = (UserModel) viewers.data().get(i);
+                if (model != null) {
+                    holder.binding.readersTextView.append(model.getName());
                     if (i != viewers.data().size() - 1) {
                         holder.binding.readersTextView.append("\n");
                     }
