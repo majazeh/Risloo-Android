@@ -237,8 +237,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CreateCaseUserFragment) {
             if (method.equals("references")) {
-                data.put("id", ((CreateCaseUserFragment) current).roomId);
-                data.put("not_in_case", ((CreateCaseUserFragment) current).caseId);
+                data.put("id", ((CreateCaseUserFragment) current).caseModel.getCaseRoom().getRoomId());
+                data.put("not_in_case", ((CreateCaseUserFragment) current).caseModel.getCaseId());
             }
         }
 
@@ -267,8 +267,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CreateRoomUserFragment) {
             if (method.equals("references")) {
-                data.put("id", ((CreateRoomUserFragment) current).centerId);
-                data.put("acceptation_room", ((CreateRoomUserFragment) current).roomId);
+                data.put("id", ((CreateRoomUserFragment) current).roomModel.getRoomCenter().getCenterId());
+                data.put("acceptation_room", ((CreateRoomUserFragment) current).roomModel.getRoomId());
             }
         }
 

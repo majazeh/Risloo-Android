@@ -54,9 +54,11 @@
     <string name="SnackCreatedNewBill">فاکتور جدید ساخته شد.</string>
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
     <string name="SnackCreatedNewCase">پرونده جدید ساخته شد.</string>
+    <string name="SnackCreatedNewCaseUser">عضو جدید پرونده ثبت شد.</string>
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
     <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
     <string name="SnackCreatedNewReport">گزارش جدید ساخته شد.</string>
+    <string name="SnackCreatedNewRoomUser">عضو جدید اتاق ثبت شد.</string>
     <string name="SnackCreatedNewSample">نمونه جدید ساخته شد.</string>
     <string name="SnackCreatedNewTreasury">کیف پول جدید ساخته شد.</string>
     <string name="SnackCreatedNewUser">کاربر جدید ایجاد شد.</string>
@@ -321,6 +323,17 @@
     <string name="CreateCaseFragmentButton">ساخت</string>
 
 
+    ---------- // CreateCaseUserFragment
+
+    <string name="CreateCaseUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateCaseUserFragmentReferenceHeader">مراجع(ین)</string>
+
+    <string name="CreateCaseUserFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
+
+    <string name="CreateCaseUserFragmentButton">ثبت</string>
+
+
     ---------- // CreateDocumentFragment
 
     <string name="CreateDocumentFragmentTitle">ساخت مدرک جدید</string>
@@ -341,6 +354,17 @@
     <string name="CreatePracticeFragmentFileHeader">پیوست</string>
 
     <string name="CreatePracticeFragmentButton">ساخت</string>
+
+
+    ---------- // CreateRoomUserFragment
+
+    <string name="CreateRoomUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateRoomUserFragmentReferenceHeader">مراجع(ین)</string>
+
+    <string name="CreateRoomUserFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
+
+    <string name="CreateRoomUserFragmentButton">ثبت</string>
 
 
     ---------- // CreateClientReportFragment
@@ -1200,18 +1224,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- CreateCaseUser Fragment ----------
-    */
-
-    <string name="CreateCaseUserFragmentTitle">ثبت عضو جدید</string>
-
-    <string name="CreateCaseUserFragmentReferenceHeader">مراجع(ین)</string>
-
-    <string name="CreateCaseUserFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
-
-    <string name="CreateCaseUserFragmentButton">ثبت</string>
-
-    /*
     ---------- CreateCenter Fragment ----------
     */
 
@@ -1275,18 +1287,6 @@
     <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
 
     <string name="CreateRoomFragmentButton">ساخت</string>
-
-    /*
-    ---------- CreateRoomUser Fragment ----------
-    */
-
-    <string name="CreateRoomUserFragmentTitle">ثبت عضو جدید</string>
-
-    <string name="CreateRoomUserFragmentReferenceHeader">مراجع(ین)</string>
-
-    <string name="CreateRoomUserFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
-
-    <string name="CreateRoomUserFragmentButton">ثبت</string>
 
     /*
     ---------- CreateSchedule Fragment ----------

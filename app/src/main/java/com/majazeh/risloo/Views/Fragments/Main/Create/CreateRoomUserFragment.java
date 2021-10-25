@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -41,11 +43,11 @@ public class CreateRoomUserFragment extends Fragment {
     // Adapters
     public DialogSelectedAdapter referencesAdapter;
 
+    // Models
+    public RoomModel roomModel;
+
     // Objects
     private HashMap data, header;
-
-    // Vars
-    public String roomId = "", centerId = "";
 
     @Nullable
     @Override
@@ -74,7 +76,7 @@ public class CreateRoomUserFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -97,9 +99,10 @@ public class CreateRoomUserFragment extends Fragment {
         TypeModel typeModel = CreateRoomUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
-                setData((RoomModel) typeModel);
-
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel")) {
+                roomModel = (RoomModel) typeModel;
+                setData(roomModel);
+            }
         } else {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
         }
@@ -107,12 +110,7 @@ public class CreateRoomUserFragment extends Fragment {
 
     private void setData(RoomModel model) {
         if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            roomId = model.getRoomId();
-            data.put("id", roomId);
-        }
-
-        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
-            centerId = model.getRoomCenter().getCenterId();
+            data.put("id", model.getRoomId());
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
@@ -148,20 +146,30 @@ public class CreateRoomUserFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!referencesAdapter.getIds().isEmpty())
+            data.put("user_id", referencesAdapter.getIds());
+        else
+            data.remove("user_id");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("user_id", referencesAdapter.getIds());
+        setHashmap();
 
         Room.createUser(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                UserModel userModel = (UserModel) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, userModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
             }

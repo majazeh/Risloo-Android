@@ -10,20 +10,22 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
+import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
-import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -41,11 +43,11 @@ public class CreateCaseUserFragment extends Fragment {
     // Adapters
     public DialogSelectedAdapter referencesAdapter;
 
+    // Models
+    public CaseModel caseModel;
+
     // Objects
     private HashMap data, header;
-
-    // Vars
-    public String caseId = "", roomId = "";
 
     @Nullable
     @Override
@@ -74,7 +76,7 @@ public class CreateCaseUserFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCaseUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCaseUserFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -97,9 +99,10 @@ public class CreateCaseUserFragment extends Fragment {
         TypeModel typeModel = CreateCaseUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
-                setData((CaseModel) typeModel);
-
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel")) {
+                caseModel = (CaseModel) typeModel;
+                setData(caseModel);
+            }
         } else {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
         }
@@ -107,19 +110,14 @@ public class CreateCaseUserFragment extends Fragment {
 
     private void setData(CaseModel model) {
         if (model.getCaseId() != null && !model.getCaseId().equals("")) {
-            caseId = model.getCaseId();
-            data.put("id", caseId);
-        }
-
-        if (model.getCaseRoom() != null && model.getCaseRoom().getRoomId() != null && !model.getCaseRoom().getRoomId().equals("")) {
-            roomId = model.getCaseRoom().getRoomId();
+            data.put("id", model.getCaseId());
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
-         if (method.equals("references")) {
+        if (method.equals("references")) {
             referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
         }
@@ -148,20 +146,30 @@ public class CreateCaseUserFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!referencesAdapter.getIds().isEmpty())
+            data.put("client_id", referencesAdapter.getIds());
+        else
+            data.remove("client_id");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("client_id", referencesAdapter.getIds());
+        setHashmap();
 
         Case.addClient(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                UserModel userModel = (UserModel) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(caseModel, userModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
             }
