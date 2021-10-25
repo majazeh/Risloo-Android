@@ -485,6 +485,21 @@
     ***/
 
 
+    ---------- // EditCenterUserFragment
+
+    <string name="EditCenterUserFragmentTitle">ویرایش عضو</string>
+
+    <string name="EditCenterUserFragmentPositionHeader">موقعیت</string>
+    <string name="EditCenterUserFragmentNicknameHeader">نام مراجع</string>
+    <string name="EditCenterUserFragmentStatusHeader">وضعیت</string>
+
+    <string name="EditCenterUserFragmentNicknameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+
+    <string name="EditCenterUserFragmentStatusAccept">پذیرفتن</string>
+    <string name="EditCenterUserFragmentStatusKick">تعلیق</string>
+
+    <string name="EditCenterUserFragmentButton">ویرایش</string>
+
 
     ---------- // EditTreasuryFragment
 
@@ -1470,23 +1485,6 @@
     <string name="EditCenterTabAvatarAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
 
     <string name="EditCenterTabAvatarButton">ویرایش</string>
-
-    /*
-    ---------- EditCenterUser Fragment ----------
-    */
-
-    <string name="EditCenterUserFragmentTitle">ویرایش عضو مرکز درمانی</string>
-
-    <string name="EditCenterUserFragmentPositionHeader">موقعیت</string>
-    <string name="EditCenterUserFragmentNicknameHeader">نام مراجع</string>
-    <string name="EditCenterUserFragmentStatusHeader">وضعیت</string>
-
-    <string name="EditCenterUserFragmentNicknameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
-
-    <string name="EditCenterUserFragmentStatusAccept">پذیرفتن</string>
-    <string name="EditCenterUserFragmentStatusKick">تعلیق</string>
-
-    <string name="EditCenterUserFragmentButton">ویرایش</string>
 
     /*
     ---------- EditPlatform Fragment ----------
