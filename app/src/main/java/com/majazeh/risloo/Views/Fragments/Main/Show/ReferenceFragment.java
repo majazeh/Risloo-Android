@@ -161,8 +161,8 @@ public class ReferenceFragment extends Fragment {
     }
 
     private void setData(RoomModel model) {
-        if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            data.put("id", model.getRoomId());
+        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
+            data.put("id", model.getRoomCenter().getCenterId());
         }
 
         if (model.getRoomType() != null && !model.getRoomType().equals("")) {
