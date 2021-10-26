@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             app:cardCornerRadius="@dimen/_2sdp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +43,7 @@
                     android:layout_margin="@dimen/_1sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
-                    android:background="@drawable/draw_grad_2sdp_solid_lightblue100_white_border_bottom_2sdp_gray200"
+                    android:background="@drawable/draw_grad_rec_solid_lightblue100_white_border_bottom_1sdp_coolgray200"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -72,9 +73,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
+                    app:layout_goneMarginLeft="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
-                    app:layout_constraintLeft_toRightOf="@id/menu_spinner"
-                    app:layout_goneMarginLeft="@dimen/_8sdp" />
+                    app:layout_constraintLeft_toRightOf="@id/menu_spinner" />
 
                 <TextView
                     android:id="@+id/name_textView"
@@ -163,12 +164,10 @@
                     android:textColor="@color/CoolGray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@id/name_textView"
                     app:layout_constraintStart_toStartOf="@id/name_textView"
                     app:layout_constraintTop_toBottomOf="@id/mobile_textView"
-                    tools:text="وضعیت"
-                    tools:visibility="visible" />
+                    tools:text="وضعیت" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/description_group"
@@ -189,32 +188,36 @@
         </androidx.cardview.widget.CardView>
 
         <include
-            android:id="@+id/header_includeLayout"
+            android:id="@+id/cases_headerLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_4sdp"
             android:layout_marginTop="@dimen/_18sdp"
+            app:layout_goneMarginEnd="0dp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toStartOf="@id/cases_addView"
             app:layout_constraintStart_toStartOf="@id/container_cardView"
             app:layout_constraintTop_toBottomOf="@id/container_cardView" />
 
         <include
-            android:id="@+id/add_imageView"
+            android:id="@+id/cases_addView"
             layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
-            app:layout_constraintBottom_toBottomOf="@id/header_includeLayout"
+            app:layout_constraintBottom_toBottomOf="@id/cases_headerLayout"
             app:layout_constraintEnd_toEndOf="@id/container_cardView"
-            app:layout_constraintTop_toTopOf="@id/header_includeLayout" />
+            app:layout_constraintTop_toTopOf="@id/cases_headerLayout" />
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/cases_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="header_includeLayout, add_imageView" />
+            app:constraint_referenced_ids="cases_headerLayout, cases_addView" />
 
         <HorizontalScrollView
-            android:id="@+id/filter_horizontalScrollView"
+            android:id="@+id/cases_filterView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -273,7 +276,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_horizontalScrollView"
+            app:layout_constraintTop_toBottomOf="@id/cases_filterView"
             tools:visibility="gone" />
 
         <include
@@ -284,7 +287,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_horizontalScrollView"
+            app:layout_constraintTop_toBottomOf="@id/cases_filterView"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

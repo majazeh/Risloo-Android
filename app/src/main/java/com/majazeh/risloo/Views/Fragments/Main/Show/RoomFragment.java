@@ -88,9 +88,9 @@ public class RoomFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
+        binding.casesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
 
-        InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.casesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
         InitManager.fixedHorizontalRecyclerView(requireActivity(), binding.tagsRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
@@ -379,7 +379,7 @@ public class RoomFragment extends Fragment {
                 NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(roomModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
-        }).widget(binding.addImageView.getRoot());
+        }).widget(binding.casesAddView.getRoot());
     }
 
     private void setArgs() {
@@ -616,7 +616,7 @@ public class RoomFragment extends Fragment {
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
 
         if (type.equals("room") && ((MainActivity) requireActivity()).permissoon.showRoomDropdownCreateSchedule(((MainActivity) requireActivity()).singleton.getUserModel(), status))
-            items.add(requireActivity().getResources().getString(R.string.RoomFragmentAddSchedule));
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentCreateSchedule));
 
         if (!type.equals("room") && ((MainActivity) requireActivity()).permissoon.showRoomDropdownProfile(status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
@@ -625,7 +625,7 @@ public class RoomFragment extends Fragment {
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
 
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
-            items.add(requireActivity().getResources().getString(R.string.RoomFragmentPlatforms));
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentSessionPlatforms));
 
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownTags(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
@@ -669,9 +669,9 @@ public class RoomFragment extends Fragment {
 
     private void setPermission(String status) {
         if (((MainActivity) requireActivity()).permissoon.showRoomCreateCase(((MainActivity) requireActivity()).singleton.getUserModel(), status))
-            binding.addImageView.getRoot().setVisibility(View.VISIBLE);
+            binding.casesAddView.getRoot().setVisibility(View.VISIBLE);
         else
-            binding.addImageView.getRoot().setVisibility(View.GONE);
+            binding.casesAddView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {
@@ -703,7 +703,7 @@ public class RoomFragment extends Fragment {
                                 binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.Cases2AdapterEmpty));
                             }
 
-                            binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
+                            binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
 
                             // Tags Data
                             if (!isFiltered) {
@@ -711,9 +711,9 @@ public class RoomFragment extends Fragment {
                                     filterTagsAdapter.setItems(roomModel.getPinned_tags().data());
                                     binding.tagsRecyclerView.setAdapter(filterTagsAdapter);
 
-                                    binding.filterHorizontalScrollView.setVisibility(View.VISIBLE);
+                                    binding.casesFilterView.setVisibility(View.VISIBLE);
                                 } else if (filterTagsAdapter.getItemCount() == 0) {
-                                    binding.filterHorizontalScrollView.setVisibility(View.GONE);
+                                    binding.casesFilterView.setVisibility(View.GONE);
                                 }
                             }
 

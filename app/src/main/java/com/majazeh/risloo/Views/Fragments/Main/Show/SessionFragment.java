@@ -509,7 +509,7 @@ public class SessionFragment extends Fragment {
     }
 
     private void getData() {
-        Session.showDashborad(data, header, new Response() {
+        Session.showDashboradWithFillAccount(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 sessionModel = (SessionModel) object;

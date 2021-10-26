@@ -13,21 +13,33 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateBillBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Billing;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.BillingModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateBillFragment extends Fragment {
 
@@ -175,13 +187,7 @@ public class CreateBillFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
-
-                    switch(pos) {
-                        case "":
-
-                            break;
-                    }
+                    treasury = treasuryIds.get(position);
 
                     userSelect = false;
                 }
@@ -226,6 +232,10 @@ public class CreateBillFragment extends Fragment {
         if (model.getClients() != null && model.getClients().size() != 0) {
             setClients(model.getClients());
         }
+
+        if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getTreasuries() != null && model.getRoom().getRoomCenter().getTreasuries().size() != 0) {
+            setTreasury(model.getRoom().getRoomCenter().getTreasuries());
+        }
     }
 
     private void setClients(List clients) {
@@ -244,6 +254,24 @@ public class CreateBillFragment extends Fragment {
         referenceIds.add("");
 
         InitManager.input12sspSpinner(requireActivity(), binding.referenceIncludeLayout.selectSpinner, options);
+    }
+
+    private void setTreasury(List treasuries) {
+        ArrayList<String> options = new ArrayList<>();
+
+        for (TypeModel typeModel : treasuries.data()) {
+            TreasuriesModel model = (TreasuriesModel) typeModel;
+
+            if (model != null) {
+                options.add(model.getTitle());
+                treasuryIds.add(model.getId());
+            }
+        }
+
+        options.add("");
+        treasuryIds.add("");
+
+        InitManager.input12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
     }
 
     private void setHashmap() {
@@ -274,75 +302,75 @@ public class CreateBillFragment extends Fragment {
     }
 
     private void doWork() {
-//        DialogManager.showLoadingDialog(requireActivity(), "");
-//
-//        setHashmap();
-//
-//        Session.addBill(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                BillingModel billingModel = (BillingModel) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        DialogManager.dismissLoadingDialog();
-//                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBill));
-//
-//                        NavDirections action = NavigationMainDirections.actionGlobalBillFragment(billingModel);
-//                        ((MainActivity) requireActivity()).navController.navigate(action);
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            JSONObject responseObject = new JSONObject(response);
-//                            if (!responseObject.isNull("errors")) {
-//                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-//
-//                                Iterator<String> keys = (errorsObject.keys());
-//                                StringBuilder errors = new StringBuilder();
-//
-//                                while (keys.hasNext()) {
-//                                    String key = keys.next();
-//                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-//                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
-//
-//                                        switch (key) {
-//                                            case "title":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
-//                                                break;
-//                                            case "user_id":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
-//                                                break;
-//                                            case "type":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
-//                                                break;
-//                                            case "treasury":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
-//                                                break;
-//                                            case "amount":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
-//                                                break;
-//                                        }
-//
-//                                        errors.append(validation);
-//                                        errors.append("\n");
-//                                    }
-//                                }
-//
-//                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
+
+        Billing.addBill(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                BillingModel billingModel = (BillingModel) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBill));
+
+                        NavDirections action = NavigationMainDirections.actionGlobalBillFragment(billingModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                        switch (key) {
+                                            case "title":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "user_id":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "type":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "treasury":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "amount":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
+                                                break;
+                                        }
+
+                                        errors.append(validation);
+                                        errors.append("\n");
+                                    }
+                                }
+
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
