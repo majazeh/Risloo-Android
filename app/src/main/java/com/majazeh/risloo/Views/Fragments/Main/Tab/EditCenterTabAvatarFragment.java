@@ -108,14 +108,14 @@ public class EditCenterTabAvatarFragment extends Fragment {
                     data.put("id", model.getCenterId());
                 }
 
-                if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
+                if (model.getDetail() != null && model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
                     avatarPath = model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url");
 
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                     Picasso.get().load(avatarPath).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                    if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
+                    if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getDetail().getString("title")));
                     else if (model.getCenterId() != null && !model.getCenterId().equals(""))
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getCenterId()));

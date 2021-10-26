@@ -178,7 +178,7 @@ public class CaseFragment extends Fragment {
                 data.put("session_platforms", 1);
             }
 
-            if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().getString("problem").equals("")) {
+            if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().getString("problem").equals("") && !model.getDetail().getString("problem").equals("")) {
                 binding.problemTextView.setText(model.getDetail().getString("problem"));
             }
 
