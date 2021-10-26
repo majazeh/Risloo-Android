@@ -209,7 +209,7 @@ public class Center extends Model {
     public static void editUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id") && has(data, "userId"))
-                Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, null);
+                Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, UserModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {

@@ -169,7 +169,7 @@ public class Room extends Model {
     public static void createUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
-                Model.post(endpoint + "/" + data.get("id") + "/users", data, header, response, null);
+                Model.post(endpoint + "/" + data.get("id") + "/users", data, header, response, UserModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
