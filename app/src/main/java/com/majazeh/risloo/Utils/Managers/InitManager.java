@@ -844,8 +844,14 @@ public class InitManager {
                     case "ورود به کاربری":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_user_cog_light, null));
                         break;
-                    case "محل برگزاری":
+                    case "محل برگزاری جلسات":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_map_marker_alt_light, null));
+                        break;
+                    case "اتاق\u200Cهای درمان":
+                        dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_loveseat_light, null));
+                        break;
+                    case "حسابداری":
+                        dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_calculator_light, null));
                         break;
                     case "برچسب\u200Cهای مهم":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_tags_light, null));

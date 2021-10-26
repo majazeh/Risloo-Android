@@ -15,12 +15,12 @@ import androidx.navigation.NavDirections;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Cases2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.FilterTagsAdapter;
@@ -29,7 +29,6 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
-
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -41,6 +40,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class RoomFragment extends Fragment {
@@ -91,6 +91,7 @@ public class RoomFragment extends Fragment {
         binding.casesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
 
         InitManager.imgResTintBackground(requireActivity(), binding.casesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
+
         InitManager.fixedHorizontalRecyclerView(requireActivity(), binding.tagsRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
@@ -111,30 +112,36 @@ public class RoomFragment extends Fragment {
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
+        CustomClickView.onDelayedListener(() -> {
+            IntentManager.phone(requireActivity(), binding.mobileTextView.getText().toString());
+        }).widget(binding.mobileTextView);
+
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
                 case "اعضاء":
                     if (!type.equals("room")) {
-                        if (centerModel != null) {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } else {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(roomModel.getRoomCenter());
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        }
+                        NavDirections action;
+
+                        if (centerModel != null)
+                            action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                        else
+                            action = NavigationMainDirections.actionGlobalCenterUsersFragment(roomModel.getRoomCenter());
+
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
                         NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     } break;
                 case "برنامه درمانی":
                     if (!type.equals("room")) {
-                        if (centerModel != null) {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } else {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        }
+                        NavDirections action;
+
+                        if (centerModel != null)
+                            action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                        else
+                            action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
                         NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
@@ -145,56 +152,63 @@ public class RoomFragment extends Fragment {
                 } break;
                 case "پروفایل من":
                     if (!type.equals("room")) {
-                        if (centerModel != null) {
-                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } else {
-                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), null);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        }
+                        NavDirections action;
+
+                        if (centerModel != null)
+                            action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                        else
+                            action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), null);
+
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
                         NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     } break;
                 case "ویرایش":
                     if (!type.equals("room")) {
-                        if (centerModel != null) {
-                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } else {
-                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel.getRoomCenter());
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        }
+                        NavDirections action;
+
+                        if (centerModel != null)
+                            action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
+                        else
+                            action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel.getRoomCenter());
+
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
                         NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     } break;
-                case "محل برگزاری":
+                case "محل برگزاری جلسات":
                     if (!type.equals("room")) {
-                        if (centerModel != null) {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } else {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(roomModel.getRoomCenter());
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        }
+                        NavDirections action;
+
+                        if (centerModel != null)
+                            action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                        else
+                            action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(roomModel.getRoomCenter());
+
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
                         NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     } break;
                 case "برچسب\u200Cهای مهم":
                     if (!type.equals("room")) {
-                        if (centerModel != null) {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } else {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(roomModel.getRoomCenter());
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        }
+                        NavDirections action;
+
+                        if (centerModel != null)
+                            action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
+                        else
+                            action = NavigationMainDirections.actionGlobalCenterTagsFragment(roomModel.getRoomCenter());
+
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
                         NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     } break;
+                case "حسابداری": {
+                    // TODO : Place Code Here
+                } break;
             }
         }).widget(binding.menuSpinner.selectImageView);
 
@@ -203,6 +217,8 @@ public class RoomFragment extends Fragment {
             userSelect = true;
             return false;
         });
+
+        binding.menuSpinner.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.menuSpinner.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -213,26 +229,28 @@ public class RoomFragment extends Fragment {
                     switch (pos) {
                         case "اعضاء":
                             if (!type.equals("room")) {
-                                if (centerModel != null) {
-                                    NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                } else {
-                                    NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(roomModel.getRoomCenter());
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                }
+                                NavDirections action;
+
+                                if (centerModel != null)
+                                    action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                                else
+                                    action = NavigationMainDirections.actionGlobalCenterUsersFragment(roomModel.getRoomCenter());
+
+                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } break;
                         case "برنامه درمانی":
                             if (!type.equals("room")) {
-                                if (centerModel != null) {
-                                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                } else {
-                                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                }
+                                NavDirections action;
+
+                                if (centerModel != null)
+                                    action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                                else
+                                    action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+
+                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
@@ -243,56 +261,63 @@ public class RoomFragment extends Fragment {
                         } break;
                         case "پروفایل من":
                             if (!type.equals("room")) {
-                                if (centerModel != null) {
-                                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                } else {
-                                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), null);
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                }
+                                NavDirections action;
+
+                                if (centerModel != null)
+                                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                                else
+                                    action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), null);
+
+                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } break;
                         case "ویرایش":
                             if (!type.equals("room")) {
-                                if (centerModel != null) {
-                                    NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                } else {
-                                    NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel.getRoomCenter());
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                }
+                                NavDirections action;
+
+                                if (centerModel != null)
+                                    action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
+                                else
+                                    action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel.getRoomCenter());
+
+                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } break;
-                        case "محل برگزاری":
+                        case "محل برگزاری جلسات":
                             if (!type.equals("room")) {
-                                if (centerModel != null) {
-                                    NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                } else {
-                                    NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(roomModel.getRoomCenter());
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                }
+                                NavDirections action;
+
+                                if (centerModel != null)
+                                    action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                                else
+                                    action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(roomModel.getRoomCenter());
+
+                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } break;
                         case "برچسب\u200Cهای مهم":
                             if (!type.equals("room")) {
-                                if (centerModel != null) {
-                                    NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                } else {
-                                    NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(roomModel.getRoomCenter());
-                                    ((MainActivity) requireActivity()).navController.navigate(action);
-                                }
+                                NavDirections action;
+
+                                if (centerModel != null)
+                                    action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
+                                else
+                                    action = NavigationMainDirections.actionGlobalCenterTagsFragment(roomModel.getRoomCenter());
+
+                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
                                 NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } break;
+                        case "حسابداری": {
+                            // TODO : Place Code Here
+                        } break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -309,42 +334,17 @@ public class RoomFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.RoomFragmentRequest))) {
-                DialogManager.showLoadingDialog(requireActivity(), "");
-
-                Room.request(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        roomModel = (RoomModel) object;
-                        centerModel = roomModel.getRoomCenter();
-
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                setAcceptation(roomModel);
-
-                                DialogManager.dismissLoadingDialog();
-                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSuccesAcceptation));
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // Place Code if Needed
-                            });
-                        }
-                    }
-                });
+                doWork();
             } else {
                 if (!type.equals("room")) {
-                    if (centerModel != null) {
-                        NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
-                    } else {
-                        NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
-                        ((MainActivity) requireActivity()).navController.navigate(action);
-                    }
+                    NavDirections action;
+
+                    if (centerModel != null)
+                        action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                    else
+                        action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+
+                    ((MainActivity) requireActivity()).navController.navigate(action);
                 } else {
                     NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
                     ((MainActivity) requireActivity()).navController.navigate(action);
@@ -407,10 +407,10 @@ public class RoomFragment extends Fragment {
 
             if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals("")) {
                 binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getManager().getName());
-            } else if (model.getManager() != null) {
+            } else if (model.getManager() != null && model.getManager().getId() != null && !model.getManager().getId().equals("")) {
                 binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getManager().getId());
             } else {
-                binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + "نامعلوم");
+                binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             }
 
             if (model.getDetail() != null && model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
@@ -438,12 +438,12 @@ public class RoomFragment extends Fragment {
 
             if (model.getDetail() != null && model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-                Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
 
             setAcceptation(model);
@@ -466,18 +466,17 @@ public class RoomFragment extends Fragment {
             if (!type.equals("room")) {
                 if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
                     binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName());
-                else if (model.getRoomManager() != null)
+                else if (model.getRoomManager() != null && model.getRoomManager().getId() != null && !model.getRoomManager().getId().equals(""))
                     binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getId());
                 else
-                    binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + "نامعلوم");
-
+                    binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             } else {
                 if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
                     binding.nameTextView.setText(model.getRoomManager().getName());
-                else if (model.getRoomManager() != null)
+                else if (model.getRoomManager() != null && model.getRoomManager().getId() != null && !model.getRoomManager().getId().equals(""))
                     binding.nameTextView.setText(model.getRoomManager().getId());
                 else
-                    binding.nameTextView.setText("نامعلوم");
+                    binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             }
 
             if (!type.equals("room") && model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("description") && !model.getRoomCenter().getDetail().isNull("description") && !model.getRoomCenter().getDetail().getString("description").equals("")) {
@@ -505,12 +504,12 @@ public class RoomFragment extends Fragment {
 
             if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null && model.getRoomManager().getAvatar() .getMedium().getUrl() != null && !model.getRoomManager().getAvatar().getMedium().getUrl().equals("")) {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoomManager().getAvatar() .getMedium().getUrl()).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(model.getRoomManager().getAvatar() .getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-                Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
 
             setAcceptation(model);
@@ -577,26 +576,26 @@ public class RoomFragment extends Fragment {
                 binding.statusTextView.setVisibility(View.GONE);
                 binding.statusTextView.setText("");
             } else {
-                InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_lightblue600_ripple_lightblue300);
+                InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 binding.statusTextView.setVisibility(View.VISIBLE);
                 binding.statusTextView.setText(SelectionManager.getCenterStatus(requireActivity(), "fa", status));
 
                 switch (status) {
                     case "accepted":
-                        binding.statusTextView.setTextColor(getResources().getColor(R.color.Emerald600));
+                        binding.statusTextView.setTextColor(getResources().getColor(R.color.Emerald500));
                         break;
                     case "kicked":
-                        binding.statusTextView.setTextColor(getResources().getColor(R.color.Red600));
+                        binding.statusTextView.setTextColor(getResources().getColor(R.color.Red500));
                         break;
                     default:
-                        binding.statusTextView.setTextColor(getResources().getColor(R.color.CoolGray600));
+                        binding.statusTextView.setTextColor(getResources().getColor(R.color.CoolGray500));
                         break;
                 }
             }
 
         } else {
-            InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.LightBlue600), R.drawable.draw_16sdp_solid_white_border_1sdp_lightblue600_ripple_lightblue300);
+            InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
             binding.statusTextView.setVisibility(View.GONE);
             binding.statusTextView.setText("");
@@ -612,16 +611,16 @@ public class RoomFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
 
-        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownSchedules(status))
+        if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.RoomFragmentRequest)))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
 
-        if (type.equals("room") && ((MainActivity) requireActivity()).permissoon.showRoomDropdownCreateSchedule(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownCreateSchedule(((MainActivity) requireActivity()).singleton.getUserModel(), status, type))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentCreateSchedule));
 
-        if (!type.equals("room") && ((MainActivity) requireActivity()).permissoon.showRoomDropdownProfile(status))
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownProfile(status, type))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
 
-        if (!type.equals("room"))
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownEdit(type))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
 
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
@@ -630,38 +629,40 @@ public class RoomFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownTags(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
 
+//        items.add(requireActivity().getResources().getString(R.string.RoomFragmentAccounting));
+
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.imgResTintBackground(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray300);
+            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
             InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "اعضاء":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_users_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_users_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "برنامه درمانی":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_calendar_alt_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "تعریف برنامه درمانی":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_calendar_plus_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_calendar_plus_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "پروفایل من":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_user_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_user_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "ویرایش":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
-                case "محل برگزاری":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_map_marker_alt_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                case "محل برگزاری جلسات":
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_map_marker_alt_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "برچسب\u200Cهای مهم":
-                    InitManager.imgResTintBackgroundTag(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_tags_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_tags_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    break;
+                case "حسابداری":
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_calculator_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
             }
-
-            binding.menuSpinner.selectImageView.setPadding((int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp), (int) getResources().getDimension(R.dimen._8sdp));
-            binding.menuSpinner.selectSpinner.setVisibility(View.GONE);
         } else {
             binding.menuSpinner.getRoot().setVisibility(View.GONE);
         }
@@ -686,9 +687,8 @@ public class RoomFragment extends Fragment {
                             setData(roomModel);
 
                             List items = new List();
-                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
+                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
                                 items.add(new CaseModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
-                            }
 
                             if (Objects.equals(data.get("page"), 1))
                                 cases2Adapter.clearItems();
@@ -699,11 +699,13 @@ public class RoomFragment extends Fragment {
 
                                 binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (cases2Adapter.getItemCount() == 0) {
+                                binding.casesSingleLayout.recyclerView.setAdapter(null);
+
                                 binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.Cases2AdapterEmpty));
                             }
 
-                            binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
+                            binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 
                             // Tags Data
                             if (!isFiltered) {
@@ -713,17 +715,13 @@ public class RoomFragment extends Fragment {
 
                                     binding.casesFilterView.setVisibility(View.VISIBLE);
                                 } else if (filterTagsAdapter.getItemCount() == 0) {
+                                    binding.tagsRecyclerView.setAdapter(null);
+
                                     binding.casesFilterView.setVisibility(View.GONE);
                                 }
                             }
 
-                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.casesShimmerLayout.getRoot().stopShimmer();
-
-                            if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
-
+                            hideShimmer();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -738,13 +736,7 @@ public class RoomFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.casesShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
-
+                        hideShimmer();
                     });
 
                     isLoading = false;
@@ -753,13 +745,65 @@ public class RoomFragment extends Fragment {
         });
     }
 
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        Room.request(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                roomModel = (RoomModel) object;
+                centerModel = roomModel.getRoomCenter();
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSuccesAcceptation));
+
+                        setAcceptation(roomModel);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                        errors.append(validation);
+                                        errors.append("\n");
+                                    }
+                                }
+
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
     public void responseAdapter() {
         data.put("page", 1);
 
-        if (filterTagsAdapter.getIds().size() != 0) {
+        if (!filterTagsAdapter.getIds().isEmpty()) {
             isFiltered = true;
             data.put("tag", filterTagsAdapter.getIds());
-        } else if (data.containsKey("tag")) {
+        } else {
             isFiltered = false;
             data.remove("tag");
         }
@@ -770,6 +814,15 @@ public class RoomFragment extends Fragment {
         binding.casesShimmerLayout.getRoot().startShimmer();
 
         getData();
+    }
+
+    private void hideShimmer() {
+        binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.casesShimmerLayout.getRoot().stopShimmer();
+
+        if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
     }
 
     @Override
