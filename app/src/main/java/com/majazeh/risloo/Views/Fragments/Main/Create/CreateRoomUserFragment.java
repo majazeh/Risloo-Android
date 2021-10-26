@@ -10,15 +10,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateRoomUserBinding;
@@ -161,15 +159,12 @@ public class CreateRoomUserFragment extends Fragment {
         Room.createUser(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                UserModel userModel = (UserModel) object;
-
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoomUser));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, userModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
