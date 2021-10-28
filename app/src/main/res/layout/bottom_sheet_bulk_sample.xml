@@ -15,7 +15,7 @@
         android:layout_height="@dimen/_48sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        android:background="@drawable/draw_grad_12sdp_solid_coolgray200_coolgray100_border_bottom_2sdp_gray200"
+        android:background="@drawable/draw_grad_12sdp_solid_coolgray200_coolgray100_border_bottom_1sdp_coolgray200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

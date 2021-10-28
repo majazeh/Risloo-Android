@@ -732,6 +732,21 @@
     <string name="CaseFragmentEdit">ویرایش</string>
 
 
+    ---------- // CenterFragment
+
+    <string name="CenterFragmentTitle">مرکز درمانی</string>
+
+    <string name="CenterFragmentRequest">درخواست پذیرش</string>
+    <string name="CenterFragmentSchedules">برنامه درمانی</string>
+
+    <string name="CenterFragmentUsers">اعضاء</string>
+    <string name="CenterFragmentProfile">پروفایل من</string>
+    <string name="CenterFragmentEdit">ویرایش</string>
+    <string name="CenterFragmentSessionPlatforms">محل برگزاری جلسات</string>
+    <string name="CenterFragmentRooms">اتاق‌های درمان</string>
+    <string name="CenterFragmentAccounting">حسابداری</string>
+
+
     ---------- // DashboardFragment
 
     <string name="DashboardFragmentTitle">خانه</string>
@@ -761,6 +776,25 @@
     ---------- // ReferenceFragment
 
     <string name="ReferenceFragmentTitle">مراجع</string>
+
+
+    ---------- // RoomFragment
+
+    <string name="RoomFragmentTitle">اتاق درمان</string>
+
+    <string name="RoomFragmentRequest">درخواست پذیرش</string>
+    <string name="RoomFragmentSchedules">برنامه درمانی</string>
+
+    <string name="RoomFragmentCreateSchedule">تعریف برنامه درمانی</string>
+    <string name="RoomFragmentUsers">اعضاء</string>
+    <string name="RoomFragmentProfile">پروفایل من</string>
+    <string name="RoomFragmentEdit">ویرایش</string>
+    <string name="RoomFragmentSessionPlatforms">محل برگزاری جلسات</string>
+    <string name="RoomFragmentTags">برچسب‌های مهم</string>
+    <string name="RoomFragmentAccounting">حسابداری</string>
+
+    <string name="RoomFragmentPersonalClinic">کلینیک شخصی</string>
+    <string name="RoomFragmentFilterByTag">فیلتر بر اساس برچسب‌ها:</string>
 
 
     ---------- // SampleFragment
@@ -1680,42 +1714,6 @@
     <string name="RoomTagsFragmentTitle">برچسب‌های مهم اتاق</string>
 
     <string name="RoomTagsFragmentEmpty">هنوز برچسبی برای اتاق ثبت نشده است.</string>
-
-    // Show Fragments
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- Center Fragment ----------
-    */
-
-    <string name="CenterFragmentTitle">مرکز درمانی</string>
-
-    <string name="CenterFragmentRequest">درخواست پذیرش</string>
-    <string name="CenterFragmentSchedules">برنامه درمانی</string>
-
-    <string name="CenterFragmentUsers">اعضاء</string>
-    <string name="CenterFragmentProfile">پروفایل من</string>
-    <string name="CenterFragmentEdit">ویرایش</string>
-    <string name="CenterFragmentPlatforms">محل برگزاری</string>
-
-    /*
-    ---------- Room Fragment ----------
-    */
-
-    <string name="RoomFragmentTitle">اتاق درمان</string>
-
-    <string name="RoomFragmentRequest">درخواست پذیرش</string>
-    <string name="RoomFragmentSchedules">برنامه درمانی</string>
-
-    <string name="RoomFragmentUsers">اعضاء</string>
-    <string name="RoomFragmentAddSchedule">تعریف برنامه درمانی</string>
-    <string name="RoomFragmentProfile">پروفایل من</string>
-    <string name="RoomFragmentEdit">ویرایش</string>
-    <string name="RoomFragmentPlatforms">محل برگزاری</string>
-    <string name="RoomFragmentTags">برچسب‌های مهم</string>
-
-    <string name="RoomFragmentPersonalClinic">کلینیک شخصی</string>
-    <string name="RoomFragmentFilterByTag">فیلتر بر اساس برچسب‌ها:</string>
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////

@@ -121,13 +121,6 @@ public class Permissoon {
             return false;
     }
 
-    public boolean showCenterDropdownSchedules(String position) {
-        if (!position.equals(""))
-            return position.equals("request");
-        else
-            return false;
-    }
-
     public boolean showCenterDropdownProfile(String position) {
         if (!position.equals(""))
             return !position.equals("request");
@@ -160,9 +153,9 @@ public class Permissoon {
     ---------- Room ----------
     */
 
-    public boolean showRoomDropdownCreateSchedule(UserModel model, String position) {
+    public boolean showRoomDropdownCreateSchedule(UserModel model, String position, String type) {
         if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+            return type.equals("room") && (model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator"));
         else
             return false;
     }
@@ -174,19 +167,20 @@ public class Permissoon {
             return false;
     }
 
-    public boolean showRoomDropdownSchedules(String position) {
+    public boolean showRoomDropdownProfile(String position, String type) {
         if (!position.equals(""))
-            return position.equals("request");
+            return !type.equals("room") && !position.equals("request");
         else
             return false;
     }
 
-    public boolean showRoomDropdownProfile(String position) {
-        if (!position.equals(""))
-            return !position.equals("request");
+    public boolean showRoomDropdownEdit(String type) {
+        if (!type.equals(""))
+            return !type.equals("room");
         else
             return false;
     }
+
 
     public boolean showRoomDropdownPlatforms(UserModel model, String position) {
         if (model != null)

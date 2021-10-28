@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -161,15 +159,12 @@ public class CreateCaseUserFragment extends Fragment {
         Case.addClient(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                UserModel userModel = (UserModel) object;
-
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCaseUser));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(caseModel.getCaseRoom(), userModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
