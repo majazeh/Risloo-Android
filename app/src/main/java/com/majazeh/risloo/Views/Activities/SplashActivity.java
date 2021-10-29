@@ -81,38 +81,42 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        handler.postDelayed(() -> binding.explodeProgressBar.setVisibility(View.VISIBLE), 500);
+        if (BuildConfig.BUILD_TYPE.equals("release")) {
+            handler.postDelayed(() -> binding.explodeProgressBar.setVisibility(View.VISIBLE), 500);
 
-        Auth.explode(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                VersionModel model = new VersionModel((JSONObject) object);
+            Auth.explode(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    VersionModel model = new VersionModel((JSONObject) object);
 
-                runOnUiThread(() -> {
-                    if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
-                        binding.explodeProgressBar.setVisibility(View.GONE);
+                    runOnUiThread(() -> {
+                        if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
+                            binding.explodeProgressBar.setVisibility(View.GONE);
 
-                    if (model.getAndroid() != null && model.getAndroid().getForce() != null) {
-                        if (StringManager.compareVersionNames(PackageManager.versionNameWithoutSuffix(SplashActivity.this), model.getAndroid().getForce()) == 1) {
-                            DialogManager.showVersionDialog(SplashActivity.this, "force", model);
-                            return;
+                        if (model.getAndroid() != null && model.getAndroid().getForce() != null) {
+                            if (StringManager.compareVersionNames(PackageManager.versionNameWithoutSuffix(SplashActivity.this), model.getAndroid().getForce()) == 1) {
+                                DialogManager.showVersionDialog(SplashActivity.this, "force", model);
+                                return;
+                            }
                         }
-                    }
 
-                    navigate();
-                });
-            }
+                        navigate();
+                    });
+                }
 
-            @Override
-            public void onFailure(String response) {
-                runOnUiThread(() -> {
-                    if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
-                        binding.explodeProgressBar.setVisibility(View.GONE);
+                @Override
+                public void onFailure(String response) {
+                    runOnUiThread(() -> {
+                        if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
+                            binding.explodeProgressBar.setVisibility(View.GONE);
 
-                    navigate();
-                });
-            }
-        });
+                        navigate();
+                    });
+                }
+            });
+        } else {
+            handler.postDelayed(this::navigate, 1000);
+        }
     }
 
     private void navigate() {
