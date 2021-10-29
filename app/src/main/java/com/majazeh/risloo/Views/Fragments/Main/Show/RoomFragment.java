@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Fragments.Main.Show;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,6 @@ import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -111,10 +111,6 @@ public class RoomFragment extends Fragment {
                 }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
-
-        CustomClickView.onDelayedListener(() -> {
-            IntentManager.phone(requireActivity(), binding.mobileTextView.getText().toString());
-        }).widget(binding.mobileTextView);
 
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
@@ -421,15 +417,8 @@ public class RoomFragment extends Fragment {
             }
 
             if (model.getDetail() != null && model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
-                JSONArray phones = model.getDetail().getJSONArray("phone_numbers");
-
-                binding.mobileTextView.setText("");
-                for (int i = 0; i < phones.length(); i++) {
-                    binding.mobileTextView.append(phones.get(i).toString());
-                    if (i != phones.length() - 1) {
-                        binding.mobileTextView.append("  -  ");
-                    }
-                }
+                binding.mobileTextView.setText(StringManager.phones(requireActivity(), model.getDetail().getJSONArray("phone_numbers")));
+                binding.mobileTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 binding.mobileGroup.setVisibility(View.VISIBLE);
             } else {
@@ -487,15 +476,8 @@ public class RoomFragment extends Fragment {
             }
 
             if (!type.equals("room") && model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("phone_numbers") && !model.getRoomCenter().getDetail().isNull("phone_numbers") && model.getRoomCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
-                JSONArray phones = model.getRoomCenter().getDetail().getJSONArray("phone_numbers");
-
-                binding.mobileTextView.setText("");
-                for (int i = 0; i < phones.length(); i++) {
-                    binding.mobileTextView.append(phones.get(i).toString());
-                    if (i != phones.length() - 1) {
-                        binding.mobileTextView.append("  -  ");
-                    }
-                }
+                binding.mobileTextView.setText(StringManager.phones(requireActivity(), model.getRoomCenter().getDetail().getJSONArray("phone_numbers")));
+                binding.mobileTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 binding.mobileGroup.setVisibility(View.VISIBLE);
             } else {

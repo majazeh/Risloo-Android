@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,7 +36,6 @@ import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -106,10 +106,6 @@ public class CenterFragment extends Fragment {
                 }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
-
-        CustomClickView.onDelayedListener(() -> {
-            IntentManager.phone(requireActivity(), binding.mobileTextView.getText().toString());
-        }).widget(binding.mobileTextView);
 
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
@@ -300,15 +296,8 @@ public class CenterFragment extends Fragment {
             }
 
             if (model.getDetail() != null && model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
-                JSONArray phones = model.getDetail().getJSONArray("phone_numbers");
-
-                binding.mobileTextView.setText("");
-                for (int i = 0; i < phones.length(); i++) {
-                    binding.mobileTextView.append(phones.get(i).toString());
-                    if (i != phones.length() - 1) {
-                        binding.mobileTextView.append("  -  ");
-                    }
-                }
+                binding.mobileTextView.setText(StringManager.phones(requireActivity(), model.getDetail().getJSONArray("phone_numbers")));
+                binding.mobileTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 binding.mobileGroup.setVisibility(View.VISIBLE);
             } else {
