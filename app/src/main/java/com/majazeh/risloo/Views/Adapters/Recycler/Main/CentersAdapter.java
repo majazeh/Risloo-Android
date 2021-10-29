@@ -109,7 +109,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersHolder> {
                 else
                     holder.binding.nameTextView.setText("نامعلوم");
 
-                holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CentersFragmentPersonalClinic));
+                holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CenterAdapterPersonalClinic));
             }
 
             if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
