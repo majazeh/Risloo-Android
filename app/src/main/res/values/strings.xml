@@ -611,6 +611,13 @@
     <string name="CasesFragmentEmpty">هنوز پرونده‌‌ی ثبت نشده است.</string>
 
 
+    ---------- // CentersFragment
+
+    <string name="CentersFragmentTitle">مراکز درمانی</string>
+
+    <string name="CentersFragmentEmpty">هنوز مرکز درمانی ثبت نشده است.</string>
+
+
     ---------- // CenterUsersFragment
 
     <string name="CenterUsersFragmentTitle">اعضاء مرکز درمانی</string>
@@ -988,6 +995,11 @@
     <string name="CaseAdapterRoom">اتاق درمان</string>
     <string name="CaseAdapterCenter">مرکز درمانی</string>
     <string name="CaseAdapterReference">مراجعین</string>
+
+
+    ---------- // CenterAdapter
+
+    <string name="CenterAdapterPersonalClinic">اتاق درمان شخصی</string>
 
 
     ---------- // CenterUserAdapter
@@ -1648,16 +1660,6 @@
 
     // Index Fragments
     //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- Centers Fragment ----------
-    */
-
-    <string name="CentersFragmentTitle">مراکز درمانی</string>
-
-    <string name="CentersFragmentPersonalClinic">اتاق درمان شخصی</string>
-
-    <string name="CentersFragmentEmpty">هنوز مرکز درمانی ثبت نشده است.</string>
 
     /*
     ---------- CenterPlatforms Fragment ----------

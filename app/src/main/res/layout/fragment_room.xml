@@ -290,6 +290,13 @@
             app:layout_constraintTop_toBottomOf="@id/cases_filterView"
             tools:visibility="visible" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/cases_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="cases_headerLayout, cases_addView, cases_filterView, cases_shimmerLayout, cases_singleLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.factor.bouncy.BouncyNestedScrollView>

@@ -181,7 +181,6 @@ public class Permissoon {
             return false;
     }
 
-
     public boolean showRoomDropdownPlatforms(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
@@ -201,6 +200,10 @@ public class Permissoon {
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else
             return false;
+    }
+
+    public boolean showRoomCases(UserModel model) {
+        return true;
     }
 
     /*

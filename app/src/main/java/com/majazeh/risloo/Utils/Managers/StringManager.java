@@ -1,13 +1,22 @@
 package com.majazeh.risloo.Utils.Managers;
 
+import android.app.Activity;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.text.DecimalFormat;
 
@@ -129,6 +138,38 @@ public class StringManager {
     /*
     ---------- Customize One ----------
     */
+
+    public static SpannableStringBuilder phones(Activity activity, JSONArray list) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        try {
+            for (int i = 0; i < list.length(); i++) {
+                String label = list.getString(i);
+
+                builder.append(label);
+                if (i != list.length() - 1) {
+                    builder.append("  -  ");
+                }
+
+                builder.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        IntentManager.phone(activity, label);
+                    }
+
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint textPaint) {
+                        textPaint.setUnderlineText(false);
+                    }
+
+                }, builder.toString().indexOf(label), builder.toString().indexOf(label) + label.length(), 0);
+            }
+
+            return builder;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return SpannableStringBuilder.valueOf("");
+    }
 
     public static SpannableString strikethrough(String value, int startIndex, int endIndex) {
         SpannableString spannableString = new SpannableString(value);
