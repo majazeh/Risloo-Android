@@ -122,13 +122,13 @@ public class AuthLoginFragment extends Fragment {
 
                             switch (model.getTheory()) {
                                 case "password":
-                                    action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
+                                    action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(model);
                                     break;
                                 case "mobileCode":
-                                    action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
+                                    action = NavigationAuthDirections.actionGlobalAuthPinFragment(model);
                                     break;
                                 case "recovery":
-                                    action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
+                                    action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(model);
                                     break;
                             }
 

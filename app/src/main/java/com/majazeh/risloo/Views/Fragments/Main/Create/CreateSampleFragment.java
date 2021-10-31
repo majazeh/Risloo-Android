@@ -33,8 +33,10 @@ import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -667,101 +669,183 @@ public class CreateSampleFragment extends Fragment {
 
         setHashmap();
 
-        Sample.create(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+        if (type.equals("bulk")) {
+            Sample.createBulk(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    BulkSampleModel bulkSampleModel = (BulkSampleModel) object;
 
-                        if (type.equals("bulk")) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBulkSample));
 
-//                            NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment();
-//                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } else {
+                            NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(bulkSampleModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject responseObject = new JSONObject(response);
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder errors = new StringBuilder();
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                            switch (key) {
+                                                case "scale_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "room_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "type":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "title":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "members_count":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "case_status":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "problem":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "case_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "session_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "client_id":
+                                                    if (type.equals("case_user"))
+                                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
+                                                    else if (type.equals("room_user"))
+                                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+
+                                                    break;
+                                                case "psychologist_description":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, validation);
+                                                    break;
+                                            }
+
+                                            errors.append(validation);
+                                            errors.append("\n");
+                                        }
+                                    }
+
+                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
+            Sample.createSample(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    SampleModel sampleModel = (SampleModel) object;
+
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
 
-//                            NavDirections action = NavigationMainDirections.actionGlobalSampleFragment();
-//                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        }
-
-                        ((MainActivity) requireActivity()).navController.navigateUp();
-                    });
+                            NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(sampleModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        });
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        try {
-                            JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject responseObject = new JSONObject(response);
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
 
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder errors = new StringBuilder();
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder errors = new StringBuilder();
 
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                        switch (key) {
-                                            case "scale_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "room_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "type":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "title":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "members_count":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "case_status":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "problem":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "case_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "session_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "client_id":
-                                                if (type.equals("case_user"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
-                                                else if (type.equals("room_user"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                            switch (key) {
+                                                case "scale_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "room_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "type":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "title":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "members_count":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "case_status":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "problem":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "case_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "session_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "client_id":
+                                                    if (type.equals("case_user"))
+                                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
+                                                    else if (type.equals("room_user"))
+                                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
 
-                                                break;
-                                            case "psychologist_description":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, validation);
-                                                break;
+                                                    break;
+                                                case "psychologist_description":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, validation);
+                                                    break;
+                                            }
+
+                                            errors.append(validation);
+                                            errors.append("\n");
                                         }
-
-                                        errors.append(validation);
-                                        errors.append("\n");
                                     }
-                                }
 
-                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override

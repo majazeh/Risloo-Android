@@ -103,10 +103,12 @@ public class AuthSerialFragment extends Fragment {
             Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.LightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (!((AuthActivity) requireActivity()).singleton.getName().equals(""))
+            if (((AuthActivity) requireActivity()).singleton.getName() != null && !((AuthActivity) requireActivity()).singleton.getName().equals(""))
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
+            else if (((AuthActivity) requireActivity()).singleton.getId() != null && !((AuthActivity) requireActivity()).singleton.getId().equals(""))
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getId()));
             else
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
         }
     }
 

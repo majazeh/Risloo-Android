@@ -159,19 +159,23 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void setArgs() {
-        mobile = AuthPinFragmentArgs.fromBundle(getArguments()).getMobile();
-        binding.mobileTextView.getRoot().setText(mobile);
-
         AuthModel authModel = (AuthModel) AuthPinFragmentArgs.fromBundle(getArguments()).getTypeModel();
         setData(authModel);
     }
 
     private void setData(AuthModel model) {
-        if (model.getKey() != null && !model.getKey().equals(""))
+        if (model.getKey() != null && !model.getKey().equals("")) {
             data.put("key", model.getKey());
+        }
 
-        if (model.getCallback() != null && !model.getCallback().equals(""))
+        if (model.getCallback() != null && !model.getCallback().equals("")) {
             data.put("callback", model.getCallback());
+        }
+
+        if (model.getAuthorized_key() != null && !model.getAuthorized_key().equals("")) {
+            mobile = model.getAuthorized_key();
+            binding.mobileTextView.getRoot().setText(mobile);
+        }
 
         startCountDownTimer();
     }
@@ -232,10 +236,10 @@ public class AuthPinFragment extends Fragment {
 
                                 switch (model.getTheory()) {
                                     case "password":
-                                        action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
+                                        action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(model);
                                         break;
                                     case "recovery":
-                                        action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
+                                        action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(model);
                                         break;
                                 }
 

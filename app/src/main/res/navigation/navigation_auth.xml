@@ -15,10 +15,24 @@
         tools:layout="@layout/fragment_auth_login" />
 
     <fragment
-        android:id="@+id/authRegisterFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthRegisterFragment"
-        android:label="@string/RegisterFragmentTitle"
-        tools:layout="@layout/fragment_auth_register" />
+        android:id="@+id/authPasswordChangeFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordChangeFragment"
+        android:label="@string/PasswordChangeFragmentTitle"
+        tools:layout="@layout/fragment_auth_password_change" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/authPasswordFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordFragment"
+        android:label="@string/PasswordFragmentTitle"
+        tools:layout="@layout/fragment_auth_password" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/authPasswordRecoverFragment"
@@ -27,43 +41,20 @@
         tools:layout="@layout/fragment_auth_password_recover" />
 
     <fragment
-        android:id="@+id/authPasswordFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordFragment"
-        android:label="@string/PasswordFragmentTitle"
-        tools:layout="@layout/fragment_auth_password" >
-        <argument
-            android:name="mobile"
-            app:argType="string" />
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/authPasswordChangeFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordChangeFragment"
-        android:label="@string/PasswordChangeFragmentTitle"
-        tools:layout="@layout/fragment_auth_password_change" >
-        <argument
-            android:name="mobile"
-            app:argType="string" />
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
         android:id="@+id/authPinFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPinFragment"
         android:label="@string/PinFragmentTitle"
         tools:layout="@layout/fragment_auth_pin" >
         <argument
-            android:name="mobile"
-            app:argType="string" />
-        <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
+
+    <fragment
+        android:id="@+id/authRegisterFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthRegisterFragment"
+        android:label="@string/RegisterFragmentTitle"
+        tools:layout="@layout/fragment_auth_register" />
 
     <fragment
         android:id="@+id/authSerialFragment"
@@ -80,24 +71,24 @@
         app:popUpToInclusive="true" />
 
     <action
-        android:id="@+id/action_global_authRegisterFragment"
-        app:destination="@id/authRegisterFragment" />
-
-    <action
-        android:id="@+id/action_global_authPasswordRecoverFragment"
-        app:destination="@id/authPasswordRecoverFragment" />
+        android:id="@+id/action_global_authPasswordChangeFragment"
+        app:destination="@id/authPasswordChangeFragment" />
 
     <action
         android:id="@+id/action_global_authPasswordFragment"
         app:destination="@id/authPasswordFragment" />
 
     <action
-        android:id="@+id/action_global_authPasswordChangeFragment"
-        app:destination="@id/authPasswordChangeFragment" />
+        android:id="@+id/action_global_authPasswordRecoverFragment"
+        app:destination="@id/authPasswordRecoverFragment" />
 
     <action
         android:id="@+id/action_global_authPinFragment"
         app:destination="@id/authPinFragment" />
+
+    <action
+        android:id="@+id/action_global_authRegisterFragment"
+        app:destination="@id/authRegisterFragment" />
 
     <action
         android:id="@+id/action_global_authSerialFragment"

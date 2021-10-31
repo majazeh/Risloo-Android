@@ -170,25 +170,30 @@ public class AuthPasswordFragment extends Fragment {
     }
 
     private void setArgs() {
-        mobile = AuthPasswordFragmentArgs.fromBundle(getArguments()).getMobile();
-        binding.mobileTextView.getRoot().setText(mobile);
-
         AuthModel authModel = (AuthModel) AuthPasswordFragmentArgs.fromBundle(getArguments()).getTypeModel();
         setData(authModel);
     }
 
     private void setData(AuthModel model) {
-        if (model.getKey() != null && !model.getKey().equals(""))
+        if (model.getKey() != null && !model.getKey().equals("")) {
             data.put("key", model.getKey());
+        }
 
-        if (model.getCallback() != null && !model.getCallback().equals(""))
+        if (model.getCallback() != null && !model.getCallback().equals("")) {
             data.put("callback", model.getCallback());
+        }
 
-//        password = ((AuthActivity) requireActivity()).singleton.getRegistPassword(mobile);
-//        binding.passwordIncludeLayout.inputEditText.setText(password);
+        if (model.getAuthorized_key() != null && !model.getAuthorized_key().equals("")) {
+            mobile = model.getAuthorized_key();
+            binding.mobileTextView.getRoot().setText(mobile);
+        }
+
+//        if (!((AuthActivity) requireActivity()).singleton.getRegistPassword(mobile).equals("")) {
+//            password = ((AuthActivity) requireActivity()).singleton.getRegistPassword(mobile);
+//            binding.passwordIncludeLayout.inputEditText.setText(password);
 //
-//        if (!password.equals(""))
 //            binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
+//        }
     }
 
     private void doWork() {
@@ -208,10 +213,10 @@ public class AuthPasswordFragment extends Fragment {
 
                             switch (model.getTheory()) {
                                 case "mobileCode":
-                                    action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
+                                    action = NavigationAuthDirections.actionGlobalAuthPinFragment(model);
                                     break;
                                 case "recovery":
-                                    action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
+                                    action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(model);
                                     break;
                             }
 
