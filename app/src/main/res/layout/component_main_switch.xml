@@ -16,6 +16,5 @@
     android:textColor="@color/CoolGray600"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
-    android:theme="@style/SwicthCompatTheme"
-    android:layoutDirection="rtl" />
+    android:layoutDirection="rtl"
+    android:theme="@style/SwicthCompatTheme" />

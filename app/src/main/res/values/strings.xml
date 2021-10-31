@@ -390,6 +390,22 @@
     <string name="CreateDocumentFragmentButton">ساخت</string>
 
 
+    ---------- // CreatePlatformFragment
+
+    <string name="CreatePlatformFragmentTitle">ایجاد محل برگزاری جدید</string>
+
+    <string name="CreatePlatformFragmentTitleHeader">عنوان</string>
+    <string name="CreatePlatformFragmentSessionTypeHeader">نوع جلسه</string>
+    <string name="CreatePlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
+    <string name="CreatePlatformFragmentIdentifierHeader">مقدار</string>
+
+    <string name="CreatePlatformFragmentIdentifierGuide">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید.</string>
+
+    <string name="CreatePlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
+
+    <string name="CreatePlatformFragmentButton">ایجاد</string>
+
+
     ---------- // CreatePracticeFragment
 
     <string name="CreatePracticeFragmentTitle">ساخت کاربرگ جدید</string>
@@ -567,6 +583,22 @@
     <string name="EditCenterUserFragmentStatusKick">تعلیق</string>
 
     <string name="EditCenterUserFragmentButton">ویرایش</string>
+
+
+    ---------- // EditPlatformFragment
+
+    <string name="EditPlatformFragmentTitle">ویرایش محل برگزاری</string>
+
+    <string name="EditPlatformFragmentTitleHeader">عنوان</string>
+    <string name="EditPlatformFragmentSessionTypeHeader">نوع جلسه</string>
+    <string name="EditPlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
+    <string name="EditPlatformFragmentIdentifierHeader">مقدار</string>
+
+    <string name="EditPlatformFragmentIdentifierGuide">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
+
+    <string name="EditPlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
+
+    <string name="EditPlatformFragmentButton">ویرایش</string>
 
 
     ---------- // EditTreasuryFragment
@@ -1457,23 +1489,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- CreatePlatform Fragment ----------
-    */
-
-    <string name="CreatePlatformFragmentTitle">ساخت محل برگزاری جدید</string>
-
-    <string name="CreatePlatformFragmentTitleHeader">عنوان</string>
-    <string name="CreatePlatformFragmentSessionTypeHeader">نوع جلسه</string>
-    <string name="CreatePlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
-    <string name="CreatePlatformFragmentIdentifierHeader">مقدار</string>
-
-    <string name="CreatePlatformFragmentIdentifierGuide">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید.</string>
-
-    <string name="CreatePlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
-
-    <string name="CreatePlatformFragmentButton">ساخت</string>
-
-    /*
     ---------- CreateSchedule Fragment ----------
     */
 
@@ -1592,23 +1607,6 @@
 
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- EditPlatform Fragment ----------
-    */
-
-    <string name="EditPlatformFragmentTitle">ویرایش محل برگزاری</string>
-
-    <string name="EditPlatformFragmentTitleHeader">عنوان</string>
-    <string name="EditPlatformFragmentSessionTypeHeader">نوع جلسه</string>
-    <string name="EditPlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
-    <string name="EditPlatformFragmentIdentifierHeader">مقدار</string>
-
-    <string name="EditPlatformFragmentIdentifierGuide">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
-
-    <string name="EditPlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
-
-    <string name="EditPlatformFragmentButton">ویرایش</string>
 
     /*
     ---------- EditSession Fragment ----------

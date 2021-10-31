@@ -76,7 +76,7 @@ public class CreatePlatformFragment extends Fragment {
         InitManager.input12sspSpinner(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, R.array.PlatformSessions);
         InitManager.input12sspSpinner(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, R.array.PlatformIndentifiers);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreatePlatformFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreatePlatformFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -87,14 +87,33 @@ public class CreatePlatformFragment extends Fragment {
             return false;
         });
 
+        binding.indentifierIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.indentifierIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.indentifierIncludeLayout.inputEditText);
+            return false;
+        });
+
         binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.indentifierIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            indentifier = binding.indentifierIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.sessionTypeIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
+
+        binding.indentifierTypeIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        binding.sessionTypeIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        binding.indentifierTypeIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.sessionTypeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -110,11 +129,6 @@ public class CreatePlatformFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-
-        binding.indentifierTypeIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
         });
 
         binding.indentifierTypeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -145,16 +159,6 @@ public class CreatePlatformFragment extends Fragment {
             }
         });
 
-        binding.indentifierIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.indentifierIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.indentifierIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.indentifierIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            indentifier = binding.indentifierIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
         binding.sessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked)
                 createSession = "1";
@@ -168,13 +172,11 @@ public class CreatePlatformFragment extends Fragment {
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOn));
                 binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Emerald700));
-                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50_border_1sdp_coolgray300);
             } else {
                 available = "0";
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOff));
                 binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_coolgray300);
             }
         });
 
@@ -211,15 +213,42 @@ public class CreatePlatformFragment extends Fragment {
         }
     }
 
+    private void setHashmap() {
+        if (!title.equals(""))
+            data.put("title", title);
+        else
+            data.remove("title");
+
+        if (!sessionType.equals(""))
+            data.put("type", SelectionManager.getPlatformSession(requireActivity(), "en", sessionType));
+        else
+            data.remove("type");
+
+        if (!indentifierType.equals(""))
+            data.put("identifier_type", SelectionManager.getPlatformIdentifier(requireActivity(), "en", indentifierType));
+        else
+            data.remove("identifier_type");
+
+        if (!indentifier.equals(""))
+            data.put("identifier", indentifier);
+        else
+            data.remove("identifier");
+
+        if (!createSession.equals(""))
+            data.put("selected", createSession);
+        else
+            data.remove("selected");
+
+        if (!available.equals(""))
+            data.put("available", available);
+        else
+            data.remove("available");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("title", title);
-        data.put("type", SelectionManager.getPlatformSession(requireActivity(), "en", sessionType));
-        data.put("identifier_type", SelectionManager.getPlatformIdentifier(requireActivity(), "en", indentifierType));
-        data.put("identifier", indentifier);
-        data.put("selected", createSession);
-        data.put("available", available);
+        setHashmap();
 
         Center.createCenterSessionPlatform(data, header, new Response() {
             @Override
@@ -292,6 +321,7 @@ public class CreatePlatformFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }
