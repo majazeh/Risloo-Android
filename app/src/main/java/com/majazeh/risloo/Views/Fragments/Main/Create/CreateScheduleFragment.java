@@ -282,7 +282,7 @@ public class CreateScheduleFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSchedule));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });

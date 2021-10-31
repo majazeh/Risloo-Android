@@ -227,7 +227,7 @@ public class CreatePlatformFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewPlatformAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewPlatform));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });

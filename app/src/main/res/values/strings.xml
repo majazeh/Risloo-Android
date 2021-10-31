@@ -20,9 +20,6 @@
     <string name="AppSwicthOff">غیر فعال</string>
 
     <string name="AppDefaultUnknown">نامعلوم</string>
-    <string name="AppDefaultUser">عضو</string>
-    <string name="AppDefaultName">عضو آزمایشی</string>
-    <string name="AppDefaultCenter">مرکز آزمایشی</string>
     <string name="AppDefaultWeek">00/00 تا 00/00</string>
 
     <string name="AppShareImage">اشتراک گذاری</string>
@@ -59,11 +56,14 @@
     <string name="SnackCreatedNewCenter">مرکز درمانی جدید ساخته شد.</string>
     <string name="SnackCreatedNewCenterUser">عضو جدید مرکز ثبت شد.</string>
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
+    <string name="SnackCreatedNewPlatform">محل برگزاری جدید ساخته شد.</string>
     <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
     <string name="SnackCreatedNewReport">گزارش جدید ساخته شد.</string>
     <string name="SnackCreatedNewRoom">اتاق درمان جدید ساخته شد.</string>
     <string name="SnackCreatedNewRoomUser">عضو جدید اتاق ثبت شد.</string>
     <string name="SnackCreatedNewSample">نمونه جدید ساخته شد.</string>
+    <string name="SnackCreatedNewSchedule">برنامه جدید ساخته شد.</string>
+    <string name="SnackCreatedNewSession">جلسه جدید ساخته شد.</string>
     <string name="SnackCreatedNewSessionUser">عضو جدید جلسه ثبت شد.</string>
     <string name="SnackCreatedNewTreasury">کیف پول جدید ساخته شد.</string>
     <string name="SnackCreatedNewUser">کاربر جدید ایجاد شد.</string>
@@ -273,19 +273,23 @@
 
     <string name="MainTitleDashboard">داشبورد</string>
     <string name="MainTitleCenters">مراکز درمانی</string>
+    <string name="MainTitleCases">پرونده‌ها</string>
     <string name="MainTitleSessions">جلسات</string>
     <string name="MainTitleUsers">اعضاء</string>
     <string name="MainTitleScales">ارزیابی‌ها</string>
     <string name="MainTitleSamples">نمونه‌ها</string>
     <string name="MainTitleBulkSamples">نمونه‌های گروهی</string>
+    <string name="MainTitleDocuments">مدارک</string>
 
     <string name="MainDescDashboard">خلاصه‌ای از سامانه</string>
     <string name="MainDescCenters">همه مراکز درمانی</string>
+    <string name="MainDescCases">پرونده‌های من</string>
     <string name="MainDescSessions">جلسات درمانی من</string>
     <string name="MainDescUsers">اعضاء موجود در سامانه</string>
     <string name="MainDescScales">آزمون‌های روان شناختی موجود در سامانه</string>
     <string name="MainDescSamples">آزمون‌های گرفته شده</string>
     <string name="MainDescBulkSamples">آزمون‌های گروهی گرفته شده</string>
+    <string name="MainDescDocuments">مدارک موجود در سامانه</string>
 
     <string name="MainToolbarMe">مشاهده پروفایل</string>
     <string name="MainToolbarAccounting">حسابداری</string>
@@ -586,7 +590,6 @@
     ***/
 
 
-
     ---------- // BillingsFragment
 
     <string name="BillingsFragmentTitle">صورت حساب‌ها</string>
@@ -626,6 +629,8 @@
 
 
     ---------- // ClientReportsFragment
+
+    <string name="ClientReportsFragmentTitle">گزارشات</string>
 
     <string name="ClientReportsFragmentCaseTitle">گزارشات پرونده</string>
     <string name="ClientReportsFragmentSessionTitle">گزارشات جلسه</string>
@@ -1873,11 +1878,6 @@
     <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
     <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
-
-    <string name="ToastNewSessionAdded">جلسه جدید افزوده شد.</string>
-    <string name="ToastNewScheduleAdded">برنامه جدید افزوده شد.</string>
-    <string name="ToastNewPlatformAdded">محل برگزاری جدید افزوده شد.</string>
-    <string name="ToastNewSuccesPayment">پرداخت انجام شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
