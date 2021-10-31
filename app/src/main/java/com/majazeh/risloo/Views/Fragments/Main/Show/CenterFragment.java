@@ -450,8 +450,8 @@ public class CenterFragment extends Fragment {
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
                                 items.add(new RoomModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
 
-                            if (Objects.equals(data.get("page"), 1))
-                                roomsAdapter.clearItems();
+//                            if (Objects.equals(data.get("page"), 1))
+//                                roomsAdapter.clearItems();
 
                             if (!items.data().isEmpty()) {
                                 roomsAdapter.setItems(items.data());
