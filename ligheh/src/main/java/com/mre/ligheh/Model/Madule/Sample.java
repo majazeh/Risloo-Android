@@ -232,12 +232,20 @@ public class Sample extends Model {
         }
     }
 
-    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response,Class aClass) {
         try {
-            Model.create(endpoint + "/samples", data, header, response, SampleModel.class);
+            Model.create(endpoint + "/samples", data, header, response, aClass);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void createSample(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+       create(data, header, response, SampleModel.class);
+    }
+
+    public static void createBulk(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+      create(data, header, response, BulkSampleModel.class);
     }
 
     public static void items(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
