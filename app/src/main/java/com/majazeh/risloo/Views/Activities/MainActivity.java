@@ -351,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(action);
             } break;
             case "نمونه\u200Cها": {
-                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment();
+                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, null);
                 navController.navigate(action);
             } break;
             case "نمونه\u200Cهای گروهی": {

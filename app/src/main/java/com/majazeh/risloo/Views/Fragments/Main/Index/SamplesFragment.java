@@ -17,9 +17,9 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
 import com.majazeh.risloo.databinding.FragmentSamplesBinding;
@@ -28,6 +28,8 @@ import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -44,7 +46,7 @@ public class SamplesFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private boolean isLoading = true;
+    private boolean isLoading = true, isScrollable = true;
 
     @Nullable
     @Override
@@ -54,6 +56,8 @@ public class SamplesFragment extends Fragment {
         initializer();
 
         listener();
+
+        setArgs();
 
         setPermission();
 
@@ -98,7 +102,9 @@ public class SamplesFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    data.put("page", 1);
+                    if (isScrollable)
+                        data.put("page", 1);
+
                     data.put("q", String.valueOf(s));
 
                     if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.GONE)
@@ -115,7 +121,7 @@ public class SamplesFragment extends Fragment {
         });
 
         binding.getRoot().setMOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (!isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
+            if (isScrollable && !isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
                 isLoading = true;
 
                 if (data.containsKey("page"))
@@ -136,6 +142,27 @@ public class SamplesFragment extends Fragment {
         }).widget(binding.addImageView.getRoot());
     }
 
+    private void setArgs() {
+        String chainId = SamplesFragmentArgs.fromBundle(getArguments()).getChainId();
+        String[] sampleIds = SamplesFragmentArgs.fromBundle(getArguments()).getSampleIds();
+
+        if (chainId != null) {
+            data.put("chain", chainId);
+        }
+
+        if (sampleIds != null) {
+            ArrayList<String> ids = new ArrayList<>();
+            Collections.addAll(ids, sampleIds);
+
+            data.put("ids", ids);
+        }
+
+        if (chainId != null || sampleIds != null) {
+            data.remove("page");
+            isScrollable = false;
+        }
+    }
+
     private void setPermission() {
         UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
 
@@ -153,7 +180,7 @@ public class SamplesFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (Objects.equals(data.get("page"), 1))
+                        if (!isScrollable || Objects.equals(data.get("page"), 1))
                             adapter.clearItems();
 
                         if (!items.data().isEmpty()) {
@@ -209,6 +236,7 @@ public class SamplesFragment extends Fragment {
         super.onDestroyView();
         binding = null;
         isLoading = true;
+        isScrollable = true;
         handler.removeCallbacksAndMessages(null);
     }
 

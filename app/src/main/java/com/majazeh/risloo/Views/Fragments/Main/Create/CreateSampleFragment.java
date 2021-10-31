@@ -36,7 +36,6 @@ import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
-import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -761,14 +760,15 @@ public class CreateSampleFragment extends Fragment {
             Sample.createSample(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    SampleModel sampleModel = (SampleModel) object;
-
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
 
-                            NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(sampleModel);
+                            String[] sampleIds = new String[scalesAdapter.getIds().size()];
+                            sampleIds = scalesAdapter.getIds().toArray(sampleIds);
+
+                            NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, sampleIds);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         });
                     }

@@ -381,7 +381,7 @@ public class BreadCrumb {
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.samplesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment();
+                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, null);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.bulkSamplesFragment: {

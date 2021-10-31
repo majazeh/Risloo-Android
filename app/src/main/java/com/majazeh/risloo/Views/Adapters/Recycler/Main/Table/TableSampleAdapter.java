@@ -139,7 +139,8 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }).widget(holder.binding.statusTextView);
 
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code Here
+            NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(model.getChainId(), null);
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.bulkTextView);
     }
 

@@ -99,7 +99,16 @@
         android:id="@+id/samplesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Index.SamplesFragment"
         android:label="@string/SamplesFragmentTitle"
-        tools:layout="@layout/fragment_samples" />
+        tools:layout="@layout/fragment_samples" >
+        <argument
+            android:name="chainId"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="sampleIds"
+            app:nullable="true"
+            app:argType="string[]" />
+    </fragment>
 
     <fragment
         android:id="@+id/bulkSamplesFragment"
