@@ -18,7 +18,11 @@ public class SampleAnswers {
     }
 
     public void sendRequest( String authorization, Response response) {
+        System.out.println("remote: " + remoteAnswers);
+        System.out.println("local: " + localAnswers);
         if (!remoteAnswers.isEmpty()) {
+            localToRemote();
+        }
             if (Model.request) {
                 remoteToLocal(remoteAnswers);
             } else {
@@ -47,7 +51,7 @@ public class SampleAnswers {
                     }
                 });
             }
-        }
+
     }
 
     public void sendPrerequisites(String authorization,Response response){
@@ -77,6 +81,7 @@ public class SampleAnswers {
         ArrayList arrayList = new ArrayList<String>();
         arrayList.add(key);
         arrayList.add(value);
+        if (!remoteAnswers.contains(arrayList))
         remoteAnswers.add(arrayList);
     }
 

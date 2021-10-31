@@ -13,6 +13,7 @@ public class AuthModel extends TypeModel {
     private String callback;
     private String token;
     private UserModel user;
+    private String authorized_key;
 
     public AuthModel(JSONObject jsonObject) throws JSONException {
         super(jsonObject);
@@ -22,6 +23,8 @@ public class AuthModel extends TypeModel {
             setKey(jsonObject.getString("key"));
         if (!jsonObject.isNull("callback"))
             setCallback(jsonObject.getString("callback"));
+        if (!jsonObject.isNull("authorized_key"))
+            setAuthorized_key(jsonObject.getString("authorized_key"));
         if (!jsonObject.isNull("token"))
             setToken(jsonObject.getString("token"));
         if (jsonObject.isNull("key"))
@@ -68,6 +71,14 @@ public class AuthModel extends TypeModel {
         this.user = user;
     }
 
+    public String getAuthorized_key() {
+        return authorized_key;
+    }
+
+    public void setAuthorized_key(String authorized_key) {
+        this.authorized_key = authorized_key;
+    }
+
     @Override
     public JSONObject toObject() {
         try {
@@ -75,7 +86,7 @@ public class AuthModel extends TypeModel {
             super.toObject().put("key", getKey());
             super.toObject().put("callback", getCallback());
             super.toObject().put("token", getToken());
-            super.toObject().put("key", getKey());
+            super.toObject().put("authorized_key", getAuthorized_key());
             super.toObject().put("user", getUser().toObject());
 
         } catch (JSONException e) {
