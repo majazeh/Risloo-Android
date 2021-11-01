@@ -3,8 +3,6 @@ package com.mre.ligheh.Model.Madule;
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
-import com.mre.ligheh.Model.TypeModel.UserModel;
-import com.mre.ligheh.Model.TypeModel.VersionModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,8 +90,12 @@ public class Auth extends Model {
 
     public static void loginOtherUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            if (has(data, "Authorization")) {
-                Model.post("as" + data.get("id"), data, header, response, UserModel.class);
+            if (has(header, "Authorization")) {
+                if (has(data, "id")) {
+                    Model.post("auth/as/" + data.get("id"), data, header, response, AuthModel.class);
+                } else {
+                    Exceptioner.make(response, "آیدی را وارد کنید");
+                }
             } else {
                 Exceptioner.make(response, "لاگین نیستید");
             }
@@ -104,8 +106,8 @@ public class Auth extends Model {
 
     public static void logoutFromOtherUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            if (has(data, "Authorization")) {
-                Model.post("back", data, header, response, UserModel.class);
+            if (has(header, "Authorization")) {
+                Model.post("auth/back", data, header, response, AuthModel.class);
             } else {
                 Exceptioner.make(response, "لاگین نیستید");
             }

@@ -37,7 +37,7 @@ public class Permissoon {
     */
 
     public boolean showUserLogin(UserModel model) {
-        return false;
+        return true;
     }
 
     public boolean showUserEdit(UserModel model) {

@@ -204,7 +204,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             }
                         } break;
                         case "ورود به کاربری":
-                            // TODO : Place Code If Needed
+                            ((MainActivity) activity).userChange("loginOtherUser", model.getId());
                             break;
                     }
 
@@ -293,7 +293,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         items.add(activity.getResources().getString(R.string.CenterUserAdapterEdit));
-//        items.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
+        items.add(activity.getResources().getString(R.string.CenterUserAdapterEnter));
         items.add("");
 
         InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);

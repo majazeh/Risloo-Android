@@ -125,7 +125,7 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     else if (pos.contains("@"))
                         IntentManager.email(activity, new String[]{pos}, "", "", "");
                     else if (pos.equals("ورود به کاربری")) {
-                        // TODO : Place Code When Needed
+                        ((MainActivity) activity).userChange("loginOtherUser", model.getId());
                     } else if (pos.equals("ویرایش")) {
                         NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(model);
                         ((MainActivity) activity).navController.navigate(action);
@@ -162,7 +162,7 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (!model.getEmail().equals(""))
             items.add(model.getEmail());
 
-//        items.add(activity.getResources().getString(R.string.UserAdapterLogin));
+        items.add(activity.getResources().getString(R.string.UserAdapterLogin));
         items.add(activity.getResources().getString(R.string.UserAdapterEdit));
         items.add("");
 

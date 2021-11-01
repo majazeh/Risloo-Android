@@ -45,9 +45,12 @@
     // Snack Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="SnackSuccesAcceptation">پذیرش ثبت شد.</string>
     <string name="SnackChangesSaved">تغییرات ثبت شد.</string>
     <string name="SnackScheduleReserved">برنامه درمانی رزرو شد.</string>
+    <string name="SnackSuccesAcceptation">پذیرش ثبت شد.</string>
+
+    <string name="SnackLoginOtherUser">ورود به کاربری انجام شد.</string>
+    <string name="SnackLogoutFormOtherUser">خروج از کاربری انجام شد.</string>
 
     <string name="SnackCreatedNewBill">فاکتور جدید ساخته شد.</string>
     <string name="SnackCreatedNewBulkSample">نمونه گروهی جدید ساخته شد.</string>
