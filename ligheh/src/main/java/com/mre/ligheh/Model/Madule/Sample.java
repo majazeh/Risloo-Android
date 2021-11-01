@@ -185,7 +185,7 @@ public class Sample extends Model {
         try {
             if (data.containsKey("id")) {
                 String id = (String) data.get("id");
-                Model.post(endpoint + "/samples/" + id + "/scoring", data, header,response, SampleModel.class);
+                Model.post(endpoint + "/samples/" + id + "/scoring", data, header, response, SampleModel.class);
             } else {
                 Exceptioner.make(response, "آیدی را وارد کنید");
             }
@@ -202,9 +202,9 @@ public class Sample extends Model {
                             public void onOK(Object object) {
                                 boolean repeat = false;
                                 SampleModel sampleModel = (SampleModel) object;
-                                    if (sampleModel.getSampleStatus().equals("scoring") || (sampleModel.getSampleStatus().equals("creating_files"))) {
-                                        repeat = true;
-                                    }
+                                if (sampleModel.getSampleStatus().equals("scoring") || (sampleModel.getSampleStatus().equals("creating_files"))) {
+                                    repeat = true;
+                                }
 
                                 if (repeat) {
                                     try {
@@ -224,7 +224,7 @@ public class Sample extends Model {
                             }
                         }
                         , SampleModel.class);
-            }else{
+            } else {
                 Exceptioner.make(response, "آیدی را وارد کنید");
             }
         } catch (IOException e) {
@@ -232,7 +232,7 @@ public class Sample extends Model {
         }
     }
 
-    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response,Class aClass) {
+    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response, Class aClass) {
         try {
             Model.create(endpoint + "/samples", data, header, response, aClass);
         } catch (IOException e) {
@@ -241,11 +241,11 @@ public class Sample extends Model {
     }
 
     public static void createSample(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
-       create(data, header, response, SampleModel.class);
+        create(data, header, response, null);
     }
 
     public static void createBulk(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
-      create(data, header, response, BulkSampleModel.class);
+        create(data, header, response, BulkSampleModel.class); 
     }
 
     public static void items(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
