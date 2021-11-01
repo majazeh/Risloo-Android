@@ -36,6 +36,7 @@ import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -762,14 +763,25 @@ public class CreateSampleFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
+                            try {
+                                ArrayList<String> ids = new ArrayList<>();
+                                for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
+                                    SampleModel model = new SampleModel(((JSONObject) object).getJSONArray("data").getJSONObject(i));
+                                    ids.add(model.getSampleId());
+                                }
 
-                            String[] sampleIds = new String[scalesAdapter.getIds().size()];
-                            sampleIds = scalesAdapter.getIds().toArray(sampleIds);
+                                String[] sampleIds = new String[ids.size()];
+                                sampleIds = ids.toArray(sampleIds);
 
-                            NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, sampleIds);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
+                                DialogManager.dismissLoadingDialog();
+                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
+
+                                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, sampleIds);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         });
                     }
                 }

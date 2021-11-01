@@ -199,7 +199,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         else
             holder.binding.editionTextView.setText("-");
 
-        if (model.getChainId() != null)
+        if (!model.getChainId().equals(""))
             holder.binding.bulkTextView.setVisibility(View.VISIBLE);
         else
             holder.binding.bulkTextView.setVisibility(View.GONE);

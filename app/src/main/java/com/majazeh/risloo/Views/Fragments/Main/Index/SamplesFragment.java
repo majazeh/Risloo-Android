@@ -28,8 +28,6 @@ import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -151,8 +149,10 @@ public class SamplesFragment extends Fragment {
         }
 
         if (sampleIds != null) {
-            ArrayList<String> ids = new ArrayList<>();
-            Collections.addAll(ids, sampleIds);
+            StringBuilder ids = new StringBuilder();
+            for (String id : sampleIds) {
+                ids.append(id + ",");
+            }
 
             data.put("ids", ids);
         }

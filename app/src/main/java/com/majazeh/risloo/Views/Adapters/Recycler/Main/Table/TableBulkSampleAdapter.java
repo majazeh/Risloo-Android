@@ -188,7 +188,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void setMenu(TableBulkSampleHolder holder, BulkSampleModel model) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (!model.getLink().equals("") && !model.getStatus().equals("closed")) {
+        if (model.getLink() != null && !model.getLink().equals("") && model.getStatus() != null && !model.getStatus().equals("closed")) {
             items.add(activity.getResources().getString(R.string.BulkSampleAdapterLink));
             items.add(activity.getResources().getString(R.string.BulkSampleAdapterCopy));
         }

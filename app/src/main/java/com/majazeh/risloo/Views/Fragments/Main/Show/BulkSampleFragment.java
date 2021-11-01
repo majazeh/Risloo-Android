@@ -224,7 +224,7 @@ public class BulkSampleFragment extends Fragment {
     private void setDropdown(BulkSampleModel model) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (!model.getLink().equals("") && !model.getStatus().equals("closed")) {
+        if (model.getLink() != null && !model.getLink().equals("") && model.getStatus() != null && !model.getStatus().equals("closed")) {
             items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentLink));
             items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentCopy));
         }
