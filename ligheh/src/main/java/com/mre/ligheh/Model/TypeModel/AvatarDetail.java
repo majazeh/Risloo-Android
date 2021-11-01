@@ -94,4 +94,21 @@ public class AvatarDetail extends TypeModel {
     public void setExec(String exec) {
         this.exec = exec;
     }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("file_name", getFile_name());
+            super.toObject().put("slug", getSlug());
+            super.toObject().put("mode", getMode());
+            super.toObject().put("url", getUrl());
+            super.toObject().put("mime", getMime());
+            super.toObject().put("exec", getExec());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return super.toObject();
+    }
 }

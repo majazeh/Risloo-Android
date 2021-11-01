@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AvatarModel extends TypeModel {
     private AvatarDetail large;
@@ -65,8 +66,19 @@ public class AvatarModel extends TypeModel {
     }
 
 
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("large", getLarge().toObject());
+            super.toObject().put("medium", getMedium().toObject());
+            super.toObject().put("original", getOriginal().toObject());
+            super.toObject().put("small", getSmall().toObject());
 
-
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return super.toObject();
+    }
 
 
     @NonNull

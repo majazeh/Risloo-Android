@@ -168,4 +168,53 @@ public class BulkSampleModel extends TypeModel {
     public void setLink(String link) {
         this.link = link;
     }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            if (notNull(getRoom()))
+                super.toObject().put("room", getRoom().toObject());
+            if (notNull(getStatus()))
+                super.toObject().put("status", getStatus());
+            if (notNull(getCaseModel()))
+                super.toObject().put("caseModel", getCaseModel().toObject());
+            if (notNull(getCase_status()))
+                super.toObject().put("case_status", getCase_status());
+            if (notNull(getScales()))
+                super.toObject().put("scales", getScales().toObject());
+            if (notNull(getMembers()))
+                super.toObject().put("members", getMembers().toObject());
+            if (notNull(getSamples()))
+                super.toObject().put("samples", getSamples().toObject());
+            if (notNull(getMembers_count()))
+                super.toObject().put("members_count", getMembers_count());
+            if (notNull(getJoined()))
+                super.toObject().put("joined", getJoined());
+            if (notNull(getTitle()))
+                super.toObject().put("title", getTitle());
+            if (notNull(getLink()))
+                super.toObject().put("link", getLink());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return super.toObject();
+    }
+
+    @Override
+    public String toString() {
+        return "BulkSampleModel{" +
+                "id='" + id + '\'' +
+                ", room=" + room +
+                ", status='" + status + '\'' +
+                ", caseModel=" + caseModel +
+                ", case_status='" + case_status + '\'' +
+                ", scales=" + scales +
+                ", members=" + members +
+                ", samples=" + samples +
+                ", members_count=" + members_count +
+                ", joined=" + joined +
+                ", title='" + title + '\'' +
+                ", link='" + link + '\'' +
+                '}';
+    }
 }

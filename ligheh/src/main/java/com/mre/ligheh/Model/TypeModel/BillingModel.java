@@ -118,4 +118,35 @@ public class BillingModel extends TypeModel {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("creditor", getCreditor().toObject());
+            super.toObject().put("debtor", getDebtor().toObject());
+            super.toObject().put("amount", getAmount());
+            super.toObject().put("action", getAction());
+            super.toObject().put("title", getTitle());
+            super.toObject().put("description", getDescription());
+            super.toObject().put("created_at", getCreated_at());
+            super.toObject().put("type", getType());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return super.toObject();
+    }
+
+    @Override
+    public String toString() {
+        return  "id='" + id + '\'' +
+                ", creditor=" + creditor +
+                ", debtor=" + debtor +
+                ", amount=" + amount +
+                ", action=" + action +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", created_at=" + created_at +
+                ", type='" + type + '\'';
+    }
 }

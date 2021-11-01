@@ -103,6 +103,27 @@ public class TypeModel implements Parcelable {
 
     }
 
+    protected boolean notNull(Object object) {
+        if (object == null)
+            return false;
+        else
+            return true;
+    }
+
+    protected boolean notNull(String string) {
+        if (string == null)
+            return false;
+        else
+            return true;
+    }
+
+    protected boolean notNull(List list) {
+        if (list.size() == 0)
+            return false;
+        else
+            return true;
+    }
+
     public JSONObject toObject() {
         return object;
     }

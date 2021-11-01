@@ -24,7 +24,7 @@ public class SampleModel extends TypeModel {
     private int membersCount;
     private int joined;
     private List chain;
-    private String chainId;
+    private String chainId = "";
     private RoomModel SampleRoom;
     private CaseModel SampleCase;
     private List prerequisites;
@@ -132,7 +132,6 @@ public class SampleModel extends TypeModel {
             setItems(new com.mre.ligheh.Model.Madule.List());
         }
 
-
         if (!jsonObject.isNull("chain")) {
             if (jsonObject.get("chain").getClass().getName().equals("org.json.JSONObject")) {
                 JSONObject jsonObject1 = jsonObject.getJSONObject("chain");
@@ -143,11 +142,11 @@ public class SampleModel extends TypeModel {
                     }
                     setChain(chains);
                 }
+                if (!jsonObject1.isNull("id"))
                 setChainId(jsonObject1.getString("id"));
             } else {
                 setChainId(jsonObject.getString("chain"));
             }
-
         }
 
         if (!jsonObject.isNull("prerequisites")) {
