@@ -180,7 +180,7 @@ public class BreadCrumb {
             case R.id.createDocumentFragment:
                 return createDocument();
             case R.id.createClientReportFragment:
-                return createReport();
+                return createClientReport();
             case R.id.createPracticeFragment:
                 return createPractice();
             case R.id.createRoomFragment:
@@ -625,53 +625,7 @@ public class BreadCrumb {
         }
     }
 
-    /*
-    ---------- Toolbar ----------
-    */
-
-    private ArrayList<String> me() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.MeFragmentTitle));
-
-        destinationIds = meIds();
-        return list;
-    }
-    private ArrayList<Integer> meIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.meFragment);
-
-        return list;
-    }
-
-    private ArrayList<String> accounting() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.AccountingFragmentTitle));
-
-        destinationIds = accountingIds();
-        return list;
-    }
-    private ArrayList<Integer> accountingIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.accountingFragment);
-
-        return list;
-    }
-
-    private ArrayList<String> payments() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.PaymentsFragmentTitle));
-
-        destinationIds = paymentsIds();
-        return list;
-    }
-    private ArrayList<Integer> paymentsIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.paymentsFragment);
-
-        return list;
-    }
-
-    /*
+        /*
     ---------- Drawer ----------
     */
 
@@ -802,6 +756,52 @@ public class BreadCrumb {
     }
 
     /*
+    ---------- Toolbar ----------
+    */
+
+    private ArrayList<String> me() {
+        ArrayList<String> list = dashboard();
+        list.add(activity.getResources().getString(R.string.MeFragmentTitle));
+
+        destinationIds = meIds();
+        return list;
+    }
+    private ArrayList<Integer> meIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.meFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> accounting() {
+        ArrayList<String> list = dashboard();
+        list.add(activity.getResources().getString(R.string.AccountingFragmentTitle));
+
+        destinationIds = accountingIds();
+        return list;
+    }
+    private ArrayList<Integer> accountingIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.accountingFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> payments() {
+        ArrayList<String> list = dashboard();
+        list.add(activity.getResources().getString(R.string.PaymentsFragmentTitle));
+
+        destinationIds = paymentsIds();
+        return list;
+    }
+    private ArrayList<Integer> paymentsIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.paymentsFragment);
+
+        return list;
+    }
+
+    /*
     ---------- Create ----------
     */
 
@@ -875,6 +875,20 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> createClientReport() {
+        ArrayList<String> list = clientReports();
+        list.add(activity.getResources().getString(R.string.CreateClientReportFragmentTitle));
+
+        destinationIds = createClientReportIds();
+        return list;
+    }
+    private ArrayList<Integer> createClientReportIds() {
+        ArrayList<Integer> list = clientReportsIds();
+        list.add(R.id.createClientReportFragment);
+
+        return list;
+    }
+
     private ArrayList<String> createDocument() {
         ArrayList<String> list = documents();
         list.add(activity.getResources().getString(R.string.CreateDocumentFragmentTitle));
@@ -913,20 +927,6 @@ public class BreadCrumb {
     private ArrayList<Integer> createPracticeIds() {
         ArrayList<Integer> list = sessionIds();
         list.add(R.id.createPracticeFragment);
-
-        return list;
-    }
-
-    private ArrayList<String> createReport() {
-        ArrayList<String> list = clientReports();
-        list.add(activity.getResources().getString(R.string.CreateClientReportFragmentTitle));
-
-        destinationIds = createReportIds();
-        return list;
-    }
-    private ArrayList<Integer> createReportIds() {
-        ArrayList<Integer> list = clientReportsIds();
-        list.add(R.id.createClientReportFragment);
 
         return list;
     }
