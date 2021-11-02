@@ -75,27 +75,16 @@ public class Singleton {
             setRegist(mobile, password);
     }
 
-    public void logout() {
-        if (OtherUser.getInstance().getUserModel() != null) {
-            OtherUser.getInstance().logout();
-        }
+    public void otherUser(boolean isLogin) {
+        setOtherUser(isLogin);
+    }
 
+    public void logout() {
         editor.remove("token");
         editor.remove("authorization");
+        editor.remove("otherUser");
         editor.remove("usermodel");
         editor.apply();
-    }
-
-    /*
-    ---------- OtherUser ----------
-    */
-
-    public void loginOtherUser(AuthModel authModel) {
-        OtherUser.getInstance().login(authModel);
-    }
-
-    public void logoutFromOtherUser() {
-        OtherUser.getInstance().logout();
     }
 
     /*
@@ -103,76 +92,65 @@ public class Singleton {
     */
 
     private void setToken(String value) {
-        if (!OtherUser.getInstance().getToken().equals("")) {
-            OtherUser.getInstance().setToken(value);
-        } else {
-            editor.putString("token", value);
-            editor.apply();
-        }
+        editor.putString("token", value);
+        editor.apply();
     }
 
     private void setAuthorization(String value) {
-        if (!OtherUser.getInstance().getAuthorization().equals("")) {
-            OtherUser.getInstance().setAuthorization(value);
-        } else {
-            editor.putString("authorization", value);
-            editor.apply();
-        }
+        editor.putString("authorization", value);
+        editor.apply();
+    }
+
+    private void setOtherUser(boolean value) {
+        editor.putBoolean("otherUser", value);
+        editor.apply();
     }
 
     private void setParams(UserModel userModel) {
-        if (OtherUser.getInstance().getUserModel() != null) {
-            OtherUser.getInstance().setUserModel(userModel);
-        } else {
-            try {
-                JSONObject jsonObject = getUserModel().object;
+        try {
+            JSONObject jsonObject = getUserModel().object;
 
-                jsonObject.put("name", userModel.getName());
-                jsonObject.put("mobile", userModel.getMobile());
-                jsonObject.put("email", userModel.getEmail());
-                jsonObject.put("birthday", userModel.getBirthday());
-                jsonObject.put("status", userModel.getUserStatus());
-                jsonObject.put("type", userModel.getUserType());
-                jsonObject.put("gender", userModel.getGender());
+            jsonObject.put("name", userModel.getName());
+            jsonObject.put("mobile", userModel.getMobile());
+            jsonObject.put("email", userModel.getEmail());
+            jsonObject.put("birthday", userModel.getBirthday());
+            jsonObject.put("status", userModel.getUserStatus());
+            jsonObject.put("type", userModel.getUserType());
+            jsonObject.put("gender", userModel.getGender());
 
-                JSONArray avatarArray = new JSONArray();
+            JSONArray avatarArray = new JSONArray();
 
-                if (userModel.getAvatar() != null) {
-                    JSONObject small = userModel.getAvatar().getSmall().object;
-                    JSONObject medium = userModel.getAvatar().getMedium().object;
-                    JSONObject original = userModel.getAvatar().getOriginal().object;
-                    JSONObject large = userModel.getAvatar().getLarge().object;
+            if (userModel.getAvatar() != null) {
+                JSONObject small = userModel.getAvatar().getSmall().object;
+                JSONObject medium = userModel.getAvatar().getMedium().object;
+                JSONObject original = userModel.getAvatar().getOriginal().object;
+                JSONObject large = userModel.getAvatar().getLarge().object;
 
-                    if (small != null)
-                        avatarArray.put(small);
+                if (small != null)
+                    avatarArray.put(small);
 
-                    if (medium != null)
-                        avatarArray.put(medium);
+                if (medium != null)
+                    avatarArray.put(medium);
 
-                    if (original != null)
-                        avatarArray.put(original);
+                if (original != null)
+                    avatarArray.put(original);
 
-                    if (large != null)
-                        avatarArray.put(large);
-                }
-
-                jsonObject.put("avatar", avatarArray);
-
-                editor.putString("usermodel", jsonObject.toString());
-                editor.apply();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                if (large != null)
+                    avatarArray.put(large);
             }
+
+            jsonObject.put("avatar", avatarArray);
+
+            editor.putString("usermodel", jsonObject.toString());
+            editor.apply();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
     private void setUserModel(UserModel userModel) {
-        if (OtherUser.getInstance().getUserModel() != null) {
-            OtherUser.getInstance().setUserModel(userModel);
-        } else {
-            editor.putString("usermodel", userModel.object.toString());
-            editor.apply();
-        }
+        editor.putString("usermodel", userModel.object.toString());
+        editor.apply();
     }
 
     private void setRegist(String mobile, String password) {
@@ -212,56 +190,37 @@ public class Singleton {
     ---------- Getters ----------
     */
 
-    public String getTokenMain() {
+    public String getToken() {
         if (!sharedPreferences.getString("token", "").equals(""))
             return sharedPreferences.getString("token", "");
 
         return "";
     }
 
-    public String getAuthorizationMain() {
+    public String getAuthorization() {
         if (!sharedPreferences.getString("authorization", "").equals(""))
             return sharedPreferences.getString("authorization", "");
 
         return "";
     }
 
-    public String getToken() {
-        if (!OtherUser.getInstance().getToken().equals("")) {
-            return OtherUser.getInstance().getToken();
-        } else {
-            if (!sharedPreferences.getString("token", "").equals(""))
-                return sharedPreferences.getString("token", "");
+    public Boolean getOtherUser() {
+        if (sharedPreferences.contains("otherUser"))
+            return sharedPreferences.getBoolean("otherUser", false);
 
-            return "";
-        }
-    }
-
-    public String getAuthorization() {
-        if (!OtherUser.getInstance().getAuthorization().equals("")) {
-            return OtherUser.getInstance().getAuthorization();
-        } else {
-            if (!sharedPreferences.getString("authorization", "").equals(""))
-                return sharedPreferences.getString("authorization", "");
-
-            return "";
-        }
+        return false;
     }
 
     public UserModel getUserModel() {
-        if (OtherUser.getInstance().getUserModel() != null) {
-            return OtherUser.getInstance().getUserModel();
-        } else {
-            try {
-                if (!sharedPreferences.getString("usermodel", "").equals("")) {
-                    JSONObject jsonObject = new JSONObject(sharedPreferences.getString("usermodel", ""));
+        try {
+            if (!sharedPreferences.getString("usermodel", "").equals("")) {
+                JSONObject jsonObject = new JSONObject(sharedPreferences.getString("usermodel", ""));
 
-                    return new UserModel(jsonObject);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } return null;
-        }
+                return new UserModel(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return null;
     }
 
     public String getRegistPassword(String mobile) {

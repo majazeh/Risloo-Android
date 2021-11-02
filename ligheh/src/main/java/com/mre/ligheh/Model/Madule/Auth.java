@@ -3,7 +3,6 @@ package com.mre.ligheh.Model.Madule;
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
-import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,7 +107,7 @@ public class Auth extends Model {
     public static void logoutFromOtherUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(header, "Authorization")) {
-                Model.post("auth/back", data, header, response, UserModel.class);
+                Model.post("auth/back", data, header, response, AuthModel.class);
             } else {
                 Exceptioner.make(response, "لاگین نیستید");
             }

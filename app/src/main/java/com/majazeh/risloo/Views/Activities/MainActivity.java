@@ -27,7 +27,6 @@ import com.majazeh.risloo.Utils.Entities.BreadCrumb;
 import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Inputor;
-import com.majazeh.risloo.Utils.Entities.OtherUser;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
@@ -83,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     // Objects
     public NavHostFragment navHostFragment;
     public NavController navController;
-    private HashMap data, headerMain, headerUser;
 
     // Vars
     private boolean userSelect = false;
@@ -145,12 +143,6 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         fragmont = new Fragmont(navHostFragment);
-
-        data = new HashMap<>();
-        headerMain = new HashMap<>();
-        headerUser = new HashMap<>();
-        headerMain.put("Authorization", singleton.getAuthorizationMain());
-        headerUser.put("Authorization", singleton.getAuthorization());
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
@@ -288,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
                 binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(2);
             }
 
-            if (OtherUser.getInstance().getUserModel() != null) {
+            if (singleton.getOtherUser()) {
                 binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.VISIBLE);
             } else {
                 binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.GONE);
@@ -365,13 +357,6 @@ public class MainActivity extends AppCompatActivity {
         InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, items);
     }
 
-    private void setHashmap(String userId) {
-        if (!userId.equals(""))
-            data.put("id", userId);
-        else
-            data.remove("id");
-    }
-
     public void responseAdapter(String item) {
         switch (item) {
             case "داشبورد": {
@@ -418,16 +403,23 @@ public class MainActivity extends AppCompatActivity {
     public void userChange(String method, String userId) {
         DialogManager.showLoadingDialog(this, "");
 
-        setHashmap(userId);
+        HashMap data = new HashMap<>();
+        HashMap header = new HashMap<>();
+
+        if (!userId.equals(""))
+            data.put("id", userId);
+
+        header.put("Authorization", singleton.getAuthorization());
 
         if (method.equals("loginOtherUser")) {
-            Auth.loginOtherUser(data, headerMain, new Response() {
+            Auth.loginOtherUser(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
                     AuthModel model = (AuthModel) object;
 
                     runOnUiThread(() -> {
-                        singleton.loginOtherUser(model);
+                        singleton.login(model);
+                        singleton.otherUser(true);
 
                         setData();
 
@@ -451,11 +443,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Auth.logoutFromOtherUser(data, headerUser, new Response() {
+            Auth.logoutFromOtherUser(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
+                    AuthModel model = (AuthModel) object;
+
                     runOnUiThread(() -> {
-                        singleton.logoutFromOtherUser();
+                        singleton.login(model);
+                        singleton.otherUser(false);
 
                         setData();
 
@@ -599,12 +594,8 @@ public class MainActivity extends AppCompatActivity {
             binding.getRoot().closeDrawer(GravityCompat.START);
         else if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment)
             navController.navigateUp();
-        else {
-            if (OtherUser.getInstance().getUserModel() != null)
-                OtherUser.getInstance().logout();
-
+        else
             IntentManager.finish(this);
-        }
     }
 
 }
