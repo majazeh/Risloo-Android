@@ -425,11 +425,14 @@ public class MainActivity extends AppCompatActivity {
 
                         setToolbar();
 
+                        if (binding.contentIncludeLayout.logoutImageView.getRoot().getVisibility() == View.GONE)
+                            binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.VISIBLE);
+
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
 
-                        if (binding.contentIncludeLayout.logoutImageView.getRoot().getVisibility() == View.GONE)
-                            binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.VISIBLE);
+                        NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
+                        navController.navigate(action);
                     });
                 }
 
@@ -453,11 +456,14 @@ public class MainActivity extends AppCompatActivity {
 
                         setToolbar();
 
+                        if (binding.contentIncludeLayout.logoutImageView.getRoot().getVisibility() == View.VISIBLE)
+                            binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.GONE);
+
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
 
-                        if (binding.contentIncludeLayout.logoutImageView.getRoot().getVisibility() == View.VISIBLE)
-                            binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.GONE);
+                        NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
+                        navController.navigate(action);
                     });
                 }
 
