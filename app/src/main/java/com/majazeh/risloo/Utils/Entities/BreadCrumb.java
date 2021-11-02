@@ -339,21 +339,6 @@ public class BreadCrumb {
     private void navigateTo(int position) {
         switch (position) {
 
-            // -------------------- Toolbar
-
-            case R.id.meFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalMeFragment(((MainActivity) activity).singleton.getUserModel());
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.accountingFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalAccountingFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.paymentsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-
             // -------------------- Drawer
 
             case R.id.dashboardFragment: {
@@ -390,6 +375,21 @@ public class BreadCrumb {
             } break;
             case R.id.documentsFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalDocumentsFragment();
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+
+            // -------------------- Toolbar
+
+            case R.id.meFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalMeFragment(((MainActivity) activity).singleton.getUserModel());
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.accountingFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalAccountingFragment();
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.paymentsFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
 
@@ -1385,9 +1385,9 @@ public class BreadCrumb {
         if (billingModel != null && billingModel.getTitle() != null && !billingModel.getTitle().equals(""))
             list.add(billingModel.getTitle());
         else if (billingModel != null && billingModel.getId() != null && !billingModel.getId().equals(""))
-            list.add("صورت حساب" + " " + billingModel.getId());
+            list.add(billingModel.getId());
         else
-            list.add("نامعلوم");
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
         destinationIds = billIds();
         return list;
@@ -1405,9 +1405,9 @@ public class BreadCrumb {
         if (bulkSampleModel != null && bulkSampleModel.getTitle() != null && !bulkSampleModel.getTitle().equals(""))
             list.add(bulkSampleModel.getTitle());
         else if (bulkSampleModel != null && bulkSampleModel.getId() != null && !bulkSampleModel.getId().equals(""))
-            list.add("نمونه\u200Cای" + " " + bulkSampleModel.getId());
+            list.add(bulkSampleModel.getId());
         else
-            list.add("نامعلوم");
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
         destinationIds = bulkSampleIds();
         return list;
@@ -1423,9 +1423,9 @@ public class BreadCrumb {
         ArrayList<String> list = room();
 
         if (caseModel != null && caseModel.getCaseId() != null && !caseModel.getCaseId().equals(""))
-            list.add("پرونده\u200Cی" + " " + caseModel.getCaseId());
+            list.add(caseModel.getCaseId());
         else
-            list.add("نامعلوم");
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
         destinationIds = casseIds();
         return list;
@@ -1446,7 +1446,7 @@ public class BreadCrumb {
             else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
                 list.add("مرکز" + " " + centerModel.getCenterId());
             else
-                list.add("نامعلوم");
+                list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1475,9 +1475,9 @@ public class BreadCrumb {
             else if (userModel != null && userModel.getName() != null && !userModel.getName().equals(""))
                 list.add(userModel.getName());
             else if (userModel != null && userModel.getId() != null && !userModel.getId().equals(""))
-                list.add("مراجع" + " " + userModel.getId());
+                list.add(userModel.getId());
             else
-                list.add("نامعلوم");
+                list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         } else {
             list.add(activity.getResources().getString(R.string.MeFragmentTitle));
         }
@@ -1512,14 +1512,14 @@ public class BreadCrumb {
             else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
                 list.add("کلینیک شخصی" + " " + centerModel.getCenterId());
             else
-                list.add("نامعلوم");
+                list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         } else {
             if (roomModel != null && roomModel.getRoomManager() != null && roomModel.getRoomManager().getName() != null && !roomModel.getRoomManager().getName().equals(""))
                 list.add("اتاق درمان" + " " + roomModel.getRoomManager().getName());
             else if (roomModel != null && roomModel.getRoomId() != null && !roomModel.getRoomId().equals(""))
                 list.add("اتاق درمان" + " " + roomModel.getRoomId());
             else
-                list.add("نامعلوم");
+                list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         }
 
         destinationIds = roomIds();
@@ -1544,9 +1544,9 @@ public class BreadCrumb {
         if (sampleModel != null && sampleModel.getSampleTitle() != null && !sampleModel.getSampleTitle().equals(""))
             list.add(sampleModel.getSampleTitle());
         else if (sampleModel != null && sampleModel.getSampleId() != null && !sampleModel.getSampleId().equals(""))
-            list.add("نمونه\u200Cای" + " " + sampleModel.getSampleId());
+            list.add(sampleModel.getSampleId());
         else
-            list.add("نامعلوم");
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
         destinationIds = sampleIds();
         return list;
@@ -1569,11 +1569,11 @@ public class BreadCrumb {
             list = room();
 
         if (sessionType.equals("session") && sessionModel != null && sessionModel.getId() != null && !sessionModel.getId().equals(""))
-            list.add("جلسه\u200Cی" + " " + sessionModel.getId());
+            list.add(sessionModel.getId());
         else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getId() != null && !scheduleModel.getId().equals(""))
-            list.add("جلسه\u200Cی" + " " + scheduleModel.getId());
+            list.add(scheduleModel.getId());
         else
-            list.add("نامعلوم");
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
         destinationIds = sessionIds();
         return list;
@@ -1599,9 +1599,9 @@ public class BreadCrumb {
         if (treasuriesModel != null && treasuriesModel.getTitle() != null && !treasuriesModel.getTitle().equals(""))
             list.add(treasuriesModel.getTitle());
         else if (treasuriesModel != null && treasuriesModel.getId() != null && !treasuriesModel.getId().equals(""))
-            list.add("کیف پول" + " " + treasuriesModel.getId());
+            list.add(treasuriesModel.getId());
         else
-            list.add("نامعلوم");
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
         destinationIds = treasuryIds();
         return list;
@@ -1619,9 +1619,9 @@ public class BreadCrumb {
         if (userModel != null && userModel.getName() != null && !userModel.getName().equals(""))
             list.add(userModel.getName());
         else if (userModel != null && userModel.getId() != null && !userModel.getId().equals(""))
-            list.add("عضو" + " " + userModel.getId());
+            list.add(userModel.getId());
         else
-            list.add("نامعلوم");
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
         destinationIds = userIds();
         return list;
