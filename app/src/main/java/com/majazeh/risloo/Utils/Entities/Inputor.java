@@ -20,6 +20,10 @@ public class Inputor {
     // Objects
     private Drawable background;
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public Inputor() {
         // TODO : Place Code If Needed
     }

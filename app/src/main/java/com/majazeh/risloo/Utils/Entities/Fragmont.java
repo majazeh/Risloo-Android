@@ -102,6 +102,10 @@ public class Fragmont {
     // Objects
     private final NavHostFragment navHostFragment;
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public Fragmont(@NonNull NavHostFragment navHostFragment) {
         this.navHostFragment = navHostFragment;
     }
@@ -153,6 +157,9 @@ public class Fragmont {
         else if (fragment instanceof CreateCenterUserFragment)
             return fragment;
 
+        else if (fragment instanceof CreateClientReportFragment)
+            return fragment;
+
         else if (fragment instanceof CreateDocumentFragment)
             return fragment;
 
@@ -160,9 +167,6 @@ public class Fragmont {
             return fragment;
 
         else if (fragment instanceof CreatePracticeFragment)
-            return fragment;
-
-        else if (fragment instanceof CreateClientReportFragment)
             return fragment;
 
         else if (fragment instanceof CreateRoomFragment)
@@ -420,7 +424,7 @@ public class Fragmont {
     }
 
     /*
-    ---------- CreateSchedule & CreateSession ----------
+    ---------- Create Schedule & Session ----------
     */
 
     public Fragment getTime() {

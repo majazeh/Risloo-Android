@@ -18,6 +18,10 @@ public class Decorator {
     // Vars
     private boolean lightStatus, lightNav;
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public Decorator(@NonNull Activity activity) {
         this.activity = activity;
 

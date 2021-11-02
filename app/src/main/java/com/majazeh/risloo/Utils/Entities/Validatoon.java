@@ -8,6 +8,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Validatoon {
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public Validatoon() {
         // TODO : Place Code If Needed
     }
