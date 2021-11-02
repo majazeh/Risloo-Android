@@ -93,7 +93,7 @@ public class Auth extends Model {
         try {
             if (has(header, "Authorization")) {
                 if (has(data, "id")) {
-                    Model.post("auth/as/" + data.get("id"), data, header, response, UserModel.class);
+                    Model.post("auth/as/" + data.get("id"), data, header, response, AuthModel.class);
                 } else {
                     Exceptioner.make(response, "آیدی را وارد کنید");
                 }

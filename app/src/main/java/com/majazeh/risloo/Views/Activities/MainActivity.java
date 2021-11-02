@@ -27,6 +27,7 @@ import com.majazeh.risloo.Utils.Entities.BreadCrumb;
 import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Inputor;
+import com.majazeh.risloo.Utils.Entities.OtherUser;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
@@ -50,6 +51,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     // Objects
     public NavHostFragment navHostFragment;
     public NavController navController;
-    private HashMap data, header;
+    private HashMap data, headerMain, headerUser;
 
     // Vars
     private boolean userSelect = false;
@@ -145,8 +147,10 @@ public class MainActivity extends AppCompatActivity {
         fragmont = new Fragmont(navHostFragment);
 
         data = new HashMap<>();
-        header = new HashMap<>();
-        header.put("Authorization", singleton.getAuthorization());
+        headerMain = new HashMap<>();
+        headerUser = new HashMap<>();
+        headerMain.put("Authorization", singleton.getAuthorizationMain());
+        headerUser.put("Authorization", singleton.getAuthorization());
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
@@ -283,6 +287,12 @@ public class MainActivity extends AppCompatActivity {
 
                 binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(2);
             }
+
+            if (OtherUser.getInstance().getUserModel() != null) {
+                binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.GONE);
+            }
         } else {
             IntentManager.auth(this, "login");
         }
@@ -411,10 +421,10 @@ public class MainActivity extends AppCompatActivity {
         setHashmap(userId);
 
         if (method.equals("loginOtherUser")) {
-            Auth.loginOtherUser(data, header, new Response() {
+            Auth.loginOtherUser(data, headerMain, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    UserModel model = (UserModel) object;
+                    AuthModel model = (AuthModel) object;
 
                     runOnUiThread(() -> {
                         singleton.loginOtherUser(model);
@@ -424,9 +434,6 @@ public class MainActivity extends AppCompatActivity {
                         setDrawer();
 
                         setToolbar();
-
-                        if (binding.contentIncludeLayout.logoutImageView.getRoot().getVisibility() == View.GONE)
-                            binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.VISIBLE);
 
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
@@ -444,7 +451,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Auth.logoutFromOtherUser(data, header, new Response() {
+            Auth.logoutFromOtherUser(data, headerUser, new Response() {
                 @Override
                 public void onOK(Object object) {
                     runOnUiThread(() -> {
@@ -455,9 +462,6 @@ public class MainActivity extends AppCompatActivity {
                         setDrawer();
 
                         setToolbar();
-
-                        if (binding.contentIncludeLayout.logoutImageView.getRoot().getVisibility() == View.VISIBLE)
-                            binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.GONE);
 
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
@@ -595,8 +599,12 @@ public class MainActivity extends AppCompatActivity {
             binding.getRoot().closeDrawer(GravityCompat.START);
         else if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment)
             navController.navigateUp();
-        else
+        else {
+            if (OtherUser.getInstance().getUserModel() != null)
+                OtherUser.getInstance().logout();
+
             IntentManager.finish(this);
+        }
     }
 
 }

@@ -34,9 +34,7 @@ public class Singleton {
                     .build();
 
             sharedPreferences = EncryptedSharedPreferences.create(
-                    activity,
-                    "encrypted_shared_preferences",
-                    masterKey,
+                    activity, "encrypted_shared_preferences", masterKey,
                     EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                     EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM);
 
@@ -92,8 +90,8 @@ public class Singleton {
     ---------- OtherUser ----------
     */
 
-    public void loginOtherUser(UserModel userModel) {
-        OtherUser.getInstance().login(userModel);
+    public void loginOtherUser(AuthModel authModel) {
+        OtherUser.getInstance().login(authModel);
     }
 
     public void logoutFromOtherUser() {
@@ -105,13 +103,21 @@ public class Singleton {
     */
 
     private void setToken(String value) {
-        editor.putString("token", value);
-        editor.apply();
+        if (!OtherUser.getInstance().getToken().equals("")) {
+            OtherUser.getInstance().setToken(value);
+        } else {
+            editor.putString("token", value);
+            editor.apply();
+        }
     }
 
     private void setAuthorization(String value) {
-        editor.putString("authorization", value);
-        editor.apply();
+        if (!OtherUser.getInstance().getAuthorization().equals("")) {
+            OtherUser.getInstance().setAuthorization(value);
+        } else {
+            editor.putString("authorization", value);
+            editor.apply();
+        }
     }
 
     private void setParams(UserModel userModel) {
@@ -206,18 +212,40 @@ public class Singleton {
     ---------- Getters ----------
     */
 
-    public String getToken() {
+    public String getTokenMain() {
         if (!sharedPreferences.getString("token", "").equals(""))
             return sharedPreferences.getString("token", "");
 
         return "";
     }
 
-    public String getAuthorization() {
+    public String getAuthorizationMain() {
         if (!sharedPreferences.getString("authorization", "").equals(""))
             return sharedPreferences.getString("authorization", "");
 
         return "";
+    }
+
+    public String getToken() {
+        if (!OtherUser.getInstance().getToken().equals("")) {
+            return OtherUser.getInstance().getToken();
+        } else {
+            if (!sharedPreferences.getString("token", "").equals(""))
+                return sharedPreferences.getString("token", "");
+
+            return "";
+        }
+    }
+
+    public String getAuthorization() {
+        if (!OtherUser.getInstance().getAuthorization().equals("")) {
+            return OtherUser.getInstance().getAuthorization();
+        } else {
+            if (!sharedPreferences.getString("authorization", "").equals(""))
+                return sharedPreferences.getString("authorization", "");
+
+            return "";
+        }
     }
 
     public UserModel getUserModel() {
