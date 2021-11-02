@@ -74,7 +74,7 @@ public class PaymentManager {
         DialogManager.showPaymentDialog(activity, "finalize", Paymont.getInstance().getPaymentModel());
 
         HashMap data = new HashMap<>();
-        data.put("user", ((MainActivity) activity).singleton.getId());
+        data.put("user", ((MainActivity) activity).singleton.getUserModel().getId());
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 

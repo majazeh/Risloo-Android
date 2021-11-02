@@ -216,7 +216,7 @@ public class EditUserTabPasswordFragment extends Fragment {
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId()) && binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getUserModel().getId()) && binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
             if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
@@ -251,7 +251,7 @@ public class EditUserTabPasswordFragment extends Fragment {
     }
 
     private void resetInputs() {
-        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getUserModel().getId())) {
             currentPassword = "";
             binding.currentPasswordIncludeLayout.inputEditText.setText(currentPassword);
         }
@@ -261,7 +261,7 @@ public class EditUserTabPasswordFragment extends Fragment {
     }
 
     private void setHashmap() {
-        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getUserModel().getId())) {
             if (!currentPassword.equals(""))
                 data.put("password", currentPassword);
             else
@@ -279,7 +279,7 @@ public class EditUserTabPasswordFragment extends Fragment {
 
         setHashmap();
 
-        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getUserModel().getId())) {
             Auth.editPassword(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {

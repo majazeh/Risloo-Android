@@ -1470,7 +1470,7 @@ public class BreadCrumb {
             list = roomUsers();
 
         if (referenceType.equals("user")) {
-            if (userModel != null && userModel.getId() != null && userModel.getId().equals(((MainActivity) activity).singleton.getId()))
+            if (userModel != null && userModel.getId() != null && userModel.getId().equals(((MainActivity) activity).singleton.getUserModel().getId()))
                 list.add(activity.getResources().getString(R.string.MeFragmentTitle));
             else if (userModel != null && userModel.getName() != null && !userModel.getName().equals(""))
                 list.add(userModel.getName());

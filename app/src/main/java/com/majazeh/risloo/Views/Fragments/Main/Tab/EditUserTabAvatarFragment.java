@@ -155,7 +155,7 @@ public class EditUserTabAvatarFragment extends Fragment {
 
         setHashmap();
 
-        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getUserModel().getId())) {
             Auth.changeAvatar(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {

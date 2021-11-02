@@ -67,7 +67,7 @@ public class DashboardFragment extends Fragment {
         roomsAdapter = new RoomsAdapter(requireActivity());
 
         data = new HashMap<>();
-        data.put("user", ((MainActivity) requireActivity()).singleton.getId());
+        data.put("user", ((MainActivity) requireActivity()).singleton.getUserModel().getId());
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 

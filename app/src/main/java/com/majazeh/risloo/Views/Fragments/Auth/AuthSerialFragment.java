@@ -16,13 +16,14 @@ import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthSerialBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -31,6 +32,9 @@ public class AuthSerialFragment extends Fragment {
 
     // Binding
     private FragmentAuthSerialBinding binding;
+
+    // Models
+    private UserModel userModel;
 
     // Objects
     private HashMap data, header;
@@ -70,7 +74,7 @@ public class AuthSerialFragment extends Fragment {
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
-                IntentManager.display(requireActivity(), ((AuthActivity) requireActivity()).singleton.getName(), ((AuthActivity) requireActivity()).singleton.getAvatar());
+                IntentManager.display(requireActivity(), userModel.getName(), userModel.getAvatar().getMedium().getUrl());
         }).widget(binding.avatarIncludeLayout.avatarImageView);
 
         binding.serialEditText.getRoot().setOnTouchListener((v, event) -> {
@@ -98,15 +102,17 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void setData() {
-        if (!((AuthActivity) requireActivity()).singleton.getAvatar().equals("")) {
+        userModel = ((AuthActivity) requireActivity()).singleton.getUserModel();
+
+        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar() .getMedium().getUrl() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.LightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
+            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.LightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (((AuthActivity) requireActivity()).singleton.getName() != null && !((AuthActivity) requireActivity()).singleton.getName().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
-            else if (((AuthActivity) requireActivity()).singleton.getId() != null && !((AuthActivity) requireActivity()).singleton.getId().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getId()));
+            if (userModel.getName() != null && !userModel.getName().equals(""))
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(userModel.getName()));
+            else if (userModel.getId() != null && !userModel.getId().equals(""))
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(userModel.getId()));
             else
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
         }
