@@ -10,7 +10,6 @@ import androidx.security.crypto.MasterKey;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
-import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -86,6 +85,18 @@ public class Singleton {
     }
 
     /*
+    ---------- OtherUser ----------
+    */
+
+    public void loginOtherUser(UserModel userModel) {
+        OtherUser.getInstance().login(userModel);
+    }
+
+    public void logoutFromOtherUser() {
+        OtherUser.getInstance().logout();
+    }
+
+    /*
     ---------- Setters ----------
     */
 
@@ -100,50 +111,58 @@ public class Singleton {
     }
 
     private void setParams(UserModel userModel) {
-        try {
-            JSONObject jsonObject = getUserModel().object;
+        if (OtherUser.getInstance().getUserModel() != null) {
+            OtherUser.getInstance().setUserModel(userModel);
+        } else {
+            try {
+                JSONObject jsonObject = getUserModel().object;
 
-            jsonObject.put("name", userModel.getName());
-            jsonObject.put("mobile", userModel.getMobile());
-            jsonObject.put("email", userModel.getEmail());
-            jsonObject.put("birthday", userModel.getBirthday());
-            jsonObject.put("status", userModel.getUserStatus());
-            jsonObject.put("type", userModel.getUserType());
-            jsonObject.put("gender", userModel.getGender());
+                jsonObject.put("name", userModel.getName());
+                jsonObject.put("mobile", userModel.getMobile());
+                jsonObject.put("email", userModel.getEmail());
+                jsonObject.put("birthday", userModel.getBirthday());
+                jsonObject.put("status", userModel.getUserStatus());
+                jsonObject.put("type", userModel.getUserType());
+                jsonObject.put("gender", userModel.getGender());
 
-            JSONArray avatarArray = new JSONArray();
+                JSONArray avatarArray = new JSONArray();
 
-            if (userModel.getAvatar() != null) {
-                JSONObject small = userModel.getAvatar().getSmall().object;
-                JSONObject medium = userModel.getAvatar().getMedium().object;
-                JSONObject original = userModel.getAvatar().getOriginal().object;
-                JSONObject large = userModel.getAvatar().getLarge().object;
+                if (userModel.getAvatar() != null) {
+                    JSONObject small = userModel.getAvatar().getSmall().object;
+                    JSONObject medium = userModel.getAvatar().getMedium().object;
+                    JSONObject original = userModel.getAvatar().getOriginal().object;
+                    JSONObject large = userModel.getAvatar().getLarge().object;
 
-                if (small != null)
-                    avatarArray.put(small);
+                    if (small != null)
+                        avatarArray.put(small);
 
-                if (medium != null)
-                    avatarArray.put(medium);
+                    if (medium != null)
+                        avatarArray.put(medium);
 
-                if (original != null)
-                    avatarArray.put(original);
+                    if (original != null)
+                        avatarArray.put(original);
 
-                if (large != null)
-                    avatarArray.put(large);
+                    if (large != null)
+                        avatarArray.put(large);
+                }
+
+                jsonObject.put("avatar", avatarArray);
+
+                editor.putString("usermodel", jsonObject.toString());
+                editor.apply();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-
-            jsonObject.put("avatar", avatarArray);
-
-            editor.putString("usermodel", jsonObject.toString());
-            editor.apply();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
     private void setUserModel(UserModel userModel) {
-        editor.putString("usermodel", userModel.object.toString());
-        editor.apply();
+        if (OtherUser.getInstance().getUserModel() != null) {
+            OtherUser.getInstance().setUserModel(userModel);
+        } else {
+            editor.putString("usermodel", userModel.object.toString());
+            editor.apply();
+        }
     }
 
     private void setRegist(String mobile, String password) {
@@ -198,15 +217,19 @@ public class Singleton {
     }
 
     public UserModel getUserModel() {
-        try {
-            if (!sharedPreferences.getString("usermodel", "").equals("")) {
-                JSONObject jsonObject = new JSONObject(sharedPreferences.getString("usermodel", ""));
+        if (OtherUser.getInstance().getUserModel() != null) {
+            return OtherUser.getInstance().getUserModel();
+        } else {
+            try {
+                if (!sharedPreferences.getString("usermodel", "").equals("")) {
+                    JSONObject jsonObject = new JSONObject(sharedPreferences.getString("usermodel", ""));
 
-                return new UserModel(jsonObject);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } return null;
+                    return new UserModel(jsonObject);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } return null;
+        }
     }
 
     public String getRegistPassword(String mobile) {
@@ -238,46 +261,6 @@ public class Singleton {
         } catch (JSONException e) {
             e.printStackTrace();
         } return new ArrayList<>();
-    }
-
-    /*
-    ---------- UserModel Properties ----------
-    */
-
-    public String getId() {
-        if (getUserModel().getId() != null)
-            return getUserModel().getId();
-
-        return "";
-    }
-
-    public String getName() {
-        if (getUserModel().getName() != null)
-            return getUserModel().getName();
-
-        return "";
-    }
-
-    public String getAvatar() {
-        if (getUserModel().getAvatar() != null && getUserModel().getAvatar().getMedium() != null && getUserModel().getAvatar().getMedium().getUrl() != null && !getUserModel().getAvatar().getMedium().getUrl().equals(""))
-            return getUserModel().getAvatar().getMedium().getUrl();
-
-        return "";
-    }
-
-    public String getMoney() {
-        int total = 0;
-
-        if (getUserModel().getTreasuries() != null) {
-            for (TypeModel typeModel : getUserModel().getTreasuries().data()) {
-                TreasuriesModel model = (TreasuriesModel) typeModel;
-
-                if (model.getSymbol().equals("wallet") || model.getSymbol().equals("gift"))
-                    total += model.getBalance();
-            }
-        }
-
-        return String.valueOf(total);
     }
 
 }

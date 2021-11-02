@@ -31,10 +31,12 @@ import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Utils.Managers.AnimateManager;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -46,13 +48,18 @@ import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.EditCenterTabAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     // Objects
     public NavHostFragment navHostFragment;
     public NavController navController;
+    private HashMap data, header;
 
     // Vars
     private boolean userSelect = false;
@@ -136,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
 
         fragmont = new Fragmont(navHostFragment);
 
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", singleton.getAuthorization());
+
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
 
@@ -149,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         }).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
-            // TODO : Place Code When Needed
+            userChange("logoutFormOtherUser", "");
         }).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
 
         binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
@@ -225,32 +237,51 @@ public class MainActivity extends AppCompatActivity {
 
     public void setData() {
         if (!singleton.getToken().equals("")) {
-            if (!singleton.getName().equals("")) {
-                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
-            } else if (!singleton.getId().equals("")) {
-                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getId());
+            UserModel model = singleton.getUserModel();
+
+            if (model.getName() != null && !model.getName().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(model.getName());
+            } else if (model.getId() != null && !model.getId().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(model.getId());
             } else {
                 binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             }
 
-            if (!singleton.getMoney().equals("0")) {
-                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman));
-                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.VISIBLE);
+            if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
+            } else {
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
+            }
 
-                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(1);
+            if (model.getTreasuries() != null) {
+                int balance = 0;
+
+                for (TypeModel typeModel : model.getTreasuries().data()) {
+                    TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel;
+
+                    if (treasuriesModel.getSymbol().equals("wallet") || treasuriesModel.getSymbol().equals("gift")) {
+                        balance += treasuriesModel.getBalance();
+                    }
+                }
+
+                if (balance != 0) {
+                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(StringManager.separate(String.valueOf(balance)) + " " + getResources().getString(R.string.MainToman));
+                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.VISIBLE);
+
+                    binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(1);
+                } else {
+                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText("");
+                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
+
+                    binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(2);
+                }
             } else {
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText("");
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
 
                 binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(2);
-            }
-
-            if (!singleton.getAvatar().equals("")) {
-                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(singleton.getAvatar()).placeholder(R.color.CoolGray100).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
-            } else {
-                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
             }
         } else {
             IntentManager.auth(this, "login");
@@ -324,6 +355,13 @@ public class MainActivity extends AppCompatActivity {
         InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, items);
     }
 
+    private void setHashmap(String userId) {
+        if (!userId.equals(""))
+            data.put("id", userId);
+        else
+            data.remove("id");
+    }
+
     public void responseAdapter(String item) {
         switch (item) {
             case "داشبورد": {
@@ -365,6 +403,72 @@ public class MainActivity extends AppCompatActivity {
         }
 
         binding.getRoot().closeDrawer(GravityCompat.START);
+    }
+
+    public void userChange(String method, String userId) {
+        DialogManager.showLoadingDialog(this, "");
+
+        setHashmap(userId);
+
+        if (method.equals("loginOtherUser")) {
+            Auth.loginOtherUser(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    UserModel model = (UserModel) object;
+
+                    runOnUiThread(() -> {
+                        singleton.loginOtherUser(model);
+
+                        setData();
+
+                        setDrawer();
+
+                        setToolbar();
+
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
+
+                        if (binding.contentIncludeLayout.logoutImageView.getRoot().getVisibility() == View.GONE)
+                            binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.VISIBLE);
+                    });
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            });
+        } else {
+            Auth.logoutFromOtherUser(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    runOnUiThread(() -> {
+                        singleton.logoutFromOtherUser();
+
+                        setData();
+
+                        setDrawer();
+
+                        setToolbar();
+
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
+
+                        if (binding.contentIncludeLayout.logoutImageView.getRoot().getVisibility() == View.VISIBLE)
+                            binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.GONE);
+                    });
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            });
+        }
     }
 
     @Override
