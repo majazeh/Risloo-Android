@@ -270,7 +270,7 @@ public class EditUserTabPersonalFragment extends Fragment {
             else
                 binding.emailIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalBirthday(model))
+            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalBirthday())
                 binding.birthdayIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.birthdayIncludeLayout.getRoot().setVisibility(View.GONE);

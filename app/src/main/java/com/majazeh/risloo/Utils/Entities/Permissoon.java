@@ -9,13 +9,114 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class Permissoon {
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public Permissoon() {
         // TODO : Place Code If Needed
     }
 
     /*
-    ---------- Dashboard ----------
+    ---------- Main ----------
     */
+
+    public boolean showBulkSamples(UserModel model) {
+        if (model != null) {
+            if (model.getUserType().equals("admin"))
+                return true;
+
+            if (!model.getCenterList().data().isEmpty())
+                for (TypeModel typeModel : model.getCenterList().data()) {
+                    CenterModel centerModel = (CenterModel) typeModel;
+
+                    if (centerModel != null && centerModel.getAcceptation() != null)
+                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
+                            return true;
+                }
+
+        } return false;
+    }
+
+    public boolean showUsers(UserModel model) {
+        if (model != null)
+            return model.getUserType().equals("admin");
+        else
+            return false;
+    }
+
+    /*
+    ---------- Create ----------
+    */
+
+    // -------------------- CreateUser
+
+    public boolean showCreateUserBirthday() {
+        return false;
+    }
+
+    /*
+    ---------- Edit ----------
+    */
+
+
+
+    /*
+    ---------- Index ----------
+    */
+
+    // -------------------- Centers
+
+    public boolean showCentersCreateCenter(UserModel model) {
+        if (model != null)
+            return model.getUserType().equals("admin");
+        else
+            return false;
+    }
+
+    // -------------------- Samples
+
+    public boolean showSamplesCreateSample(UserModel model) {
+        if (model != null) {
+            if (model.getUserType().equals("admin"))
+                return true;
+
+            if (!model.getCenterList().data().isEmpty())
+                for (TypeModel typeModel : model.getCenterList().data()) {
+                    CenterModel centerModel = (CenterModel) typeModel;
+
+                    if (centerModel != null && centerModel.getAcceptation() != null)
+                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
+                            return true;
+                }
+
+        } return false;
+    }
+
+    // -------------------- Scales
+
+    public boolean showScalesCreateSample(UserModel model) {
+        if (model != null) {
+            if (model.getUserType().equals("admin"))
+                return true;
+
+            if (!model.getCenterList().data().isEmpty())
+                for (TypeModel typeModel : model.getCenterList().data()) {
+                    CenterModel centerModel = (CenterModel) typeModel;
+
+                    if (centerModel != null && centerModel.getAcceptation() != null)
+                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
+                            return true;
+                }
+
+        } return false;
+    }
+
+    /*
+    ---------- Show ----------
+    */
+
+    // -------------------- Dashboard
 
     public boolean showDashboardData(UserModel model) {
         if (model != null)
@@ -25,28 +126,19 @@ public class Permissoon {
     }
 
     /*
-    ---------- Me ----------
+    ---------- Tab ----------
     */
 
-    public boolean showMeEdit(UserModel model) {
-        return true;
+    // -------------------- EditUserTabPassword
+
+    public boolean showEditUserTabPasswordCurrent(UserModel model) {
+        if (model != null)
+            return !model.getUserType().equals("admin") && !model.isNo_password();
+        else
+            return false;
     }
 
-    /*
-    ---------- User ----------
-    */
-
-    public boolean showUserLogin(UserModel model) {
-        return true;
-    }
-
-    public boolean showUserEdit(UserModel model) {
-        return true;
-    }
-
-    /*
-    ---------- EditUserTabPersonal ----------
-    */
+    // -------------------- EditUserTabPersonal
 
     public boolean showEditUserTabPersonalMobile(UserModel model) {
         if (model != null)
@@ -62,7 +154,7 @@ public class Permissoon {
             return false;
     }
 
-    public boolean showEditUserTabPersonalBirthday(UserModel model) {
+    public boolean showEditUserTabPersonalBirthday() {
         return false;
     }
 
@@ -80,35 +172,42 @@ public class Permissoon {
             return false;
     }
 
-    /*
-    ---------- EditUserTabPassword ----------
-    */
 
-    public boolean showEditUserTabPasswordCurrent(UserModel model) {
-        if (model != null)
-            return !model.getUserType().equals("admin") && !model.isNo_password();
-        else
-            return false;
-    }
 
-    /*
-    ---------- CreateUser ----------
-    */
 
-    public boolean showCreateUserBirthday() {
-        return false;
-    }
 
-    /*
-    ---------- Centers ----------
-    */
 
-    public boolean showCentersCreateCenter(UserModel model) {
-        if (model != null)
-            return model.getUserType().equals("admin");
-        else
-            return false;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////     ///////////////////////////////////////////////////////////////////////////     ///////////////////////////////////////////////////////////////////////////     ///////////////////////////////////////////////////////////////////////////     ///////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*
     ---------- Center ----------
@@ -388,76 +487,6 @@ public class Permissoon {
             return userModel.getUserType().equals("admin") || sessionModel.getRoom().getRoomAcceptation().getPosition().equals("manager");
         else if (userModel != null)
             return userModel.getUserType().equals("admin");
-        else
-            return false;
-    }
-
-    /*
-    ---------- Scales ----------
-    */
-
-    public boolean showScalesCreateSample(UserModel model) {
-        if (model != null) {
-            if (model.getUserType().equals("admin"))
-                return true;
-
-            if (!model.getCenterList().data().isEmpty())
-                for (TypeModel typeModel : model.getCenterList().data()) {
-                    CenterModel centerModel = (CenterModel) typeModel;
-
-                    if (centerModel != null && centerModel.getAcceptation() != null)
-                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
-                            return true;
-                }
-
-        } return false;
-    }
-
-    /*
-    ---------- Samples ----------
-    */
-
-    public boolean showSamplesCreateSample(UserModel model) {
-        if (model != null) {
-            if (model.getUserType().equals("admin"))
-                return true;
-
-            if (!model.getCenterList().data().isEmpty())
-                for (TypeModel typeModel : model.getCenterList().data()) {
-                    CenterModel centerModel = (CenterModel) typeModel;
-
-                    if (centerModel != null && centerModel.getAcceptation() != null)
-                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
-                            return true;
-                }
-
-        } return false;
-    }
-
-    /*
-    ---------- Main ----------
-    */
-
-    public boolean showBulkSamples(UserModel model) {
-        if (model != null) {
-            if (model.getUserType().equals("admin"))
-                return true;
-
-            if (!model.getCenterList().data().isEmpty())
-                for (TypeModel typeModel : model.getCenterList().data()) {
-                    CenterModel centerModel = (CenterModel) typeModel;
-
-                    if (centerModel != null && centerModel.getAcceptation() != null)
-                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
-                            return true;
-                }
-
-        } return false;
-    }
-
-    public boolean showUsers(UserModel model) {
-        if (model != null)
-            return model.getUserType().equals("admin");
         else
             return false;
     }

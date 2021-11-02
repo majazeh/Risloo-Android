@@ -48,8 +48,6 @@ public class UserFragment extends Fragment {
 
         setArgs();
 
-        setPermission();
-
         getData();
 
         return binding.getRoot();
@@ -130,18 +128,6 @@ public class UserFragment extends Fragment {
 
             Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
-    }
-
-    private void setPermission() {
-        if (((MainActivity) requireActivity()).permissoon.showUserLogin(userModel))
-            binding.loginImageView.getRoot().setVisibility(View.VISIBLE);
-        else
-            binding.loginImageView.getRoot().setVisibility(View.GONE);
-
-        if (((MainActivity) requireActivity()).permissoon.showUserEdit(userModel))
-            binding.editImageView.getRoot().setVisibility(View.VISIBLE);
-        else
-            binding.editImageView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {
