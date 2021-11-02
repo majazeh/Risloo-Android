@@ -78,6 +78,10 @@ public class Singleton {
     }
 
     public void logout() {
+        if (OtherUser.getInstance().getUserModel() != null) {
+            OtherUser.getInstance().logout();
+        }
+
         editor.remove("token");
         editor.remove("authorization");
         editor.remove("usermodel");
