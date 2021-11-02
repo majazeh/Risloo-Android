@@ -25,7 +25,7 @@ import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Entities.Inputor;
+import com.majazeh.risloo.Utils.Entities.Inputon;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
@@ -56,7 +56,7 @@ public class TestActivity extends AppCompatActivity {
     private ActivityTestBinding binding;
 
     // Entities
-    public Inputor inputor;
+    public Inputon inputon;
     public Singleton singleton;
     public Validatoon validatoon;
 
@@ -119,7 +119,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void initializer() {
-        inputor = new Inputor();
+        inputon = new Inputon();
 
         singleton = new Singleton(this);
 
@@ -500,8 +500,8 @@ public class TestActivity extends AppCompatActivity {
                 Rect outRect = new Rect();
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    if (inputor.editText != null && inputor.editText.hasFocus()) {
-                        inputor.clear(this, inputor.editText);
+                    if (inputon.editText != null && inputon.editText.hasFocus()) {
+                        inputon.clear(this, inputon.editText);
                     }
                 }
             }

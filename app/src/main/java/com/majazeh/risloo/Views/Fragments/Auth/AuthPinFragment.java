@@ -89,7 +89,7 @@ public class AuthPinFragment extends Fragment {
     private void listener() {
         binding.pinEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.pinEditText.getRoot().hasFocus())
-                ((AuthActivity) requireActivity()).inputor.select(requireActivity(), binding.pinEditText.getRoot());
+                ((AuthActivity) requireActivity()).inputon.select(requireActivity(), binding.pinEditText.getRoot());
             return false;
         });
 

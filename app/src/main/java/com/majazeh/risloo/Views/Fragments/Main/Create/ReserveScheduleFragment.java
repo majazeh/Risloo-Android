@@ -153,19 +153,19 @@ public class ReserveScheduleFragment extends Fragment {
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
             return false;
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 

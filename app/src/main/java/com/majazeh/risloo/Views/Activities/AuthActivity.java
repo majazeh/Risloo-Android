@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Decoraton;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
-import com.majazeh.risloo.Utils.Entities.Inputor;
+import com.majazeh.risloo.Utils.Entities.Inputon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -31,7 +31,7 @@ public class AuthActivity extends AppCompatActivity {
 
     // Entities
     public Fragmont fragmont;
-    public Inputor inputor;
+    public Inputon inputon;
     public Singleton singleton;
     public Validatoon validatoon;
 
@@ -74,7 +74,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void initializer() {
-        inputor = new Inputor();
+        inputon = new Inputon();
 
         singleton = new Singleton(this);
 
@@ -110,8 +110,8 @@ public class AuthActivity extends AppCompatActivity {
                 Rect outRect = new Rect();
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    if (inputor.editText != null && inputor.editText.hasFocus()) {
-                        inputor.clear(this, inputor.editText);
+                    if (inputon.editText != null && inputon.editText.hasFocus()) {
+                        inputon.clear(this, inputon.editText);
                     }
                 }
             }

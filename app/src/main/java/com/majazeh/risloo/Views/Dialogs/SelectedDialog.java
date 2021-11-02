@@ -101,7 +101,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
     private void listener() {
         binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.inputEditText);
             return false;
         });
 
@@ -208,7 +208,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
             calculateCount();
 
-            ((MainActivity) requireActivity()).inputor.clear(requireActivity(), ((MainActivity) requireActivity()).inputor.editText);
+            ((MainActivity) requireActivity()).inputon.clear(requireActivity(), ((MainActivity) requireActivity()).inputon.editText);
             binding.inputEditText.getText().clear();
         } catch (JSONException e) {
             e.printStackTrace();

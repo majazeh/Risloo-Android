@@ -95,7 +95,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.durationIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
             return false;
         });
 
@@ -161,7 +161,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
 
         binding.repeatWeeksIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.repeatWeeksIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.repeatWeeksIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.repeatWeeksIncludeLayout.inputEditText);
             return false;
         });
 

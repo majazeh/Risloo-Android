@@ -85,13 +85,13 @@ public class EditUserTabPasswordFragment extends Fragment {
     private void listener() {
         binding.currentPasswordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.currentPasswordIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText);
             return false;
         });
 
         binding.newPasswordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.newPasswordIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.newPasswordIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.newPasswordIncludeLayout.inputEditText);
             return false;
         });
 

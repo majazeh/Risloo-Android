@@ -146,7 +146,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((MainActivity) activity).inputor.select(activity, holder.binding.inputEditText);
+                    ((MainActivity) activity).inputon.select(activity, holder.binding.inputEditText);
             return false;
         });
 

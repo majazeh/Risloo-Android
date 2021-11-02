@@ -106,13 +106,13 @@ public class CreateCaseFragment extends Fragment {
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
             return false;
         });
 

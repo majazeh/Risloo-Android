@@ -124,7 +124,7 @@ public class PaymentsFragment extends Fragment {
 
         binding.amountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.amountIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.amountIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.amountIncludeLayout.inputEditText);
             return false;
         });
 

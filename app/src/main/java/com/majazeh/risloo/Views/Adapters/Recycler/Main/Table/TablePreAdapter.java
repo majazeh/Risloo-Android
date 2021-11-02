@@ -151,7 +151,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((MainActivity) activity).inputor.select(activity, holder.binding.inputEditText);
+                    ((MainActivity) activity).inputon.select(activity, holder.binding.inputEditText);
             return false;
         });
 

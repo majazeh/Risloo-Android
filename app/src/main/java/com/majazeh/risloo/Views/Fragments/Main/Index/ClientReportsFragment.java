@@ -90,7 +90,7 @@ public class ClientReportsFragment extends Fragment {
     private void listener() {
         binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.searchEditText);
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.searchIncludeLayout.searchEditText);
             return false;
         });
 

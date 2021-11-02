@@ -80,7 +80,7 @@ public class AuthPasswordFragment extends Fragment {
     private void listener() {
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.passwordIncludeLayout.inputEditText.hasFocus())
-                ((AuthActivity) requireActivity()).inputor.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
+                ((AuthActivity) requireActivity()).inputon.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
             return false;
         });
 

@@ -12,7 +12,7 @@ import com.majazeh.risloo.Views.Activities.TestActivity;
 
 import java.util.Objects;
 
-public class Inputor {
+public class Inputon {
 
     // Widgets
     public EditText editText;
@@ -24,7 +24,7 @@ public class Inputor {
     ---------- Intialize ----------
     */
 
-    public Inputor() {
+    public Inputon() {
         // TODO : Place Code If Needed
     }
 
