@@ -10,7 +10,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
-public class Decorator {
+public class Decoraton {
 
     // Objects
     private final Activity activity;
@@ -22,10 +22,10 @@ public class Decorator {
     ---------- Intialize ----------
     */
 
-    public Decorator(@NonNull Activity activity) {
+    public Decoraton(@NonNull Activity activity) {
         this.activity = activity;
 
-        // Making The Ui Not Jumping When HIding And Showing The System UI
+        // Note : Making The Ui Not Jumping When HIding And Showing The System UI
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             activity.getWindow().getAttributes().layoutInDisplayCutoutMode = LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         }

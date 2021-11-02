@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Decorator;
+import com.majazeh.risloo.Utils.Entities.Decoraton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.TransitionManager;
@@ -22,7 +22,7 @@ public class DisplayActivity extends AppCompatActivity {
     private ActivityDisplayBinding binding;
 
     // Entities
-    private Decorator decorator;
+    private Decoraton decoraton;
 
     // Objects
     private Bundle extras;
@@ -48,10 +48,10 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        decorator = new Decorator(this);
+        decoraton = new Decoraton(this);
 
-        decorator.showSystemUI(true, true);
-        decorator.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
+        decoraton.showSystemUI(true, true);
+        decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
     }
 
     private void initializer() {
@@ -74,9 +74,9 @@ public class DisplayActivity extends AppCompatActivity {
 
         CustomClickView.onClickListener(() -> {
             if (!systemUiVisibility)
-                decorator.showSystemUI(true, true);
+                decoraton.showSystemUI(true, true);
             else
-                decorator.immersiveHideSystemUI();
+                decoraton.immersiveHideSystemUI();
         }).widget(binding.avatarZoomageView);
 
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(visibility -> {

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
-import com.majazeh.risloo.Utils.Entities.Decorator;
+import com.majazeh.risloo.Utils.Entities.Decoraton;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -55,10 +55,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        Decorator decorator = new Decorator(this);
+        Decoraton decoraton = new Decoraton(this);
 
-        decorator.showSystemUI(false, false);
-        decorator.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
+        decoraton.showSystemUI(false, false);
+        decoraton.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
 
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.debugTextView.getRoot().setVisibility(View.VISIBLE);

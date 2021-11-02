@@ -27,6 +27,10 @@ public class Singleton {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public Singleton(@NonNull Activity activity) {
         try {
             MasterKey masterKey = new MasterKey.Builder(activity, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
