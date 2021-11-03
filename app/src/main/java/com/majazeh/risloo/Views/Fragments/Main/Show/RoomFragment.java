@@ -599,10 +599,10 @@ public class RoomFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownCreateSchedule(((MainActivity) requireActivity()).singleton.getUserModel(), status, type))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentCreateSchedule));
 
-        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownProfile(status, type))
+        if (!binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.RoomFragmentRequest)) && !type.equals("room"))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
 
-        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownEdit(type))
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), status, type))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
 
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))

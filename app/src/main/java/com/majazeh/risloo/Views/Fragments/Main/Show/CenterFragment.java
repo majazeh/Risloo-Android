@@ -383,7 +383,7 @@ public class CenterFragment extends Fragment {
         if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest)))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentSchedules));
 
-        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownProfile(status))
+        if (!binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest)))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
 
         if (((MainActivity) requireActivity()).permissoon.showCenterDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), status))

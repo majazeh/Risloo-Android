@@ -216,6 +216,36 @@ public class Permissoon {
             return false;
     }
 
+    // -------------------- Center
+
+    public boolean showCenterDropdownUsers(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
+    public boolean showCenterDropdownEdit(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
+    public boolean showCenterDropdownPlatforms(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
+    public boolean showCenterCreateRoom(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager");
+        else
+            return position.equals("manager");
+    }
+
     // -------------------- Dashboard
 
     public boolean showDashboardData(UserModel model) {
@@ -223,6 +253,54 @@ public class Permissoon {
             return !model.getUserType().equals("admin");
         else
             return false;
+    }
+
+    // -------------------- Room
+
+    public boolean showRoomDropdownUsers(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
+    public boolean showRoomDropdownCreateSchedule(UserModel model, String position, String type) {
+        if (model != null)
+            return (model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator")) && type.equals("room");
+        else
+            return (position.equals("manager") || position.equals("operator")) && type.equals("room");
+    }
+
+    public boolean showRoomDropdownEdit(UserModel model, String position, String type) {
+        if (model != null)
+            return (model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator")) && !type.equals("room");
+        else
+            return (position.equals("manager") || position.equals("operator")) && !type.equals("room");
+    }
+
+    public boolean showRoomDropdownPlatforms(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
+    public boolean showRoomDropdownTags(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
+    public boolean showRoomCreateCase(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
+    public boolean showRoomCases(UserModel model) {
+        return true;
     }
 
     // -------------------- Session
@@ -373,105 +451,6 @@ public class Permissoon {
 
 
 
-
-
-
-
-    /*
-    ---------- Center ----------
-    */
-
-    public boolean showCenterDropdownUsers(UserModel model, String position) {
-        if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
-        else
-            return false;
-    }
-
-    public boolean showCenterDropdownProfile(String position) {
-        if (!position.equals(""))
-            return !position.equals("request");
-        else
-            return false;
-    }
-
-    public boolean showCenterDropdownEdit(UserModel model, String position) {
-        if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
-        else
-            return false;
-    }
-
-    public boolean showCenterDropdownPlatforms(UserModel model, String position) {
-        if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
-        else
-            return false;
-    }
-
-    public boolean showCenterCreateRoom(UserModel model, String position) {
-        if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager");
-        else
-            return false;
-    }
-
-    /*
-    ---------- Room ----------
-    */
-
-    public boolean showRoomDropdownCreateSchedule(UserModel model, String position, String type) {
-        if (model != null)
-            return type.equals("room") && (model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator"));
-        else
-            return false;
-    }
-
-    public boolean showRoomDropdownUsers(UserModel model, String position) {
-        if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
-        else
-            return false;
-    }
-
-    public boolean showRoomDropdownProfile(String position, String type) {
-        if (!position.equals(""))
-            return !type.equals("room") && !position.equals("request");
-        else
-            return false;
-    }
-
-    public boolean showRoomDropdownEdit(String type) {
-        if (!type.equals(""))
-            return !type.equals("room");
-        else
-            return false;
-    }
-
-    public boolean showRoomDropdownPlatforms(UserModel model, String position) {
-        if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
-        else
-            return false;
-    }
-
-    public boolean showRoomDropdownTags(UserModel model, String position) {
-        if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
-        else
-            return false;
-    }
-
-    public boolean showRoomCreateCase(UserModel model, String position) {
-        if (model != null)
-            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
-        else
-            return false;
-    }
-
-    public boolean showRoomCases(UserModel model) {
-        return true;
-    }
 
     /*
     ---------- Schedules ----------
