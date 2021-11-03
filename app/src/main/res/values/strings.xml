@@ -24,6 +24,9 @@
 
     <string name="AppShareImage">اشتراک گذاری</string>
 
+    <string name="AppEdit">ویرایش</string>
+    <string name="AppReserve">رزرو</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Scheduled Strings
@@ -483,6 +486,16 @@
     <string name="CreateSampleFragmentButton">ساخت</string>
 
 
+    ---------- // CreateScheduleFragment
+
+    <string name="CreateScheduleFragmentTitle">ساخت برنامه درمانی جدید</string>
+
+
+    ---------- // CreateSessionFragment
+
+    <string name="CreateSessionFragmentTitle">ساخت جلسه درمانی جدید</string>
+
+
     ---------- // CreateSessionUserFragment
 
     <string name="CreateSessionUserFragmentTitle">ثبت عضو جدید</string>
@@ -602,6 +615,11 @@
     <string name="EditPlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
 
     <string name="EditPlatformFragmentButton">ویرایش</string>
+
+
+    ---------- // EditSessionFragment
+
+    <string name="EditSessionFragmentTitle">ویرایش جلسه درمانی</string>
 
 
     ---------- // EditTreasuryFragment
@@ -1491,12 +1509,6 @@
     // Create Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
-    /*
-    ---------- CreateSchedule Fragment ----------
-    */
-
-    <string name="CreateScheduleFragmentTitle">ساخت برنامه درمانی جدید</string>
-
     ---------- // CreateScheduleTabTime
 
     <string name="CreateScheduleTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
@@ -1558,12 +1570,6 @@
 
     <string name="CreateScheduleTabPaymentButton">ساخت</string>
 
-    /*
-    ---------- CreateSession Fragment ----------
-    */
-
-    <string name="CreateSessionFragmentTitle">ساخت جلسه درمانی جدید</string>
-
     ---------- // CreateSessionTabTime
 
     <string name="CreateSessionTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
@@ -1610,12 +1616,6 @@
 
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- EditSession Fragment ----------
-    */
-
-    <string name="EditSessionFragmentTitle">ویرایش جلسه درمانی</string>
 
     ---------- // EditSessionTabTime
 

@@ -1045,7 +1045,7 @@ public class BreadCrumb {
 
     private ArrayList<String> reserveSchedule() {
         ArrayList<String> list = roomSchedules();
-        list.add("رزرو");
+        list.add(activity.getResources().getString(R.string.AppReserve));
 
         destinationIds = reserveScheduleIds();
         return list;
@@ -1069,7 +1069,7 @@ public class BreadCrumb {
         else
             list = room();
 
-        list.add("ویرایش");
+        list.add(activity.getResources().getString(R.string.AppEdit));
 
         destinationIds = editCenterIds();
         return list;
@@ -1089,7 +1089,7 @@ public class BreadCrumb {
 
     private ArrayList<String> editCenterUser() {
         ArrayList<String> list = reference();
-        list.add("ویرایش");
+        list.add(activity.getResources().getString(R.string.AppEdit));
 
         destinationIds = editCenterUserIds();
         return list;
@@ -1103,7 +1103,7 @@ public class BreadCrumb {
 
     private ArrayList<String> editPlatform() {
         ArrayList<String> list = centerPlatforms();
-        list.add("ویرایش");
+        list.add(activity.getResources().getString(R.string.AppEdit));
 
         destinationIds = editPlatformIds();
         return list;
@@ -1117,7 +1117,7 @@ public class BreadCrumb {
 
     private ArrayList<String> editSession() {
         ArrayList<String> list = session();
-        list.add("ویرایش");
+        list.add(activity.getResources().getString(R.string.AppEdit));
 
         destinationIds = editSessionIds();
         return list;
@@ -1131,7 +1131,7 @@ public class BreadCrumb {
 
     private ArrayList<String> editTreasury() {
         ArrayList<String> list = treasury();
-        list.add("ویرایش");
+        list.add(activity.getResources().getString(R.string.AppEdit));
 
         destinationIds = editTreasuryIds();
         return list;
@@ -1145,7 +1145,7 @@ public class BreadCrumb {
 
     private ArrayList<String> editUser() {
         ArrayList<String> list = user();
-        list.add("ویرایش");
+        list.add(activity.getResources().getString(R.string.AppEdit));
 
         destinationIds = editUserIds();
         return list;
@@ -1441,10 +1441,10 @@ public class BreadCrumb {
         ArrayList<String> list = centers();
 
         try {
-            if (centerModel != null && centerModel.getDetail() != null && !centerModel.getDetail().getString("title").equals(""))
+            if (centerModel != null && centerModel.getDetail() != null && centerModel.getDetail().has("title") && !centerModel.getDetail().isNull("title") && !centerModel.getDetail().getString("title").equals(""))
                 list.add(centerModel.getDetail().getString("title"));
             else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
-                list.add("مرکز" + " " + centerModel.getCenterId());
+                list.add("مرکز درمان" + " " + centerModel.getCenterId());
             else
                 list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         } catch (JSONException e) {
@@ -1561,9 +1561,9 @@ public class BreadCrumb {
     private ArrayList<String> session() {
         ArrayList<String> list;
 
-        if (sessionType.equals("session") && sessionModel.getCaseModel() != null)
+        if (sessionType.equals("session") && sessionModel != null && sessionModel.getCaseModel() != null)
             list = casse();
-        else if (sessionType.equals("schedule") && scheduleModel.getCaseModel() != null)
+        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getCaseModel() != null)
             list = casse();
         else
             list = room();
@@ -1581,9 +1581,9 @@ public class BreadCrumb {
     private ArrayList<Integer> sessionIds() {
         ArrayList<Integer> list;
 
-        if (sessionType.equals("session") && sessionModel.getCaseModel() != null)
+        if (sessionType.equals("session") && sessionModel != null && sessionModel.getCaseModel() != null)
             list = casseIds();
-        else if (sessionType.equals("schedule") && scheduleModel.getCaseModel() != null)
+        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getCaseModel() != null)
             list = casseIds();
         else
             list = roomIds();
