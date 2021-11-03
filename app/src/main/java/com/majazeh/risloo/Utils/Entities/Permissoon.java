@@ -299,8 +299,11 @@ public class Permissoon {
             return position.equals("manager") || position.equals("operator");
     }
 
-    public boolean showRoomCases(String position) {
-        return !position.equals("psychologist") && !position.equals("client");
+    public boolean showRoomCases(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || (!position.equals("psychologist") && !position.equals("client"));
+        else
+            return !position.equals("psychologist") && !position.equals("client");
     }
 
     // -------------------- Session

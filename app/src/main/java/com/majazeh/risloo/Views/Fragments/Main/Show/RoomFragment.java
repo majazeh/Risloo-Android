@@ -656,7 +656,7 @@ public class RoomFragment extends Fragment {
         else
             binding.casesAddView.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showRoomCases(status))
+        if (((MainActivity) requireActivity()).permissoon.showRoomCases(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             binding.casesGroup.setVisibility(View.VISIBLE);
         else
             binding.casesGroup.setVisibility(View.GONE);
@@ -673,42 +673,45 @@ public class RoomFragment extends Fragment {
                             centerModel = roomModel.getRoomCenter();
                             setData(roomModel);
 
-                            List items = new List();
-                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
-                                items.add(new CaseModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
+                            if (binding.casesGroup.getVisibility() == View.VISIBLE) {
 
-                            if (Objects.equals(data.get("page"), 1))
-                                cases2Adapter.clearItems();
+                                List items = new List();
+                                for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
+                                    items.add(new CaseModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
 
-                            if (!items.data().isEmpty()) {
-                                cases2Adapter.setItems(items.data());
-                                binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+                                if (Objects.equals(data.get("page"), 1))
+                                    cases2Adapter.clearItems();
 
-                                binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (cases2Adapter.getItemCount() == 0) {
-                                binding.casesSingleLayout.recyclerView.setAdapter(null);
+                                if (!items.data().isEmpty()) {
+                                    cases2Adapter.setItems(items.data());
+                                    binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
 
-                                binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                                binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.Cases2AdapterEmpty));
-                            }
+                                    binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
+                                } else if (cases2Adapter.getItemCount() == 0) {
+                                    binding.casesSingleLayout.recyclerView.setAdapter(null);
 
-                            binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
-
-                            // Tags Data
-                            if (!isFiltered) {
-                                if (!roomModel.getPinned_tags().data().isEmpty()) {
-                                    filterTagsAdapter.setItems(roomModel.getPinned_tags().data());
-                                    binding.tagsRecyclerView.setAdapter(filterTagsAdapter);
-
-                                    binding.casesFilterView.setVisibility(View.VISIBLE);
-                                } else if (filterTagsAdapter.getItemCount() == 0) {
-                                    binding.tagsRecyclerView.setAdapter(null);
-
-                                    binding.casesFilterView.setVisibility(View.GONE);
+                                    binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                    binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.Cases2AdapterEmpty));
                                 }
-                            }
 
-                            hideShimmer();
+                                binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
+
+                                // Tags Data
+                                if (!isFiltered) {
+                                    if (!roomModel.getPinned_tags().data().isEmpty()) {
+                                        filterTagsAdapter.setItems(roomModel.getPinned_tags().data());
+                                        binding.tagsRecyclerView.setAdapter(filterTagsAdapter);
+
+                                        binding.casesFilterView.setVisibility(View.VISIBLE);
+                                    } else if (filterTagsAdapter.getItemCount() == 0) {
+                                        binding.tagsRecyclerView.setAdapter(null);
+
+                                        binding.casesFilterView.setVisibility(View.GONE);
+                                    }
+                                }
+
+                                hideShimmer();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
