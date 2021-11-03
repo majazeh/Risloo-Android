@@ -656,7 +656,7 @@ public class RoomFragment extends Fragment {
         else
             binding.casesAddView.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showRoomCases(((MainActivity) requireActivity()).singleton.getUserModel()))
+        if (((MainActivity) requireActivity()).permissoon.showRoomCases(status))
             binding.casesGroup.setVisibility(View.VISIBLE);
         else
             binding.casesGroup.setVisibility(View.GONE);
