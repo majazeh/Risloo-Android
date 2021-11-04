@@ -1,9 +1,12 @@
 package com.majazeh.risloo.Utils.Managers;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,9 +20,29 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class FileManager {
+
+    /*
+    ---------- Create ----------
+    */
+
+    @SuppressLint("SimpleDateFormat")
+    public static File createCameraFile(Activity activity) {
+        try {
+            File imageStorageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+            String imageFileName = new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()) + "_";
+            String imageFileSuffix = ".jpg";
+
+            return File.createTempFile(imageFileName, imageFileSuffix, imageStorageDir);
+        } catch (IOException e) {
+            return new File("");
+        }
+    }
 
     /*
     ---------- Write ----------

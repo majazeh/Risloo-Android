@@ -550,6 +550,17 @@ public class MainActivity extends AppCompatActivity {
                             ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
 
                         break;
+                    case 500:
+                        if (fragmont.getCurrent() instanceof CreateCenterFragment)
+                            ((CreateCenterFragment) fragmont.getCurrent()).responseAction("crop", data);
+
+                        if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
+                            ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("crop", data);
+
+                        if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
+                            ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("crop", data);
+
+                        break;
                 }
             } break;
             case RESULT_CANCELED: {
@@ -565,6 +576,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 400:
                         ToastManager.showErrorToast(this, getResources().getString(R.string.ToastCameraException));
+                        break;
+                    case 500:
+                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastCropException));
                         break;
                 }
             } break;

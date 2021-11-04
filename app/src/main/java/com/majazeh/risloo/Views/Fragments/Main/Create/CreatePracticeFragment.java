@@ -123,7 +123,7 @@ public class CreatePracticeFragment extends Fragment {
             case "file":
                 ResultManager.fileResult(requireActivity(), data, binding.fileIncludeLayout.nameTextView);
 
-                filePath = ResultManager.filePath;
+                filePath = ResultManager.path;
                 break;
         }
     }

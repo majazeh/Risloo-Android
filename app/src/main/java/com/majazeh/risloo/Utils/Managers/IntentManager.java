@@ -1,6 +1,5 @@
 package com.majazeh.risloo.Utils.Managers;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
@@ -23,9 +22,6 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
 public class IntentManager {
@@ -102,24 +98,34 @@ public class IntentManager {
         activity.startActivityForResult(intent, 300);
     }
 
-    @SuppressLint("SimpleDateFormat")
     public static String camera(Activity activity) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        File imageFile = FileManager.createCameraFile(activity);
+        String fileProviderAuthority = "com.majazeh.risloo.debug.fileprovider";
+
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity, fileProviderAuthority, imageFile));
+
+        activity.startActivityForResult(intent, 400);
+
+        return imageFile.getAbsolutePath();
+    }
+
+    public static void crop(Activity activity, Uri uri) {
         try {
-            String imageFileName = new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()) + "_";
-            String imageFileSuffix = ".jpg";
-            File imageStorageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            Intent intent = new Intent("com.android.camera.action.CROP");
 
-            File imageFile = File.createTempFile(imageFileName, imageFileSuffix, imageStorageDir);
-            String fileProviderAuthority = "com.majazeh.risloo.debug.fileprovider";
+            intent.setDataAndType(uri, "image/*");
+            intent.putExtra("crop", true);
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("outputX", 256);
+            intent.putExtra("outputY", 256);
+            intent.putExtra("return-data", true);
 
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity, fileProviderAuthority, imageFile));
-
-            activity.startActivityForResult(intent, 400);
-
-            return imageFile.getAbsolutePath();
-        } catch (IOException e) {
-            return "";
+            activity.startActivityForResult(intent, 500);
+        } catch (ActivityNotFoundException activityNotFoundException) {
+            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastCropException));
         }
     }
 
@@ -170,9 +176,9 @@ public class IntentManager {
         context.startActivity(Intent.createChooser(intent, chooser));
     }
 
-    public static void mediaScan(Activity activity, File file) {
+    public static void mediaScan(Activity activity, Uri uri) {
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        intent.setData(Uri.fromFile(file));
+        intent.setData(uri);
 
         activity.sendBroadcast(intent);
     }

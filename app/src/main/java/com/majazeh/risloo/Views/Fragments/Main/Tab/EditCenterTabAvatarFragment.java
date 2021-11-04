@@ -133,15 +133,15 @@ public class EditCenterTabAvatarFragment extends Fragment {
     public void responseAction(String method, Intent data) {
         switch (method) {
             case "gallery":
-                ResultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
-
-                avatarPath = ResultManager.filePath;
-                avatarBitmap = ResultManager.bitmap;
+                ResultManager.galleryResult(requireActivity(), data);
                 break;
             case "camera":
-                ResultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                ResultManager.cameraResult(requireActivity(), avatarPath);
+                break;
+            case "crop":
+                ResultManager.cropResult(data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
 
-                avatarPath = ResultManager.filePath;
+                avatarPath = ResultManager.path;
                 avatarBitmap = ResultManager.bitmap;
                 break;
         }

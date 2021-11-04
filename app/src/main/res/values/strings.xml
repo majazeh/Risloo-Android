@@ -1883,6 +1883,7 @@
     <string name="ToastStorageException">ریسلو به حافظه گوشی دسترسی ندارد.</string>
     <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
+    <string name="ToastCropException">برنامه‌ای برای کراپ کردن وجود ندارد.</string>
     <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
