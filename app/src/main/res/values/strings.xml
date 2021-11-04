@@ -105,6 +105,11 @@
     <string name="ToastPermissionGalleryException">ریسلو دسترسی به البوم ندارد.</string>
     <string name="ToastPermissionCameraException">ریسلو دسترسی به دوربین ندارد.</string>
 
+    <string name="ToastIntentFileException">برنامه‌ی برای آپلود فایل وجود ندارد.</string>
+    <string name="ToastIntentGalleryException">برنامه‌ی برای انتخاب تصویر وجود ندارد.</string>
+    <string name="ToastIntentCameraException">برنامه‌ی برای گرفتن تصویر وجود ندارد.</string>
+    <string name="ToastIntentCropException">برنامه‌ی برای کراپ تصویر وجود ندارد.</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Splash Strings
@@ -1884,7 +1889,6 @@
     // Toast Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="ToastCropException">برنامه‌ای برای کراپ کردن وجود ندارد.</string>
     <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
