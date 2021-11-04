@@ -511,18 +511,17 @@ public class BreadCrumb {
         }
     }
 
+    /*
+    ---------- Setters ----------
+    */
+
     private void setModels(TypeModel typeModel) {
         switch (StringManager.substring(typeModel.getClass().getName(), '.')) {
-            case "CenterModel":
-                centerModel = (CenterModel) typeModel;
-                roomType = centerModel.getCenterType();
+            case "BillingModel":
+                billingModel = (BillingModel) typeModel;
                 break;
-            case "RoomModel":
-                roomModel = (RoomModel) typeModel;
-                roomType = roomModel.getRoomType();
-
-                if (roomModel.getRoomCenter() != null)
-                    centerModel = roomModel.getRoomCenter();
+            case "BulkSampleModel":
+                bulkSampleModel = (BulkSampleModel) typeModel;
                 break;
             case "CaseModel":
                 caseModel = (CaseModel) typeModel;
@@ -531,58 +530,24 @@ public class BreadCrumb {
                     roomModel = caseModel.getCaseRoom();
                     roomType = roomModel.getRoomType();
 
-                    if (roomModel.getRoomCenter() != null)
+                    if (roomModel.getRoomCenter() != null) {
                         centerModel = roomModel.getRoomCenter();
-                }
-                break;
-            case "ScheduleModel":
-                scheduleModel = (ScheduleModel) typeModel;
-
-                if (scheduleModel.getCaseModel() != null) {
-                    caseModel = scheduleModel.getCaseModel();
-
-                    if (caseModel.getCaseRoom() != null) {
-                        roomModel = caseModel.getCaseRoom();
-                        roomType = roomModel.getRoomType();
-
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
-                    }
-                } else {
-                    if (scheduleModel.getRoom() != null) {
-                        roomModel = scheduleModel.getRoom();
-                        roomType = roomModel.getRoomType();
-
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
                     }
                 }
+
                 break;
-            case "SessionModel":
-                sessionModel = (SessionModel) typeModel;
+            case "CenterModel":
+                centerModel = (CenterModel) typeModel;
+                roomType = centerModel.getCenterType();
+                break;
+            case "RoomModel":
+                roomModel = (RoomModel) typeModel;
+                roomType = roomModel.getRoomType();
 
-                if (sessionModel.getCaseModel() != null) {
-                    caseModel = sessionModel.getCaseModel();
-
-                    if (caseModel.getCaseRoom() != null) {
-                        roomModel = caseModel.getCaseRoom();
-                        roomType = roomModel.getRoomType();
-
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
-                    }
-                } else {
-                    if (sessionModel.getRoom() != null) {
-                        roomModel = sessionModel.getRoom();
-                        roomType = roomModel.getRoomType();
-
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
-                    }
+                if (roomModel.getRoomCenter() != null) {
+                    centerModel = roomModel.getRoomCenter();
                 }
-                break;
-            case "SessionPlatformModel":
-                sessionPlatformModel = (SessionPlatformModel) typeModel;
+
                 break;
             case "SampleModel":
                 sampleModel = (SampleModel) typeModel;
@@ -594,27 +559,80 @@ public class BreadCrumb {
                         roomModel = caseModel.getCaseRoom();
                         roomType = roomModel.getRoomType();
 
-                        if (roomModel.getRoomCenter() != null)
+                        if (roomModel.getRoomCenter() != null) {
                             centerModel = roomModel.getRoomCenter();
+                        }
                     }
                 } else {
                     if (sampleModel.getSampleRoom() != null) {
                         roomModel = sampleModel.getSampleRoom();
                         roomType = roomModel.getRoomType();
 
-                        if (roomModel.getRoomCenter() != null)
+                        if (roomModel.getRoomCenter() != null) {
                             centerModel = roomModel.getRoomCenter();
+                        }
                     }
                 }
 
-                if (sampleModel.getClient() != null)
+                if (sampleModel.getClient() != null) {
                     userModel = sampleModel.getClient();
+                }
+
                 break;
-            case "BulkSampleModel":
-                bulkSampleModel = (BulkSampleModel) typeModel;
+            case "ScheduleModel":
+                scheduleModel = (ScheduleModel) typeModel;
+
+                if (scheduleModel.getCaseModel() != null) {
+                    caseModel = scheduleModel.getCaseModel();
+
+                    if (caseModel.getCaseRoom() != null) {
+                        roomModel = caseModel.getCaseRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null) {
+                            centerModel = roomModel.getRoomCenter();
+                        }
+                    }
+                } else {
+                    if (scheduleModel.getRoom() != null) {
+                        roomModel = scheduleModel.getRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null) {
+                            centerModel = roomModel.getRoomCenter();
+                        }
+                    }
+                }
+
                 break;
-            case "BillingModel":
-                billingModel = (BillingModel) typeModel;
+            case "SessionModel":
+                sessionModel = (SessionModel) typeModel;
+
+                if (sessionModel.getCaseModel() != null) {
+                    caseModel = sessionModel.getCaseModel();
+
+                    if (caseModel.getCaseRoom() != null) {
+                        roomModel = caseModel.getCaseRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null) {
+                            centerModel = roomModel.getRoomCenter();
+                        }
+                    }
+                } else {
+                    if (sessionModel.getRoom() != null) {
+                        roomModel = sessionModel.getRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null) {
+                            centerModel = roomModel.getRoomCenter();
+                        }
+                    }
+                }
+
+                break;
+            case "SessionPlatformModel":
+                sessionPlatformModel = (SessionPlatformModel) typeModel;
                 break;
             case "TreasuriesModel":
                 treasuriesModel = (TreasuriesModel) typeModel;
