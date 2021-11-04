@@ -27,6 +27,11 @@
     <string name="AppEdit">ویرایش</string>
     <string name="AppReserve">رزرو</string>
 
+    <string name="AppPlatforms">محل‌های برگزاری جلسات</string>
+    <string name="AppSchedules">برنامه‌های درمانی</string>
+    <string name="AppTags">برچسب‌های مهم</string>
+    <string name="AppUsers">اعضاء</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Scheduled Strings

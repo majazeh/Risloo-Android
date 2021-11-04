@@ -625,7 +625,36 @@ public class BreadCrumb {
         }
     }
 
-        /*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /*
     ---------- Drawer ----------
     */
 
@@ -1183,7 +1212,7 @@ public class BreadCrumb {
         else
             list = room();
 
-        list.add("محل\u200Cهای برگزاری");
+        list.add(activity.getResources().getString(R.string.AppPlatforms));
 
         destinationIds = centerPlatformsIds();
         return list;
@@ -1209,7 +1238,7 @@ public class BreadCrumb {
         else
             list = room();
 
-        list.add("برنامه\u200Cهای درمانی");
+        list.add(activity.getResources().getString(R.string.AppSchedules));
 
         destinationIds = centerSchedulesIds();
         return list;
@@ -1235,7 +1264,7 @@ public class BreadCrumb {
         else
             list = room();
 
-        list.add("برچسب\u200Cهای مهم");
+        list.add(activity.getResources().getString(R.string.AppTags));
 
         destinationIds = centerTagsIds();
         return list;
@@ -1261,7 +1290,7 @@ public class BreadCrumb {
         else
             list = room();
 
-        list.add("اعضاء");
+        list.add(activity.getResources().getString(R.string.AppUsers));
 
         destinationIds = centerUsersIds();
         return list;
@@ -1287,7 +1316,7 @@ public class BreadCrumb {
         else
             list = session();
 
-        list.add(activity.getResources().getString(R.string.ClientReportsFragmentCaseTitle));
+        list.add(activity.getResources().getString(R.string.ClientReportsFragmentTitle));
 
         destinationIds = clientReportsIds();
         return list;
@@ -1307,7 +1336,7 @@ public class BreadCrumb {
 
     private ArrayList<String> roomPlatforms() {
         ArrayList<String> list = room();
-        list.add("محل\u200Cهای برگزاری");
+        list.add(activity.getResources().getString(R.string.AppPlatforms));
 
         destinationIds = roomPlatformsIds();
         return list;
@@ -1321,7 +1350,7 @@ public class BreadCrumb {
 
     private ArrayList<String> roomSchedules() {
         ArrayList<String> list = room();
-        list.add("برنامه\u200Cهای درمانی");
+        list.add(activity.getResources().getString(R.string.AppSchedules));
 
         destinationIds = roomSchedulesIds();
         return list;
@@ -1335,7 +1364,7 @@ public class BreadCrumb {
 
     private ArrayList<String> roomTags() {
         ArrayList<String> list = room();
-        list.add("برچسب\u200Cهای مهم");
+        list.add(activity.getResources().getString(R.string.AppTags));
 
         destinationIds = roomTagsIds();
         return list;
@@ -1349,7 +1378,7 @@ public class BreadCrumb {
 
     private ArrayList<String> roomUsers() {
         ArrayList<String> list = room();
-        list.add("اعضاء");
+        list.add(activity.getResources().getString(R.string.AppUsers));
 
         destinationIds = roomUsersIds();
         return list;
