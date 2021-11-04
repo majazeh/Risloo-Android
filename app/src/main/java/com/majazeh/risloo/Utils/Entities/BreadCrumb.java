@@ -71,8 +71,8 @@ public class BreadCrumb {
     private CaseModel caseModel;
     private CenterModel centerModel;
     private RoomModel roomModel;
-    private ScheduleModel scheduleModel;
     private SampleModel sampleModel;
+    private ScheduleModel scheduleModel;
     private SessionModel sessionModel;
     private SessionPlatformModel sessionPlatformModel;
     private TreasuriesModel treasuriesModel;
@@ -81,6 +81,10 @@ public class BreadCrumb {
     // Vars
     private String roomType = "", sessionType = "", clientReportsType = "", referenceType = "";
     private ArrayList<Integer> destinationIds;
+
+    /*
+    ---------- Intialize ----------
+    */
 
     public BreadCrumb(@NonNull Activity activity) {
         this.activity = activity;
@@ -93,7 +97,7 @@ public class BreadCrumb {
     public SpannableStringBuilder getFa(NavDestination destination, Bundle arguments) {
         SpannableStringBuilder builder = new SpannableStringBuilder();
 
-        ArrayList<String> list = construct(destination, arguments);
+        ArrayList<String> list = intialize(destination, arguments);
         for (int i = 0; i < list.size(); i++) {
             String label = list.get(i);
 
@@ -110,7 +114,7 @@ public class BreadCrumb {
                     @Override
                     public void onClick(@NonNull View widget) {
                         if (!finalLabel.equals("نامعلوم"))
-                            navigateTo(destinationIds.get(position));
+                            navigate(destinationIds.get(position));
                     }
 
                     @Override
@@ -126,12 +130,8 @@ public class BreadCrumb {
         return builder;
     }
 
-    /*
-    ---------- Construct ----------
-    */
-
     @SuppressLint("NonConstantResourceId")
-    private ArrayList<String> construct(NavDestination destination, Bundle arguments) {
+    private ArrayList<String> intialize(NavDestination destination, Bundle arguments) {
         switch (destination.getId()) {
 
             // -------------------- Toolbar
@@ -336,7 +336,7 @@ public class BreadCrumb {
     }
 
     @SuppressLint("NonConstantResourceId")
-    private void navigateTo(int position) {
+    private void navigate(int position) {
         switch (position) {
 
             // -------------------- Drawer
@@ -511,6 +511,37 @@ public class BreadCrumb {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /*
     ---------- Setters ----------
     */
@@ -522,6 +553,29 @@ public class BreadCrumb {
                 break;
             case "BulkSampleModel":
                 bulkSampleModel = (BulkSampleModel) typeModel;
+
+                if (bulkSampleModel.getCaseModel() != null) {
+                    caseModel = bulkSampleModel.getCaseModel();
+
+                    if (caseModel.getCaseRoom() != null) {
+                        roomModel = caseModel.getCaseRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null) {
+                            centerModel = roomModel.getRoomCenter();
+                        }
+                    }
+                } else {
+                    if (bulkSampleModel.getRoom() != null) {
+                        roomModel = bulkSampleModel.getRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null) {
+                            centerModel = roomModel.getRoomCenter();
+                        }
+                    }
+                }
+
                 break;
             case "CaseModel":
                 caseModel = (CaseModel) typeModel;
@@ -539,6 +593,7 @@ public class BreadCrumb {
             case "CenterModel":
                 centerModel = (CenterModel) typeModel;
                 roomType = centerModel.getCenterType();
+
                 break;
             case "RoomModel":
                 roomModel = (RoomModel) typeModel;
@@ -636,41 +691,18 @@ public class BreadCrumb {
                 break;
             case "TreasuriesModel":
                 treasuriesModel = (TreasuriesModel) typeModel;
+
+                if (treasuriesModel.getCenterModel() != null) {
+                    centerModel = treasuriesModel.getCenterModel();
+                    roomType = centerModel.getCenterType();
+                }
+
                 break;
             case "UserModel":
                 userModel = (UserModel) typeModel;
                 break;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
     ---------- Drawer ----------
