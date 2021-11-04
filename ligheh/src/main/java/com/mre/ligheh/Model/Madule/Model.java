@@ -50,6 +50,7 @@ public class Model {
         APIRequest.post(endpoint, setData(data), setHeader(header), response, aClass);
     }
     public static RequestData setData(HashMap<String, Object> data) {
+        System.out.println("data: " + data.toString());
         RequestData requestData = new RequestData();
         for (String key : data.keySet()) {
             if (data.get(key).getClass().getSimpleName().equals("File"))

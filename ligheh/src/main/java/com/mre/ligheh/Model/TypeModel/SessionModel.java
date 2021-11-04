@@ -34,6 +34,7 @@ public class SessionModel extends TypeModel {
     private JSONArray practices;
     private List samples;
     private List session_platforms;
+    private List availableSessionPlatforms;
     private String report = "";
     private String encryption_type = "";
     private List transactions;
@@ -91,6 +92,15 @@ public class SessionModel extends TypeModel {
                 }
             }else{
                 setSession_platforms(new List());
+            }
+
+            if (!jsonObject.isNull("available_session_platforms") && jsonObject.getJSONArray("available_session_platforms").length() != 0) {
+                availableSessionPlatforms = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("available_session_platforms").length(); i++) {
+                    availableSessionPlatforms.add(new SessionPlatformModel(jsonObject.getJSONArray("available_session_platforms").getJSONObject(i)));
+                }
+            }else{
+                setAvailableSessionPlatforms(new List());
             }
             if (!jsonObject.isNull("canceled_at"))
                 setCanceled_at(jsonObject.getInt("canceled_at"));
@@ -353,5 +363,13 @@ public class SessionModel extends TypeModel {
 
     public void setClosed_at_type(String closed_at_type) {
         this.closed_at_type = closed_at_type;
+    }
+
+    public List getAvailableSessionPlatforms() {
+        return availableSessionPlatforms;
+    }
+
+    public void setAvailableSessionPlatforms(List availableSessionPlatforms) {
+        this.availableSessionPlatforms = availableSessionPlatforms;
     }
 }

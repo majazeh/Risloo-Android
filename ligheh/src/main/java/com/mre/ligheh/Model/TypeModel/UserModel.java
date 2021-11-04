@@ -36,6 +36,8 @@ public class UserModel extends TypeModel {
     private List caseList;
     private List sampleList;
     private List treasuries;
+    private FieldModel field;
+    private SessionPlatformModel session_platform;
     private JSONObject dalilyScheduleExports;
 
     public UserModel() {
@@ -86,6 +88,11 @@ public class UserModel extends TypeModel {
         if (!jsonObject.isNull("avatar"))
             setAvatar(new AvatarModel(jsonObject.getJSONArray("avatar")));
 
+        if (!jsonObject.isNull("session_platform"))
+            setSession_platform(new SessionPlatformModel(jsonObject.getJSONObject("session_platform")));
+
+        if (!jsonObject.isNull("field"))
+            setField(new FieldModel(jsonObject.getJSONObject("field")));
 
         if (!jsonObject.isNull("centers")) {
             List centers = new List();
@@ -356,6 +363,22 @@ public class UserModel extends TypeModel {
         this.dalilyScheduleExports = dalilyScheduleExports;
     }
 
+    public FieldModel getField() {
+        return field;
+    }
+
+    public void setField(FieldModel field) {
+        this.field = field;
+    }
+
+    public SessionPlatformModel getSession_platform() {
+        return session_platform;
+    }
+
+    public void setSession_platform(SessionPlatformModel session_platform) {
+        this.session_platform = session_platform;
+    }
+
     @Override
     public JSONObject toObject() {
         try {
@@ -377,6 +400,8 @@ public class UserModel extends TypeModel {
             super.toObject().put("updated_at", getUserUpdated_at());
             super.toObject().put("accepted_at", getUserAccepted_at());
             super.toObject().put("kicked_at", getUserKicked_at());
+            super.toObject().put("session_platform", getSession_platform().toObject());
+            super.toObject().put("field", getField().toObject());
             super.toObject().put("meta", getMeta());
             super.toObject().put("creator", getCreator().toObject());
             super.toObject().put("avatar", getAvatar().toObject());
