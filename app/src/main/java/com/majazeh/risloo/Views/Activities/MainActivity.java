@@ -482,8 +482,24 @@ public class MainActivity extends AppCompatActivity {
 
         if (grantResults.length > 0) {
             for (int grantResult : grantResults) {
-                if (grantResult != PackageManager.PERMISSION_GRANTED)
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    switch (requestCode) {
+                        case 100:
+                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionFileException));
+                            break;
+                        case 200:
+                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionStorageException));
+                            break;
+                        case 300:
+                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionGalleryException));
+                            break;
+                        case 400:
+                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionCameraException));
+                            break;
+                    }
+
                     return;
+                }
             }
 
             switch (requestCode) {
@@ -565,21 +581,21 @@ public class MainActivity extends AppCompatActivity {
             } break;
             case RESULT_CANCELED: {
                 switch (requestCode) {
-                    case 100:
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastFileException));
-                        break;
-                    case 200:
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastStorageException));
-                        break;
-                    case 300:
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastGalleryException));
-                        break;
-                    case 400:
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastCameraException));
-                        break;
-                    case 500:
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastCropException));
-                        break;
+//                    case 100:
+//                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastFileException));
+//                        break;
+//                    case 200:
+//                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastStorageException));
+//                        break;
+//                    case 300:
+//                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastGalleryException));
+//                        break;
+//                    case 400:
+//                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastCameraException));
+//                        break;
+//                    case 500:
+//                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastCropException));
+//                        break;
                 }
             } break;
         }

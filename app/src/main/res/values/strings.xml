@@ -100,6 +100,11 @@
     <string name="ToastSampleDoublePressExit">برای خروج از نمونه دوباره کلیک کنید.</string>
     <string name="ToastSampleLinkSaved">لینک نمونه ذخیره شد.</string>
 
+    <string name="ToastPermissionFileException">ریسلو دسترسی به آپلود فایل ندارد.</string>
+    <string name="ToastPermissionStorageException">ریسلو دسترسی به ذخیره فایل ندارد.</string>
+    <string name="ToastPermissionGalleryException">ریسلو دسترسی به البوم ندارد.</string>
+    <string name="ToastPermissionCameraException">ریسلو دسترسی به دوربین ندارد.</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Splash Strings
@@ -1879,10 +1884,6 @@
     // Toast Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="ToastFileException">ریسلو به انتخاب فایل دسترسی ندارد.</string>
-    <string name="ToastStorageException">ریسلو به حافظه گوشی دسترسی ندارد.</string>
-    <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
-    <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
     <string name="ToastCropException">برنامه‌ای برای کراپ کردن وجود ندارد.</string>
     <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
 

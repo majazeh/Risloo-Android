@@ -11,6 +11,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Decoraton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Managers.TransitionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
@@ -131,12 +132,22 @@ public class DisplayActivity extends AppCompatActivity {
 
         if (grantResults.length > 0) {
             for (int grantResult : grantResults) {
-                if (grantResult != PackageManager.PERMISSION_GRANTED)
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    switch (requestCode) {
+                        case 200:
+                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionStorageException));
+                            break;
+                    }
+
                     return;
+                }
             }
 
-            if (requestCode == 200)
-                IntentManager.download(this, path);
+            switch (requestCode) {
+                case 200:
+                    IntentManager.download(this, path);
+                    break;
+            }
         }
     }
 
