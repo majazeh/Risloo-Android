@@ -90,45 +90,56 @@ public class BreadCrumb {
         this.activity = activity;
     }
 
-    /*
-    ---------- Methods ----------
-    */
 
-    public SpannableStringBuilder getFa(NavDestination destination, Bundle arguments) {
-        SpannableStringBuilder builder = new SpannableStringBuilder();
 
-        ArrayList<String> list = intialize(destination, arguments);
-        for (int i = 0; i < list.size(); i++) {
-            String label = list.get(i);
 
-            if (list.size() == 1 && label.equals("خانه"))
-                label = activity.getResources().getString(R.string.DashboardFragmentWelcome);
 
-            builder.append(label);
-            if (i != list.size() - 1) {
-                builder.append("  >  ");
-                int position = i;
 
-                String finalLabel = label;
-                builder.setSpan(new ClickableSpan() {
-                    @Override
-                    public void onClick(@NonNull View widget) {
-                        if (!finalLabel.equals("نامعلوم"))
-                            navigate(destinationIds.get(position));
-                    }
 
-                    @Override
-                    public void updateDrawState(@NonNull TextPaint textPaint) {
-                        textPaint.setColor(activity.getResources().getColor(R.color.CoolGray500));
-                        textPaint.setUnderlineText(false);
-                    }
 
-                }, builder.toString().indexOf(label), builder.toString().indexOf(label) + label.length(), 0);
-            }
-        }
 
-        return builder;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @SuppressLint("NonConstantResourceId")
     private ArrayList<String> intialize(NavDestination destination, Bundle arguments) {
@@ -336,7 +347,7 @@ public class BreadCrumb {
     }
 
     @SuppressLint("NonConstantResourceId")
-    private void navigate(int position) {
+    private void navigateTo(int position) {
         switch (position) {
 
             // -------------------- Drawer
@@ -543,7 +554,47 @@ public class BreadCrumb {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- Setters ----------
+    ---------- Methods ----------
+    */
+
+    public SpannableStringBuilder getFa(NavDestination destination, Bundle arguments) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        ArrayList<String> list = intialize(destination, arguments);
+        for (int i = 0; i < list.size(); i++) {
+            String label = list.get(i);
+
+            if (list.size() == 1 && label.equals("خانه"))
+                label = activity.getResources().getString(R.string.DashboardFragmentWelcome);
+
+            builder.append(label);
+            if (i != list.size() - 1) {
+                builder.append("  >  ");
+                int position = i;
+
+                String finalLabel = label;
+                builder.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        if (!finalLabel.equals("نامعلوم"))
+                            navigateTo(destinationIds.get(position));
+                    }
+
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint textPaint) {
+                        textPaint.setColor(activity.getResources().getColor(R.color.CoolGray500));
+                        textPaint.setUnderlineText(false);
+                    }
+
+                }, builder.toString().indexOf(label), builder.toString().indexOf(label) + label.length(), 0);
+            }
+        }
+
+        return builder;
+    }
+
+    /*
+    ---------- Voids ----------
     */
 
     private void setModels(TypeModel typeModel) {
