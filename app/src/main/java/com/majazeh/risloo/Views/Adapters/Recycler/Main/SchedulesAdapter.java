@@ -112,7 +112,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
 
     private void listener(SchedulesHolder holder, ScheduleModel model) {
         CustomClickView.onClickListener(() -> {
-            if (holder.binding.statusTextView.getText().toString().equals("در حال نوبت\u200Cگیری") && ((MainActivity) activity).permissoon.showReserveScheduleFragment(((MainActivity) activity).singleton.getUserModel(), model)) {
+            if (holder.binding.statusTextView.getText().toString().equals("در حال نوبت\u200Cگیری") && ((MainActivity) activity).permissoon.showCenterSchedulesFragmentReserveSchedule(((MainActivity) activity).singleton.getUserModel(), model)) {
 
                 if (current instanceof CenterSchedulesFragment)
                     model.setTreasuries(((CenterSchedulesFragment) current).treasuries);

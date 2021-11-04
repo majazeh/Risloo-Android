@@ -113,6 +113,21 @@ public class Permissoon {
             return false;
     }
 
+    // -------------------- CenterSchedules
+
+    public boolean showCenterSchedulesFragmentReserveSchedule(UserModel userModel, ScheduleModel scheduleModel) {
+        if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null && scheduleModel.getRoom().getRoomCenter() != null && scheduleModel.getRoom().getRoomCenter().getAcceptation() != null)
+            return !userModel.getUserType().equals("admin") && !userModel.getUserType().equals("system") || (scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("manager") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("operator")) || (scheduleModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("manager") || scheduleModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("operator"));
+        else if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomCenter() != null && scheduleModel.getRoom().getRoomCenter().getAcceptation() != null)
+            return !userModel.getUserType().equals("admin") && !userModel.getUserType().equals("system") || (scheduleModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("manager") || scheduleModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("operator"));
+        else if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null)
+            return !userModel.getUserType().equals("admin") && !userModel.getUserType().equals("system") || (scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("manager") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("operator"));
+        else if (userModel != null)
+            return !userModel.getUserType().equals("admin") && !userModel.getUserType().equals("system");
+        else
+            return false;
+    }
+
     // -------------------- Samples
 
     public boolean showSamplesCreateSample(UserModel model) {
@@ -417,57 +432,6 @@ public class Permissoon {
     public boolean showEditUserTabPersonalType(UserModel model) {
         if (model != null)
             return model.getUserType().equals("admin");
-        else
-            return false;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ///////////////////////////////////////////////////////////////////////////     ///////////////////////////////////////////////////////////////////////////     ///////////////////////////////////////////////////////////////////////////     ///////////////////////////////////////////////////////////////////////////     ///////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-    /*
-    ---------- Schedules ----------
-    */
-
-    public boolean showReserveScheduleFragment(UserModel userModel, ScheduleModel scheduleModel) {
-        if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null && scheduleModel.getRoom().getRoomCenter() != null && scheduleModel.getRoom().getRoomCenter().getAcceptation() != null)
-            return !userModel.getUserType().equals("admin") && !userModel.getUserType().equals("system") || (scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("manager") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("operator")) || (scheduleModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("manager") || scheduleModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("operator"));
-        else if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomCenter() != null && scheduleModel.getRoom().getRoomCenter().getAcceptation() != null)
-            return !userModel.getUserType().equals("admin") && !userModel.getUserType().equals("system") || (scheduleModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("manager") || scheduleModel.getRoom().getRoomCenter().getAcceptation().getPosition().equals("operator"));
-        else if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null)
-            return !userModel.getUserType().equals("admin") && !userModel.getUserType().equals("system") || (scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("manager") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("operator"));
-        else if (userModel != null)
-            return !userModel.getUserType().equals("admin") && !userModel.getUserType().equals("system");
         else
             return false;
     }
