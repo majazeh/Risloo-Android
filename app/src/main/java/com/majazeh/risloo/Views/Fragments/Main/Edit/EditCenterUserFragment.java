@@ -214,9 +214,9 @@ public class EditCenterUserFragment extends Fragment {
             data.remove("position");
 
         if (!nickname.equals(""))
-            data.put("nickname", nickname);
+            data.put("name", nickname);
         else
-            data.remove("nickname");
+            data.remove("name");
 
         if (!status.equals(""))
             data.put("status", status);
@@ -263,7 +263,7 @@ public class EditCenterUserFragment extends Fragment {
                                             case "position":
                                                 ((MainActivity) requireActivity()).validatoon.showValid(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
                                                 break;
-                                            case "nickname":
+                                            case "name":
                                                 ((MainActivity) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
                                                 break;
                                             case "status":
