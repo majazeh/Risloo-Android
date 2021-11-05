@@ -481,9 +481,9 @@ public class BreadCrumb {
                 if (referenceType.equals("user"))
                     action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, userModel);
                 else if (referenceType.equals("center"))
-                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) activity).singleton.getUserModel());
                 else
-                    action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
+                    action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, ((MainActivity) activity).singleton.getUserModel());
 
                 ((MainActivity) activity).navController.navigate(action);
             } break;

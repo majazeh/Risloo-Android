@@ -133,20 +133,15 @@ public class ReferenceFragment extends Fragment {
             setData(this.roomModel);
         }
 
-        TypeModel typeModel = ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        userModel = (UserModel) ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel")) {
-                userModel = (UserModel) typeModel;
-                setData(userModel);
-            }
-        } else {
-            userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
-
+        if (((MainActivity) requireActivity()).singleton.getUserModel().getId().equals(userModel.getUserId())) {
             if (!type.equals("room"))
                 setData(this.centerModel.getAcceptation());
             else
                 setData(this.roomModel.getRoomAcceptation());
+        } else {
+            setData(userModel);
         }
     }
 

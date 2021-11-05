@@ -151,13 +151,13 @@ public class RoomFragment extends Fragment {
                         NavDirections action;
 
                         if (centerModel != null)
-                            action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                            action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                         else
-                            action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), null);
+                            action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
 
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
-                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
+                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     } break;
                 case "ویرایش":
@@ -260,13 +260,13 @@ public class RoomFragment extends Fragment {
                                 NavDirections action;
 
                                 if (centerModel != null)
-                                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                                 else
-                                    action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), null);
+                                    action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
 
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, null);
+                                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } break;
                         case "ویرایش":

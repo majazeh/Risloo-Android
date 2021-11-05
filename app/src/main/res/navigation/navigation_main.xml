@@ -750,7 +750,6 @@
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
         <argument
             android:name="typeModel"
-            app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
 

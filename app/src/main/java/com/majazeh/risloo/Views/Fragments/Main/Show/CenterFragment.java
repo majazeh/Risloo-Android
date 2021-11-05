@@ -118,7 +118,7 @@ public class CenterFragment extends Fragment {
                     ((MainActivity) requireActivity()).navController.navigate(action);
                 } break;
                 case "پروفایل من": {
-                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                     ((MainActivity) requireActivity()).navController.navigate(action);
                 } break;
                 case "ویرایش": {
@@ -162,7 +162,7 @@ public class CenterFragment extends Fragment {
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "پروفایل من": {
-                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, null);
+                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
