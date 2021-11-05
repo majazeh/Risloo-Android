@@ -9,6 +9,8 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 
+import com.majazeh.risloo.BuildConfig;
+
 import java.io.File;
 import java.util.Objects;
 
@@ -171,7 +173,7 @@ public class PathManager {
     */
 
     private static boolean isLocalStorageDocument(Uri uri) {
-        return "com.majazeh.risloo.debug.fileprovider".equals(uri.getAuthority());
+        return (BuildConfig.APPLICATION_ID + ".fileprovider").equals(uri.getAuthority());
     }
 
     private static boolean isExternalStorageDocument(Uri uri) {

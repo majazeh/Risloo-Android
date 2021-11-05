@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,7 +37,7 @@ public class ResultManager {
             textView.setText(StringManager.substring(path, '/'));
     }
 
-    public static void galleryResult(Activity activity, Intent data) {
+    public static void galleryResult(Activity activity, Intent data, CircleImageView circleImageView, TextView textView) {
         try {
             Uri imageUri = data.getData();
             InputStream imageStream = activity.getContentResolver().openInputStream(imageUri);
@@ -48,14 +47,17 @@ public class ResultManager {
             bitmap = BitmapManager.scaleToCenter(imageBitmap);
 
             if (path != null && bitmap != null)
-                IntentManager.crop(activity, imageUri);
+                circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
+
+            if (textView != null)
+                textView.setVisibility(View.GONE);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public static void cameraResult(Activity activity, String selectedPath) {
+    public static void cameraResult(Activity activity, String selectedPath, CircleImageView circleImageView, TextView textView) {
         File imageFile = new File(selectedPath);
         Uri imageUri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", imageFile);
 
@@ -69,15 +71,6 @@ public class ResultManager {
 
         path = selectedPath;
         bitmap = BitmapManager.scaleToCenter(imageBitmap);
-
-        if (ResultManager.path != null && bitmap != null)
-            IntentManager.crop(activity, imageUri);
-    }
-
-    public static void cropResult(Intent data, CircleImageView circleImageView, TextView textView) {
-        Bundle extras = data.getExtras();
-
-        bitmap = extras.getParcelable("data");
 
         if (path != null && bitmap != null)
             circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));

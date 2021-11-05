@@ -108,7 +108,6 @@
     <string name="ToastIntentFileException">برنامه‌ی برای آپلود فایل وجود ندارد.</string>
     <string name="ToastIntentGalleryException">برنامه‌ی برای انتخاب تصویر وجود ندارد.</string>
     <string name="ToastIntentCameraException">برنامه‌ی برای گرفتن تصویر وجود ندارد.</string>
-    <string name="ToastIntentCropException">برنامه‌ی برای کراپ تصویر وجود ندارد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

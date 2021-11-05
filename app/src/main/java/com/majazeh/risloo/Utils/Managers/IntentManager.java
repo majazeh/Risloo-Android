@@ -112,24 +112,6 @@ public class IntentManager {
         return imageFile.getAbsolutePath();
     }
 
-    public static void crop(Activity activity, Uri uri) {
-        try {
-            Intent intent = new Intent("com.android.camera.action.CROP");
-
-            intent.setDataAndType(uri, "image/*");
-            intent.putExtra("crop", true);
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", 256);
-            intent.putExtra("outputY", 256);
-            intent.putExtra("return-data", true);
-
-            activity.startActivityForResult(intent, 500);
-        } catch (ActivityNotFoundException activityNotFoundException) {
-            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityException));
-        }
-    }
-
     /*
     ---------- Local ----------
     */
