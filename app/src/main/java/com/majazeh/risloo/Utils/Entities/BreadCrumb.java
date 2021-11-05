@@ -32,6 +32,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Index.RoomPlatformsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomTagsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomUsersFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Main.Index.SamplesFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BillFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CaseFragmentArgs;
@@ -51,7 +52,6 @@ import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
-import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -74,12 +74,13 @@ public class BreadCrumb {
     private SampleModel sampleModel;
     private ScheduleModel scheduleModel;
     private SessionModel sessionModel;
-    private SessionPlatformModel sessionPlatformModel;
     private TreasuriesModel treasuriesModel;
     private UserModel userModel;
 
     // Vars
     private String roomType = "", sessionType = "", clientReportsType = "", referenceType = "";
+    private String chainId = null;
+    private String[] sampleIds = null;
     private ArrayList<Integer> destinationIds;
 
     /*
@@ -90,56 +91,49 @@ public class BreadCrumb {
         this.activity = activity;
     }
 
+    /*
+    ---------- Methods ----------
+    */
 
+    public SpannableStringBuilder getFa(NavDestination destination, Bundle arguments) {
+        SpannableStringBuilder builder = new SpannableStringBuilder();
 
+        ArrayList<String> list = intialize(destination, arguments);
+        for (int i = 0; i < list.size(); i++) {
+            String label = list.get(i);
 
+            if (list.size() == 1 && label.equals("خانه"))
+                label = activity.getResources().getString(R.string.DashboardFragmentWelcome);
 
+            builder.append(label);
+            if (i != list.size() - 1) {
+                builder.append("  >  ");
+                int position = i;
 
+                String finalLabel = label;
+                builder.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        if (!finalLabel.equals("نامعلوم"))
+                            navigateTo(destinationIds.get(position));
+                    }
 
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint textPaint) {
+                        textPaint.setColor(activity.getResources().getColor(R.color.CoolGray500));
+                        textPaint.setUnderlineText(false);
+                    }
 
+                }, builder.toString().indexOf(label), builder.toString().indexOf(label) + label.length(), 0);
+            }
+        }
 
+        return builder;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /*
+    ---------- Voids ----------
+    */
 
     @SuppressLint("NonConstantResourceId")
     private ArrayList<String> intialize(NavDestination destination, Bundle arguments) {
@@ -160,6 +154,9 @@ public class BreadCrumb {
             case R.id.scalesFragment:
                 return scales();
             case R.id.samplesFragment:
+                chainId = SamplesFragmentArgs.fromBundle(arguments).getChainId();
+                sampleIds = SamplesFragmentArgs.fromBundle(arguments).getSampleIds();
+
                 return samples();
             case R.id.bulkSamplesFragment:
                 return bulkSamples();
@@ -293,14 +290,9 @@ public class BreadCrumb {
                 setModels(CenterFragmentArgs.fromBundle(arguments).getTypeModel());
                 return center();
             case R.id.referenceFragment: {
-                TypeModel typeModel = ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
+                UserModel userModel = (UserModel) ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (typeModel != null) {
-                    if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel"))
-                        referenceType = "user";
-
-                    setModels(typeModel);
-                } else {
+                if (((MainActivity) activity).singleton.getUserModel().getId().equals(userModel.getUserId())) {
                     TypeModel centerModel = ReferenceFragmentArgs.fromBundle(arguments).getCenterModel();
 
                     if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
@@ -309,6 +301,11 @@ public class BreadCrumb {
                         referenceType = "room";
 
                     setModels(centerModel);
+                } else {
+                    TypeModel typeModel = ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
+                    referenceType = "user";
+
+                    setModels(typeModel);
                 }
 
                 return reference();
@@ -377,7 +374,7 @@ public class BreadCrumb {
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.samplesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, null);
+                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(chainId, sampleIds);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.bulkSamplesFragment: {
@@ -522,81 +519,6 @@ public class BreadCrumb {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- Methods ----------
-    */
-
-    public SpannableStringBuilder getFa(NavDestination destination, Bundle arguments) {
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-
-        ArrayList<String> list = intialize(destination, arguments);
-        for (int i = 0; i < list.size(); i++) {
-            String label = list.get(i);
-
-            if (list.size() == 1 && label.equals("خانه"))
-                label = activity.getResources().getString(R.string.DashboardFragmentWelcome);
-
-            builder.append(label);
-            if (i != list.size() - 1) {
-                builder.append("  >  ");
-                int position = i;
-
-                String finalLabel = label;
-                builder.setSpan(new ClickableSpan() {
-                    @Override
-                    public void onClick(@NonNull View widget) {
-                        if (!finalLabel.equals("نامعلوم"))
-                            navigateTo(destinationIds.get(position));
-                    }
-
-                    @Override
-                    public void updateDrawState(@NonNull TextPaint textPaint) {
-                        textPaint.setColor(activity.getResources().getColor(R.color.CoolGray500));
-                        textPaint.setUnderlineText(false);
-                    }
-
-                }, builder.toString().indexOf(label), builder.toString().indexOf(label) + label.length(), 0);
-            }
-        }
-
-        return builder;
-    }
-
-    /*
-    ---------- Voids ----------
-    */
-
     private void setModels(TypeModel typeModel) {
         switch (StringManager.substring(typeModel.getClass().getName(), '.')) {
             case "BillingModel":
@@ -737,9 +659,6 @@ public class BreadCrumb {
                 }
 
                 break;
-            case "SessionPlatformModel":
-                sessionPlatformModel = (SessionPlatformModel) typeModel;
-                break;
             case "TreasuriesModel":
                 treasuriesModel = (TreasuriesModel) typeModel;
 
@@ -751,6 +670,9 @@ public class BreadCrumb {
                 break;
             case "UserModel":
                 userModel = (UserModel) typeModel;
+                break;
+            default:
+                // TODO : Place If Needed
                 break;
         }
     }
