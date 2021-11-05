@@ -128,6 +128,8 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
             return false;
         });
 
+        holder.binding.statusSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         holder.binding.statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -201,7 +203,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
             @Override
             public void onFailure(String response) {
                 activity.runOnUiThread(() -> {
-                    // Place Code if Needed
+                    // TODO : Place Code If Needed
                 });
             }
         });

@@ -90,8 +90,8 @@ public class SessionFragment extends Fragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.psychologistsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
-        binding.usersHeaderLayout.titleTextView.setText(getResources().getString(R.string.Users2AdapterHeader));
-        binding.practicesHeaderLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
+        binding.usersHeaderLayout.titleTextView.setText(getResources().getString(R.string.User2AdapterHeader));
+        binding.practicesHeaderLayout.titleTextView.setText(getResources().getString(R.string.PracticeAdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
         binding.billsHeaderLayout.titleTextView.setText(getResources().getString(R.string.BillAdapterTitle));
 
@@ -545,7 +545,7 @@ public class SessionFragment extends Fragment {
                             binding.usersSingleLayout.recyclerView.setAdapter(null);
 
                             binding.usersSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.usersSingleLayout.emptyView.setText(getResources().getString(R.string.Users2AdapterEmpty));
+                            binding.usersSingleLayout.emptyView.setText(getResources().getString(R.string.User2AdapterEmpty));
                         }
 
 //                        // Practices Data
@@ -558,7 +558,7 @@ public class SessionFragment extends Fragment {
                             binding.practicesSingleLayout.recyclerView.setAdapter(null);
 
                             binding.practicesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.practicesSingleLayout.emptyView.setText(getResources().getString(R.string.PracticesAdapterEmpty));
+                            binding.practicesSingleLayout.emptyView.setText(getResources().getString(R.string.PracticeAdapterEmpty));
 //                        }
 
                         // Samples Data

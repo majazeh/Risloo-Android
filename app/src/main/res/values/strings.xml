@@ -1126,6 +1126,20 @@
     <string name="PaymentAdapterEmpty">هنوز پرداختی ثبت نشده است.</string>
 
 
+    ---------- // PracticeAdapter
+
+    <string name="PracticeAdapterHeader">کاربرگ‌ها</string>
+
+    <string name="PracticeAdapterSerial">سریال</string>
+    <string name="PracticeAdapterName">عنوان</string>
+    <string name="PracticeAdapterDescription">محتوا</string>
+
+    <string name="PracticeAdapterAttachment">دریافت پیوست</string>
+    <string name="PracticeAdapterHomeWork">ارسال تکلیف</string>
+
+    <string name="PracticeAdapterEmpty">هنوز کاربرگی ثبت نشده است.</string>
+
+
     ---------- // RoomUserAdapter
 
     <string name="RoomUserAdapterSerial">سریال</string>
@@ -1166,6 +1180,18 @@
     <string name="SessionAdapterDuration">مدت‌زمان جلسه</string>
     <string name="SessionAdapterStatus">وضعیت</string>
     <string name="SessionAdapterCase">پرونده</string>
+
+
+    ---------- // Session2Adapter
+
+    <string name="Session2AdapterHeader">جلسات</string>
+
+    <string name="Session2AdapterSerial">سریال</string>
+    <string name="Session2AdapterDate">زمان شروع</string>
+    <string name="Session2AdapterDuration">مدت‌زمان جلسه</string>
+    <string name="Session2AdapterStatus">وضعیت</string>
+
+    <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
 
 
     ---------- // TimeAdapter
@@ -1214,6 +1240,18 @@
 
     <string name="UserAdapterLogin">ورود به کاربری</string>
     <string name="UserAdapterEdit">ویرایش</string>
+
+
+    ---------- // User2Adapter
+
+    <string name="User2AdapterHeader">اعضاء</string>
+
+    <string name="User2AdapterName">مراجع</string>
+    <string name="User2AdapterField">فیلد</string>
+    <string name="User2AdapterPlatform">بستر</string>
+    <string name="User2AdapterPosition">وضعیت</string>
+
+    <string name="User2AdapterEmpty">هنوز عضوی ثبت نشده است.</string>
 
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -1768,21 +1806,6 @@
     <string name="PsychologistsAdapterEmpty">هنوز درمانگری ثبت نشده است.</string>
 
     /*
-    ---------- Practices Adapter ----------
-    */
-
-    <string name="PracticesAdapterHeader">کاربرگ‌ها</string>
-
-    <string name="PracticesAdapterSerial">سریال</string>
-    <string name="PracticesAdapterName">عنوان</string>
-    <string name="PracticesAdapterDescription">محتوا</string>
-
-    <string name="PracticesAdapterAttachment">دریافت پیوست</string>
-    <string name="PracticesAdapterHomeWork">ارسال تکلیف</string>
-
-    <string name="PracticesAdapterEmpty">هنوز کاربرگی ثبت نشده است.</string>
-
-    /*
     ---------- References Adapter ----------
     */
 
@@ -1809,32 +1832,6 @@
 
     <string name="SchedulesAdapterWeekEmpty">برنامه‌ای در این هفته موجود نمی باشد.</string>
     <string name="SchedulesAdapterDayEmpty">برنامه‌ای در این روز موجود نمی باشد.</string>
-
-    /*
-    ---------- Sessions2 Adapter ----------
-    */
-
-    <string name="Sessions2AdapterHeader">جلسات</string>
-
-    <string name="Sessions2AdapterSerial">سریال</string>
-    <string name="Sessions2AdapterDate">زمان شروع</string>
-    <string name="Sessions2AdapterDuration">مدت‌زمان جلسه</string>
-    <string name="Sessions2AdapterStatus">وضعیت</string>
-
-    <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- Users2 Adapter ----------
-    */
-
-    <string name="Users2AdapterHeader">اعضاء</string>
-
-    <string name="Users2AdapterName">مراجع</string>
-    <string name="Users2AdapterField">فیلد</string>
-    <string name="Users2AdapterPlatform">بستر</string>
-    <string name="Users2AdapterPosition">وضعیت</string>
-
-    <string name="Users2AdapterEmpty">هنوز عضوی ثبت نشده است.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

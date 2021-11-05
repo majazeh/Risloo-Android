@@ -72,6 +72,7 @@
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
+        app:layout_goneMarginEnd="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/menu_imageView"
         app:layout_constraintStart_toEndOf="@id/name_textView"

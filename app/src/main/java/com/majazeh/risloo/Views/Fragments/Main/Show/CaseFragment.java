@@ -83,7 +83,7 @@ public class CaseFragment extends Fragment {
 
         binding.psychologistsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
         binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
-        binding.sessionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.Sessions2AdapterHeader));
+        binding.sessionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.Session2AdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
         binding.sessionsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);

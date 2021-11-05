@@ -20,10 +20,11 @@
     <TextView
         android:id="@+id/name_textView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:minLines="2"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -40,11 +41,11 @@
     <TextView
         android:id="@+id/field_textView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:minLines="2"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -62,12 +63,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:minHeight="@dimen/_26sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_coolgray200"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/position_spinner"
         app:layout_constraintStart_toEndOf="@id/field_textView"
@@ -84,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="@id/platform_spinner"
         app:layout_constraintEnd_toEndOf="@id/platform_spinner"
         app:layout_constraintTop_toTopOf="@id/platform_spinner"
-        app:tint="@color/CoolGray600" />
+        app:tint="@color/CoolGray500" />
 
     <Spinner
         android:id="@+id/position_spinner"
@@ -92,11 +93,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:minHeight="@dimen/_26sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_coolgray200"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/platform_spinner"
@@ -113,6 +115,6 @@
         app:layout_constraintBottom_toBottomOf="@id/position_spinner"
         app:layout_constraintEnd_toEndOf="@id/position_spinner"
         app:layout_constraintTop_toTopOf="@id/position_spinner"
-        app:tint="@color/CoolGray600" />
+        app:tint="@color/CoolGray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
