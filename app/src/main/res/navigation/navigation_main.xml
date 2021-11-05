@@ -7,53 +7,6 @@
     tools:ignore="ExtraText">
 
     /*
-    ---------- Toolbar ----------
-    */
-
-    ---------- // Fragments
-
-    <fragment
-        android:id="@+id/meFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.MeFragment"
-        android:label="@string/MeFragmentTitle"
-        tools:layout="@layout/fragment_me">
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/accountingFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.AccountingFragment"
-        android:label="@string/AccountingFragmentTitle"
-        tools:layout="@layout/fragment_accounting" />
-
-    <fragment
-        android:id="@+id/paymentsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.PaymentsFragment"
-        android:label="@string/PaymentsFragmentTitle"
-        tools:layout="@layout/fragment_payments" >
-        <argument
-            android:name="typeModel"
-            app:nullable="true"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    ---------- // Actions
-
-    <action
-        android:id="@+id/action_global_meFragment"
-        app:destination="@id/meFragment" />
-
-    <action
-        android:id="@+id/action_global_accountingFragment"
-        app:destination="@id/accountingFragment" />
-
-    <action
-        android:id="@+id/action_global_paymentsFragment"
-        app:destination="@id/paymentsFragment" />
-
-    /*
     ---------- Drawer ----------
     */
 
@@ -163,6 +116,53 @@
         app:destination="@id/documentsFragment" />
 
     /*
+    ---------- Toolbar ----------
+    */
+
+    ---------- // Fragments
+
+    <fragment
+        android:id="@+id/meFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.MeFragment"
+        android:label="@string/MeFragmentTitle"
+        tools:layout="@layout/fragment_me">
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/accountingFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.AccountingFragment"
+        android:label="@string/AccountingFragmentTitle"
+        tools:layout="@layout/fragment_accounting" />
+
+    <fragment
+        android:id="@+id/paymentsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.PaymentsFragment"
+        android:label="@string/PaymentsFragmentTitle"
+        tools:layout="@layout/fragment_payments" >
+        <argument
+            android:name="typeModel"
+            app:nullable="true"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    ---------- // Actions
+
+    <action
+        android:id="@+id/action_global_meFragment"
+        app:destination="@id/meFragment" />
+
+    <action
+        android:id="@+id/action_global_accountingFragment"
+        app:destination="@id/accountingFragment" />
+
+    <action
+        android:id="@+id/action_global_paymentsFragment"
+        app:destination="@id/paymentsFragment" />
+
+    /*
     ---------- Create ----------
     */
 
@@ -224,6 +224,17 @@
     </fragment>
 
     <fragment
+        android:id="@+id/createClientReportFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateClientReportFragment"
+        android:label="@string/CreateClientReportFragmentTitle"
+        tools:layout="@layout/fragment_create_client_report" >
+        <argument
+            android:name="typeModel"
+            app:nullable="true"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/createDocumentFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateDocumentFragment"
         android:label="@string/CreateDocumentFragmentTitle"
@@ -235,10 +246,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/createPracticeFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment"
-        android:label="@string/CreatePracticeFragmentTitle"
-        tools:layout="@layout/fragment_create_practice" >
+        android:id="@+id/createPlatformFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreatePlatformFragment"
+        android:label="@string/CreatePlatformFragmentTitle"
+        tools:layout="@layout/fragment_create_platform" >
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -246,10 +257,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/createClientReportFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateClientReportFragment"
-        android:label="@string/CreateClientReportFragmentTitle"
-        tools:layout="@layout/fragment_create_client_report" >
+        android:id="@+id/createPracticeFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment"
+        android:label="@string/CreatePracticeFragmentTitle"
+        tools:layout="@layout/fragment_create_practice" >
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -275,17 +286,6 @@
         android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreateRoomUserFragment"
         android:label="@string/CreateRoomUserFragmentTitle"
         tools:layout="@layout/fragment_create_room_user" >
-        <argument
-            android:name="typeModel"
-            app:nullable="true"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/createPlatformFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Create.CreatePlatformFragment"
-        android:label="@string/CreatePlatformFragmentTitle"
-        tools:layout="@layout/fragment_create_platform" >
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -391,16 +391,20 @@
         app:destination="@id/createCenterUserFragment" />
 
     <action
+        android:id="@+id/action_global_createClientReportFragment"
+        app:destination="@id/createClientReportFragment" />
+
+    <action
         android:id="@+id/action_global_createDocumentFragment"
         app:destination="@id/createDocumentFragment" />
 
     <action
-        android:id="@+id/action_global_createPracticeFragment"
-        app:destination="@id/createPracticeFragment" />
+        android:id="@+id/action_global_createPlatformFragment"
+        app:destination="@id/createPlatformFragment" />
 
     <action
-        android:id="@+id/action_global_createReportFragment"
-        app:destination="@id/createClientReportFragment" />
+        android:id="@+id/action_global_createPracticeFragment"
+        app:destination="@id/createPracticeFragment" />
 
     <action
         android:id="@+id/action_global_createRoomFragment"
@@ -409,10 +413,6 @@
     <action
         android:id="@+id/action_global_createRoomUserFragment"
         app:destination="@id/createRoomUserFragment" />
-
-    <action
-        android:id="@+id/action_global_createPlatformFragment"
-        app:destination="@id/createPlatformFragment" />
 
     <action
         android:id="@+id/action_global_createSampleFragment"
@@ -553,16 +553,6 @@
         tools:layout="@layout/fragment_billings" />
 
     <fragment
-        android:id="@+id/centerUsersFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CenterUsersFragment"
-        android:label="@string/CenterUsersFragmentTitle"
-        tools:layout="@layout/fragment_center_users" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
         android:id="@+id/centerPlatformsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CenterPlatformsFragment"
         android:label="@string/CenterPlatformsFragmentTitle"
@@ -593,10 +583,20 @@
     </fragment>
 
     <fragment
-        android:id="@+id/roomUsersFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.RoomUsersFragment"
-        android:label="@string/RoomUsersFragmentTitle"
-        tools:layout="@layout/fragment_room_users" >
+        android:id="@+id/centerUsersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CenterUsersFragment"
+        android:label="@string/CenterUsersFragmentTitle"
+        tools:layout="@layout/fragment_center_users" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/clientReportsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.ClientReportsFragment"
+        android:label="@string/ClientReportsFragmentTitle"
+        tools:layout="@layout/fragment_client_reports" >
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -633,10 +633,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/clientReportsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.ClientReportsFragment"
-        android:label="@string/ClientReportsFragmentTitle"
-        tools:layout="@layout/fragment_client_reports" >
+        android:id="@+id/roomUsersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.RoomUsersFragment"
+        android:label="@string/RoomUsersFragmentTitle"
+        tools:layout="@layout/fragment_room_users" >
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -655,10 +655,6 @@
         app:destination="@id/billingsFragment" />
 
     <action
-        android:id="@+id/action_global_centerUsersFragment"
-        app:destination="@id/centerUsersFragment" />
-
-    <action
         android:id="@+id/action_global_centerPlatformsFragment"
         app:destination="@id/centerPlatformsFragment" />
 
@@ -671,8 +667,12 @@
         app:destination="@id/centerTagsFragment" />
 
     <action
-        android:id="@+id/action_global_roomUsersFragment"
-        app:destination="@id/roomUsersFragment" />
+        android:id="@+id/action_global_centerUsersFragment"
+        app:destination="@id/centerUsersFragment" />
+
+    <action
+        android:id="@+id/action_global_clientReportsFragment"
+        app:destination="@id/clientReportsFragment" />
 
     <action
         android:id="@+id/action_global_roomPlatformsFragment"
@@ -687,8 +687,8 @@
         app:destination="@id/roomTagsFragment" />
 
     <action
-        android:id="@+id/action_global_clientReportsFragment"
-        app:destination="@id/clientReportsFragment" />
+        android:id="@+id/action_global_roomUsersFragment"
+        app:destination="@id/roomUsersFragment" />
 
     <action
         android:id="@+id/action_global_treasuriesFragment"
@@ -701,16 +701,6 @@
     ---------- // Fragments
 
     <fragment
-        android:id="@+id/treasuryFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.TreasuryFragment"
-        android:label="@string/TreasuryFragmentTitle"
-        tools:layout="@layout/fragment_treasury" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
         android:id="@+id/billFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Show.BillFragment"
         android:label="@string/BillFragmentTitle"
@@ -721,20 +711,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/centerFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CenterFragment"
-        android:label="@string/CenterFragmentTitle"
-        tools:layout="@layout/fragment_center" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/roomFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.RoomFragment"
-        android:label="@string/RoomFragmentTitle"
-        tools:layout="@layout/fragment_room" >
+        android:id="@+id/bulkSampleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragment"
+        android:label="@string/BulkSampleFragmentTitle"
+        tools:layout="@layout/fragment_bulk_sample" >
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -751,40 +731,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/sessionFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.SessionFragment"
-        android:label="@string/SessionFragmentTitle"
-        tools:layout="@layout/fragment_session" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/userFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.UserFragment"
-        android:label="@string/UserFragmentTitle"
-        tools:layout="@layout/fragment_user" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/sampleFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment"
-        android:label="@string/SampleFragmentTitle"
-        tools:layout="@layout/fragment_sample" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/bulkSampleFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragment"
-        android:label="@string/BulkSampleFragmentTitle"
-        tools:layout="@layout/fragment_bulk_sample" >
+        android:id="@+id/centerFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CenterFragment"
+        android:label="@string/CenterFragmentTitle"
+        tools:layout="@layout/fragment_center" >
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -804,46 +754,96 @@
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
 
-    ---------- // Actions
+    <fragment
+        android:id="@+id/roomFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.RoomFragment"
+        android:label="@string/RoomFragmentTitle"
+        tools:layout="@layout/fragment_room" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
-    <action
-        android:id="@+id/action_global_treasuryFragment"
-        app:destination="@id/treasuryFragment" />
+    <fragment
+        android:id="@+id/sampleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment"
+        android:label="@string/SampleFragmentTitle"
+        tools:layout="@layout/fragment_sample" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sessionFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.SessionFragment"
+        android:label="@string/SessionFragmentTitle"
+        tools:layout="@layout/fragment_session" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/treasuryFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.TreasuryFragment"
+        android:label="@string/TreasuryFragmentTitle"
+        tools:layout="@layout/fragment_treasury" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.UserFragment"
+        android:label="@string/UserFragmentTitle"
+        tools:layout="@layout/fragment_user" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    ---------- // Actions
 
     <action
         android:id="@+id/action_global_billFragment"
         app:destination="@id/billFragment" />
 
     <action
-        android:id="@+id/action_global_centerFragment"
-        app:destination="@id/centerFragment" />
-
-    <action
-        android:id="@+id/action_global_roomFragment"
-        app:destination="@id/roomFragment" />
+        android:id="@+id/action_global_bulkSampleFragment"
+        app:destination="@id/bulkSampleFragment" />
 
     <action
         android:id="@+id/action_global_caseFragment"
         app:destination="@id/caseFragment" />
 
     <action
-        android:id="@+id/action_global_sessionFragment"
-        app:destination="@id/sessionFragment" />
+        android:id="@+id/action_global_centerFragment"
+        app:destination="@id/centerFragment" />
 
     <action
-        android:id="@+id/action_global_userFragment"
-        app:destination="@id/userFragment" />
+        android:id="@+id/action_global_referenceFragment"
+        app:destination="@id/referenceFragment" />
+
+    <action
+        android:id="@+id/action_global_roomFragment"
+        app:destination="@id/roomFragment" />
 
     <action
         android:id="@+id/action_global_sampleFragment"
         app:destination="@id/sampleFragment" />
 
     <action
-        android:id="@+id/action_global_bulkSampleFragment"
-        app:destination="@id/bulkSampleFragment" />
+        android:id="@+id/action_global_sessionFragment"
+        app:destination="@id/sessionFragment" />
 
     <action
-        android:id="@+id/action_global_referenceFragment"
-        app:destination="@id/referenceFragment" />
+        android:id="@+id/action_global_treasuryFragment"
+        app:destination="@id/treasuryFragment" />
+
+    <action
+        android:id="@+id/action_global_userFragment"
+        app:destination="@id/userFragment" />
 
 </navigation>
