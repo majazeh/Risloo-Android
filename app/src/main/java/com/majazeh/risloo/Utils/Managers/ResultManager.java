@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.content.FileProvider;
+
+import com.majazeh.risloo.BuildConfig;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -53,7 +57,9 @@ public class ResultManager {
 
     public static void cameraResult(Activity activity, String selectedPath) {
         File imageFile = new File(selectedPath);
-        IntentManager.mediaScan(activity, Uri.fromFile(imageFile));
+        Uri imageUri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", imageFile);
+
+        IntentManager.mediaScan(activity, imageUri);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
@@ -65,7 +71,7 @@ public class ResultManager {
         bitmap = BitmapManager.scaleToCenter(imageBitmap);
 
         if (ResultManager.path != null && bitmap != null)
-            IntentManager.crop(activity, Uri.fromFile(imageFile));
+            IntentManager.crop(activity, imageUri);
     }
 
     public static void cropResult(Intent data, CircleImageView circleImageView, TextView textView) {

@@ -31,14 +31,15 @@ public class FileManager {
     */
 
     @SuppressLint("SimpleDateFormat")
-    public static File createCameraFile(Activity activity) {
+    public static File createImageFile(Activity activity) {
         try {
-            File imageStorageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            String timeStamp = new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date());
+            String fileName = "IMG_" + timeStamp + "_";
+            String fileSuffix = ".jpg";
 
-            String imageFileName = new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()) + "_";
-            String imageFileSuffix = ".jpg";
+            File storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-            return File.createTempFile(imageFileName, imageFileSuffix, imageStorageDir);
+            return File.createTempFile(fileName, fileSuffix, storageDir);
         } catch (IOException e) {
             return new File("");
         }

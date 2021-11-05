@@ -14,6 +14,7 @@ import android.provider.Settings;
 
 import androidx.core.content.FileProvider;
 
+import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.DisplayActivity;
@@ -101,10 +102,10 @@ public class IntentManager {
     public static String camera(Activity activity) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        File imageFile = FileManager.createCameraFile(activity);
-        String fileProviderAuthority = "com.majazeh.risloo.debug.fileprovider";
+        File imageFile = FileManager.createImageFile(activity);
+        Uri imageUri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", imageFile);
 
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity, fileProviderAuthority, imageFile));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
         activity.startActivityForResult(intent, 400);
 
@@ -125,7 +126,7 @@ public class IntentManager {
 
             activity.startActivityForResult(intent, 500);
         } catch (ActivityNotFoundException activityNotFoundException) {
-            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastCropException));
+            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityException));
         }
     }
 
