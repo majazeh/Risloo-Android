@@ -140,9 +140,9 @@ public class ClientReportsFragment extends Fragment {
             NavDirections action;
 
             if (type.equals("case"))
-                action = NavigationMainDirections.actionGlobalCreateReportFragment(caseModel);
+                action = NavigationMainDirections.actionGlobalCreateClientReportFragment(caseModel);
             else
-                action = NavigationMainDirections.actionGlobalCreateReportFragment(sessionModel);
+                action = NavigationMainDirections.actionGlobalCreateClientReportFragment(sessionModel);
 
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());

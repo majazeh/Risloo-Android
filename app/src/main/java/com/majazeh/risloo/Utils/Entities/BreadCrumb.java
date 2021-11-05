@@ -145,16 +145,6 @@ public class BreadCrumb {
     private ArrayList<String> intialize(NavDestination destination, Bundle arguments) {
         switch (destination.getId()) {
 
-            // -------------------- Toolbar
-
-            case R.id.meFragment:
-                setModels(MeFragmentArgs.fromBundle(arguments).getTypeModel());
-                return me();
-            case R.id.accountingFragment:
-                return accounting();
-            case R.id.paymentsFragment:
-                return payments();
-
             // -------------------- Drawer
 
             case R.id.dashboardFragment:
@@ -176,6 +166,16 @@ public class BreadCrumb {
             case R.id.documentsFragment:
                 return documents();
 
+            // -------------------- Toolbar
+
+            case R.id.meFragment:
+                setModels(MeFragmentArgs.fromBundle(arguments).getTypeModel());
+                return me();
+            case R.id.accountingFragment:
+                return accounting();
+            case R.id.paymentsFragment:
+                return payments();
+
             // -------------------- Create
 
             case R.id.createBillFragment:
@@ -188,18 +188,18 @@ public class BreadCrumb {
                 return createCenter();
             case R.id.createCenterUserFragment:
                 return createCenterUser();
-            case R.id.createDocumentFragment:
-                return createDocument();
             case R.id.createClientReportFragment:
                 return createClientReport();
+            case R.id.createDocumentFragment:
+                return createDocument();
+            case R.id.createPlatformFragment:
+                return createPlatform();
             case R.id.createPracticeFragment:
                 return createPractice();
             case R.id.createRoomFragment:
                 return createRoom();
             case R.id.createRoomUserFragment:
                 return createRoomUser();
-            case R.id.createPlatformFragment:
-                return createPlatform();
             case R.id.createSampleFragment:
                 return createSample();
             case R.id.createScheduleFragment:
@@ -253,7 +253,7 @@ public class BreadCrumb {
             case R.id.centerUsersFragment:
                 setModels(CenterUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerUsers();
-            case R.id.clientReportsFragment:{
+            case R.id.clientReportsFragment: {
                 TypeModel typeModel = ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel();
 
                 if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
