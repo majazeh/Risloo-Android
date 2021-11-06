@@ -1475,7 +1475,7 @@ public class BreadCrumb {
         ArrayList<String> list = room();
 
         if (caseModel != null && caseModel.getCaseId() != null && !caseModel.getCaseId().equals(""))
-            list.add(caseModel.getCaseId());
+            list.add("پرونده" + " " + caseModel.getCaseId());
         else
             list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
@@ -1596,7 +1596,7 @@ public class BreadCrumb {
         if (sampleModel != null && sampleModel.getSampleTitle() != null && !sampleModel.getSampleTitle().equals(""))
             list.add(sampleModel.getSampleTitle());
         else if (sampleModel != null && sampleModel.getSampleId() != null && !sampleModel.getSampleId().equals(""))
-            list.add(sampleModel.getSampleId());
+            list.add("نمونه" + " " + sampleModel.getSampleId());
         else
             list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
@@ -1621,9 +1621,9 @@ public class BreadCrumb {
             list = room();
 
         if (sessionType.equals("session") && sessionModel != null && sessionModel.getId() != null && !sessionModel.getId().equals(""))
-            list.add(sessionModel.getId());
+            list.add("جلسه" + " " + sessionModel.getId());
         else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getId() != null && !scheduleModel.getId().equals(""))
-            list.add(scheduleModel.getId());
+            list.add("جلسه" + " " + scheduleModel.getId());
         else
             list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 
