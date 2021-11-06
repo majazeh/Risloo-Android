@@ -127,7 +127,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private void listener(TableSampleHolder holder, SampleModel model, int position) {
         CustomClickView.onClickListener(() -> {
-            if (((MainActivity) activity).permissoon.showSamplesFragmentSample(model)) {
+            if (((MainActivity) activity).permissoon.showSamplesFragmentSample(((MainActivity) activity).singleton.getUserModel(), model)) {
                 NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(model);
                 ((MainActivity) activity).navController.navigate(action);
             }
