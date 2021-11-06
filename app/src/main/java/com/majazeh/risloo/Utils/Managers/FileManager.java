@@ -30,6 +30,13 @@ public class FileManager {
     ---------- Create ----------
     */
 
+    public static void createExternalFile(String name) {
+        File file = new File(Environment.getExternalStorageDirectory() + name);
+
+        if (!file.exists())
+            file.mkdirs();
+    }
+
     @SuppressLint("SimpleDateFormat")
     public static File createImageFile(Activity activity) {
         try {

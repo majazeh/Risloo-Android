@@ -45,7 +45,7 @@ import java.util.Iterator;
 public class SampleFragment extends Fragment {
 
     // Binding
-    private FragmentSampleBinding binding;
+    public FragmentSampleBinding binding;
 
     // Adapters
     private IndexProfileAdapter indexHalfAdapter, indexExtraAdapter;
@@ -150,7 +150,7 @@ public class SampleFragment extends Fragment {
                     selectedProfileUrl = profileUrls.get(position);
 
                     if (PermissionManager.storagePermission(requireActivity()))
-                        IntentManager.download(requireContext(), selectedProfileUrl);
+                        IntentManager.download(requireContext(), binding.scaleTextView.getText().toString(), selectedProfileUrl);
 
                     parent.setSelection(parent.getAdapter().getCount());
 

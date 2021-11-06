@@ -23,7 +23,6 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 
 import java.io.File;
-import java.util.Objects;
 
 public class IntentManager {
 
@@ -172,15 +171,24 @@ public class IntentManager {
         manager.setPrimaryClip(clip);
     }
 
-    public static void download(Context context, String url) {
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+    public static void download(Context context, String folder, String url) {
+        String subPath;
 
+        if (!folder.equals("")) {
+            subPath = File.separator + "Risloo" + File.separator + folder + File.separator + url.substring(url.lastIndexOf('/'));
+            FileManager.createExternalFile(File.separator + "Risloo" + File.separator + folder);
+        } else {
+            subPath = File.separator + "Risloo" + File.separator + url.substring(url.lastIndexOf('/'));
+            FileManager.createExternalFile(File.separator + "Risloo");
+        }
+
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.allowScanningByMediaScanner();
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, url.substring(url.lastIndexOf('/')));
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subPath);
 
         DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        Objects.requireNonNull(manager).enqueue(request);
+        manager.enqueue(request);
     }
 
     public static void browser(Activity activity, String url) {
