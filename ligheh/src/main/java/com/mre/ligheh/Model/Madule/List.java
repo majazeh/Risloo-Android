@@ -80,6 +80,8 @@ public class List {
         try {
             if (meta() != null && !meta().isNull("total"))
                 return meta().getInt("total");
+            else
+                return size();
         } catch (JSONException e) {
             e.printStackTrace();
         }
