@@ -4,6 +4,8 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ProgressBar;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -31,6 +33,16 @@ public class AnimateManager {
         ObjectAnimator fadeAnimation = ObjectAnimator.ofFloat(view, "alpha", fromAlpha, toAlpha);
         fadeAnimation.setDuration(duration);
         fadeAnimation.start();
+    }
+
+    public static void animateProgressValue(ProgressBar progressBar, int duration, int maxProgress, int toProgress) {
+        progressBar.setMax(maxProgress * 100);
+
+        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress(), toProgress * 100);
+        animation.setDuration(duration);
+        animation.setAutoCancel(true);
+        animation.setInterpolator(new AccelerateDecelerateInterpolator());
+        animation.start();
     }
 
 }

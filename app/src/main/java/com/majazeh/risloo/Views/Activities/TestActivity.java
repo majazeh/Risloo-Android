@@ -21,6 +21,7 @@ import com.majazeh.risloo.NavigationTestDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -329,8 +330,7 @@ public class TestActivity extends AppCompatActivity {
         String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
         binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
-        binding.headerIncludeLayout.answeredProgressBar.setMax(sampleModel.getSampleForm().itemSize());
-        binding.headerIncludeLayout.answeredProgressBar.setProgress(sampleModel.getSampleForm().getItemPosition());
+        AnimateManager.animateProgressValue(binding.headerIncludeLayout.answeredProgressBar, 500, sampleModel.getSampleForm().itemSize(), sampleModel.getSampleForm().getItemPosition());
 
         userSelect = false;
 
