@@ -224,10 +224,17 @@ public class BreadCrumb {
             case R.id.editPlatformFragment:
                 setModels(EditPlatformFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editPlatform();
-            case R.id.editSessionFragment:
-                setModels(EditSessionFragmentArgs.fromBundle(arguments).getTypeModel());
+            case R.id.editSessionFragment: {
+                TypeModel typeModel = EditSessionFragmentArgs.fromBundle(arguments).getTypeModel();
+
+                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel"))
+                    sessionType = "schedule";
+                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+                    sessionType = "session";
+
+                setModels(typeModel);
                 return editSession();
-            case R.id.editTreasuryFragment:
+            } case R.id.editTreasuryFragment:
                 setModels(EditTreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editTreasury();
             case R.id.editUserFragment:
