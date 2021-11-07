@@ -21,7 +21,6 @@ import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class RoomPlatformsFragment extends Fragment {
 
@@ -55,7 +54,6 @@ public class RoomPlatformsFragment extends Fragment {
         adapter = new RoomPlatformsAdapter(requireActivity());
 
         data = new HashMap<>();
-        data.put("page", 1);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -83,8 +81,7 @@ public class RoomPlatformsFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (Objects.equals(data.get("page"), 1))
-                            adapter.clearItems();
+                        adapter.clearItems();
 
                         if (!items.data().isEmpty()) {
                             adapter.setItems(items.data());
@@ -92,15 +89,15 @@ public class RoomPlatformsFragment extends Fragment {
 
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
+                            binding.indexSingleLayout.recyclerView.setAdapter(null);
+
                             binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.RoomPlatformsFragmentEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        hideShimmer();
                     });
                 }
             }
@@ -109,13 +106,17 @@ public class RoomPlatformsFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        hideShimmer();
                     });
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.indexShimmerLayout.getRoot().stopShimmer();
     }
 
     @Override

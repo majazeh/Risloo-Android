@@ -82,6 +82,7 @@ public class CenterTagsFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+                        adapter.clearItems();
 
                         if (!items.data().isEmpty()) {
                             adapter.setItems(items.data());

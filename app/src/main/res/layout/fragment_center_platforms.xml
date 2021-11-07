@@ -20,23 +20,33 @@
         <include
             android:id="@+id/header_includeLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_4sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_goneMarginEnd="@dimen/_12sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toStartOf="@id/add_imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/add_includeLayout"
-            layout="@layout/component_main_button_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/add_imageView"
+            layout="@layout/component_main_button_oval_mid"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
             android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="@id/header_includeLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
+            app:layout_constraintTop_toTopOf="@id/header_includeLayout" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/index_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="header_includeLayout, add_imageView" />
 
         <include
             android:id="@+id/index_shimmerLayout"
@@ -46,7 +56,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/index_barrier"
             tools:visibility="gone" />
 
         <include
@@ -57,7 +67,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/index_barrier"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

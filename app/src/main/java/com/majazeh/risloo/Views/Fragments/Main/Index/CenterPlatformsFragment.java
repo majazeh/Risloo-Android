@@ -25,7 +25,6 @@ import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class CenterPlatformsFragment extends Fragment {
 
@@ -61,14 +60,12 @@ public class CenterPlatformsFragment extends Fragment {
         adapter = new CenterPlatformsAdapter(requireActivity());
 
         data = new HashMap<>();
-        data.put("page", 1);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterPlatformsFragmentTitle));
 
-        InitManager.layoutTextColorResTintBackground(requireActivity(), binding.addIncludeLayout.getRoot(), binding.addIncludeLayout.selectTextView, binding.addIncludeLayout.selectImageView, getResources().getString(R.string.CenterPlatformsFragmentAdd), getResources().getColor(R.color.Emerald700), R.drawable.ic_plus_light, R.color.Emerald700, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_emerald200);
-
+        InitManager.imgResTintBackground(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
@@ -77,7 +74,7 @@ public class CenterPlatformsFragment extends Fragment {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCreatePlatformFragment(centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
-        }).widget(binding.addIncludeLayout.getRoot());
+        }).widget(binding.addImageView.getRoot());
     }
 
     private void setArgs() {
@@ -99,8 +96,7 @@ public class CenterPlatformsFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (Objects.equals(data.get("page"), 1))
-                            adapter.clearItems();
+                        adapter.clearItems();
 
                         if (!items.data().isEmpty()) {
                             adapter.setItems(items.data());
@@ -108,15 +104,15 @@ public class CenterPlatformsFragment extends Fragment {
 
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
+                            binding.indexSingleLayout.recyclerView.setAdapter(null);
+
                             binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.CenterPlatformsFragmentEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        hideShimmer();
                     });
                 }
             }
@@ -125,14 +121,17 @@ public class CenterPlatformsFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        hideShimmer();
                     });
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.indexShimmerLayout.getRoot().stopShimmer();
     }
 
     @Override
