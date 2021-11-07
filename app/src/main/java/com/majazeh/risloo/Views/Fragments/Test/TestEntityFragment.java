@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEntityBinding;
 import com.mre.ligheh.Model.TypeModel.EntityModel;
@@ -25,6 +26,8 @@ public class TestEntityFragment extends Fragment {
         binding = FragmentTestEntityBinding.inflate(inflater, viewGroup, false);
 
         setArgs();
+
+        setAnimation();
 
         return binding.getRoot();
     }
@@ -50,6 +53,11 @@ public class TestEntityFragment extends Fragment {
         } else {
             binding.descriptionTextView.getRoot().setVisibility(View.GONE);
         }
+    }
+
+    private void setAnimation() {
+        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.descriptionTextView.getRoot(), 500, 0f, 1f);
     }
 
     @Override

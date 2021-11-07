@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestPrerequisiteAdapter;
@@ -33,6 +34,8 @@ public class TestPrerequisiteFragment extends Fragment {
         initializer();
 
         setArgs();
+
+        setAnimation();
 
         return binding.getRoot();
     }
@@ -58,6 +61,12 @@ public class TestPrerequisiteFragment extends Fragment {
             adapter.setItems(items.data());
             binding.listRecyclerView.setAdapter(adapter);
         }
+    }
+
+    private void setAnimation() {
+        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.descriptionTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.listRecyclerView, 500, 0f, 1f);
     }
 
     @Override

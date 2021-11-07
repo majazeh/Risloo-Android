@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestOptionalAdapter;
@@ -37,6 +38,8 @@ public class TestOptionalFragment extends Fragment {
         initializer();
 
         setArgs();
+
+        setAnimation();
 
         return binding.getRoot();
     }
@@ -88,6 +91,13 @@ public class TestOptionalFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setAnimation() {
+        AnimateManager.animateViewAlpha(binding.entityTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.descriptionTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.listRecyclerView, 500, 0f, 1f);
     }
 
     @Override

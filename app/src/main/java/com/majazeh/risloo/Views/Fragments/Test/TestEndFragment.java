@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
@@ -34,6 +35,8 @@ public class TestEndFragment extends Fragment {
         listener();
 
         setArgs();
+
+        setAnimation();
 
         return binding.getRoot();
     }
@@ -72,6 +75,12 @@ public class TestEndFragment extends Fragment {
                 }
             }
         }
+    }
+
+    private void setAnimation() {
+        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.descriptionTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.endTextView, 500, 0f, 1f);
     }
 
     @Override

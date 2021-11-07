@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestDescriptionBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
@@ -27,6 +28,8 @@ public class TestDescriptionFragment extends Fragment {
 
         setArgs();
 
+        setAnimation();
+
         return binding.getRoot();
     }
 
@@ -39,6 +42,10 @@ public class TestDescriptionFragment extends Fragment {
         String description = model.getObject().toString();
 
         Markwon.create(requireActivity()).setMarkdown(binding.descriptionTextView,  description);
+    }
+
+    private void setAnimation() {
+        AnimateManager.animateViewAlpha(binding.descriptionTextView, 500, 0f, 1f);
     }
 
     @Override
