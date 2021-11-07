@@ -30,5 +30,13 @@
   {
     "fa_title": "لغو شده توسط مرکز مشاوره",
     "en_title": "canceled_by_center"
+  },
+  {
+    "fa_title": "نام نویسی",
+    "en_title": "registration"
+  },
+  {
+    "fa_title": "در انتظار",
+    "en_title": "awaiting"
   }
 ]

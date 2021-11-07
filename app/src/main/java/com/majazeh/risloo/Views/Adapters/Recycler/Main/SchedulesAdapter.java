@@ -201,6 +201,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
 
         switch (status) {
             case "registration_awaiting":
+            case "registration":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_amber600);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_amber50);

@@ -1675,7 +1675,12 @@ public class BreadCrumb {
     }
 
     private ArrayList<String> sample() {
-        ArrayList<String> list = reference();
+        ArrayList<String> list;
+
+        if (caseModel != null)
+            list = casse();
+        else
+            list = reference();
 
         if (sampleModel != null && sampleModel.getSampleTitle() != null && !sampleModel.getSampleTitle().equals(""))
             list.add(sampleModel.getSampleTitle());
@@ -1688,7 +1693,13 @@ public class BreadCrumb {
         return list;
     }
     private ArrayList<Integer> sampleIds() {
-        ArrayList<Integer> list = referenceIds();
+        ArrayList<Integer> list;
+
+        if (caseModel != null)
+            list = casseIds();
+        else
+            list = referenceIds();
+
         list.add(R.id.sampleFragment);
 
         return list;

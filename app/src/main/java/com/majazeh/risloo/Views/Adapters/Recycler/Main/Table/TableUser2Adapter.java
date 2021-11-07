@@ -217,10 +217,12 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         InitManager.input8sspSpinner(activity, holder.binding.platformSpinner, options);
 
         // Set Selected Platform
-        String platform = model.getSession_platform().getTitle();
-        for (int i=0; i<holder.binding.platformSpinner.getCount(); i++) {
-            if (holder.binding.platformSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(platform)) {
-                holder.binding.platformSpinner.setSelection(i);
+        if (model.getSession_platform() != null) {
+            String platform = model.getSession_platform().getTitle();
+            for (int i=0; i<holder.binding.platformSpinner.getCount(); i++) {
+                if (holder.binding.platformSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(platform)) {
+                    holder.binding.platformSpinner.setSelection(i);
+                }
             }
         }
 

@@ -434,6 +434,7 @@ public class SessionFragment extends Fragment {
 
         switch (status) {
             case "registration_awaiting":
+            case "registration":
                 binding.statusTextView.setTextColor(getResources().getColor(R.color.Amber500));
                 binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_amber600);
                 break;
