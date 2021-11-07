@@ -695,6 +695,13 @@
     <string name="CenterUsersFragmentEmpty">هنوز عضوی برای مرکز ثبت نشده است.</string>
 
 
+    ---------- // CenterTagsFragment
+
+    <string name="CenterTagsFragmentTitle">برچسب‌های مهم کلینیک شخصی</string>
+
+    <string name="CenterTagsFragmentEmpty">هنوز برچسبی برای کلینیک ثبت نشده است.</string>
+
+
     ---------- // ClientReportsFragment
 
     <string name="ClientReportsFragmentTitle">گزارشات</string>
@@ -732,6 +739,13 @@
     <string name="RoomUsersFragmentTitle">اعضاء اتاق درمان</string>
 
     <string name="RoomUsersFragmentEmpty">هنوز عضوی برای اتاق ثبت نشده است.</string>
+
+
+    ---------- // RoomTagsFragment
+
+    <string name="RoomTagsFragmentTitle">برچسب‌های مهم اتاق درمان</string>
+
+    <string name="RoomTagsFragmentEmpty">هنوز برچسبی برای اتاق ثبت نشده است.</string>
 
 
     ---------- // SamplesFragment
@@ -1740,14 +1754,6 @@
     <string name="CenterSchedulesFragmentFilters">فیلترها:</string>
 
     /*
-    ---------- CenterTags Fragment ----------
-    */
-
-    <string name="CenterTagsFragmentTitle">برچسب‌های مهم کلینیک</string>
-
-    <string name="CenterTagsFragmentEmpty">هنوز برچسبی برای کلینیک ثبت نشده است.</string>
-
-    /*
     ---------- RoomPlatforms Fragment ----------
     */
 
@@ -1766,14 +1772,6 @@
     <string name="RoomSchedulesFragmentTitle">برنامه‌های اتاق درمان</string>
 
     <string name="RoomSchedulesFragmentFilters">فیلترها:</string>
-
-    /*
-    ---------- RoomTags Fragment ----------
-    */
-
-    <string name="RoomTagsFragmentTitle">برچسب‌های مهم اتاق</string>
-
-    <string name="RoomTagsFragmentEmpty">هنوز برچسبی برای اتاق ثبت نشده است.</string>
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////

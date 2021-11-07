@@ -408,7 +408,7 @@ public class TestActivity extends AppCompatActivity {
         handler.postDelayed(() -> {
             formModel = sampleModel.getSampleForm().next();
             navigate();
-        }, 1000);
+        }, 500);
     }
 
     public void closeSample() {

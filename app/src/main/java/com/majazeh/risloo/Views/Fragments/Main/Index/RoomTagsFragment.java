@@ -22,7 +22,6 @@ import com.mre.ligheh.Model.TypeModel.RoomModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class RoomTagsFragment extends Fragment {
 
@@ -56,7 +55,6 @@ public class RoomTagsFragment extends Fragment {
         adapter = new TagsAdapter(requireActivity());
 
         data = new HashMap<>();
-        data.put("page", 1);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -84,20 +82,18 @@ public class RoomTagsFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (Objects.equals(data.get("page"), 1))
-                            adapter.clearItems();
 
-                        if (!items.data().isEmpty())
+                        if (!items.data().isEmpty()) {
                             adapter.setItems(items.data());
-                        else
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                        } else {
                             adapter.setItems(new ArrayList<>());
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                        }
 
-                        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        hideShimmer();
                     });
                 }
             }
@@ -106,13 +102,17 @@ public class RoomTagsFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        hideShimmer();
                     });
                 }
             }
         });
+    }
+
+    private void hideShimmer() {
+        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.indexShimmerLayout.getRoot().stopShimmer();
     }
 
     @Override
