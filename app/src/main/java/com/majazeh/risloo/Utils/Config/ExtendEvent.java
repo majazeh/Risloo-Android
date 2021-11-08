@@ -23,7 +23,7 @@ public class ExtendEvent extends APIEvents {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void onResponsed(Response callback, Object response, Class classs) {
+    public void onOK(Response callback, Object response, Class classs) {
         try {
             if (response.getClass().getName().equals("okhttp3.Response")) {
                 int code = ((okhttp3.Response) response).code();

@@ -25,7 +25,7 @@ public abstract class APIEvents {
             public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) {
 
                 if (response.isSuccessful()) {
-                    onResponsed(callback, response, aClass);
+                    onOK(callback, response, aClass);
                 } else {
                     Exceptioner.make(callback,response);
                     Model.request = false;
@@ -41,5 +41,5 @@ public abstract class APIEvents {
         });
     }
 
-    public abstract void onResponsed(Response callback, Object response, Class aClass);
+    public abstract void onOK(Response callback, Object response, Class aClass);
 }

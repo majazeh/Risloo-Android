@@ -80,7 +80,7 @@ public class APIRequest extends APIEvents {
     }
 
     @Override
-    public void onResponsed(Response callback, Object response, Class aClass) {
+    public void onOK(Response callback, Object response, Class aClass) {
         if (response.getClass().getName().equals("okhttp3.Response")) {
             try {
                 int code = ((okhttp3.Response)response).code();
