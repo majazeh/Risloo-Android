@@ -160,12 +160,7 @@ public class EditSessionFragment extends Fragment {
 
         // Platform Data
         if (platform instanceof EditSessionTabPlatformFragment) {
-            if (((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView);
-            if (((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView);
-            if (((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView);
+            ((EditSessionTabPlatformFragment) platform).hideValid();
         }
 
         // Payment Data
@@ -244,9 +239,7 @@ public class EditSessionFragment extends Fragment {
 
         // Platform Data
         if (platform instanceof EditSessionTabPlatformFragment) {
-            data.put("platforms", ((EditSessionTabPlatformFragment) platform).adapter.platforms);
-            data.put("pin_platform", ((EditSessionTabPlatformFragment) platform).adapter.pinPlatform);
-            data.put("identifier_platform", ((EditSessionTabPlatformFragment) platform).adapter.identifierPlatform);
+            ((EditSessionTabPlatformFragment) platform).setHashmap(data);
         }
 
         // Payment Data
@@ -363,16 +356,10 @@ public class EditSessionFragment extends Fragment {
 
                                             // Platform Data
                                             case "platforms":
-                                                if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
-                                                break;
                                             case "pin_platform":
-                                                if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
-                                                break;
                                             case "identifier_platform":
                                                 if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
+                                                    ((EditSessionTabPlatformFragment) platform).showValid(key, validation);
                                                 break;
 
                                             // Payment Data

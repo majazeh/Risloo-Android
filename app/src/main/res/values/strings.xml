@@ -977,6 +977,16 @@
     ***/
 
 
+    ---------- // CreateScheduleTabPlatform
+
+    <string name="CreateScheduleTabPlatformButton">ساخت</string>
+
+
+    ---------- // CreateSessionTabPlatform
+
+    <string name="CreateSessionTabPlatformButton">ساخت</string>
+
+
     ---------- // EditCenterTabAvatar
 
     <string name="EditCenterTabAvatarAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
@@ -993,6 +1003,11 @@
     <string name="EditCenterTabDetailDescriptionHeader">توضیحات</string>
 
     <string name="EditCenterTabDetailButton">ویرایش</string>
+
+
+    ---------- // EditSessionTabPlatform
+
+    <string name="EditSessionTabPlatformButton">ویرایش</string>
 
 
     ---------- // EditUserTabAvatar
@@ -1652,10 +1667,6 @@
 
     <string name="CreateScheduleTabSessionButton">ساخت</string>
 
-    ---------- // CreateScheduleTabPlatform
-
-    <string name="CreateScheduleTabPlatformButton">ساخت</string>
-
     ---------- // CreateScheduleTabPayment
 
     <string name="CreateScheduleTabPaymentPaymentHeader">نوع دریافت</string>
@@ -1695,10 +1706,6 @@
     <string name="CreateSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
 
     <string name="CreateSessionTabSessionButton">ساخت</string>
-
-    ---------- // CreateSessionTabPlatform
-
-    <string name="CreateSessionTabPlatformButton">ساخت</string>
 
     ---------- // CreateSessionTabPayment
 
@@ -1747,10 +1754,6 @@
     <string name="EditSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
 
     <string name="EditSessionTabSessionButton">ویرایش</string>
-
-    ---------- // EditSessionTabPlatform
-
-    <string name="EditSessionTabPlatformButton">ویرایش</string>
 
     ---------- // EditSessionTabPayment
 

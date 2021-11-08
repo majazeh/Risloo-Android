@@ -172,12 +172,7 @@ public class CreateScheduleFragment extends Fragment {
 
         // Platform Data
         if (platform instanceof CreateScheduleTabPlatformFragment) {
-            if (((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView);
-            if (((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView);
-            if (((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView);
+            ((CreateScheduleTabPlatformFragment) platform).hideValid();
         }
 
         // Payment Data
@@ -265,9 +260,7 @@ public class CreateScheduleFragment extends Fragment {
 
         // Platform Data
         if (platform instanceof CreateScheduleTabPlatformFragment) {
-            data.put("platforms", ((CreateScheduleTabPlatformFragment) platform).adapter.platforms);
-            data.put("pin_platform", ((CreateScheduleTabPlatformFragment) platform).adapter.pinPlatform);
-            data.put("identifier_platform", ((CreateScheduleTabPlatformFragment) platform).adapter.identifierPlatform);
+            ((CreateScheduleTabPlatformFragment) platform).setHashmap(data);
         }
 
         // Payment Data
@@ -411,16 +404,10 @@ public class CreateScheduleFragment extends Fragment {
 
                                             // Platform Data
                                             case "platforms":
-                                                if (platform instanceof CreateScheduleTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
-                                                break;
                                             case "pin_platform":
-                                                if (platform instanceof CreateScheduleTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
-                                                break;
                                             case "identifier_platform":
                                                 if (platform instanceof CreateScheduleTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
+                                                    ((CreateScheduleTabPlatformFragment) platform).showValid(key, validation);
                                                 break;
 
                                             // Payment Data

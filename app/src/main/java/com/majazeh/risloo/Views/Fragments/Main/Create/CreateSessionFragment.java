@@ -161,12 +161,7 @@ public class CreateSessionFragment extends Fragment {
 
         // Platform Data
         if (platform instanceof CreateSessionTabPlatformFragment) {
-            if (((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView);
-            if (((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView);
-            if (((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView);
+            ((CreateSessionTabPlatformFragment) platform).hideValid();
         }
 
         // Payment Data
@@ -231,9 +226,7 @@ public class CreateSessionFragment extends Fragment {
 
         // Platform Data
         if (platform instanceof CreateSessionTabPlatformFragment) {
-            data.put("platforms", ((CreateSessionTabPlatformFragment) platform).adapter.platforms);
-            data.put("pin_platform", ((CreateSessionTabPlatformFragment) platform).adapter.pinPlatform);
-            data.put("identifier_platform", ((CreateSessionTabPlatformFragment) platform).adapter.identifierPlatform);
+            ((CreateSessionTabPlatformFragment) platform).setHashmap(data);
         }
 
         // Payment Data
@@ -355,16 +348,10 @@ public class CreateSessionFragment extends Fragment {
 
                                             // Platform Data
                                             case "platforms":
-                                                if (platform instanceof CreateSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
-                                                break;
                                             case "pin_platform":
-                                                if (platform instanceof CreateSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
-                                                break;
                                             case "identifier_platform":
                                                 if (platform instanceof CreateSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
+                                                    ((CreateSessionTabPlatformFragment) platform).showValid(key, validation);
                                                 break;
 
                                             // Payment Data
