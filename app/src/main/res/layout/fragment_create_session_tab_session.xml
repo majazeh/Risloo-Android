@@ -13,7 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_12sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -206,10 +206,10 @@
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/axis_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/axis_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/axis_errorLayout"
-                app:layout_goneMarginTop="@dimen/_6sdp" />
+                app:layout_constraintTop_toBottomOf="@id/axis_errorLayout" />
 
             <include
                 android:id="@+id/description_includeLayout"
@@ -258,10 +258,10 @@
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/coordination_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/coordination_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/coordination_errorLayout"
-                app:layout_goneMarginTop="@dimen/_6sdp" />
+                app:layout_constraintTop_toBottomOf="@id/coordination_errorLayout" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/scheduled_group"
@@ -278,7 +278,9 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintRight_toRightOf="@id/container_constraintLayout"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/container_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/container_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/container_constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

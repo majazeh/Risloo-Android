@@ -13,7 +13,6 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -134,40 +133,16 @@ public class CreateSessionFragment extends Fragment {
         }
 
         // Session Data
-        if (session instanceof CreateSessionTabSessionFragment) {
-            if (((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView);
-
-            if (((CreateSessionTabSessionFragment) session).binding.startTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.startTypeErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.startTypeErrorLayout.errorTextView);
-            if (((CreateSessionTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.startRelativeErrorLayout.errorTextView);
-            if (((CreateSessionTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.startAccurateErrorLayout.errorTextView);
-            if (((CreateSessionTabSessionFragment) session).binding.endTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.endTypeErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.endTypeErrorLayout.errorTextView);
-            if (((CreateSessionTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.endRelativeErrorLayout.errorTextView);
-            if (((CreateSessionTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.endAccurateErrorLayout.errorTextView);
-
-            if (((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView);
-            if (((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView);
-            if (((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView);
-        }
+        if (session instanceof CreateSessionTabSessionFragment)
+            ((CreateSessionTabSessionFragment) session).hideValid();
 
         // Platform Data
-        if (platform instanceof CreateSessionTabPlatformFragment) {
+        if (platform instanceof CreateSessionTabPlatformFragment)
             ((CreateSessionTabPlatformFragment) platform).hideValid();
-        }
 
         // Payment Data
-        if (payment instanceof CreateSessionTabPaymentFragment) {
+        if (payment instanceof CreateSessionTabPaymentFragment)
             ((CreateSessionTabPaymentFragment) payment).hideValid();
-        }
 
         doWork();
     }
@@ -197,41 +172,16 @@ public class CreateSessionFragment extends Fragment {
         }
 
         // Session Data
-        if (session instanceof CreateSessionTabSessionFragment) {
-            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((CreateSessionTabSessionFragment) session).status));
-
-            if (data.get("status").equals("registration_awaiting")) {
-                data.put("opens_at_type", ((CreateSessionTabSessionFragment) session).startType);
-
-                if (data.get("opens_at_type").equals("relative"))
-                    data.put("opens_at", DateManager.relativeTimestamp(((CreateSessionTabSessionFragment) session).startRelativeDay, ((CreateSessionTabSessionFragment) session).startRelativeHour, ((CreateSessionTabSessionFragment) session).startRelativeMinute));
-                else
-                    data.put("opens_at", DateManager.accurateTimestamp(((CreateSessionTabSessionFragment) session).startAccurateTime, ((CreateSessionTabSessionFragment) session).startAccurateDate));
-
-                if (((CreateSessionTabSessionFragment) session).endAvailable) {
-                    data.put("closed_at_type", ((CreateSessionTabSessionFragment) session).endType);
-
-                    if (data.get("closed_at_type").equals("relative"))
-                        data.put("closed_at", DateManager.relativeTimestamp(((CreateSessionTabSessionFragment) session).endRelativeDay, ((CreateSessionTabSessionFragment) session).endRelativeHour, ((CreateSessionTabSessionFragment) session).endRelativeMinute));
-                    else
-                        data.put("closed_at", DateManager.accurateTimestamp(((CreateSessionTabSessionFragment) session).endAccurateTime, ((CreateSessionTabSessionFragment) session).endAccurateDate));
-                }
-            }
-
-            data.put("fields", ((CreateSessionTabSessionFragment) session).axisesAdapter.getIds());
-            data.put("description", ((CreateSessionTabSessionFragment) session).description);
-            data.put("client_reminder", ((CreateSessionTabSessionFragment) session).coordination);
-        }
+        if (session instanceof CreateSessionTabSessionFragment)
+            ((CreateSessionTabSessionFragment) session).setHashmap(data);
 
         // Platform Data
-        if (platform instanceof CreateSessionTabPlatformFragment) {
+        if (platform instanceof CreateSessionTabPlatformFragment)
             ((CreateSessionTabPlatformFragment) platform).setHashmap(data);
-        }
 
         // Payment Data
-        if (payment instanceof CreateSessionTabPaymentFragment) {
+        if (payment instanceof CreateSessionTabPaymentFragment)
             ((CreateSessionTabPaymentFragment) payment).setHashmap(data);
-        }
 
         Session.create(data, header, new Response() {
             @Override
@@ -305,43 +255,16 @@ public class CreateSessionFragment extends Fragment {
 
                                             // Session Data
                                             case "status":
-                                                if (session instanceof CreateSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
-                                                break;
-
                                             case "opens_at_type":
-                                                if (session instanceof CreateSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.startTypeErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.startTypeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "opens_at":
-                                                if (session instanceof CreateSessionTabSessionFragment && data.get("opens_at_type").equals("relative"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.startRelativeErrorLayout.errorTextView, validation);
-                                                else if (session instanceof CreateSessionTabSessionFragment && data.get("opens_at_type").equals("absolute"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.startAccurateErrorLayout.errorTextView, validation);
-                                                break;
-
                                             case "closed_at_type":
-                                                if (session instanceof CreateSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.endTypeErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.endTypeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "closed_at":
-                                                if (session instanceof CreateSessionTabSessionFragment && data.get("closed_at_type").equals("relative"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.endRelativeErrorLayout.errorTextView, validation);
-                                                else if (session instanceof CreateSessionTabSessionFragment && data.get("closed_at_type").equals("absolute"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.endAccurateErrorLayout.errorTextView, validation);
-                                                    break;
-
                                             case "fields":
-                                                if (session instanceof CreateSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView, validation);
-                                                break;
                                             case "description":
-                                                if (session instanceof CreateSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, validation);
-                                                break;
                                             case "client_reminder":
                                                 if (session instanceof CreateSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, validation);
+                                                    ((CreateSessionTabSessionFragment) session).showValid(key, validation);
+
                                                 break;
 
                                             // Platform Data
@@ -350,12 +273,14 @@ public class CreateSessionFragment extends Fragment {
                                             case "identifier_platform":
                                                 if (platform instanceof CreateSessionTabPlatformFragment)
                                                     ((CreateSessionTabPlatformFragment) platform).showValid(key, validation);
+
                                                 break;
 
                                             // Payment Data
                                             case "payment_status":
                                                 if (payment instanceof CreateSessionTabPaymentFragment)
                                                     ((CreateSessionTabPaymentFragment) payment).showValid(key, validation);
+
                                                 break;
                                         }
 

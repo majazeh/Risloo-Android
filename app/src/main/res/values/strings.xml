@@ -977,11 +977,6 @@
     ***/
 
 
-    ---------- // CreateScheduleTabPlatform
-
-    <string name="CreateScheduleTabPlatformButton">ساخت</string>
-
-
     ---------- // CreateScheduleTabPayment
 
     <string name="CreateScheduleTabPaymentPaymentHeader">نوع دریافت</string>
@@ -989,9 +984,22 @@
     <string name="CreateScheduleTabPaymentButton">ساخت</string>
 
 
-    ---------- // CreateSessionTabPlatform
+    ---------- // CreateScheduleTabPlatform
 
-    <string name="CreateSessionTabPlatformButton">ساخت</string>
+    <string name="CreateScheduleTabPlatformButton">ساخت</string>
+
+
+    ---------- // CreateScheduleTabSession
+
+    <string name="CreateScheduleTabSessionStatusHeader">وضعیت جلسه</string>
+    <string name="CreateScheduleTabSessionAxisHeader">محور جلسه</string>
+    <string name="CreateScheduleTabSessionDescriptionHeader">توضیحات</string>
+    <string name="CreateScheduleTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+
+    <string name="CreateScheduleTabSessionAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
+    <string name="CreateScheduleTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+
+    <string name="CreateScheduleTabSessionButton">ساخت</string>
 
 
     ---------- // CreateSessionTabPayment
@@ -999,6 +1007,24 @@
     <string name="CreateSessionTabPaymentPaymentHeader">نوع دریافت</string>
 
     <string name="CreateSessionTabPaymentButton">ساخت</string>
+
+
+    ---------- // CreateSessionTabPlatform
+
+    <string name="CreateSessionTabPlatformButton">ساخت</string>
+
+
+    ---------- // CreateSessionTabSession
+
+    <string name="CreateSessionTabSessionStatusHeader">وضعیت جلسه</string>
+    <string name="CreateSessionTabSessionAxisHeader">محور جلسه</string>
+    <string name="CreateSessionTabSessionDescriptionHeader">توضیحات</string>
+    <string name="CreateSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+
+    <string name="CreateSessionTabSessionAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
+    <string name="CreateSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+
+    <string name="CreateSessionTabSessionButton">ساخت</string>
 
 
     ---------- // EditCenterTabAvatar
@@ -1019,16 +1045,27 @@
     <string name="EditCenterTabDetailButton">ویرایش</string>
 
 
-    ---------- // EditSessionTabPlatform
-
-    <string name="EditSessionTabPlatformButton">ویرایش</string>
-
-
     ---------- // EditSessionTabPayment
 
     <string name="EditSessionTabPaymentPaymentHeader">نوع دریافت</string>
 
     <string name="EditSessionTabPaymentButton">ویرایش</string>
+
+
+    ---------- // EditSessionTabPlatform
+
+    <string name="EditSessionTabPlatformButton">ویرایش</string>
+
+
+    ---------- // EditSessionTabSession
+
+    <string name="EditSessionTabSessionStatusHeader">وضعیت جلسه</string>
+    <string name="EditSessionTabSessionDescriptionHeader">توضیحات</string>
+    <string name="EditSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+
+    <string name="EditSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+
+    <string name="EditSessionTabSessionButton">ویرایش</string>
 
 
     ---------- // EditUserTabAvatar
@@ -1631,6 +1668,8 @@
 
 
 
+
+
     // Create Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1671,18 +1710,6 @@
 
     <string name="CreateScheduleTabReferenceButton">ساخت</string>
 
-    ---------- // CreateScheduleTabSession
-
-    <string name="CreateScheduleTabSessionStatusHeader">وضعیت جلسه</string>
-    <string name="CreateScheduleTabSessionAxisHeader">محور جلسه</string>
-    <string name="CreateScheduleTabSessionDescriptionHeader">توضیحات</string>
-    <string name="CreateScheduleTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
-
-    <string name="CreateScheduleTabSessionAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
-    <string name="CreateScheduleTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
-
-    <string name="CreateScheduleTabSessionButton">ساخت</string>
-
     ---------- // CreateSessionTabTime
 
     <string name="CreateSessionTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
@@ -1702,18 +1729,6 @@
     <string name="CreateSessionTabTimePatternTypePeriod">بازه زمانی</string>
 
     <string name="CreateSessionTabTimeButton">ساخت</string>
-
-    ---------- // CreateSessionTabSession
-
-    <string name="CreateSessionTabSessionStatusHeader">وضعیت جلسه</string>
-    <string name="CreateSessionTabSessionAxisHeader">محور جلسه</string>
-    <string name="CreateSessionTabSessionDescriptionHeader">توضیحات</string>
-    <string name="CreateSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
-
-    <string name="CreateSessionTabSessionAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
-    <string name="CreateSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
-
-    <string name="CreateSessionTabSessionButton">ساخت</string>
 
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
@@ -1744,16 +1759,6 @@
     <string name="EditSessionTabReferenceRoom">اتاق درمان</string>
 
     <string name="EditSessionTabReferenceButton">ساخت</string>
-
-    ---------- // EditSessionTabSession
-
-    <string name="EditSessionTabSessionStatusHeader">وضعیت جلسه</string>
-    <string name="EditSessionTabSessionDescriptionHeader">توضیحات</string>
-    <string name="EditSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
-
-    <string name="EditSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
-
-    <string name="EditSessionTabSessionButton">ویرایش</string>
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
