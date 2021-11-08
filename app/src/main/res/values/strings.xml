@@ -26,6 +26,7 @@
 
     <string name="AppEdit">ویرایش</string>
     <string name="AppReserve">رزرو</string>
+    <string name="AppFilters">فیلترها:</string>
 
     <string name="AppPlatforms">محل‌های برگزاری جلسات</string>
     <string name="AppSchedules">برنامه‌های درمانی</string>
@@ -695,6 +696,12 @@
     <string name="CenterPlatformsFragmentEmpty">هنوز محل برگزاری برای مرکز ثبت نشده است.</string>
 
 
+    ---------- // CenterSchedulesFragment
+
+    <string name="CenterSchedulesFragmentTitle">برنامه‌های مرکز درمانی</string>
+
+    <string name="CenterSchedulesFragmentEmpty">هنوز برنامه‌‌ی برای مرکز ثبت نشده است.</string>
+
     ---------- // CenterUsersFragment
 
     <string name="CenterUsersFragmentTitle">اعضاء مرکز درمانی</string>
@@ -746,6 +753,13 @@
     <string name="RoomPlatformsFragmentTitle">محل برگزاری جلسات اتاق درمان</string>
 
     <string name="RoomPlatformsFragmentEmpty">هنوز محل برگزاری برای اتاق ثبت نشده است.</string>
+
+
+    ---------- // RoomSchedulesFragment
+
+    <string name="RoomSchedulesFragmentTitle">برنامه‌های اتاق درمان</string>
+
+    <string name="RoomSchedulesFragmentEmpty">هنوز برنامه‌‌ی برای اتاق ثبت نشده است.</string>
 
 
     ---------- // RoomUsersFragment
@@ -1743,25 +1757,6 @@
     <string name="EditSessionTabPaymentPaymentHeader">نوع دریافت</string>
 
     <string name="EditSessionTabPaymentButton">ویرایش</string>
-
-    // Index Fragments
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- CenterSchedules Fragment ----------
-    */
-
-    <string name="CenterSchedulesFragmentTitle">برنامه‌های مرکز درمانی</string>
-
-    <string name="CenterSchedulesFragmentFilters">فیلترها:</string>
-
-    /*
-    ---------- RoomSchedules Fragment ----------
-    */
-
-    <string name="RoomSchedulesFragmentTitle">برنامه‌های اتاق درمان</string>
-
-    <string name="RoomSchedulesFragmentFilters">فیلترها:</string>
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////

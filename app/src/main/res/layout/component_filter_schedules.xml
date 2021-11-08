@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="never"
+    android:layoutDirection="rtl">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl">
+
+        <TextView
+            android:id="@+id/filter_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:gravity="center"
+            android:text="@string/AppFilters"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/CoolGray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular" />
+
+        <include
+            android:id="@+id/room_filterLayout"
+            layout="@layout/component_main_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/status_filterLayout"
+            layout="@layout/component_main_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</HorizontalScrollView>
