@@ -177,8 +177,7 @@ public class CreateScheduleFragment extends Fragment {
 
         // Payment Data
         if (payment instanceof CreateScheduleTabPaymentFragment) {
-            if (((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView);
+            ((CreateScheduleTabPaymentFragment) payment).hideValid();
         }
 
         doWork();
@@ -265,8 +264,7 @@ public class CreateScheduleFragment extends Fragment {
 
         // Payment Data
         if (payment instanceof CreateScheduleTabPaymentFragment) {
-            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((CreateScheduleTabPaymentFragment) payment).payment));
-            data.put("amounts", ((CreateScheduleTabPaymentFragment) payment).createAxisAdapter.getAmounts());
+            ((CreateScheduleTabPaymentFragment) payment).setHashmap(data);
         }
 
         Room.createSchedule(data, header, new Response() {
@@ -413,7 +411,7 @@ public class CreateScheduleFragment extends Fragment {
                                             // Payment Data
                                             case "payment_status":
                                                 if (payment instanceof CreateScheduleTabPaymentFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
+                                                    ((CreateScheduleTabPaymentFragment) payment).showValid(key, validation);
                                                 break;
                                         }
 

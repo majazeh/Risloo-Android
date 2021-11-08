@@ -166,8 +166,7 @@ public class CreateSessionFragment extends Fragment {
 
         // Payment Data
         if (payment instanceof CreateSessionTabPaymentFragment) {
-            if (((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView);
+            ((CreateSessionTabPaymentFragment) payment).hideValid();
         }
 
         doWork();
@@ -231,8 +230,7 @@ public class CreateSessionFragment extends Fragment {
 
         // Payment Data
         if (payment instanceof CreateSessionTabPaymentFragment) {
-            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((CreateSessionTabPaymentFragment) payment).payment));
-            data.put("amounts", ((CreateSessionTabPaymentFragment) payment).createAxisAdapter.getAmounts());
+            ((CreateSessionTabPaymentFragment) payment).setHashmap(data);
         }
 
         Session.create(data, header, new Response() {
@@ -357,7 +355,7 @@ public class CreateSessionFragment extends Fragment {
                                             // Payment Data
                                             case "payment_status":
                                                 if (payment instanceof CreateSessionTabPaymentFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
+                                                    ((CreateSessionTabPaymentFragment) payment).showValid(key, validation);
                                                 break;
                                         }
 

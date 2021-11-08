@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -21,20 +22,21 @@ import com.majazeh.risloo.databinding.FragmentCreateSessionTabPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CreateSessionTabPaymentFragment extends Fragment {
 
     // Binding
-    public FragmentCreateSessionTabPaymentBinding binding;
+    private FragmentCreateSessionTabPaymentBinding binding;
 
     // Adapters
-    public CreateAxisAdapter createAxisAdapter;
+    public CreateAxisAdapter axisAdapter;
 
     // Fragments
     private Fragment current;
 
     // Vars
-    public String payment = "";
+    private String payment = "";
     private boolean userSelect = false;
 
     @Nullable
@@ -52,7 +54,7 @@ public class CreateSessionTabPaymentFragment extends Fragment {
     }
 
     private void initializer() {
-        createAxisAdapter = new CreateAxisAdapter(requireActivity());
+        axisAdapter = new CreateAxisAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
@@ -60,9 +62,9 @@ public class CreateSessionTabPaymentFragment extends Fragment {
 
         InitManager.input12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentStatus);
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), 0);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTabPaymentButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTabPaymentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -71,6 +73,8 @@ public class CreateSessionTabPaymentFragment extends Fragment {
             userSelect = true;
             return false;
         });
+
+        binding.paymentIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.paymentIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -99,14 +103,40 @@ public class CreateSessionTabPaymentFragment extends Fragment {
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> amounts) {
-        createAxisAdapter.setItems(items, ids, amounts);
-        binding.axisRecyclerView.setAdapter(createAxisAdapter);
+        axisAdapter.setItems(items, ids, amounts);
+        binding.axisRecyclerView.setAdapter(axisAdapter);
+    }
+
+    public void setHashmap(HashMap data) {
+        if (!payment.equals(""))
+            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", payment));
+        else
+            data.remove("payment_status");
+
+        if (!axisAdapter.getAmounts().isEmpty())
+            data.put("amounts", axisAdapter.getAmounts());
+        else
+            data.remove("amounts");
+    }
+
+    public void hideValid() {
+        if (binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView);
+    }
+
+    public void showValid(String key, String validation) {
+        switch (key) {
+            case "payment_status":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView, validation);
+                break;
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }

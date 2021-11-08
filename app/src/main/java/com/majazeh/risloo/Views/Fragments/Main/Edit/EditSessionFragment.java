@@ -165,8 +165,7 @@ public class EditSessionFragment extends Fragment {
 
         // Payment Data
         if (payment instanceof EditSessionTabPaymentFragment) {
-            if (((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView);
+            ((EditSessionTabPaymentFragment) payment).hideValid();
         }
 
         doWork();
@@ -244,7 +243,7 @@ public class EditSessionFragment extends Fragment {
 
         // Payment Data
         if (payment instanceof EditSessionTabPaymentFragment) {
-            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((EditSessionTabPaymentFragment) payment).payment));
+            ((EditSessionTabPaymentFragment) payment).setHashmap(data);
         }
 
         Session.edit(data, header, new Response() {
@@ -365,7 +364,7 @@ public class EditSessionFragment extends Fragment {
                                             // Payment Data
                                             case "payment_status":
                                                 if (payment instanceof EditSessionTabPaymentFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
+                                                    ((EditSessionTabPaymentFragment) payment).showValid(key, validation);
                                                 break;
                                         }
 

@@ -217,10 +217,10 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
     private void addPayment(TypeModel item) {
         if (payment instanceof CreateScheduleTabPaymentFragment)
-            ((CreateScheduleTabPaymentFragment) payment).createAxisAdapter.addItem(item);
+            ((CreateScheduleTabPaymentFragment) payment).axisAdapter.addItem(item);
 
         if (payment instanceof CreateSessionTabPaymentFragment)
-            ((CreateSessionTabPaymentFragment) payment).createAxisAdapter.addItem(item);
+            ((CreateSessionTabPaymentFragment) payment).axisAdapter.addItem(item);
     }
 
     public void calculateCount() {

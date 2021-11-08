@@ -187,10 +187,10 @@ public class DialogSelectedAdapter extends RecyclerView.Adapter<DialogSelectedHo
 
     private void removePayment(int position) {
         if (payment instanceof CreateScheduleTabPaymentFragment)
-            ((CreateScheduleTabPaymentFragment) payment).createAxisAdapter.removeItem(position);
+            ((CreateScheduleTabPaymentFragment) payment).axisAdapter.removeItem(position);
 
         if (payment instanceof CreateSessionTabPaymentFragment)
-            ((CreateSessionTabPaymentFragment) payment).createAxisAdapter.removeItem(position);
+            ((CreateSessionTabPaymentFragment) payment).axisAdapter.removeItem(position);
     }
 
     private void refreshCount() {

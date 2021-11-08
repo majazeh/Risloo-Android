@@ -982,9 +982,23 @@
     <string name="CreateScheduleTabPlatformButton">ساخت</string>
 
 
+    ---------- // CreateScheduleTabPayment
+
+    <string name="CreateScheduleTabPaymentPaymentHeader">نوع دریافت</string>
+
+    <string name="CreateScheduleTabPaymentButton">ساخت</string>
+
+
     ---------- // CreateSessionTabPlatform
 
     <string name="CreateSessionTabPlatformButton">ساخت</string>
+
+
+    ---------- // CreateSessionTabPayment
+
+    <string name="CreateSessionTabPaymentPaymentHeader">نوع دریافت</string>
+
+    <string name="CreateSessionTabPaymentButton">ساخت</string>
 
 
     ---------- // EditCenterTabAvatar
@@ -1008,6 +1022,13 @@
     ---------- // EditSessionTabPlatform
 
     <string name="EditSessionTabPlatformButton">ویرایش</string>
+
+
+    ---------- // EditSessionTabPayment
+
+    <string name="EditSessionTabPaymentPaymentHeader">نوع دریافت</string>
+
+    <string name="EditSessionTabPaymentButton">ویرایش</string>
 
 
     ---------- // EditUserTabAvatar
@@ -1610,11 +1631,6 @@
 
 
 
-
-
-
-
-
     // Create Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1667,14 +1683,6 @@
 
     <string name="CreateScheduleTabSessionButton">ساخت</string>
 
-    ---------- // CreateScheduleTabPayment
-
-    <string name="CreateScheduleTabPaymentPaymentHeader">نوع دریافت</string>
-
-    <string name="CreateScheduleTabPaymentAxisTotal">مبلغ جلسه</string>
-
-    <string name="CreateScheduleTabPaymentButton">ساخت</string>
-
     ---------- // CreateSessionTabTime
 
     <string name="CreateSessionTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
@@ -1706,14 +1714,6 @@
     <string name="CreateSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
 
     <string name="CreateSessionTabSessionButton">ساخت</string>
-
-    ---------- // CreateSessionTabPayment
-
-    <string name="CreateSessionTabPaymentPaymentHeader">نوع دریافت</string>
-
-    <string name="CreateSessionTabPaymentAxisTotal">مبلغ جلسه</string>
-
-    <string name="CreateSessionTabPaymentButton">ساخت</string>
 
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
@@ -1755,14 +1755,10 @@
 
     <string name="EditSessionTabSessionButton">ویرایش</string>
 
-    ---------- // EditSessionTabPayment
-
-    <string name="EditSessionTabPaymentPaymentHeader">نوع دریافت</string>
-
-    <string name="EditSessionTabPaymentButton">ویرایش</string>
-
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="CreateScheduleTabPaymentAxisTotal">مبلغ جلسه</string>
 
     /*
     ---------- Cases2 Adapter ----------
