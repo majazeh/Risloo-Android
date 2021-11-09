@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabReferenceBinding;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -29,6 +30,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EditSessionTabReferenceFragment extends Fragment {
 
@@ -69,7 +71,7 @@ public class EditSessionTabReferenceFragment extends Fragment {
 
         InitManager.input12sspSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes);
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabReferenceButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabReferenceButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -78,6 +80,15 @@ public class EditSessionTabReferenceFragment extends Fragment {
             userSelect = true;
             return false;
         });
+
+        binding.selectionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        binding.typeIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        binding.selectionIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.typeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -106,47 +117,6 @@ public class EditSessionTabReferenceFragment extends Fragment {
             }
         });
 
-        CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "cases");
-        }).widget(binding.caseIncludeLayout.selectContainer);
-
-        binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
-        binding.bulkSessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                groupSession = "on";
-
-                binding.countIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-            } else {
-                groupSession = "";
-
-                binding.countIncludeLayout.getRoot().setVisibility(View.GONE);
-            }
-        });
-
-        binding.countIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.countIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.countIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.countIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
-        binding.selectionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
-        });
-
         binding.selectionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -162,6 +132,42 @@ public class EditSessionTabReferenceFragment extends Fragment {
 
             }
         });
+
+        binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.countIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.countIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.countIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.countIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.bulkSessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                groupSession = "on";
+
+                binding.countIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                groupSession = "";
+
+                binding.countIncludeLayout.getRoot().setVisibility(View.GONE);
+            }
+        });
+
+        CustomClickView.onDelayedListener(() -> {
+            DialogManager.showSearchableDialog(requireActivity(), "cases");
+        }).widget(binding.caseIncludeLayout.selectContainer);
 
         CustomClickView.onDelayedListener(() -> {
             if (current instanceof EditSessionFragment)
@@ -279,22 +285,24 @@ public class EditSessionTabReferenceFragment extends Fragment {
         InitManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, options);
     }
 
-    private void setClients(com.mre.ligheh.Model.Madule.List clients) {
+    private void setClients(List clients) {
         if (clients != null && clients.data().size() != 0) {
             binding.caseIncludeLayout.secondaryTextView.setVisibility(View.VISIBLE);
-
             binding.caseIncludeLayout.secondaryTextView.setText("");
+
             for (int i = 0; i < clients.data().size(); i++) {
                 UserModel user = (UserModel) clients.data().get(i);
+
                 if (user != null) {
                     binding.caseIncludeLayout.secondaryTextView.append(user.getName());
-                    if (i != clients.data().size() - 1) {
+                    if (i != clients.data().size() - 1)
                         binding.caseIncludeLayout.secondaryTextView.append("  -  ");
-                    }
+
                 }
             }
         } else {
             binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
+            binding.caseIncludeLayout.secondaryTextView.setText("");
         }
     }
 
@@ -322,10 +330,95 @@ public class EditSessionTabReferenceFragment extends Fragment {
         }
     }
 
+    public void setHashmap(HashMap data) {
+        if (!selection.equals(""))
+            data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", selection));
+        else
+            data.remove("selection_type");
+
+        if (type.equals("اعضاء ریسلو")) {
+            data.put("clients_type", "risloo");
+        } else if (type.contains("مرکز")) {
+            data.put("clients_type", "center");
+        } else if (type.contains("اتاق درمان")) {
+            data.put("clients_type", "room");
+        } else if (type.equals("اعضاء پرونده درمانی …")) {
+            data.put("clients_type", "case");
+
+            if (!caseId.equals(""))
+                data.put("case_id", caseId);
+            else
+                data.remove("case_id");
+
+        } else if (type.equals("ساخت پرونده جدید")) {
+            data.put("clients_type", "new_case");
+
+            if (!problem.equals(""))
+                data.put("problem", problem);
+            else
+                data.remove("problem");
+        }
+
+        if (!groupSession.equals(""))
+            data.put("group_session", groupSession);
+        else
+            data.remove("group_session");
+
+        if (groupSession.equals("on"))
+            data.put("clients_number", count);
+        else
+            data.remove("clients_number");
+
+    }
+
+    public void hideValid() {
+        if (binding.selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView);
+
+        if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+
+        if (binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
+
+        if (binding.problemErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
+
+        if (binding.bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.bulkSessionErrorLayout.getRoot(), binding.bulkSessionErrorLayout.errorTextView);
+
+        if (binding.countErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.countErrorLayout.getRoot(), binding.countErrorLayout.errorTextView);
+    }
+
+    public void showValid(String key, String validation) {
+        switch (key) {
+            case "selection_type":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView, validation);
+                break;
+            case "clients_type":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                break;
+            case "case_id":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
+                break;
+            case "problem":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
+                break;
+            case "group_session":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.bulkSessionErrorLayout.getRoot(), binding.bulkSessionErrorLayout.errorTextView, validation);
+                break;
+            case "clients_number":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.countErrorLayout.getRoot(), binding.countErrorLayout.errorTextView, validation);
+                break;
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }

@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -112,18 +111,8 @@ public class CreateScheduleFragment extends Fragment {
             ((CreateScheduleTabTimeFragment) time).hideValid();
 
         // Reference Data
-        if (reference instanceof CreateScheduleTabReferenceFragment) {
-            if (((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView);
-            if (((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView);
-            if (((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
-            if (((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView);
-            if (((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.errorTextView);
-        }
+        if (reference instanceof CreateScheduleTabReferenceFragment)
+            ((CreateScheduleTabReferenceFragment) reference).hideValid();
 
         // Session Data
         if (session instanceof CreateScheduleTabSessionFragment)
@@ -148,27 +137,8 @@ public class CreateScheduleFragment extends Fragment {
             ((CreateScheduleTabTimeFragment) time).setHashmap(data);
 
         // Reference Data
-        if (reference instanceof CreateScheduleTabReferenceFragment) {
-            data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", ((CreateScheduleTabReferenceFragment) reference).selection));
-
-            if (((CreateScheduleTabReferenceFragment) reference).type.equals("اعضاء ریسلو")) {
-                data.put("clients_type", "risloo");
-            } else if (((CreateScheduleTabReferenceFragment) reference).type.contains("مرکز")) {
-                data.put("clients_type", "center");
-            } else if (((CreateScheduleTabReferenceFragment) reference).type.contains("اتاق درمان")) {
-                data.put("clients_type", "room");
-            } else if (((CreateScheduleTabReferenceFragment) reference).type.equals("اعضاء پرونده درمانی …")) {
-                data.put("clients_type", "case");
-                data.put("case_id", ((CreateScheduleTabReferenceFragment) reference).caseId);
-            } else if (((CreateScheduleTabReferenceFragment) reference).type.equals("ساخت پرونده جدید")) {
-                data.put("clients_type", "new_case");
-            }
-
-            data.put("group_session", ((CreateScheduleTabReferenceFragment) reference).groupSession);
-            if (((CreateScheduleTabReferenceFragment) reference).groupSession.equals("on")) {
-                data.put("clients_number", ((CreateScheduleTabReferenceFragment) reference).count);
-            }
-        }
+        if (reference instanceof CreateScheduleTabReferenceFragment)
+            ((CreateScheduleTabReferenceFragment) reference).setHashmap(data);
 
         // Session Data
         if (session instanceof CreateScheduleTabSessionFragment)
@@ -231,24 +201,13 @@ public class CreateScheduleFragment extends Fragment {
 
                                             // Reference Data
                                             case "selection_type":
-                                                if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView, validation);
-                                                break;
                                             case "clients_type":
-                                                if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "case_id":
-                                                if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, validation);
-                                                break;
                                             case "group_session":
-                                                if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView, validation);
-                                                break;
                                             case "clients_number":
                                                 if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.errorTextView, validation);
+                                                    ((CreateScheduleTabReferenceFragment) reference).showValid(key, validation);
+
                                                 break;
 
                                             // Session Data

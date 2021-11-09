@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditSessionAdapter;
@@ -112,20 +111,8 @@ public class EditSessionFragment extends Fragment {
             ((EditSessionTabTimeFragment) time).hideValid();
 
         // Reference Data
-        if (!hasCase && reference instanceof EditSessionTabReferenceFragment) {
-            if (((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView);
-            if (((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView);
-            if (((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
-            if (((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.errorTextView);
-            if (((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView);
-            if (((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.errorTextView);
-        }
+        if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
+            ((EditSessionTabReferenceFragment) reference).hideValid();
 
         // Session Data
         if (session instanceof EditSessionTabSessionFragment)
@@ -142,6 +129,20 @@ public class EditSessionFragment extends Fragment {
         doWork();
     }
 
+    private void setHashmap() {
+        String caseId = sessionModel.getCaseModel().getCaseId();
+
+        if (!caseId.equals(""))
+            data.put("case_id", caseId);
+        else
+            data.remove("case_id");
+
+        if (!caseId.equals(""))
+            data.put("clients_type", "case");
+        else
+            data.remove("clients_type");
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
@@ -149,34 +150,13 @@ public class EditSessionFragment extends Fragment {
         if (time instanceof EditSessionTabTimeFragment)
             ((EditSessionTabTimeFragment) time).setHashmap(data);
 
+        // Case Data
+        if (hasCase)
+            setHashmap();
+
         // Reference Data
-        if (hasCase) {
-            data.put("case_id", sessionModel.getCaseModel().getCaseId());
-            data.put("clients_type", "case");
-        } else {
-            if (reference instanceof EditSessionTabReferenceFragment) {
-                data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", ((EditSessionTabReferenceFragment) reference).selection));
-
-                if (((EditSessionTabReferenceFragment) reference).type.equals("اعضاء ریسلو")) {
-                    data.put("clients_type", "risloo");
-                } else if (((EditSessionTabReferenceFragment) reference).type.contains("مرکز")) {
-                    data.put("clients_type", "center");
-                } else if (((EditSessionTabReferenceFragment) reference).type.contains("اتاق درمان")) {
-                    data.put("clients_type", "room");
-                } else if (((EditSessionTabReferenceFragment) reference).type.equals("اعضاء پرونده درمانی …")) {
-                    data.put("clients_type", "case");
-                    data.put("case_id", ((EditSessionTabReferenceFragment) reference).caseId);
-                } else if (((EditSessionTabReferenceFragment) reference).type.equals("ساخت پرونده جدید")) {
-                    data.put("clients_type", "new_case");
-                    data.put("problem", ((EditSessionTabReferenceFragment) reference).problem);
-                }
-
-                data.put("group_session", ((EditSessionTabReferenceFragment) reference).groupSession);
-                if (((EditSessionTabReferenceFragment) reference).groupSession.equals("on")) {
-                    data.put("clients_number", ((EditSessionTabReferenceFragment) reference).count);
-                }
-            }
-        }
+        if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
+            ((EditSessionTabReferenceFragment) reference).setHashmap(data);
 
         // Session Data
         if (session instanceof EditSessionTabSessionFragment)
@@ -231,28 +211,14 @@ public class EditSessionFragment extends Fragment {
 
                                             // Reference Data
                                             case "selection_type":
-                                                if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView, validation);
-                                                break;
                                             case "clients_type":
-                                                if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "case_id":
-                                                if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, validation);
-                                                break;
                                             case "problem":
-                                                if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.errorTextView, validation);
-                                                break;
                                             case "group_session":
-                                                if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView, validation);
-                                                break;
                                             case "clients_number":
                                                 if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.errorTextView, validation);
+                                                    ((EditSessionTabReferenceFragment) reference).showValid(key, validation);
+
                                                 break;
 
                                             // Session Data
