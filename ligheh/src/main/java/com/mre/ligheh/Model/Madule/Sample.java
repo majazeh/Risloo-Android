@@ -113,15 +113,11 @@ public class Sample extends Model {
             if (data.containsKey("id")) {
                 String id = (String) data.get("id");
                 if (sampleAnswers != null) {
-                    if (!sampleAnswers.localAnswers.isEmpty() && !sampleAnswers.remoteAnswers.isEmpty()) {
-                        sampleAnswers.sendRequest((String) header.get("Authorization"), new Response() {
+                    if (!sampleAnswers.prerequisites.isEmpty()) {
+                        sampleAnswers.sendPrerequisites((String) header.get("Authorization"), new Response() {
                             @Override
                             public void onOK(Object object) {
-                                try {
-                                    Model.put(endpoint + "/samples/" + id + "/close", data, header, response1, null);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                close(sampleAnswers, data, header, response1);
                             }
 
                             @Override
@@ -130,7 +126,25 @@ public class Sample extends Model {
                             }
                         });
                     } else {
-                        Model.put(endpoint + "/samples/" + id + "/close", data, header, response1, null);
+                        if (!sampleAnswers.localAnswers.isEmpty() || !sampleAnswers.remoteAnswers.isEmpty()) {
+                            sampleAnswers.sendRequest((String) header.get("Authorization"), new Response() {
+                                @Override
+                                public void onOK(Object object) {
+                                    try {
+                                        Model.put(endpoint + "/samples/" + id + "/close", data, header, response1, null);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(String response) {
+                                    response1.onFailure(response);
+                                }
+                            });
+                        } else {
+                            Model.put(endpoint + "/samples/" + id + "/close", data, header, response1, null);
+                        }
                     }
                 } else {
                     Model.put(endpoint + "/samples/" + id + "/close", data, header, response1, null);
@@ -245,7 +259,7 @@ public class Sample extends Model {
     }
 
     public static void createBulk(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
-        create(data, header, response, BulkSampleModel.class); 
+        create(data, header, response, BulkSampleModel.class);
     }
 
     public static void items(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {

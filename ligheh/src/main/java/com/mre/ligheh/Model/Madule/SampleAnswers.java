@@ -1,9 +1,14 @@
 package com.mre.ligheh.Model.Madule;
 
+import android.icu.text.Edits;
+
+import androidx.annotation.MainThread;
+
 import com.mre.ligheh.API.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class SampleAnswers {
     public ArrayList<ArrayList<String>> localAnswers;
@@ -17,78 +22,97 @@ public class SampleAnswers {
         prerequisites = new ArrayList<>();
     }
 
-    public void sendRequest( String authorization, Response response) {
+    public void sendRequest(String authorization, Response response) {
         System.out.println("remote: " + remoteAnswers);
         System.out.println("local: " + localAnswers);
-        if (!remoteAnswers.isEmpty()) {
+        if (Model.request) {
+        } else {
+            HashMap data = new HashMap();
+            HashMap header = new HashMap();
             localToRemote();
-        }
-            if (Model.request) {
-                remoteToLocal(remoteAnswers);
-            } else {
-                HashMap data = new HashMap();
-                HashMap header = new HashMap();
-                localToRemote();
-                remoteAnswers.addAll(remoteAnswers);
-                data.put("items", remoteAnswers);
-                data.put("id", id);
+            localAnswers.clear();
+            data.put("items", remoteAnswers);
+            data.put("id", id);
+            if (authorization.startsWith("Bearer"))
+                header.put("Authorization", authorization);
+            else
                 header.put("Authorization", "Bearer " + authorization);
-                Sample.items(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        remoteAnswers.clear();
-                        response.onOK(null);
-                    }
+            Sample.items(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    remoteAnswers.clear();
+                    response.onOK(null);
+                }
 
-                    @Override
-                    public void onFailure(String response) {
-                        try {
-                            Thread.sleep(300);
-                            sendRequest(authorization, null);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                @Override
+                public void onFailure(String response) {
+                    try {
+                        Thread.sleep(5000);
+                        Model.request = false;
+                        sendRequest(authorization, null);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                });
-            }
+                }
+            });
+        }
 
     }
 
-    public void sendPrerequisites(String authorization,Response response){
+    public void sendPrerequisites(String authorization, Response response) {
         if (!prerequisites.isEmpty()) {
-                HashMap data = new HashMap();
-                HashMap header = new HashMap();
-                data.put("prerequisites", prerequisites);
-                data.put("id", id);
+            HashMap data = new HashMap();
+            HashMap header = new HashMap();
+            data.put("prerequisites", prerequisites);
+            data.put("id", id);
+            if (authorization.startsWith("Bearer"))
+                header.put("Authorization", authorization);
+            else
                 header.put("Authorization", "Bearer " + authorization);
-                Sample.items(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        prerequisites.clear();
-                        response.onOK(null);
-                    }
+            Sample.items(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    prerequisites.clear();
+                    response.onOK(null);
+                }
 
-                    @Override
-                    public void onFailure(String response) {
+                @Override
+                public void onFailure(String response) {
+                    try {
+                        Thread.sleep(5000);
+                        Model.request = false;
 
+                        sendPrerequisites(authorization, null);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                });
+                }
+            });
 
         }
     }
 
-    public void addToRemote(int key,Object value){
+    public void add(int key, Object value) {
         ArrayList arrayList = new ArrayList<String>();
         arrayList.add(key);
         arrayList.add(value);
-        if (!remoteAnswers.contains(arrayList))
-        remoteAnswers.add(arrayList);
+        if (Model.request)
+            localAnswers.add(arrayList);
+        else
+            remoteAnswers.add(arrayList);
     }
 
-    public void addToPrerequisites(int key,Object value){
+    public void addToPrerequisites(int key, Object value) {
         ArrayList arrayList = new ArrayList<String>();
         arrayList.add(key);
         arrayList.add(value);
+        Iterator<ArrayList<String>> iterator = prerequisites.iterator();
+        while (iterator.hasNext()) {
+            ArrayList a = iterator.next();
+            if (arrayList.get(0).equals(a.get(0))) {
+                prerequisites.remove(a);
+            }
+        }
         prerequisites.add(arrayList);
     }
 

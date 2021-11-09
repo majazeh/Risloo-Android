@@ -768,7 +768,7 @@ public class SampleFragment extends Fragment {
     }
 
     public void sendItem(int key, String value) {
-        sampleAnswers.addToRemote(key, value);
+        sampleAnswers.add(key, value);
         sampleAnswers.sendRequest(((MainActivity) requireActivity()).singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {

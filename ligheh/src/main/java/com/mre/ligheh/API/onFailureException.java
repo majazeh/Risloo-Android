@@ -18,6 +18,7 @@ public abstract class onFailureException {
             case "java.net.UnknownHostException":
             case "java.net.SocketTimeoutException":
                 onClient("اینترنت خود را چک کنید!");
+                callback.onFailure("اینترنت خود را چک کنید!");
                 break;
             case "java.io.IOException":
             case "JSONException":
@@ -26,10 +27,12 @@ public abstract class onFailureException {
             case "NoSuchMethodException":
             case "InvocationTargetException":
                 onClient((String) object);
+                callback.onFailure((String) object);
                 statusCode = 100;
                 break;
             case "java.lang.String":
                 onClient((String) object);
+                callback.onFailure((String) object);
                 break;
             case "okhttp3.Response":
                 try {

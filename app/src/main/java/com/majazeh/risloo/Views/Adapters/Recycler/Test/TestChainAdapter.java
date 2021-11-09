@@ -87,7 +87,7 @@ public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> {
             InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_check_circle_light, R.color.CoolGray300, 0);
         } else {
             InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.CoolGray500), R.style.danaMediumTextStyle);
-            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, 0, 0, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray500);
+            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, 0, R.color.CoolGray300, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray500);
         }
     }
 

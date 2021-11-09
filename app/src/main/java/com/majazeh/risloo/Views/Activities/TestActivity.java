@@ -62,7 +62,7 @@ public class TestActivity extends AppCompatActivity {
     public Validatoon validatoon;
 
     // Models
-    private SampleAnswers sampleAnswers;
+    public SampleAnswers sampleAnswers;
     public SampleModel sampleModel;
     public FormModel formModel;
 
@@ -384,7 +384,7 @@ public class TestActivity extends AppCompatActivity {
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
         binding.statusTextView.getRoot().requestLayout();
 
-        sampleAnswers.addToRemote(key, value);
+        sampleAnswers.add(key, value);
         sampleAnswers.sendRequest(singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {

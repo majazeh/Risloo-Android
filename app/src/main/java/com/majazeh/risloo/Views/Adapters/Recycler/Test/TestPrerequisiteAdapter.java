@@ -19,6 +19,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreInputHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreSelectHolder;
+import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
 import com.majazeh.risloo.databinding.SingleItemTestPreInputBinding;
 import com.majazeh.risloo.databinding.SingleItemTestPreSelectBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
@@ -50,7 +51,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
         else if (viewType == 2)
             return new TestPreSelectHolder(SingleItemTestPreSelectBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return  null;
+        return null;
     }
 
     @Override
@@ -70,7 +71,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
             listener((TestPreSelectHolder) holder, i);
 
-            setData((TestPreSelectHolder) holder, model);
+            setData((TestPreSelectHolder) holder, model, i);
         }
     }
 
@@ -180,11 +181,11 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
         setType(holder, model);
     }
 
-    private void setData(TestPreSelectHolder holder, PrerequisitesModel model) {
+    private void setData(TestPreSelectHolder holder, PrerequisitesModel model, int item) {
         if (!model.getText().equals(""))
             holder.binding.headerTextView.setText(model.getText());
 
-        setType(holder, model);
+        setType(holder, model, item);
     }
 
     private void setType(TestPreInputHolder holder, PrerequisitesModel model) {
@@ -210,13 +211,18 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    private void setType(TestPreSelectHolder holder, PrerequisitesModel model) {
+    private void setType(TestPreSelectHolder holder, PrerequisitesModel model, int item) {
         setSpinner(holder, model);
 
-        if (!model.getUser_answered().equals(""))
+        if (!model.getUser_answered().equals("")) {
             holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
-        else
+            ((TestActivity) activity).sampleAnswers.addToPrerequisites(item + 1, String.valueOf(holder.binding.selectSpinner.getSelectedItemPosition()+1));
+        } else {
             holder.binding.selectSpinner.setSelection(0);
+            ((TestActivity) activity).sampleAnswers.addToPrerequisites(item + 1, String.valueOf(1));
+        }
+
+
     }
 
     private void setSpinner(TestPreSelectHolder holder, PrerequisitesModel model) {
