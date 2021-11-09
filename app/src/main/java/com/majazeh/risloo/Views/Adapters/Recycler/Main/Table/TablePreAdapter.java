@@ -81,7 +81,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             listener((TableFieldSelectHolder) holder, i);
 
-            setData((TableFieldSelectHolder) holder, model);
+            setData((TableFieldSelectHolder) holder, model, i);
         }
     }
 
@@ -219,10 +219,10 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         setClickable(holder);
     }
 
-    private void setData(TableFieldSelectHolder holder, PrerequisitesModel model) {
+    private void setData(TableFieldSelectHolder holder, PrerequisitesModel model, int position) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
-        setType(holder, model);
+        setType(holder, model, position);
 
         setClickable(holder);
     }
@@ -250,13 +250,20 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    private void setType(TableFieldSelectHolder holder, PrerequisitesModel model) {
+    private void setType(TableFieldSelectHolder holder, PrerequisitesModel model, int position) {
         setSpinner(holder, model);
 
-        if (!model.getUser_answered().equals(""))
+        if (!model.getUser_answered().equals("")) {
             holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
-        else
+
+            if (current instanceof SampleFragment)
+                ((SampleFragment) current).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(holder.binding.selectSpinner.getSelectedItemPosition() + 1));
+        } else {
             holder.binding.selectSpinner.setSelection(holder.binding.selectSpinner.getCount());
+
+            if (current instanceof SampleFragment)
+                ((SampleFragment) current).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(1));
+        }
     }
 
     private void setClickable(TableFieldInputHolder holder) {

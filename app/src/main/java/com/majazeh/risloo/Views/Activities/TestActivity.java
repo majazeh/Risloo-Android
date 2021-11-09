@@ -269,6 +269,10 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void navigate() {
+        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() == R.id.testPrerequisiteFragment) {
+            sendPre();
+        }
+
         switch (formModel.getType()) {
             case "psychologist_description": {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testPsyDescFragment) {
@@ -342,6 +346,32 @@ public class TestActivity extends AppCompatActivity {
                 binding.locationIncludeLayout.selectSpinner.setSelection(0);
             }
         }
+    }
+
+    private void sendPre() {
+        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
+        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
+        binding.statusTextView.getRoot().requestLayout();
+
+        sampleAnswers.sendPrerequisites(singleton.getToken(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                runOnUiThread(() -> {
+                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
+                    binding.statusTextView.getRoot().requestLayout();
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                runOnUiThread(() -> {
+                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
+                    binding.statusTextView.getRoot().requestLayout();
+                });
+            }
+        });
     }
 
     public void sendPre(int key, String value) {

@@ -54,7 +54,7 @@ public class SampleFragment extends Fragment {
     private TableItemAdapter tableItemAdapter;
 
     // Models
-    private SampleAnswers sampleAnswers;
+    public SampleAnswers sampleAnswers;
     private SampleModel sampleModel;
 
     // Objects
