@@ -81,7 +81,10 @@ public class EditSessionFragment extends Fragment {
             data.put("id", sessionModel.getId());
         }
 
-        if (sessionModel.getCaseModel() != null && sessionModel.getCaseModel().getCaseId() != null) {
+        if (sessionModel.getCaseModel() != null && sessionModel.getCaseModel().getCaseId() != null && !sessionModel.getCaseModel().getCaseId().equals("")) {
+            data.put("case_id", sessionModel.getCaseModel().getCaseId());
+            data.put("clients_type", "case");
+
             hasCase = true;
 
             tabs = getResources().getStringArray(R.array.EditSessionHasCaseTabs);
@@ -130,29 +133,10 @@ public class EditSessionFragment extends Fragment {
     }
 
     private void setHashmap() {
-        String caseId = sessionModel.getCaseModel().getCaseId();
-
-        if (!caseId.equals(""))
-            data.put("case_id", caseId);
-        else
-            data.remove("case_id");
-
-        if (!caseId.equals(""))
-            data.put("clients_type", "case");
-        else
-            data.remove("clients_type");
-    }
-
-    private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
 
         // Time Data
         if (time instanceof EditSessionTabTimeFragment)
             ((EditSessionTabTimeFragment) time).setHashmap(data);
-
-        // Case Data
-        if (hasCase)
-            setHashmap();
 
         // Reference Data
         if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
@@ -169,6 +153,12 @@ public class EditSessionFragment extends Fragment {
         // Payment Data
         if (payment instanceof EditSessionTabPaymentFragment)
             ((EditSessionTabPaymentFragment) payment).setHashmap(data);
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
 
         Session.edit(data, header, new Response() {
             @Override
@@ -177,6 +167,8 @@ public class EditSessionFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }

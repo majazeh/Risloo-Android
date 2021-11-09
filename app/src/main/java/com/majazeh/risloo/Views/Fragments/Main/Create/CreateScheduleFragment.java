@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -25,6 +27,7 @@ import com.majazeh.risloo.databinding.FragmentCreateScheduleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
@@ -129,8 +132,7 @@ public class CreateScheduleFragment extends Fragment {
         doWork();
     }
 
-    public void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+    private void setHashmap() {
 
         // Time Data
         if (time instanceof CreateScheduleTabTimeFragment)
@@ -151,16 +153,25 @@ public class CreateScheduleFragment extends Fragment {
         // Payment Data
         if (payment instanceof CreateScheduleTabPaymentFragment)
             ((CreateScheduleTabPaymentFragment) payment).setHashmap(data);
+    }
+
+    public void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
 
         Room.createSchedule(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                ScheduleModel scheduleModel = (ScheduleModel) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSchedule));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(scheduleModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
             }

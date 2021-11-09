@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -24,6 +26,7 @@ import com.majazeh.risloo.databinding.FragmentCreateSessionBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
@@ -128,8 +131,7 @@ public class CreateSessionFragment extends Fragment {
         doWork();
     }
 
-    public void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+    private void setHashmap() {
 
         // Time Data
         if (time instanceof CreateSessionTabTimeFragment)
@@ -146,16 +148,25 @@ public class CreateSessionFragment extends Fragment {
         // Payment Data
         if (payment instanceof CreateSessionTabPaymentFragment)
             ((CreateSessionTabPaymentFragment) payment).setHashmap(data);
+    }
+
+    public void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
 
         Session.create(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                SessionModel sessionModel = (SessionModel) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSession));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(sessionModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
             }
