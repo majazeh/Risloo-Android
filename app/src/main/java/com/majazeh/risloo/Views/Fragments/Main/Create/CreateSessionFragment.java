@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -111,26 +110,8 @@ public class CreateSessionFragment extends Fragment {
         payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         // Time Data
-        if (time instanceof CreateSessionTabTimeFragment) {
-            if (((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
-            if (((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView);
-            if (((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView);
-            if (((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView);
-            if (((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView);
-            if (((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView);
-            if (((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView);
-            if (((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView);
-            if (((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView);
-        }
+        if (time instanceof CreateSessionTabTimeFragment)
+            ((CreateSessionTabTimeFragment) time).hideValid();
 
         // Session Data
         if (session instanceof CreateSessionTabSessionFragment)
@@ -151,25 +132,8 @@ public class CreateSessionFragment extends Fragment {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
         // Time Data
-        if (time instanceof CreateSessionTabTimeFragment) {
-            data.put("time", DateManager.jalHHsMM(((CreateSessionTabTimeFragment) time).startTime));
-            data.put("duration", ((CreateSessionTabTimeFragment) time).duration);
-            data.put("date_type", ((CreateSessionTabTimeFragment) time).dateType);
-
-            if (((CreateSessionTabTimeFragment) time).dateType.equals("specific")) {
-                data.put("date", ((CreateSessionTabTimeFragment) time).specifiedDate);
-            } else {
-                data.put("week_days", ((CreateSessionTabTimeFragment) time).patternDaysAdapter.getIds());
-                data.put("repeat_status", ((CreateSessionTabTimeFragment) time).patternType);
-
-                if (((CreateSessionTabTimeFragment) time).patternType.equals("weeks")) {
-                    data.put("repeat", ((CreateSessionTabTimeFragment) time).repeatWeeks);
-                } else {
-                    data.put("repeat_from", ((CreateSessionTabTimeFragment) time).periodStartDate);
-                    data.put("repeat_to", ((CreateSessionTabTimeFragment) time).periodEndDate);
-                }
-            }
-        }
+        if (time instanceof CreateSessionTabTimeFragment)
+            ((CreateSessionTabTimeFragment) time).setHashmap(data);
 
         // Session Data
         if (session instanceof CreateSessionTabSessionFragment)
@@ -217,40 +181,17 @@ public class CreateSessionFragment extends Fragment {
 
                                             // Time Data
                                             case "time":
-                                                if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "duration":
-                                                if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
-                                                break;
                                             case "date_type":
-                                                if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "date":
-                                                if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView, validation);
-                                                break;
                                             case "week_days":
-                                                if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView, validation);
-                                                break;
                                             case "repeat_status":
-                                                if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "repeat":
-                                                if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView, validation);
-                                                break;
                                             case "repeat_from":
-                                                if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView, validation);
-                                                break;
                                             case "repeat_to":
                                                 if (time instanceof CreateSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView, validation);
+                                                    ((CreateSessionTabTimeFragment) time).showValid(key, validation);
+
                                                 break;
 
                                             // Session Data

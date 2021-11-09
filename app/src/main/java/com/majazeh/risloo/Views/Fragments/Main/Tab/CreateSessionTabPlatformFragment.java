@@ -102,8 +102,10 @@ public class CreateSessionTabPlatformFragment extends Fragment {
     public void hideValid() {
         if (binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
             ((MainActivity) requireActivity()).validatoon.hideValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView);
+
         if (binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
             ((MainActivity) requireActivity()).validatoon.hideValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView);
+
         if (binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
             ((MainActivity) requireActivity()).validatoon.hideValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView);
     }

@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -109,14 +108,8 @@ public class EditSessionFragment extends Fragment {
         payment = ((MainActivity) requireActivity()).fragmont.getEditSessionTagPayment(hasCase);
 
         // Time Data
-        if (time instanceof EditSessionTabTimeFragment) {
-            if (((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
-            if (((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView);
-            if (((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.errorTextView);
-        }
+        if (time instanceof EditSessionTabTimeFragment)
+            ((EditSessionTabTimeFragment) time).hideValid();
 
         // Reference Data
         if (!hasCase && reference instanceof EditSessionTabReferenceFragment) {
@@ -153,11 +146,8 @@ public class EditSessionFragment extends Fragment {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
         // Time Data
-        if (time instanceof EditSessionTabTimeFragment) {
-            data.put("time", DateManager.jalHHsMM(((EditSessionTabTimeFragment) time).startTime));
-            data.put("duration", ((EditSessionTabTimeFragment) time).duration);
-            data.put("date", ((EditSessionTabTimeFragment) time).startDate);
-        }
+        if (time instanceof EditSessionTabTimeFragment)
+            ((EditSessionTabTimeFragment) time).setHashmap(data);
 
         // Reference Data
         if (hasCase) {
@@ -232,16 +222,11 @@ public class EditSessionFragment extends Fragment {
 
                                             // Time Data
                                             case "time":
-                                                if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "duration":
-                                                if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
-                                                break;
                                             case "date":
                                                 if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.errorTextView, validation);
+                                                    ((EditSessionTabTimeFragment) time).showValid(key, validation);
+
                                                 break;
 
                                             // Reference Data
