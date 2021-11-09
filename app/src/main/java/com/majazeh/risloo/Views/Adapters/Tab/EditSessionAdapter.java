@@ -15,11 +15,11 @@ import java.util.HashMap;
 
 public class EditSessionAdapter extends FragmentStateAdapter {
 
-    // Vars
-    private boolean hasCase;
-
     // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
+
+    // Vars
+    private boolean hasCase;
 
     public EditSessionAdapter(@NonNull FragmentActivity fragment, boolean hasCase) {
         super(fragment);

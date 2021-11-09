@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
@@ -25,11 +26,12 @@ import com.majazeh.risloo.databinding.FragmentCreateScheduleTabSessionBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CreateScheduleTabSessionFragment extends Fragment {
 
     // Binding
-    public FragmentCreateScheduleTabSessionBinding binding;
+    private FragmentCreateScheduleTabSessionBinding binding;
 
     // Adapters
     public DialogSelectedAdapter axisesAdapter;
@@ -38,11 +40,10 @@ public class CreateScheduleTabSessionFragment extends Fragment {
     private Fragment current;
 
     // Vars
-    public String status = "", description = "", coordination = "";
-    public String startType = "relative", endType = "relative";
-    public String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
-    public String startRelativeDay = "", startRelativeHour = "", startRelativeMinute = "", endRelativeDay = "", endRelativeHour = "", endRelativeMinute = "";
-    public boolean endAvailable = false;
+    private String status = "", description = "", coordination = "";
+    private String startType = "relative", endType = "relative";
+    private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
+    private String startRelativeDay = "", startRelativeHour = "", startRelativeMinute = "", endRelativeDay = "", endRelativeHour = "", endRelativeMinute = "";
     private boolean userSelect = false;
 
     @Nullable
@@ -94,15 +95,20 @@ public class CreateScheduleTabSessionFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabSessionButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabSessionButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+
+        // -------------------- Spinner
+
         binding.statusIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
+
+        binding.statusIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
         binding.statusIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -140,32 +146,6 @@ public class CreateScheduleTabSessionFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-
-        binding.axisIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSelectedDialog(requireActivity(), "axises");
-            return false;
-        });
-
-        binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-        });
-
-        binding.coordinationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.coordinationIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
-            return false;
-        });
-
-        binding.coordinationIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            coordination = binding.coordinationIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         // -------------------- RadioGroup
@@ -207,8 +187,6 @@ public class CreateScheduleTabSessionFragment extends Fragment {
         // -------------------- Checkbox
 
         binding.endTypeIncludeLayout.headerCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            endAvailable = isChecked;
-
             if (isChecked) {
                 binding.endTypeIncludeLayout.firstRadioButton.setAlpha((float) 1);
                 binding.endTypeIncludeLayout.secondRadioButton.setAlpha((float) 1);
@@ -278,6 +256,18 @@ public class CreateScheduleTabSessionFragment extends Fragment {
             return false;
         });
 
+        binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.coordinationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.coordinationIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
+            return false;
+        });
+
         // -------------------- Focus
 
         binding.startRelativeIncludeLayout.dayEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -302,6 +292,22 @@ public class CreateScheduleTabSessionFragment extends Fragment {
 
         binding.endRelativeIncludeLayout.minuteEditText.setOnFocusChangeListener((v, hasFocus) -> {
             endRelativeMinute = binding.endRelativeIncludeLayout.minuteEditText.getText().toString().trim();
+        });
+
+        binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.coordinationIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            coordination = binding.coordinationIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        // -------------------- Dialog
+
+        binding.axisIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSelectedDialog(requireActivity(), "axises");
+            return false;
         });
 
         // -------------------- BottomSheet
@@ -388,10 +394,136 @@ public class CreateScheduleTabSessionFragment extends Fragment {
         }
     }
 
+    public void setHashmap(HashMap data) {
+        if (!status.equals(""))
+            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", status));
+        else
+            data.remove("status");
+
+        if (status.equals("registration_awaiting")) {
+
+            if (!startType.equals("")) {
+                data.put("opens_at_type", startType);
+
+                if (startType.equals("relative"))
+                    data.put("opens_at", DateManager.relativeTimestamp(startRelativeDay, startRelativeHour, startRelativeMinute));
+                else
+                    data.put("opens_at", DateManager.accurateTimestamp(startAccurateTime, startAccurateDate));
+
+            } else {
+                data.remove("opens_at_type");
+                data.remove("opens_at");
+            }
+
+            if (binding.endTypeIncludeLayout.headerCheckBox.isChecked()) {
+
+                if (!endType.equals("")) {
+                    data.put("closed_at_type", endType);
+
+                    if (endType.equals("relative"))
+                        data.put("closed_at", DateManager.relativeTimestamp(endRelativeDay, endRelativeHour, endRelativeMinute));
+                    else
+                        data.put("closed_at", DateManager.accurateTimestamp(endAccurateTime, endAccurateDate));
+
+                } else {
+                    data.remove("closed_at_type");
+                    data.remove("closed_at");
+                }
+
+            }
+
+        }
+
+        if (!axisesAdapter.getIds().isEmpty())
+            data.put("fields", axisesAdapter.getIds());
+        else
+            data.remove("fields");
+
+        if (!description.equals(""))
+            data.put("description", description);
+        else
+            data.remove("description");
+
+        if (!coordination.equals(""))
+            data.put("client_reminder", coordination);
+        else
+            data.remove("client_reminder");
+    }
+
+    public void hideValid() {
+        if (binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
+
+        if (binding.startTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.startTypeErrorLayout.getRoot(), binding.startTypeErrorLayout.errorTextView);
+
+        if (binding.startRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.startRelativeErrorLayout.getRoot(), binding.startRelativeErrorLayout.errorTextView);
+
+        if (binding.startAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.startAccurateErrorLayout.getRoot(), binding.startAccurateErrorLayout.errorTextView);
+
+        if (binding.endTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.endTypeErrorLayout.getRoot(), binding.endTypeErrorLayout.errorTextView);
+
+        if (binding.endRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.endRelativeErrorLayout.getRoot(), binding.endRelativeErrorLayout.errorTextView);
+
+        if (binding.endAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.endAccurateErrorLayout.getRoot(), binding.endAccurateErrorLayout.errorTextView);
+
+        if (binding.axisErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView);
+
+        if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+
+        if (binding.coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.coordinationErrorLayout.getRoot(), binding.coordinationErrorLayout.errorTextView);
+    }
+
+    public void showValid(String key, String validation) {
+        switch (key) {
+            case "status":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
+                break;
+            case "opens_at_type":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.startTypeErrorLayout.getRoot(), binding.startTypeErrorLayout.errorTextView, validation);
+                break;
+            case "opens_at":
+                if (startType.equals("relative"))
+                    ((MainActivity) requireActivity()).validatoon.showValid(binding.startRelativeErrorLayout.getRoot(), binding.startRelativeErrorLayout.errorTextView, validation);
+                else if (startType.equals("absolute"))
+                    ((MainActivity) requireActivity()).validatoon.showValid(binding.startAccurateErrorLayout.getRoot(), binding.startAccurateErrorLayout.errorTextView, validation);
+
+                break;
+            case "closed_at_type":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.endTypeErrorLayout.getRoot(), binding.endTypeErrorLayout.errorTextView, validation);
+                break;
+            case "closed_at":
+                if (endType.equals("relative"))
+                    ((MainActivity) requireActivity()).validatoon.showValid(binding.endRelativeErrorLayout.getRoot(), binding.endRelativeErrorLayout.errorTextView, validation);
+                else if (endType.equals("absolute"))
+                    ((MainActivity) requireActivity()).validatoon.showValid(binding.endAccurateErrorLayout.getRoot(), binding.endAccurateErrorLayout.errorTextView, validation);
+
+                break;
+            case "fields":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView, validation);
+                break;
+            case "description":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+                break;
+            case "client_reminder":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.coordinationErrorLayout.getRoot(), binding.coordinationErrorLayout.errorTextView, validation);
+                break;
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        userSelect = false;
     }
 
 }

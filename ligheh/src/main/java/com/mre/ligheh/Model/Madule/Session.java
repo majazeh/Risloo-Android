@@ -1,7 +1,6 @@
 package com.mre.ligheh.Model.Madule;
 
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.TypeModel.ReportModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 
 import org.json.JSONObject;
@@ -53,7 +52,7 @@ public class Session extends Model {
 
     public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
-            Model.post("rooms/" + data.get("id") + "/schedules", data, header, response, null);
+            Model.post("rooms/" + data.get("id") + "/schedules", data, header, response, SessionModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

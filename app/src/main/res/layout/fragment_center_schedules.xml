@@ -18,11 +18,15 @@
         tools:paddingBottom="0dp">
 
         <include
-            android:id="@+id/schedules_headerLayout"
+            android:id="@+id/header_includeLayout"
             layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +38,7 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/schedules_headerLayout" />
+            app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
 
         <include
             android:id="@+id/forward_imageView"
@@ -44,7 +48,7 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/schedules_headerLayout" />
+            app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
 
         <include
             android:id="@+id/week_textView"
@@ -66,64 +70,27 @@
             app:layout_constraintEnd_toStartOf="@id/week_textView"
             app:layout_constraintTop_toTopOf="@id/week_textView" />
 
-        <HorizontalScrollView
-            android:id="@+id/filter_horizontalScrollView"
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/buttons_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="filter_imageView, forward_imageView, week_textView, backward_imageView" />
+
+        <include
+            android:id="@+id/filter_includeLayout"
+            layout="@layout/component_filter_schedules"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            android:scrollbarSize="0dp"
-            android:overScrollMode="never"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/week_textView"
-            tools:visibility="visible">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layoutDirection="rtl">
-
-                <TextView
-                    android:id="@+id/filter_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:gravity="center"
-                    android:text="@string/CenterSchedulesFragmentFilters"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/CoolGray600"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_regular" />
-
-                <include
-                    android:id="@+id/room_filterLayout"
-                    layout="@layout/component_main_filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
-
-                <include
-                    android:id="@+id/status_filterLayout"
-                    layout="@layout/component_main_filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
+            app:layout_constraintTop_toBottomOf="@id/buttons_barrier"
+            tools:visibility="visible" />
 
         <include
-            android:id="@+id/weeks_shimmerLayout"
+            android:id="@+id/days_shimmerLayout"
             layout="@layout/component_shimmer_week"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -131,11 +98,11 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_horizontalScrollView"
+            app:layout_constraintTop_toBottomOf="@id/filter_includeLayout"
             tools:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/weeks_recyclerView"
+            android:id="@+id/days_recyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -146,18 +113,18 @@
             app:layout_constrainedHeight="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_horizontalScrollView"
+            app:layout_constraintTop_toBottomOf="@id/filter_includeLayout"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/single_item_week"
             tools:itemCount="7"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/weeks_barrier"
+            android:id="@+id/days_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="weeks_shimmerLayout, weeks_recyclerView" />
+            app:constraint_referenced_ids="days_shimmerLayout, days_recyclerView" />
 
         <include
             android:id="@+id/schedules_shimmerLayout"
@@ -167,7 +134,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weeks_barrier"
+            app:layout_constraintTop_toBottomOf="@id/days_barrier"
             tools:visibility="gone" />
 
         <include
@@ -178,7 +145,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weeks_barrier"
+            app:layout_constraintTop_toBottomOf="@id/days_barrier"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

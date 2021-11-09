@@ -12,26 +12,28 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.DateManager;
-import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+
+import java.util.HashMap;
 
 public class EditSessionTabTimeFragment extends Fragment {
 
     // Binding
-    public FragmentEditSessionTabTimeBinding binding;
+    private FragmentEditSessionTabTimeBinding binding;
 
     // Fragments
     private Fragment current;
 
     // Vars
-    public String startTime = "", duration = "60", startDate = "";
+    private String startTime = "", duration = "60", startDate = "";
 
     @Nullable
     @Override
@@ -54,15 +56,11 @@ public class EditSessionTabTimeFragment extends Fragment {
         binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabTimeStartDateHeader));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabTimeButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabTimeButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), startTime, "startTime");
-        }).widget(binding.startTimeIncludeLayout.selectTextView);
-
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.durationIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
@@ -72,6 +70,10 @@ public class EditSessionTabTimeFragment extends Fragment {
         binding.durationIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             duration = binding.durationIncludeLayout.inputEditText.getText().toString().trim();
         });
+
+        CustomClickView.onDelayedListener(() -> {
+            SheetManager.showTimeBottomSheet(requireActivity(), startTime, "startTime");
+        }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
             SheetManager.showDateBottomSheet(requireActivity(), startDate, "startDate");
@@ -121,6 +123,48 @@ public class EditSessionTabTimeFragment extends Fragment {
             case "startDate":
                 startDate = data;
                 binding.startDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(startDate, "-"));
+                break;
+        }
+    }
+
+    public void setHashmap(HashMap data) {
+        if (!startTime.equals(""))
+            data.put("time", DateManager.jalHHsMM(startTime));
+        else
+            data.remove("time");
+
+        if (!duration.equals(""))
+            data.put("duration", duration);
+        else
+            data.remove("duration");
+
+        if (!startDate.equals(""))
+            data.put("date", startDate);
+        else
+            data.remove("date");
+    }
+
+    public void hideValid() {
+        if (binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
+
+        if (binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
+
+        if (binding.startDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.startDateErrorLayout.getRoot(), binding.startDateErrorLayout.errorTextView);
+    }
+
+    public void showValid(String key, String validation) {
+        switch (key) {
+            case "time":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, validation);
+                break;
+            case "duration":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, validation);
+                break;
+            case "date":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.startDateErrorLayout.getRoot(), binding.startDateErrorLayout.errorTextView, validation);
                 break;
         }
     }

@@ -22,14 +22,15 @@ import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EditSessionTabPlatformFragment extends Fragment {
 
     // Binding
-    public FragmentEditSessionTabPlatformBinding binding;
+    private FragmentEditSessionTabPlatformBinding binding;
 
     // Adapters
-    public TabPlatformsAdapter adapter;
+    private TabPlatformsAdapter adapter;
 
     // Fragments
     private Fragment current;
@@ -55,7 +56,7 @@ public class EditSessionTabPlatformFragment extends Fragment {
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.platformsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabPlatformButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabPlatformButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -110,9 +111,53 @@ public class EditSessionTabPlatformFragment extends Fragment {
                 binding.platformsSingleLayout.recyclerView.setAdapter(adapter);
                 binding.platformsSingleLayout.emptyView.setVisibility(View.GONE);
             } else if (adapter.getItemCount() == 0) {
+                binding.platformsSingleLayout.recyclerView.setAdapter(null);
+
                 binding.platformsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                 binding.platformsSingleLayout.emptyView.setText(getResources().getString(R.string.TabPlatformsAdapterEmpty));
             }
+        }
+    }
+
+    public void setHashmap(HashMap data) {
+        if (!adapter.platforms.isEmpty())
+            data.put("platforms", adapter.platforms);
+        else
+            data.remove("platforms");
+
+        if (!adapter.pinPlatform.isEmpty())
+            data.put("pin_platform", adapter.pinPlatform);
+        else
+            data.remove("pin_platform");
+
+        if (!adapter.identifierPlatform.isEmpty())
+            data.put("identifier_platform", adapter.identifierPlatform);
+        else
+            data.remove("identifier_platform");
+    }
+
+    public void hideValid() {
+        if (binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView);
+
+        if (binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView);
+
+        if (binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView);
+    }
+
+    public void showValid(String key, String validation) {
+        switch (key) {
+            case "platforms":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView, validation);
+                break;
+            case "pin_platform":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView, validation);
+                break;
+            case "identifier_platform":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView, validation);
+                break;
         }
     }
 

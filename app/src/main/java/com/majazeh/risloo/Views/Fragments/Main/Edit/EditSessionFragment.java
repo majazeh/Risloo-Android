@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -109,14 +108,8 @@ public class EditSessionFragment extends Fragment {
         payment = ((MainActivity) requireActivity()).fragmont.getEditSessionTagPayment(hasCase);
 
         // Time Data
-        if (time instanceof EditSessionTabTimeFragment) {
-            if (((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
-            if (((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView);
-            if (((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.errorTextView);
-        }
+        if (time instanceof EditSessionTabTimeFragment)
+            ((EditSessionTabTimeFragment) time).hideValid();
 
         // Reference Data
         if (!hasCase && reference instanceof EditSessionTabReferenceFragment) {
@@ -135,44 +128,16 @@ public class EditSessionFragment extends Fragment {
         }
 
         // Session Data
-        if (session instanceof EditSessionTabSessionFragment) {
-            if (((EditSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView);
-
-            if (((EditSessionTabSessionFragment) session).binding.startTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.startTypeErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.startTypeErrorLayout.errorTextView);
-            if (((EditSessionTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.startRelativeErrorLayout.errorTextView);
-            if (((EditSessionTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.startAccurateErrorLayout.errorTextView);
-            if (((EditSessionTabSessionFragment) session).binding.endTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.endTypeErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.endTypeErrorLayout.errorTextView);
-            if (((EditSessionTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.endRelativeErrorLayout.errorTextView);
-            if (((EditSessionTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.endAccurateErrorLayout.errorTextView);
-
-            if (((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView);
-            if (((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView);
-        }
+        if (session instanceof EditSessionTabSessionFragment)
+            ((EditSessionTabSessionFragment) session).hideValid();
 
         // Platform Data
-        if (platform instanceof EditSessionTabPlatformFragment) {
-            if (((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView);
-            if (((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView);
-            if (((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView);
-        }
+        if (platform instanceof EditSessionTabPlatformFragment)
+            ((EditSessionTabPlatformFragment) platform).hideValid();
 
         // Payment Data
-        if (payment instanceof EditSessionTabPaymentFragment) {
-            if (((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView);
-        }
+        if (payment instanceof EditSessionTabPaymentFragment)
+            ((EditSessionTabPaymentFragment) payment).hideValid();
 
         doWork();
     }
@@ -181,11 +146,8 @@ public class EditSessionFragment extends Fragment {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
         // Time Data
-        if (time instanceof EditSessionTabTimeFragment) {
-            data.put("time", DateManager.jalHHsMM(((EditSessionTabTimeFragment) time).startTime));
-            data.put("duration", ((EditSessionTabTimeFragment) time).duration);
-            data.put("date", ((EditSessionTabTimeFragment) time).startDate);
-        }
+        if (time instanceof EditSessionTabTimeFragment)
+            ((EditSessionTabTimeFragment) time).setHashmap(data);
 
         // Reference Data
         if (hasCase) {
@@ -217,42 +179,16 @@ public class EditSessionFragment extends Fragment {
         }
 
         // Session Data
-        if (session instanceof EditSessionTabSessionFragment) {
-            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((EditSessionTabSessionFragment) session).status));
-
-            if (data.get("status").equals("registration_awaiting")) {
-                data.put("opens_at_type", ((EditSessionTabSessionFragment) session).startType);
-
-                if (data.get("opens_at_type").equals("relative"))
-                    data.put("opens_at", DateManager.relativeTimestamp(((EditSessionTabSessionFragment) session).startRelativeDay, ((EditSessionTabSessionFragment) session).startRelativeHour, ((EditSessionTabSessionFragment) session).startRelativeMinute));
-                else
-                    data.put("opens_at", DateManager.accurateTimestamp(((EditSessionTabSessionFragment) session).startAccurateTime, ((EditSessionTabSessionFragment) session).startAccurateDate));
-
-                if (((EditSessionTabSessionFragment) session).endAvailable) {
-                    data.put("closed_at_type", ((EditSessionTabSessionFragment) session).endType);
-
-                    if (data.get("closed_at_type").equals("relative"))
-                        data.put("closed_at", DateManager.relativeTimestamp(((EditSessionTabSessionFragment) session).endRelativeDay, ((EditSessionTabSessionFragment) session).endRelativeHour, ((EditSessionTabSessionFragment) session).endRelativeMinute));
-                    else
-                        data.put("closed_at", DateManager.accurateTimestamp(((EditSessionTabSessionFragment) session).endAccurateTime, ((EditSessionTabSessionFragment) session).endAccurateDate));
-                }
-            }
-
-            data.put("description", ((EditSessionTabSessionFragment) session).description);
-            data.put("client_reminder", ((EditSessionTabSessionFragment) session).coordination);
-        }
+        if (session instanceof EditSessionTabSessionFragment)
+            ((EditSessionTabSessionFragment) session).setHashmap(data);
 
         // Platform Data
-        if (platform instanceof EditSessionTabPlatformFragment) {
-            data.put("platforms", ((EditSessionTabPlatformFragment) platform).adapter.platforms);
-            data.put("pin_platform", ((EditSessionTabPlatformFragment) platform).adapter.pinPlatform);
-            data.put("identifier_platform", ((EditSessionTabPlatformFragment) platform).adapter.identifierPlatform);
-        }
+        if (platform instanceof EditSessionTabPlatformFragment)
+            ((EditSessionTabPlatformFragment) platform).setHashmap(data);
 
         // Payment Data
-        if (payment instanceof EditSessionTabPaymentFragment) {
-            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((EditSessionTabPaymentFragment) payment).payment));
-        }
+        if (payment instanceof EditSessionTabPaymentFragment)
+            ((EditSessionTabPaymentFragment) payment).setHashmap(data);
 
         Session.edit(data, header, new Response() {
             @Override
@@ -286,16 +222,11 @@ public class EditSessionFragment extends Fragment {
 
                                             // Time Data
                                             case "time":
-                                                if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "duration":
-                                                if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
-                                                break;
                                             case "date":
                                                 if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.errorTextView, validation);
+                                                    ((EditSessionTabTimeFragment) time).showValid(key, validation);
+
                                                 break;
 
                                             // Reference Data
@@ -326,59 +257,31 @@ public class EditSessionFragment extends Fragment {
 
                                             // Session Data
                                             case "status":
-                                                if (session instanceof EditSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
-                                                break;
-
                                             case "opens_at_type":
-                                                if (session instanceof EditSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.startTypeErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.startTypeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "opens_at":
-                                                if (session instanceof EditSessionTabSessionFragment && data.get("opens_at_type").equals("relative"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.startRelativeErrorLayout.errorTextView, validation);
-                                                else if (session instanceof EditSessionTabSessionFragment && data.get("opens_at_type").equals("absolute"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.startAccurateErrorLayout.errorTextView, validation);
-                                                break;
-
                                             case "closed_at_type":
-                                                if (session instanceof EditSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.endTypeErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.endTypeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "closed_at":
-                                                if (session instanceof EditSessionTabSessionFragment && data.get("closed_at_type").equals("relative"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.endRelativeErrorLayout.errorTextView, validation);
-                                                else if (session instanceof EditSessionTabSessionFragment && data.get("closed_at_type").equals("absolute"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.endAccurateErrorLayout.errorTextView, validation);
-                                                break;
-
                                             case "description":
-                                                if (session instanceof EditSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, validation);
-                                                break;
                                             case "client_reminder":
                                                 if (session instanceof EditSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, validation);
+                                                    ((EditSessionTabSessionFragment) session).showValid(key, validation);
+
                                                 break;
 
                                             // Platform Data
                                             case "platforms":
-                                                if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
-                                                break;
                                             case "pin_platform":
-                                                if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
-                                                break;
                                             case "identifier_platform":
                                                 if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
+                                                    ((EditSessionTabPlatformFragment) platform).showValid(key, validation);
+
                                                 break;
 
                                             // Payment Data
                                             case "payment_status":
                                                 if (payment instanceof EditSessionTabPaymentFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
+                                                    ((EditSessionTabPaymentFragment) payment).showValid(key, validation);
+
                                                 break;
                                         }
 

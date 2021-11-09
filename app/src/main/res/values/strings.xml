@@ -26,6 +26,7 @@
 
     <string name="AppEdit">ویرایش</string>
     <string name="AppReserve">رزرو</string>
+    <string name="AppFilters">فیلترها:</string>
 
     <string name="AppPlatforms">محل‌های برگزاری جلسات</string>
     <string name="AppSchedules">برنامه‌های درمانی</string>
@@ -695,6 +696,12 @@
     <string name="CenterPlatformsFragmentEmpty">هنوز محل برگزاری برای مرکز ثبت نشده است.</string>
 
 
+    ---------- // CenterSchedulesFragment
+
+    <string name="CenterSchedulesFragmentTitle">برنامه‌های مرکز درمانی</string>
+
+    <string name="CenterSchedulesFragmentEmpty">هنوز برنامه‌‌ی برای مرکز ثبت نشده است.</string>
+
     ---------- // CenterUsersFragment
 
     <string name="CenterUsersFragmentTitle">اعضاء مرکز درمانی</string>
@@ -746,6 +753,13 @@
     <string name="RoomPlatformsFragmentTitle">محل برگزاری جلسات اتاق درمان</string>
 
     <string name="RoomPlatformsFragmentEmpty">هنوز محل برگزاری برای اتاق ثبت نشده است.</string>
+
+
+    ---------- // RoomSchedulesFragment
+
+    <string name="RoomSchedulesFragmentTitle">برنامه‌های اتاق درمان</string>
+
+    <string name="RoomSchedulesFragmentEmpty">هنوز برنامه‌‌ی برای اتاق ثبت نشده است.</string>
 
 
     ---------- // RoomUsersFragment
@@ -963,6 +977,116 @@
     ***/
 
 
+    ---------- // CreateScheduleTabPayment
+
+    <string name="CreateScheduleTabPaymentPaymentHeader">نوع دریافت</string>
+
+    <string name="CreateScheduleTabPaymentButton">ساخت</string>
+
+
+    ---------- // CreateScheduleTabPlatform
+
+    <string name="CreateScheduleTabPlatformButton">ساخت</string>
+
+
+    ---------- // CreateScheduleTabReference
+
+    <string name="CreateScheduleTabReferenceTypeHeader">نوع مراجعین درخواست دهنده</string>
+    <string name="CreateScheduleTabReferenceCaseHeader">پرونده</string>
+    <string name="CreateScheduleTabReferenceCountHeader">تعداد حداکثر مراجعین</string>
+    <string name="CreateScheduleTabReferenceSelectionHeader">نوع انتخاب مراجعین</string>
+
+    <string name="CreateScheduleTabReferenceCheckbox">جلسه گروهی</string>
+
+    <string name="CreateScheduleTabReferenceTypeRisloo">اعضاء ریسلو</string>
+    <string name="CreateScheduleTabReferenceTypeUser">اعضاء</string>
+    <string name="CreateScheduleTabReferenceTypeCase">اعضاء پرونده درمانی …</string>
+
+    <string name="CreateScheduleTabReferenceRoom">اتاق درمان</string>
+
+    <string name="CreateScheduleTabReferenceButton">ساخت</string>
+
+
+    ---------- // CreateScheduleTabSession
+
+    <string name="CreateScheduleTabSessionStatusHeader">وضعیت جلسه</string>
+    <string name="CreateScheduleTabSessionAxisHeader">محور جلسه</string>
+    <string name="CreateScheduleTabSessionDescriptionHeader">توضیحات</string>
+    <string name="CreateScheduleTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+
+    <string name="CreateScheduleTabSessionAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
+    <string name="CreateScheduleTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+
+    <string name="CreateScheduleTabSessionButton">ساخت</string>
+
+
+    ---------- // CreateScheduleTabTime
+
+    <string name="CreateScheduleTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
+    <string name="CreateScheduleTabTimeDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="CreateScheduleTabTimeDateTypeHeader">نوع تاریخ انتخابی</string>
+    <string name="CreateScheduleTabTimeSpecifiedDateHeader">تاریخ</string>
+    <string name="CreateScheduleTabTimePatternDaysHeader">روزهای هفته</string>
+    <string name="CreateScheduleTabTimePatternTypeHeader">نوع الگوی التخابی</string>
+    <string name="CreateScheduleTabTimeRepeatWeeksHeader">تعداد هفته</string>
+    <string name="CreateScheduleTabTimePeriodStartDateHeader">شروع</string>
+    <string name="CreateScheduleTabTimePeriodEndDateHeader">پایان</string>
+
+    <string name="CreateScheduleTabTimeDateTypeSpecified">مشخص</string>
+    <string name="CreateScheduleTabTimeDateTypePattern">الگو</string>
+
+    <string name="CreateScheduleTabTimePatternTypeRepeat">تکرار</string>
+    <string name="CreateScheduleTabTimePatternTypePeriod">بازه زمانی</string>
+
+    <string name="CreateScheduleTabTimeButton">ساخت</string>
+
+
+    ---------- // CreateSessionTabPayment
+
+    <string name="CreateSessionTabPaymentPaymentHeader">نوع دریافت</string>
+
+    <string name="CreateSessionTabPaymentButton">ساخت</string>
+
+
+    ---------- // CreateSessionTabPlatform
+
+    <string name="CreateSessionTabPlatformButton">ساخت</string>
+
+
+    ---------- // CreateSessionTabSession
+
+    <string name="CreateSessionTabSessionStatusHeader">وضعیت جلسه</string>
+    <string name="CreateSessionTabSessionAxisHeader">محور جلسه</string>
+    <string name="CreateSessionTabSessionDescriptionHeader">توضیحات</string>
+    <string name="CreateSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+
+    <string name="CreateSessionTabSessionAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
+    <string name="CreateSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+
+    <string name="CreateSessionTabSessionButton">ساخت</string>
+
+
+    ---------- // CreateSessionTabTime
+
+    <string name="CreateSessionTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
+    <string name="CreateSessionTabTimeDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="CreateSessionTabTimeDateTypeHeader">نوع تاریخ انتخابی</string>
+    <string name="CreateSessionTabTimeSpecifiedDateHeader">تاریخ</string>
+    <string name="CreateSessionTabTimePatternDaysHeader">روزهای هفته</string>
+    <string name="CreateSessionTabTimePatternTypeHeader">نوع الگوی التخابی</string>
+    <string name="CreateSessionTabTimeRepeatWeeksHeader">تعداد هفته</string>
+    <string name="CreateSessionTabTimePeriodStartDateHeader">شروع</string>
+    <string name="CreateSessionTabTimePeriodEndDateHeader">پایان</string>
+
+    <string name="CreateSessionTabTimeDateTypeSpecified">مشخص</string>
+    <string name="CreateSessionTabTimeDateTypePattern">الگو</string>
+
+    <string name="CreateSessionTabTimePatternTypeRepeat">تکرار</string>
+    <string name="CreateSessionTabTimePatternTypePeriod">بازه زمانی</string>
+
+    <string name="CreateSessionTabTimeButton">ساخت</string>
+
+
     ---------- // EditCenterTabAvatar
 
     <string name="EditCenterTabAvatarAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
@@ -979,6 +1103,58 @@
     <string name="EditCenterTabDetailDescriptionHeader">توضیحات</string>
 
     <string name="EditCenterTabDetailButton">ویرایش</string>
+
+
+    ---------- // EditSessionTabPayment
+
+    <string name="EditSessionTabPaymentPaymentHeader">نوع دریافت</string>
+
+    <string name="EditSessionTabPaymentButton">ویرایش</string>
+
+
+    ---------- // EditSessionTabPlatform
+
+    <string name="EditSessionTabPlatformButton">ویرایش</string>
+
+
+    ---------- // EditSessionTabReference
+
+    <string name="EditSessionTabReferenceTypeHeader">نوع مراجعین درخواست دهنده</string>
+    <string name="EditSessionTabReferenceCaseHeader">پرونده</string>
+    <string name="EditSessionTabReferenceProblemHeader">مسئله</string>
+    <string name="EditSessionTabReferenceCountHeader">تعداد حداکثر مراجعین</string>
+    <string name="EditSessionTabReferenceSelectionHeader">نوع انتخاب مراجعین</string>
+
+    <string name="EditSessionTabReferenceCheckbox">جلسه گروهی</string>
+
+    <string name="EditSessionTabReferenceTypeRisloo">اعضاء ریسلو</string>
+    <string name="EditSessionTabReferenceTypeUser">اعضاء</string>
+    <string name="EditSessionTabReferenceTypeCase">اعضاء پرونده درمانی …</string>
+    <string name="EditSessionTabReferenceTypeNew">ساخت پرونده جدید</string>
+
+    <string name="EditSessionTabReferenceRoom">اتاق درمان</string>
+
+    <string name="EditSessionTabReferenceButton">ساخت</string>
+
+
+    ---------- // EditSessionTabSession
+
+    <string name="EditSessionTabSessionStatusHeader">وضعیت جلسه</string>
+    <string name="EditSessionTabSessionDescriptionHeader">توضیحات</string>
+    <string name="EditSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+
+    <string name="EditSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+
+    <string name="EditSessionTabSessionButton">ویرایش</string>
+
+
+    ---------- // EditSessionTabTime
+
+    <string name="EditSessionTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
+    <string name="EditSessionTabTimeDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="EditSessionTabTimeStartDateHeader">تاریخ</string>
+
+    <string name="EditSessionTabTimeButton">ویرایش</string>
 
 
     ---------- // EditUserTabAvatar
@@ -1584,187 +1760,10 @@
 
 
 
-
-
-    // Create Fragments
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    ---------- // CreateScheduleTabTime
-
-    <string name="CreateScheduleTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
-    <string name="CreateScheduleTabTimeDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="CreateScheduleTabTimeDateTypeHeader">نوع تاریخ انتخابی</string>
-    <string name="CreateScheduleTabTimeSpecifiedDateHeader">تاریخ</string>
-    <string name="CreateScheduleTabTimePatternDaysHeader">روزهای هفته</string>
-    <string name="CreateScheduleTabTimePatternTypeHeader">نوع الگوی التخابی</string>
-    <string name="CreateScheduleTabTimeRepeatWeeksHeader">تعداد هفته</string>
-    <string name="CreateScheduleTabTimePeriodStartDateHeader">شروع</string>
-    <string name="CreateScheduleTabTimePeriodEndDateHeader">پایان</string>
-
-    <string name="CreateScheduleTabTimeDateTypeSpecified">مشخص</string>
-    <string name="CreateScheduleTabTimeDateTypePattern">الگو</string>
-
-    <string name="CreateScheduleTabTimePatternTypeRepeat">تکرار</string>
-    <string name="CreateScheduleTabTimePatternTypePeriod">بازه زمانی</string>
-
-    <string name="CreateScheduleTabTimeButton">ساخت</string>
-
-    ---------- // CreateScheduleTabReference
-
-    <string name="CreateScheduleTabReferenceTypeHeader">نوع مراجعین درخواست دهنده</string>
-    <string name="CreateScheduleTabReferenceCaseHeader">پرونده</string>
-    <string name="CreateScheduleTabReferenceCountHeader">تعداد حداکثر مراجعین</string>
-    <string name="CreateScheduleTabReferenceSelectionHeader">نوع انتخاب مراجعین</string>
-
-    <string name="CreateScheduleTabReferenceCheckbox">جلسه گروهی</string>
-
-    <string name="CreateScheduleTabReferenceTypeRisloo">اعضاء ریسلو</string>
-    <string name="CreateScheduleTabReferenceTypeUser">اعضاء</string>
-    <string name="CreateScheduleTabReferenceTypeCase">اعضاء پرونده درمانی …</string>
-
-    <string name="CreateScheduleTabReferenceRoom">اتاق درمان</string>
-
-    <string name="CreateScheduleTabReferenceButton">ساخت</string>
-
-    ---------- // CreateScheduleTabSession
-
-    <string name="CreateScheduleTabSessionStatusHeader">وضعیت جلسه</string>
-    <string name="CreateScheduleTabSessionAxisHeader">محور جلسه</string>
-    <string name="CreateScheduleTabSessionDescriptionHeader">توضیحات</string>
-    <string name="CreateScheduleTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
-
-    <string name="CreateScheduleTabSessionAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
-    <string name="CreateScheduleTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
-
-    <string name="CreateScheduleTabSessionButton">ساخت</string>
-
-    ---------- // CreateScheduleTabPlatform
-
-    <string name="CreateScheduleTabPlatformButton">ساخت</string>
-
-    ---------- // CreateScheduleTabPayment
-
-    <string name="CreateScheduleTabPaymentPaymentHeader">نوع دریافت</string>
-
-    <string name="CreateScheduleTabPaymentAxisTotal">مبلغ جلسه</string>
-
-    <string name="CreateScheduleTabPaymentButton">ساخت</string>
-
-    ---------- // CreateSessionTabTime
-
-    <string name="CreateSessionTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
-    <string name="CreateSessionTabTimeDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="CreateSessionTabTimeDateTypeHeader">نوع تاریخ انتخابی</string>
-    <string name="CreateSessionTabTimeSpecifiedDateHeader">تاریخ</string>
-    <string name="CreateSessionTabTimePatternDaysHeader">روزهای هفته</string>
-    <string name="CreateSessionTabTimePatternTypeHeader">نوع الگوی التخابی</string>
-    <string name="CreateSessionTabTimeRepeatWeeksHeader">تعداد هفته</string>
-    <string name="CreateSessionTabTimePeriodStartDateHeader">شروع</string>
-    <string name="CreateSessionTabTimePeriodEndDateHeader">پایان</string>
-
-    <string name="CreateSessionTabTimeDateTypeSpecified">مشخص</string>
-    <string name="CreateSessionTabTimeDateTypePattern">الگو</string>
-
-    <string name="CreateSessionTabTimePatternTypeRepeat">تکرار</string>
-    <string name="CreateSessionTabTimePatternTypePeriod">بازه زمانی</string>
-
-    <string name="CreateSessionTabTimeButton">ساخت</string>
-
-    ---------- // CreateSessionTabSession
-
-    <string name="CreateSessionTabSessionStatusHeader">وضعیت جلسه</string>
-    <string name="CreateSessionTabSessionAxisHeader">محور جلسه</string>
-    <string name="CreateSessionTabSessionDescriptionHeader">توضیحات</string>
-    <string name="CreateSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
-
-    <string name="CreateSessionTabSessionAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
-    <string name="CreateSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
-
-    <string name="CreateSessionTabSessionButton">ساخت</string>
-
-    ---------- // CreateSessionTabPlatform
-
-    <string name="CreateSessionTabPlatformButton">ساخت</string>
-
-    ---------- // CreateSessionTabPayment
-
-    <string name="CreateSessionTabPaymentPaymentHeader">نوع دریافت</string>
-
-    <string name="CreateSessionTabPaymentAxisTotal">مبلغ جلسه</string>
-
-    <string name="CreateSessionTabPaymentButton">ساخت</string>
-
-    // Edit Fragments
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    ---------- // EditSessionTabTime
-
-    <string name="EditSessionTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
-    <string name="EditSessionTabTimeDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="EditSessionTabTimeStartDateHeader">تاریخ</string>
-
-    <string name="EditSessionTabTimeButton">ویرایش</string>
-
-    ---------- // EditSessionTabReference
-
-    <string name="EditSessionTabReferenceTypeHeader">نوع مراجعین درخواست دهنده</string>
-    <string name="EditSessionTabReferenceCaseHeader">پرونده</string>
-    <string name="EditSessionTabReferenceProblemHeader">مسئله</string>
-    <string name="EditSessionTabReferenceCountHeader">تعداد حداکثر مراجعین</string>
-    <string name="EditSessionTabReferenceSelectionHeader">نوع انتخاب مراجعین</string>
-
-    <string name="EditSessionTabReferenceCheckbox">جلسه گروهی</string>
-
-    <string name="EditSessionTabReferenceTypeRisloo">اعضاء ریسلو</string>
-    <string name="EditSessionTabReferenceTypeUser">اعضاء</string>
-    <string name="EditSessionTabReferenceTypeCase">اعضاء پرونده درمانی …</string>
-    <string name="EditSessionTabReferenceTypeNew">ساخت پرونده جدید</string>
-
-    <string name="EditSessionTabReferenceRoom">اتاق درمان</string>
-
-    <string name="EditSessionTabReferenceButton">ساخت</string>
-
-    ---------- // EditSessionTabSession
-
-    <string name="EditSessionTabSessionStatusHeader">وضعیت جلسه</string>
-    <string name="EditSessionTabSessionDescriptionHeader">توضیحات</string>
-    <string name="EditSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
-
-    <string name="EditSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
-
-    <string name="EditSessionTabSessionButton">ویرایش</string>
-
-    ---------- // EditSessionTabPlatform
-
-    <string name="EditSessionTabPlatformButton">ویرایش</string>
-
-    ---------- // EditSessionTabPayment
-
-    <string name="EditSessionTabPaymentPaymentHeader">نوع دریافت</string>
-
-    <string name="EditSessionTabPaymentButton">ویرایش</string>
-
-    // Index Fragments
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- CenterSchedules Fragment ----------
-    */
-
-    <string name="CenterSchedulesFragmentTitle">برنامه‌های مرکز درمانی</string>
-
-    <string name="CenterSchedulesFragmentFilters">فیلترها:</string>
-
-    /*
-    ---------- RoomSchedules Fragment ----------
-    */
-
-    <string name="RoomSchedulesFragmentTitle">برنامه‌های اتاق درمان</string>
-
-    <string name="RoomSchedulesFragmentFilters">فیلترها:</string>
-
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="CreateScheduleTabPaymentAxisTotal">مبلغ جلسه</string>
 
     /*
     ---------- Cases2 Adapter ----------
