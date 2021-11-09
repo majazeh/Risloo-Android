@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -109,26 +108,8 @@ public class CreateScheduleFragment extends Fragment {
         payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         // Time Data
-        if (time instanceof CreateScheduleTabTimeFragment) {
-            if (((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
-            if (((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.errorTextView);
-            if (((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView);
-            if (((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView);
-            if (((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView);
-            if (((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView);
-            if (((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView);
-            if (((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView);
-            if (((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView);
-        }
+        if (time instanceof CreateScheduleTabTimeFragment)
+            ((CreateScheduleTabTimeFragment) time).hideValid();
 
         // Reference Data
         if (reference instanceof CreateScheduleTabReferenceFragment) {
@@ -163,25 +144,8 @@ public class CreateScheduleFragment extends Fragment {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
         // Time Data
-        if (time instanceof CreateScheduleTabTimeFragment) {
-            data.put("time", DateManager.jalHHsMM(((CreateScheduleTabTimeFragment) time).startTime));
-            data.put("duration", ((CreateScheduleTabTimeFragment) time).duration);
-            data.put("date_type", ((CreateScheduleTabTimeFragment) time).dateType);
-
-            if (((CreateScheduleTabTimeFragment) time).dateType.equals("specific")) {
-                data.put("date", ((CreateScheduleTabTimeFragment) time).specifiedDate);
-            } else {
-                data.put("week_days", ((CreateScheduleTabTimeFragment) time).patternDaysAdapter.getIds());
-                data.put("repeat_status", ((CreateScheduleTabTimeFragment) time).patternType);
-
-                if (((CreateScheduleTabTimeFragment) time).patternType.equals("weeks")) {
-                    data.put("repeat", ((CreateScheduleTabTimeFragment) time).repeatWeeks);
-                } else {
-                    data.put("repeat_from", ((CreateScheduleTabTimeFragment) time).periodStartDate);
-                    data.put("repeat_to", ((CreateScheduleTabTimeFragment) time).periodEndDate);
-                }
-            }
-        }
+        if (time instanceof CreateScheduleTabTimeFragment)
+            ((CreateScheduleTabTimeFragment) time).setHashmap(data);
 
         // Reference Data
         if (reference instanceof CreateScheduleTabReferenceFragment) {
@@ -252,40 +216,17 @@ public class CreateScheduleFragment extends Fragment {
 
                                             // Time Data
                                             case "time":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "duration":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
-                                                break;
                                             case "date_type":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "date":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView, validation);
-                                                break;
                                             case "week_days":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView, validation);
-                                                break;
                                             case "repeat_status":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView, validation);
-                                                break;
                                             case "repeat":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView, validation);
-                                                break;
                                             case "repeat_from":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView, validation);
-                                                break;
                                             case "repeat_to":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView, validation);
+                                                    ((CreateScheduleTabTimeFragment) time).showValid(key, validation);
+
                                                 break;
 
                                             // Reference Data

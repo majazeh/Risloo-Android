@@ -12,26 +12,27 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.DateManager;
-import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CreateScheduleTabTimeFragment extends Fragment {
 
     // Binding
-    public FragmentCreateScheduleTabTimeBinding binding;
+    private FragmentCreateScheduleTabTimeBinding binding;
 
     // Adapters
     public DialogSelectedAdapter patternDaysAdapter;
@@ -40,7 +41,7 @@ public class CreateScheduleTabTimeFragment extends Fragment {
     private Fragment current;
 
     // Vars
-    public String startTime = "", duration = "60", dateType = "specific", patternType = "weeks", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
+    private String startTime = "", duration = "60", dateType = "specific", patternType = "weeks", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
 
     @Nullable
     @Override
@@ -84,23 +85,35 @@ public class CreateScheduleTabTimeFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.patternDaysIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabTimeButton), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_lightblue500_ripple_lightblue800);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabTimeButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), startTime, "startTime");
-        }).widget(binding.startTimeIncludeLayout.selectTextView);
-
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.durationIncludeLayout.inputEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
             return false;
         });
 
+        binding.repeatWeeksIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.repeatWeeksIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.repeatWeeksIncludeLayout.inputEditText);
+            return false;
+        });
+
         binding.durationIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             duration = binding.durationIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.repeatWeeksIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            repeatWeeks = binding.repeatWeeksIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.patternDaysIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "patternDays");
+            return false;
         });
 
         binding.dateTypeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
@@ -132,16 +145,6 @@ public class CreateScheduleTabTimeFragment extends Fragment {
             }
         });
 
-        CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), specifiedDate, "specifiedDate");
-        }).widget(binding.specifiedDateIncludeLayout.selectTextView);
-
-        binding.patternDaysIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "patternDays");
-            return false;
-        });
-
         binding.patternTypeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.first_radioButton:
@@ -159,15 +162,13 @@ public class CreateScheduleTabTimeFragment extends Fragment {
             }
         });
 
-        binding.repeatWeeksIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.repeatWeeksIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.repeatWeeksIncludeLayout.inputEditText);
-            return false;
-        });
+        CustomClickView.onDelayedListener(() -> {
+            SheetManager.showTimeBottomSheet(requireActivity(), startTime, "startTime");
+        }).widget(binding.startTimeIncludeLayout.selectTextView);
 
-        binding.repeatWeeksIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            repeatWeeks = binding.repeatWeeksIncludeLayout.inputEditText.getText().toString().trim();
-        });
+        CustomClickView.onDelayedListener(() -> {
+            SheetManager.showDateBottomSheet(requireActivity(), specifiedDate, "specifiedDate");
+        }).widget(binding.specifiedDateIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
             SheetManager.showDateBottomSheet(requireActivity(), periodStartDate, "periodStartDate");
@@ -249,6 +250,125 @@ public class CreateScheduleTabTimeFragment extends Fragment {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setHashmap(HashMap data) {
+        if (!startTime.equals(""))
+            data.put("time", DateManager.jalHHsMM(startTime));
+        else
+            data.remove("time");
+
+        if (!duration.equals(""))
+            data.put("duration", duration);
+        else
+            data.remove("duration");
+
+        if (!dateType.equals(""))
+            data.put("date_type", dateType);
+        else
+            data.remove("date_type");
+
+        if (dateType.equals("specific")) {
+
+            if (!specifiedDate.equals(""))
+                data.put("date", specifiedDate);
+            else
+                data.remove("date");
+
+        } else {
+
+            if (!patternDaysAdapter.getIds().isEmpty())
+                data.put("week_days", patternDaysAdapter.getIds());
+            else
+                data.remove("week_days");
+
+            if (!patternType.equals(""))
+                data.put("repeat_status", patternType);
+            else
+                data.remove("repeat_status");
+
+            if (patternType.equals("weeks")) {
+
+                if (!repeatWeeks.equals(""))
+                    data.put("repeat", repeatWeeks);
+                else
+                    data.remove("repeat");
+
+            } else {
+
+                if (!periodStartDate.equals(""))
+                    data.put("repeat_from", periodStartDate);
+                else
+                    data.remove("repeat_from");
+
+                if (!periodEndDate.equals(""))
+                    data.put("repeat_to", periodEndDate);
+                else
+                    data.remove("repeat_to");
+            }
+        }
+
+    }
+
+    public void hideValid() {
+        if (binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
+
+        if (binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
+
+        if (binding.dateTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.dateTypeErrorLayout.getRoot(), binding.dateTypeErrorLayout.errorTextView);
+
+        if (binding.specifiedDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.specifiedDateErrorLayout.getRoot(), binding.specifiedDateErrorLayout.errorTextView);
+
+        if (binding.patternDaysErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.patternDaysErrorLayout.getRoot(), binding.patternDaysErrorLayout.errorTextView);
+
+        if (binding.patternTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.patternTypeErrorLayout.getRoot(), binding.patternTypeErrorLayout.errorTextView);
+
+        if (binding.repeatWeeksErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.repeatWeeksErrorLayout.getRoot(), binding.repeatWeeksErrorLayout.errorTextView);
+
+        if (binding.periodStartDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.periodStartDateErrorLayout.getRoot(), binding.periodStartDateErrorLayout.errorTextView);
+
+        if (binding.periodEndDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((MainActivity) requireActivity()).validatoon.hideValid(binding.periodEndDateErrorLayout.getRoot(), binding.periodEndDateErrorLayout.errorTextView);
+    }
+
+    public void showValid(String key, String validation) {
+        switch (key) {
+            case "time":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, validation);
+                break;
+            case "duration":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, validation);
+                break;
+            case "date_type":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.dateTypeErrorLayout.getRoot(), binding.dateTypeErrorLayout.errorTextView, validation);
+                break;
+            case "date":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.specifiedDateErrorLayout.getRoot(), binding.specifiedDateErrorLayout.errorTextView, validation);
+                break;
+            case "week_days":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.patternDaysErrorLayout.getRoot(), binding.patternDaysErrorLayout.errorTextView, validation);
+                break;
+            case "repeat_status":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.patternTypeErrorLayout.getRoot(), binding.patternTypeErrorLayout.errorTextView, validation);
+                break;
+            case "repeat":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.repeatWeeksErrorLayout.getRoot(), binding.repeatWeeksErrorLayout.errorTextView, validation);
+                break;
+            case "repeat_from":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.periodStartDateErrorLayout.getRoot(), binding.periodStartDateErrorLayout.errorTextView, validation);
+                break;
+            case "repeat_to":
+                ((MainActivity) requireActivity()).validatoon.showValid(binding.periodEndDateErrorLayout.getRoot(), binding.periodEndDateErrorLayout.errorTextView, validation);
+                break;
         }
     }
 
