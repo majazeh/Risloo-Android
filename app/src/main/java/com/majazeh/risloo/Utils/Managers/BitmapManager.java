@@ -44,6 +44,14 @@ public class BitmapManager {
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
+    public static Bitmap pathToBitmap(String path) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = false;
+        options.inSampleSize = Math.max(1, 2);
+
+        return BitmapFactory.decodeFile(path, options);
+    }
+
     public static Bitmap uriToBitmap(Activity activity, Uri uri) {
         try {
             InputStream imageStream = activity.getContentResolver().openInputStream(uri);

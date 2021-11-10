@@ -3,25 +3,24 @@ package com.majazeh.risloo.Utils.Managers;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.core.content.FileProvider;
 
 import com.majazeh.risloo.BuildConfig;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ResultManager {
 
     // Vars
-    public static Bitmap bitmap = null;
+    public static File file = null;
     public static String path = "";
 
     /*
@@ -29,54 +28,62 @@ public class ResultManager {
     */
 
     public static void fileResult(Activity activity, Intent data, TextView textView) {
-        Uri fileUri = data.getData();
+        Uri uri = data.getData();
 
-        path = PathManager.localPath(activity, fileUri);
+        path = PathManager.localPath(activity, uri);
 
-        if (path != null && textView != null)
+        if (path != null && textView != null) {
             textView.setText(StringManager.substring(path, '/'));
-    }
-
-    public static void galleryResult(Activity activity, Intent data, CircleImageView circleImageView, TextView textView) {
-        try {
-            Uri imageUri = data.getData();
-            InputStream imageStream = activity.getContentResolver().openInputStream(imageUri);
-            Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
-
-            path = PathManager.localPath(activity, imageUri);
-            bitmap = BitmapManager.scaleToCenter(imageBitmap);
-
-            if (path != null && bitmap != null)
-                circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
-
-            if (textView != null)
-                textView.setVisibility(View.GONE);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
-    public static void cameraResult(Activity activity, String selectedPath, CircleImageView circleImageView, TextView textView) {
-        File imageFile = new File(selectedPath);
-        Uri imageUri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", imageFile);
+    public static void galleryResult(Activity activity, Intent data) {
+        Uri uri = data.getData();
+        Bitmap bitmap = BitmapManager.uriToBitmap(activity, uri);
 
-        IntentManager.mediaScan(activity, imageUri);
+        path = PathManager.localPath(activity, uri);
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = false;
-        options.inSampleSize = Math.max(1, 2);
+        if (path != null && bitmap != null) {
+            file = FileManager.createBitmapFile(activity, BitmapManager.modifyOrientation(bitmap, path), "image");
+            IntentManager.crop(activity, Uri.fromFile(file));
+        }
+    }
 
-        Bitmap imageBitmap = BitmapFactory.decodeFile(selectedPath, options);
+    public static void cameraResult(Activity activity, String selectedPath) {
+        Uri uri;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", new File(selectedPath));
+        else
+            uri = Uri.fromFile(file);
+
+        Bitmap bitmap = BitmapManager.pathToBitmap(selectedPath);
+
+        IntentManager.mediaScan(activity, uri);
 
         path = selectedPath;
-        bitmap = BitmapManager.scaleToCenter(imageBitmap);
 
-        if (path != null && bitmap != null)
+        if (path != null && bitmap != null) {
+            file = FileManager.createBitmapFile(activity, BitmapManager.modifyOrientation(bitmap, path), "image");
+            IntentManager.crop(activity, Uri.fromFile(file));
+        }
+
+    }
+
+    public static void cropResult(Activity activity, Intent data, CircleImageView circleImageView, TextView textView) {
+        Uri uri = UCrop.getOutput(data);
+        Bitmap bitmap = BitmapManager.uriToBitmap(activity, uri);
+
+        path = PathManager.localPath(activity, uri);
+
+        if (path != null && bitmap != null) {
+            file = FileManager.createBitmapFile(activity, BitmapManager.modifyOrientation(bitmap, path), "image");
             circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
 
-        if (textView != null)
-            textView.setVisibility(View.GONE);
+            if (textView != null) {
+                textView.setVisibility(View.GONE);
+            }
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -21,6 +22,7 @@ import com.majazeh.risloo.Views.Activities.DisplayActivity;
 import com.majazeh.risloo.Views.Activities.IntroActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 
@@ -101,14 +103,30 @@ public class IntentManager {
     public static String camera(Activity activity) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        File imageFile = FileManager.createImageFile(activity);
-        Uri imageUri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", imageFile);
+        File file = FileManager.createImageFile(activity);
+        if (file != null) {
+            Uri uri;
 
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", file);
+            else
+                uri = Uri.fromFile(file);
 
-        activity.startActivityForResult(intent, 400);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
-        return imageFile.getAbsolutePath();
+            activity.startActivityForResult(intent, 400);
+
+            return file.getAbsolutePath();
+        }
+
+        return "";
+    }
+
+    public static void crop(Activity activity, Uri uri) {
+        UCrop.of(uri, uri)
+                .withAspectRatio(1, 1)
+                .withMaxResultSize(512, 512)
+                .start(activity);
     }
 
     /*

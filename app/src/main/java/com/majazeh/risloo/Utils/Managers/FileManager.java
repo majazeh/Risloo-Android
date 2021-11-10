@@ -27,6 +27,7 @@ public class FileManager {
     ---------- Create ----------
     */
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void createExternalFile(String name) {
         File file = new File(Environment.getExternalStorageDirectory() + name);
 
@@ -42,6 +43,27 @@ public class FileManager {
             String suffix = ".jpg";
 
             return File.createTempFile(prefix, suffix, directory);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static File createBitmapFile(Context context, Bitmap bitmap, String fileName) {
+        try {
+            File file = new File(context.getCacheDir(), fileName);
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
+                file.getParentFile().mkdirs();
+            if (!file.exists())
+                file.createNewFile();
+
+            FileOutputStream fos = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+
+            return file;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -85,24 +107,6 @@ public class FileManager {
             oos.writeObject(jsonArray.toString());
             oos.flush();
             oos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void writeBitmapToCache(Context context, Bitmap bitmap, String fileName) {
-        try {
-            File file = new File(context.getCacheDir(), fileName);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                file.getParentFile().mkdirs();
-            if (!file.exists())
-                file.createNewFile();
-
-            FileOutputStream fos = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

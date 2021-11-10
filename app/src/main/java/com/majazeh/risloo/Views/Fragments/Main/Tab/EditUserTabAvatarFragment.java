@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Main.Tab;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SheetManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
@@ -35,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
@@ -51,7 +49,7 @@ public class EditUserTabAvatarFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private Bitmap avatarBitmap = null;
+    private File avatarFile = null;
     public String avatarPath = "";
 
     @Nullable
@@ -86,7 +84,7 @@ public class EditUserTabAvatarFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            if (avatarBitmap == null) {
+            if (avatarFile == null) {
                 if (!avatarPath.equals(""))
                     ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastImageNewNotSelected));
                 else
@@ -127,25 +125,23 @@ public class EditUserTabAvatarFragment extends Fragment {
     public void responseAction(String method, Intent data) {
         switch (method) {
             case "gallery":
-                ResultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
-
-                avatarPath = ResultManager.path;
-                avatarBitmap = ResultManager.bitmap;
+                ResultManager.galleryResult(requireActivity(), data);
                 break;
             case "camera":
-                ResultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                ResultManager.cameraResult(requireActivity(), avatarPath);
+                break;
+            case "crop":
+                ResultManager.cropResult(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
 
+                avatarFile = ResultManager.file;
                 avatarPath = ResultManager.path;
-                avatarBitmap = ResultManager.bitmap;
                 break;
         }
     }
 
     private void setHashmap() {
-        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-
-        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
-            data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+        if (avatarFile != null)
+            data.put("avatar", avatarFile);
         else
             data.remove("avatar");
     }
@@ -171,7 +167,8 @@ public class EditUserTabAvatarFragment extends Fragment {
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
 
-                        FileManager.deleteFileFromCache(requireActivity(), "image");
+                        if (avatarFile != null)
+                            avatarFile.delete();
                     }
                 }
 
@@ -219,7 +216,8 @@ public class EditUserTabAvatarFragment extends Fragment {
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
 
-                        FileManager.deleteFileFromCache(requireActivity(), "image");
+                        if (avatarFile != null)
+                            avatarFile.delete();
                     }
                 }
 
@@ -264,6 +262,9 @@ public class EditUserTabAvatarFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+
+        if (avatarFile != null)
+            avatarFile.delete();
     }
 
 }

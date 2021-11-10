@@ -1,5 +1,7 @@
 package com.majazeh.risloo.Views.Activities;
 
+import static android.content.RestrictionsManager.RESULT_ERROR;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -55,6 +57,7 @@ import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
+import com.yalantis.ucrop.UCrop;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -566,6 +569,17 @@ public class MainActivity extends AppCompatActivity {
                             ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
 
                         break;
+                    case UCrop.REQUEST_CROP:
+                        if (fragmont.getCurrent() instanceof CreateCenterFragment)
+                            ((CreateCenterFragment) fragmont.getCurrent()).responseAction("crop", data);
+
+                        if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
+                            ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("crop", data);
+
+                        if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
+                            ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("crop", data);
+
+                        break;
                 }
             } break;
             case RESULT_CANCELED: {
@@ -581,6 +595,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             } break;
+            case UCrop.RESULT_ERROR: {
+                ToastManager.showErrorToast(this, getResources().getString(R.string.ToastIntentCropException));
+                break;
+            }
         }
     }
 

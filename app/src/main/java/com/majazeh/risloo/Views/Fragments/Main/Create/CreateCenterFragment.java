@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Fragments.Main.Create;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,7 +15,6 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -36,6 +34,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -49,10 +48,10 @@ public class CreateCenterFragment extends Fragment {
     public DialogSelectedAdapter phonesAdapter;
 
     // Objects
-    private Bitmap avatarBitmap = null;
     private HashMap data, header;
 
     // Vars
+    private File avatarFile = null;
     public String type = "personal_clinic", managerId = "", title = "", address = "", description = "", avatarPath = "";
 
     @Nullable
@@ -216,16 +215,16 @@ public class CreateCenterFragment extends Fragment {
     public void responseAction(String method, Intent data) {
         switch (method) {
             case "gallery":
-                ResultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
-
-                avatarPath = ResultManager.path;
-                avatarBitmap = ResultManager.bitmap;
+                ResultManager.galleryResult(requireActivity(), data);
                 break;
             case "camera":
-                ResultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.selectCircleImageView, null);
+                ResultManager.cameraResult(requireActivity(), avatarPath);
+                break;
+            case "crop":
+                ResultManager.cropResult(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
 
+                avatarFile = ResultManager.file;
                 avatarPath = ResultManager.path;
-                avatarBitmap = ResultManager.bitmap;
                 break;
         }
     }
@@ -262,14 +261,10 @@ public class CreateCenterFragment extends Fragment {
             else
                 data.remove("title");
 
-            if (avatarBitmap != null) {
-                FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-
-                if (FileManager.readFileFromCache(requireActivity(), "image") != null)
-                    data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
-                else
-                    data.remove("avatar");
-            }
+            if (avatarFile != null)
+                data.put("avatar", avatarFile);
+            else
+                data.remove("avatar");
         }
 
     }
@@ -293,8 +288,8 @@ public class CreateCenterFragment extends Fragment {
                         ((MainActivity) requireActivity()).navController.navigate(action);
                     });
 
-                    if (FileManager.readFileFromCache(requireActivity(), "image") != null)
-                        FileManager.deleteFileFromCache(requireActivity(), "image");
+                    if (avatarFile != null)
+                        avatarFile.delete();
                 }
             }
 
@@ -359,6 +354,9 @@ public class CreateCenterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+
+        if (avatarFile != null)
+            avatarFile.delete();
     }
 
 }
