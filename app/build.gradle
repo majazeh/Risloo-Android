@@ -14,7 +14,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 7
-        versionName "1.5.1"
+        versionName "1.6.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -153,7 +153,7 @@ dependencies {
 
     implementation 'com.github.chrisbanes:PhotoView:2.3.0' // ZoomImageView
     implementation 'com.github.samanzamani:PersianDate:1.1' // Persian Date
-    implementation 'com.github.yalantis:ucrop:2.2.6' // Urop Image
+    implementation 'com.github.yalantis:ucrop:2.2.7' // Urop Image
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0' // Facebook Shimmer
 
