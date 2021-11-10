@@ -546,6 +546,15 @@ public class BreadCrumb {
                         else
                             centerModel = null;
 
+                    } else if (bulkSampleModel.getRoom() != null) {
+                        roomModel = bulkSampleModel.getRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null)
+                            centerModel = roomModel.getRoomCenter();
+                        else
+                            centerModel = null;
+
                     } else {
                         roomModel = null;
                         roomType = "";
@@ -625,6 +634,15 @@ public class BreadCrumb {
                         else
                             centerModel = null;
 
+                    } else if (sampleModel.getSampleRoom() != null) {
+                        roomModel = sampleModel.getSampleRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null)
+                            centerModel = roomModel.getRoomCenter();
+                        else
+                            centerModel = null;
+
                     } else {
                         roomModel = null;
                         roomType = "";
@@ -674,6 +692,15 @@ public class BreadCrumb {
                         else
                             centerModel = null;
 
+                    } else if (scheduleModel.getRoom() != null) {
+                        roomModel = scheduleModel.getRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null)
+                            centerModel = roomModel.getRoomCenter();
+                        else
+                            centerModel = null;
+
                     } else {
                         roomModel = null;
                         roomType = "";
@@ -711,6 +738,15 @@ public class BreadCrumb {
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
+                        roomType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null)
+                            centerModel = roomModel.getRoomCenter();
+                        else
+                            centerModel = null;
+
+                    } else if (sessionModel.getRoom() != null) {
+                        roomModel = sessionModel.getRoom();
                         roomType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
