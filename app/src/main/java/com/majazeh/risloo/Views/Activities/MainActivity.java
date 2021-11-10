@@ -582,7 +582,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             } break;
-            case RESULT_CANCELED: {
+            case RESULT_ERROR: {
                 switch (requestCode) {
                     case 100:
                         ToastManager.showErrorToast(this, getResources().getString(R.string.ToastIntentFileException));

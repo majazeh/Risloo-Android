@@ -107,10 +107,10 @@
     <string name="ToastPermissionGalleryException">ریسلو دسترسی به البوم ندارد.</string>
     <string name="ToastPermissionCameraException">ریسلو دسترسی به دوربین ندارد.</string>
 
-    <string name="ToastIntentFileException">برنامه‌ی برای آپلود فایل وجود ندارد.</string>
-    <string name="ToastIntentGalleryException">برنامه‌ی برای انتخاب تصویر وجود ندارد.</string>
-    <string name="ToastIntentCameraException">برنامه‌ی برای گرفتن تصویر وجود ندارد.</string>
-    <string name="ToastIntentCropException">برنامه‌ی برای کراپ تصویر وجود ندارد.</string>
+    <string name="ToastIntentFileException">خطا در انتخاب فایل! لطفا دوباره تلاش کنید.</string>
+    <string name="ToastIntentGalleryException">خطا در انتخاب تصویر! لطفا دوباره تلاش کنید.</string>
+    <string name="ToastIntentCameraException">خطا در گرفتن تصویر! لطفا دوباره تلاش کنید.</string>
+    <string name="ToastIntentCropException">خطا در کراپ تصویر! لطفا دوباره تلاش کنید.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

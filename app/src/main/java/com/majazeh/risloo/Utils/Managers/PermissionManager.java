@@ -67,7 +67,14 @@ public class PermissionManager {
                 if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     return true;
                 } else {
-                    ActivityCompat.requestPermissions(activity, permissions, 400);
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 400);
+                    return false;
+                }
+            } else if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                    return true;
+                } else {
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, 400);
                     return false;
                 }
             } else {
