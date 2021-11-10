@@ -7,7 +7,8 @@
     <string name="AppDebugNote">شما هم اکنون در نسخه آزمایشی ریسلو هستید. هیچ اطلاعاتی در این نسخه حقیقی و ماندگار نیست.</string>
     <string name="AppDebugTag">نسخه آزمایشی</string>
 
-    <string name="AppImageContent">عکس</string>
+    <string name="AppImageCrop">Crop Pic</string>
+    <string name="AppImageContent">تصویر</string>
     <string name="AppInputEmpty">فیلد خالی است.</string>
 
     <string name="AppSearchHint">جستجو</string>

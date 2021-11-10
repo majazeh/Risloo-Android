@@ -100,7 +100,7 @@ public class RoomFragment extends Fragment {
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE) {
-                if (!type.equals("room") && !succesRequest) {
+                if (!type.equals("room") && !succesRequest && centerModel != null) {
                     try {
                         IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), centerModel.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                     } catch (JSONException e) {
