@@ -1,6 +1,5 @@
 package com.majazeh.risloo.Utils.Managers;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -20,8 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
 public class FileManager {
@@ -37,18 +34,17 @@ public class FileManager {
             file.mkdirs();
     }
 
-    @SuppressLint("SimpleDateFormat")
     public static File createImageFile(Activity activity) {
         try {
-            String timeStamp = new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date());
-            String fileName = "IMG_" + timeStamp + "_";
-            String fileSuffix = ".jpg";
+            File directory = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-            File storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            String prefix = "JPEG_" + System.currentTimeMillis() + "_";
+            String suffix = ".jpg";
 
-            return File.createTempFile(fileName, fileSuffix, storageDir);
+            return File.createTempFile(prefix, suffix, directory);
         } catch (IOException e) {
-            return new File("");
+            e.printStackTrace();
+            return null;
         }
     }
 

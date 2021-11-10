@@ -24,3 +24,9 @@
 
 -keepnames class * extends android.os.Parcelable
 -keepnames class * extends java.io.Serializable
+
+# ---------- // Urop Image Rules ---------- #
+
+-dontwarn com.yalantis.ucrop**
+-keep class com.yalantis.ucrop** { *; }
+-keep interface com.yalantis.ucrop** { *; }

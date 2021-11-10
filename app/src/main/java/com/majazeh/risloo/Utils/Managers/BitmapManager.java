@@ -1,16 +1,20 @@
 package com.majazeh.risloo.Utils.Managers;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.RectF;
+import android.net.Uri;
 import android.util.Base64;
 
 import androidx.exifinterface.media.ExifInterface;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class BitmapManager {
 
@@ -38,6 +42,16 @@ public class BitmapManager {
     public static Bitmap stringToBitmap(String value) {
         byte[] decodedByte = Base64.decode(value, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    public static Bitmap uriToBitmap(Activity activity, Uri uri) {
+        try {
+            InputStream imageStream = activity.getContentResolver().openInputStream(uri);
+            return BitmapFactory.decodeStream(imageStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /*

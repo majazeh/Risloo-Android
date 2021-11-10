@@ -153,6 +153,7 @@ dependencies {
 
     implementation 'com.github.chrisbanes:PhotoView:2.3.0' // ZoomImageView
     implementation 'com.github.samanzamani:PersianDate:1.1' // Persian Date
+    implementation 'com.github.yalantis:ucrop:2.2.6' // Urop Image
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0' // Facebook Shimmer
 
