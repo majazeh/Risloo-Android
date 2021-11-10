@@ -5,17 +5,17 @@ import androidx.annotation.NonNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ItemModel extends TypeModel{
-    private String type="";
-    private String image_url="";
+public class ItemModel extends TypeModel {
+    private String index ;
+    private String type = "";
+    private String image_url = "";
     private String text;
     private ItemAnswer answer;
     private String category;
     private String description;
-    private String user_answered="";
+    private String user_answered = "";
 
     public ItemModel(JSONObject jsonObject) {
-        super(jsonObject);
         try {
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
@@ -31,6 +31,8 @@ public class ItemModel extends TypeModel{
                 setCategory(jsonObject.getString("category"));
             if (!jsonObject.isNull("description"))
                 setDescription(jsonObject.getString("description"));
+            if (!jsonObject.isNull("index"))
+                setIndex(String.valueOf(jsonObject.getInt("index")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -91,6 +93,16 @@ public class ItemModel extends TypeModel{
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getIndex() {
+        return index;
+    }
+
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
 
     @NonNull
     @Override

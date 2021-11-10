@@ -49,10 +49,6 @@ public class SampleModel extends TypeModel {
     private int code;
 
     public SampleModel(JSONObject jsonObject) throws JSONException {
-//        String customDesign = "customScale" + jsonObject.scale.id;
-//        if(class customDesign){
-//            new customDesign();
-//        }
         super(jsonObject);
         if (!jsonObject.isNull("id"))
             setSampleId(jsonObject.getString("id"));
@@ -125,6 +121,7 @@ public class SampleModel extends TypeModel {
         if (!jsonObject.isNull("items")) {
             com.mre.ligheh.Model.Madule.List items = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("items").length(); i++) {
+                jsonObject.getJSONArray("items").getJSONObject(i).put("index", i+1);
                 items.add(new ItemModel(jsonObject.getJSONArray("items").getJSONObject(i)));
             }
             setItems(items);
@@ -143,7 +140,7 @@ public class SampleModel extends TypeModel {
                     setChain(chains);
                 }
                 if (!jsonObject1.isNull("id"))
-                setChainId(jsonObject1.getString("id"));
+                    setChainId(jsonObject1.getString("id"));
             } else {
                 setChainId(jsonObject.getString("chain"));
             }
@@ -152,6 +149,7 @@ public class SampleModel extends TypeModel {
         if (!jsonObject.isNull("prerequisites")) {
             com.mre.ligheh.Model.Madule.List prerequisites = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("prerequisites").length(); i++) {
+                jsonObject.getJSONArray("prerequisites").getJSONObject(i).put("index", i+1);
                 prerequisites.add(new PrerequisitesModel(jsonObject.getJSONArray("prerequisites").getJSONObject(i)));
             }
             setPrerequisites(prerequisites);
@@ -166,10 +164,10 @@ public class SampleModel extends TypeModel {
             com.mre.ligheh.Model.Madule.List profilesExtra = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("profiles").length(); i++) {
                 profiles.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
-                if (jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").equals("profile_png")){
+                if (jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").equals("profile_png")) {
                     profilesHalf.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
                 }
-                if (!jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").startsWith("profile_png") && jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").endsWith("png")){
+                if (!jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").startsWith("profile_png") && jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").endsWith("png")) {
                     profilesExtra.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
                 }
             }

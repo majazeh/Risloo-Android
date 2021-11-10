@@ -23,8 +23,6 @@ public class SampleAnswers {
     }
 
     public void sendRequest(String authorization, Response response) {
-        System.out.println("remote: " + remoteAnswers);
-        System.out.println("local: " + localAnswers);
         if (Model.request) {
         } else {
             HashMap data = new HashMap();
@@ -103,16 +101,15 @@ public class SampleAnswers {
     }
 
     public void addToPrerequisites(int key, Object value) {
+        for (int i = 0; i < prerequisites.size(); i++) {
+            if (String.valueOf(prerequisites.get(i).get(0)).equals(String.valueOf(key))) {
+                prerequisites.remove(i);
+                break;
+            }
+        }
         ArrayList arrayList = new ArrayList<String>();
         arrayList.add(key);
         arrayList.add(value);
-        Iterator<ArrayList<String>> iterator = prerequisites.iterator();
-        while (iterator.hasNext()) {
-            ArrayList a = iterator.next();
-            if (arrayList.get(0).equals(a.get(0))) {
-                prerequisites.remove(a);
-            }
-        }
         prerequisites.add(arrayList);
     }
 

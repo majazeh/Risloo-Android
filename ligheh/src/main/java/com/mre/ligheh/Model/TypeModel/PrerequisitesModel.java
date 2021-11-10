@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PrerequisitesModel extends TypeModel {
+    private String index ;
     private String type="";
     private String text="";
     private JSONObject answer;
@@ -31,6 +32,8 @@ public class PrerequisitesModel extends TypeModel {
                 setForce(jsonObject.getString("force"));
             if (!jsonObject.isNull("user_answered"))
                 setUser_answered(jsonObject.getString("user_answered"));
+            if (!jsonObject.isNull("index"))
+                setIndex(String.valueOf(jsonObject.getInt("index")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -91,6 +94,16 @@ public class PrerequisitesModel extends TypeModel {
     public void setUser_answered(String user_answered) {
         this.user_answered = user_answered;
     }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+
 
     @NonNull
     @Override

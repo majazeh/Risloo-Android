@@ -85,7 +85,7 @@ public class TestOptionalFragment extends Fragment {
             }
 
             if (options.size() != 0) {
-                adapter.setItems(options, item.getUser_answered(), model.getTitle());
+                adapter.setItems(options, item.getUser_answered(), item.getIndex());
                 binding.listRecyclerView.setAdapter(adapter);
             }
         } catch (JSONException e) {
