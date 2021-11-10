@@ -171,21 +171,23 @@ public class IntentManager {
         manager.setPrimaryClip(clip);
     }
 
-    public static void download(Context context, String folder, String url) {
-        String subPath;
+    public static void download(Context context, String url) {
+        String savePath;
+        String fullName = url.substring(url.lastIndexOf('/') + 1);
+        String subName = fullName.substring(0, fullName.indexOf("."));
 
-        if (!folder.equals("")) {
-            subPath = File.separator + "Risloo" + File.separator + folder + File.separator + url.substring(url.lastIndexOf('/'));
-            FileManager.createExternalFile(File.separator + "Risloo" + File.separator + folder);
+        if (fullName.startsWith("X1")) {
+            savePath = File.separator + "Risloo" + File.separator + subName + File.separator + fullName;
+            FileManager.createExternalFile(File.separator + "Risloo" + File.separator + subName);
         } else {
-            subPath = File.separator + "Risloo" + File.separator + url.substring(url.lastIndexOf('/'));
+            savePath = File.separator + "Risloo" + File.separator + fullName;
             FileManager.createExternalFile(File.separator + "Risloo");
         }
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.allowScanningByMediaScanner();
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, subPath);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, savePath);
 
         DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         manager.enqueue(request);

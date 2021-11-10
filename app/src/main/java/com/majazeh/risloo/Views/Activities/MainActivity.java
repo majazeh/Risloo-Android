@@ -508,7 +508,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 200:
                     if (fragmont.getCurrent() instanceof SampleFragment)
-                        IntentManager.download(this, ((SampleFragment) fragmont.getCurrent()).binding.scaleTextView.getText().toString(), ((SampleFragment) fragmont.getCurrent()).selectedProfileUrl);
+                        IntentManager.download(this, ((SampleFragment) fragmont.getCurrent()).selectedProfileUrl);
 
                     break;
                 case 300:

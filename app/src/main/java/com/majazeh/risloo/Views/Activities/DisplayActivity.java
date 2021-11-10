@@ -70,7 +70,7 @@ public class DisplayActivity extends AppCompatActivity {
 
         CustomClickView.onDelayedListener(() -> {
             if (PermissionManager.storagePermission(this))
-                IntentManager.download(this, "", path);
+                IntentManager.download(this, path);
         }).widget(binding.downloadImageView);
 
         CustomClickView.onClickListener(() -> {
@@ -145,7 +145,7 @@ public class DisplayActivity extends AppCompatActivity {
 
             switch (requestCode) {
                 case 200:
-                    IntentManager.download(this, "", path);
+                    IntentManager.download(this, path);
                     break;
             }
         }
