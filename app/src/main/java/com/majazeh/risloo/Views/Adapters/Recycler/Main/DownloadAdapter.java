@@ -7,9 +7,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.DownloadHolder;
 import com.majazeh.risloo.databinding.SingleItemDownloadBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -71,6 +73,8 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadHolder> {
 
     private void setData(DownloadHolder holder) {
         holder.binding.titleTextView.setText("قايل");
+
+        Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
     }
 
 }
