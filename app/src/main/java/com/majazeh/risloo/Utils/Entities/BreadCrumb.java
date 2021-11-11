@@ -64,6 +64,7 @@ public class BreadCrumb {
 
     // Objects
     private final Activity activity;
+    private NavDestination navDestination;
 
     // Models
     private BillingModel billingModel;
@@ -97,6 +98,8 @@ public class BreadCrumb {
 
     public SpannableStringBuilder getFa(NavDestination destination, Bundle arguments) {
         SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        navDestination = destination;
 
         ArrayList<String> list = intialize(destination, arguments);
         for (int i = 0; i < list.size(); i++) {
@@ -621,7 +624,7 @@ public class BreadCrumb {
 
                 if (roomModel.getRoomCenter() != null)
                     centerModel = roomModel.getRoomCenter();
-                else
+                else if (navDestination.getId() != R.id.roomFragment)
                     centerModel = null;
 
                 break;

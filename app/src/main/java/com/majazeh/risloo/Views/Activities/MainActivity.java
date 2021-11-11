@@ -207,12 +207,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            String faBreadCump = breadCrumb.getFa(destination, arguments).toString();
+
             binding.contentIncludeLayout.headerAppBarLayout.setExpanded(true);
 
-            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(breadCrumb.getFa(destination, arguments));
+            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(faBreadCump);
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
 
-            indexNavAdapter.setFocused(breadCrumb.getFa(destination, arguments).toString());
+            indexNavAdapter.setFocused(faBreadCump);
         });
 
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {

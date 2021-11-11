@@ -135,7 +135,7 @@ public class ReferenceFragment extends Fragment {
 
         userModel = (UserModel) ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (((MainActivity) requireActivity()).singleton.getUserModel().getId().equals(userModel.getUserId())) {
+        if (((MainActivity) requireActivity()).singleton.getUserModel().getId().equals(userModel.getId())) {
             if (!type.equals("room"))
                 setData(this.centerModel.getAcceptation());
             else
