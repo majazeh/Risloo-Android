@@ -166,7 +166,7 @@ public class Singleton {
 
                 boolean updated = false;
                 for (TypeModel model : models) {
-                    if (model.object.getString("mobile").equals(mobile)) {
+                    if (model.object.has("mobile") && !model.object.getString("mobile").equals("") && model.object.getString("mobile").equals(mobile)) {
                         model.object.put("password", password);
                         updated = true;
                         break;
@@ -233,7 +233,7 @@ public class Singleton {
                 ArrayList<TypeModel> models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {}.getType());
 
                 for (TypeModel model : models) {
-                    if (model.object.getString("mobile").equals(mobile))
+                    if (model.object.has("mobile") && !model.object.getString("mobile").equals("") && model.object.getString("mobile").equals(mobile))
                         return model.object.getString("password");
                 }
             }
@@ -249,7 +249,8 @@ public class Singleton {
                 ArrayList<String> mobiles = new ArrayList<>();
 
                 for (TypeModel model : models)
-                    mobiles.add(model.object.getString("mobile"));
+                    if (model.object.has("mobile") && !model.object.getString("mobile").equals(""))
+                        mobiles.add(model.object.getString("mobile"));
 
                 return mobiles;
             }
