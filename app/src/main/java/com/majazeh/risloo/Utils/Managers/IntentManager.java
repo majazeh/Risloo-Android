@@ -198,17 +198,17 @@ public class IntentManager {
         manager.setPrimaryClip(clip);
     }
 
-    public static void download(Context context, String url) {
+    public static void download(Activity activity, String url) {
         String savePath;
         String fullName = url.substring(url.lastIndexOf('/') + 1);
         String subName = fullName.substring(0, fullName.indexOf("."));
 
         if (fullName.startsWith("X1")) {
             savePath = File.separator + "Risloo" + File.separator + subName + File.separator + fullName;
-            FileManager.createExternalFile(File.separator + "Risloo" + File.separator + subName);
+            FileManager.createExternalFile(activity, File.separator + "Risloo" + File.separator + subName);
         } else {
             savePath = File.separator + "Risloo" + File.separator + fullName;
-            FileManager.createExternalFile(File.separator + "Risloo");
+            FileManager.createExternalFile(activity, File.separator + "Risloo");
         }
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
@@ -216,7 +216,7 @@ public class IntentManager {
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, savePath);
 
-        DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        DownloadManager manager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
         manager.enqueue(request);
     }
 

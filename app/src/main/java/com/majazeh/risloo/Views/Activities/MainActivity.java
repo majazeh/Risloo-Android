@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
             images.add(R.drawable.ic_balance_scale_light);
         }
 
-        if (permissoon.showDownloads()) {
+        if (permissoon.showDownloads(this)) {
             titles.add(getResources().getString(R.string.MainTitleDownloads));
             description.add(getResources().getString(R.string.MainDescDownloads));
             images.add(R.drawable.ic_arrow_to_bottom_light);

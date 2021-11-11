@@ -150,7 +150,7 @@ public class SampleFragment extends Fragment {
                     selectedProfileUrl = profileUrls.get(position);
 
                     if (PermissionManager.storagePermission(requireActivity()))
-                        IntentManager.download(requireContext(), selectedProfileUrl);
+                        IntentManager.download(requireActivity(), selectedProfileUrl);
 
                     parent.setSelection(parent.getAdapter().getCount());
 

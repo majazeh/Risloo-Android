@@ -28,8 +28,8 @@ public class FileManager {
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void createExternalFile(String name) {
-        File file = new File(Environment.getExternalStorageDirectory() + name);
+    public static void createExternalFile(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
 
         if (!file.exists())
             file.mkdirs();
@@ -221,8 +221,8 @@ public class FileManager {
         return file.exists();
     }
 
-    public static boolean hasFileInDownloads(String name) {
-        File file = new File(Environment.getExternalStorageDirectory(), name);
+    public static boolean hasFileInDownloads(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
         return file.exists();
     }
 
