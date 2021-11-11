@@ -151,8 +151,6 @@ public class BreadCrumb {
                 return sessions();
             case R.id.usersFragment:
                 return users();
-            case R.id.scalesFragment:
-                return scales();
             case R.id.samplesFragment:
                 chainId = SamplesFragmentArgs.fromBundle(arguments).getChainId();
                 sampleIds = SamplesFragmentArgs.fromBundle(arguments).getSampleIds();
@@ -160,6 +158,8 @@ public class BreadCrumb {
                 return samples();
             case R.id.bulkSamplesFragment:
                 return bulkSamples();
+            case R.id.scalesFragment:
+                return scales();
             case R.id.documentsFragment:
                 return documents();
             case R.id.downloadsFragment:
@@ -378,16 +378,16 @@ public class BreadCrumb {
                 NavDirections action = NavigationMainDirections.actionGlobalUsersFragment();
                 ((MainActivity) activity).navController.navigate(action);
             } break;
-            case R.id.scalesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
             case R.id.samplesFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(chainId, sampleIds);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.bulkSamplesFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalBulkSamplesFragment();
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.scalesFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.documentsFragment: {
@@ -884,20 +884,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> scales() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.ScalesFragmentTitle));
-
-        destinationIds = scalesIds();
-        return list;
-    }
-    private ArrayList<Integer> scalesIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.scalesFragment);
-
-        return list;
-    }
-
     private ArrayList<String> samples() {
         ArrayList<String> list = dashboard();
         list.add(activity.getResources().getString(R.string.SamplesFragmentTitle));
@@ -922,6 +908,20 @@ public class BreadCrumb {
     private ArrayList<Integer> bulkSamplesIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.bulkSamplesFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> scales() {
+        ArrayList<String> list = dashboard();
+        list.add(activity.getResources().getString(R.string.ScalesFragmentTitle));
+
+        destinationIds = scalesIds();
+        return list;
+    }
+    private ArrayList<Integer> scalesIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.scalesFragment);
 
         return list;
     }

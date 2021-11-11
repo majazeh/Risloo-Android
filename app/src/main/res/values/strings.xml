@@ -299,9 +299,9 @@
     <string name="MainTitleCases">پرونده‌ها</string>
     <string name="MainTitleSessions">جلسات</string>
     <string name="MainTitleUsers">اعضاء</string>
-    <string name="MainTitleScales">ارزیابی‌ها</string>
     <string name="MainTitleSamples">نمونه‌ها</string>
     <string name="MainTitleBulkSamples">نمونه‌های گروهی</string>
+    <string name="MainTitleScales">ارزیابی‌ها</string>
     <string name="MainTitleDocuments">مدارک</string>
     <string name="MainTitleDownloads">دانلودها</string>
 
@@ -310,9 +310,9 @@
     <string name="MainDescCases">پرونده‌های من</string>
     <string name="MainDescSessions">جلسات درمانی من</string>
     <string name="MainDescUsers">اعضاء موجود در سامانه</string>
-    <string name="MainDescScales">آزمون‌های روان شناختی موجود در سامانه</string>
     <string name="MainDescSamples">آزمون‌های گرفته شده</string>
     <string name="MainDescBulkSamples">آزمون‌های گروهی گرفته شده</string>
+    <string name="MainDescScales">آزمون‌های روان شناختی موجود در سامانه</string>
     <string name="MainDescDocuments">مدارک موجود در سامانه</string>
     <string name="MainDescDownloads">همه فایل‌ها و تصاویر دانلود شده</string>
 

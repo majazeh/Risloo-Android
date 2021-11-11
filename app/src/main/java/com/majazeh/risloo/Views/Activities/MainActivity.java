@@ -316,17 +316,20 @@ public class MainActivity extends AppCompatActivity {
             images.add(R.drawable.ic_users_light);
         }
 
-        titles.add(getResources().getString(R.string.MainTitleScales));
         titles.add(getResources().getString(R.string.MainTitleSamples));
-        description.add(getResources().getString(R.string.MainDescScales));
         description.add(getResources().getString(R.string.MainDescSamples));
-        images.add(R.drawable.ic_balance_scale_light);
         images.add(R.drawable.ic_vial_light);
 
         if (permissoon.showBulkSamples(singleton.getUserModel())) {
             titles.add(getResources().getString(R.string.MainTitleBulkSamples));
             description.add(getResources().getString(R.string.MainDescBulkSamples));
             images.add(R.drawable.ic_users_medical_light);
+        }
+
+        if (permissoon.showScales(singleton.getUserModel())) {
+            titles.add(getResources().getString(R.string.MainTitleScales));
+            description.add(getResources().getString(R.string.MainDescScales));
+            images.add(R.drawable.ic_balance_scale_light);
         }
 
         if (permissoon.showDownloads()) {
@@ -388,16 +391,16 @@ public class MainActivity extends AppCompatActivity {
                 NavDirections action = NavigationMainDirections.actionGlobalUsersFragment();
                 navController.navigate(action);
             } break;
-            case "ارزیابی\u200Cها": {
-                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
-                navController.navigate(action);
-            } break;
             case "نمونه\u200Cها": {
                 NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, null);
                 navController.navigate(action);
             } break;
             case "نمونه\u200Cهای گروهی": {
                 NavDirections action = NavigationMainDirections.actionGlobalBulkSamplesFragment();
+                navController.navigate(action);
+            } break;
+            case "ارزیابی\u200Cها": {
+                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
                 navController.navigate(action);
             } break;
             case "مدارک": {

@@ -40,6 +40,23 @@ public class Permissoon {
         } return false;
     }
 
+    public boolean showScales(UserModel model) {
+        if (model != null) {
+            if (model.getUserType().equals("admin") || model.getUserType().equals("operator"))
+                return true;
+
+            if (!model.getCenterList().data().isEmpty())
+                for (TypeModel typeModel : model.getCenterList().data()) {
+                    CenterModel centerModel = (CenterModel) typeModel;
+
+                    if (centerModel != null && centerModel.getAcceptation() != null)
+                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
+                            return true;
+                }
+
+        } return false;
+    }
+
     public boolean showDownloads() {
         return FileManager.hasFileInDownloads("Risloo");
     }
