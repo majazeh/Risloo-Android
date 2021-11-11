@@ -10,8 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.DownloadAdapter;
 import com.majazeh.risloo.databinding.FragmentDownloadsBinding;
+
+import java.io.File;
 
 public class DownloadsFragment extends Fragment {
 
@@ -19,7 +23,7 @@ public class DownloadsFragment extends Fragment {
     private FragmentDownloadsBinding binding;
 
     // Adapters
-//    private DownloadAdapter adapter;
+    private DownloadAdapter adapter;
 
     @Nullable
     @Override
@@ -34,14 +38,18 @@ public class DownloadsFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new DownloadAdapter(requireActivity());
+        adapter = new DownloadAdapter(requireActivity());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.DownloadsFragmentTitle));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedGridRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setData() {
+        File file = FileManager.createExternalFile(requireActivity(), "Risloo");
+
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
         // TODO : Place Code When Needed
     }
 

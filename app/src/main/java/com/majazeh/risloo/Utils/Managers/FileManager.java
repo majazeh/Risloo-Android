@@ -28,11 +28,13 @@ public class FileManager {
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void createExternalFile(Activity activity, String name) {
+    public static File createExternalFile(Activity activity, String name) {
         File file = new File(activity.getExternalCacheDir(), name);
 
         if (!file.exists())
             file.mkdirs();
+
+        return file;
     }
 
     public static File createImageFile(Activity activity) {

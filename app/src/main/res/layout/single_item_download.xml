@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:padding="@dimen/_8sdp"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
+    tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp">
+
+    <ImageView
+        android:id="@+id/avatar_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/title_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        tools:text="عنوان" />
+
+</LinearLayout>
