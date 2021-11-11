@@ -329,6 +329,12 @@ public class MainActivity extends AppCompatActivity {
             images.add(R.drawable.ic_users_medical_light);
         }
 
+        if (permissoon.showDownloads()) {
+            titles.add(getResources().getString(R.string.MainTitleDownloads));
+            description.add(getResources().getString(R.string.MainDescDownloads));
+            images.add(R.drawable.ic_arrow_to_bottom_light);
+        }
+
         for (int i = 0; i < titles.size(); i++) {
             try {
                 JSONObject object = new JSONObject();
@@ -396,6 +402,10 @@ public class MainActivity extends AppCompatActivity {
             } break;
             case "مدارک": {
                 NavDirections action = NavigationMainDirections.actionGlobalDocumentsFragment();
+                navController.navigate(action);
+            } break;
+            case "دانلودها": {
+                NavDirections action = NavigationMainDirections.actionGlobalDownloadsFragment();
                 navController.navigate(action);
             } break;
         }

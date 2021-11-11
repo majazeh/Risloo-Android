@@ -221,6 +221,11 @@ public class FileManager {
         return file.exists();
     }
 
+    public static boolean hasFileInDownloads(String name) {
+        File file = new File(Environment.getExternalStorageDirectory(), name);
+        return file.exists();
+    }
+
     /*
     ---------- Delete ----------
     */

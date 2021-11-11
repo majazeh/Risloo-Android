@@ -45,6 +45,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Index.CenterUsersFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CentersFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.ClientReportsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.DocumentsFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.DownloadsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.PaymentsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomPlatformsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragment;
@@ -246,6 +247,9 @@ public class Fragmont {
             return fragment;
 
         else if (fragment instanceof DocumentsFragment)
+            return fragment;
+
+        else if (fragment instanceof DownloadsFragment)
             return fragment;
 
         else if (fragment instanceof PaymentsFragment)

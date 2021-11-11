@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.factor.bouncy.BouncyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:fillViewport="true"
+    android:layoutDirection="rtl"
+    app:fling_animation_size=".3"
+    app:overscroll_animation_size=".3"
+    tools:context=".Views.Fragments.Main.Index.DownloadsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_12sdp"
+        tools:paddingBottom="0dp">
+
+        <include
+            android:id="@+id/header_includeLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/index_singleLayout"
+            layout="@layout/component_single_center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.factor.bouncy.BouncyNestedScrollView>

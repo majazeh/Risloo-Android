@@ -162,6 +162,8 @@ public class BreadCrumb {
                 return bulkSamples();
             case R.id.documentsFragment:
                 return documents();
+            case R.id.downloadsFragment:
+                return downloads();
 
             // -------------------- Toolbar
 
@@ -390,6 +392,10 @@ public class BreadCrumb {
             } break;
             case R.id.documentsFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalDocumentsFragment();
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.downloadsFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalDownloadsFragment();
                 ((MainActivity) activity).navController.navigate(action);
             } break;
 
@@ -930,6 +936,20 @@ public class BreadCrumb {
     private ArrayList<Integer> documentsIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.documentsFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> downloads() {
+        ArrayList<String> list = dashboard();
+        list.add(activity.getResources().getString(R.string.DownloadsFragmentTitle));
+
+        destinationIds = downloadsIds();
+        return list;
+    }
+    private ArrayList<Integer> downloadsIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.downloadsFragment);
 
         return list;
     }

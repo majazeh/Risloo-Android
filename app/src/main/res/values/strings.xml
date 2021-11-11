@@ -303,6 +303,7 @@
     <string name="MainTitleSamples">نمونه‌ها</string>
     <string name="MainTitleBulkSamples">نمونه‌های گروهی</string>
     <string name="MainTitleDocuments">مدارک</string>
+    <string name="MainTitleDownloads">دانلودها</string>
 
     <string name="MainDescDashboard">خلاصه‌ای از سامانه</string>
     <string name="MainDescCenters">همه مراکز درمانی</string>
@@ -313,6 +314,7 @@
     <string name="MainDescSamples">آزمون‌های گرفته شده</string>
     <string name="MainDescBulkSamples">آزمون‌های گروهی گرفته شده</string>
     <string name="MainDescDocuments">مدارک موجود در سامانه</string>
+    <string name="MainDescDownloads">همه فایل‌ها و تصاویر دانلود شده</string>
 
     <string name="MainToolbarMe">مشاهده پروفایل</string>
     <string name="MainToolbarAccounting">حسابداری</string>
@@ -734,6 +736,13 @@
     <string name="DocumentsFragmentTitle">مدارک</string>
 
     <string name="DocumentsFragmentEmpty">هنوز مدرکی ثبت نشده است.</string>
+
+
+    ---------- // DownloadsFragment
+
+    <string name="DownloadsFragmentTitle">دانلودها</string>
+
+    <string name="DownloadsFragmentEmpty">هنوز فایل یا تصویری دانلود نشده است.</string>
 
 
     ---------- // PaymentsFragment

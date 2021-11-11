@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Utils.Entities;
 
+import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -37,6 +38,10 @@ public class Permissoon {
                 }
 
         } return false;
+    }
+
+    public boolean showDownloads() {
+        return FileManager.hasFileInDownloads("Risloo");
     }
 
     public boolean showUsers(UserModel model) {
