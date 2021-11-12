@@ -673,14 +673,14 @@
 
     <string name="BanksFragmentSettleTotalHeader">موجودی حساب</string>
 
-    <string name="BanksFragmentSettleIbanHeader">انتخاب حساب بانکی جهت تسویه</string>
+    <string name="BanksFragmentSettleAccountHeader">انتخاب حساب بانکی جهت تسویه</string>
     <string name="BanksFragmentSettleTypeHeader">نحوه تسویه حساب</string>
 
     <string name="BanksFragmentSettleAmountHeader">مبلغ (تومان)</string>
     <string name="BanksFragmentSettleWeekdayHeader">انتخاب یک روز در هفته</string>
     <string name="BanksFragmentSettleDayHeader">انتخاب یک روز در ماه</string>
 
-    <string name="BanksFragmentSettleTypeGuide">تسویه‌های زمان‌بندی شده، رأس ساعت ۰۵:۳۰ صورت می‌گیرد. بنابراین نهایتا تا فردای کاری هر درخواست، مبلغ به حساب ثبت شده واریز می‌گردد.</string>
+    <string name="BanksFragmentSettleScheduleGuide">تسویه‌های زمان‌بندی شده، رأس ساعت ۰۵:۳۰ صورت می‌گیرد. بنابراین نهایتا تا فردای کاری هر درخواست، مبلغ به حساب ثبت شده واریز می‌گردد.</string>
 
     <string name="BanksFragmentSettleImmediateButton">تسویه آنی</string>
     <string name="BanksFragmentSettleScheduleButton">ثبت زمان‌بندی</string>

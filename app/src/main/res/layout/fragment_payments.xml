@@ -86,29 +86,29 @@
                 app:layout_constraintStart_toStartOf="@id/amount_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/amount_includeLayout" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:id="@+id/charge_textView"
+                layout="@layout/component_main_button_rect_big"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toEndOf="@id/treasury_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/treasury_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/amount_errorLayout" />
 
-        <include
-            android:id="@+id/charge_textView"
-            layout="@layout/component_main_button_rect_big"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_32sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintEnd_toEndOf="@id/charge_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/charge_constraintLayout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
             android:id="@+id/table_headerLayout"
             layout="@layout/component_main_index_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintEnd_toEndOf="@id/charge_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/charge_textView" />
+            app:layout_constraintTop_toBottomOf="@id/charge_constraintLayout" />
 
         <include
             android:id="@+id/table_shimmerLayout"

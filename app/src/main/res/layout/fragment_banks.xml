@@ -16,7 +16,263 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_12sdp">
 
+        <include
+            android:id="@+id/create_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/create_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_headerLayout">
+
+            <include
+                android:id="@+id/iban_includeLayout"
+                layout="@layout/component_main_input_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/iban_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/iban_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/iban_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/iban_includeLayout" />
+
+            <include
+                android:id="@+id/create_textView"
+                layout="@layout/component_main_button_rect_big"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toEndOf="@id/iban_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/iban_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/iban_errorLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/index_shimmerLayout"
+            layout="@layout/component_shimmer_room"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_constraintLayout"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/index_singleLayout"
+            layout="@layout/component_single_room"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_constraintLayout"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/index_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="index_shimmerLayout, index_singleLayout" />
+
+        <include
+            android:id="@+id/settle_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="@id/create_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/create_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/index_barrier"
+            tools:layout_marginTop="@dimen/_6sdp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settle_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
+            app:layout_constraintEnd_toEndOf="@id/create_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/create_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/settle_headerLayout">
+
+            <include
+                android:id="@+id/account_includeLayout"
+                layout="@layout/component_main_input_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/account_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/account_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/account_includeLayout" />
+
+            <include
+                android:id="@+id/type_includeLayout"
+                layout="@layout/component_main_input_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/account_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/account_errorLayout" />
+
+            <include
+                android:id="@+id/type_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/type_includeLayout" />
+
+            <include
+                android:id="@+id/amount_includeLayout"
+                layout="@layout/component_main_input_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/account_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/type_errorLayout" />
+
+            <include
+                android:id="@+id/amount_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/amount_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/amount_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/amount_includeLayout" />
+
+            <include
+                android:id="@+id/weekday_includeLayout"
+                layout="@layout/component_main_input_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/account_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/amount_errorLayout" />
+
+            <include
+                android:id="@+id/weekday_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/weekday_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/weekday_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/weekday_includeLayout" />
+
+            <include
+                android:id="@+id/day_includeLayout"
+                layout="@layout/component_main_input_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/account_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/weekday_errorLayout" />
+
+            <include
+                android:id="@+id/day_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/day_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/day_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/day_includeLayout" />
+
+            <include
+                android:id="@+id/schedule_guideLayout"
+                layout="@layout/component_main_guide"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_goneMarginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/account_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/day_errorLayout" />
+
+            <include
+                android:id="@+id/settle_textView"
+                layout="@layout/component_main_button_rect_big"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/account_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/schedule_guideLayout" />
+
+            <include
+                android:id="@+id/schedule_helperView"
+                layout="@layout/component_main_helper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/account_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/settle_textView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
