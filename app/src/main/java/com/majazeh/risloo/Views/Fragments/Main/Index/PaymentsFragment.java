@@ -85,6 +85,7 @@ public class PaymentsFragment extends Fragment {
         binding.chargeHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.Emerald600));
 
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeTreasuryHeader));
+
         binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 5, 12, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
