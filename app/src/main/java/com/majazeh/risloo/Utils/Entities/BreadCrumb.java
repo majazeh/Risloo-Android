@@ -32,6 +32,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Index.RoomPlatformsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomTagsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomUsersFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Main.Index.RoomsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Index.SamplesFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BillFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragmentArgs;
@@ -284,6 +285,9 @@ public class BreadCrumb {
             case R.id.roomUsersFragment:
                 setModels(RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomUsers();
+            case R.id.roomsFragment:
+                setModels(RoomsFragmentArgs.fromBundle(arguments).getTypeModel());
+                return rooms();
             case R.id.treasuriesFragment:
                 return treasuries();
 
@@ -463,6 +467,10 @@ public class BreadCrumb {
             } break;
             case R.id.roomUsersFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.roomsFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalRoomsFragment(centerModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.treasuriesFragment: {
@@ -1559,6 +1567,20 @@ public class BreadCrumb {
     private ArrayList<Integer> roomUsersIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.roomUsersFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> rooms() {
+        ArrayList<String> list = center();
+        list.add(activity.getResources().getString(R.string.AppRooms));
+
+        destinationIds = roomsIds();
+        return list;
+    }
+    private ArrayList<Integer> roomsIds() {
+        ArrayList<Integer> list = centerIds();
+        list.add(R.id.roomsFragment);
 
         return list;
     }

@@ -130,7 +130,8 @@ public class CenterFragment extends Fragment {
                     ((MainActivity) requireActivity()).navController.navigate(action);
                 } break;
                 case "اتاق\u200Cهای درمان": {
-                    // TODO : Place Code Here
+                    NavDirections action = NavigationMainDirections.actionGlobalRoomsFragment(centerModel);
+                    ((MainActivity) requireActivity()).navController.navigate(action);
                 } break;
                 case "حسابداری": {
                     // TODO : Place Code Here
@@ -174,7 +175,8 @@ public class CenterFragment extends Fragment {
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "اتاق\u200Cهای درمان": {
-                            // TODO : Place Code Here
+                            NavDirections action = NavigationMainDirections.actionGlobalRoomsFragment(centerModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "حسابداری": {
                             // TODO : Place Code Here
@@ -392,7 +394,9 @@ public class CenterFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showCenterDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentSessionPlatforms));
 
-//        items.add(requireActivity().getResources().getString(R.string.CenterFragmentRooms));
+        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownRooms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentRooms));
+
 //        items.add(requireActivity().getResources().getString(R.string.CenterFragmentAccounting));
 
         items.add("");

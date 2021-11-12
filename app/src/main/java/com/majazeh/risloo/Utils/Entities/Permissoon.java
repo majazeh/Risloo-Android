@@ -289,6 +289,13 @@ public class Permissoon {
             return position.equals("manager") || position.equals("operator");
     }
 
+    public boolean showCenterDropdownRooms(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
     public boolean showCenterCreateRoom(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager");

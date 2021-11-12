@@ -30,6 +30,7 @@
     <string name="AppFilters">فیلترها:</string>
 
     <string name="AppPlatforms">محل‌های برگزاری جلسات</string>
+    <string name="AppRooms">اتاق‌های درمان</string>
     <string name="AppSchedules">برنامه‌های درمانی</string>
     <string name="AppTags">برچسب‌های مهم</string>
     <string name="AppUsers">اعضاء</string>
@@ -686,13 +687,6 @@
     <string name="CasesFragmentEmpty">هنوز پرونده‌‌ی ثبت نشده است.</string>
 
 
-    ---------- // CentersFragment
-
-    <string name="CentersFragmentTitle">مراکز درمانی</string>
-
-    <string name="CentersFragmentEmpty">هنوز مرکز درمانی ثبت نشده است.</string>
-
-
     ---------- // CenterPlatformsFragment
 
     <string name="CenterPlatformsFragmentTitle">محل برگزاری جلسات مرکز درمانی</string>
@@ -706,11 +700,12 @@
 
     <string name="CenterSchedulesFragmentEmpty">هنوز برنامه‌‌ی برای مرکز ثبت نشده است.</string>
 
-    ---------- // CenterUsersFragment
 
-    <string name="CenterUsersFragmentTitle">اعضاء مرکز درمانی</string>
+    ---------- // CentersFragment
 
-    <string name="CenterUsersFragmentEmpty">هنوز عضوی برای مرکز ثبت نشده است.</string>
+    <string name="CentersFragmentTitle">مراکز درمانی</string>
+
+    <string name="CentersFragmentEmpty">هنوز مرکز درمانی ثبت نشده است.</string>
 
 
     ---------- // CenterTagsFragment
@@ -718,6 +713,13 @@
     <string name="CenterTagsFragmentTitle">برچسب‌های مهم کلینیک شخصی</string>
 
     <string name="CenterTagsFragmentEmpty">هنوز برچسبی برای کلینیک ثبت نشده است.</string>
+
+
+    ---------- // CenterUsersFragment
+
+    <string name="CenterUsersFragmentTitle">اعضاء مرکز درمانی</string>
+
+    <string name="CenterUsersFragmentEmpty">هنوز عضوی برای مرکز ثبت نشده است.</string>
 
 
     ---------- // ClientReportsFragment
@@ -773,6 +775,13 @@
     <string name="RoomSchedulesFragmentEmpty">هنوز برنامه‌‌ی برای اتاق ثبت نشده است.</string>
 
 
+    ---------- // RoomTagsFragment
+
+    <string name="RoomTagsFragmentTitle">برچسب‌های مهم اتاق درمان</string>
+
+    <string name="RoomTagsFragmentEmpty">هنوز برچسبی برای اتاق ثبت نشده است.</string>
+
+
     ---------- // RoomUsersFragment
 
     <string name="RoomUsersFragmentTitle">اعضاء اتاق درمان</string>
@@ -780,11 +789,11 @@
     <string name="RoomUsersFragmentEmpty">هنوز عضوی برای اتاق ثبت نشده است.</string>
 
 
-    ---------- // RoomTagsFragment
+    ---------- // RoomsFragment
 
-    <string name="RoomTagsFragmentTitle">برچسب‌های مهم اتاق درمان</string>
+    <string name="RoomsFragmentTitle">ترتیب اتاق‌های درمان</string>
 
-    <string name="RoomTagsFragmentEmpty">هنوز برچسبی برای اتاق ثبت نشده است.</string>
+    <string name="RoomsFragmentEmpty">هنوز اتاق درماني ثبت نشده است.</string>
 
 
     ---------- // SamplesFragment
