@@ -663,6 +663,29 @@
     ***/
 
 
+    ---------- // BanksFragment
+
+    <string name="BanksFragmentTitle">تسویه حساب</string>
+
+    <string name="BanksFragmentCreateIbanHeader">شماره شبا</string>
+
+    <string name="BanksFragmentCreateButton">افزودن حساب بانکی</string>
+
+    <string name="BanksFragmentSettleTotalHeader">موجودی حساب</string>
+
+    <string name="BanksFragmentSettleIbanHeader">انتخاب حساب بانکی جهت تسویه</string>
+    <string name="BanksFragmentSettleTypeHeader">نحوه تسویه حساب</string>
+
+    <string name="BanksFragmentSettleAmountHeader">مبلغ (تومان)</string>
+    <string name="BanksFragmentSettleWeekdayHeader">انتخاب یک روز در هفته</string>
+    <string name="BanksFragmentSettleDayHeader">انتخاب یک روز در ماه</string>
+
+    <string name="BanksFragmentSettleTypeGuide">تسویه‌های زمان‌بندی شده، رأس ساعت ۰۵:۳۰ صورت می‌گیرد. بنابراین نهایتا تا فردای کاری هر درخواست، مبلغ به حساب ثبت شده واریز می‌گردد.</string>
+
+    <string name="BanksFragmentSettleImmediateButton">تسویه آنی</string>
+    <string name="BanksFragmentSettleScheduleButton">ثبت زمان‌بندی</string>
+
+
     ---------- // BillingsFragment
 
     <string name="BillingsFragmentTitle">صورت حساب‌ها</string>
@@ -842,6 +865,7 @@
 
     <string name="AccountingFragmentTreasuries">کیف پول‌ها</string>
     <string name="AccountingFragmentBillings">صورت حساب‌ها</string>
+    <string name="AccountingFragmentBanks">تسویه حساب</string>
     <string name="AccountingFragmentPayments">شارژ حساب</string>
 
 
@@ -1251,6 +1275,13 @@
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
+
+
+    ---------- // BankAdapter
+
+    <string name="BankAdapterTitle">حساب‌های بانکی</string>
+
+    <string name="BankAdapterEmpty">شما هیچ حساب بانکی فعالی ندارید.ابتدا شماره شبا حساب بانکی خود را از طریق افزودن حساب ثبت کنید. پس از تأیید ریسلو، در این بخش روند تسویه را انجام دهید.</string>
 
 
     ---------- // BillAdapter

@@ -35,6 +35,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Edit.EditPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditTreasuryFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditUserFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.BanksFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.BillingsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.BulkSamplesFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CasesFragment;
@@ -220,6 +221,9 @@ public class Fragmont {
 
         // -------------------- Index
 
+        else if (fragment instanceof BanksFragment)
+            return fragment;
+        
         else if (fragment instanceof BillingsFragment)
             return fragment;
 

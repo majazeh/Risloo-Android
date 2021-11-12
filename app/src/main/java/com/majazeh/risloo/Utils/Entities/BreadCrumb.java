@@ -249,6 +249,8 @@ public class BreadCrumb {
 
             // -------------------- Index
 
+            case R.id.banksFragment:
+                return banks();
             case R.id.billingsFragment:
                 return billings();
             case R.id.centerPlatformsFragment:
@@ -423,6 +425,10 @@ public class BreadCrumb {
 
             // -------------------- Index
 
+            case R.id.banksFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalBanksFragment();
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
             case R.id.billingsFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
                 ((MainActivity) activity).navController.navigate(action);
@@ -1370,6 +1376,20 @@ public class BreadCrumb {
     /*
     ---------- Index ----------
     */
+
+    private ArrayList<String> banks() {
+        ArrayList<String> list = dashboard();
+        list.add(activity.getResources().getString(R.string.BanksFragmentTitle));
+
+        destinationIds = banksIds();
+        return list;
+    }
+    private ArrayList<Integer> banksIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.banksFragment);
+
+        return list;
+    }
 
     private ArrayList<String> billings() {
         ArrayList<String> list = dashboard();

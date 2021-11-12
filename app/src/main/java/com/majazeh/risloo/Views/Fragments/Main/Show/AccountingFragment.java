@@ -38,6 +38,7 @@ public class AccountingFragment extends Fragment {
     private void initializer() {
         InitManager.layoutTextColorResTintBackground(requireActivity(), binding.treasuriesIncludeLayout.getRoot(), binding.treasuriesIncludeLayout.selectTextView, binding.treasuriesIncludeLayout.selectImageView, getResources().getString(R.string.AccountingFragmentTreasuries), getResources().getColor(R.color.CoolGray500), R.drawable.ic_wallet_light, R.color.Risloo500, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_risloo50);
         InitManager.layoutTextColorResTintBackground(requireActivity(), binding.billingsIncludeLayout.getRoot(), binding.billingsIncludeLayout.selectTextView, binding.billingsIncludeLayout.selectImageView, getResources().getString(R.string.AccountingFragmentBillings), getResources().getColor(R.color.CoolGray500), R.drawable.ic_file_invoice_light, R.color.Amber500, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_amber200);
+        InitManager.layoutTextColorResTintBackground(requireActivity(), binding.banksIncludeLayout.getRoot(), binding.banksIncludeLayout.selectTextView, binding.banksIncludeLayout.selectImageView, getResources().getString(R.string.AccountingFragmentBanks), getResources().getColor(R.color.CoolGray500), R.drawable.ic_cash_register_light, R.color.Violet500, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_violet200);
         InitManager.layoutTextColorResTintBackground(requireActivity(), binding.paymentsIncludeLayout.getRoot(), binding.paymentsIncludeLayout.selectTextView, binding.paymentsIncludeLayout.selectImageView, getResources().getString(R.string.AccountingFragmentPayments), getResources().getColor(R.color.CoolGray500), R.drawable.ic_plus_light, R.color.Emerald600, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_emerald200);
     }
 
@@ -52,6 +53,11 @@ public class AccountingFragment extends Fragment {
             NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.billingsIncludeLayout.getRoot());
+
+        CustomClickView.onClickListener(() -> {
+            NavDirections action = NavigationMainDirections.actionGlobalBanksFragment();
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.banksIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);

@@ -557,6 +557,12 @@
     ---------- // Fragments
 
     <fragment
+        android:id="@+id/banksFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.BanksFragment"
+        android:label="@string/BanksFragmentTitle"
+        tools:layout="@layout/fragment_banks" />
+
+    <fragment
         android:id="@+id/billingsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Index.BillingsFragment"
         android:label="@string/BillingsFragmentTitle"
@@ -669,6 +675,10 @@
         tools:layout="@layout/fragment_treasuries" />
 
     ---------- // Actions
+
+    <action
+        android:id="@+id/action_global_banksFragment"
+        app:destination="@id/banksFragment" />
 
     <action
         android:id="@+id/action_global_billingsFragment"
