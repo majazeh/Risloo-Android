@@ -426,7 +426,7 @@ public class BreadCrumb {
             // -------------------- Index
 
             case R.id.banksFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBanksFragment();
+                NavDirections action = NavigationMainDirections.actionGlobalBanksFragment(null);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.billingsFragment: {

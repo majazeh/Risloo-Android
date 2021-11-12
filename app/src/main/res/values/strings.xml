@@ -677,7 +677,7 @@
     <string name="BanksFragmentSettleTypeHeader">نحوه تسویه حساب</string>
     <string name="BanksFragmentSettleAmountHeader">مبلغ (تومان)</string>
     <string name="BanksFragmentSettleWeekdayHeader">انتخاب یک روز در هفته</string>
-    <string name="BanksFragmentSettleDayHeader">انتخاب یک روز در ماه</string>
+    <string name="BanksFragmentSettleMonthDayHeader">انتخاب یک روز در ماه</string>
 
     <string name="BanksFragmentSettleScheduleGuide">تسویه‌های زمان‌بندی شده، رأس ساعت ۰۵:۳۰ صورت می‌گیرد. بنابراین نهایتا تا فردای کاری هر درخواست، مبلغ به حساب ثبت شده واریز می‌گردد.</string>
 

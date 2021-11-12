@@ -197,7 +197,7 @@
 
             <include
                 android:id="@+id/weekday_includeLayout"
-                layout="@layout/component_main_input_money"
+                layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -218,8 +218,8 @@
                 app:layout_constraintTop_toBottomOf="@id/weekday_includeLayout" />
 
             <include
-                android:id="@+id/day_includeLayout"
-                layout="@layout/component_main_input_money"
+                android:id="@+id/monthday_includeLayout"
+                layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -229,15 +229,15 @@
                 app:layout_constraintTop_toBottomOf="@id/weekday_errorLayout" />
 
             <include
-                android:id="@+id/day_errorLayout"
+                android:id="@+id/monthday_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/day_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/day_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/day_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/monthday_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/monthday_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/monthday_includeLayout" />
 
             <include
                 android:id="@+id/schedule_guideLayout"
@@ -248,7 +248,7 @@
                 app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/account_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/account_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/day_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/monthday_errorLayout" />
 
             <include
                 android:id="@+id/settle_textView"

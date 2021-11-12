@@ -126,6 +126,59 @@
         <item></item>
     </array>
 
+    <array name="IbanTypes">
+        <item>تسویه آنی</item>
+        <item>زمانبندی: روزانه</item>
+        <item>زمانبندی: هفتگی</item>
+        <item>زمانبندی: ماهانه</item>
+        <item></item>
+    </array>
+
+    <array name="SettleWeekDays">
+        <item>شنبه</item>
+        <item>یک‌شنبه</item>
+        <item>دو‌شنبه</item>
+        <item>سه‌شنبه</item>
+        <item>چهارشنبه</item>
+        <item>پنچ‌شنبه</item>
+        <item>جمعه</item>
+        <item></item>
+    </array>
+
+    <array name="SettleMonthDays">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>یک روز مانده به روز آخر ماه</item>
+        <item>روز آخر ماه</item>
+        <item></item>
+    </array>
+
     <array name="PaymentStatus">
         <item>آنلاین</item>
         <item>نقدی</item>

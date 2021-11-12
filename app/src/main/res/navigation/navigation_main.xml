@@ -151,7 +151,7 @@
         android:id="@+id/paymentsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Index.PaymentsFragment"
         android:label="@string/PaymentsFragmentTitle"
-        tools:layout="@layout/fragment_payments" >
+        tools:layout="@layout/fragment_payments">
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -560,7 +560,12 @@
         android:id="@+id/banksFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Index.BanksFragment"
         android:label="@string/BanksFragmentTitle"
-        tools:layout="@layout/fragment_banks" />
+        tools:layout="@layout/fragment_banks">
+        <argument
+            android:name="typeModel"
+            app:nullable="true"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/billingsFragment"
