@@ -284,6 +284,13 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/settle_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="settle_headerLayout, settle_constraintLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.factor.bouncy.BouncyNestedScrollView>

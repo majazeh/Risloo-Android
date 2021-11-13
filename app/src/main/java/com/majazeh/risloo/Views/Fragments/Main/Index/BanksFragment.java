@@ -54,6 +54,8 @@ public class BanksFragment extends Fragment {
 
         setArgs();
 
+        getData();
+
         return binding.getRoot();
     }
 
@@ -367,11 +369,15 @@ public class BanksFragment extends Fragment {
 //                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 //
 //                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+//
+//                            binding.settleGroup.setVisibility(View.GONE);
 //                        } else if (adapter.itemsCount() == 0) {
 //                            binding.indexSingleLayout.recyclerView.setAdapter(null);
 //
 //                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
 //                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BankAdapterEmpty));
+//
+//                            binding.settleGroup.setVisibility(View.VISIBLE);
 //                        }
 //
 //                        binding.createHeaderLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));

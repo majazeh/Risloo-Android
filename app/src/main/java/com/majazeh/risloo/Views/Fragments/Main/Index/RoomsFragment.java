@@ -23,7 +23,7 @@ public class RoomsFragment extends Fragment {
     private FragmentRoomsBinding binding;
 
     // Adapters
-//    public RoomsAdapter adapter;
+//    public IndexRoomAdapter adapter;
 
     // Models
     public CenterModel centerModel;
@@ -46,7 +46,7 @@ public class RoomsFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new RoomsAdapter(requireActivity());
+//        adapter = new IndexRoomAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -87,7 +87,7 @@ public class RoomsFragment extends Fragment {
 //                            binding.indexSingleLayout.recyclerView.setAdapter(null);
 //
 //                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-//                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.RoomsFragmentEmpty));
+//                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.RoomAdapterEmpty));
 //                        }
 //
 //                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
