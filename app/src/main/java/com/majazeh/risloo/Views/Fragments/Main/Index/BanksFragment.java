@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Fragments.Main.Index;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -62,6 +62,7 @@ public class BanksFragment extends Fragment {
         binding.createHeaderLayout.titleTextView.setText(getResources().getString(R.string.BankAdapterTitle));
 
         binding.ibanIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentCreateIbanHeader));
+        binding.ibanIncludeLayout.inputEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(24)});
         binding.ibanIncludeLayout.footerTextView.setText(getResources().getString(R.string.MainIban) + " - " + "0");
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.BanksFragmentCreateButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
@@ -203,6 +204,45 @@ public class BanksFragment extends Fragment {
                 if (userSelect) {
                     type = parent.getItemAtPosition(position).toString();
 
+                    switch(type) {
+                        case "تسویه آنی":
+                            binding.amountIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.weekdayIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.monthdayIncludeLayout.getRoot().setVisibility(View.GONE);
+
+                            binding.scheduleGuideLayout.getRoot().setVisibility(View.GONE);
+
+                            binding.settleTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BanksFragmentSettleImmediateButton));
+                            break;
+                        case "زمانبندی: روزانه":
+                            binding.amountIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.weekdayIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.monthdayIncludeLayout.getRoot().setVisibility(View.GONE);
+
+                            binding.scheduleGuideLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.settleTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BanksFragmentSettleScheduleButton));
+                            break;
+                        case "زمانبندی: هفتگی":
+                            binding.amountIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.weekdayIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.monthdayIncludeLayout.getRoot().setVisibility(View.GONE);
+
+                            binding.scheduleGuideLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.settleTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BanksFragmentSettleScheduleButton));
+                            break;
+                        case "زمانبندی: ماهانه":
+                            binding.amountIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.weekdayIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.monthdayIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.scheduleGuideLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.settleTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BanksFragmentSettleScheduleButton));
+                            break;
+                    }
+
                     userSelect = false;
                 }
             }
@@ -298,6 +338,10 @@ public class BanksFragment extends Fragment {
         // TODO : Place Code When Needed
     }
 
+    private void setData() {
+
+    }
+
     private void setHashmap(String method) {
         if (method.equals("create")) {
             if (!iban.equals(""))
@@ -318,25 +362,47 @@ public class BanksFragment extends Fragment {
             else
                 data.remove("iban_id");
 
-            if (!type.equals(""))
+            if (!type.equals("")) {
                 data.put("type", SelectionManager.getIbanType(requireActivity(), "en", type));
-            else
+
+                switch (type) {
+                    case "تسویه آنی":
+                        if (!amount.equals(""))
+                            data.put("amount", amount);
+                        else
+                            data.remove("amount");
+
+                        data.remove("weekday");
+                        data.remove("day");
+                        break;
+                    case "زمانبندی: روزانه":
+                        data.remove("amount");
+                        data.remove("weekday");
+                        data.remove("day");
+                        break;
+                    case "زمانبندی: هفتگی":
+                        if (!weekday.equals(""))
+                            data.put("weekday", weekday);
+                        else
+                            data.remove("weekday");
+
+                        data.remove("amount");
+                        data.remove("day");
+                        break;
+                    case "زمانبندی: ماهانه":
+                        if (!monthday.equals(""))
+                            data.put("day", monthday);
+                        else
+                            data.remove("day");
+
+                        data.remove("amount");
+                        data.remove("weekday");
+                        break;
+                }
+
+            } else {
                 data.remove("type");
-
-            if (!amount.equals(""))
-                data.put("amount", amount);
-            else
-                data.remove("amount");
-
-            if (!weekday.equals(""))
-                data.put("weekday", weekday);
-            else
-                data.remove("weekday");
-
-            if (!monthday.equals(""))
-                data.put("day", monthday);
-            else
-                data.remove("day");
+            }
 
             // Clear "Create" Section
             data.remove("iban");
@@ -344,15 +410,121 @@ public class BanksFragment extends Fragment {
     }
 
     private void doWork(String method) {
-        DialogManager.showLoadingDialog(requireActivity(), "");
-
-        setHashmap(method);
-
-        if (method.equals("create")) {
-            // TODO : Place Code Here
-        } else {
-            // TODO : Place Code Here
-        }
+//        DialogManager.showLoadingDialog(requireActivity(), "");
+//
+//        setHashmap(method);
+//
+//        if (method.equals("create")) {
+//            Bank.add(data, header, new Response() {
+//                @Override
+//                public void onOK(Object object) {
+//                    if (isAdded()) {
+//                        requireActivity().runOnUiThread(() -> {
+//                            DialogManager.dismissLoadingDialog();
+//                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewIban));
+//                        });
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(String response) {
+//                    if (isAdded()) {
+//                        requireActivity().runOnUiThread(() -> {
+//                            try {
+//                                JSONObject responseObject = new JSONObject(response);
+//                                if (!responseObject.isNull("errors")) {
+//                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+//
+//                                    Iterator<String> keys = (errorsObject.keys());
+//                                    StringBuilder errors = new StringBuilder();
+//
+//                                    while (keys.hasNext()) {
+//                                        String key = keys.next();
+//                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+//                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+//
+//                                            switch (key) {
+//                                                case "iban":
+//                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView, validation);
+//                                                    break;
+//                                            }
+//
+//                                            errors.append(validation);
+//                                            errors.append("\n");
+//                                        }
+//                                    }
+//
+//                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        });
+//                    }
+//                }
+//            });
+//        } else {
+//            Bank.settle(data, header, new Response() {
+//                @Override
+//                public void onOK(Object object) {
+//                    if (isAdded()) {
+//                        requireActivity().runOnUiThread(() -> {
+//                            DialogManager.dismissLoadingDialog();
+//                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackIbanSettled));
+//                        });
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(String response) {
+//                    if (isAdded()) {
+//                        requireActivity().runOnUiThread(() -> {
+//                            try {
+//                                JSONObject responseObject = new JSONObject(response);
+//                                if (!responseObject.isNull("errors")) {
+//                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+//
+//                                    Iterator<String> keys = (errorsObject.keys());
+//                                    StringBuilder errors = new StringBuilder();
+//
+//                                    while (keys.hasNext()) {
+//                                        String key = keys.next();
+//                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+//                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+//
+//                                            switch (key) {
+//                                                case "iban_id":
+//                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView, validation);
+//                                                    break;
+//                                                case "type":
+//                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+//                                                    break;
+//                                                case "amount":
+//                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
+//                                                    break;
+//                                                case "weekday":
+//                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView, validation);
+//                                                    break;
+//                                                case "day":
+//                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView, validation);
+//                                                    break;
+//                                            }
+//
+//                                            errors.append(validation);
+//                                            errors.append("\n");
+//                                        }
+//                                    }
+//
+//                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//                        });
+//                    }
+//                }
+//            });
+//        }
     }
 
     private void hideShimmer() {

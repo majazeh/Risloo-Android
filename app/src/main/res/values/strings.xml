@@ -59,6 +59,7 @@
     <string name="SnackChangesSaved">تغییرات ثبت شد.</string>
     <string name="SnackScheduleReserved">برنامه درمانی رزرو شد.</string>
     <string name="SnackSuccesAcceptation">پذیرش ثبت شد.</string>
+    <string name="SnackIbanSettled">حساب تسویه شد.</string>
 
     <string name="SnackLoginOtherUser">ورود به کاربری انجام شد.</string>
     <string name="SnackLogoutFormOtherUser">خروج از کاربری انجام شد.</string>
@@ -70,6 +71,7 @@
     <string name="SnackCreatedNewCenter">مرکز درمانی جدید ساخته شد.</string>
     <string name="SnackCreatedNewCenterUser">عضو جدید مرکز ثبت شد.</string>
     <string name="SnackCreatedNewDocument">مدرک جدید ساخته شد.</string>
+    <string name="SnackCreatedNewIban">حساب بانکی جدید افزوده شد.</string>
     <string name="SnackCreatedNewPlatform">محل برگزاری جدید ساخته شد.</string>
     <string name="SnackCreatedNewPractice">کاربرگ جدید ساخته شد.</string>
     <string name="SnackCreatedNewReport">گزارش جدید ساخته شد.</string>
