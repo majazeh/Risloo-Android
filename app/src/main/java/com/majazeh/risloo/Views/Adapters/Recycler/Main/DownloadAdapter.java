@@ -72,7 +72,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadHolder> {
     }
 
     private void setData(DownloadHolder holder) {
-        holder.binding.titleTextView.setText("قايل");
+        holder.binding.titleTextView.setText("فايل");
 
         Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
     }

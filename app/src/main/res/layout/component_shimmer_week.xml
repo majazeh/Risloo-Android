@@ -15,14 +15,13 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingEnd="@dimen/_12sdp"
-        android:paddingStart="@dimen/_12sdp">
+        android:orientation="horizontal">
 
         <include
             layout="@layout/shimmer_item_week"
             android:layout_width="@dimen/_100sdp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp" />
 
         <include
             layout="@layout/shimmer_item_week"
@@ -58,6 +57,7 @@
             layout="@layout/shimmer_item_week"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_4sdp" />
 
     </LinearLayout>
