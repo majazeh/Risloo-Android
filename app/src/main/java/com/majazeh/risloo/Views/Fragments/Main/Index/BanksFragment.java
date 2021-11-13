@@ -69,6 +69,7 @@ public class BanksFragment extends Fragment {
 
         binding.settleHeaderLayout.titleTextView.setText(getResources().getString(R.string.BanksFragmentTitle));
 
+        binding.totalIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleTotalHeader));
         binding.accountIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleAccountHeader));
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleTypeHeader));
         binding.weekdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleWeekdayHeader));
@@ -336,10 +337,12 @@ public class BanksFragment extends Fragment {
         TypeModel typeModel = BanksFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         // TODO : Place Code When Needed
+
+        setData();
     }
 
     private void setData() {
-
+        binding.totalIncludeLayout.amountTextView.setText("100.000" + " " + getResources().getString(R.string.MainToman));
     }
 
     private void setHashmap(String method) {

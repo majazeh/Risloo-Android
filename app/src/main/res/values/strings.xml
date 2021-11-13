@@ -674,7 +674,7 @@
 
     <string name="BanksFragmentCreateButton">افزودن حساب بانکی</string>
 
-    <string name="BanksFragmentSettleTotalHeader">موجودی حساب</string>
+    <string name="BanksFragmentSettleTotalHeader">موجودی حساب :</string>
     <string name="BanksFragmentSettleAccountHeader">انتخاب حساب بانکی جهت تسویه</string>
     <string name="BanksFragmentSettleTypeHeader">نحوه تسویه حساب</string>
     <string name="BanksFragmentSettleAmountHeader">مبلغ (تومان)</string>
