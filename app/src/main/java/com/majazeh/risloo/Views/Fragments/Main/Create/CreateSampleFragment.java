@@ -102,8 +102,6 @@ public class CreateSampleFragment extends Fragment {
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentReferenceHeader));
         binding.psychologyDescriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionHeader));
 
-        binding.bulkHelperView.getRoot().setText(getResources().getString(R.string.CreateSampleFragmentBulkHelper));
-
         binding.scaleGuideLayout.guideTextView.setMovementMethod(LinkMovementMethod.getInstance());
         binding.titleGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentTitleGuide));
         binding.membersCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentMembersCountGuide));
@@ -115,6 +113,7 @@ public class CreateSampleFragment extends Fragment {
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
+        InitManager.txtTextColorBackground(binding.bulkHelperView.getRoot(), getResources().getString(R.string.CreateSampleFragmentBulkHelper), getResources().getColor(R.color.CoolGray600), R.drawable.draw_2sdp_solid_coolgray50_border_right_2dp_coolgray400);
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 

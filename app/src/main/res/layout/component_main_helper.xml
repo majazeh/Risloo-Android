@@ -8,9 +8,9 @@
     android:gravity="right"
     android:textSize="@dimen/_9ssp"
     android:textStyle="normal"
-    android:textColor="@color/CoolGray600"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_regular"
-    android:background="@drawable/draw_2sdp_solid_coolgray50_border_left_2dp_coolgray300"
     tools:text="متن مساعد"
+    tools:textColor="@color/CoolGray600"
+    tools:background="@drawable/draw_2sdp_solid_coolgray50_border_right_2dp_coolgray400"
     tools:layout_margin="@dimen/_12sdp" />

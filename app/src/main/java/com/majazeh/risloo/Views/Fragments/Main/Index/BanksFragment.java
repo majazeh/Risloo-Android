@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentBanksBinding;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +31,9 @@ public class BanksFragment extends Fragment {
 
     // Binding
     private FragmentBanksBinding binding;
+
+    // Adapters
+//    private IndexBankAdapter adapter;
 
     // Objects
     private HashMap data, header;
@@ -55,6 +58,8 @@ public class BanksFragment extends Fragment {
     }
 
     private void initializer() {
+//        adapter = new IndexBankAdapter(requireActivity());
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -66,6 +71,8 @@ public class BanksFragment extends Fragment {
         binding.ibanIncludeLayout.footerTextView.setText(getResources().getString(R.string.MainIban) + " - " + "0");
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.BanksFragmentCreateButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView,  getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
         binding.settleHeaderLayout.titleTextView.setText(getResources().getString(R.string.BanksFragmentTitle));
 
@@ -84,6 +91,7 @@ public class BanksFragment extends Fragment {
         InitManager.input12sspSpinner(requireActivity(), binding.weekdayIncludeLayout.selectSpinner, R.array.SettleWeekDays);
         InitManager.input12sspSpinner(requireActivity(), binding.monthdayIncludeLayout.selectSpinner, R.array.SettleMonthDays);
 
+        InitManager.txtTextColorBackground(binding.scheduleHelperView.getRoot(), getResources().getString(R.string.BanksFragmentSettleScheduleHelper), getResources().getColor(R.color.Amber600), R.drawable.draw_2sdp_solid_amber50_border_right_2dp_amber400);
         InitManager.txtTextColorBackground(binding.settleTextView.getRoot(), getResources().getString(R.string.BanksFragmentSettleImmediateButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_emerald600_ripple_emerald800);
     }
 
@@ -334,15 +342,58 @@ public class BanksFragment extends Fragment {
     }
 
     private void setArgs() {
-        TypeModel typeModel = BanksFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
-        // TODO : Place Code When Needed
-
-        setData();
+        UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
+        setData(userModel);
     }
 
-    private void setData() {
+    private void setData(UserModel model) {
+        // TODO : Place Code When Needed
+
         binding.totalIncludeLayout.amountTextView.setText("100.000" + " " + getResources().getString(R.string.MainToman));
+    }
+
+    private void getData() {
+//        Bank.list(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                List items = (List) object;
+//
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        adapter.clearItems();
+//
+//                        if (!items.data().isEmpty()) {
+//                            adapter.setItems(items.data());
+//                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+//
+//                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+//                        } else if (adapter.itemsCount() == 0) {
+//                            binding.indexSingleLayout.recyclerView.setAdapter(null);
+//
+//                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+//                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BankAdapterEmpty));
+//                        }
+//
+//                        binding.createHeaderLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+//
+//                        hideShimmer();
+//                    });
+//
+//                    isLoading = false;
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        hideShimmer();
+//                    });
+//
+//                    isLoading = false;
+//                }
+//            }
+//        });
     }
 
     private void setHashmap(String method) {

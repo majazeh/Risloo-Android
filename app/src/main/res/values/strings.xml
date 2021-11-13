@@ -681,6 +681,8 @@
     <string name="BanksFragmentSettleWeekdayHeader">انتخاب یک روز در هفته</string>
     <string name="BanksFragmentSettleMonthDayHeader">انتخاب یک روز در ماه</string>
 
+    <string name="BanksFragmentSettleScheduleHelper">در حال حاضر، تسویه حساب زمان‌بندی شده فعال نیست. در صورت تمایل آن را فعال کنید.</string>
+
     <string name="BanksFragmentSettleScheduleGuide">تسویه‌های زمان‌بندی شده، رأس ساعت ۰۵:۳۰ صورت می‌گیرد. بنابراین نهایتا تا فردای کاری هر درخواست، مبلغ به حساب ثبت شده واریز می‌گردد.</string>
 
     <string name="BanksFragmentSettleImmediateButton">تسویه آنی</string>
