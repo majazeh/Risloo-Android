@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
@@ -207,14 +208,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            String faBreadCump = breadCrumb.getFa(destination, arguments).toString();
+            SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
 
             binding.contentIncludeLayout.headerAppBarLayout.setExpanded(true);
 
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(faBreadCump);
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
 
-            indexNavAdapter.setFocused(faBreadCump);
+            indexNavAdapter.setFocused(faBreadCump.toString());
         });
 
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
