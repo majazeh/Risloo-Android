@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexRoomHolder;
+import com.majazeh.risloo.Views.Fragments.Main.Index.RoomsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.DashboardFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexRoomBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -25,6 +27,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
 
@@ -33,9 +36,11 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
 
     // Objects
     private Activity activity;
+    private HashMap data, header;
 
     // Vars
     private ArrayList<TypeModel> items;
+    private boolean userSelect = false;
 
     public IndexRoomAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -62,8 +67,9 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
     public int getItemCount() {
         if (this.items != null)
             return items.size();
-        else
+        else {
             return 0;
+        }
     }
 
     public void setItems(ArrayList<TypeModel> items) {
@@ -83,13 +89,33 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
 
     private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(IndexRoomHolder holder, RoomModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
+
+        holder.binding.switchIncludeLayout.getRoot().setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.switchIncludeLayout.getRoot().setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        holder.binding.switchIncludeLayout.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (userSelect) {
+                doWork(holder, model, isChecked);
+
+                userSelect = false;
+            }
+        });
     }
 
     private void setData(IndexRoomHolder holder, RoomModel model) {
@@ -127,6 +153,10 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
                 setAvatar(holder, "");
 
         }
+
+        if (current instanceof RoomsFragment) {
+            setSelected(holder, true);
+        }
     }
 
     private void setAvatar(IndexRoomHolder holder, String url) {
@@ -139,6 +169,15 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
 
             Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
+    }
+
+    private void setSelected(IndexRoomHolder holder, boolean isSelected) {
+        holder.binding.switchIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+        holder.binding.switchIncludeLayout.getRoot().setChecked(isSelected);
+    }
+
+    private void doWork(IndexRoomHolder holder, RoomModel model, boolean isSelected) {
+        // TODO : Place Code When Needed
     }
 
 }

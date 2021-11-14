@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layoutDirection="rtl"
     android:minWidth="@dimen/_96sdp"
     android:paddingBottom="@dimen/_6sdp"
     android:paddingEnd="@dimen/_6sdp"
@@ -16,5 +17,4 @@
     android:textColor="@color/CoolGray600"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:layoutDirection="rtl"
     android:theme="@style/SwicthCompatTheme" />

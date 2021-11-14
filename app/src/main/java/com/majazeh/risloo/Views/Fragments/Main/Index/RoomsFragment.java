@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomsBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 
@@ -23,7 +24,7 @@ public class RoomsFragment extends Fragment {
     private FragmentRoomsBinding binding;
 
     // Adapters
-//    public IndexRoomAdapter adapter;
+    public IndexRoomAdapter adapter;
 
     // Models
     public CenterModel centerModel;
@@ -46,7 +47,7 @@ public class RoomsFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new IndexRoomAdapter(requireActivity());
+        adapter = new IndexRoomAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -92,7 +93,7 @@ public class RoomsFragment extends Fragment {
 //
 //                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 //
-//                        hideShimmer();
+                        hideShimmer();
 //                    });
 //                }
 //            }
