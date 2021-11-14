@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    android:paddingBottom="@dimen/_12sdp"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
+    tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp">
+
+    <include
+        android:id="@+id/avatar_includeLayout"
+        layout="@layout/component_main_avatar_borderless_small"
+        android:layout_width="@dimen/_62sdp"
+        android:layout_height="@dimen/_62sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
+        tools:text="نام و نام خانوادگی" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -115,6 +115,7 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
                     holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 
                 holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CenterAdapterPersonalClinic));
+
             }
 
             if (model.getDetail() != null && model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)

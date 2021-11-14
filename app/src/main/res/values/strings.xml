@@ -1294,6 +1294,13 @@
     <string name="CenterAdapterPersonalClinic">اتاق درمان شخصی</string>
 
 
+    ---------- // RoomAdapter
+
+    <string name="RoomAdapterHeader">اتاق‌های درمان</string>
+
+    <string name="RoomAdapterEmpty">هنوز اتاق درمانی ثبت نشده است.</string>
+
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Table Adapter Strings
@@ -1859,14 +1866,6 @@
     <string name="ReferencesAdapterHeader">مراجعین</string>
 
     <string name="ReferencesAdapterEmpty">هنوز مراجعی ثبت نشده است.</string>
-
-    /*
-    ---------- Rooms Adapter ----------
-    */
-
-    <string name="RoomsAdapterHeader">اتاق‌های درمان</string>
-
-    <string name="RoomsAdapterEmpty">هنوز اتاق درمانی ثبت نشده است.</string>
 
     /*
     ---------- Schedules Adapter ----------

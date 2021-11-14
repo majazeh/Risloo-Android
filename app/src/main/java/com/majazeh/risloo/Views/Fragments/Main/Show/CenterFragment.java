@@ -27,7 +27,7 @@ import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.RoomsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -50,7 +50,7 @@ public class CenterFragment extends Fragment {
     private FragmentCenterBinding binding;
 
     // Adapters
-    private RoomsAdapter roomsAdapter;
+    private IndexRoomAdapter indexRoomAdapter;
 
     // Models
     private CenterModel centerModel;
@@ -79,7 +79,7 @@ public class CenterFragment extends Fragment {
     }
 
     private void initializer() {
-        roomsAdapter = new RoomsAdapter(requireActivity());
+        indexRoomAdapter = new IndexRoomAdapter(requireActivity());
 
         handler = new Handler();
 
@@ -88,7 +88,7 @@ public class CenterFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.roomsHeaderLayout.titleTextView.setText(getResources().getString(R.string.RoomsAdapterHeader));
+        binding.roomsHeaderLayout.titleTextView.setText(getResources().getString(R.string.RoomAdapterHeader));
 
         InitManager.imgResTintBackground(requireActivity(), binding.roomsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
 
@@ -458,18 +458,18 @@ public class CenterFragment extends Fragment {
 //                                roomsAdapter.clearItems();
 
                             if (!items.data().isEmpty()) {
-                                roomsAdapter.setItems(items.data());
-                                binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+                                indexRoomAdapter.setItems(items.data());
+                                binding.roomsSingleLayout.recyclerView.setAdapter(indexRoomAdapter);
 
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (roomsAdapter.getItemCount() == 0) {
+                            } else if (indexRoomAdapter.getItemCount() == 0) {
                                 binding.roomsSingleLayout.recyclerView.setAdapter(null);
 
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 if (binding.roomsSearchLayout.searchProgressBar.getVisibility() == View.VISIBLE)
                                     binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                                 else
-                                    binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.RoomsAdapterEmpty));
+                                    binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.RoomAdapterEmpty));
                             }
 
                             binding.roomsHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));

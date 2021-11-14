@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.RoomsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentDashboardBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.User;
@@ -38,7 +38,7 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
 
     // Adapters
-    private RoomsAdapter roomsAdapter;
+    private IndexRoomAdapter indexRoomAdapter;
 
     // Models
     private UserModel userModel;
@@ -64,7 +64,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void initializer() {
-        roomsAdapter = new RoomsAdapter(requireActivity());
+        indexRoomAdapter = new IndexRoomAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("user", ((MainActivity) requireActivity()).singleton.getUserModel().getId());
@@ -171,15 +171,15 @@ public class DashboardFragment extends Fragment {
                         items.add(roomModel);
                 }
 
-                roomsAdapter.setItems(items);
-                binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+                indexRoomAdapter.setItems(items);
+                binding.roomsSingleLayout.recyclerView.setAdapter(indexRoomAdapter);
 
-                if (roomsAdapter.getItemCount() == 0)
+                if (indexRoomAdapter.getItemCount() == 0)
                     binding.roomsGroup.setVisibility(View.GONE);
                 else
                     binding.roomsGroup.setVisibility(View.VISIBLE);
 
-            } else if (roomsAdapter.getItemCount() == 0) {
+            } else if (indexRoomAdapter.getItemCount() == 0) {
                 binding.roomsGroup.setVisibility(View.GONE);
             }
 
