@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,8 +12,8 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Cases2Holder;
-import com.majazeh.risloo.databinding.SingleItemCase2Binding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexCaseHolder;
+import com.majazeh.risloo.databinding.SingleItemIndexCaseBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -21,7 +21,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class Cases2Adapter extends RecyclerView.Adapter<Cases2Holder> {
+public class IndexCaseAdapter extends RecyclerView.Adapter<IndexCaseHolder> {
 
     // Objects
     private Activity activity;
@@ -29,18 +29,18 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Holder> {
     // Vars
     private ArrayList<TypeModel> items;
 
-    public Cases2Adapter(@NonNull Activity activity) {
+    public IndexCaseAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public Cases2Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Cases2Holder(SingleItemCase2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexCaseHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexCaseHolder(SingleItemIndexCaseBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Cases2Holder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexCaseHolder holder, int i) {
         CaseModel model = (CaseModel) items.get(i);
 
         listener(holder, model);
@@ -71,22 +71,22 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Holder> {
         }
     }
 
-    private void listener(Cases2Holder holder, CaseModel model) {
+    private void listener(IndexCaseHolder holder, CaseModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(Cases2Holder holder, CaseModel model) {
+    private void setData(IndexCaseHolder holder, CaseModel model) {
         holder.binding.serialTextView.setText(model.getCaseId());
         holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDD(String.valueOf(model.getCaseCreated_at()), " "));
-        holder.binding.sessionCountTextView.setText(model.getSessions_count() + " جلسه ");
+        holder.binding.sessionCountTextView.setText(model.getSessions_count() + " " + " جلسه");
 
         setClients(holder, model.getClients());
     }
 
-    private void setClients(Cases2Holder holder, List clients) {
+    private void setClients(IndexCaseHolder holder, List clients) {
         if (clients != null && clients.data().size() != 0) {
             holder.binding.referenceTextView.setText("");
             for (int i = 0; i < clients.data().size(); i++) {

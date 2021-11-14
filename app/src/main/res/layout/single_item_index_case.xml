@@ -46,12 +46,11 @@
         android:id="@+id/reference_imageView"
         android:layout_width="@dimen/_12sdp"
         android:layout_height="@dimen/_12sdp"
-        android:layout_marginStart="@dimen/_12sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_user_light"
         app:layout_constraintBottom_toBottomOf="@id/reference_textView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/serial_textView"
         app:layout_constraintTop_toTopOf="@id/reference_textView"
         app:tint="@color/CoolGray500" />
 
@@ -86,12 +85,11 @@
         android:id="@+id/date_imageView"
         android:layout_width="@dimen/_12sdp"
         android:layout_height="@dimen/_12sdp"
-        android:layout_marginStart="@dimen/_12sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_clock_light"
         app:layout_constraintBottom_toBottomOf="@id/date_textView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/serial_textView"
         app:layout_constraintTop_toTopOf="@id/date_textView"
         app:tint="@color/CoolGray500" />
 
@@ -130,7 +128,6 @@
         android:id="@+id/session_count_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="center"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
@@ -138,7 +135,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="@id/date_textView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/serial_imageView"
         app:layout_constraintTop_toTopOf="@id/date_textView"
         tools:text="تعداد جلسات" />
 

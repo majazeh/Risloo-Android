@@ -23,7 +23,7 @@ import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Cases2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexCaseAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.FilterTagsAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomBinding;
 import com.mre.ligheh.API.Response;
@@ -49,7 +49,7 @@ public class RoomFragment extends Fragment {
     private FragmentRoomBinding binding;
 
     // Adapters
-    private Cases2Adapter cases2Adapter;
+    private IndexCaseAdapter indexCaseAdapter;
     private FilterTagsAdapter filterTagsAdapter;
 
     // Models
@@ -80,7 +80,7 @@ public class RoomFragment extends Fragment {
     }
 
     private void initializer() {
-        cases2Adapter = new Cases2Adapter(requireActivity());
+        indexCaseAdapter = new IndexCaseAdapter(requireActivity());
         filterTagsAdapter = new FilterTagsAdapter(requireActivity());
 
         data = new HashMap<>();
@@ -88,7 +88,7 @@ public class RoomFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.casesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
+        binding.casesHeaderLayout.titleTextView.setText(getResources().getString(R.string.CaseAdapterHeader));
 
         InitManager.imgResTintBackground(requireActivity(), binding.casesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
 
@@ -680,18 +680,18 @@ public class RoomFragment extends Fragment {
                                     items.add(new CaseModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
 
                                 if (Objects.equals(data.get("page"), 1))
-                                    cases2Adapter.clearItems();
+                                    indexCaseAdapter.clearItems();
 
                                 if (!items.data().isEmpty()) {
-                                    cases2Adapter.setItems(items.data());
-                                    binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+                                    indexCaseAdapter.setItems(items.data());
+                                    binding.casesSingleLayout.recyclerView.setAdapter(indexCaseAdapter);
 
                                     binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
-                                } else if (cases2Adapter.getItemCount() == 0) {
+                                } else if (indexCaseAdapter.getItemCount() == 0) {
                                     binding.casesSingleLayout.recyclerView.setAdapter(null);
 
                                     binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                                    binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.Cases2AdapterEmpty));
+                                    binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.CaseAdapterEmpty));
                                 }
 
                                 binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));

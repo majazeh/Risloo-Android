@@ -20,9 +20,9 @@
         android:layout_height="@dimen/_16sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@id/description_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/name_textView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:tint="@color/CoolGray900"
         tools:srcCompat="@drawable/ic_tachometer_alt_light" />
 
