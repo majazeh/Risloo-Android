@@ -1284,8 +1284,14 @@
 
     <string name="CaseAdapterHeader">پرونده‌ها</string>
 
+    <string name="CaseAdapterSession">جلسه</string>
+
     <string name="CaseAdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
 
+
+    ---------- // CenterAdapter
+
+    <string name="CenterAdapterPersonalClinic">اتاق درمان شخصی</string>
 
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -1339,11 +1345,6 @@
     <string name="CaseAdapterRoom">اتاق درمان</string>
     <string name="CaseAdapterCenter">مرکز درمانی</string>
     <string name="CaseAdapterReference">مراجعین</string>
-
-
-    ---------- // CenterAdapter
-
-    <string name="CenterAdapterPersonalClinic">اتاق درمان شخصی</string>
 
 
     ---------- // CenterUserAdapter

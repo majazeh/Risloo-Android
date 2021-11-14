@@ -9,6 +9,7 @@ import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
+import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -81,7 +82,7 @@ public class IndexCaseAdapter extends RecyclerView.Adapter<IndexCaseHolder> {
     private void setData(IndexCaseHolder holder, CaseModel model) {
         holder.binding.serialTextView.setText(model.getCaseId());
         holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDD(String.valueOf(model.getCaseCreated_at()), " "));
-        holder.binding.sessionCountTextView.setText(model.getSessions_count() + " " + " جلسه");
+        holder.binding.sessionCountTextView.setText(model.getSessions_count() + " " + activity.getResources().getString(R.string.CaseAdapterSession));
 
         setClients(holder, model.getClients());
     }
