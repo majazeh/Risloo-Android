@@ -21,6 +21,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexBankAdapter;
 import com.majazeh.risloo.databinding.FragmentBanksBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -33,7 +34,7 @@ public class BanksFragment extends Fragment {
     private FragmentBanksBinding binding;
 
     // Adapters
-//    private IndexBankAdapter adapter;
+    private IndexBankAdapter adapter;
 
     // Objects
     private HashMap data, header;
@@ -60,7 +61,7 @@ public class BanksFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new IndexBankAdapter(requireActivity());
+        adapter = new IndexBankAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -366,12 +367,12 @@ public class BanksFragment extends Fragment {
 //
 //                        if (!items.data().isEmpty()) {
 //                            adapter.setItems(items.data());
-//                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 //
 //                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
 //
 //                            binding.settleGroup.setVisibility(View.GONE);
-//                        } else if (adapter.itemsCount() == 0) {
+//                        } else if (adapter.getItemCount() == 0) {
 //                            binding.indexSingleLayout.recyclerView.setAdapter(null);
 //
 //                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
@@ -382,7 +383,7 @@ public class BanksFragment extends Fragment {
 //
 //                        binding.createHeaderLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 //
-//                        hideShimmer();
+                        hideShimmer();
 //                    });
 //
 //                    isLoading = false;
