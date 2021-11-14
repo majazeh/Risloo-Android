@@ -108,18 +108,18 @@ public class IndexNavAdapter extends RecyclerView.Adapter<IndexNavHolder> {
     public void setFocused(String value) {
         if (value.contains("نمونه\u200Cهای گروهی")) {
             if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
-                selectedPosition = 6;
-            else if (((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
                 selectedPosition = 5;
+            else if (((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 4;
             else
                 selectedPosition = 10;
         }
 
         else if (value.contains("نمونه") || value.contains("نمونه\u200Cها")) {
             if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()))
-                selectedPosition = 5;
-            else
                 selectedPosition = 4;
+            else
+                selectedPosition = 3;
         }
 
         else if (value.contains("جلسه") || value.contains("جلسات"))
@@ -130,10 +130,21 @@ public class IndexNavAdapter extends RecyclerView.Adapter<IndexNavHolder> {
             selectedPosition = 3;
 
         else if (value.contains("ارزیابی\u200Cها")) {
-            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()))
-                selectedPosition = 4;
+            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 6;
+            else if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) || ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 5;
             else
-                selectedPosition = 3;
+                selectedPosition = 10;
+        }
+
+        else if (value.contains("دانلودها")) {
+            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 7;
+            else if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 6;
+            else
+                selectedPosition = 10;
         }
 
         else

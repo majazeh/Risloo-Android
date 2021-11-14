@@ -25,6 +25,13 @@ public class Permissoon {
     ---------- Main ----------
     */
 
+    public boolean showUsers(UserModel model) {
+        if (model != null)
+            return model.getUserType().equals("admin");
+        else
+            return false;
+    }
+
     public boolean showBulkSamples(UserModel model) {
         if (model != null) {
             if (model.getUserType().equals("admin"))
@@ -61,13 +68,6 @@ public class Permissoon {
 
     public boolean showDownloads(Activity activity) {
         return FileManager.hasFileInDownloads(activity, "Risloo");
-    }
-
-    public boolean showUsers(UserModel model) {
-        if (model != null)
-            return model.getUserType().equals("admin");
-        else
-            return false;
     }
 
     /*
