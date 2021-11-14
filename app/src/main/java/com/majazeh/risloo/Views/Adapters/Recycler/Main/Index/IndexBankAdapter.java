@@ -90,7 +90,7 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
             holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
             holder.binding.avatarIncludeLayout.iconImageView.setImageResource(R.drawable.ic_university_light);
 
-            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_coolgray200);
         }
     }
 

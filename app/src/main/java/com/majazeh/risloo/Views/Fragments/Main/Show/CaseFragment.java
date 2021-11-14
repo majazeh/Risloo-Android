@@ -20,8 +20,8 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.PsychologistsAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.ReferencesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexPsychologistAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexReferenceAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSession2Adapter;
 import com.majazeh.risloo.databinding.FragmentCaseBinding;
 import com.mre.ligheh.API.Response;
@@ -41,8 +41,8 @@ public class CaseFragment extends Fragment {
     private FragmentCaseBinding binding;
 
     // Adapters
-    private PsychologistsAdapter psychologistsAdapter;
-    private ReferencesAdapter referencesAdapter;
+    private IndexPsychologistAdapter indexPsychologistAdapter;
+    private IndexReferenceAdapter indexReferenceAdapter;
     private TableSession2Adapter tableSession2Adapter;
     private TableSampleAdapter tableSampleAdapter;
 
@@ -72,8 +72,8 @@ public class CaseFragment extends Fragment {
     }
 
     private void initializer() {
-        psychologistsAdapter = new PsychologistsAdapter(requireActivity());
-        referencesAdapter = new ReferencesAdapter(requireActivity());
+        indexPsychologistAdapter = new IndexPsychologistAdapter(requireActivity());
+        indexReferenceAdapter = new IndexReferenceAdapter(requireActivity());
         tableSession2Adapter = new TableSession2Adapter(requireActivity());
         tableSampleAdapter = new TableSampleAdapter(requireActivity());
 
@@ -81,8 +81,8 @@ public class CaseFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.psychologistsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
-        binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
+        binding.psychologistsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PsychologistAdapterHeader));
+        binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferenceAdapterHeader));
         binding.sessionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.Session2AdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
@@ -270,28 +270,28 @@ public class CaseFragment extends Fragment {
 
                         // Psychologists Data
                         if (!psychologists.data().isEmpty()) {
-                            psychologistsAdapter.setItems(psychologists.data());
-                            binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
+                            indexPsychologistAdapter.setItems(psychologists.data());
+                            binding.psychologistsSingleLayout.recyclerView.setAdapter(indexPsychologistAdapter);
 
                             binding.psychologistsSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (psychologistsAdapter.getItemCount() == 0) {
+                        } else if (indexPsychologistAdapter.getItemCount() == 0) {
                             binding.psychologistsSingleLayout.recyclerView.setAdapter(null);
 
                             binding.psychologistsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.psychologistsSingleLayout.emptyView.setText(getResources().getString(R.string.PsychologistsAdapterEmpty));
+                            binding.psychologistsSingleLayout.emptyView.setText(getResources().getString(R.string.PsychologistAdapterEmpty));
                         }
 
                         // References Data
                         if (caseModel.getClients() != null && caseModel.getClients().data().size() != 0) {
-                            referencesAdapter.setItems(caseModel.getClients().data());
-                            binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+                            indexReferenceAdapter.setItems(caseModel.getClients().data());
+                            binding.referencesSingleLayout.recyclerView.setAdapter(indexReferenceAdapter);
 
                             binding.referencesSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (referencesAdapter.getItemCount() == 0) {
+                        } else if (indexReferenceAdapter.getItemCount() == 0) {
                             binding.referencesSingleLayout.recyclerView.setAdapter(null);
 
                             binding.referencesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.referencesSingleLayout.emptyView.setText(getResources().getString(R.string.ReferencesAdapterEmpty));
+                            binding.referencesSingleLayout.emptyView.setText(getResources().getString(R.string.ReferenceAdapterEmpty));
                         }
 
                         // Sessions Data
@@ -320,8 +320,8 @@ public class CaseFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
-                        binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
-                        binding.referencesHeaderLayout.countTextView.setText(StringManager.bracing(referencesAdapter.getItemCount()));
+                        binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(indexPsychologistAdapter.getItemCount()));
+                        binding.referencesHeaderLayout.countTextView.setText(StringManager.bracing(indexReferenceAdapter.getItemCount()));
                         binding.sessionsHeaderLayout.countTextView.setText(StringManager.bracing(tableSession2Adapter.itemsCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(tableSampleAdapter.itemsCount()));
 

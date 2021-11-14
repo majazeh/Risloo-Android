@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +13,7 @@
 
     <include
         android:id="@+id/avatar_includeLayout"
-        layout="@layout/component_main_avatar_borderless_small"
+        layout="@layout/component_main_avatar_52sdp_txt"
         android:layout_width="@dimen/_52sdp"
         android:layout_height="@dimen/_52sdp" />
 

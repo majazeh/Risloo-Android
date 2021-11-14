@@ -135,7 +135,7 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 

@@ -1294,6 +1294,20 @@
     <string name="CenterAdapterPersonalClinic">اتاق درمان شخصی</string>
 
 
+    ---------- // PsychologistAdapter
+
+    <string name="PsychologistAdapterHeader">درمانگران</string>
+
+    <string name="PsychologistAdapterEmpty">هنوز درمانگری ثبت نشده است.</string>
+
+
+    ---------- // ReferenceAdapter
+
+    <string name="ReferenceAdapterHeader">مراجعین</string>
+
+    <string name="ReferenceAdapterEmpty">هنوز مراجعی ثبت نشده است.</string>
+
+
     ---------- // RoomAdapter
 
     <string name="RoomAdapterHeader">اتاق‌های درمان</string>
@@ -1850,22 +1864,6 @@
     <string name="TabPlatformsAdapterIdentifierHint">مقدار</string>
 
     <string name="TabPlatformsAdapterEmpty">هنوز بستري ثبت نشده است.</string>
-
-    /*
-    ---------- Psychologists Adapter ----------
-    */
-
-    <string name="PsychologistsAdapterHeader">درمانگران</string>
-
-    <string name="PsychologistsAdapterEmpty">هنوز درمانگری ثبت نشده است.</string>
-
-    /*
-    ---------- References Adapter ----------
-    */
-
-    <string name="ReferencesAdapterHeader">مراجعین</string>
-
-    <string name="ReferencesAdapterEmpty">هنوز مراجعی ثبت نشده است.</string>
 
     /*
     ---------- Schedules Adapter ----------

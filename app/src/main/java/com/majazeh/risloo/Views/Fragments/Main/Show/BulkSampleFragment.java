@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.ReferencesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexReferenceAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableScaleAdapter;
 import com.majazeh.risloo.databinding.FragmentBulkSampleBinding;
 import com.mre.ligheh.API.Response;
@@ -42,7 +42,7 @@ public class BulkSampleFragment extends Fragment {
     private FragmentBulkSampleBinding binding;
 
     // Adapters
-    private ReferencesAdapter referencesAdapter;
+    private IndexReferenceAdapter indexReferenceAdapter;
     private TableScaleAdapter tableScaleAdapter;
     private TableSampleAdapter tableSampleAdapter;
 
@@ -72,7 +72,7 @@ public class BulkSampleFragment extends Fragment {
     }
 
     private void initializer() {
-        referencesAdapter = new ReferencesAdapter(requireActivity());
+        indexReferenceAdapter = new IndexReferenceAdapter(requireActivity());
         tableScaleAdapter = new TableScaleAdapter(requireActivity());
         tableSampleAdapter = new TableSampleAdapter(requireActivity());
 
@@ -80,7 +80,7 @@ public class BulkSampleFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
+        binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferenceAdapterHeader));
         binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
@@ -260,15 +260,15 @@ public class BulkSampleFragment extends Fragment {
 
                         // References Data
                         if (bulkSampleModel.getMembers() != null && bulkSampleModel.getMembers().data().size() != 0) {
-                            referencesAdapter.setItems(bulkSampleModel.getMembers().data());
-                            binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+                            indexReferenceAdapter.setItems(bulkSampleModel.getMembers().data());
+                            binding.referencesSingleLayout.recyclerView.setAdapter(indexReferenceAdapter);
 
                             binding.referencesSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (referencesAdapter.getItemCount() == 0) {
+                        } else if (indexReferenceAdapter.getItemCount() == 0) {
                             binding.referencesSingleLayout.recyclerView.setAdapter(null);
 
                             binding.referencesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.referencesSingleLayout.emptyView.setText(getResources().getString(R.string.ReferencesAdapterEmpty));
+                            binding.referencesSingleLayout.emptyView.setText(getResources().getString(R.string.ReferenceAdapterEmpty));
                         }
 
                         // Scales Data
