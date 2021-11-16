@@ -360,7 +360,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 if (method.equals("tags")) {
                     TagModel model = (TagModel) item;
 
-                    detector(holder, ((CenterTagsFragment) current).adapter.selectedHolder.binding.valueTextView.getText().equals(model.getTitle()));
+                    detector(holder, ((CenterTagsFragment) current).adapter.selectedHolder.binding.titleTextView.getText().equals(model.getTitle()));
                 }
             }
 
@@ -368,7 +368,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 if (method.equals("tags")) {
                     TagModel model = (TagModel) item;
 
-                    detector(holder, ((RoomTagsFragment) current).adapter.selectedHolder.binding.valueTextView.getText().equals(model.getTitle()));
+                    detector(holder, ((RoomTagsFragment) current).adapter.selectedHolder.binding.titleTextView.getText().equals(model.getTitle()));
                 }
             }
 

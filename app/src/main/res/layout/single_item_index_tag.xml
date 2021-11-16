@@ -19,14 +19,14 @@
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_coolgray200"
-        app:layout_constraintBottom_toBottomOf="@id/value_textView"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/value_textView"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="5" />
 
     <TextView
-        android:id="@+id/value_textView"
+        android:id="@+id/title_textView"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -38,7 +38,7 @@
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_coolgray200"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/index_textView"
@@ -53,9 +53,9 @@
         android:padding="@dimen/_4sdp"
         android:theme="@style/ProgressBarTheme"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/value_textView"
-        app:layout_constraintEnd_toEndOf="@id/value_textView"
-        app:layout_constraintTop_toTopOf="@id/value_textView"
+        app:layout_constraintBottom_toBottomOf="@id/title_textView"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintTop_toTopOf="@id/title_textView"
         style="@style/Widget.AppCompat.ProgressBar"
         tools:visibility="visible" />
 

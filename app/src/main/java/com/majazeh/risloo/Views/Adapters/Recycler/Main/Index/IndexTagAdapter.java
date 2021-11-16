@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,10 +15,10 @@ import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.TagsHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexTagHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomTagsFragment;
-import com.majazeh.risloo.databinding.SingleItemTagBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexTagBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
@@ -29,7 +29,10 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
+public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
+
+    // Holders
+    public IndexTagHolder selectedHolder;
 
     // Fragments
     private Fragment current;
@@ -37,23 +40,22 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
     // Objects
     private Activity activity;
     private HashMap data, header;
-    public TagsHolder selectedHolder;
 
     // Vars
     private ArrayList<TypeModel> items;
 
-    public TagsAdapter(@NonNull Activity activity) {
+    public IndexTagAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public TagsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new TagsHolder(SingleItemTagBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexTagHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexTagHolder(SingleItemIndexTagBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TagsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexTagHolder holder, int i) {
         intializer();
 
         listener(holder);
@@ -90,22 +92,33 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(TagsHolder holder) {
+    private void listener(IndexTagHolder holder) {
+        CustomClickView.onDelayedListener(() -> {
+            // TODO : Place Code When Needed
+        }).widget(holder.binding.indexTextView);
+
         CustomClickView.onDelayedListener(() -> {
             selectedHolder = holder;
             DialogManager.showSearchableDialog(activity, "tags");
-        }).widget(holder.binding.valueTextView);
+        }).widget(holder.binding.titleTextView);
     }
 
-    private void setData(TagsHolder holder) {
+    private void setData(IndexTagHolder holder) {
         holder.binding.indexTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
-        holder.binding.valueTextView.setText("");
+
+        setTitle(holder);
+    }
+
+    private void setTitle(IndexTagHolder holder) {
+        holder.binding.titleTextView.setText("");
 
         for (TypeModel item : items) {
             TagModel model = (TagModel) item;
 
             if (model.getOrder() == holder.getBindingAdapterPosition() + 1)
-                holder.binding.valueTextView.setText(model.getTitle());
+                holder.binding.titleTextView.setText(model.getTitle());
+
+            break;
         }
     }
 
@@ -114,10 +127,10 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
             case "tags": {
                 TagModel model = (TagModel) item;
 
-                if (!selectedHolder.binding.valueTextView.getText().equals(model.getTitle())) {
-                    selectedHolder.binding.valueTextView.setText(model.getTitle());
-                } else if (selectedHolder.binding.valueTextView.getText().equals(model.getTitle())) {
-                    selectedHolder.binding.valueTextView.setText("");
+                if (!selectedHolder.binding.titleTextView.getText().equals(model.getTitle())) {
+                    selectedHolder.binding.titleTextView.setText(model.getTitle());
+                } else if (selectedHolder.binding.titleTextView.getText().equals(model.getTitle())) {
+                    selectedHolder.binding.titleTextView.setText("");
                 }
 
                 DialogManager.dismissSearchableDialog();
@@ -127,10 +140,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
         }
     }
 
-    private void doWork(TagModel model) {
-        if (selectedHolder.binding.orderProgressBar.getVisibility() == View.GONE)
-            selectedHolder.binding.orderProgressBar.setVisibility(View.VISIBLE);
-
+    private void setHashmap(TagModel model) {
         if (current instanceof CenterTagsFragment)
             data.put("roomId", ((CenterTagsFragment) current).centerModel.getCenterId());
         else if (current instanceof RoomTagsFragment)
@@ -138,8 +148,21 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
 
         data.put("id", model.getId());
         data.put("order", selectedHolder.getBindingAdapterPosition() + 1);
+    }
 
-        if (current instanceof CenterTagsFragment)
+    private void setProgress(boolean show) {
+        if (show && selectedHolder.binding.orderProgressBar.getVisibility() == View.GONE)
+            selectedHolder.binding.orderProgressBar.setVisibility(View.VISIBLE);
+        else if (!show && selectedHolder.binding.orderProgressBar.getVisibility() == View.VISIBLE)
+            selectedHolder.binding.orderProgressBar.setVisibility(View.GONE);
+    }
+
+    private void doWork(TagModel model) {
+        setProgress(true);
+
+        setHashmap(model);
+
+        if (current instanceof CenterTagsFragment) {
             Center.orderTags(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -154,20 +177,18 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
                         else
                             setItems(new ArrayList<>());
 
-                        if (selectedHolder.binding.orderProgressBar.getVisibility() == View.VISIBLE)
-                            selectedHolder.binding.orderProgressBar.setVisibility(View.GONE);
+                        setProgress(false);
                     });
                 }
 
                 @Override
                 public void onFailure(String response) {
                     activity.runOnUiThread(() -> {
-                        if (selectedHolder.binding.orderProgressBar.getVisibility() == View.VISIBLE)
-                            selectedHolder.binding.orderProgressBar.setVisibility(View.GONE);
+                        setProgress(false);
                     });
                 }
             });
-        else if (current instanceof RoomTagsFragment)
+        } else if (current instanceof RoomTagsFragment) {
             Room.orderTags(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -182,19 +203,18 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
                         else
                             setItems(new ArrayList<>());
 
-                        if (selectedHolder.binding.orderProgressBar.getVisibility() == View.VISIBLE)
-                            selectedHolder.binding.orderProgressBar.setVisibility(View.GONE);
+                        setProgress(false);
                     });
                 }
 
                 @Override
                 public void onFailure(String response) {
                     activity.runOnUiThread(() -> {
-                        if (selectedHolder.binding.orderProgressBar.getVisibility() == View.VISIBLE)
-                            selectedHolder.binding.orderProgressBar.setVisibility(View.GONE);
+                        setProgress(false);
                     });
                 }
             });
+        }
     }
 
 }
