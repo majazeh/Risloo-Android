@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.DownloadAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexDownloadAdapter;
 import com.majazeh.risloo.databinding.FragmentDownloadsBinding;
 
 import java.io.File;
@@ -23,7 +23,7 @@ public class DownloadsFragment extends Fragment {
     private FragmentDownloadsBinding binding;
 
     // Adapters
-    private DownloadAdapter adapter;
+    private IndexDownloadAdapter adapter;
 
     @Nullable
     @Override
@@ -38,7 +38,7 @@ public class DownloadsFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new DownloadAdapter(requireActivity());
+        adapter = new IndexDownloadAdapter(requireActivity());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.DownloadsFragmentTitle));
 

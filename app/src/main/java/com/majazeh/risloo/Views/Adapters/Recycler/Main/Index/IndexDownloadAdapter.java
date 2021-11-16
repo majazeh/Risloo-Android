@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.DownloadHolder;
-import com.majazeh.risloo.databinding.SingleItemDownloadBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexDownloadHolder;
+import com.majazeh.risloo.databinding.SingleItemIndexDownloadBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class DownloadAdapter extends RecyclerView.Adapter<DownloadHolder> {
+public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHolder> {
 
     // Objects
     private Activity activity;
@@ -23,18 +23,18 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadHolder> {
     // Vars
     private ArrayList<String> items;
 
-    public DownloadAdapter(@NonNull Activity activity) {
+    public IndexDownloadAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public DownloadHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new DownloadHolder(SingleItemDownloadBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexDownloadHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexDownloadHolder(SingleItemIndexDownloadBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DownloadHolder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexDownloadHolder holder, int i) {
 //        String item = items.get(i);
 
         listener(holder);
@@ -47,7 +47,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadHolder> {
         if (this.items != null)
             return items.size();
         else
-            return 5;
+            return 4;
     }
 
     public void setItems(ArrayList<String> items) {
@@ -65,13 +65,13 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadHolder> {
         }
     }
 
-    private void listener(DownloadHolder holder) {
+    private void listener(IndexDownloadHolder holder) {
         CustomClickView.onDelayedListener(() -> {
-            // TODO : Place Code Here
+            // TODO : Place Code When Needed
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(DownloadHolder holder) {
+    private void setData(IndexDownloadHolder holder) {
         holder.binding.titleTextView.setText("فايل");
 
         Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
