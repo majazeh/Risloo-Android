@@ -67,7 +67,7 @@
 
         <include
             android:id="@+id/index_singleLayout"
-            layout="@layout/component_single_center"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="gone"

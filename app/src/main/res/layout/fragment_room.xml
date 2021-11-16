@@ -281,7 +281,7 @@
 
         <include
             android:id="@+id/cases_singleLayout"
-            layout="@layout/component_single_case2"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="gone"

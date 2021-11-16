@@ -191,7 +191,7 @@
 
         <include
             android:id="@+id/references_singleLayout"
-            layout="@layout/component_single_reference"
+            layout="@layout/component_single_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="gone"
