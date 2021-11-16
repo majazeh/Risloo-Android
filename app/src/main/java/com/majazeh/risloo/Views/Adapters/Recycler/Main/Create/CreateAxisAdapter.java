@@ -29,7 +29,7 @@ public class CreateAxisAdapter extends RecyclerView.Adapter<CreateAxisHolder> {
 
     // Vars
     private ArrayList<TypeModel> items;
-    private ArrayList<String> ids, amounts;
+    private ArrayList<String> ids = new ArrayList<>(), amounts = new ArrayList<>();
 
     public CreateAxisAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -53,10 +53,6 @@ public class CreateAxisAdapter extends RecyclerView.Adapter<CreateAxisHolder> {
     @Override
     public int getItemCount() {
         return items.size();
-    }
-
-    public ArrayList<TypeModel> getItems() {
-        return items;
     }
 
     public ArrayList<String> getIds() {
@@ -151,7 +147,7 @@ public class CreateAxisAdapter extends RecyclerView.Adapter<CreateAxisHolder> {
     }
 
     private void setData(CreateAxisHolder holder, int position) {
-        holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateScheduleTabPaymentAxisTotal) + " " + ids.get(position));
+        holder.binding.headerTextView.setText(activity.getResources().getString(R.string.AppSessionPrice) + " " + ids.get(position));
         holder.binding.inputEditText.setText(amounts.get(position));
         holder.binding.footerTextView.setText(StringManager.separate(amounts.get(position)) + " " + activity.getResources().getString(R.string.MainToman));
     }
