@@ -24,7 +24,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexCaseAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.FilterTagsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Filter.FilterTagAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -50,7 +50,7 @@ public class RoomFragment extends Fragment {
 
     // Adapters
     private IndexCaseAdapter indexCaseAdapter;
-    private FilterTagsAdapter filterTagsAdapter;
+    private FilterTagAdapter filterTagAdapter;
 
     // Models
     private RoomModel roomModel;
@@ -81,7 +81,7 @@ public class RoomFragment extends Fragment {
 
     private void initializer() {
         indexCaseAdapter = new IndexCaseAdapter(requireActivity());
-        filterTagsAdapter = new FilterTagsAdapter(requireActivity());
+        filterTagAdapter = new FilterTagAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -699,11 +699,11 @@ public class RoomFragment extends Fragment {
                                 // Tags Data
                                 if (!isFiltered) {
                                     if (!roomModel.getPinned_tags().data().isEmpty()) {
-                                        filterTagsAdapter.setItems(roomModel.getPinned_tags().data());
-                                        binding.tagsRecyclerView.setAdapter(filterTagsAdapter);
+                                        filterTagAdapter.setItems(roomModel.getPinned_tags().data());
+                                        binding.tagsRecyclerView.setAdapter(filterTagAdapter);
 
                                         binding.casesFilterView.setVisibility(View.VISIBLE);
-                                    } else if (filterTagsAdapter.getItemCount() == 0) {
+                                    } else if (filterTagAdapter.getItemCount() == 0) {
                                         binding.tagsRecyclerView.setAdapter(null);
 
                                         binding.casesFilterView.setVisibility(View.GONE);
@@ -790,9 +790,9 @@ public class RoomFragment extends Fragment {
     public void responseAdapter() {
         data.put("page", 1);
 
-        if (!filterTagsAdapter.getIds().isEmpty()) {
+        if (!filterTagAdapter.getIds().isEmpty()) {
             isFiltered = true;
-            data.put("tag", filterTagsAdapter.getIds());
+            data.put("tag", filterTagAdapter.getIds());
         } else {
             isFiltered = false;
             data.remove("tag");

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Filter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.FilterTagsHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Filter.FilterTagHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Show.RoomFragment;
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
 import com.mre.ligheh.Model.TypeModel.TagModel;
@@ -17,7 +17,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsHolder> {
+public class FilterTagAdapter extends RecyclerView.Adapter<FilterTagHolder> {
 
     // Fragments
     private Fragment current;
@@ -29,18 +29,18 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsHolder> {
     private ArrayList<TypeModel> items;
     private ArrayList<String> ids = new ArrayList<>();
 
-    public FilterTagsAdapter(@NonNull Activity activity) {
+    public FilterTagAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public FilterTagsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new FilterTagsHolder(SingleItemFilterTagBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public FilterTagHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new FilterTagHolder(SingleItemFilterTagBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FilterTagsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull FilterTagHolder holder, int i) {
         TagModel model = (TagModel) items.get(i);
 
         intializer();
@@ -79,7 +79,7 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsHolder> {
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
-    private void listener(FilterTagsHolder holder, TagModel model) {
+    private void listener(FilterTagHolder holder, TagModel model) {
         holder.binding.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked)
                 ids.add(model.getId());
@@ -90,7 +90,7 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsHolder> {
         });
     }
 
-    private void setData(FilterTagsHolder holder, TagModel model) {
+    private void setData(FilterTagHolder holder, TagModel model) {
         holder.binding.getRoot().setText(model.getTitle());
     }
 
