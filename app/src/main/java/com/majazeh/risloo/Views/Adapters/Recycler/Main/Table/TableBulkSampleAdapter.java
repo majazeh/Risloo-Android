@@ -203,10 +203,14 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
+    private void setHashmap(BulkSampleModel model) {
+        data.put("authorized_key", model.getLink());
+    }
+
     private void doWork(BulkSampleModel model) {
         DialogManager.showLoadingDialog(activity, "");
 
-        data.put("authorized_key", model.getLink());
+        setHashmap(model);
 
         Sample.auth(data, header, new Response() {
             @Override

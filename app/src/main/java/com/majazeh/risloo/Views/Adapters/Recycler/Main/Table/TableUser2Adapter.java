@@ -264,19 +264,27 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    private void doWork(UserModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity, "");
-
+    private void setHashmap(UserModel model, String value, String method) {
         if (current instanceof SessionFragment)
             data.put("id", ((SessionFragment) current).sessionModel.getId());
 
         if (method.equals("position")) {
             data.put("userId", model.getId());
             data.put("position", value);
+
+            data.remove("session_platform");
         } else {
             data.put("userId", model.getId());
             data.put("session_platform", value);
+
+            data.remove("position");
         }
+    }
+
+    private void doWork(UserModel model, String value, String method) {
+        DialogManager.showLoadingDialog(activity, "");
+
+        setHashmap(model, value, method);
 
         Session.editUser(data, header, new Response() {
             @Override

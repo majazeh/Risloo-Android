@@ -258,12 +258,23 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void doWork(TableBillHolder holder, BillingModel model, int position, String method) {
-        DialogManager.showLoadingDialog(activity, "");
-
+    private void setHashmap(BillingModel model, int position, String method) {
         if (method.equals("settled")) {
             data.put("id", model.getId());
 
+            data.remove("billingId");
+        } else {
+            data.put("id", treasuryIds.get(position));
+            data.put("billingId", model.getId());
+        }
+    }
+
+    private void doWork(TableBillHolder holder, BillingModel model, int position, String method) {
+        DialogManager.showLoadingDialog(activity, "");
+
+        setHashmap(model, position, method);
+
+        if (method.equals("settled")) {
             Billing.settled(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -298,9 +309,6 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 }
             });
         } else {
-            data.put("billingId", model.getId());
-            data.put("id", treasuryIds.get(position));
-
             Billing.finall(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {

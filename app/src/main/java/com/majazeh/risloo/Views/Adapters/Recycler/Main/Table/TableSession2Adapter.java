@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderSession2Holder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableSession2Holder;
@@ -185,11 +185,15 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    private void setHashmap(SessionModel model, String status) {
+        data.put("id", model.getId());
+        data.put("status", status);
+    }
+
     private void doWork(SessionModel model, String status) {
         DialogManager.showLoadingDialog(activity, "");
 
-        data.put("id", model.getId());
-        data.put("status", status);
+        setHashmap(model, status);
 
         Session.edit(data, header, new Response() {
             @Override

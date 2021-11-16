@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderSampleHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableSampleHolder;
@@ -246,10 +246,14 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    private void setHashmap(SampleModel model) {
+        data.put("id", model.getSampleId());
+    }
+
     private void doWork(TableSampleHolder holder, SampleModel model, int position) {
         DialogManager.showLoadingDialog(activity, "");
 
-        data.put("id", model.getSampleId());
+        setHashmap(model);
 
         Sample.score(data, header, new Response() {
             @Override

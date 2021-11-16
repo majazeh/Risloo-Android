@@ -299,9 +299,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
     }
 
-    private void doWork(TableCenterUserHolder holder, UserModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity, "");
-
+    private void setHashmap(UserModel model, String value, String method) {
         if (current instanceof CenterUsersFragment)
             data.put("id", ((CenterUsersFragment) current).centerModel.getCenterId());
 
@@ -309,6 +307,21 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             data.put("userId", model.getId());
             data.put("position", value);
 
+            data.remove("status");
+        } else {
+            data.put("userId", model.getId());
+            data.put("status", value);
+
+            data.remove("position");
+        }
+    }
+
+    private void doWork(TableCenterUserHolder holder, UserModel model, String value, String method) {
+        DialogManager.showLoadingDialog(activity, "");
+
+        setHashmap(model, value, method);
+
+        if (method.equals("position")) {
             Center.changePosition(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -326,9 +339,6 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 }
             });
         } else {
-            data.put("userId", model.getId());
-            data.put("status", value);
-
             Center.changeStatus(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
