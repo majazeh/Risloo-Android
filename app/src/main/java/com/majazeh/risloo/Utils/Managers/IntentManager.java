@@ -225,7 +225,7 @@ public class IntentManager {
         try {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         } catch (ActivityNotFoundException e) {
-            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityException));
+            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityPaymentException));
         }
         activity.startActivity(intent);
     }

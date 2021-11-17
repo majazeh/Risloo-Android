@@ -106,6 +106,8 @@
     <string name="ToastSampleDoublePressExit">برای خروج از نمونه دوباره کلیک کنید.</string>
     <string name="ToastSampleLinkSaved">لینک نمونه ذخیره شد.</string>
 
+    <string name="ToastActivityPaymentException">برنامه‌ای برای بارگذاری درگاه پرداخت وجود ندارد.</string>
+
     <string name="ToastPermissionFileException">ریسلو دسترسی به آپلود فایل ندارد.</string>
     <string name="ToastPermissionStorageException">ریسلو دسترسی به ذخیره فایل ندارد.</string>
     <string name="ToastPermissionGalleryException">ریسلو دسترسی به البوم ندارد.</string>
@@ -1923,13 +1925,6 @@
     <string name="DialogScheduleFilterStatus">بر اساس وضعیت</string>
     <string name="DialogScheduleFilterReset">پاک کردن همه فیلترها</string>
     <string name="DialogScheduleFilterHint">اتاق درمان</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Toast Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

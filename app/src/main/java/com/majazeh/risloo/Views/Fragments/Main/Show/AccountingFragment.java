@@ -55,8 +55,8 @@ public class AccountingFragment extends Fragment {
         }).widget(binding.billingsIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalBanksFragment(null);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+//            NavDirections action = NavigationMainDirections.actionGlobalBanksFragment(null);
+//            ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.banksIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
