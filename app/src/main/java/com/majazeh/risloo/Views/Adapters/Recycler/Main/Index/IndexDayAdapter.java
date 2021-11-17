@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -29,8 +29,8 @@ public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
 
     // Vars
     private ArrayList<Long> timestamps;
-    public long currentTimestamp = DateManager.currentTimestamp(), selectedTimestamp;
     private boolean userSelect = false;
+    public long currentTimestamp = DateManager.currentTimestamp(), selectedTimestamp;
 
     public IndexDayAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -70,19 +70,14 @@ public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
     }
 
     private void detector(IndexDayHolder holder, long timestamp) {
-        if (currentTimestamp == timestamp) {
+        if (currentTimestamp > timestamp) {
             if (selectedTimestamp == timestamp)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);
-            else
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
-        } else if (currentTimestamp > timestamp) {
-            if (selectedTimestamp == timestamp)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_risloo500_ripple_risloo50);
             else
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray50_border_1sdp_coolgray200_ripple_coolgray300);
         } else {
             if (selectedTimestamp == timestamp)
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_risloo500_ripple_risloo50);
             else
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
         }
@@ -90,17 +85,13 @@ public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
 
     private void listener(IndexDayHolder holder, long timestamp) {
         CustomClickView.onDelayedListener(() -> {
-            if (current instanceof CenterSchedulesFragment) {
+            if (current instanceof CenterSchedulesFragment)
                 ((CenterSchedulesFragment) current).responseAdapter(timestamp);
-                selectedTimestamp = timestamp;
-                userSelect = true;
-            }
-
-            if (current instanceof RoomSchedulesFragment) {
+            else if (current instanceof RoomSchedulesFragment)
                 ((RoomSchedulesFragment) current).responseAdapter(timestamp);
-                selectedTimestamp = timestamp;
-                userSelect = true;
-            }
+
+            selectedTimestamp = timestamp;
+            userSelect = true;
 
             notifyDataSetChanged();
         }).widget(holder.binding.getRoot());
@@ -110,10 +101,8 @@ public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
         holder.binding.titleTextView.setText(DateManager.jalDayName(String.valueOf(timestamp)));
         holder.binding.dateTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(timestamp), "/"));
 
-        if (!userSelect) {
-            if (currentTimestamp == timestamp) {
-                selectedTimestamp = timestamp;
-            }
+        if (!userSelect && currentTimestamp == timestamp) {
+            selectedTimestamp = timestamp;
         }
     }
 
