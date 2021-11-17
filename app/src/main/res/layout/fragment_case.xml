@@ -276,7 +276,7 @@
 
         <include
             android:id="@+id/references_shimmerLayout"
-            layout="@layout/component_shimmer_index2"
+            layout="@layout/component_shimmer_reference"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="visible"
