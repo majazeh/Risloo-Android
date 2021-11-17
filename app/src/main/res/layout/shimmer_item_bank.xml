@@ -1,28 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    android:padding="@dimen/_8sdp"
     android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200">
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_56sdp"
-        android:layout_margin="@dimen/_6sdp"
-        android:background="@drawable/draw_2sdp_solid_coolgray50" />
+        android:id="@+id/avatar_view"
+        android:layout_width="@dimen/_52sdp"
+        android:layout_height="@dimen/_52sdp"
+        android:background="@drawable/draw_oval_solid_coolgray100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:background="@color/CoolGray200" />
+        android:id="@+id/iban_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:background="@drawable/draw_2sdp_solid_coolgray100"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toTopOf="@id/name_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avatar_view"
+        app:layout_constraintTop_toTopOf="@id/avatar_view" />
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_32sdp"
-        android:layout_margin="@dimen/_6sdp"
-        android:background="@drawable/draw_2sdp_solid_coolgray50" />
+        android:id="@+id/name_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_18sdp"
+        android:background="@drawable/draw_2sdp_solid_coolgray100"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iban_view"
+        app:layout_constraintTop_toBottomOf="@id/iban_view" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
