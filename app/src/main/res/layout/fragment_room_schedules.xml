@@ -91,7 +91,7 @@
 
         <include
             android:id="@+id/days_shimmerLayout"
-            layout="@layout/component_shimmer_week"
+            layout="@layout/component_shimmer_day"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"

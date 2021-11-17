@@ -18,43 +18,43 @@
         android:orientation="horizontal">
 
         <include
-            layout="@layout/shimmer_item_week"
+            layout="@layout/shimmer_item_day"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp" />
 
         <include
-            layout="@layout/shimmer_item_week"
+            layout="@layout/shimmer_item_day"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            layout="@layout/shimmer_item_week"
+            layout="@layout/shimmer_item_day"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            layout="@layout/shimmer_item_week"
+            layout="@layout/shimmer_item_day"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            layout="@layout/shimmer_item_week"
+            layout="@layout/shimmer_item_day"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            layout="@layout/shimmer_item_week"
+            layout="@layout/shimmer_item_day"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            layout="@layout/shimmer_item_week"
+            layout="@layout/shimmer_item_day"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"

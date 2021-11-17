@@ -217,7 +217,7 @@
 
         <include
             android:id="@+id/psychologists_shimmerLayout"
-            layout="@layout/component_shimmer_psychology"
+            layout="@layout/component_shimmer_psychologist"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="visible"

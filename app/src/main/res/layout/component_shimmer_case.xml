@@ -18,24 +18,24 @@
         android:padding="@dimen/_12sdp">
 
         <include
-            layout="@layout/shimmer_item_psychology"
+            layout="@layout/shimmer_item_case"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include
-            layout="@layout/shimmer_item_psychology"
+            layout="@layout/shimmer_item_case"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp" />
 
         <include
-            layout="@layout/shimmer_item_psychology"
+            layout="@layout/shimmer_item_case"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp" />
 
         <include
-            layout="@layout/shimmer_item_psychology"
+            layout="@layout/shimmer_item_case"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp" />
