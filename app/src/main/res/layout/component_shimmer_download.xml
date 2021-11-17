@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -11,35 +10,53 @@
     app:shimmer_auto_start="true"
     app:shimmer_duration="1000">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="@dimen/_12sdp">
 
         <include
-            layout="@layout/shimmer_item_case"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/shimmer_item1"
+            layout="@layout/shimmer_item_download"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            app:layout_constraintEnd_toStartOf="@id/shimmer_item2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            layout="@layout/shimmer_item_case"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp" />
+            android:id="@+id/shimmer_item2"
+            layout="@layout/shimmer_item_download"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/shimmer_item1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            layout="@layout/shimmer_item_case"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp" />
+            android:id="@+id/shimmer_item3"
+            layout="@layout/shimmer_item_download"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toStartOf="@id/shimmer_item4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shimmer_item1" />
 
         <include
-            layout="@layout/shimmer_item_case"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp" />
+            android:id="@+id/shimmer_item4"
+            layout="@layout/shimmer_item_download"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/shimmer_item3"
+            app:layout_constraintTop_toBottomOf="@id/shimmer_item2"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.facebook.shimmer.ShimmerFrameLayout>
