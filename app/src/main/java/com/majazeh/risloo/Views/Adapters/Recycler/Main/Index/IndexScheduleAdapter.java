@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -22,12 +22,14 @@ import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexScheduleHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexScheduleBinding;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -129,71 +131,94 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
     }
 
     private void setData(IndexScheduleHolder holder, ScheduleModel model) {
-        try {
-            holder.binding.timeTextView.setText("ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())));
-            holder.binding.durationTextView.setText(model.getDuration() + " دقیقه");
-            holder.binding.nameTextView.setText(model.getRoom().getRoomManager().getName());
+        holder.binding.timeTextView.setText("ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())));
+        holder.binding.durationTextView.setText(model.getDuration() + " دقیقه");
+        holder.binding.nameTextView.setText(model.getRoom().getRoomManager().getName());
 
-            if (model.getClients() != null && model.getClients().data().size() != 0) {
-                holder.binding.referenceGroup.setVisibility(View.VISIBLE);
-                holder.binding.referenceTextView.setText("");
-                for (int i = 0; i < model.getClients().data().size(); i++) {
-                    UserModel user = (UserModel) model.getClients().data().get(i);
-                    if (user != null) {
-                        holder.binding.referenceTextView.append(user.getName());
-                        if (i != model.getClients().data().size() - 1) {
-                            holder.binding.referenceTextView.append("  -  ");
-                        }
-                    }
+        setClients(holder, model.getClients());
+
+        setFields(holder, model.getFields());
+
+        setPlatforms(holder, model.getSession_platforms());
+
+        setGroupSession(holder, model.isGroup_session());
+
+        setStatus(holder, model.getStatus());
+
+        if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null)
+            setAvatar(holder, model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
+        else
+            setAvatar(holder, "");
+    }
+
+    private void setClients(IndexScheduleHolder holder, List clients) {
+        if (clients != null && clients.data().size() != 0) {
+            holder.binding.referenceGroup.setVisibility(View.VISIBLE);
+            holder.binding.referenceTextView.setText("");
+
+            for (int i = 0; i < clients.data().size(); i++) {
+                UserModel user = (UserModel) clients.data().get(i);
+
+                if (user != null) {
+                    holder.binding.referenceTextView.append(user.getName());
+                    if (i != clients.data().size() - 1)
+                        holder.binding.referenceTextView.append("  -  ");
+
                 }
-            } else {
-                holder.binding.referenceGroup.setVisibility(View.GONE);
             }
-
-            if (model.getFields() != null && model.getFields().length() != 0) {
-                holder.binding.axisGroup.setVisibility(View.VISIBLE);
-                holder.binding.axisTextView.setText("");
-                for (int i = 0; i < model.getFields().length(); i++) {
-                    holder.binding.axisTextView.append(model.getFields().getJSONObject(i).getString("title"));
-                    if (i != model.getFields().length() - 1) {
-                        holder.binding.axisTextView.append("  |  ");
-                    }
-                }
-            } else {
-                holder.binding.axisGroup.setVisibility(View.GONE);
-            }
-
-            if (model.getSession_platforms() != null && model.getSession_platforms().data().size() != 0) {
-                holder.binding.platformGroup.setVisibility(View.VISIBLE);
-                holder.binding.platformTextView.setText("");
-                for (int i = 0; i < model.getSession_platforms().data().size(); i++) {
-                    SessionPlatformModel platform = (SessionPlatformModel) model.getSession_platforms().data().get(i);
-                    if (platform != null) {
-                        holder.binding.platformTextView.append(platform.getTitle());
-                        if (i != model.getSession_platforms().data().size() - 1) {
-                            holder.binding.platformTextView.append("  |  ");
-                        }
-                    }
-                }
-            } else {
-                holder.binding.platformGroup.setVisibility(View.GONE);
-            }
-
-            if (model.isGroup_session())
-                holder.binding.bulkTextView.setVisibility(View.VISIBLE);
-            else
-                holder.binding.bulkTextView.setVisibility(View.GONE);
-
-            setStatus(holder, model.getStatus());
-
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null)
-                setAvatar(holder, model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
-            else
-                setAvatar(holder, "");
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } else {
+            holder.binding.referenceGroup.setVisibility(View.GONE);
+            holder.binding.referenceTextView.setText("");
         }
+    }
+
+    private void setFields(IndexScheduleHolder holder, JSONArray fields) {
+        if (fields != null && fields.length() != 0) {
+            holder.binding.axisGroup.setVisibility(View.VISIBLE);
+            holder.binding.axisTextView.setText("");
+
+            try {
+                for (int i = 0; i < fields.length(); i++) {
+                    holder.binding.axisTextView.append(fields.getJSONObject(i).getString("title"));
+                    if (i != fields.length() - 1)
+                        holder.binding.axisTextView.append("  |  ");
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            holder.binding.axisGroup.setVisibility(View.GONE);
+            holder.binding.axisTextView.setText("");
+        }
+    }
+
+    private void setPlatforms(IndexScheduleHolder holder, List platforms) {
+        if (platforms != null && platforms.data().size() != 0) {
+            holder.binding.platformGroup.setVisibility(View.VISIBLE);
+            holder.binding.platformTextView.setText("");
+
+            for (int i = 0; i < platforms.data().size(); i++) {
+                SessionPlatformModel platform = (SessionPlatformModel) platforms.data().get(i);
+
+                if (platform != null) {
+                    holder.binding.platformTextView.append(platform.getTitle());
+                    if (i != platforms.data().size() - 1)
+                        holder.binding.platformTextView.append("  |  ");
+
+                }
+            }
+        } else {
+            holder.binding.platformGroup.setVisibility(View.GONE);
+            holder.binding.platformTextView.setText("");
+        }
+    }
+
+    private void setGroupSession(IndexScheduleHolder holder, boolean isGroupSession) {
+        if (isGroupSession)
+            holder.binding.bulkTextView.setVisibility(View.VISIBLE);
+        else
+            holder.binding.bulkTextView.setVisibility(View.GONE);
     }
 
     private void setStatus(IndexScheduleHolder holder, String status) {
@@ -208,14 +233,14 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
                 break;
             case "client_awaiting":
             case "session_awaiting":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.LightBlue500));
-                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_lightblue600);
-                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue50);
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_risloo500);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_risloo50);
                 break;
             case "in_session":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_emerald600);
-                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_amber50);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50);
                 break;
             case "canceled_by_client":
             case "canceled_by_center":
@@ -234,12 +259,12 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
     private void setAvatar(IndexScheduleHolder holder, String url) {
         if (!url.equals("")) {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.CoolGray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray50).placeholder(R.color.CoolGray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 
@@ -263,7 +288,7 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
                 emptyTextView.setText("");
             } else {
                 emptyTextView.setVisibility(View.VISIBLE);
-                emptyTextView.setText(activity.getResources().getString(R.string.SchedulesAdapterDayEmpty));
+                emptyTextView.setText(activity.getResources().getString(R.string.ScheduleAdapterDayEmpty));
             }
 
             countTextView.setText(StringManager.bracing(showingItems.size()));

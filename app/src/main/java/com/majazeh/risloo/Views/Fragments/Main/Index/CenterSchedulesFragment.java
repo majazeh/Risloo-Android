@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.IndexScheduleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexScheduleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexDayAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterSchedulesBinding;
 import com.mre.ligheh.API.Response;
