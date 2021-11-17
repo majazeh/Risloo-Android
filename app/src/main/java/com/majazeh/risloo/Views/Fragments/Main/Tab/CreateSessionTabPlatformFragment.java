@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.TabPlatformsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Create.CreatePlatformAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateSessionFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionTabPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -27,7 +27,7 @@ public class CreateSessionTabPlatformFragment extends Fragment {
     private FragmentCreateSessionTabPlatformBinding binding;
 
     // Adapters
-    private TabPlatformsAdapter adapter;
+    private CreatePlatformAdapter adapter;
 
     // Fragments
     private Fragment current;
@@ -47,7 +47,7 @@ public class CreateSessionTabPlatformFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new TabPlatformsAdapter(requireActivity());
+        adapter = new CreatePlatformAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
@@ -77,7 +77,7 @@ public class CreateSessionTabPlatformFragment extends Fragment {
                 binding.platformsSingleLayout.recyclerView.setAdapter(null);
 
                 binding.platformsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                binding.platformsSingleLayout.emptyView.setText(getResources().getString(R.string.TabPlatformsAdapterEmpty));
+                binding.platformsSingleLayout.emptyView.setText(getResources().getString(R.string.CreatePlatformAdapterEmpty));
             }
         }
     }

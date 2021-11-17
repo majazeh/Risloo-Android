@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Create;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -10,40 +10,40 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.TabPlatformsHolder;
-import com.majazeh.risloo.databinding.SingleItemTabPlatformBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Create.CreatePlatformHolder;
+import com.majazeh.risloo.databinding.SingleItemCreatePlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder> {
+public class CreatePlatformAdapter extends RecyclerView.Adapter<CreatePlatformHolder> {
 
     // Objects
     private Activity activity;
-    public HashMap platforms = new HashMap(), pinPlatform = new HashMap<>(), identifierPlatform = new HashMap<>();
+    public HashMap platforms = new HashMap<>(), pinPlatform = new HashMap<>(), identifierPlatform = new HashMap<>();
 
     // Vars
     private ArrayList<TypeModel> items = new ArrayList<>();
     private boolean userSelect = false;
 
-    public TabPlatformsAdapter(@NonNull Activity activity) {
+    public CreatePlatformAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public TabPlatformsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new TabPlatformsHolder(SingleItemTabPlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public CreatePlatformHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new CreatePlatformHolder(SingleItemCreatePlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TabPlatformsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull CreatePlatformHolder holder, int i) {
         SessionPlatformModel model = (SessionPlatformModel) items.get(i);
 
         listener(holder, model);
@@ -84,7 +84,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(TabPlatformsHolder holder, SessionPlatformModel model) {
+    private void listener(CreatePlatformHolder holder, SessionPlatformModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.getRoot());
@@ -107,17 +107,21 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
             return false;
         });
 
+        holder.binding.selectedSwitchCompat.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.roomCheckBox.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        holder.binding.selectedSwitchCompat.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         holder.binding.roomCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
                 setPinned(holder, model.getId(), isChecked);
 
                 userSelect = false;
             }
-        });
-
-        holder.binding.selectedSwitchCompat.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
         });
 
         holder.binding.selectedSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -129,9 +133,8 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
         });
     }
 
-    private void setData(TabPlatformsHolder holder, SessionPlatformModel model) {
+    private void setData(CreatePlatformHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType())) ;
-
         holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.CoolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         setIdentifier(holder, model.getId(), model.getIdentifier());
@@ -141,23 +144,29 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
         setSelected(holder, model.getId(), model.isSelected());
     }
 
-    private void setIdentifier(TabPlatformsHolder holder, String id, String identifier) {
+    private void setIdentifier(CreatePlatformHolder holder, String id, String identifier) {
         if (identifier != null) {
             identifierPlatform.put(id, identifier);
+
             holder.binding.identifierEditText.setText(identifier);
         } else {
+            identifierPlatform.remove(id);
+
             holder.binding.identifierEditText.setText("");
         }
     }
 
-    private void setPinned(TabPlatformsHolder holder, String id , boolean isPinned) {
+    private void setPinned(CreatePlatformHolder holder, String id , boolean isPinned) {
         if (isPinned) {
             pinPlatform.put(id, "on");
+
             holder.binding.roomCheckBox.setChecked(true);
 
             holder.binding.identifierEditText.setFocusableInTouchMode(true);
             holder.binding.identifierEditText.setAlpha((float) 1);
         } else {
+            pinPlatform.remove(id);
+
             holder.binding.roomCheckBox.setChecked(false);
 
             holder.binding.identifierEditText.setFocusableInTouchMode(false);
@@ -165,23 +174,24 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
         }
     }
 
-    private void setSelected(TabPlatformsHolder holder, String id, boolean isSelected) {
+    private void setSelected(CreatePlatformHolder holder, String id, boolean isSelected) {
         if (isSelected) {
             platforms.put(id, "on");
+
             holder.binding.selectedSwitchCompat.setChecked(true);
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
             holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
-            holder.binding.selectedSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50_border_1sdp_coolgray200);
 
             holder.binding.roomCheckBox.setEnabled(true);
             holder.binding.roomCheckBox.setAlpha((float) 1);
         } else {
+            platforms.remove(id);
+
             holder.binding.selectedSwitchCompat.setChecked(false);
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
             holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
-            holder.binding.selectedSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200);
 
             holder.binding.roomCheckBox.setEnabled(false);
             holder.binding.roomCheckBox.setAlpha((float) 0.6);

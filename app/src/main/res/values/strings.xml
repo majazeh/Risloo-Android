@@ -1277,6 +1277,21 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Create Adapter Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+    ---------- // CreatePlatformAdapter
+
+    <string name="CreatePlatformAdapterRoomCheckbox">اتصال به اتاق درمان</string>
+
+    <string name="CreatePlatformAdapterIdentifierHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید.</string>
+
+    <string name="CreatePlatformAdapterEmpty">هنوز محل برگزاری ثبت نشده است.</string>
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // Index Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1858,16 +1873,6 @@
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- TabPlatforms Adapter ----------
-    */
-
-    <string name="TabPlatformsAdapterRoomCheckbox">اتصال به اتاق درمان</string>
-
-    <string name="TabPlatformsAdapterIdentifierHint">مقدار</string>
-
-    <string name="TabPlatformsAdapterEmpty">هنوز بستري ثبت نشده است.</string>
 
     /*
     ---------- Schedules Adapter ----------
