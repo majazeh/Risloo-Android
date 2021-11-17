@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.CenterPlatformsHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexCenterPlatformHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterPlatformsFragment;
-import com.majazeh.risloo.databinding.SingleItemCenterPlatformBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexCenterPlatformBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
@@ -31,7 +31,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatformsHolder> {
+public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenterPlatformHolder> {
 
     // Fragments
     private Fragment current;
@@ -44,21 +44,21 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public CenterPlatformsAdapter(@NonNull Activity activity) {
+    public IndexCenterPlatformAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public CenterPlatformsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new CenterPlatformsHolder(SingleItemCenterPlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexCenterPlatformHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexCenterPlatformHolder(SingleItemIndexCenterPlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CenterPlatformsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexCenterPlatformHolder holder, int i) {
         SessionPlatformModel model = (SessionPlatformModel) items.get(i);
 
-        initializer(holder);
+        initializer();
 
         listener(holder, model);
 
@@ -90,7 +90,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         }
     }
 
-    private void initializer(CenterPlatformsHolder holder) {
+    private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
@@ -99,7 +99,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(CenterPlatformsHolder holder, SessionPlatformModel model) {
+    private void listener(IndexCenterPlatformHolder holder, SessionPlatformModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.getRoot());
@@ -116,6 +116,15 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             return false;
         });
 
+        holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.sessionCheckBox.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        holder.binding.availableSwitchCompat.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         holder.binding.sessionCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
                 if (isChecked)
@@ -125,11 +134,6 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
                 userSelect = false;
             }
-        });
-
-        holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
         });
 
         holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -146,9 +150,8 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         });
     }
 
-    private void setData(CenterPlatformsHolder holder, SessionPlatformModel model) {
+    private void setData(IndexCenterPlatformHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType()));
-
         holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.CoolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         setIdentifier(holder, model);
@@ -158,7 +161,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         setAvailable(holder, model.isAvailable());
     }
 
-    private void setIdentifier(CenterPlatformsHolder holder, SessionPlatformModel model) {
+    private void setIdentifier(IndexCenterPlatformHolder holder, SessionPlatformModel model) {
         if (model.getIdentifier() != null && !model.getIdentifier().equals("")) {
             holder.binding.identifierGroup.setVisibility(View.VISIBLE);
 
@@ -181,17 +184,16 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         }
     }
 
-    private void setSelected(CenterPlatformsHolder holder, boolean isSelected) {
+    private void setSelected(IndexCenterPlatformHolder holder, boolean isSelected) {
         holder.binding.sessionCheckBox.setChecked(isSelected);
     }
 
-    private void setAvailable(CenterPlatformsHolder holder, boolean isAvailable) {
+    private void setAvailable(IndexCenterPlatformHolder holder, boolean isAvailable) {
         if (isAvailable) {
             holder.binding.availableSwitchCompat.setChecked(true);
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
-            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50_border_1sdp_coolgray200);
 
             holder.binding.sessionCheckBox.setEnabled(true);
             holder.binding.sessionCheckBox.setAlpha((float) 1);
@@ -200,21 +202,24 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
-            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200);
 
             holder.binding.sessionCheckBox.setEnabled(false);
             holder.binding.sessionCheckBox.setAlpha((float) 0.6);
         }
     }
 
-    private void doWork(CenterPlatformsHolder holder, SessionPlatformModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity, "");
-
+    private void setHashmap(SessionPlatformModel model, String value, String method) {
         if (current instanceof CenterPlatformsFragment)
             data.put("id", ((CenterPlatformsFragment) current).centerModel.getCenterId());
 
         data.put("platformId", model.getId());
         data.put(method, value);
+    }
+
+    private void doWork(IndexCenterPlatformHolder holder, SessionPlatformModel model, String value, String method) {
+        DialogManager.showLoadingDialog(activity, "");
+
+        setHashmap(model, value, method);
 
         Center.editCenterSessionPlatform(data, header, new Response() {
             @Override
@@ -228,21 +233,25 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             @Override
             public void onFailure(String response) {
                 activity.runOnUiThread(() -> {
-                    if (method.equals("available")) {
-                        if (value.equals("1"))
-                            setAvailable(holder, false);
-                        else if (value.equals("0"))
-                            setAvailable(holder, true);
-
-                    } else if (method.equals("selected")) {
-                        if (value.equals("1"))
-                            setSelected(holder, false);
-                        else if (value.equals("0"))
-                            setSelected(holder, true);
-                    }
+                    resetWidget(holder, value, method);
                 });
             }
         });
+    }
+
+    private void resetWidget(IndexCenterPlatformHolder holder, String value, String method) {
+        if (method.equals("available")) {
+            if (value.equals("1"))
+                setAvailable(holder, false);
+            else if (value.equals("0"))
+                setAvailable(holder, true);
+
+        } else if (method.equals("selected")) {
+            if (value.equals("1"))
+                setSelected(holder, false);
+            else if (value.equals("0"))
+                setSelected(holder, true);
+        }
     }
 
 }

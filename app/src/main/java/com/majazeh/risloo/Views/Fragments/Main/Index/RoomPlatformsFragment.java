@@ -13,7 +13,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.RoomPlatformsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexRoomPlatformAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomPlatformsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -28,7 +28,7 @@ public class RoomPlatformsFragment extends Fragment {
     private FragmentRoomPlatformsBinding binding;
 
     // Adapters
-    private RoomPlatformsAdapter adapter;
+    private IndexRoomPlatformAdapter adapter;
 
     // Models
     public RoomModel roomModel;
@@ -51,7 +51,7 @@ public class RoomPlatformsFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new RoomPlatformsAdapter(requireActivity());
+        adapter = new IndexRoomPlatformAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();

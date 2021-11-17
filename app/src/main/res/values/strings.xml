@@ -1295,6 +1295,11 @@
     <string name="CenterAdapterPersonalClinic">اتاق درمان شخصی</string>
 
 
+    ---------- // CenterPlatformAdapter
+
+    <string name="CenterPlatformAdapterSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
+
+
     ---------- // PsychologistAdapter
 
     <string name="PsychologistAdapterHeader">درمانگران</string>
@@ -1314,6 +1319,12 @@
     <string name="RoomAdapterHeader">اتاق‌های درمان</string>
 
     <string name="RoomAdapterEmpty">هنوز اتاق درمانی ثبت نشده است.</string>
+
+
+    ---------- // RoomPlatformAdapter
+
+    <string name="RoomPlatformAdapterCenterCheckbox">اتصال به مرکز درمانی</string>
+    <string name="RoomPlatformAdapterSessionHint">تنظیمات پیش‌فرض هنگام ایجاد جلسه:</string>
 
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -1845,12 +1856,6 @@
 
 
 
-
-
-
-
-
-
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1875,15 +1880,6 @@
 
     <string name="SchedulesAdapterWeekEmpty">برنامه‌ای در این هفته موجود نمی باشد.</string>
     <string name="SchedulesAdapterDayEmpty">برنامه‌ای در این روز موجود نمی باشد.</string>
-
-    /*
-    ---------- Platforms Adapter ----------
-    */
-
-    <string name="CenterPlatformsFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
-
-    <string name="RoomPlatformsFragmentCenterCheckbox">اتصال به مرکز درمانی</string>
-    <string name="RoomPlatformsFragmentSessionHint">تنظیمات پیش‌فرض هنگام ایجاد جلسه:</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

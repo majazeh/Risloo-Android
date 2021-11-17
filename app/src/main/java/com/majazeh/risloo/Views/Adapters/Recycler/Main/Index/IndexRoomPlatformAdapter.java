@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,15 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.RoomPlatformsHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexRoomPlatformHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomPlatformsFragment;
-import com.majazeh.risloo.databinding.SingleItemRoomPlatformBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexRoomPlatformBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
@@ -34,7 +34,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHolder> {
+public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlatformHolder> {
 
     // Fragments
     private Fragment current;
@@ -48,18 +48,18 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public RoomPlatformsAdapter(@NonNull Activity activity) {
+    public IndexRoomPlatformAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public RoomPlatformsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new RoomPlatformsHolder(SingleItemRoomPlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexRoomPlatformHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexRoomPlatformHolder(SingleItemIndexRoomPlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RoomPlatformsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexRoomPlatformHolder holder, int i) {
         SessionPlatformModel model = (SessionPlatformModel) items.get(i);
 
         initializer(holder);
@@ -94,7 +94,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         }
     }
 
-    private void initializer(RoomPlatformsHolder holder) {
+    private void initializer(IndexRoomPlatformHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
 
         handler = new Handler();
@@ -107,7 +107,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(RoomPlatformsHolder holder, SessionPlatformModel model) {
+    private void listener(IndexRoomPlatformHolder holder, SessionPlatformModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.getRoot());
@@ -151,6 +151,22 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
             return false;
         });
 
+        holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.levelSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.centerCheckBox.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        holder.binding.availableSwitchCompat.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        holder.binding.levelSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
         holder.binding.centerCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
                 if (isChecked)
@@ -164,11 +180,6 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
             }
         });
 
-        holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
-        });
-
         holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
                 if (isChecked)
@@ -180,11 +191,6 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
 
                 userSelect = false;
             }
-        });
-
-        holder.binding.levelSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
         });
 
         holder.binding.levelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -206,10 +212,10 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         });
     }
 
-    private void setData(RoomPlatformsHolder holder, SessionPlatformModel model) {
+    private void setData(IndexRoomPlatformHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType()));
-
         holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.CoolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+
         holder.binding.identifierEditText.setText(model.getIdentifier());
 
         setLevel(holder, model);
@@ -219,7 +225,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         setAvailable(holder, model.isAvailable());
     }
 
-    private void setLevel(RoomPlatformsHolder holder, SessionPlatformModel model) {
+    private void setLevel(IndexRoomPlatformHolder holder, SessionPlatformModel model) {
         String level = SelectionManager.getPlatformLevel(activity, "fa", String.valueOf(model.getSelected_level()));
         for (int i = 0; i < holder.binding.levelSpinner.getCount(); i++) {
             if (holder.binding.levelSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(level)) {
@@ -228,7 +234,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         }
     }
 
-    private void setPinned(RoomPlatformsHolder holder, boolean isPinned) {
+    private void setPinned(IndexRoomPlatformHolder holder, boolean isPinned) {
         if (isPinned) {
             holder.binding.centerCheckBox.setChecked(true);
 
@@ -242,13 +248,12 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         }
     }
 
-    private void setAvailable(RoomPlatformsHolder holder, boolean isAvailable) {
+    private void setAvailable(IndexRoomPlatformHolder holder, boolean isAvailable) {
         if (isAvailable) {
             holder.binding.availableSwitchCompat.setChecked(true);
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
-            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50_border_1sdp_coolgray200);
 
             holder.binding.centerCheckBox.setEnabled(true);
             holder.binding.centerCheckBox.setAlpha((float) 1);
@@ -261,7 +266,6 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
-            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200);
 
             holder.binding.centerCheckBox.setEnabled(false);
             holder.binding.centerCheckBox.setAlpha((float) 0.6);
@@ -275,14 +279,18 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         }
     }
 
-    private void doWork(RoomPlatformsHolder holder, SessionPlatformModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity,"");
-
+    private void setHashmap(SessionPlatformModel model, String value, String method) {
         if (current instanceof RoomPlatformsFragment)
             data.put("id", ((RoomPlatformsFragment) current).roomModel.getRoomId());
 
         data.put("platformId", model.getId());
         data.put(method, value);
+    }
+
+    private void doWork(IndexRoomPlatformHolder holder, SessionPlatformModel model, String value, String method) {
+        DialogManager.showLoadingDialog(activity,"");
+
+        setHashmap(model, value, method);
 
         Room.editRoomSessionPlatform(data, header, new Response() {
             @Override
@@ -296,21 +304,25 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
             @Override
             public void onFailure(String response) {
                 activity.runOnUiThread(() -> {
-                    if (method.equals("available")) {
-                        if (value.equals("1"))
-                            setAvailable(holder, false);
-                        else if (value.equals("0"))
-                            setAvailable(holder, true);
-
-                    } else if (method.equals("pin")) {
-                        if (value.equals("1"))
-                            setPinned(holder, false);
-                        else if (value.equals("0"))
-                            setPinned(holder, true);
-                    }
+                    resetWidget(holder, value, method);
                 });
             }
         });
+    }
+
+    private void resetWidget(IndexRoomPlatformHolder holder, String value, String method) {
+        if (method.equals("available")) {
+            if (value.equals("1"))
+                setAvailable(holder, false);
+            else if (value.equals("0"))
+                setAvailable(holder, true);
+
+        } else if (method.equals("pin")) {
+            if (value.equals("1"))
+                setPinned(holder, false);
+            else if (value.equals("0"))
+                setPinned(holder, true);
+        }
     }
 
 }
