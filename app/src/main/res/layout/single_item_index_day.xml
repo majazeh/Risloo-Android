@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_100sdp"
     android:layout_height="wrap_content"
@@ -11,7 +10,7 @@
     android:paddingEnd="@dimen/_4sdp"
     android:paddingStart="@dimen/_4sdp"
     android:paddingTop="@dimen/_8sdp"
-    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
     tools:layout_marginEnd="@dimen/_2sdp"
     tools:layout_marginStart="@dimen/_2sdp">
 

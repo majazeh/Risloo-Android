@@ -182,7 +182,7 @@ public class CenterSchedulesFragment extends Fragment {
                                 binding.schedulesSingleLayout.recyclerView.setAdapter(null);
 
                                 binding.schedulesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                                binding.schedulesSingleLayout.emptyView.setText(getResources().getString(R.string.SchedulesAdapterWeekEmpty));
+                                binding.schedulesSingleLayout.emptyView.setText(getResources().getString(R.string.ScheduleAdapterWeekEmpty));
                             }
 
                             hideShimmer();
