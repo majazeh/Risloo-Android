@@ -9,17 +9,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.WeeksHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexDayHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragment;
-import com.majazeh.risloo.databinding.SingleItemWeekBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexDayBinding;
 
 import java.util.ArrayList;
 
-public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
+public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
 
     // Fragments
     private Fragment current;
@@ -32,18 +32,18 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
     public long currentTimestamp = DateManager.currentTimestamp(), selectedTimestamp;
     private boolean userSelect = false;
 
-    public WeeksAdapter(@NonNull Activity activity) {
+    public IndexDayAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public WeeksHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new WeeksHolder(SingleItemWeekBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexDayHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexDayHolder(SingleItemIndexDayBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WeeksHolder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexDayHolder holder, int i) {
         long timestamp = timestamps.get(i);
 
         intializer();
@@ -69,7 +69,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
-    private void detector(WeeksHolder holder, long timestamp) {
+    private void detector(IndexDayHolder holder, long timestamp) {
         if (currentTimestamp == timestamp) {
             if (selectedTimestamp == timestamp)
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue500_ripple_lightblue800);
@@ -88,7 +88,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
         }
     }
 
-    private void listener(WeeksHolder holder, long timestamp) {
+    private void listener(IndexDayHolder holder, long timestamp) {
         CustomClickView.onDelayedListener(() -> {
             if (current instanceof CenterSchedulesFragment) {
                 ((CenterSchedulesFragment) current).responseAdapter(timestamp);
@@ -106,7 +106,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(WeeksHolder holder, long timestamp) {
+    private void setData(IndexDayHolder holder, long timestamp) {
         holder.binding.titleTextView.setText(DateManager.jalDayName(String.valueOf(timestamp)));
         holder.binding.dateTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(timestamp), "/"));
 
@@ -117,7 +117,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
         }
     }
 
-    private void setActive(WeeksHolder holder, long timestamp) {
+    private void setActive(IndexDayHolder holder, long timestamp) {
         if (selectedTimestamp == timestamp) {
             detector(holder, timestamp);
 

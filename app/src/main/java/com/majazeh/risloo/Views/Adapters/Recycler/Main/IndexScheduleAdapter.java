@@ -13,15 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.SchedulesHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexScheduleHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragment;
-import com.majazeh.risloo.databinding.SingleItemScheduleBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexScheduleBinding;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -32,7 +32,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
+public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHolder> {
 
     // Fragments
     private Fragment current;
@@ -47,18 +47,18 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
     private ArrayList<TypeModel> items, showingItems = new ArrayList<>();
     public long selectedTimestamp = DateManager.currentTimestamp();
 
-    public SchedulesAdapter(@NonNull Activity activity) {
+    public IndexScheduleAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SchedulesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SchedulesHolder(SingleItemScheduleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public IndexScheduleHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new IndexScheduleHolder(SingleItemIndexScheduleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SchedulesHolder holder, int i) {
+    public void onBindViewHolder(@NonNull IndexScheduleHolder holder, int i) {
         ScheduleModel model = (ScheduleModel) showingItems.get(i);
 
         initializer();
@@ -110,7 +110,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
-    private void listener(SchedulesHolder holder, ScheduleModel model) {
+    private void listener(IndexScheduleHolder holder, ScheduleModel model) {
         CustomClickView.onClickListener(() -> {
             if (holder.binding.statusTextView.getText().toString().equals("در حال نوبت\u200Cگیری") && ((MainActivity) activity).permissoon.showCenterSchedulesFragmentReserveSchedule(((MainActivity) activity).singleton.getUserModel(), model)) {
 
@@ -128,7 +128,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(SchedulesHolder holder, ScheduleModel model) {
+    private void setData(IndexScheduleHolder holder, ScheduleModel model) {
         try {
             holder.binding.timeTextView.setText("ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())));
             holder.binding.durationTextView.setText(model.getDuration() + " دقیقه");
@@ -196,7 +196,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         }
     }
 
-    private void setStatus(SchedulesHolder holder, String status) {
+    private void setStatus(IndexScheduleHolder holder, String status) {
         holder.binding.statusTextView.setText(SelectionManager.getSessionStatus2(activity, "fa", status));
 
         switch (status) {
@@ -231,7 +231,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         }
     }
 
-    private void setAvatar(SchedulesHolder holder, String url) {
+    private void setAvatar(IndexScheduleHolder holder, String url) {
         if (!url.equals("")) {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             Picasso.get().load(url).placeholder(R.color.CoolGray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);

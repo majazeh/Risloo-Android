@@ -1863,20 +1863,7 @@
 
 
 
-
-
-
-
-
-
-
-
-    // Adapter Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- Schedules Adapter ----------
-    */
+    ---------- // ScheduleAdapter
 
     <string name="SchedulesAdapterReference">مراجعین :</string>
     <string name="SchedulesAdapterAxis">محور‌های جلسه :</string>

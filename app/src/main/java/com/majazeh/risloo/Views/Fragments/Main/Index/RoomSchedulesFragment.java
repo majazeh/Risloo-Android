@@ -17,8 +17,8 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.SchedulesAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.WeeksAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.IndexScheduleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.IndexDayAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomSchedulesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -40,8 +40,8 @@ public class RoomSchedulesFragment extends Fragment {
     private FragmentRoomSchedulesBinding binding;
 
     // Adapters
-    private WeeksAdapter daysAdapter;
-    private SchedulesAdapter schedulesAdapter;
+    private IndexScheduleAdapter indexScheduleAdapter;
+    private IndexDayAdapter indexDayAdapter;
 
     // Models
     private RoomModel roomModel;
@@ -71,8 +71,8 @@ public class RoomSchedulesFragment extends Fragment {
     }
 
     private void initializer() {
-        daysAdapter = new WeeksAdapter(requireActivity());
-        schedulesAdapter = new SchedulesAdapter(requireActivity());
+        indexScheduleAdapter = new IndexScheduleAdapter(requireActivity());
+        indexDayAdapter = new IndexDayAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -119,8 +119,8 @@ public class RoomSchedulesFragment extends Fragment {
     private void setWeek(long timestamp) {
         binding.weekTextView.getRoot().setText(DateManager.currentJalWeekString(timestamp));
 
-        daysAdapter.setTimestamps(DateManager.currentJalWeekTimestamps(timestamp));
-        binding.daysRecyclerView.setAdapter(daysAdapter);
+        indexDayAdapter.setTimestamps(DateManager.currentJalWeekTimestamps(timestamp));
+        binding.daysRecyclerView.setAdapter(indexDayAdapter);
 
         Objects.requireNonNull(binding.daysRecyclerView.getLayoutManager()).scrollToPosition(DateManager.dayNameTimestampPosition(timestamp));
     }
@@ -162,16 +162,16 @@ public class RoomSchedulesFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         try {
-                            schedulesAdapter.clearItems();
+                            indexScheduleAdapter.clearItems();
 
                             filterableStatus = new List();
                             for (int i = 0; i < ((JSONArray) items.filterAllowed("status")).length(); i++)
                                 filterableStatus.add(new TypeModel(new JSONObject().put("id", ((JSONArray) items.filterAllowed("status")).getString(i))));
 
                             if (!items.data().isEmpty()) {
-                                schedulesAdapter.setItems(items.data(), binding.headerIncludeLayout.countTextView, binding.schedulesSingleLayout.emptyView);
-                                binding.schedulesSingleLayout.recyclerView.setAdapter(schedulesAdapter);
-                            } else if (schedulesAdapter.getItemCount() == 0) {
+                                indexScheduleAdapter.setItems(items.data(), binding.headerIncludeLayout.countTextView, binding.schedulesSingleLayout.emptyView);
+                                binding.schedulesSingleLayout.recyclerView.setAdapter(indexScheduleAdapter);
+                            } else if (indexScheduleAdapter.getItemCount() == 0) {
                                 binding.schedulesSingleLayout.recyclerView.setAdapter(null);
 
                                 binding.schedulesSingleLayout.emptyView.setVisibility(View.VISIBLE);
@@ -199,8 +199,8 @@ public class RoomSchedulesFragment extends Fragment {
 
     private void changeTimestamp(long timestamp) {
         currentTimestamp = timestamp;
-        daysAdapter.selectedTimestamp = timestamp;
-        schedulesAdapter.selectedTimestamp = timestamp;
+        indexDayAdapter.selectedTimestamp = timestamp;
+        indexScheduleAdapter.selectedTimestamp = timestamp;
 
         showShimmer();
 
@@ -261,7 +261,7 @@ public class RoomSchedulesFragment extends Fragment {
     }
 
     public void responseAdapter(long timestamp) {
-        schedulesAdapter.setTimestamp(timestamp);
+        indexScheduleAdapter.setTimestamp(timestamp);
     }
 
     private void showShimmer() {

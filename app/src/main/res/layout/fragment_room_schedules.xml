@@ -115,7 +115,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/filter_includeLayout"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/single_item_week"
+            tools:listitem="@layout/single_item_index_day"
             tools:itemCount="7"
             tools:visibility="visible" />
 
