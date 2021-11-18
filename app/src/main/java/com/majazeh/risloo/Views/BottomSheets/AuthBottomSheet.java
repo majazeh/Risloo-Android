@@ -93,10 +93,14 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
         this.userModel = userModel;
     }
 
+    private void setHashmap() {
+        data.put("key", key);
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("key", key);
+        setHashmap();
 
         Center.theory(data, header, new Response() {
             @Override

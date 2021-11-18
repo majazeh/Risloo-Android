@@ -196,10 +196,14 @@ public class AuthPasswordChangeFragment extends Fragment {
 //        }
     }
 
+    private void setHashmap() {
+        data.put("password", password);
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("password", password);
+        setHashmap();
 
         Auth.auth_theory(data, header, new Response() {
             @Override

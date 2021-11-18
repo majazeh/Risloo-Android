@@ -105,10 +105,14 @@ public class AuthLoginFragment extends Fragment {
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
+    private void setHashmap() {
+        data.put("authorized_key", mobile);
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("authorized_key", mobile);
+        setHashmap();
 
         Auth.auth(data, header, new Response() {
             @Override

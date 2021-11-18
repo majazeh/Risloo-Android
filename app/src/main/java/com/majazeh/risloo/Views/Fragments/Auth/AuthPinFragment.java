@@ -228,11 +228,19 @@ public class AuthPinFragment extends Fragment {
         doWork("code");
     }
 
+    private void setHashmap(String method) {
+        if (method.equals("code")) {
+            data.put("code", pin);
+        } else if (method.equals("verification")) {
+            data.remove("code");
+        }
+    }
+
     private void doWork(String method) {
         if (method.equals("code")) {
             DialogManager.showLoadingDialog(requireActivity(), "");
 
-            data.put("code", pin);
+            setHashmap(method);
 
             Auth.auth_theory(data, header, new Response() {
                 @Override

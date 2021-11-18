@@ -102,10 +102,14 @@ public class AuthPasswordRecoverFragment extends Fragment {
         }).widget(binding.registerLinkTextView.getRoot());
     }
 
+    private void setHashmap() {
+        data.put("mobile", mobile);
+    }
+
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        data.put("mobile", mobile);
+        setHashmap();
 
         Auth.recovery(data, header, new Response() {
             @Override

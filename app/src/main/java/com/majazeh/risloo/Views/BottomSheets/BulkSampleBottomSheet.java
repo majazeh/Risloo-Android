@@ -171,13 +171,19 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
         this.bulkSampleModel = bulkSampleModel;
     }
 
-    private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
-
+    private void setHashmap() {
         data.put("key", key);
 
         if (binding.nicknameGroup.getVisibility() == View.VISIBLE)
             data.put("nickname", nickname);
+        else
+            data.remove("nickname");
+    }
+
+    private void doWork() {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap();
 
         Sample.theory(data, header, new Response() {
             @Override

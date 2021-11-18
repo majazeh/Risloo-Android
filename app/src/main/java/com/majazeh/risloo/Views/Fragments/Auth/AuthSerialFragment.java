@@ -118,17 +118,22 @@ public class AuthSerialFragment extends Fragment {
         }
     }
 
-    private void doWork(String method) {
+    private void setHashmap(String method) {
         if (method.equals("serial")) {
-            DialogManager.showLoadingDialog(requireActivity(), "");
-
             data.put("authorized_key", serial);
-
-            // Todo : Place Code Here
-
         } else if (method.equals("logout")) {
-            DialogManager.showLoadingDialog(requireActivity(), "");
+            data.remove("authorized_key");
+        }
+    }
 
+    private void doWork(String method) {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap(method);
+
+        if (method.equals("serial")) {
+            // Todo : Place Code Here
+        } else if (method.equals("logout")) {
             Auth.logout(new HashMap<>(), header, new Response() {
                 @Override
                 public void onOK(Object object) {
