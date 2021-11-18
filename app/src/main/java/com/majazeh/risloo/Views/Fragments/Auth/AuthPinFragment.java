@@ -127,7 +127,7 @@ public class AuthPinFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.pinEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
                 ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 countDownTimer.cancel();

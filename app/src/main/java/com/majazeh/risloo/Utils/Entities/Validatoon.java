@@ -1,38 +1,39 @@
 package com.majazeh.risloo.Utils.Entities;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.annotation.NonNull;
+
+import com.majazeh.risloo.R;
 
 public class Validatoon {
+
+    // Objects
+    private final Activity activity;
 
     /*
     ---------- Intialize ----------
     */
 
-    public Validatoon() {
-        // TODO : Place Code If Needed
+    public Validatoon(@NonNull Activity activity) {
+        this.activity = activity;
     }
 
     /*
     ---------- Methods ----------
     */
 
-    public void showValid(ConstraintLayout errorLayout, TextView errorTextView, String value) {
+    public void emptyValid(LinearLayout errorLayout, TextView errorTextView) {
         errorLayout.setVisibility(View.VISIBLE);
-        errorTextView.setText(value);
+        errorTextView.setText(activity.getResources().getString(R.string.AppInputEmpty));
     }
 
     public void showValid(LinearLayout errorLayout, TextView errorTextView, String value) {
         errorLayout.setVisibility(View.VISIBLE);
         errorTextView.setText(value);
-    }
-
-    public void hideValid(ConstraintLayout errorLayout, TextView errorTextView) {
-        errorLayout.setVisibility(View.GONE);
-        errorTextView.setText("");
     }
 
     public void hideValid(LinearLayout errorLayout, TextView errorTextView) {

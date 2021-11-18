@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
         permissoon = new Permissoon();
 
-        validatoon = new Validatoon();
+        validatoon = new Validatoon(this);
 
         indexNavAdapter = new IndexNavAdapter(this);
 

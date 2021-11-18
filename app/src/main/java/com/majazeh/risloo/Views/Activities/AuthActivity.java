@@ -78,7 +78,7 @@ public class AuthActivity extends AppCompatActivity {
 
         singleton = new Singleton(this);
 
-        validatoon = new Validatoon();
+        validatoon = new Validatoon(this);
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
         navController = Objects.requireNonNull(navHostFragment).getNavController();
