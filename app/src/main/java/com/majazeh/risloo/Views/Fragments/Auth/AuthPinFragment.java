@@ -218,6 +218,16 @@ public class AuthPinFragment extends Fragment {
         });
     }
 
+    public void autoSmsVerificate(String code) {
+        pin = code;
+        binding.pinEditText.getRoot().setText(pin);
+
+        ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+        countDownTimer.cancel();
+
+        doWork("code");
+    }
+
     private void doWork(String method) {
         if (method.equals("code")) {
             DialogManager.showLoadingDialog(requireActivity(), "");
