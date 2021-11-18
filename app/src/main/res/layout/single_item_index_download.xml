@@ -25,13 +25,26 @@
         android:id="@+id/title_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
-        android:fontFamily="@font/dana_medium"
+        android:fontFamily="@font/dana_bold"
         tools:text="عنوان" />
+
+    <TextView
+        android:id="@+id/date_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="زمان دانلود" />
 
 </LinearLayout>

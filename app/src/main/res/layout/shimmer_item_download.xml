@@ -7,7 +7,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_height="@dimen/_124sdp"
         android:layout_margin="@dimen/_6sdp"
         android:background="@drawable/draw_2sdp_solid_coolgray100" />
 

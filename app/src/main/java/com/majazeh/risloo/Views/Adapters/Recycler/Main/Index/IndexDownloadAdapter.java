@@ -73,6 +73,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
 
     private void setData(IndexDownloadHolder holder) {
         holder.binding.titleTextView.setText("فايل");
+        holder.binding.dateTextView.setText("1400/00/00");
 
         Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
     }
