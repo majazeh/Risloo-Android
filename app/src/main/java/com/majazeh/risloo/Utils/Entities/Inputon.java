@@ -6,9 +6,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Activities.TestActivity;
 
 import java.util.Objects;
 
@@ -37,12 +34,7 @@ public class Inputon {
         background = editText.getBackground();
 
         editText.requestFocus();
-        if (activity instanceof AuthActivity)
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500);
-        else if (activity instanceof MainActivity)
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_lightblue500);
-        else if (activity instanceof TestActivity)
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_lightblue500);
+        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500);
     }
 
     public void clear(Activity activity, EditText editText) {
@@ -51,6 +43,10 @@ public class Inputon {
 
         hideKeyboard(activity, editText);
     }
+
+    /*
+    ---------- Voids ----------
+    */
 
     private void hideKeyboard(Activity activity, EditText editText) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
