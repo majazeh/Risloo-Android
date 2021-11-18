@@ -313,34 +313,39 @@ public class CreateSessionUserFragment extends Fragment {
                                 JSONObject errorsObject = responseObject.getJSONObject("errors");
 
                                 Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder errors = new StringBuilder();
+                                StringBuilder allErrors = new StringBuilder();
 
                                 while (keys.hasNext()) {
                                     String key = keys.next();
+                                    StringBuilder keyErrors = new StringBuilder();
+
                                     for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                        String error = errorsObject.getJSONArray(key).getString(i);
 
-                                        switch (key) {
-                                            case "field":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "session_platform":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "client_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "description":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
-                                                break;
-                                        }
+                                        keyErrors.append(error);
+                                        keyErrors.append("\n");
 
-                                        errors.append(validation);
-                                        errors.append("\n");
+                                        allErrors.append(error);
+                                        allErrors.append("\n");
+                                    }
+
+                                    switch (key) {
+                                        case "field":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "session_platform":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "client_id":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "description":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
                                     }
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

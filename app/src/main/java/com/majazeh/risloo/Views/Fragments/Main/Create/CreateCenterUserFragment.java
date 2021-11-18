@@ -301,37 +301,42 @@ public class CreateCenterUserFragment extends Fragment {
                                 JSONObject errorsObject = responseObject.getJSONObject("errors");
 
                                 Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder errors = new StringBuilder();
+                                StringBuilder allErrors = new StringBuilder();
 
                                 while (keys.hasNext()) {
                                     String key = keys.next();
+                                    StringBuilder keyErrors = new StringBuilder();
+
                                     for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                        String error = errorsObject.getJSONArray(key).getString(i);
 
-                                        switch (key) {
-                                            case "mobile":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "position":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "room_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "nickname":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "create_case":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
-                                                break;
-                                        }
+                                        keyErrors.append(error);
+                                        keyErrors.append("\n");
 
-                                        errors.append(validation);
-                                        errors.append("\n");
+                                        allErrors.append(error);
+                                        allErrors.append("\n");
+                                    }
+
+                                    switch (key) {
+                                        case "mobile":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "position":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "room_id":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "nickname":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "create_case":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
                                     }
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -332,37 +332,42 @@ public class CreateBillFragment extends Fragment {
                                 JSONObject errorsObject = responseObject.getJSONObject("errors");
 
                                 Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder errors = new StringBuilder();
+                                StringBuilder allErrors = new StringBuilder();
 
                                 while (keys.hasNext()) {
                                     String key = keys.next();
+                                    StringBuilder keyErrors = new StringBuilder();
+
                                     for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                        String error = errorsObject.getJSONArray(key).getString(i);
 
-                                        switch (key) {
-                                            case "title":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "user_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "type":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "treasury":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "amount":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
-                                                break;
-                                        }
+                                        keyErrors.append(error);
+                                        keyErrors.append("\n");
 
-                                        errors.append(validation);
-                                        errors.append("\n");
+                                        allErrors.append(error);
+                                        allErrors.append("\n");
+                                    }
+
+                                    switch (key) {
+                                        case "title":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "user_id":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "type":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "treasury":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "amount":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
                                     }
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

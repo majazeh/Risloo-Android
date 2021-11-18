@@ -16,7 +16,6 @@ import androidx.navigation.NavDirections;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
@@ -303,43 +302,48 @@ public class CreateCenterFragment extends Fragment {
                                 JSONObject errorsObject = responseObject.getJSONObject("errors");
 
                                 Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder errors = new StringBuilder();
+                                StringBuilder allErrors = new StringBuilder();
 
                                 while (keys.hasNext()) {
                                     String key = keys.next();
+                                    StringBuilder keyErrors = new StringBuilder();
+
                                     for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                        String error = errorsObject.getJSONArray(key).getString(i);
 
-                                        switch (key) {
-                                            case "type":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView,validation);
-                                                break;
-                                            case "manager_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView,validation);
-                                                break;
-                                            case "title":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView,validation);
-                                                break;
-                                            case "address":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView,validation);
-                                                break;
-                                            case "description":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView,validation);
-                                                break;
-                                            case "avatar":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView,validation);
-                                                break;
-                                            case "phone_numbers":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView,validation);
-                                                break;
-                                        }
+                                        keyErrors.append(error);
+                                        keyErrors.append("\n");
 
-                                        errors.append(validation);
-                                        errors.append("\n");
+                                        allErrors.append(error);
+                                        allErrors.append("\n");
+                                    }
+
+                                    switch (key) {
+                                        case "type":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "manager_id":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "title":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "address":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "description":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "avatar":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
+                                        case "phone_numbers":
+                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            break;
                                     }
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
