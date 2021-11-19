@@ -135,13 +135,13 @@ public class EditSessionTabReferenceFragment extends Fragment {
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.problemIncludeLayout.inputEditText);
             return false;
         });
 
         binding.countIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.countIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.countIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.countIncludeLayout.inputEditText);
             return false;
         });
 

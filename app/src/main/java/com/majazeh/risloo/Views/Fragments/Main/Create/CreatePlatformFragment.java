@@ -83,13 +83,13 @@ public class CreatePlatformFragment extends Fragment {
     private void listener() {
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
         binding.indentifierIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.indentifierIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.indentifierIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.indentifierIncludeLayout.inputEditText);
             return false;
         });
 

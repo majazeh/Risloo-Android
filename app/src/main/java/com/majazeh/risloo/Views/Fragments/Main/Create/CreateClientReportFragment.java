@@ -103,7 +103,7 @@ public class CreateClientReportFragment extends Fragment {
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 

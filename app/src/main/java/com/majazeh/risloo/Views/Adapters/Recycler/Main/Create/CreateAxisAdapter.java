@@ -112,7 +112,7 @@ public class CreateAxisAdapter extends RecyclerView.Adapter<CreateAxisHolder> {
     private void listener(CreateAxisHolder holder, int position) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                ((MainActivity) activity).inputon.select(activity, holder.binding.inputEditText);
+                ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 

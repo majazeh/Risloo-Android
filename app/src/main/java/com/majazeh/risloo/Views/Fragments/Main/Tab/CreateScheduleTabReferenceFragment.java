@@ -127,7 +127,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
         binding.countIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.countIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.countIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.countIncludeLayout.inputEditText);
             return false;
         });
 

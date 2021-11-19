@@ -87,13 +87,13 @@ public class CreateCenterUserFragment extends Fragment {
     private void listener() {
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.mobileIncludeLayout.inputEditText);
             return false;
         });
 
         binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.nicknameIncludeLayout.inputEditText);
             return false;
         });
 

@@ -92,7 +92,7 @@ public class CreatePlatformAdapter extends RecyclerView.Adapter<CreatePlatformHo
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
             if (holder.binding.selectedSwitchCompat.isChecked() && holder.binding.roomCheckBox.isChecked())
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.identifierEditText.hasFocus())
-                    ((MainActivity) activity).inputon.select(activity, holder.binding.identifierEditText);
+                    ((MainActivity) activity).inputon.select(holder.binding.identifierEditText);
             return false;
         });
 

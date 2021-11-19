@@ -206,7 +206,7 @@ public class CenterFragment extends Fragment {
 
         binding.roomsSearchLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.roomsSearchLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.roomsSearchLayout.searchEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.roomsSearchLayout.searchEditText);
             return false;
         });
 

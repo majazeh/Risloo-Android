@@ -102,13 +102,13 @@ public class BanksFragment extends Fragment {
     private void listener() {
         binding.ibanIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.ibanIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.ibanIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.ibanIncludeLayout.inputEditText);
             return false;
         });
 
         binding.amountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.amountIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.amountIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.amountIncludeLayout.inputEditText);
             return false;
         });
 

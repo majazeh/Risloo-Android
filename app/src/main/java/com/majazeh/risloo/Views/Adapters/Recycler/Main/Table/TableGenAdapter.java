@@ -120,7 +120,7 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((MainActivity) activity).inputon.select(activity, holder.binding.inputEditText);
+                    ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 

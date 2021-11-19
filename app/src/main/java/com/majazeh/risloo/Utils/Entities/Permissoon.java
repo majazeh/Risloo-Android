@@ -2,6 +2,8 @@ package com.majazeh.risloo.Utils.Entities;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
+
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -13,12 +15,15 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class Permissoon {
 
+    // Objects
+    private final Activity activity;
+
     /*
     ---------- Intialize ----------
     */
 
-    public Permissoon() {
-        // TODO : Place Code If Needed
+    public Permissoon(@NonNull Activity activity) {
+        this.activity = activity;
     }
 
     /*
@@ -66,7 +71,7 @@ public class Permissoon {
         } return false;
     }
 
-    public boolean showDownloads(Activity activity) {
+    public boolean showDownloads() {
         return FileManager.hasFileInDownloads(activity, "Risloo");
     }
 

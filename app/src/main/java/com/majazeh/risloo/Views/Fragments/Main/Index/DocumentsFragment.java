@@ -77,7 +77,7 @@ public class DocumentsFragment extends Fragment {
     private void listener() {
         binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.searchIncludeLayout.searchEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.searchIncludeLayout.searchEditText);
             return false;
         });
 

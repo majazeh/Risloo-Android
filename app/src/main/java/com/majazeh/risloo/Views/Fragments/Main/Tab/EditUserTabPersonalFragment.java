@@ -96,19 +96,19 @@ public class EditUserTabPersonalFragment extends Fragment {
     private void listener() {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.mobileIncludeLayout.inputEditText);
             return false;
         });
 
         binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.emailIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.emailIncludeLayout.inputEditText);
             return false;
         });
 

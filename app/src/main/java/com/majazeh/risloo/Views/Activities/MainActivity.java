@@ -132,13 +132,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializer() {
         breadCrumb = new BreadCrumb(this);
-
-        inputon = new Inputon();
-
+        inputon = new Inputon(this);
+        permissoon = new Permissoon(this);
         singleton = new Singleton(this);
-
-        permissoon = new Permissoon();
-
         validatoon = new Validatoon(this);
 
         indexNavAdapter = new IndexNavAdapter(this);
@@ -335,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
             images.add(R.drawable.ic_balance_scale_light);
         }
 
-        if (permissoon.showDownloads(this)) {
+        if (permissoon.showDownloads()) {
             titles.add(getResources().getString(R.string.MainTitleDownloads));
             description.add(getResources().getString(R.string.MainDescDownloads));
             images.add(R.drawable.ic_arrow_to_bottom_light);
@@ -627,7 +623,7 @@ public class MainActivity extends AppCompatActivity {
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                     if (inputon.editText != null && inputon.editText.hasFocus()) {
-                        inputon.clear(this, inputon.editText);
+                        inputon.clear(inputon.editText);
                     }
                 }
             }

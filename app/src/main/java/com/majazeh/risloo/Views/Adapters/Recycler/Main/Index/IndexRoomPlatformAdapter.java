@@ -115,7 +115,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
             if (holder.binding.availableSwitchCompat.isChecked() && holder.binding.centerCheckBox.isChecked())
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.identifierEditText.hasFocus())
-                    ((MainActivity) activity).inputon.select(activity, holder.binding.identifierEditText);
+                    ((MainActivity) activity).inputon.select(holder.binding.identifierEditText);
             return false;
         });
 

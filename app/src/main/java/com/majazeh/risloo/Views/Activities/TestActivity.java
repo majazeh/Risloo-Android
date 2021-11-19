@@ -120,10 +120,8 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void initializer() {
-        inputon = new Inputon();
-
+        inputon = new Inputon(this);
         singleton = new Singleton(this);
-
         validatoon = new Validatoon(this);
 
         sampleAnswers = new SampleAnswers();
@@ -531,7 +529,7 @@ public class TestActivity extends AppCompatActivity {
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                     if (inputon.editText != null && inputon.editText.hasFocus()) {
-                        inputon.clear(this, inputon.editText);
+                        inputon.clear(inputon.editText);
                     }
                 }
             }

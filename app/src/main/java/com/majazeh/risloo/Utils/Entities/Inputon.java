@@ -5,31 +5,34 @@ import android.graphics.drawable.Drawable;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
 import com.majazeh.risloo.R;
 
 import java.util.Objects;
 
 public class Inputon {
 
+    // Objects
+    private final Activity activity;
+    private Drawable background;
+
     // Widgets
     public EditText editText;
-
-    // Objects
-    private Drawable background;
 
     /*
     ---------- Intialize ----------
     */
 
-    public Inputon() {
-        // TODO : Place Code If Needed
+    public Inputon(@NonNull Activity activity) {
+        this.activity = activity;
     }
 
     /*
     ---------- Methods ----------
     */
 
-    public void select(Activity activity, EditText editText) {
+    public void select(EditText editText) {
         this.editText = editText;
         background = editText.getBackground();
 
@@ -37,7 +40,7 @@ public class Inputon {
         editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500);
     }
 
-    public void clear(Activity activity, EditText editText) {
+    public void clear(EditText editText) {
         editText.clearFocus();
         editText.setBackground(background);
 

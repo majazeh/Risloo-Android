@@ -92,13 +92,13 @@ public class CreateScheduleTabTimeFragment extends Fragment {
     private void listener() {
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.durationIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.durationIncludeLayout.inputEditText);
             return false;
         });
 
         binding.repeatWeeksIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.repeatWeeksIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.repeatWeeksIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.repeatWeeksIncludeLayout.inputEditText);
             return false;
         });
 

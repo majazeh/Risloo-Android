@@ -210,49 +210,49 @@ public class EditSessionTabSessionFragment extends Fragment {
 
         binding.startRelativeIncludeLayout.dayEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.startRelativeIncludeLayout.dayEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.startRelativeIncludeLayout.dayEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.startRelativeIncludeLayout.dayEditText);
             return false;
         });
 
         binding.startRelativeIncludeLayout.hourEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.startRelativeIncludeLayout.hourEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.startRelativeIncludeLayout.hourEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.startRelativeIncludeLayout.hourEditText);
             return false;
         });
 
         binding.startRelativeIncludeLayout.minuteEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.startRelativeIncludeLayout.minuteEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.startRelativeIncludeLayout.minuteEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.startRelativeIncludeLayout.minuteEditText);
             return false;
         });
 
         binding.endRelativeIncludeLayout.dayEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.endRelativeIncludeLayout.dayEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.endRelativeIncludeLayout.dayEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.endRelativeIncludeLayout.dayEditText);
             return false;
         });
 
         binding.endRelativeIncludeLayout.hourEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.endRelativeIncludeLayout.hourEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.endRelativeIncludeLayout.hourEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.endRelativeIncludeLayout.hourEditText);
             return false;
         });
 
         binding.endRelativeIncludeLayout.minuteEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.endRelativeIncludeLayout.minuteEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.endRelativeIncludeLayout.minuteEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.endRelativeIncludeLayout.minuteEditText);
             return false;
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 
         binding.coordinationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.coordinationIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputon.select(binding.coordinationIncludeLayout.inputEditText);
             return false;
         });
 

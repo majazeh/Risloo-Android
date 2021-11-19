@@ -88,7 +88,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
     private void listener() {
         binding.nicknameEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameEditText.getRoot().hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(requireActivity(), binding.nicknameEditText.getRoot());
+                ((MainActivity) requireActivity()).inputon.select(binding.nicknameEditText.getRoot());
             return false;
         });
 

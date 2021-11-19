@@ -122,7 +122,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
     private void listener(TestPreInputHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                ((TestActivity) activity).inputon.select(activity, holder.binding.inputEditText);
+                ((TestActivity) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 
