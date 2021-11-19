@@ -36,7 +36,6 @@ public class AuthActivity extends AppCompatActivity {
     public Validatoon validatoon;
 
     // Objects
-    private NavHostFragment navHostFragment;
     public NavController navController;
     private NavGraph navGraph;
     private Bundle extras;
@@ -78,7 +77,7 @@ public class AuthActivity extends AppCompatActivity {
         singleton = new Singleton(this);
         validatoon = new Validatoon(this);
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         navGraph = navController.getNavInflater().inflate(R.navigation.navigation_auth);
 

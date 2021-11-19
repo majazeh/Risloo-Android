@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
     private IndexNavAdapter indexNavAdapter;
 
     // Objects
-    public NavHostFragment navHostFragment;
     public NavController navController;
 
     // Vars
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
         indexNavAdapter = new IndexNavAdapter(this);
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         fragmont = new Fragmont(navHostFragment);

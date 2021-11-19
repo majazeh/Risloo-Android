@@ -67,7 +67,6 @@ public class TestActivity extends AppCompatActivity {
     public FormModel formModel;
 
     // Objects
-    private NavHostFragment navHostFragment;
     private NavController navController;
     private NavGraph navGraph;
     private Bundle extras;
@@ -126,7 +125,7 @@ public class TestActivity extends AppCompatActivity {
 
         sampleAnswers = new SampleAnswers();
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
         navController = Objects.requireNonNull(navHostFragment).getNavController();
         navGraph = navController.getNavInflater().inflate(R.navigation.navigation_test);
 
