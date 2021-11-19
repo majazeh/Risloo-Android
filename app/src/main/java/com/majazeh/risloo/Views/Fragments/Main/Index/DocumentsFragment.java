@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -124,8 +122,7 @@ public class DocumentsFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateDocumentFragment(null);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToCreateDocumentFragment(null);
         }).widget(binding.addImageView.getRoot());
     }
 

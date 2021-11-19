@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -45,23 +43,19 @@ public class AccountingFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToTreasuriesFragment();
         }).widget(binding.treasuriesIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToBillingsFragment();
         }).widget(binding.billingsIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-//            NavDirections action = NavigationMainDirections.actionGlobalBanksFragment(null);
-//            ((MainActivity) requireActivity()).navController.navigate(action);
+//            ((MainActivity) requireActivity()).navigatoon.navigateToBanksFragment(null);
         }).widget(binding.banksIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToPaymentsFragment(null);
         }).widget(binding.paymentsIncludeLayout.getRoot());
     }
 

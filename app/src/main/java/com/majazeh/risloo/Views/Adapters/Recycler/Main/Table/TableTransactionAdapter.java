@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -105,8 +103,7 @@ public class TableTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalBillFragment(model.getBilling());
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToBillFragment(model.getBilling());
         }).widget(holder.binding.billImageView);
     }
 

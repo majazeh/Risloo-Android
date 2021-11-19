@@ -9,10 +9,8 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -129,10 +127,9 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void listener(TableUser2Holder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof SessionFragment) {
-                if (((SessionFragment) current).sessionModel != null && ((SessionFragment) current).sessionModel.getRoom() != null) {
-                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((SessionFragment) current).sessionModel.getRoom(), model);
-                    ((MainActivity) activity).navController.navigate(action);
-                }
+                if (((SessionFragment) current).sessionModel != null && ((SessionFragment) current).sessionModel.getRoom() != null)
+                    ((MainActivity) activity).navigatoon.navigateToReferenceFragment(((SessionFragment) current).sessionModel.getRoom(), model);
+
             }
         }).widget(holder.binding.getRoot());
 

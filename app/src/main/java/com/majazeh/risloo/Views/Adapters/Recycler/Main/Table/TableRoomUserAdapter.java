@@ -6,10 +6,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -105,10 +103,9 @@ public class TableRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void listener(TableRoomUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
-            if (current instanceof RoomUsersFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).roomModel, model);
-                ((MainActivity) activity).navController.navigate(action);
-            }
+            if (current instanceof RoomUsersFragment)
+                ((MainActivity) activity).navigatoon.navigateToReferenceFragment(((RoomUsersFragment) current).roomModel, model);
+
         }).widget(holder.binding.getRoot());
     }
 

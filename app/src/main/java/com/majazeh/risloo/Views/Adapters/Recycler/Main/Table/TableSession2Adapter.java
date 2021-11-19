@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
@@ -119,8 +117,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableSession2Holder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToSessionFragment(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.statusSpinner.setOnTouchListener((v, event) -> {
@@ -149,8 +146,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToEditSessionFragment(model);
         }).widget(holder.binding.editImageView);
     }
 

@@ -13,13 +13,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableClientReportAdapter;
 import com.majazeh.risloo.databinding.FragmentClientReportsBinding;
@@ -137,14 +135,11 @@ public class ClientReportsFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action;
-
             if (type.equals("case"))
-                action = NavigationMainDirections.actionGlobalCreateClientReportFragment(caseModel);
+                ((MainActivity) requireActivity()).navigatoon.navigateToCreateClientReportFragment(caseModel);
             else
-                action = NavigationMainDirections.actionGlobalCreateClientReportFragment(sessionModel);
+                ((MainActivity) requireActivity()).navigatoon.navigateToCreateClientReportFragment(sessionModel);
 
-            ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }
 

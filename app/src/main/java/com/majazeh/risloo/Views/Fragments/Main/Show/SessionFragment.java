@@ -10,20 +10,18 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableBillAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TablePracticeAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexPsychologistAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableBillAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TablePracticeAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableUser2Adapter;
 import com.majazeh.risloo.databinding.FragmentSessionBinding;
 import com.mre.ligheh.API.Response;
@@ -116,18 +114,16 @@ public class SessionFragment extends Fragment {
     private void listener() {
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
-                case "گزارشات": {
-                    if (sessionModel != null) {
-                        NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment(sessionModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
-                    }
-                } break;
-                case "ویرایش": {
-                    if (sessionModel != null) {
-                        NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(sessionModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
-                    }
-                } break;
+                case "گزارشات":
+                    if (sessionModel != null)
+                        ((MainActivity) requireActivity()).navigatoon.navigateToClientReportsFragment(sessionModel);
+
+                    break;
+                case "ویرایش":
+                    if (sessionModel != null)
+                        ((MainActivity) requireActivity()).navigatoon.navigateToEditSessionFragment(sessionModel);
+
+                    break;
             }
         }).widget(binding.menuSpinner.selectImageView);
 
@@ -146,18 +142,16 @@ public class SessionFragment extends Fragment {
                     String pos = parent.getItemAtPosition(position).toString();
 
                     switch (pos) {
-                        case "گزارشات": {
-                            if (sessionModel != null) {
-                                NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment(sessionModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
-                            }
-                        } break;
-                        case "ویرایش": {
-                            if (sessionModel != null) {
-                                NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(sessionModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
-                            }
-                        } break;
+                        case "گزارشات":
+                            if (sessionModel != null)
+                                ((MainActivity) requireActivity()).navigatoon.navigateToClientReportsFragment(sessionModel);
+
+                            break;
+                        case "ویرایش":
+                            if (sessionModel != null)
+                                ((MainActivity) requireActivity()).navigatoon.navigateToEditSessionFragment(sessionModel);
+
+                            break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -173,31 +167,27 @@ public class SessionFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            if (sessionModel != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateSessionUserFragment(sessionModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            }
+            if (sessionModel != null)
+                ((MainActivity) requireActivity()).navigatoon.navigateToCreateSessionUserFragment(sessionModel);
+
         }).widget(binding.usersAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            if (sessionModel != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment(sessionModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            }
+            if (sessionModel != null)
+                ((MainActivity) requireActivity()).navigatoon.navigateToCreatePracticeFragment(sessionModel);
+
         }).widget(binding.practicesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            if (sessionModel != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment(sessionModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            }
+            if (sessionModel != null)
+                ((MainActivity) requireActivity()).navigatoon.navigateToCreateSampleFragment(sessionModel);
+
         }).widget(binding.samplesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            if (sessionModel != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateBillFragment(sessionModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            }
+            if (sessionModel != null)
+                ((MainActivity) requireActivity()).navigatoon.navigateToCreateBillFragment(sessionModel);
+
         }).widget(binding.billsAddView.getRoot());
     }
 

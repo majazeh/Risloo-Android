@@ -3,9 +3,6 @@ package com.majazeh.risloo.Utils.Managers;
 import android.app.Activity;
 import android.net.Uri;
 
-import androidx.navigation.NavDirections;
-
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Instances.Paymont;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -105,18 +102,15 @@ public class PaymentManager {
     private static void navigate(Activity activity) {
         switch (Paymont.getInstance().getDestination()) {
             case R.id.billingsFragment:
-            case R.id.sessionFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBillFragment(Paymont.getInstance().getTypeModel());
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.paymentsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.reserveScheduleFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(Paymont.getInstance().getTypeModel());
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
+            case R.id.sessionFragment:
+                ((MainActivity) activity).navigatoon.navigateToBillFragment(Paymont.getInstance().getTypeModel());
+                break;
+            case R.id.paymentsFragment:
+                ((MainActivity) activity).navigatoon.navigateToPaymentsFragment(null);
+                break;
+            case R.id.reserveScheduleFragment:
+                ((MainActivity) activity).navigatoon.navigateToReserveScheduleFragment(Paymont.getInstance().getTypeModel());
+                break;
         }
     }
 

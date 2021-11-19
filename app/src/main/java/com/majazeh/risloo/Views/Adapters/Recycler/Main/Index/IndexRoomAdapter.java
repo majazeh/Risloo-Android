@@ -8,10 +8,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -98,8 +96,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
     @SuppressLint("ClickableViewAccessibility")
     private void listener(IndexRoomHolder holder, RoomModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToRoomFragment(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.switchIncludeLayout.getRoot().setOnTouchListener((v, event) -> {

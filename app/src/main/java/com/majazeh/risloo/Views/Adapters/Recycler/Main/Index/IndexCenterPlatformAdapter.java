@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
@@ -105,10 +103,9 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            if (current instanceof CenterPlatformsFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(((CenterPlatformsFragment) current).centerModel, model);
-                ((MainActivity) activity).navController.navigate(action);
-            }
+            if (current instanceof CenterPlatformsFragment)
+                ((MainActivity) activity).navigatoon.navigateToEditPlatformFragment(((CenterPlatformsFragment) current).centerModel, model);
+
         }).widget(holder.binding.editImageView);
 
         holder.binding.sessionCheckBox.setOnTouchListener((v, event) -> {

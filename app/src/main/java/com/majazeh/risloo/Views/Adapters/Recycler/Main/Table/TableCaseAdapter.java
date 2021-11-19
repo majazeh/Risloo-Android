@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderCaseHolder;
@@ -96,8 +94,7 @@ public class TableCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void listener(TableCaseHolder holder, CaseModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToCaseFragment(model);
         }).widget(holder.binding.getRoot());
     }
 

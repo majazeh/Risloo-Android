@@ -8,10 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
@@ -121,11 +119,9 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
                 else if (current instanceof RoomSchedulesFragment)
                     model.setTreasuries(((RoomSchedulesFragment) current).treasuries);
 
-                NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(model);
-                ((MainActivity) activity).navController.navigate(action);
+                ((MainActivity) activity).navigatoon.navigateToReserveScheduleFragment(model);
             } else {
-                NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
-                ((MainActivity) activity).navController.navigate(action);
+                ((MainActivity) activity).navigatoon.navigateToSessionFragment(model);
             }
         }).widget(holder.binding.getRoot());
     }

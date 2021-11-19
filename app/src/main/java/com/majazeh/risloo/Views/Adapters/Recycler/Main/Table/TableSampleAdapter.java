@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -127,10 +125,9 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private void listener(TableSampleHolder holder, SampleModel model, int position) {
         CustomClickView.onClickListener(() -> {
-            if (((MainActivity) activity).permissoon.showSamplesFragmentSample(((MainActivity) activity).singleton.getUserModel(), model)) {
-                NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(model);
-                ((MainActivity) activity).navController.navigate(action);
-            }
+            if (((MainActivity) activity).permissoon.showSamplesFragmentSample(((MainActivity) activity).singleton.getUserModel(), model))
+                ((MainActivity) activity).navigatoon.navigateToSampleFragment(model);
+
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
@@ -138,11 +135,11 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 doWork(holder, model, position);
             else
                 IntentManager.test(activity, model.getSampleId());
+
         }).widget(holder.binding.statusTextView);
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(model.getChainId(), null);
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToSamplesFragment(model.getChainId(), null);
         }).widget(holder.binding.bulkTextView);
     }
 

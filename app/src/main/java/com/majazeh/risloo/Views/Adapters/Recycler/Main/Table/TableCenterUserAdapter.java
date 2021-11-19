@@ -9,17 +9,15 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderCenterUserHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableCenterUserHolder;
@@ -130,10 +128,9 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableCenterUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
-            if (current instanceof CenterUsersFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).centerModel, model);
-                ((MainActivity) activity).navController.navigate(action);
-            }
+            if (current instanceof CenterUsersFragment)
+                ((MainActivity) activity).navigatoon.navigateToReferenceFragment(((CenterUsersFragment) current).centerModel, model);
+
         }).widget(holder.binding.getRoot());
 
         holder.binding.positionSpinner.setOnTouchListener((v, event) -> {
@@ -181,28 +178,25 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         case "تعلیق":
                             doWork(holder, model, "kick", "status");
                             break;
-                        case "ساختن اتاق درمان": {
-                            if (current instanceof CenterUsersFragment) {
-                                NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(((CenterUsersFragment) current).centerModel, model);
-                                ((MainActivity) activity).navController.navigate(action);
-                            }
-                        } break;
-                        case "اتاق درمان": {
+                        case "ساختن اتاق درمان":
+                            if (current instanceof CenterUsersFragment)
+                                ((MainActivity) activity).navigatoon.navigateToCreateRoomFragment(((CenterUsersFragment) current).centerModel, model);
+
+                            break;
+                        case "اتاق درمان":
                             try {
                                 RoomModel roomModel = new RoomModel(new JSONObject().put("id", model.getMeta().getString("room_id")).put("type", "room").put("manager", model.object));
 
-                                NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(roomModel);
-                                ((MainActivity) activity).navController.navigate(action);
+                                ((MainActivity) activity).navigatoon.navigateToRoomFragment(roomModel);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        } break;
-                        case "ویرایش": {
-                            if (current instanceof CenterUsersFragment) {
-                                NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(((CenterUsersFragment) current).centerModel, model);
-                                ((MainActivity) activity).navController.navigate(action);
-                            }
-                        } break;
+                            break;
+                        case "ویرایش":
+                            if (current instanceof CenterUsersFragment)
+                                ((MainActivity) activity).navigatoon.navigateToEditCenterUserFragment(((CenterUsersFragment) current).centerModel, model);
+
+                            break;
                         case "ورود به کاربری":
                             ((MainActivity) activity).userChange("loginOtherUser", model.getId());
                             break;

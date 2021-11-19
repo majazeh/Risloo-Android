@@ -11,9 +11,7 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -23,8 +21,8 @@ import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexCaseAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Filter.FilterTagAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexCaseAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -116,91 +114,66 @@ public class RoomFragment extends Fragment {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
                 case "اعضاء":
                     if (!type.equals("room")) {
-                        NavDirections action;
-
                         if (centerModel != null)
-                            action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
                         else
-                            action = NavigationMainDirections.actionGlobalCenterUsersFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(roomModel.getRoomCenter());
 
-                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
-                        NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToRoomUsersFragment(roomModel);
                     } break;
                 case "برنامه درمانی":
                     if (!type.equals("room")) {
-                        NavDirections action;
-
                         if (centerModel != null)
-                            action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                         else
-                            action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getRoomCenter());
 
-                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
-                        NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToRoomSchedulesFragment(roomModel);
                     } break;
-                case "تعریف برنامه درمانی": {
-                    NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
+                case "تعریف برنامه درمانی":
+                    ((MainActivity) requireActivity()).navigatoon.navigateToCreateScheduleFragment(roomModel);
+                    break;
                 case "پروفایل من":
                     if (!type.equals("room")) {
-                        NavDirections action;
-
                         if (centerModel != null)
-                            action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                         else
-                            action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel.getRoomCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
 
-                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
-                        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, ((MainActivity) requireActivity()).singleton.getUserModel());
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                     } break;
                 case "ویرایش":
                     if (!type.equals("room")) {
-                        NavDirections action;
-
                         if (centerModel != null)
-                            action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
+                            ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
                         else
-                            action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel.getRoomCenter());
 
-                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
-                        NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel);
                     } break;
                 case "محل برگزاری جلسات":
                     if (!type.equals("room")) {
-                        NavDirections action;
-
                         if (centerModel != null)
-                            action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
                         else
-                            action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(roomModel.getRoomCenter());
 
-                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
-                        NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToRoomPlatformsFragment(roomModel);
                     } break;
                 case "برچسب\u200Cهای مهم":
                     if (!type.equals("room")) {
-                        NavDirections action;
-
                         if (centerModel != null)
-                            action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(centerModel);
                         else
-                            action = NavigationMainDirections.actionGlobalCenterTagsFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(roomModel.getRoomCenter());
 
-                        ((MainActivity) requireActivity()).navController.navigate(action);
                     } else {
-                        NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToRoomTagsFragment(roomModel);
                     } break;
                 case "حسابداری": {
                     // TODO : Place Code Here
@@ -225,91 +198,66 @@ public class RoomFragment extends Fragment {
                     switch (pos) {
                         case "اعضاء":
                             if (!type.equals("room")) {
-                                NavDirections action;
-
                                 if (centerModel != null)
-                                    action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
                                 else
-                                    action = NavigationMainDirections.actionGlobalCenterUsersFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(roomModel.getRoomCenter());
 
-                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                ((MainActivity) requireActivity()).navigatoon.navigateToRoomUsersFragment(roomModel);
                             } break;
                         case "برنامه درمانی":
                             if (!type.equals("room")) {
-                                NavDirections action;
-
                                 if (centerModel != null)
-                                    action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                                 else
-                                    action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getRoomCenter());
 
-                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                ((MainActivity) requireActivity()).navigatoon.navigateToRoomSchedulesFragment(roomModel);
                             } break;
-                        case "تعریف برنامه درمانی": {
-                            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
+                        case "تعریف برنامه درمانی":
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCreateScheduleFragment(roomModel);
+                            break;
                         case "پروفایل من":
                             if (!type.equals("room")) {
-                                NavDirections action;
-
                                 if (centerModel != null)
-                                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                                 else
-                                    action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel.getRoomCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel.getRoomCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
 
-                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, ((MainActivity) requireActivity()).singleton.getUserModel());
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                             } break;
                         case "ویرایش":
                             if (!type.equals("room")) {
-                                NavDirections action;
-
                                 if (centerModel != null)
-                                    action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
                                 else
-                                    action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel.getRoomCenter());
 
-                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(roomModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel);
                             } break;
                         case "محل برگزاری جلسات":
                             if (!type.equals("room")) {
-                                NavDirections action;
-
                                 if (centerModel != null)
-                                    action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
                                 else
-                                    action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(roomModel.getRoomCenter());
 
-                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                ((MainActivity) requireActivity()).navigatoon.navigateToRoomPlatformsFragment(roomModel);
                             } break;
                         case "برچسب\u200Cهای مهم":
                             if (!type.equals("room")) {
-                                NavDirections action;
-
                                 if (centerModel != null)
-                                    action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(centerModel);
                                 else
-                                    action = NavigationMainDirections.actionGlobalCenterTagsFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(roomModel.getRoomCenter());
 
-                                ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
+                                ((MainActivity) requireActivity()).navigatoon.navigateToRoomTagsFragment(roomModel);
                             } break;
                         case "حسابداری": {
                             // TODO : Place Code Here
@@ -333,17 +281,13 @@ public class RoomFragment extends Fragment {
                 doWork();
             } else {
                 if (!type.equals("room")) {
-                    NavDirections action;
-
                     if (centerModel != null)
-                        action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                     else
-                        action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(roomModel.getRoomCenter());
+                        ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getRoomCenter());
 
-                    ((MainActivity) requireActivity()).navController.navigate(action);
                 } else {
-                    NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
+                    ((MainActivity) requireActivity()).navigatoon.navigateToRoomSchedulesFragment(roomModel);
                 }
             }
         }).widget(binding.actionTextView.getRoot());
@@ -371,10 +315,9 @@ public class RoomFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            if (roomModel != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(roomModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            }
+            if (roomModel != null)
+                ((MainActivity) requireActivity()).navigatoon.navigateToCreateCaseFragment(roomModel);
+
         }).widget(binding.casesAddView.getRoot());
     }
 

@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -100,13 +98,11 @@ public class TableTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void listener(TableTreasuryHolder holder, TreasuriesModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToCreateTreasuryFragment(model);
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalEditTreasuryFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToEditTreasuryFragment(model);
         }).widget(holder.binding.editImageView);
     }
 

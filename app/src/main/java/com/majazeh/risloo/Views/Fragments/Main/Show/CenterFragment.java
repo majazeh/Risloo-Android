@@ -15,9 +15,7 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -109,33 +107,27 @@ public class CenterFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
-                case "اعضاء": {
-                    NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
-                case "برنامه درمانی": {
-                    NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
-                case "پروفایل من": {
-                    NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
-                case "ویرایش": {
-                    NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
-                case "محل برگزاری جلسات": {
-                    NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
-                case "اتاق\u200Cهای درمان": {
-                    NavDirections action = NavigationMainDirections.actionGlobalRoomsFragment(centerModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
-                case "حسابداری": {
+                case "اعضاء":
+                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
+                    break;
+                case "برنامه درمانی":
+                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                    break;
+                case "پروفایل من":
+                    ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
+                    break;
+                case "ویرایش":
+                    ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
+                    break;
+                case "محل برگزاری جلسات":
+                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
+                    break;
+                case "اتاق\u200Cهای درمان":
+                    ((MainActivity) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
+                    break;
+                case "حسابداری":
                     // TODO : Place Code Here
-                } break;
+                    break;
             }
         }).widget(binding.menuSpinner.selectImageView);
 
@@ -154,33 +146,27 @@ public class CenterFragment extends Fragment {
                     String pos = parent.getItemAtPosition(position).toString();
 
                     switch (pos) {
-                        case "اعضاء": {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "برنامه درمانی": {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "پروفایل من": {
-                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "ویرایش": {
-                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "محل برگزاری جلسات": {
-                            NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "اتاق\u200Cهای درمان": {
-                            NavDirections action = NavigationMainDirections.actionGlobalRoomsFragment(centerModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "حسابداری": {
+                        case "اعضاء":
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
+                            break;
+                        case "برنامه درمانی":
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                            break;
+                        case "پروفایل من":
+                            ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
+                            break;
+                        case "ویرایش":
+                            ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
+                            break;
+                        case "محل برگزاری جلسات":
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
+                            break;
+                        case "اتاق\u200Cهای درمان":
+                            ((MainActivity) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
+                            break;
+                        case "حسابداری":
                             // TODO : Place Code Here
-                        } break;
+                            break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -196,12 +182,11 @@ public class CenterFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest))) {
+            if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest)))
                 doWork();
-            } else {
-                NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                ((MainActivity) requireActivity()).navController.navigate(action);
-            }
+            else
+                ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+
         }).widget(binding.actionTextView.getRoot());
 
         binding.roomsSearchLayout.searchEditText.setOnTouchListener((v, event) -> {
@@ -259,8 +244,7 @@ public class CenterFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(centerModel, null);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToCreateRoomFragment(centerModel, null);
         }).widget(binding.roomsAddView.getRoot());
     }
 

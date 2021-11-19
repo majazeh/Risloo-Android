@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -100,17 +98,15 @@ public class ReferenceFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
                 IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), userModel.getAvatar().getMedium().getUrl());
+
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action;
-
             if (!type.equals("room"))
-                action = NavigationMainDirections.actionGlobalEditCenterUserFragment(centerModel, userModel);
+                ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterUserFragment(centerModel, userModel);
             else
-                action = NavigationMainDirections.actionGlobalEditCenterUserFragment(roomModel, userModel);
+                ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterUserFragment(roomModel, userModel);
 
-            ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.editImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {

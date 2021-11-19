@@ -6,10 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -76,14 +74,11 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
 
     private void listener(IndexCenterHolder holder, CenterModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action;
-
             if (model.getCenterType().equals("counseling_center"))
-                action = NavigationMainDirections.actionGlobalCenterFragment(model);
+                ((MainActivity) activity).navigatoon.navigateToCenterFragment(model);
             else
-                action = NavigationMainDirections.actionGlobalRoomFragment(model);
+                ((MainActivity) activity).navigatoon.navigateToRoomFragment(model);
 
-            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
     }
 

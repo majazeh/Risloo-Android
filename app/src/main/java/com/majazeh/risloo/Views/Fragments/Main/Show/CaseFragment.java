@@ -10,18 +10,16 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexPsychologistAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexReferenceAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSession2Adapter;
 import com.majazeh.risloo.databinding.FragmentCaseBinding;
 import com.mre.ligheh.API.Response;
@@ -103,13 +101,12 @@ public class CaseFragment extends Fragment {
     private void listener() {
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
-                case "گزارشات": {
-                    NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment(caseModel);
-                    ((MainActivity) requireActivity()).navController.navigate(action);
-                } break;
-                case "ویرایش": {
+                case "گزارشات":
+                    ((MainActivity) requireActivity()).navigatoon.navigateToClientReportsFragment(caseModel);
+                    break;
+                case "ویرایش":
                     // TODO : Place Code Here
-                } break;
+                    break;
             }
         }).widget(binding.menuSpinner.selectImageView);
 
@@ -128,13 +125,12 @@ public class CaseFragment extends Fragment {
                     String pos = parent.getItemAtPosition(position).toString();
 
                     switch (pos) {
-                        case "گزارشات": {
-                            NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment(caseModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } break;
-                        case "ویرایش": {
+                        case "گزارشات":
+                            ((MainActivity) requireActivity()).navigatoon.navigateToClientReportsFragment(caseModel);
+                            break;
+                        case "ویرایش":
                             // TODO : Place Code Here
-                        } break;
+                            break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -150,18 +146,15 @@ public class CaseFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseUserFragment(caseModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToCreateCaseUserFragment(caseModel);
         }).widget(binding.referencesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSessionFragment(caseModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToCreateSessionFragment(caseModel);
         }).widget(binding.sessionsAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment(caseModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToCreateSampleFragment(caseModel);
         }).widget(binding.samplesAddView.getRoot());
     }
 

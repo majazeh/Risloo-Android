@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -89,8 +87,7 @@ public class TreasuriesFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateTreasuryFragment(((MainActivity) requireActivity()).singleton.getUserModel());
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            ((MainActivity) requireActivity()).navigatoon.navigateToCreateTreasuryFragment(((MainActivity) requireActivity()).singleton.getUserModel());
         }).widget(binding.addImageView.getRoot());
     }
 

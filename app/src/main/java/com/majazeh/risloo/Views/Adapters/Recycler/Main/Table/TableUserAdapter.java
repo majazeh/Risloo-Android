@@ -8,15 +8,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderUserHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableUserHolder;
@@ -103,8 +101,7 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalUserFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            ((MainActivity) activity).navigatoon.navigateToUserFragment(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
@@ -124,12 +121,10 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         IntentManager.phone(activity, pos);
                     else if (pos.contains("@"))
                         IntentManager.email(activity, new String[]{pos}, "", "", "");
-                    else if (pos.equals("ورود به کاربری")) {
+                    else if (pos.equals("ورود به کاربری"))
                         ((MainActivity) activity).userChange("loginOtherUser", model.getId());
-                    } else if (pos.equals("ویرایش")) {
-                        NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(model);
-                        ((MainActivity) activity).navController.navigate(action);
-                    }
+                    else if (pos.equals("ویرایش"))
+                        ((MainActivity) activity).navigatoon.navigateToEditUserFragment(model);
 
                     parent.setSelection(parent.getAdapter().getCount());
 
