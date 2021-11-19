@@ -14,10 +14,12 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Sheet.SheetSampleAdapter;
 import com.majazeh.risloo.databinding.BottomSheetBulkSampleBinding;
@@ -29,8 +31,10 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
 
@@ -92,7 +96,12 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
             nickname = binding.nicknameEditText.getRoot().getText().toString().trim();
         });
 
-        CustomClickView.onDelayedListener(this::doWork).widget(binding.entryButton);
+        CustomClickView.onDelayedListener(() -> {
+            if (binding.nicknameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
+
+            doWork();
+        }).widget(binding.entryButton);
     }
 
     private void setDialog() {
@@ -205,7 +214,37 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        // TODO : Place Code If Needed
+                        try {
+                            JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder allErrors = new StringBuilder();
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    StringBuilder keyErrors = new StringBuilder();
+
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String error = errorsObject.getJSONArray(key).getString(i);
+
+                                        keyErrors.append(error);
+                                        keyErrors.append("\n");
+
+                                        allErrors.append(error);
+                                        allErrors.append("\n");
+                                    }
+
+                                    if (key.equals("nickname"))
+                                        ((AuthActivity) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                }
+
+                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     });
                 }
             }

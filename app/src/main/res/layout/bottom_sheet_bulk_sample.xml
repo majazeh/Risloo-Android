@@ -166,6 +166,17 @@
         app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
         app:layout_constraintTop_toBottomOf="@id/nickname_textView" />
 
+    <include
+        android:id="@+id/nickname_errorLayout"
+        layout="@layout/component_auth_error"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/nickname_editText"
+        app:layout_constraintStart_toStartOf="@id/nickname_editText"
+        app:layout_constraintTop_toBottomOf="@id/nickname_editText" />
+
     <androidx.constraintlayout.widget.Group
         android:id="@+id/nickname_group"
         android:layout_width="wrap_content"
@@ -190,6 +201,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
         app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-        app:layout_constraintTop_toBottomOf="@id/nickname_editText" />
+        app:layout_constraintTop_toBottomOf="@id/nickname_errorLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
