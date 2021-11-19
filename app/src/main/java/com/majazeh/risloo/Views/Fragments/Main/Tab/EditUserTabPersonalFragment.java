@@ -433,43 +433,48 @@ public class EditUserTabPersonalFragment extends Fragment {
                                     JSONObject errorsObject = responseObject.getJSONObject("errors");
 
                                     Iterator<String> keys = (errorsObject.keys());
-                                    StringBuilder errors = new StringBuilder();
+                                    StringBuilder allErrors = new StringBuilder();
 
                                     while (keys.hasNext()) {
                                         String key = keys.next();
+                                        StringBuilder keyErrors = new StringBuilder();
+
                                         for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                            String error = errorsObject.getJSONArray(key).getString(i);
 
-                                            switch (key) {
-                                                case "name":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "mobile":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "email":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "birthday":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "status":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "type":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "gender":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
-                                                    break;
-                                            }
+                                            keyErrors.append(error);
+                                            keyErrors.append("\n");
 
-                                            errors.append(validation);
-                                            errors.append("\n");
+                                            allErrors.append(error);
+                                            allErrors.append("\n");
+                                        }
+
+                                        switch (key) {
+                                            case "name":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "mobile":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "email":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "birthday":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "status":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "type":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "gender":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

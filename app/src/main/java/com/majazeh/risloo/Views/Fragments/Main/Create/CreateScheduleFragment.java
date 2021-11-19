@@ -186,78 +186,83 @@ public class CreateScheduleFragment extends Fragment {
                                 JSONObject errorsObject = responseObject.getJSONObject("errors");
 
                                 Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder errors = new StringBuilder();
+                                StringBuilder allErrors = new StringBuilder();
 
                                 while (keys.hasNext()) {
                                     String key = keys.next();
+                                    StringBuilder keyErrors = new StringBuilder();
+
                                     for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                        String error = errorsObject.getJSONArray(key).getString(i);
 
-                                        switch (key) {
+                                        keyErrors.append(error);
+                                        keyErrors.append("\n");
 
-                                            // Time Data
-                                            case "time":
-                                            case "duration":
-                                            case "date_type":
-                                            case "date":
-                                            case "week_days":
-                                            case "repeat_status":
-                                            case "repeat":
-                                            case "repeat_from":
-                                            case "repeat_to":
-                                                if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((CreateScheduleTabTimeFragment) time).showValid(key, validation);
+                                        allErrors.append(error);
+                                        allErrors.append("\n");
+                                    }
 
-                                                break;
+                                    switch (key) {
 
-                                            // Reference Data
-                                            case "selection_type":
-                                            case "clients_type":
-                                            case "case_id":
-                                            case "group_session":
-                                            case "clients_number":
-                                                if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((CreateScheduleTabReferenceFragment) reference).showValid(key, validation);
+                                        // Time Data
+                                        case "time":
+                                        case "duration":
+                                        case "date_type":
+                                        case "date":
+                                        case "week_days":
+                                        case "repeat_status":
+                                        case "repeat":
+                                        case "repeat_from":
+                                        case "repeat_to":
+                                            if (time instanceof CreateScheduleTabTimeFragment)
+                                                ((CreateScheduleTabTimeFragment) time).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
 
-                                                break;
+                                            break;
 
-                                            // Session Data
-                                            case "status":
-                                            case "opens_at_type":
-                                            case "opens_at":
-                                            case "closed_at_type":
-                                            case "closed_at":
-                                            case "fields":
-                                            case "description":
-                                            case "client_reminder":
-                                                if (session instanceof CreateScheduleTabSessionFragment)
-                                                    ((CreateScheduleTabSessionFragment) session).showValid(key, validation);
+                                        // Reference Data
+                                        case "selection_type":
+                                        case "clients_type":
+                                        case "case_id":
+                                        case "group_session":
+                                        case "clients_number":
+                                            if (reference instanceof CreateScheduleTabReferenceFragment)
+                                                ((CreateScheduleTabReferenceFragment) reference).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
 
-                                                break;
+                                            break;
 
-                                            // Platform Data
-                                            case "platforms":
-                                            case "pin_platform":
-                                            case "identifier_platform":
-                                                if (platform instanceof CreateScheduleTabPlatformFragment)
-                                                    ((CreateScheduleTabPlatformFragment) platform).showValid(key, validation);
+                                        // Session Data
+                                        case "status":
+                                        case "opens_at_type":
+                                        case "opens_at":
+                                        case "closed_at_type":
+                                        case "closed_at":
+                                        case "fields":
+                                        case "description":
+                                        case "client_reminder":
+                                            if (session instanceof CreateScheduleTabSessionFragment)
+                                                ((CreateScheduleTabSessionFragment) session).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
 
-                                                break;
+                                            break;
 
-                                            // Payment Data
-                                            case "payment_status":
-                                                if (payment instanceof CreateScheduleTabPaymentFragment)
-                                                    ((CreateScheduleTabPaymentFragment) payment).showValid(key, validation);
+                                        // Platform Data
+                                        case "platforms":
+                                        case "pin_platform":
+                                        case "identifier_platform":
+                                            if (platform instanceof CreateScheduleTabPlatformFragment)
+                                                ((CreateScheduleTabPlatformFragment) platform).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
 
-                                                break;
-                                        }
+                                            break;
 
-                                        errors.append(validation);
-                                        errors.append("\n");
+                                        // Payment Data
+                                        case "payment_status":
+                                            if (payment instanceof CreateScheduleTabPaymentFragment)
+                                                ((CreateScheduleTabPaymentFragment) payment).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+
+                                            break;
                                     }
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
