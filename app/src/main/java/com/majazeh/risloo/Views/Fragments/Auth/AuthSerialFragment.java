@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -139,10 +137,8 @@ public class AuthSerialFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            NavDirections action = NavigationAuthDirections.actionGlobalAuthLoginFragment();
-
                             ((AuthActivity) requireActivity()).singleton.logout();
-                            ((AuthActivity) requireActivity()).navController.navigate(action);
+                            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment();
 
                             DialogManager.dismissLoadingDialog();
                         });

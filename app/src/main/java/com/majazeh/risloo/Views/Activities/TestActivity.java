@@ -11,27 +11,24 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.BuildConfig;
-import com.majazeh.risloo.NavigationTestDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
+import com.majazeh.risloo.Utils.Entities.Decoraton;
+import com.majazeh.risloo.Utils.Entities.Inputon;
+import com.majazeh.risloo.Utils.Entities.Navigatoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Entities.Inputon;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
-import com.majazeh.risloo.Utils.Entities.Decoraton;
-import com.majazeh.risloo.Utils.Entities.Validatoon;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -58,6 +55,7 @@ public class TestActivity extends AppCompatActivity {
 
     // Entities
     public Inputon inputon;
+    public Navigatoon navigatoon;
     public Singleton singleton;
     public Validatoon validatoon;
 
@@ -67,8 +65,6 @@ public class TestActivity extends AppCompatActivity {
     public FormModel formModel;
 
     // Objects
-    private NavController navController;
-    private NavGraph navGraph;
     private Bundle extras;
     private Handler handler;
     public HashMap data, header;
@@ -126,8 +122,7 @@ public class TestActivity extends AppCompatActivity {
         sampleAnswers = new SampleAnswers();
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
-        navController = Objects.requireNonNull(navHostFragment).getNavController();
-        navGraph = navController.getNavInflater().inflate(R.navigation.navigation_test);
+        navigatoon = new Navigatoon(this, Objects.requireNonNull(navHostFragment));
 
         extras = getIntent().getExtras();
 
@@ -223,20 +218,18 @@ public class TestActivity extends AppCompatActivity {
 
             switch (formModel.getType()) {
                 case "psychologist_description":
-                    navGraph.setStartDestination(R.id.testPsyDescFragment);
+                    navigatoon.setStartDestinationId(R.id.testPsyDescFragment);
                     break;
                 case "chain":
-                    navGraph.setStartDestination(R.id.testChainFragment);
+                    navigatoon.setStartDestinationId(R.id.testChainFragment);
                     break;
                 case "prerequisites":
-                    navGraph.setStartDestination(R.id.testPrerequisiteFragment);
+                    navigatoon.setStartDestinationId(R.id.testPrerequisiteFragment);
                     break;
                 case "description":
-                    navGraph.setStartDestination(R.id.testDescriptionFragment);
+                    navigatoon.setStartDestinationId(R.id.testDescriptionFragment);
                     break;
             }
-
-            navController.setGraph(navGraph);
         }
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
@@ -266,62 +259,56 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void navigate() {
-        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() == R.id.testPrerequisiteFragment) {
+        if (navigatoon.getCurrentDestinationId() == R.id.testPrerequisiteFragment) {
             sendPre();
         }
 
         switch (formModel.getType()) {
-            case "psychologist_description": {
-                if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testPsyDescFragment) {
-                    NavDirections action = NavigationTestDirections.actionGlobalTestPsyDescFragment();
-                    navController.navigate(action);
-                } else {
+            case "psychologist_description":
+                if (navigatoon.getCurrentDestinationId() != R.id.testPsyDescFragment)
+                    navigatoon.navigateToTestPsyDescFragment();
+                else
                     IntentManager.finish(this);
-                }
-            } break;
-            case "chain": {
-                if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testChainFragment) {
-                    NavDirections action = NavigationTestDirections.actionGlobalTestChainFragment();
-                    navController.navigate(action);
-                } else {
+
+                break;
+            case "chain":
+                if (navigatoon.getCurrentDestinationId() != R.id.testChainFragment)
+                    navigatoon.navigateToTestChainFragment();
+                else
                     IntentManager.finish(this);
-                }
-            } break;
-            case "prerequisites": {
-                if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testPrerequisiteFragment) {
-                    NavDirections action = NavigationTestDirections.actionGlobalTestPrerequisiteFragment();
-                    navController.navigate(action);
-                } else {
+
+                break;
+            case "prerequisites":
+                if (navigatoon.getCurrentDestinationId() != R.id.testPrerequisiteFragment)
+                    navigatoon.navigateToTestPrerequisiteFragment();
+                else
                     IntentManager.finish(this);
-                }
-            } break;
-            case "description": {
-                if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testDescriptionFragment) {
-                    NavDirections action = NavigationTestDirections.actionGlobalTestDescriptionFragment();
-                    navController.navigate(action);
-                } else {
+
+                break;
+            case "description":
+                if (navigatoon.getCurrentDestinationId() != R.id.testDescriptionFragment)
+                    navigatoon.navigateToTestDescriptionFragment();
+                else
                     IntentManager.finish(this);
-                }
-            } break;
-            case "entities": {
-                NavDirections action = NavigationTestDirections.actionGlobalTestEntityFragment();
-                navController.navigate(action);
-            } break;
-            case "item": {
+
+                break;
+            case "entities":
+                navigatoon.navigateToTestEntityFragment();
+
+                break;
+            case "item":
                 ItemModel itemModel = (ItemModel) formModel.getObject();
 
-                if (itemModel.getType().equals("text")) {
-                    NavDirections action = NavigationTestDirections.actionGlobalTestOptionalFragment();
-                    navController.navigate(action);
-                } else if (itemModel.getType().equals("image_url")) {
-                    NavDirections action = NavigationTestDirections.actionGlobalTestPictoralFragment();
-                    navController.navigate(action);
-                }
-            } break;
-            case "close": {
-                NavDirections action = NavigationTestDirections.actionGlobalTestEndFragment();
-                navController.navigate(action);
-            } break;
+                if (itemModel.getType().equals("text"))
+                    navigatoon.navigateToTestOptionalFragment();
+                else if (itemModel.getType().equals("image_url"))
+                    navigatoon.navigateToTestPictoralFragment();
+
+                break;
+            case "close":
+                navigatoon.navigateToTestEndFragment();
+
+                break;
         }
 
         setWidgets();

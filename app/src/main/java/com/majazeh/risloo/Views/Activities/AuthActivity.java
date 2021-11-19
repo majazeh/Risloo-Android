@@ -7,16 +7,14 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Decoraton;
-import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Inputon;
+import com.majazeh.risloo.Utils.Entities.Navigatoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -30,14 +28,12 @@ public class AuthActivity extends AppCompatActivity {
     private ActivityAuthBinding binding;
 
     // Entities
-    public Fragmont fragmont;
     public Inputon inputon;
+    public Navigatoon navigatoon;
     public Singleton singleton;
     public Validatoon validatoon;
 
     // Objects
-    public NavController navController;
-    private NavGraph navGraph;
     private Bundle extras;
 
     @Override
@@ -78,10 +74,7 @@ public class AuthActivity extends AppCompatActivity {
         validatoon = new Validatoon(this);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
-        navController = Objects.requireNonNull(navHostFragment).getNavController();
-        navGraph = navController.getNavInflater().inflate(R.navigation.navigation_auth);
-
-        fragmont = new Fragmont(navHostFragment);
+        navigatoon = new Navigatoon(this, Objects.requireNonNull(navHostFragment));
 
         extras = getIntent().getExtras();
     }
@@ -90,11 +83,9 @@ public class AuthActivity extends AppCompatActivity {
         if (extras != null) {
             if (extras.getString("theory") != null) {
                 if (extras.getString("theory").equals("login"))
-                    navGraph.setStartDestination(R.id.authLoginFragment);
+                    navigatoon.setStartDestinationId(R.id.authLoginFragment);
                 else
-                    navGraph.setStartDestination(R.id.authRegisterFragment);
-
-                navController.setGraph(navGraph);
+                    navigatoon.setStartDestinationId(R.id.authRegisterFragment);
             }
         }
     }
@@ -118,14 +109,14 @@ public class AuthActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (navGraph.getStartDestination() == R.id.authLoginFragment) {
-            if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authLoginFragment && Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authSerialFragment)
-                navController.navigateUp();
+        if (navigatoon.getStartDestinationId() == R.id.authLoginFragment) {
+            if (navigatoon.getCurrentDestinationId() != R.id.authLoginFragment && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
+                navigatoon.navigateUp();
             else
                 IntentManager.finish(this);
         } else {
-            if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authRegisterFragment && Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authSerialFragment)
-                navController.navigateUp();
+            if (navigatoon.getCurrentDestinationId() != R.id.authRegisterFragment && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
+                navigatoon.navigateUp();
             else
                 IntentManager.finish(this);
         }

@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -29,7 +27,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Objects;
 
 public class AuthRegisterFragment extends Fragment {
 
@@ -92,13 +89,11 @@ public class AuthRegisterFragment extends Fragment {
         }).widget(binding.buttonTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationAuthDirections.actionGlobalAuthLoginFragment();
-            ((AuthActivity) requireActivity()).navController.navigate(action);
+            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment();
         }).widget(binding.loginLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordRecoverFragment();
-            ((AuthActivity) requireActivity()).navController.navigate(action);
+            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment();
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
@@ -119,28 +114,23 @@ public class AuthRegisterFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (model.getUser() == null) {
-                            NavDirections action = null;
-
                             switch (model.getTheory()) {
                                 case "password":
-                                    action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(model);
+                                    ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
                                     break;
                                 case "mobileCode":
-                                    action = NavigationAuthDirections.actionGlobalAuthPinFragment(model);
+                                    ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPinFragment(model);
                                     break;
                                 case "recovery":
-                                    action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(model);
+                                    ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
                                     break;
                             }
-
-                            ((AuthActivity) requireActivity()).navController.navigate(Objects.requireNonNull(action));
-                            DialogManager.dismissLoadingDialog();
                         } else {
                             ((AuthActivity) requireActivity()).singleton.login(model);
-
                             IntentManager.main(requireActivity());
-                            DialogManager.dismissLoadingDialog();
                         }
+
+                        DialogManager.dismissLoadingDialog();
                     });
                 }
             }

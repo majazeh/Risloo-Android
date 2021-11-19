@@ -14,19 +14,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.tasks.Task;
-import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
 import com.mre.ligheh.API.Response;
@@ -39,7 +37,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Objects;
 
 public class AuthPinFragment extends Fragment {
 
@@ -129,8 +126,8 @@ public class AuthPinFragment extends Fragment {
             if (binding.pinEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
-                ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 countDownTimer.cancel();
+                ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
 
                 doWork("code");
             }
@@ -138,23 +135,17 @@ public class AuthPinFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-
-            NavDirections action = NavigationAuthDirections.actionGlobalAuthLoginFragment();
-            ((AuthActivity) requireActivity()).navController.navigate(action);
+            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment();
         }).widget(binding.loginLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-
-            NavDirections action = NavigationAuthDirections.actionGlobalAuthRegisterFragment();
-            ((AuthActivity) requireActivity()).navController.navigate(action);
+            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthRegisterFragment();
         }).widget(binding.registerLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-
-            NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordRecoverFragment();
-            ((AuthActivity) requireActivity()).navController.navigate(action);
+            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment();
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
@@ -222,8 +213,8 @@ public class AuthPinFragment extends Fragment {
         pin = code;
         binding.pinEditText.getRoot().setText(pin);
 
-        ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
         countDownTimer.cancel();
+        ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
 
         doWork("code");
     }
@@ -250,25 +241,20 @@ public class AuthPinFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             if (model.getUser() == null) {
-                                NavDirections action = null;
-
                                 switch (model.getTheory()) {
                                     case "password":
-                                        action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(model);
+                                        ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
                                         break;
                                     case "recovery":
-                                        action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(model);
+                                        ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
                                         break;
                                 }
-
-                                ((AuthActivity) requireActivity()).navController.navigate(Objects.requireNonNull(action));
-                                DialogManager.dismissLoadingDialog();
                             } else {
                                 ((AuthActivity) requireActivity()).singleton.login(model);
-
                                 IntentManager.main(requireActivity());
-                                DialogManager.dismissLoadingDialog();
                             }
+
+                            DialogManager.dismissLoadingDialog();
                         });
                     }
                 }
