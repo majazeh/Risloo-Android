@@ -110,7 +110,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCenterUser));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
 
                         dismiss();
                     });

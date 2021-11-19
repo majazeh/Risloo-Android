@@ -14,10 +14,8 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
 import com.google.android.material.tabs.TabLayout;
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
@@ -48,7 +46,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Objects;
 
 public class CreateSampleFragment extends Fragment {
 
@@ -122,8 +119,7 @@ public class CreateSampleFragment extends Fragment {
         assessmentLinkSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
-                ((MainActivity) requireActivity()).navController.navigate(action);
+                ((MainActivity) requireActivity()).navigatoon.navigateToScalesFragment();
             }
 
             @Override
@@ -356,19 +352,16 @@ public class CreateSampleFragment extends Fragment {
                     break;
             }
         } else {
-            switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getPreviousBackStackEntry()).getDestination().getId()) {
-                case R.id.bulkSamplesFragment:
-                    binding.typeTabLayout.getTabAt(2).select();
+            if (((MainActivity) requireActivity()).navigatoon.getBackstackDestinationId() == R.id.bulkSamplesFragment) {
+                binding.typeTabLayout.getTabAt(2).select();
 
-                    type = "bulk";
-                    setType(type);
-                    break;
-                default:
-                    binding.typeTabLayout.getTabAt(0).select();
+                type = "bulk";
+                setType(type);
+            } else {
+                binding.typeTabLayout.getTabAt(0).select();
 
-                    type = "case_user";
-                    setType(type);
-                    break;
+                type = "case_user";
+                setType(type);
             }
 
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
@@ -679,8 +672,7 @@ public class CreateSampleFragment extends Fragment {
                             DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBulkSample));
 
-                            NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(bulkSampleModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
+                            ((MainActivity) requireActivity()).navigatoon.navigateToBulkSampleFragment(bulkSampleModel);
                         });
                     }
                 }
@@ -780,9 +772,7 @@ public class CreateSampleFragment extends Fragment {
                                 DialogManager.dismissLoadingDialog();
                                 SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
 
-                                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, sampleIds);
-                                ((MainActivity) requireActivity()).navController.navigate(action);
-
+                                ((MainActivity) requireActivity()).navigatoon.navigateToSamplesFragment(null, sampleIds);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

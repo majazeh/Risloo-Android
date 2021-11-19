@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -155,8 +153,7 @@ public class CreateRoomFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoom));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(roomModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToRoomFragment(roomModel);
                     });
                 }
             }

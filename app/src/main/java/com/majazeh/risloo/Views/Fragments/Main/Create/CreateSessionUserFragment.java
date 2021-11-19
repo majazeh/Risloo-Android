@@ -298,7 +298,7 @@ public class CreateSessionUserFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSessionUser));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
                     });
                 }
             }

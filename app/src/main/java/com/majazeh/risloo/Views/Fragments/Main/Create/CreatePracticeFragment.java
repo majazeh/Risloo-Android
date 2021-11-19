@@ -158,7 +158,7 @@ public class CreatePracticeFragment extends Fragment {
 //                        DialogManager.dismissLoadingDialog();
 //                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewPractice));
 //
-//                        ((MainActivity) requireActivity()).navController.navigateUp();
+//                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
 //                    });
 //                }
 //            }

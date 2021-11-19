@@ -98,7 +98,7 @@ public class EditUserFragment extends Fragment {
 
         tabLayoutMediator.attach();
 
-        if (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getPreviousBackStackEntry()).getDestination().getId() == R.id.dashboardFragment) {
+        if (((MainActivity) requireActivity()).navigatoon.getBackstackDestinationId() == R.id.dashboardFragment) {
             binding.viewPager.getRoot().setCurrentItem(1);
         }
     }

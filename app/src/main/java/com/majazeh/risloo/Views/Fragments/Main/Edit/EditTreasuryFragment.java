@@ -124,7 +124,7 @@ public class EditTreasuryFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
                     });
                 }
             }

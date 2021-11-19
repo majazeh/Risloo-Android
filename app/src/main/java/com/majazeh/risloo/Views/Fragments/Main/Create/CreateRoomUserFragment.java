@@ -164,7 +164,7 @@ public class CreateRoomUserFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoomUser));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
                     });
                 }
             }

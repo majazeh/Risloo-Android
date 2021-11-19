@@ -10,9 +10,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDestination;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -367,185 +365,141 @@ public class BreadCrumb {
 
             // -------------------- Drawer
 
-            case R.id.dashboardFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.centersFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCentersFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.casesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCasesFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.sessionsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalSessionsFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.usersFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalUsersFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.samplesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(chainId, sampleIds);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.bulkSamplesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBulkSamplesFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.scalesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.documentsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalDocumentsFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.downloadsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalDownloadsFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
+            case R.id.dashboardFragment:
+                ((MainActivity) activity).navigatoon.navigateToDashboardFragment();
+                break;
+            case R.id.centersFragment:
+                ((MainActivity) activity).navigatoon.navigateToCentersFragment();
+                break;
+            case R.id.casesFragment:
+                ((MainActivity) activity).navigatoon.navigateToCasesFragment();
+                break;
+            case R.id.sessionsFragment:
+                ((MainActivity) activity).navigatoon.navigateToSessionsFragment();
+                break;
+            case R.id.usersFragment:
+                ((MainActivity) activity).navigatoon.navigateToUsersFragment();
+                break;
+            case R.id.samplesFragment:
+                ((MainActivity) activity).navigatoon.navigateToSamplesFragment(chainId, sampleIds);
+                break;
+            case R.id.bulkSamplesFragment:
+                ((MainActivity) activity).navigatoon.navigateToBulkSamplesFragment();
+                break;
+            case R.id.scalesFragment:
+                ((MainActivity) activity).navigatoon.navigateToScalesFragment();
+                break;
+            case R.id.documentsFragment:
+                ((MainActivity) activity).navigatoon.navigateToDocumentsFragment();
+                break;
+            case R.id.downloadsFragment:
+                ((MainActivity) activity).navigatoon.navigateToDownloadsFragment();
+                break;
 
             // -------------------- Toolbar
 
-            case R.id.meFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalMeFragment(((MainActivity) activity).singleton.getUserModel());
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.accountingFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalAccountingFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.paymentsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
+            case R.id.meFragment:
+                ((MainActivity) activity).navigatoon.navigateToMeFragment(((MainActivity) activity).singleton.getUserModel());
+                break;
+            case R.id.accountingFragment:
+                ((MainActivity) activity).navigatoon.navigateToAccountingFragment();
+                break;
+            case R.id.paymentsFragment:
+                ((MainActivity) activity).navigatoon.navigateToPaymentsFragment(null);
+                break;
 
             // -------------------- Index
 
-            case R.id.banksFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBanksFragment(null);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.billingsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.centerPlatformsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.centerSchedulesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.centerTagsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.centerUsersFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.clientReportsFragment: {
-                NavDirections action;
-
+            case R.id.banksFragment:
+                ((MainActivity) activity).navigatoon.navigateToBanksFragment(null);
+                break;
+            case R.id.billingsFragment:
+                ((MainActivity) activity).navigatoon.navigateToBillingsFragment();
+                break;
+            case R.id.centerPlatformsFragment:
+                ((MainActivity) activity).navigatoon.navigateToCenterPlatformsFragment(centerModel);
+                break;
+            case R.id.centerSchedulesFragment:
+                ((MainActivity) activity).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                break;
+            case R.id.centerTagsFragment:
+                ((MainActivity) activity).navigatoon.navigateToCenterTagsFragment(centerModel);
+                break;
+            case R.id.centerUsersFragment:
+                ((MainActivity) activity).navigatoon.navigateToCenterUsersFragment(centerModel);
+                break;
+            case R.id.clientReportsFragment:
                 if (clientReportsType.equals("case"))
-                    action = NavigationMainDirections.actionGlobalClientReportsFragment(caseModel);
+                    ((MainActivity) activity).navigatoon.navigateToClientReportsFragment(caseModel);
                 else
-                    action = NavigationMainDirections.actionGlobalClientReportsFragment(sessionModel);
+                    ((MainActivity) activity).navigatoon.navigateToClientReportsFragment(sessionModel);
 
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.roomPlatformsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.roomSchedulesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.roomTagsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.roomUsersFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.roomsFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalRoomsFragment(centerModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.treasuriesFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
+            break;
+            case R.id.roomPlatformsFragment:
+                ((MainActivity) activity).navigatoon.navigateToRoomPlatformsFragment(roomModel);
+                break;
+            case R.id.roomSchedulesFragment:
+                ((MainActivity) activity).navigatoon.navigateToRoomSchedulesFragment(roomModel);
+                break;
+            case R.id.roomTagsFragment:
+                ((MainActivity) activity).navigatoon.navigateToRoomTagsFragment(roomModel);
+                break;
+            case R.id.roomUsersFragment:
+                ((MainActivity) activity).navigatoon.navigateToRoomUsersFragment(roomModel);
+                break;
+            case R.id.roomsFragment:
+                ((MainActivity) activity).navigatoon.navigateToRoomsFragment(centerModel);
+                break;
+            case R.id.treasuriesFragment:
+                ((MainActivity) activity).navigatoon.navigateToTreasuriesFragment();
+                break;
 
             // -------------------- Show
 
-            case R.id.billFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBillFragment(billingModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.bulkSampleFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(bulkSampleModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.caseFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(caseModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.centerFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCenterFragment(centerModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.referenceFragment: {
-                NavDirections action;
-
+            case R.id.billFragment:
+                ((MainActivity) activity).navigatoon.navigateToBillFragment(billingModel);
+                break;
+            case R.id.bulkSampleFragment:
+                ((MainActivity) activity).navigatoon.navigateToBulkSampleFragment(bulkSampleModel);
+                break;
+            case R.id.caseFragment:
+                ((MainActivity) activity).navigatoon.navigateToCaseFragment(caseModel);
+                break;
+            case R.id.centerFragment:
+                ((MainActivity) activity).navigatoon.navigateToCenterFragment(centerModel);
+                break;
+            case R.id.referenceFragment:
                 if (referenceType.equals("user"))
-                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, userModel);
+                    ((MainActivity) activity).navigatoon.navigateToReferenceFragment(centerModel, userModel);
                 else if (referenceType.equals("center"))
-                    action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, ((MainActivity) activity).singleton.getUserModel());
+                    ((MainActivity) activity).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) activity).singleton.getUserModel());
                 else
-                    action = NavigationMainDirections.actionGlobalReferenceFragment(roomModel, ((MainActivity) activity).singleton.getUserModel());
+                    ((MainActivity) activity).navigatoon.navigateToReferenceFragment(roomModel, ((MainActivity) activity).singleton.getUserModel());
 
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.roomFragment: {
-                NavDirections action;
-
+                break;
+            case R.id.roomFragment:
                 if (roomType.equals("room"))
-                    action = NavigationMainDirections.actionGlobalRoomFragment(roomModel);
+                    ((MainActivity) activity).navigatoon.navigateToRoomFragment(roomModel);
                 else
-                    action = NavigationMainDirections.actionGlobalRoomFragment(centerModel);
+                    ((MainActivity) activity).navigatoon.navigateToRoomFragment(centerModel);
 
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.sampleFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(sampleModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.sessionFragment: {
-                NavDirections action;
-
+                break;
+            case R.id.sampleFragment:
+                ((MainActivity) activity).navigatoon.navigateToSampleFragment(sampleModel);
+                break;
+            case R.id.sessionFragment:
                 if (sessionType.equals("session"))
-                    action = NavigationMainDirections.actionGlobalSessionFragment(sessionModel);
+                    ((MainActivity) activity).navigatoon.navigateToSessionFragment(sessionModel);
                 else
-                    action = NavigationMainDirections.actionGlobalSessionFragment(scheduleModel);
+                    ((MainActivity) activity).navigatoon.navigateToSessionFragment(scheduleModel);
 
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.treasuryFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(treasuriesModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.userFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalUserFragment(userModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
+                break;
+            case R.id.treasuryFragment:
+                ((MainActivity) activity).navigatoon.navigateToTreasuryFragment(treasuriesModel);
+                break;
+            case R.id.userFragment:
+                ((MainActivity) activity).navigatoon.navigateToUserFragment(userModel);
+                break;
         }
     }
 

@@ -11,9 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -283,8 +281,7 @@ public class CreateCenterFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCenter));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalCenterFragment(centerModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToCenterFragment(centerModel);
                     });
 
                     if (avatarFile != null)

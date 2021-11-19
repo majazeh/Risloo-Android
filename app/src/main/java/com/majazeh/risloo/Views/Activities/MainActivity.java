@@ -18,18 +18,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.BuildConfig;
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.BreadCrumb;
 import com.majazeh.risloo.Utils.Entities.Decoraton;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Inputon;
+import com.majazeh.risloo.Utils.Entities.Navigatoon;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
@@ -76,15 +74,13 @@ public class MainActivity extends AppCompatActivity {
     private BreadCrumb breadCrumb;
     public Fragmont fragmont;
     public Inputon inputon;
+    public Navigatoon navigatoon;
     public Permissoon permissoon;
     public Singleton singleton;
     public Validatoon validatoon;
 
     // Adapters
     private IndexNavAdapter indexNavAdapter;
-
-    // Objects
-    public NavController navController;
 
     // Vars
     private boolean userSelect = false;
@@ -139,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         indexNavAdapter = new IndexNavAdapter(this);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
-        navController = Objects.requireNonNull(navHostFragment).getNavController();
+        navigatoon = new Navigatoon(this, Objects.requireNonNull(navHostFragment));
 
         fragmont = new Fragmont(navHostFragment);
 
@@ -173,21 +169,18 @@ public class MainActivity extends AppCompatActivity {
                     String pos = parent.getItemAtPosition(position).toString();
 
                     switch (pos) {
-                        case "مشاهده پروفایل": {
-                            NavDirections action = NavigationMainDirections.actionGlobalMeFragment(singleton.getUserModel());
-                            navController.navigate(action);
-                        } break;
-                        case "حسابداری": {
-                            NavDirections action = NavigationMainDirections.actionGlobalAccountingFragment();
-                            navController.navigate(action);
-                        } break;
-                        case "شارژ حساب": {
-                            NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(null);
-                            navController.navigate(action);
-                        } break;
-                        case "خروج": {
+                        case "مشاهده پروفایل":
+                            navigatoon.navigateToMeFragment(singleton.getUserModel());
+                            break;
+                        case "حسابداری":
+                            navigatoon.navigateToAccountingFragment();
+                            break;
+                        case "شارژ حساب":
+                            navigatoon.navigateToPaymentsFragment(null);
+                            break;
+                        case "خروج":
                             SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
-                        } break;
+                            break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -202,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+        navigatoon.getNavController().addOnDestinationChangedListener((controller, destination, arguments) -> {
             SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
 
             binding.contentIncludeLayout.headerAppBarLayout.setExpanded(true);
@@ -369,46 +362,36 @@ public class MainActivity extends AppCompatActivity {
 
     public void responseAdapter(String item) {
         switch (item) {
-            case "داشبورد": {
-                NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
-                navController.navigate(action);
-            } break;
-            case "مراکز درمانی": {
-                NavDirections action = NavigationMainDirections.actionGlobalCentersFragment();
-                navController.navigate(action);
-            } break;
-            case "پرونده\u200Cها": {
-                NavDirections action = NavigationMainDirections.actionGlobalCasesFragment();
-                navController.navigate(action);
-            } break;
-            case "جلسات": {
-                NavDirections action = NavigationMainDirections.actionGlobalSessionsFragment();
-                navController.navigate(action);
-            } break;
-            case "اعضاء": {
-                NavDirections action = NavigationMainDirections.actionGlobalUsersFragment();
-                navController.navigate(action);
-            } break;
-            case "نمونه\u200Cها": {
-                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(null, null);
-                navController.navigate(action);
-            } break;
-            case "نمونه\u200Cهای گروهی": {
-                NavDirections action = NavigationMainDirections.actionGlobalBulkSamplesFragment();
-                navController.navigate(action);
-            } break;
-            case "ارزیابی\u200Cها": {
-                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
-                navController.navigate(action);
-            } break;
-            case "مدارک": {
-                NavDirections action = NavigationMainDirections.actionGlobalDocumentsFragment();
-                navController.navigate(action);
-            } break;
-            case "دانلودها": {
-                NavDirections action = NavigationMainDirections.actionGlobalDownloadsFragment();
-                navController.navigate(action);
-            } break;
+            case "داشبورد":
+                navigatoon.navigateToDashboardFragment();
+                break;
+            case "مراکز درمانی":
+                navigatoon.navigateToCentersFragment();
+                break;
+            case "پرونده\u200Cها":
+                navigatoon.navigateToCasesFragment();
+                break;
+            case "جلسات":
+                navigatoon.navigateToSessionsFragment();
+                break;
+            case "اعضاء":
+                navigatoon.navigateToUsersFragment();
+                break;
+            case "نمونه\u200Cها":
+                navigatoon.navigateToSamplesFragment(null, null);
+                break;
+            case "نمونه\u200Cهای گروهی":
+                navigatoon.navigateToBulkSamplesFragment();
+                break;
+            case "ارزیابی\u200Cها":
+                navigatoon.navigateToScalesFragment();
+                break;
+            case "مدارک":
+                navigatoon.navigateToDocumentsFragment();
+                break;
+            case "دانلودها":
+                navigatoon.navigateToDownloadsFragment();
+                break;
         }
 
         binding.getRoot().closeDrawer(GravityCompat.START);
@@ -444,8 +427,7 @@ public class MainActivity extends AppCompatActivity {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
-                        navController.navigate(action);
+                        navigatoon.navigateToDashboardFragment();
                     });
                 }
 
@@ -475,8 +457,7 @@ public class MainActivity extends AppCompatActivity {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
-                        navController.navigate(action);
+                        navigatoon.navigateToDashboardFragment();
                     });
                 }
 
@@ -634,8 +615,8 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (binding.getRoot().isDrawerOpen(GravityCompat.START))
             binding.getRoot().closeDrawer(GravityCompat.START);
-        else if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment)
-            navController.navigateUp();
+        else if (navigatoon.getCurrentDestinationId() != R.id.dashboardFragment)
+            navigatoon.navigateUp();
         else
             IntentManager.finish(this);
     }

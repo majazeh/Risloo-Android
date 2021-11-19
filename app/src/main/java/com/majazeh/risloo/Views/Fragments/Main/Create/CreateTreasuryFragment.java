@@ -188,7 +188,7 @@ public class CreateTreasuryFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewTreasury));
 
-                        ((MainActivity) requireActivity()).navController.navigateUp();
+                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
                     });
                 }
             }

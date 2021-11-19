@@ -11,9 +11,7 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 
-import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Instances.Paymont;
 import com.majazeh.risloo.Utils.Managers.DateManager;
@@ -622,8 +620,7 @@ public class ReserveScheduleFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackScheduleReserved));
 
-                        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(scheduleModel);
-                        ((MainActivity) requireActivity()).navController.navigate(action);
+                        ((MainActivity) requireActivity()).navigatoon.navigateToSessionFragment(scheduleModel);
                     });
                 }
             }
