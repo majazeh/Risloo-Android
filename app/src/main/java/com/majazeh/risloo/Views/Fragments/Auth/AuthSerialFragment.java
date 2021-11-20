@@ -132,7 +132,7 @@ public class AuthSerialFragment extends Fragment {
         if (method.equals("serial")) {
             // Todo : Place Code Here
         } else if (method.equals("logout")) {
-            Auth.logout(new HashMap<>(), header, new Response() {
+            Auth.logout(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
                     if (isAdded()) {

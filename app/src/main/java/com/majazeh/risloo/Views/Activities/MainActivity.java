@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
     // Adapters
     private IndexNavAdapter indexNavAdapter;
 
+    // Objects
+    private HashMap data, header;
+
     // Vars
     private boolean userSelect = false;
 
@@ -138,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
         navigatoon = new Navigatoon(this, Objects.requireNonNull(navHostFragment));
 
         fragmont = new Fragmont(navHostFragment);
+
+        data = new HashMap<>();
+        header = new HashMap<>();
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
@@ -360,6 +366,15 @@ public class MainActivity extends AppCompatActivity {
         InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, items);
     }
 
+    private void setHashmap(String userId) {
+        if (!userId.equals(""))
+            data.put("id", userId);
+        else
+            data.remove("id");
+
+        header.put("Authorization", singleton.getAuthorization());
+    }
+
     public void responseAdapter(String item) {
         switch (item) {
             case "داشبورد":
@@ -400,13 +415,7 @@ public class MainActivity extends AppCompatActivity {
     public void userChange(String method, String userId) {
         DialogManager.showLoadingDialog(this, "");
 
-        HashMap data = new HashMap<>();
-        HashMap header = new HashMap<>();
-
-        if (!userId.equals(""))
-            data.put("id", userId);
-
-        header.put("Authorization", singleton.getAuthorization());
+        setHashmap(userId);
 
         if (method.equals("loginOtherUser")) {
             Auth.loginOtherUser(data, header, new Response() {

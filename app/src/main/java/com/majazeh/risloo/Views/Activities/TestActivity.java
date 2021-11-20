@@ -67,7 +67,7 @@ public class TestActivity extends AppCompatActivity {
     // Objects
     private Bundle extras;
     private Handler handler;
-    public HashMap data, header;
+    private HashMap data, header;
 
     // Vars
     private ArrayList<Boolean> answers;
