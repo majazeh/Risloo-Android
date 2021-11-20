@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Activities;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,8 +52,6 @@ public class SplashActivity extends AppCompatActivity {
         setData();
 
         getData();
-
-        Log.e("a", "a");
     }
 
     private void decorator() {
