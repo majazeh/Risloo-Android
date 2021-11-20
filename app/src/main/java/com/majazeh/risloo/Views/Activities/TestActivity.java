@@ -443,7 +443,7 @@ public class TestActivity extends AppCompatActivity {
                         for (int i = 0; i < items.data().size(); i++) {
                             ChainModel chainModel = (ChainModel) items.data().get(i);
 
-                            if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != items.data().size() && !chainModel.getId().equals(data.get("id"))) {
+                            if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != items.data().size() && !chainModel.getId().equals(sampleAnswers.id)) {
                                 DialogManager.dismissLoadingDialog();
 
                                 data.put("id", chainModel.getId());

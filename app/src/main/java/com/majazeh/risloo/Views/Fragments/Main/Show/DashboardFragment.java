@@ -202,25 +202,25 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    private void setDropdowns(String day, JSONObject data) {
+    private void setDropdowns(String day, JSONObject object) {
         try {
             if (day.equals("today")) {
                 schedulesTodayUrls = new ArrayList<>();
 
-                if (!data.getString("svg").equals(""))
-                    schedulesTodayUrls.add(data.getString("svg"));
+                if (!object.getString("svg").equals(""))
+                    schedulesTodayUrls.add(object.getString("svg"));
 
-                if (!data.getString("png").equals(""))
-                    schedulesTodayUrls.add(data.getString("png"));
+                if (!object.getString("png").equals(""))
+                    schedulesTodayUrls.add(object.getString("png"));
 
             } else {
                 schedulesTomorrowUrls = new ArrayList<>();
 
-                if (!data.getString("svg").equals(""))
-                    schedulesTomorrowUrls.add(data.getString("svg"));
+                if (!object.getString("svg").equals(""))
+                    schedulesTomorrowUrls.add(object.getString("svg"));
 
-                if (!data.getString("png").equals(""))
-                    schedulesTomorrowUrls.add(data.getString("png"));
+                if (!object.getString("png").equals(""))
+                    schedulesTomorrowUrls.add(object.getString("png"));
 
             }
         } catch (JSONException e) {

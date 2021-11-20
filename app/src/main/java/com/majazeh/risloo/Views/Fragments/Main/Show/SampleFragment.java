@@ -189,6 +189,7 @@ public class SampleFragment extends Fragment {
     private void setData(SampleModel model) {
         if (model.getSampleId() != null && !model.getSampleId().equals("")) {
             binding.serialTextView.setText(model.getSampleId());
+
             data.put("id", model.getSampleId());
             sampleAnswers.id = model.getSampleId();
         }
@@ -725,7 +726,7 @@ public class SampleFragment extends Fragment {
     public void sendGen(String key, String value) {
         HashMap newData = new HashMap<>();
 
-        newData.put("id", data.get("id"));
+        newData.put("id", sampleAnswers.id);
         newData.put(key, value);
 
         Sample.publicItems(newData, header, new Response() {

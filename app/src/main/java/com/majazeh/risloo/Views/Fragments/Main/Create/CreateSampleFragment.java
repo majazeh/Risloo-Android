@@ -634,11 +634,12 @@ public class CreateSampleFragment extends Fragment {
                     data.remove("members_count");
 
                 if (!caseStatus.equals("")) {
-                    data.put("case_status", SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus));
+                    String status = SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus);
+                    data.put("case_status", status);
 
-                    if (data.get("case_status").equals("group") || data.get("case_status").equals("personal"))
+                    if (status.equals("group") || status.equals("personal"))
                         data.put("problem", problem);
-                    else if (data.get("case_status").equals("exist"))
+                    else if (status.equals("exist"))
                         data.put("case_id", caseId);
 
                 } else {

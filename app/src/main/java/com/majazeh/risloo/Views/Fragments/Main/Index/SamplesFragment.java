@@ -117,7 +117,7 @@ public class SamplesFragment extends Fragment {
         });
 
         binding.getRoot().setMOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (isScrollable && !isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
+            if (!isLoading && isScrollable && !Objects.requireNonNull(v).canScrollVertically(1)) {
                 isLoading = true;
 
                 if (data.containsKey("page"))
@@ -177,7 +177,7 @@ public class SamplesFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (!isScrollable || Objects.equals(data.get("page"), 1))
+                        if (Objects.equals(data.get("page"), 1) || !isScrollable)
                             adapter.clearItems();
 
                         if (!items.data().isEmpty()) {
