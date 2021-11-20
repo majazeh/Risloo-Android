@@ -79,7 +79,7 @@ public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> {
     }
 
     private void setActive(TestChainHolder holder, ChainModel model) {
-        if (!model.getId().equals("") && model.getId().equals(((TestActivity) activity).data.get("id"))) {
+        if (!model.getId().equals("") && model.getId().equals(((TestActivity) activity).sampleAnswers.id)) {
             InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.Risloo500), R.style.danaDemiBoldTextStyle);
             InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_chevron_circle_left_solid, R.color.Risloo500, 0);
         } else if (!model.getStatus().equals("") && !model.getStatus().equals("seald") && !model.getStatus().equals("open")) {
