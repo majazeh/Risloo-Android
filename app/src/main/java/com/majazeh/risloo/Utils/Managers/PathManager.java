@@ -70,9 +70,9 @@ public class PathManager {
 
                 String fileName = fileName(context, uri);
                 if (fileName != null) {
-                    File file = new File(FileManager.readFileFromCache(context, "documents"), fileName);
+                    File file = new File(FileManager.readFileFromInternalCache(context, "documents"), fileName);
                     String path = file.getAbsolutePath();
-                    FileManager.writeUriToCache(context, uri, path);
+                    FileManager.writeUriToInternalCache(context, uri, path);
                     return path;
                 }
             }

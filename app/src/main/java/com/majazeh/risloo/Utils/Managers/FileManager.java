@@ -52,9 +52,9 @@ public class FileManager {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static File createBitmapFile(Context context, Bitmap bitmap, String fileName) {
+    public static File createBitmapFile(Activity activity, Bitmap bitmap, String name) {
         try {
-            File file = new File(context.getCacheDir(), fileName);
+            File file = new File(activity.getCacheDir(), name);
             if (!Objects.requireNonNull(file.getParentFile()).exists())
                 file.getParentFile().mkdirs();
             if (!file.exists())
@@ -77,9 +77,9 @@ public class FileManager {
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void writeObjectToCache(Context context, JSONObject jsonObject, String fileName) {
+    public static void writeObjectToInternalCache(Activity activity, JSONObject object, String name) {
         try {
-            File file = new File(context.getCacheDir(), fileName);
+            File file = new File(activity.getCacheDir(), name);
             if (!Objects.requireNonNull(file.getParentFile()).exists())
                 file.getParentFile().mkdirs();
             if (!file.exists())
@@ -87,7 +87,7 @@ public class FileManager {
 
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(jsonObject.toString());
+            oos.writeObject(object.toString());
             oos.flush();
             oos.close();
         } catch (IOException e) {
@@ -96,9 +96,9 @@ public class FileManager {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void writeArrayToCache(Context context, JSONArray jsonArray, String fileName) {
+    public static void writeArrayToInternalCache(Activity activity, JSONArray array, String name) {
         try {
-            File file = new File(context.getCacheDir(), fileName);
+            File file = new File(activity.getCacheDir(), name);
             if (!Objects.requireNonNull(file.getParentFile()).exists())
                 file.getParentFile().mkdirs();
             if (!file.exists())
@@ -106,7 +106,7 @@ public class FileManager {
 
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(jsonArray.toString());
+            oos.writeObject(array.toString());
             oos.flush();
             oos.close();
         } catch (IOException e) {
@@ -114,15 +114,145 @@ public class FileManager {
         }
     }
 
+    /*
+    ---------- Read ----------
+    */
+
+    public static Bitmap readBitmapFromInternalCache(Activity activity, String name) {
+        try {
+            File file = new File(activity.getCacheDir(), name);
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
+                return null;
+            if (!file.exists())
+                return null;
+
+            FileInputStream fis = new FileInputStream(file);
+            Bitmap bitmap = BitmapFactory.decodeStream(fis);
+            fis.close();
+            return bitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static JSONObject readObjectFromInternalCache(Activity activity, String name) {
+        try {
+            File file = new File(activity.getCacheDir(), name);
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
+                return null;
+            if (!file.exists())
+                return null;
+
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            JSONObject object = new JSONObject(ois.readObject().toString());
+            ois.close();
+            return object;
+        } catch (IOException | JSONException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static JSONArray readArrayFromInternalCache(Activity activity, String name) {
+        try {
+            File file = new File(activity.getCacheDir(), name);
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
+                return null;
+            if (!file.exists())
+                return null;
+
+            FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            JSONArray array = new JSONArray(ois.readObject().toString());
+            ois.close();
+            return array;
+        } catch (IOException | JSONException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /*
+    ---------- Has ----------
+    */
+
+    public static boolean hasFileInInternalCache(Activity activity, String name) {
+        File file = new File(activity.getCacheDir(), name);
+        return file.exists();
+    }
+
+    public static boolean hasFileInExternalCache(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
+        return file.exists();
+    }
+
+    /*
+    ---------- Delete ----------
+    */
+
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void writeUriToCache(Context context, Uri uri, String fileName) {
+    public static void deleteFileFromInternalCache(Activity activity, String name) {
+        File file = new File(activity.getCacheDir(), name);
+        if (file.exists())
+            file.delete();
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void deleteFileFromExternalCache(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
+        if (file.exists())
+            file.delete();
+    }
+
+    /*
+    ---------- Folder ----------
+    */
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void deleteFolderFromInternalCache(Activity activity, String name) {
+        File file = new File(activity.getCacheDir(), name);
+        if (file.exists()) {
+            String[] children = file.list();
+            if (children != null) {
+                for (String child : children) {
+                    File subFile = new File(file, child);
+                    if (subFile.exists())
+                        subFile.delete();
+                }
+            }
+            file.delete();
+        }
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void deleteFolderFromExtenalCache(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
+        if (file.exists()) {
+            String[] children = file.list();
+            if (children != null) {
+                for (String child : children) {
+                    File subFile = new File(file, child);
+                    if (subFile.exists())
+                        subFile.delete();
+                }
+            }
+            file.delete();
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void writeUriToInternalCache(Context context, Uri uri, String name) {
         InputStream is = null;
         FileOutputStream fos = null;
         BufferedOutputStream bos = null;
 
         try {
             is = context.getContentResolver().openInputStream(uri);
-            fos = new FileOutputStream(fileName, false);
+            fos = new FileOutputStream(name, false);
             bos = new BufferedOutputStream(fos);
 
             byte[] buf = new byte[1024];
@@ -144,115 +274,14 @@ public class FileManager {
         }
     }
 
-    /*
-    ---------- Read ----------
-    */
-
-    public static JSONObject readObjectFromCache(Context context, String fileName) {
-        try {
-            File file = new File(context.getCacheDir(), fileName);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                return null;
-            if (!file.exists())
-                return null;
-
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            JSONObject jsonObject = new JSONObject(ois.readObject().toString());
-            ois.close();
-            return jsonObject;
-        } catch (IOException | JSONException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static JSONArray readArrayFromCache(Context context, String fileName) {
-        try {
-            File file = new File(context.getCacheDir(), fileName);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                return null;
-            if (!file.exists())
-                return null;
-
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            JSONArray jsonArray = new JSONArray(ois.readObject().toString());
-            ois.close();
-            return jsonArray;
-        } catch (IOException | JSONException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static Bitmap readBitmapFromCache(Context context, String fileName) {
-        try {
-            File file = new File(context.getCacheDir(), fileName);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                return null;
-            if (!file.exists())
-                return null;
-
-            FileInputStream fis = new FileInputStream(file);
-            Bitmap bitmap = BitmapFactory.decodeStream(fis);
-            fis.close();
-            return bitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static File readFileFromCache(Context context, String fileName) {
-        File file = new File(context.getCacheDir(), fileName);
+    public static File readFileFromInternalCache(Context context, String name) {
+        File file = new File(context.getCacheDir(), name);
         if (!Objects.requireNonNull(file.getParentFile()).exists())
             return null;
         if (!file.exists())
             return null;
 
         return file;
-    }
-
-    /*
-    ---------- Check ----------
-    */
-
-    public static boolean hasFileInCache(Context context, String fileName) {
-        File file = new File(context.getCacheDir(), fileName);
-        return file.exists();
-    }
-
-    public static boolean hasFileInDownloads(Activity activity, String name) {
-        File file = new File(activity.getExternalCacheDir(), name);
-        return file.exists();
-    }
-
-    /*
-    ---------- Delete ----------
-    */
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void deleteFileFromCache(Context context, String fileName) {
-        File file = new File(context.getCacheDir(), fileName);
-        if (file.exists())
-            file.delete();
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void deleteFolderFromCache(Context context, String fileName) {
-        File file = new File(context.getCacheDir(), fileName);
-        if (file.exists()) {
-            String[] children = file.list();
-            if (children != null) {
-                for (String child : children) {
-                    File subFile = new File(file, child);
-                    if (subFile.exists())
-                        subFile.delete();
-                }
-            }
-            file.delete();
-        }
     }
 
 }

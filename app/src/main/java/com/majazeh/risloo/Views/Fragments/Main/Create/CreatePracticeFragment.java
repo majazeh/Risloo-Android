@@ -217,7 +217,7 @@ public class CreatePracticeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        FileManager.deleteFolderFromCache(requireActivity(), "documents");
+        FileManager.deleteFolderFromInternalCache(requireActivity(), "documents");
     }
 
 }

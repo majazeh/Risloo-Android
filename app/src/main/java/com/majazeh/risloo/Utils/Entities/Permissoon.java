@@ -72,7 +72,7 @@ public class Permissoon {
     }
 
     public boolean showDownloads() {
-        return FileManager.hasFileInDownloads(activity, "Risloo");
+        return FileManager.hasFileInExternalCache(activity, "Risloo");
     }
 
     /*
