@@ -20,7 +20,9 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
             switch(status.getStatusCode()) {
                 case CommonStatusCodes.SUCCESS:
                     System.out.println("onReceiveSucces: " + status.getStatusMessage());
+
                     String message = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
+                    String code = message.substring(5, 11);
 
                     // TODO : Extract the code from the message and pass to the input here
                     break;
