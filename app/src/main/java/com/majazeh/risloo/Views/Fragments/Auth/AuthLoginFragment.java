@@ -86,7 +86,9 @@ public class AuthLoginFragment extends Fragment {
             if (binding.mobileEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
-                ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                    ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());

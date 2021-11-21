@@ -89,7 +89,9 @@ public class AuthSerialFragment extends Fragment {
             if (binding.serialEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
-                ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                    ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+
                 doWork("serial");
             }
         }).widget(binding.buttonTextView.getRoot());

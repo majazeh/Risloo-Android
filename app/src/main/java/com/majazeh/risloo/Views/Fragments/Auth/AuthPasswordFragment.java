@@ -145,7 +145,9 @@ public class AuthPasswordFragment extends Fragment {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
-                ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                    ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());

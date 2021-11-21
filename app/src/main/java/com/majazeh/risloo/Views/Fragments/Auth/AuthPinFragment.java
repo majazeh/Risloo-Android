@@ -1,6 +1,10 @@
 package com.majazeh.risloo.Views.Fragments.Auth;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextPaint;
@@ -17,6 +21,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.auth.api.phone.SmsRetriever;
 import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.Task;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
@@ -37,6 +43,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AuthPinFragment extends Fragment {
 
@@ -126,8 +134,8 @@ public class AuthPinFragment extends Fragment {
             if (binding.pinEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
-                countDownTimer.cancel();
-                ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                    ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
 
                 doWork("code");
             }
@@ -196,29 +204,6 @@ public class AuthPinFragment extends Fragment {
         }
     }
 
-    private void startSmsRetriver() {
-        SmsRetrieverClient client = SmsRetriever.getClient(requireActivity());
-        Task<Void> task = client.startSmsRetriever();
-
-        task.addOnSuccessListener(aVoid -> {
-            // Note : Successfully started retriever, expect broadcast intent
-        });
-
-        task.addOnFailureListener(e -> {
-            // Note : Failed to start retriever, inspect Exception for more details
-        });
-    }
-
-    public void autoSmsVerificate(String code) {
-        pin = code;
-        binding.pinEditText.getRoot().setText(pin);
-
-        countDownTimer.cancel();
-        ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
-
-        doWork("code");
-    }
-
     private void setHashmap(String method) {
         if (method.equals("code")) {
             data.put("code", pin);
@@ -229,6 +214,8 @@ public class AuthPinFragment extends Fragment {
 
     private void doWork(String method) {
         if (method.equals("code")) {
+            countDownTimer.cancel();
+
             DialogManager.showLoadingDialog(requireActivity(), "");
 
             setHashmap(method);
@@ -305,6 +292,70 @@ public class AuthPinFragment extends Fragment {
 
             showTimer(true);
         }
+    }
+
+    private void startSmsRetriver() {
+        SmsRetrieverClient client = SmsRetriever.getClient(requireActivity());
+        Task<Void> task = client.startSmsRetriever();
+
+        task.addOnSuccessListener(aVoid -> {
+            // Note : Successfully started retriever, expect broadcast intent
+        });
+
+        task.addOnFailureListener(e -> {
+            // Note : Failed to start retriever, inspect Exception for more details
+        });
+    }
+
+    private void autoSmsVerificate(String code) {
+        pin = code;
+        binding.pinEditText.getRoot().setText(pin);
+
+        if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+            ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+
+        doWork("code");
+    }
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (SmsRetriever.SMS_RETRIEVED_ACTION.equals(intent.getAction())) {
+                Bundle extras = intent.getExtras();
+                Status status = (Status) extras.get(SmsRetriever.EXTRA_STATUS);
+
+                switch(status.getStatusCode()) {
+                    case CommonStatusCodes.SUCCESS:
+                        String message = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
+
+                        Pattern pattern = Pattern.compile("\\d+");
+                        Matcher matcher = pattern.matcher(message);
+
+                        if (matcher.find()) {
+                            String code = matcher.group(0);
+                            autoSmsVerificate(code);
+                        }
+
+                        break;
+                    default:
+                        SnackManager.showDefaultSnack(requireActivity(), "onReceiveFail: " + status.getStatusMessage());
+                        break;
+                }
+            }
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        requireActivity().registerReceiver(broadcastReceiver, new IntentFilter("com.google.android.gms.auth.api.phone.SMS_RETRIEVED"));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        requireActivity().unregisterReceiver(broadcastReceiver);
     }
 
     @Override
