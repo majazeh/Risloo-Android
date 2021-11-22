@@ -18,7 +18,6 @@ public abstract class onFailureException {
             case "java.net.UnknownHostException":
             case "java.net.SocketTimeoutException":
                 onClient("اینترنت خود را چک کنید!");
-                callback.onFailure("اینترنت خود را چک کنید!");
                 break;
             case "java.io.IOException":
             case "JSONException":

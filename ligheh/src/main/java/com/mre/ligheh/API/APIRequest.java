@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -20,6 +21,7 @@ public class APIRequest extends APIEvents {
     public static Class ExternalAPIEvents;
     public static String baseUrl = "https://bapi.risloo.ir/api/";
     public static int code;
+    public static OkHttpClient client;
 
     public APIRequest(Response callback, Class aClass, OkHttpClient client, Request request) {
         super(callback, aClass, client, request);
@@ -44,7 +46,6 @@ public class APIRequest extends APIEvents {
 
         builder.headers(headers.headersBody());
         request = builder.build();
-        OkHttpClient client;
         OkHttpClient.Builder builder1 = new OkHttpClient.Builder();
         builder1.connectTimeout(30, TimeUnit.SECONDS);
         builder1.readTimeout(30, TimeUnit.SECONDS);

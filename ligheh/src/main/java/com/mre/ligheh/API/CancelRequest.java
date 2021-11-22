@@ -1,2 +1,5 @@
-package com.mre.ligheh.API;public interface CancelRequest {
+package com.mre.ligheh.API;
+
+public interface CancelRequest {
+    void onCanceled();
 }

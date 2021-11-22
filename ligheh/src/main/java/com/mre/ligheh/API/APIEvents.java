@@ -41,5 +41,13 @@ public abstract class APIEvents {
         });
     }
 
+    public static void cancel(CancelRequest cancelRequest){
+        for (Call call : APIRequest.client.dispatcher().runningCalls()) {
+            System.out.println("cancle requests");
+            call.cancel();
+        }
+            cancelRequest.onCanceled();
+    }
+
     public abstract void onOK(Response callback, Object response, Class aClass);
 }
