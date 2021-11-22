@@ -68,33 +68,45 @@ public class SheetManager {
     */
 
     public static void dismissAuthBottomSheet() {
-        if (authBottomSheet != null && authBottomSheet.isVisible())
+        if (authBottomSheet != null) {
             authBottomSheet.dismiss();
+            authBottomSheet = null;
+        }
     }
 
     public static void dismissBulkSampleBottomSheet() {
-        if (bulkSampleBottomSheet != null && bulkSampleBottomSheet.isVisible())
+        if (bulkSampleBottomSheet != null) {
             bulkSampleBottomSheet.dismiss();
+            bulkSampleBottomSheet = null;
+        }
     }
 
     public static void dismissDateBottomSheet() {
-        if (dateBottomSheet != null && dateBottomSheet.isVisible())
+        if (dateBottomSheet != null) {
             dateBottomSheet.dismiss();
+            dateBottomSheet = null;
+        }
     }
 
     public static void dismissImageBottomSheet() {
-        if (imageBottomSheet != null && imageBottomSheet.isVisible())
+        if (imageBottomSheet != null) {
             imageBottomSheet.dismiss();
+            imageBottomSheet = null;
+        }
     }
 
     public static void dismissLogoutBottomSheet() {
-        if (logoutBottomSheet != null && logoutBottomSheet.isVisible())
+        if (logoutBottomSheet != null) {
             logoutBottomSheet.dismiss();
+            logoutBottomSheet = null;
+        }
     }
 
     public static void dismissTimeBottomSheet() {
-        if (timeBottomSheet != null && timeBottomSheet.isVisible())
+        if (timeBottomSheet != null) {
             timeBottomSheet.dismiss();
+            timeBottomSheet = null;
+        }
     }
 
     /*

@@ -22,6 +22,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Config.ExtendEvent;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.BreadCrumb;
 import com.majazeh.risloo.Utils.Entities.Decoraton;
@@ -210,6 +211,8 @@ public class MainActivity extends AppCompatActivity {
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
 
             indexNavAdapter.setFocused(faBreadCump.toString());
+
+            ExtendEvent.cancelRequest();
         });
 
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {

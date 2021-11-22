@@ -324,7 +324,7 @@ public class AuthPinFragment extends Fragment {
             if (SmsRetriever.SMS_RETRIEVED_ACTION.equals(intent.getAction())) {
                 Bundle extras = intent.getExtras();
                 Status status = (Status) extras.get(SmsRetriever.EXTRA_STATUS);
-                System.out.println(status.getStatusCode());
+
                 switch(status.getStatusCode()) {
                     case CommonStatusCodes.SUCCESS:
                         String message = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);

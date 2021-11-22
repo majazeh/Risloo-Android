@@ -1,5 +1,7 @@
 package com.majazeh.risloo.Utils.Config;
 
+import com.majazeh.risloo.Utils.Managers.DialogManager;
+
 import com.mre.ligheh.API.APIEvents;
 import com.mre.ligheh.API.APIRequest;
 import com.mre.ligheh.API.Response;
@@ -39,6 +41,10 @@ public class ExtendEvent extends APIEvents {
         } catch (IOException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void cancelRequest() {
+        cancel(() -> ExtendException.activity.runOnUiThread(DialogManager::dismissLoadingDialog));
     }
 
 }

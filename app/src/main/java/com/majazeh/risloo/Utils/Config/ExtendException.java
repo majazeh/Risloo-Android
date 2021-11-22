@@ -15,7 +15,7 @@ public class ExtendException extends onFailureException {
     public static Activity activity;
 
     public ExtendException(Response callback, Object object) {
-        super(callback,object);
+        super(callback, object);
     }
 
     @Override

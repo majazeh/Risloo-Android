@@ -90,33 +90,45 @@ public class DialogManager {
     */
 
     public static void dismissLoadingDialog() {
-        if (loadingDialog != null && loadingDialog.isVisible())
+        if (loadingDialog != null) {
             loadingDialog.dismiss();
+            loadingDialog = null;
+        }
     }
 
     public static void dismissPaymentDialog() {
-        if (paymentDialog != null && paymentDialog.isVisible())
+        if (paymentDialog != null) {
             paymentDialog.dismiss();
+            paymentDialog = null;
+        }
     }
 
     public static void dismissScheduleFilterDialog() {
-        if (scheduleFilterDialog != null && scheduleFilterDialog.isVisible())
+        if (scheduleFilterDialog != null) {
             scheduleFilterDialog.dismiss();
+            scheduleFilterDialog = null;
+        }
     }
 
     public static void dismissSearchableDialog() {
-        if (searchableDialog != null && searchableDialog.isVisible())
+        if (searchableDialog != null) {
             searchableDialog.dismiss();
+            searchableDialog = null;
+        }
     }
 
     public static void dismissSelectedDialog() {
-        if (selectedDialog != null && selectedDialog.isVisible())
+        if (selectedDialog != null) {
             selectedDialog.dismiss();
+            selectedDialog = null;
+        }
     }
 
     public static void dismissVersionDialog() {
-        if (versionDialog != null && versionDialog.isVisible())
+        if (versionDialog != null) {
             versionDialog.dismiss();
+            versionDialog = null;
+        }
     }
 
 
