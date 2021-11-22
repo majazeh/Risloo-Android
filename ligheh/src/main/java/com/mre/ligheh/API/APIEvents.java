@@ -12,12 +12,10 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public abstract class APIEvents {
-    public APIEvents(Response callback, Class aClass, OkHttpClient client, Request request) {
 
-    }
+    public APIEvents(Response callback, Class aClass, OkHttpClient client, Request request) {}
 
-    public APIEvents() {
-    }
+    public APIEvents() {}
 
     public void request(Response callback, Class aClass, OkHttpClient client, Request request) {
         client.newCall(request).enqueue(new Callback() {
@@ -42,12 +40,15 @@ public abstract class APIEvents {
     }
 
     public static void cancel(CancelRequest cancelRequest){
-        for (Call call : APIRequest.client.dispatcher().runningCalls()) {
-            System.out.println("cancle requests");
-            call.cancel();
-        }
+        if (APIRequest.client != null) {
+            for (Call call : APIRequest.client.dispatcher().runningCalls()) {
+                System.out.println("cancle requests");
+                call.cancel();
+            }
             cancelRequest.onCanceled();
+        }
     }
 
     public abstract void onOK(Response callback, Object response, Class aClass);
+
 }

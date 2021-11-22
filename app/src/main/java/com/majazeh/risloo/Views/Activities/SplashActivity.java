@@ -93,9 +93,12 @@ public class SplashActivity extends AppCompatActivity {
                         if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
                             binding.explodeProgressBar.setVisibility(View.GONE);
 
-                        if (model.getAndroid() != null && model.getAndroid().getForce() != null) {
+                        if (model.getAndroid() != null) {
                             if (StringManager.compareVersionNames(PackageManager.versionNameWithoutSuffix(SplashActivity.this), model.getAndroid().getForce()) == 1) {
                                 DialogManager.showVersionDialog(SplashActivity.this, "force", model);
+                                return;
+                            } else if (StringManager.compareVersionNames(model.getAndroid().getForce(), model.getAndroid().getCurrent()) == 1) {
+                                DialogManager.showVersionDialog(SplashActivity.this, "current", model);
                                 return;
                             }
                         }

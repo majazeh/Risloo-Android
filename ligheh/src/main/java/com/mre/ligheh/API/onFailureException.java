@@ -25,8 +25,6 @@ public abstract class onFailureException {
             case "InstantiationException":
             case "NoSuchMethodException":
             case "InvocationTargetException":
-                onClient((String) object);
-                callback.onFailure((String) object);
                 statusCode = 100;
                 break;
             case "java.lang.String":
