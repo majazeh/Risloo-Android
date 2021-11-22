@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -72,7 +71,7 @@ public class Permissoon {
     }
 
     public boolean showDownloads() {
-        return FileManager.hasFileInExternalCache(activity, "Risloo");
+        return false;
     }
 
     /*
