@@ -1,15 +1,15 @@
 package com.majazeh.risloo.Utils.Config;
 
+import android.app.Application;
 import android.content.res.Configuration;
 
 import androidx.annotation.NonNull;
-import androidx.multidex.MultiDexApplication;
 
 import com.majazeh.risloo.BuildConfig;
 import com.mre.ligheh.API.APIRequest;
 import com.mre.ligheh.API.Exceptioner;
 
-public class App extends MultiDexApplication {
+public class App extends Application {
 
     @Override
     public void onCreate() {

@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application' // Android Application
-    id 'androidx.navigation.safeargs' // Navigation SafeArgs
     id 'com.google.gms.google-services' // Google Services
     id 'com.google.firebase.crashlytics' // Firebase Crashlytics
+    id 'androidx.navigation.safeargs' // Navigation SafeArgs
 }
 
 android {
