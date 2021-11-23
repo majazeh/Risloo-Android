@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application' // Android Application
     id 'com.google.gms.google-services' // Google Services
-//    id 'com.google.firebase.crashlytics' // Firebase Crashlytics
+    id 'com.google.firebase.crashlytics' // Firebase Crashlytics
     id 'androidx.navigation.safeargs' // Navigation SafeArgs
 }
 
@@ -111,7 +111,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:29.0.0') // Firebase Bom
 
-//    implementation 'com.google.firebase:firebase-crashlytics' // Crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics' // Crashlytics
     implementation 'com.google.firebase:firebase-analytics' // Analytics
 
     /*
