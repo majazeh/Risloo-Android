@@ -57,7 +57,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Views.Activities.MainActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:exported="true">
 
             <!-- Codes For Payment - Please Place It Inside Activity That Will Be Directed To -->
             <intent-filter>
