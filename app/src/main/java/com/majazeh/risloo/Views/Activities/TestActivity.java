@@ -100,17 +100,13 @@ public class TestActivity extends AppCompatActivity {
             decoraton.showSystemUI(false, true);
             decoraton.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.CoolGray50));
         } else {
-            if (BuildConfig.BUILD_TYPE.equals("debug")) {
-                decoraton.showSystemUI(false, true);
-                decoraton.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.CoolGray50));
+            decoraton.showSystemUI(true, true);
+            decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
 
+            if (BuildConfig.BUILD_TYPE.equals("debug"))
                 binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
-            } else {
-                decoraton.showSystemUI(true, true);
-                decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
-
+            else
                 binding.debugTextView.getRoot().setVisibility(View.GONE);
-            }
         }
     }
 

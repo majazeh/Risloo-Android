@@ -116,17 +116,13 @@ public class MainActivity extends AppCompatActivity {
     private void decorator() {
         Decoraton decoraton = new Decoraton(this);
 
-        if (BuildConfig.BUILD_TYPE.equals("debug")) {
-            decoraton.showSystemUI(false, true);
-            decoraton.setSystemUIColor(getResources().getColor(R.color.Red600), getResources().getColor(R.color.CoolGray50));
+        decoraton.showSystemUI(true, true);
+        decoraton.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
 
+        if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
-        } else {
-            decoraton.showSystemUI(true, true);
-            decoraton.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
-
+        else
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.GONE);
-        }
     }
 
     private void initializer() {
@@ -217,18 +213,16 @@ public class MainActivity extends AppCompatActivity {
 
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             if (verticalOffset == 0 && binding.contentIncludeLayout.seperateView.getVisibility() == View.VISIBLE) {
-                if (!BuildConfig.BUILD_TYPE.equals("debug"))
-                    AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.White));
-
+                AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.White));
                 AnimateManager.animateAppBarColor(binding.contentIncludeLayout.headerAppBarLayout, 300, getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.White));
+
                 binding.contentIncludeLayout.seperateView.setVisibility(View.GONE);
             }
 
             if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange() && binding.contentIncludeLayout.seperateView.getVisibility() == View.GONE) {
-                if (!BuildConfig.BUILD_TYPE.equals("debug"))
-                    AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
-
+                AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
                 AnimateManager.animateAppBarColor(binding.contentIncludeLayout.headerAppBarLayout, 300, getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
+
                 binding.contentIncludeLayout.seperateView.setVisibility(View.VISIBLE);
             }
         });

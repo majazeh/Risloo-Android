@@ -4,7 +4,7 @@
     // App Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="AppDebugNote">شما هم اکنون در نسخه آزمایشی ریسلو هستید. هیچ اطلاعاتی در این نسخه حقیقی و ماندگار نیست.</string>
+    <string name="AppDebugNote">شما هم اکنون در نسخه آزمایشی هستید.</string>
     <string name="AppDebugTag">نسخه آزمایشی</string>
 
     <string name="AppImageCrop">Crop Pic</string>
