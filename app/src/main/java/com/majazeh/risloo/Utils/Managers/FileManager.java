@@ -24,14 +24,18 @@ import java.util.Objects;
 public class FileManager {
 
     /*
-    ---------- Get ----------
+    ---------- Create ----------
     */
 
-    public static File getInternalCachePath(Activity activity, String name) {
+    public static File createInternalCachePath(Activity activity, String name) {
         return new File(activity.getCacheDir(), name);
     }
 
-    public static File getExternalCachePath(Activity activity, String name) {
+    public static File createInternalFilesPath(Activity activity, String name) {
+        return new File(activity.getFilesDir(), name);
+    }
+
+    public static File createExternalCachePath(Activity activity, String name) {
         return new File(activity.getExternalCacheDir(), name);
     }
 
@@ -41,6 +45,11 @@ public class FileManager {
 
     public static boolean hasInternalCachePath(Activity activity, String name) {
         File file = new File(activity.getCacheDir(), name);
+        return file.exists();
+    }
+
+    public static boolean hasInternalFilesPath(Activity activity, String name) {
+        File file = new File(activity.getFilesDir(), name);
         return file.exists();
     }
 
@@ -61,11 +70,110 @@ public class FileManager {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void deleteInternalFilesPath(Activity activity, String name) {
+        File file = new File(activity.getFilesDir(), name);
+        if (file.exists())
+            file.delete();
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void deleteExternalCachePath(Activity activity, String name) {
         File file = new File(activity.getExternalCacheDir(), name);
         if (file.exists())
             file.delete();
     }
+
+    /*
+    ---------- Clear ----------
+    */
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void clearInternalCachePath(Activity activity, String name) {
+        File file = new File(activity.getCacheDir(), name);
+        if (file.exists()) {
+            String[] children = file.list();
+            if (children != null) {
+                for (String child : children) {
+                    File sub = new File(file, child);
+                    if (sub.exists())
+                        sub.delete();
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void clearInternalFilesPath(Activity activity, String name) {
+        File file = new File(activity.getFilesDir(), name);
+        if (file.exists()) {
+            String[] children = file.list();
+            if (children != null) {
+                for (String child : children) {
+                    File sub = new File(file, child);
+                    if (sub.exists())
+                        sub.delete();
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void clearExternalCachePath(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
+        if (file.exists()) {
+            String[] children = file.list();
+            if (children != null) {
+                for (String child : children) {
+                    File sub = new File(file, child);
+                    if (sub.exists())
+                        sub.delete();
+                }
+            }
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*
     ---------- Write ----------
@@ -191,24 +299,6 @@ public class FileManager {
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void deleteInternalCacheFolder(Activity activity, String name) {
