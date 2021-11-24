@@ -39,6 +39,10 @@ public class FileManager {
         return new File(activity.getExternalCacheDir(), name);
     }
 
+    public static File createExternalFilesPath(Activity activity, String type, String name) {
+        return new File(activity.getExternalFilesDir(type), name);
+    }
+
     /*
     ---------- Has ----------
     */
@@ -55,6 +59,11 @@ public class FileManager {
 
     public static boolean hasExternalCachePath(Activity activity, String name) {
         File file = new File(activity.getExternalCacheDir(), name);
+        return file.exists();
+    }
+
+    public static boolean hasExternalFilesPath(Activity activity, String type, String name) {
+        File file = new File(activity.getExternalFilesDir(type), name);
         return file.exists();
     }
 
@@ -79,6 +88,13 @@ public class FileManager {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void deleteExternalCachePath(Activity activity, String name) {
         File file = new File(activity.getExternalCacheDir(), name);
+        if (file.exists())
+            file.delete();
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void deleteExternalFilesPath(Activity activity, String type, String name) {
+        File file = new File(activity.getExternalFilesDir(type), name);
         if (file.exists())
             file.delete();
     }
@@ -120,6 +136,21 @@ public class FileManager {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void clearExternalCachePath(Activity activity, String name) {
         File file = new File(activity.getExternalCacheDir(), name);
+        if (file.exists()) {
+            String[] children = file.list();
+            if (children != null) {
+                for (String child : children) {
+                    File sub = new File(file, child);
+                    if (sub.exists())
+                        sub.delete();
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void clearExternalFilesPath(Activity activity, String type, String name) {
+        File file = new File(activity.getExternalFilesDir(type), name);
         if (file.exists()) {
             String[] children = file.list();
             if (children != null) {
