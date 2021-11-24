@@ -27,20 +27,44 @@ public class FileManager {
     ---------- Create ----------
     */
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static File createInternalCachePath(Activity activity, String name) {
-        return new File(activity.getCacheDir(), name);
+        File file = new File(activity.getCacheDir(), name);
+
+        if (!file.exists())
+            file.mkdirs();
+
+        return file;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static File createInternalFilesPath(Activity activity, String name) {
-        return new File(activity.getFilesDir(), name);
+        File file = new File(activity.getFilesDir(), name);
+
+        if (!file.exists())
+            file.mkdirs();
+
+        return file;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static File createExternalCachePath(Activity activity, String name) {
-        return new File(activity.getExternalCacheDir(), name);
+        File file = new File(activity.getExternalCacheDir(), name);
+
+        if (!file.exists())
+            file.mkdirs();
+
+        return file;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static File createExternalFilesPath(Activity activity, String type, String name) {
-        return new File(activity.getExternalFilesDir(type), name);
+        File file = new File(activity.getExternalFilesDir(type), name);
+
+        if (!file.exists())
+            file.mkdirs();
+
+        return file;
     }
 
     /*
@@ -161,6 +185,78 @@ public class FileManager {
                 }
             }
         }
+    }
+
+    /*
+    ---------- List ----------
+    */
+
+    public static String[] listInternalCachePath(Activity activity, String name) {
+        File file = new File(activity.getCacheDir(), name);
+        if (file.exists())
+            return file.list();
+        else
+            return null;
+    }
+
+    public static String[] listInternalFilesPath(Activity activity, String name) {
+        File file = new File(activity.getFilesDir(), name);
+        if (file.exists())
+            return file.list();
+        else
+            return null;
+    }
+
+    public static String[] listExternalCachePath(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
+        if (file.exists())
+            return file.list();
+        else
+            return null;
+    }
+
+    public static String[] listExternalFilesPath(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
+        if (file.exists())
+            return file.list();
+        else
+            return null;
+    }
+
+    /*
+    ---------- ListFiles ----------
+    */
+
+    public static File[] listFilesInternalCachePath(Activity activity, String name) {
+        File file = new File(activity.getCacheDir(), name);
+        if (file.exists())
+            return file.listFiles();
+        else
+            return null;
+    }
+
+    public static File[] listFilesInternalFilesPath(Activity activity, String name) {
+        File file = new File(activity.getFilesDir(), name);
+        if (file.exists())
+            return file.listFiles();
+        else
+            return null;
+    }
+
+    public static File[] listFilesExternalCachePath(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
+        if (file.exists())
+            return file.listFiles();
+        else
+            return null;
+    }
+
+    public static File[] listFilesExternalFilesPath(Activity activity, String type, String name) {
+        File file = new File(activity.getExternalFilesDir(type), name);
+        if (file.exists())
+            return file.listFiles();
+        else
+            return null;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -326,40 +422,6 @@ public class FileManager {
         } catch (IOException | JSONException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void deleteInternalCacheFolder(Activity activity, String name) {
-        File file = new File(activity.getCacheDir(), name);
-        if (file.exists()) {
-            String[] children = file.list();
-            if (children != null) {
-                for (String child : children) {
-                    File subFile = new File(file, child);
-                    if (subFile.exists())
-                        subFile.delete();
-                }
-            }
-            file.delete();
-        }
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void deleteExtenalCacheFolder(Activity activity, String name) {
-        File file = new File(activity.getExternalCacheDir(), name);
-        if (file.exists()) {
-            String[] children = file.list();
-            if (children != null) {
-                for (String child : children) {
-                    File subFile = new File(file, child);
-                    if (subFile.exists())
-                        subFile.delete();
-                }
-            }
-            file.delete();
         }
     }
 
