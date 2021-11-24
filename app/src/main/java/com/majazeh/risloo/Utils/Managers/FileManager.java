@@ -24,34 +24,6 @@ import java.util.Objects;
 public class FileManager {
 
     /*
-    ---------- Create ----------
-    */
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static File createExternalFile(Activity activity, String name) {
-        File file = new File(activity.getExternalCacheDir(), name);
-
-        if (!file.exists())
-            file.mkdirs();
-
-        return file;
-    }
-
-    public static File createImageFile(Activity activity) {
-        try {
-            File directory = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-            String prefix = "JPEG_" + System.currentTimeMillis() + "_";
-            String suffix = ".jpg";
-
-            return File.createTempFile(prefix, suffix, directory);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    /*
     ---------- Write ----------
     */
 
@@ -243,6 +215,52 @@ public class FileManager {
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static File createExternalFile(Activity activity, String name) {
+        File file = new File(activity.getExternalCacheDir(), name);
+
+        if (!file.exists())
+            file.mkdirs();
+
+        return file;
+    }
+
+    public static File createImageFile(Activity activity) {
+        try {
+            File directory = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+            String prefix = "JPEG_" + System.currentTimeMillis() + "_";
+            String suffix = ".jpg";
+
+            return File.createTempFile(prefix, suffix, directory);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void writeUriToInternalCache(Context context, Uri uri, String name) {
