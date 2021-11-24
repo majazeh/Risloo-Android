@@ -230,6 +230,16 @@ public class IntentManager {
         activity.startActivity(intent);
     }
 
+    public static void risloo(Context context) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage("com.majazeh.risloo");
+
+        if (intent != null) {
+            context.startActivity(intent);
+        } else {
+            googlePlay(context);
+        }
+    }
+
     /*
     ---------- Social ----------
     */
@@ -237,10 +247,10 @@ public class IntentManager {
     public static void googlePlay(Context context) {
         Intent intent;
         try {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getPackageName()));
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + "com.majazeh.risloo"));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         } catch (ActivityNotFoundException e) {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName()));
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + "com.majazeh.risloo"));
         }
         context.startActivity(intent);
     }

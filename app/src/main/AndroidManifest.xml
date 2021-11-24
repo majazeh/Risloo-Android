@@ -10,6 +10,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- Codes For Needed Packages -->
+    <queries>
+        <package android:name="com.majazeh.risloo" />
+    </queries>
+
     <application
         android:name=".Utils.Config.App"
         android:allowBackup="false"
