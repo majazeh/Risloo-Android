@@ -10,12 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexDownloadAdapter;
 import com.majazeh.risloo.databinding.FragmentDownloadsBinding;
-
-import java.io.File;
 
 public class DownloadsFragment extends Fragment {
 
@@ -46,10 +43,6 @@ public class DownloadsFragment extends Fragment {
     }
 
     private void setData() {
-        File file = FileManager.createExternalFile(requireActivity(), "Risloo");
-
-        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-
         // TODO : Place Code When Needed
     }
 

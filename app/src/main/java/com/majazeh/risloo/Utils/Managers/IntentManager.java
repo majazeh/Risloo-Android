@@ -205,10 +205,10 @@ public class IntentManager {
 
         if (fullName.startsWith("X1")) {
             savePath = File.separator + "Risloo" + File.separator + subName + File.separator + fullName;
-            FileManager.createExternalFile(activity, File.separator + "Risloo" + File.separator + subName);
+            FileManager.createExternalCachePath(activity, File.separator + "Risloo" + File.separator + subName);
         } else {
             savePath = File.separator + "Risloo" + File.separator + fullName;
-            FileManager.createExternalFile(activity, File.separator + "Risloo");
+            FileManager.createExternalCachePath(activity, File.separator + "Risloo");
         }
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
