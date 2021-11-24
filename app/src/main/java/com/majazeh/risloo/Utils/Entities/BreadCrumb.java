@@ -35,6 +35,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Index.SamplesFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BillFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CaseFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Main.Show.CenterAccountingFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CenterFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.MeFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.ReferenceFragmentArgs;
@@ -305,7 +306,17 @@ public class BreadCrumb {
             case R.id.centerFragment:
                 setModels(CenterFragmentArgs.fromBundle(arguments).getTypeModel());
                 return center();
-            case R.id.referenceFragment: {
+            case R.id.centerAccountingFragment: {
+                TypeModel typeModel = CenterAccountingFragmentArgs.fromBundle(arguments).getTypeModel();
+
+                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+                    roomType = "counseling_center";
+                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+                    roomType = "personal_clinic";
+
+                setModels(typeModel);
+                return centerAccounting();
+            } case R.id.referenceFragment: {
                 UserModel userModel = (UserModel) ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
 
                 if (((MainActivity) activity).singleton.getUserModel().getId().equals(userModel.getUserId())) {
@@ -467,6 +478,13 @@ public class BreadCrumb {
                 break;
             case R.id.centerFragment:
                 ((MainActivity) activity).navigatoon.navigateToCenterFragment(centerModel);
+                break;
+            case R.id.centerAccountingFragment:
+                if (roomType.equals("counseling_center"))
+                    ((MainActivity) activity).navigatoon.navigateToCenterAccountingFragment(centerModel);
+                else
+                    ((MainActivity) activity).navigatoon.navigateToCenterAccountingFragment(roomModel);
+
                 break;
             case R.id.referenceFragment:
                 if (referenceType.equals("user"))
@@ -1655,6 +1673,32 @@ public class BreadCrumb {
     private ArrayList<Integer> centerIds() {
         ArrayList<Integer> list = centersIds();
         list.add(R.id.centerFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> centerAccounting() {
+        ArrayList<String> list;
+
+        if (roomType.equals("counseling_center"))
+            list = center();
+        else
+            list = room();
+
+        list.add(activity.getResources().getString(R.string.AppAccounting));
+
+        destinationIds = centerAccountingIds();
+        return list;
+    }
+    private ArrayList<Integer> centerAccountingIds() {
+        ArrayList<Integer> list;
+
+        if (roomType.equals("counseling_center"))
+            list = centerIds();
+        else
+            list = roomIds();
+
+        list.add(R.id.centerAccountingFragment);
 
         return list;
     }

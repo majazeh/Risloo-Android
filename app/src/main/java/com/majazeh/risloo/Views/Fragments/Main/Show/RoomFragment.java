@@ -176,7 +176,13 @@ public class RoomFragment extends Fragment {
                         ((MainActivity) requireActivity()).navigatoon.navigateToRoomTagsFragment(roomModel);
                     } break;
                 case "حسابداری": {
-                    // TODO : Place Code Here
+                    if (!type.equals("room")) {
+                        if (centerModel != null)
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
+                        else
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(roomModel.getRoomCenter());
+
+                    }
                 } break;
             }
         }).widget(binding.menuSpinner.selectImageView);
@@ -260,7 +266,13 @@ public class RoomFragment extends Fragment {
                                 ((MainActivity) requireActivity()).navigatoon.navigateToRoomTagsFragment(roomModel);
                             } break;
                         case "حسابداری": {
-                            // TODO : Place Code Here
+                            if (!type.equals("room")) {
+                                if (centerModel != null)
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
+                                else
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(roomModel.getRoomCenter());
+
+                            }
                         } break;
                     }
 
@@ -554,7 +566,8 @@ public class RoomFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownTags(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
 
-//        items.add(requireActivity().getResources().getString(R.string.RoomFragmentAccounting));
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownAccounting(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentAccounting));
 
         items.add("");
 

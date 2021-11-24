@@ -31,6 +31,7 @@
     <string name="AppReserve">رزرو</string>
     <string name="AppFilters">فیلترها:</string>
 
+    <string name="AppAccounting">حسابداری</string>
     <string name="AppPlatforms">محل‌های برگزاری جلسات</string>
     <string name="AppRooms">اتاق‌های درمان</string>
     <string name="AppSchedules">برنامه‌های درمانی</string>
@@ -917,6 +918,14 @@
     <string name="CenterFragmentSessionPlatforms">محل برگزاری جلسات</string>
     <string name="CenterFragmentRooms">اتاق‌های درمان</string>
     <string name="CenterFragmentAccounting">حسابداری</string>
+
+
+    ---------- // CenterAccountingFragment
+
+    <string name="CenterAccountingFragmentTitle">حسابداری مرکز درمانی</string>
+
+    <string name="CenterAccountingFragmentCommissions">سهم‌بندی</string>
+    <string name="CenterAccountingFragmentBalances">تراز مالی</string>
 
 
     ---------- // DashboardFragment

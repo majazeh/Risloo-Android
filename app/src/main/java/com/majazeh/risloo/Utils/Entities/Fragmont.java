@@ -62,6 +62,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Show.AccountingFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BillFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CaseFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Show.CenterAccountingFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CenterFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.DashboardFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.MeFragment;
@@ -305,6 +306,9 @@ public class Fragmont {
             return fragment;
 
         else if (fragment instanceof CenterFragment)
+            return fragment;
+
+        else if (fragment instanceof CenterAccountingFragment)
             return fragment;
 
         else if (fragment instanceof DashboardFragment)

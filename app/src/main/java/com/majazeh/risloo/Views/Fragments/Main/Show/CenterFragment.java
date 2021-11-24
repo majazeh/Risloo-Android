@@ -126,7 +126,7 @@ public class CenterFragment extends Fragment {
                     ((MainActivity) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
                     break;
                 case "حسابداری":
-                    // TODO : Place Code Here
+                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
                     break;
             }
         }).widget(binding.menuSpinner.selectImageView);
@@ -165,7 +165,7 @@ public class CenterFragment extends Fragment {
                             ((MainActivity) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
                             break;
                         case "حسابداری":
-                            // TODO : Place Code Here
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
                             break;
                     }
 
@@ -381,7 +381,8 @@ public class CenterFragment extends Fragment {
 //        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownRooms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
 //            items.add(requireActivity().getResources().getString(R.string.CenterFragmentRooms));
 
-//        items.add(requireActivity().getResources().getString(R.string.CenterFragmentAccounting));
+        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownAccounting(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentAccounting));
 
         items.add("");
 

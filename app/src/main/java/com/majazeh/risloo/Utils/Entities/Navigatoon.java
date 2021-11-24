@@ -349,6 +349,11 @@ public class Navigatoon {
         navController.navigate(action);
     }
 
+    public void navigateToCenterAccountingFragment(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalCenterAccountingFragment(typeModel);
+        navController.navigate(action);
+    }
+
     public void navigateToDashboardFragment() {
         NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
         navController.navigate(action);

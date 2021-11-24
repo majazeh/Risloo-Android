@@ -780,6 +780,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/centerAccountingFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CenterAccountingFragment"
+        android:label="@string/CenterAccountingFragmentTitle"
+        tools:layout="@layout/fragment_center_accounting" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/referenceFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Show.ReferenceFragment"
         android:label="@string/ReferenceFragmentTitle"
@@ -859,6 +869,10 @@
     <action
         android:id="@+id/action_global_centerFragment"
         app:destination="@id/centerFragment" />
+
+    <action
+        android:id="@+id/action_global_centerAccountingFragment"
+        app:destination="@id/centerAccountingFragment" />
 
     <action
         android:id="@+id/action_global_referenceFragment"

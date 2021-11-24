@@ -300,6 +300,13 @@ public class Permissoon {
             return position.equals("manager") || position.equals("operator");
     }
 
+    public boolean showCenterDropdownAccounting(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
     public boolean showCenterCreateRoom(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager");
@@ -347,6 +354,13 @@ public class Permissoon {
     }
 
     public boolean showRoomDropdownTags(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return position.equals("manager") || position.equals("operator");
+    }
+
+    public boolean showRoomDropdownAccounting(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else
