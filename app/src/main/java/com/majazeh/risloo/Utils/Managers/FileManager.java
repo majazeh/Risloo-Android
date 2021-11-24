@@ -51,8 +51,12 @@ public class FileManager {
         }
     }
 
+    /*
+    ---------- Write ----------
+    */
+
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static File createBitmapFile(Activity activity, Bitmap bitmap, String name) {
+    public static File writeBitmapToInternalCache(Activity activity, Bitmap bitmap, String name) {
         try {
             File file = new File(activity.getCacheDir(), name);
             if (!Objects.requireNonNull(file.getParentFile()).exists())
@@ -71,10 +75,6 @@ public class FileManager {
             return null;
         }
     }
-
-    /*
-    ---------- Write ----------
-    */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void writeObjectToInternalCache(Activity activity, JSONObject object, String name) {
