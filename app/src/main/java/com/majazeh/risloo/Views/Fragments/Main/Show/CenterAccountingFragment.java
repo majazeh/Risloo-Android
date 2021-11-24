@@ -33,12 +33,17 @@ public class CenterAccountingFragment extends Fragment {
     }
 
     private void initializer() {
+        InitManager.layoutTextColorResTintBackground(requireActivity(), binding.banksIncludeLayout.getRoot(), binding.banksIncludeLayout.selectTextView, binding.banksIncludeLayout.selectImageView, getResources().getString(R.string.CenterAccountingFragmentBanks), getResources().getColor(R.color.CoolGray500), R.drawable.ic_cash_register_light, R.color.Violet500, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_violet200);
         InitManager.layoutTextColorResTintBackground(requireActivity(), binding.commissionsIncludeLayout.getRoot(), binding.commissionsIncludeLayout.selectTextView, binding.commissionsIncludeLayout.selectImageView, getResources().getString(R.string.CenterAccountingFragmentCommissions), getResources().getColor(R.color.CoolGray500), R.drawable.ic_abacus_light, R.color.Red400, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_red200);
         InitManager.layoutTextColorResTintBackground(requireActivity(), binding.balancesIncludeLayout.getRoot(), binding.balancesIncludeLayout.selectTextView, binding.balancesIncludeLayout.selectImageView, getResources().getString(R.string.CenterAccountingFragmentBalances), getResources().getColor(R.color.CoolGray500), R.drawable.ic_balance_scale_light, R.color.CoolGray500, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray200);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        CustomClickView.onClickListener(() -> {
+            // TODO : Place Code When Needed
+        }).widget(binding.banksIncludeLayout.getRoot());
+
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(binding.commissionsIncludeLayout.getRoot());

@@ -924,6 +924,7 @@
 
     <string name="CenterAccountingFragmentTitle">حسابداری مرکز درمانی</string>
 
+    <string name="CenterAccountingFragmentBanks">تسویه حساب</string>
     <string name="CenterAccountingFragmentCommissions">سهم‌بندی</string>
     <string name="CenterAccountingFragmentBalances">تراز مالی</string>
 
