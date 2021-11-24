@@ -19,6 +19,7 @@ import com.majazeh.risloo.Utils.Entities.Navigatoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;
@@ -51,6 +52,8 @@ public class AuthActivity extends AppCompatActivity {
 
         ExtendException.activity = this;
 
+        listener();
+
         setExtra();
     }
 
@@ -77,6 +80,12 @@ public class AuthActivity extends AppCompatActivity {
         fragmont = new Fragmont(navHostFragment);
 
         extras = getIntent().getExtras();
+    }
+
+    private void listener() {
+        CustomClickView.onClickListener(() -> {
+            IntentManager.risloo(this);
+        }).widget(binding.debugTextView.getRoot());
     }
 
     private void setExtra() {

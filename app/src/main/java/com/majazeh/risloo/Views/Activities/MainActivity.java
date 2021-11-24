@@ -150,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        CustomClickView.onClickListener(() -> {
+            IntentManager.risloo(this);
+        }).widget(binding.contentIncludeLayout.debugTextView.getRoot());
+
         CustomClickView.onDelayedListener(() -> {
             binding.getRoot().openDrawer(GravityCompat.START);
         }).widget(binding.contentIncludeLayout.menuImageView.getRoot());

@@ -4,8 +4,9 @@
     // App Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="AppDebugNote">شما هم اکنون در نسخه آزمایشی هستید.</string>
     <string name="AppDebugTag">نسخه آزمایشی</string>
+    <string name="AppDebugNote">شما هم اکنون در نسخه آزمایشی هستید</string>
+    <string name="AppDebugClick">جهت انتقال به نسخه اصلی کلیک کنید</string>
 
     <string name="AppImageCrop">Crop Pic</string>
     <string name="AppImageContent">تصویر</string>

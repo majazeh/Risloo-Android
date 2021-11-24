@@ -135,6 +135,10 @@ public class TestActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
+            IntentManager.risloo(this);
+        }).widget(binding.debugTextView.getRoot());
+
+        CustomClickView.onClickListener(() -> {
             formModel = sampleModel.getSampleForm().prev();
             navigate();
         }).widget(binding.backwardImageView.getRoot());
