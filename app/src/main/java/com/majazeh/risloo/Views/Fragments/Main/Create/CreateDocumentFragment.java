@@ -206,7 +206,7 @@ public class CreateDocumentFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        FileManager.deleteFolderFromInternalCache(requireActivity(), "documents");
+        FileManager.deleteInternalCacheFolder(requireActivity(), "documents");
     }
 
 }
