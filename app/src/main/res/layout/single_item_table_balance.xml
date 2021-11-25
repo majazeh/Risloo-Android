@@ -8,6 +8,130 @@
     android:layoutDirection="rtl"
     android:background="@drawable/draw_rec_solid_white_ripple_coolgray300">
 
+    <View
+        android:id="@+id/top_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/CoolGray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/room_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:minLines="2"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/amount_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        tools:text="اتاق درمان" />
+
+    <TextView
+        android:id="@+id/amount_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:minLines="2"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/transaction_count_textView"
+        app:layout_constraintStart_toEndOf="@id/room_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        tools:text="تراز مالی" />
+
+    <TextView
+        android:id="@+id/transaction_count_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:minLines="2"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/date_textView"
+        app:layout_constraintStart_toEndOf="@id/amount_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        tools:text="تعداد تراکنش‌ها" />
+
+    <TextView
+        android:id="@+id/date_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:minLines="2"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_goneMarginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/menu_imageView"
+        app:layout_constraintStart_toEndOf="@id/transaction_count_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        tools:text="آخرین تسویه" />
+
+    <ImageView
+        android:id="@+id/menu_imageView"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/_4sdp"
+        android:src="@drawable/ic_ellipsis_v_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/date_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        app:tint="@color/CoolGray500" />
+
+    <Spinner
+        android:id="@+id/menu_spinner"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:singleLine="true"
+        android:spinnerMode="dropdown"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@id/menu_imageView"
+        app:layout_constraintEnd_toEndOf="@id/menu_imageView"
+        app:layout_constraintStart_toStartOf="@id/menu_imageView"
+        app:layout_constraintTop_toTopOf="@id/menu_imageView" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/menu_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="menu_imageView, menu_spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

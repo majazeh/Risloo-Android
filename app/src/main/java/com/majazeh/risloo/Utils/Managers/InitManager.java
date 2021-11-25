@@ -888,6 +888,9 @@ public class InitManager {
                     case "گزارشات":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_clipboard_light, null));
                         break;
+                    case "پیش\u200Cفاکتور و تسویه":
+                        dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_file_invoice_light, null));
+                        break;
                     default:
                         if (dropdownTextView.getText().toString().contains("989"))
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_mobile_light, null));

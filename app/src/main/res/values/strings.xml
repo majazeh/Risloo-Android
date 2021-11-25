@@ -1396,12 +1396,12 @@
     <string name="BalanceAdapterHeader">تراز مالی اتاق‌های درمان</string>
 
     <string name="BalanceAdapterRoom">اتاق درمان</string>
-    <string name="BalanceAdapterAmount">تراز مالی (تومان)</string>
-    <string name="BalanceAdapterTransactionCount">تعداد تراکنش‌ها</string>
+    <string name="BalanceAdapterAmount">تراز مالی\n(تومان)</string>
+    <string name="BalanceAdapterTransactionCount">تعداد\nتراکنش‌ها</string>
     <string name="BalanceAdapterDate">آخرین تسویه</string>
 
+    <string name="BalanceAdapterPayment">پیش‌فاکتور و تسویه</string>
     <string name="BalanceAdapterReports">گزارشات</string>
-    <string name="BalanceAdapterFactor">پیش‌فاکتور و تسویه</string>
 
 
     ---------- // BankAdapter

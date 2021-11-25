@@ -57,7 +57,7 @@ public class BalancesFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.BalancesFragmentTitle));
+        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.BalanceAdapterHeader));
 
         binding.tableShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
@@ -104,7 +104,7 @@ public class BalancesFragment extends Fragment {
 //
 //                        if (!items.data().isEmpty()) {
 //                            adapter.setItems(items.data());
-//                            binding.tableSingleLayout.recyclerView.setAdapter(adapter);
+                            binding.tableSingleLayout.recyclerView.setAdapter(adapter);
 //
 //                            binding.tableSingleLayout.emptyView.setVisibility(View.GONE);
 //                        } else if (adapter.itemsCount() == 0) {
