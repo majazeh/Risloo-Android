@@ -773,6 +773,13 @@
 
     <string name="CommissionsFragmentTitle">کمیسیون اتاق‌های مرکز</string>
 
+    <string name="CommissionsFragmentContributionHeader">تعیین سهم مرکز از اتاق‌های درمان</string>
+
+    <string name="CommissionsFragmentContributionShareHeader">مقدار سهم (درصد)</string>
+    <string name="CommissionsFragmentContributionShareHint">فقط یک عدد وارد نمایید. مثال: 5</string>
+
+    <string name="CommissionsFragmentContributionButton">اعمال درصد</string>
+
 
     ---------- // DocumentsFragment
 
