@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableBalanceAdapter;
 import com.majazeh.risloo.databinding.FragmentBalancesBinding;
 
 import java.util.HashMap;
@@ -23,8 +24,8 @@ public class BalancesFragment extends Fragment {
     // Binding
     private FragmentBalancesBinding binding;
 
-//    // Adapters
-//    private TableBalanceAdapter adapter;
+    // Adapters
+    private TableBalanceAdapter adapter;
 
     // Objects
     private HashMap data, header;
@@ -49,7 +50,7 @@ public class BalancesFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new TableBalanceAdapter(requireActivity());
+        adapter = new TableBalanceAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -115,7 +116,7 @@ public class BalancesFragment extends Fragment {
 //
 //                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 //
-//                        hideShimmer();
+                        hideShimmer();
 //                    });
 //
 //                    isLoading = false;

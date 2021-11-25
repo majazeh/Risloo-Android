@@ -16,6 +16,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableCommissionAdapter;
 import com.majazeh.risloo.databinding.FragmentCommissionsBinding;
 
 import java.util.HashMap;
@@ -26,8 +27,8 @@ public class CommissionsFragment extends Fragment {
     // Binding
     private FragmentCommissionsBinding binding;
 
-//    // Adapters
-//    private TableCommissionAdapter adapter;
+    // Adapters
+    private TableCommissionAdapter adapter;
 
     // Objects
     private HashMap data, header;
@@ -53,7 +54,7 @@ public class CommissionsFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new TableCommissionAdapter(requireActivity());
+        adapter = new TableCommissionAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -144,7 +145,7 @@ public class CommissionsFragment extends Fragment {
 //
 //                        binding.tableHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
 //
-//                        hideShimmer();
+                        hideShimmer();
 //                    });
 //
 //                    isLoading = false;
