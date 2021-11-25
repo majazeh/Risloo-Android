@@ -1397,7 +1397,7 @@
 
     <string name="BalanceAdapterRoom">اتاق درمان</string>
     <string name="BalanceAdapterAmount">تراز مالی (تومان)</string>
-    <string name="BalanceAdapterCount">تعداد تراکنش‌ها</string>
+    <string name="BalanceAdapterTransactionCount">تعداد تراکنش‌ها</string>
     <string name="BalanceAdapterDate">آخرین تسویه</string>
 
     <string name="BalanceAdapterReports">گزارشات</string>
@@ -1481,10 +1481,10 @@
 
     <string name="CommissionAdapterHeader">تعیین سهم اتاق‌های درمان</string>
 
-    <string name="CommissionAdapterSerial">اتاق درمان</string>
-    <string name="CommissionAdapterLeft">سهم اتاق</string>
-    <string name="CommissionAdapterTreasury">سهم مرکز</string>
-    <string name="CommissionAdapterDescription">پیش‌فرض</string>
+    <string name="CommissionAdapterRoom">اتاق درمان</string>
+    <string name="CommissionAdapterContributionRoom">سهم اتاق</string>
+    <string name="CommissionAdapterContributionCenter">سهم مرکز</string>
+    <string name="CommissionAdapterDefault">پیش‌فرض</string>
 
     <string name="CommissionAdapterEmpty">هنوز سهمي ثبت نشده است.</string>
 
