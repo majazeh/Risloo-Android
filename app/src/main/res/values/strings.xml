@@ -675,6 +675,8 @@
 
     <string name="BalancesFragmentTitle">تراز مالی اتاق‌های مرکز</string>
 
+    <string name="BalancesFragmentEmpty">هنوز تراز مالی برای مرکز ثبت نشده است.</string>
+
 
     ---------- // BanksFragment
 
@@ -1387,6 +1389,19 @@
 
     // Table Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////
+
+
+    ---------- // BalanceAdapter
+
+    <string name="BalanceAdapterHeader">تراز مالی اتاق‌های درمان</string>
+
+    <string name="BalanceAdapterRoom">اتاق درمان</string>
+    <string name="BalanceAdapterAmount">تراز مالی (تومان)</string>
+    <string name="BalanceAdapterCount">تعداد تراکنش‌ها</string>
+    <string name="BalanceAdapterDate">آخرین تسویه</string>
+
+    <string name="BalanceAdapterReports">گزارشات</string>
+    <string name="BalanceAdapterFactor">پیش‌فاکتور و تسویه</string>
 
 
     ---------- // BankAdapter
