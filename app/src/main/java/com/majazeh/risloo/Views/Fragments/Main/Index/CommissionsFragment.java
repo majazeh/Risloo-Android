@@ -133,7 +133,7 @@ public class CommissionsFragment extends Fragment {
 //
 //                        if (!items.data().isEmpty()) {
 //                            adapter.setItems(items.data());
-//                            binding.tableSingleLayout.recyclerView.setAdapter(adapter);
+                            binding.tableSingleLayout.recyclerView.setAdapter(adapter);
 //
 //                            binding.tableSingleLayout.emptyView.setVisibility(View.GONE);
 //                        } else if (adapter.itemsCount() == 0) {
