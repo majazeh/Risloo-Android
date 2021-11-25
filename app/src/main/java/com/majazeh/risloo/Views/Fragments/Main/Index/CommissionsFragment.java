@@ -19,17 +19,22 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCommissionsBinding;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CommissionsFragment extends Fragment {
 
     // Binding
     private FragmentCommissionsBinding binding;
 
+//    // Adapters
+//    private TableCommissionAdapter adapter;
+
     // Objects
     private HashMap data, header;
 
     // Vars
     private String share = "";
+    private boolean isLoading = true;
 
     @Nullable
     @Override
@@ -48,6 +53,8 @@ public class CommissionsFragment extends Fragment {
     }
 
     private void initializer() {
+//        adapter = new TableCommissionAdapter(requireActivity());
+
         data = new HashMap<>();
         data.put("page", 1);
         header = new HashMap<>();
@@ -60,6 +67,12 @@ public class CommissionsFragment extends Fragment {
         binding.shareIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CommissionsFragmentContributionShareHint));
 
         InitManager.txtTextColorBackground(binding.contributionTextView.getRoot(), getResources().getString(R.string.CommissionsFragmentContributionButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+
+        binding.tableHeaderLayout.titleTextView.setText(getResources().getString(R.string.CommissionAdapterHeader));
+
+        binding.tableShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
+
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -72,6 +85,22 @@ public class CommissionsFragment extends Fragment {
 
         binding.shareIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             share = binding.shareIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.getRoot().setMOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (!isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
+                isLoading = true;
+
+                if (data.containsKey("page"))
+                    data.put("page", ((int) data.get("page")) + 1);
+                else
+                    data.put("page", 1);
+
+                if (binding.tableSingleLayout.progressBar.getVisibility() == View.GONE)
+                    binding.tableSingleLayout.progressBar.setVisibility(View.VISIBLE);
+
+                getData();
+            }
         });
 
         CustomClickView.onDelayedListener(() -> {
@@ -91,7 +120,48 @@ public class CommissionsFragment extends Fragment {
     }
 
     private void getData() {
-        // TODO : Place Code When Needed
+//        Commission.list(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                List items = (List) object;
+//
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        if (Objects.equals(data.get("page"), 1))
+//                            adapter.clearItems();
+//
+//                        if (!items.data().isEmpty()) {
+//                            adapter.setItems(items.data());
+//                            binding.tableSingleLayout.recyclerView.setAdapter(adapter);
+//
+//                            binding.tableSingleLayout.emptyView.setVisibility(View.GONE);
+//                        } else if (adapter.itemsCount() == 0) {
+//                            binding.tableSingleLayout.recyclerView.setAdapter(null);
+//
+//                            binding.tableSingleLayout.emptyView.setVisibility(View.VISIBLE);
+//                            binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.CommissionAdapterEmpty));
+//                        }
+//
+//                        binding.tableHeaderLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
+//
+//                        hideShimmer();
+//                    });
+//
+//                    isLoading = false;
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        hideShimmer();
+//                    });
+//
+//                    isLoading = false;
+//                }
+//            }
+//        });
     }
 
     private void setHashmap() {
@@ -165,13 +235,19 @@ public class CommissionsFragment extends Fragment {
     }
 
     private void hideShimmer() {
-        // TODO : Place Code When Needed
+        binding.tableSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.tableShimmerLayout.getRoot().setVisibility(View.GONE);
+        binding.tableShimmerLayout.getRoot().stopShimmer();
+
+        if (binding.tableSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+            binding.tableSingleLayout.progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        isLoading = true;
     }
 
 }

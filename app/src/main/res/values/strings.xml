@@ -1477,6 +1477,18 @@
     <string name="ClientReportAdapterReader">خوانندگان</string>
 
 
+    ---------- // CommissionAdapter
+
+    <string name="CommissionAdapterHeader">تعیین سهم اتاق‌های درمان</string>
+
+    <string name="CommissionAdapterSerial">اتاق درمان</string>
+    <string name="CommissionAdapterLeft">سهم اتاق</string>
+    <string name="CommissionAdapterTreasury">سهم مرکز</string>
+    <string name="CommissionAdapterDescription">پیش‌فرض</string>
+
+    <string name="CommissionAdapterEmpty">هنوز سهمي ثبت نشده است.</string>
+
+
     ---------- // DocumentAdapter
 
     <string name="DocumentAdapterSerial">سریال</string>

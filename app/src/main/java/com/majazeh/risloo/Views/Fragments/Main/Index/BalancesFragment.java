@@ -41,6 +41,8 @@ public class BalancesFragment extends Fragment {
 
         listener();
 
+        setArgs();
+
         getData();
 
         return binding.getRoot();
@@ -78,6 +80,14 @@ public class BalancesFragment extends Fragment {
                 getData();
             }
         });
+    }
+
+    private void setArgs() {
+        // TODO : Place Code When Needed
+    }
+
+    private void setData() {
+        // TODO : Place Code When Needed
     }
 
     private void getData() {
