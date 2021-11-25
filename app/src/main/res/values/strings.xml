@@ -671,6 +671,11 @@
     ***/
 
 
+    ---------- // BalancesFragment
+
+    <string name="BalancesFragmentTitle">تراز مالی اتاق‌های مرکز</string>
+
+
     ---------- // BanksFragment
 
     <string name="BanksFragmentTitle">تسویه حساب</string>
@@ -762,6 +767,11 @@
 
     <string name="ClientReportsFragmentCaseEmpty">هنوز گزارشی برای پرونده ثبت نشده است.</string>
     <string name="ClientReportsFragmentSessionEmpty">هنوز گزارشی برای جلسه ثبت نشده است.</string>
+
+
+    ---------- // CommissionsFragment
+
+    <string name="CommissionsFragmentTitle">کمیسیون اتاق‌های مرکز</string>
 
 
     ---------- // DocumentsFragment

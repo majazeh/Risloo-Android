@@ -35,6 +35,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Edit.EditPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditTreasuryFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditUserFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.BalancesFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.BanksFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.BillingsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.BulkSamplesFragment;
@@ -45,6 +46,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterUsersFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CentersFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.ClientReportsFragment;
+import com.majazeh.risloo.Views.Fragments.Main.Index.CommissionsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.DocumentsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.DownloadsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.PaymentsFragment;
@@ -222,6 +224,9 @@ public class Fragmont {
 
         // -------------------- Index
 
+        else if (fragment instanceof BalancesFragment)
+            return fragment;
+
         else if (fragment instanceof BanksFragment)
             return fragment;
         
@@ -250,6 +255,9 @@ public class Fragmont {
             return fragment;
 
         else if (fragment instanceof ClientReportsFragment)
+            return fragment;
+
+        else if (fragment instanceof CommissionsFragment)
             return fragment;
 
         else if (fragment instanceof DocumentsFragment)
@@ -305,10 +313,10 @@ public class Fragmont {
         else if (fragment instanceof CaseFragment)
             return fragment;
 
-        else if (fragment instanceof CenterFragment)
+        else if (fragment instanceof CenterAccountingFragment)
             return fragment;
 
-        else if (fragment instanceof CenterAccountingFragment)
+        else if (fragment instanceof CenterFragment)
             return fragment;
 
         else if (fragment instanceof DashboardFragment)

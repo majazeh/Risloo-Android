@@ -557,6 +557,16 @@
     ---------- // Fragments
 
     <fragment
+        android:id="@+id/balancesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.BalancesFragment"
+        android:label="@string/BalancesFragmentTitle"
+        tools:layout="@layout/fragment_balances" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/banksFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Index.BanksFragment"
         android:label="@string/BanksFragmentTitle"
@@ -624,6 +634,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/commissionsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Index.CommissionsFragment"
+        android:label="@string/CommissionsFragmentTitle"
+        tools:layout="@layout/fragment_commissions" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/roomPlatformsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Main.Index.RoomPlatformsFragment"
         android:label="@string/RoomPlatformsFragmentTitle"
@@ -682,6 +702,10 @@
     ---------- // Actions
 
     <action
+        android:id="@+id/action_global_balancesFragment"
+        app:destination="@id/balancesFragment" />
+
+    <action
         android:id="@+id/action_global_banksFragment"
         app:destination="@id/banksFragment" />
 
@@ -708,6 +732,10 @@
     <action
         android:id="@+id/action_global_clientReportsFragment"
         app:destination="@id/clientReportsFragment" />
+
+    <action
+        android:id="@+id/action_global_commissionsFragment"
+        app:destination="@id/commissionsFragment" />
 
     <action
         android:id="@+id/action_global_roomPlatformsFragment"
@@ -770,20 +798,20 @@
     </fragment>
 
     <fragment
-        android:id="@+id/centerFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CenterFragment"
-        android:label="@string/CenterFragmentTitle"
-        tools:layout="@layout/fragment_center" >
+        android:id="@+id/centerAccountingFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CenterAccountingFragment"
+        android:label="@string/CenterAccountingFragmentTitle"
+        tools:layout="@layout/fragment_center_accounting" >
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
 
     <fragment
-        android:id="@+id/centerAccountingFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CenterAccountingFragment"
-        android:label="@string/CenterAccountingFragmentTitle"
-        tools:layout="@layout/fragment_center_accounting" >
+        android:id="@+id/centerFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Main.Show.CenterFragment"
+        android:label="@string/CenterFragmentTitle"
+        tools:layout="@layout/fragment_center" >
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -867,12 +895,12 @@
         app:destination="@id/caseFragment" />
 
     <action
-        android:id="@+id/action_global_centerFragment"
-        app:destination="@id/centerFragment" />
-
-    <action
         android:id="@+id/action_global_centerAccountingFragment"
         app:destination="@id/centerAccountingFragment" />
+
+    <action
+        android:id="@+id/action_global_centerFragment"
+        app:destination="@id/centerFragment" />
 
     <action
         android:id="@+id/action_global_referenceFragment"

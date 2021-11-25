@@ -207,6 +207,11 @@ public class Navigatoon {
 
     // -------------------- Index
 
+    public void navigateToBalancesFragment(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalBalancesFragment(typeModel);
+        navController.navigate(action);
+    }
+
     public void navigateToBanksFragment(TypeModel typeModel) {
         NavDirections action = NavigationMainDirections.actionGlobalBanksFragment(typeModel);
         navController.navigate(action);
@@ -254,6 +259,11 @@ public class Navigatoon {
 
     public void navigateToClientReportsFragment(TypeModel typeModel) {
         NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment(typeModel);
+        navController.navigate(action);
+    }
+
+    public void navigateToCommissionsFragment(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalCommissionsFragment(typeModel);
         navController.navigate(action);
     }
 
@@ -344,13 +354,13 @@ public class Navigatoon {
         navController.navigate(action);
     }
 
-    public void navigateToCenterFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCenterFragment(typeModel);
+    public void navigateToCenterAccountingFragment(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalCenterAccountingFragment(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCenterAccountingFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCenterAccountingFragment(typeModel);
+    public void navigateToCenterFragment(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalCenterFragment(typeModel);
         navController.navigate(action);
     }
 
