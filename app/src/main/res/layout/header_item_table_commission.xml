@@ -65,12 +65,12 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/default_textView"
+        app:layout_constraintEnd_toStartOf="@id/pinned_textView"
         app:layout_constraintStart_toEndOf="@id/contribution_room_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/default_textView"
+        android:id="@+id/pinned_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -79,7 +79,7 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:minLines="2"
         android:gravity="center|right"
-        android:text="@string/CommissionAdapterDefault"
+        android:text="@string/CommissionAdapterPinned"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray700"

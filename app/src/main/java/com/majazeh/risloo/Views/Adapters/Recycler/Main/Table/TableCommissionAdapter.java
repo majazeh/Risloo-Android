@@ -1,7 +1,12 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -26,10 +31,12 @@ public class TableCommissionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     // Objects
     private Activity activity;
+    private Handler handler;
     private HashMap data, header;
 
     // Vars
     private ArrayList<TypeModel> items;
+    private boolean userSelect = false;
 
     public TableCommissionAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -98,27 +105,134 @@ public class TableCommissionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
 
+        handler = new Handler();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(TableCommissionHolder holder) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
+
+        holder.binding.contributionCenterEditText.setOnTouchListener((v, event) -> {
+            if (!holder.binding.pinnedCheckbox.isChecked())
+                if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.contributionCenterEditText.hasFocus())
+                    ((MainActivity) activity).inputon.select(holder.binding.contributionCenterEditText);
+            return false;
+        });
+
+        holder.binding.contributionCenterEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (holder.binding.contributionCenterEditText.hasFocus()) {
+                    handler.removeCallbacksAndMessages(null);
+                    handler.postDelayed(() -> {
+                        if (!holder.binding.pinnedCheckbox.isChecked()) {
+                            String contribution = holder.binding.contributionCenterEditText.getText().toString().trim();
+
+                            if (!contribution.equals(""))
+                                doWork(holder, contribution, "commission");
+                        }
+                    },750);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        holder.binding.pinnedCheckbox.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.pinnedCheckbox.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+
+        holder.binding.pinnedCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (userSelect) {
+                if (isChecked)
+                    doWork(holder, "1", "pinned");
+                else
+                    doWork(holder, "0", "pinned");
+
+                setPinned(holder, isChecked);
+
+                userSelect = false;
+            }
+        });
     }
 
     private void setData(TableCommissionHolder holder) {
+        holder.binding.roomTextView.setText("محمد رضا سالاري فر");
+
+        holder.binding.contributionRoomTextView.setText("50%");
+        holder.binding.contributionCenterEditText.setText("50");
+
+        setPinned(holder, true);
+    }
+
+    private void setPinned(TableCommissionHolder holder, boolean isPinned) {
+        if (isPinned) {
+            holder.binding.pinnedCheckbox.setChecked(true);
+
+            holder.binding.contributionCenterEditText.setFocusableInTouchMode(true);
+            holder.binding.contributionCenterEditText.setAlpha((float) 1);
+        } else {
+            holder.binding.pinnedCheckbox.setChecked(false);
+
+            holder.binding.contributionCenterEditText.setFocusableInTouchMode(false);
+            holder.binding.contributionCenterEditText.setAlpha((float) 0.6);
+        }
+    }
+
+    private void setHashmap(String value, String method) {
         // TODO : Place Code Here
+
+        data.put("room_id", "?????");
+        data.put(method, value);
     }
 
-    private void setHashmap() {
-
+    private void doWork(TableCommissionHolder holder, String value, String method) {
+//        DialogManager.showLoadingDialog(activity, "");
+//
+//        setHashmap(value, method);
+//
+//        Commission.edit(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                activity.runOnUiThread(() -> {
+//                    DialogManager.dismissLoadingDialog();
+//                    SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+//                });
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                activity.runOnUiThread(() -> {
+//                    resetWidget(holder, value, method);
+//                });
+//            }
+//        });
     }
 
-    private void doWork() {
-
+    private void resetWidget(TableCommissionHolder holder, String value, String method) {
+        if (method.equals("pinned")) {
+            if (value.equals("1"))
+                setPinned(holder, false);
+            else if (value.equals("0"))
+                setPinned(holder, true);
+        }
     }
 
 }

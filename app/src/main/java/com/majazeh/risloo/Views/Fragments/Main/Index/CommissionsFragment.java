@@ -167,9 +167,9 @@ public class CommissionsFragment extends Fragment {
 
     private void setHashmap() {
         if (!share.equals(""))
-            data.put("?????", share);
+            data.put("commission", share);
         else
-            data.remove("?????");
+            data.remove("commission");
     }
 
     private void doWork() {
@@ -218,7 +218,7 @@ public class CommissionsFragment extends Fragment {
 //                                    }
 //
 //                                    switch (key) {
-//                                        case "?????":
+//                                        case "commission":
 //                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.shareErrorLayout.getRoot(), binding.shareErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
 //                                            break;
 //                                    }

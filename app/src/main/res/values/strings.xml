@@ -1484,7 +1484,7 @@
     <string name="CommissionAdapterRoom">اتاق درمان</string>
     <string name="CommissionAdapterContributionRoom">سهم اتاق</string>
     <string name="CommissionAdapterContributionCenter">سهم مرکز</string>
-    <string name="CommissionAdapterDefault">پیش‌فرض</string>
+    <string name="CommissionAdapterPinned">پیش‌فرض</string>
 
     <string name="CommissionAdapterEmpty">هنوز سهمي ثبت نشده است.</string>
 
