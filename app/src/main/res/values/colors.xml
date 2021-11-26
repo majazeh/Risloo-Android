@@ -30,6 +30,22 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Pink Colors
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <color name="Pink50">#FDF2F8</color>
+    <color name="Pink100">#FCE7F3</color>
+    <color name="Pink200">#FBCFE8</color>
+    <color name="Pink300">#F9A8D4</color>
+    <color name="Pink400">#F472B6</color>
+    <color name="Pink500">#EC4899</color>
+    <color name="Pink600">#DB2777</color>
+    <color name="Pink700">#BE185D</color>
+    <color name="Pink800">#9D174D</color>
+    <color name="Pink900">#831843</color>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // Violet Colors
     //////////////////////////////////////////////////////////////////////////////////////
 

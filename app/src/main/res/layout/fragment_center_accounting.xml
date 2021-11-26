@@ -17,7 +17,7 @@
         android:paddingBottom="@dimen/_12sdp">
 
         <include
-            android:id="@+id/banks_includeLayout"
+            android:id="@+id/treasuries_includeLayout"
             layout="@layout/component_main_button_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -29,7 +29,31 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/commissions_includeLayout"
+            android:id="@+id/billings_includeLayout"
+            layout="@layout/component_main_button_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/treasuries_includeLayout" />
+
+        <include
+            android:id="@+id/banks_includeLayout"
+            layout="@layout/component_main_button_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/billings_includeLayout" />
+
+        <include
+            android:id="@+id/payments_includeLayout"
             layout="@layout/component_main_button_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -39,6 +63,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/banks_includeLayout" />
+
+        <include
+            android:id="@+id/commissions_includeLayout"
+            layout="@layout/component_main_button_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/payments_includeLayout" />
 
         <include
             android:id="@+id/balances_includeLayout"
@@ -51,6 +87,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/commissions_includeLayout" />
+
+        <include
+            android:id="@+id/discounts_includeLayout"
+            layout="@layout/component_main_button_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/balances_includeLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

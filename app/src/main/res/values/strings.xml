@@ -943,9 +943,13 @@
 
     <string name="CenterAccountingFragmentTitle">حسابداری مرکز درمانی</string>
 
+    <string name="CenterAccountingFragmentTreasuries">کیف پول‌ها</string>
+    <string name="CenterAccountingFragmentBillings">صورت حساب‌ها</string>
     <string name="CenterAccountingFragmentBanks">تسویه حساب</string>
+    <string name="CenterAccountingFragmentPayments">شارژ حساب</string>
     <string name="CenterAccountingFragmentCommissions">سهم‌بندی</string>
     <string name="CenterAccountingFragmentBalances">تراز مالی</string>
+    <string name="CenterAccountingFragmentDiscount">کد تخفیف</string>
 
 
     ---------- // DashboardFragment
