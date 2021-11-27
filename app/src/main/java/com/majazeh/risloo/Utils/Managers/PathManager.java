@@ -12,7 +12,11 @@ import android.provider.OpenableColumns;
 
 import com.majazeh.risloo.BuildConfig;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 public class PathManager {
@@ -73,7 +77,7 @@ public class PathManager {
                 if (fileName != null) {
                     File file = new File(FileManager.createInternalCachePath(activity, "documents"), fileName);
                     String path = file.getAbsolutePath();
-                    FileManager.writeUriToInternalCache(activity, uri, path);
+                    writeUriToInternalCache(activity, uri, path);
                     return path;
                 }
             }
@@ -127,6 +131,36 @@ public class PathManager {
     /*
     ---------- Access ----------
     */
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private static void writeUriToInternalCache(Context context, Uri uri, String name) {
+        InputStream is = null;
+        FileOutputStream fos = null;
+        BufferedOutputStream bos = null;
+
+        try {
+            is = context.getContentResolver().openInputStream(uri);
+            fos = new FileOutputStream(name, false);
+            bos = new BufferedOutputStream(fos);
+
+            byte[] buf = new byte[1024];
+            is.read(buf);
+
+            do bos.write(buf);
+            while (is.read(buf) != -1);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (is != null) is.close();
+                if (fos != null) fos.close();
+                if (bos != null) bos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private static String fileName(Context context, Uri uri) {
         Cursor cursor = null;

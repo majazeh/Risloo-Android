@@ -103,7 +103,7 @@ public class IntentManager {
     public static String camera(Activity activity) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        File file = FileManager.createImageFile(activity);
+        File file = FileManager.createImageExternalFilesTempPath(activity, Environment.DIRECTORY_PICTURES);
         if (file != null) {
             Uri uri;
 

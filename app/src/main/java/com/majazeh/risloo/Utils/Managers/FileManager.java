@@ -1,22 +1,18 @@
 package com.majazeh.risloo.Utils.Managers;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Environment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -84,6 +80,20 @@ public class FileManager {
             file.mkdirs();
 
         return file;
+    }
+
+    public static File createImageExternalFilesTempPath(Activity activity, String type) {
+        try {
+            File parent = activity.getExternalFilesDir(type);
+
+            String prefix = "JPEG_" + System.currentTimeMillis() + "_";
+            String suffix = ".jpg";
+
+            return File.createTempFile(prefix, suffix, parent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /*
@@ -365,43 +375,9 @@ public class FileManager {
             return null;
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /*
+    ---------- Save To Stream ----------
+    */
 
     public static File saveBitmapToStream(Bitmap bitmap, File file) {
         try {
@@ -447,6 +423,10 @@ public class FileManager {
         }
     }
 
+    /*
+    ---------- Load From Stream ----------
+    */
+
     public static Bitmap loadBitmapFromStream(File file) {
         try {
             FileInputStream fis = new FileInputStream(file);
@@ -485,78 +465,6 @@ public class FileManager {
         } catch (IOException | JSONException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public static File createImageFile(Activity activity) {
-        try {
-            File directory = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-            String prefix = "JPEG_" + System.currentTimeMillis() + "_";
-            String suffix = ".jpg";
-
-            return File.createTempFile(prefix, suffix, directory);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void writeUriToInternalCache(Context context, Uri uri, String name) {
-        InputStream is = null;
-        FileOutputStream fos = null;
-        BufferedOutputStream bos = null;
-
-        try {
-            is = context.getContentResolver().openInputStream(uri);
-            fos = new FileOutputStream(name, false);
-            bos = new BufferedOutputStream(fos);
-
-            byte[] buf = new byte[1024];
-            is.read(buf);
-
-            do bos.write(buf);
-            while (is.read(buf) != -1);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (is != null) is.close();
-                if (fos != null) fos.close();
-                if (bos != null) bos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
