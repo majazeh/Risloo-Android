@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "930630961448",
-    "project_id": "risloo-dfc29",
-    "storage_bucket": "risloo-dfc29.appspot.com"
+    "project_number": "393140962941",
+    "project_id": "risloo-2021",
+    "storage_bucket": "risloo-2021.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930630961448:android:17cf21628f06827609e81d",
+        "mobilesdk_app_id": "1:393140962941:android:161a042d4eac99ac889314",
         "android_client_info": {
           "package_name": "com.majazeh.risloo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "930630961448-felqdag3ro6vtfoa7t1ijj13a85did9t.apps.googleusercontent.com",
+          "client_id": "393140962941-r26v18rfkgjh75mrm2b3sau9al8tsu1f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6j2dZRUm24ylbr4BwZyz52sk_Nv7FaGk"
+          "current_key": "AIzaSyD21SzRQ2EBYnV658bpd6hN06iW_sr2ZvQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "930630961448-felqdag3ro6vtfoa7t1ijj13a85did9t.apps.googleusercontent.com",
+              "client_id": "393140962941-r26v18rfkgjh75mrm2b3sau9al8tsu1f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -36,27 +36,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930630961448:android:3944dde4e3cdf34909e81d",
+        "mobilesdk_app_id": "1:393140962941:android:ffcf70803d8eec70889314",
         "android_client_info": {
           "package_name": "com.majazeh.risloo.beta"
         }
       },
       "oauth_client": [
         {
-          "client_id": "930630961448-felqdag3ro6vtfoa7t1ijj13a85did9t.apps.googleusercontent.com",
+          "client_id": "393140962941-r26v18rfkgjh75mrm2b3sau9al8tsu1f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6j2dZRUm24ylbr4BwZyz52sk_Nv7FaGk"
+          "current_key": "AIzaSyD21SzRQ2EBYnV658bpd6hN06iW_sr2ZvQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "930630961448-felqdag3ro6vtfoa7t1ijj13a85did9t.apps.googleusercontent.com",
+              "client_id": "393140962941-r26v18rfkgjh75mrm2b3sau9al8tsu1f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -65,27 +65,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930630961448:android:8a6ad3fae35ba03409e81d",
+        "mobilesdk_app_id": "1:393140962941:android:98457fede10eb617889314",
         "android_client_info": {
           "package_name": "com.majazeh.risloo.debug"
         }
       },
       "oauth_client": [
         {
-          "client_id": "930630961448-felqdag3ro6vtfoa7t1ijj13a85did9t.apps.googleusercontent.com",
+          "client_id": "393140962941-r26v18rfkgjh75mrm2b3sau9al8tsu1f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6j2dZRUm24ylbr4BwZyz52sk_Nv7FaGk"
+          "current_key": "AIzaSyD21SzRQ2EBYnV658bpd6hN06iW_sr2ZvQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "930630961448-felqdag3ro6vtfoa7t1ijj13a85did9t.apps.googleusercontent.com",
+              "client_id": "393140962941-r26v18rfkgjh75mrm2b3sau9al8tsu1f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
