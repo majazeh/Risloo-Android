@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Utils.Managers;
 
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -20,10 +21,10 @@ public class PathManager {
     ---------- Funcs ----------
     */
 
-    public static String localPath(Context context, Uri uri) {
+    public static String localPath(Activity activity, Uri uri) {
 
         // DocumentProvider
-        if (DocumentsContract.isDocumentUri(context, uri)) {
+        if (DocumentsContract.isDocumentUri(activity, uri)) {
 
             // Local
             if (isLocalStorageDocument(uri)) {
@@ -63,16 +64,16 @@ public class PathManager {
                     else
                         contentUri = ContentUris.withAppendedId(Uri.parse(contentUriPrefix), Long.parseLong(documentId));
 
-                    String path = fileColumn(context, contentUri, null, null);
+                    String path = fileColumn(activity, contentUri, null, null);
                     if (path != null)
                         return path;
                 }
 
-                String fileName = fileName(context, uri);
+                String fileName = fileName(activity, uri);
                 if (fileName != null) {
-                    File file = new File(FileManager.readFileFromInternalCache(context, "documents"), fileName);
+                    File file = new File(FileManager.createInternalCachePath(activity, "documents"), fileName);
                     String path = file.getAbsolutePath();
-                    FileManager.writeUriToInternalCache(context, uri, path);
+                    FileManager.writeUriToInternalCache(activity, uri, path);
                     return path;
                 }
             }
@@ -102,7 +103,7 @@ public class PathManager {
                 String selection = "_id=?";
                 String[] selectionArgs = new String[] {split[1]};
 
-                return fileColumn(context, contentUri, selection, selectionArgs);
+                return fileColumn(activity, contentUri, selection, selectionArgs);
             }
 
         }
@@ -112,7 +113,7 @@ public class PathManager {
             if (isGooglePhotosUri(uri))
                 return uri.getLastPathSegment();
             else
-                return fileColumn(context, uri, null, null);
+                return fileColumn(activity, uri, null, null);
         }
 
         // File

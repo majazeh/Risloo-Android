@@ -44,7 +44,10 @@ public class ResultManager {
         path = PathManager.localPath(activity, uri);
 
         if (path != null && bitmap != null) {
-            file = FileManager.writeBitmapToInternalCache(activity, BitmapManager.modifyOrientation(bitmap, path), "image");
+            File f = FileManager.createInternalCachePath(activity, "image");
+            Bitmap b = BitmapManager.modifyOrientation(bitmap, path);
+            
+            file = FileManager.saveBitmapToStream(b, f);
             IntentManager.crop(activity, Uri.fromFile(file));
         }
     }
@@ -64,7 +67,10 @@ public class ResultManager {
         path = selectedPath;
 
         if (path != null && bitmap != null) {
-            file = FileManager.writeBitmapToInternalCache(activity, BitmapManager.modifyOrientation(bitmap, path), "image");
+            File f = FileManager.createInternalCachePath(activity, "image");
+            Bitmap b = BitmapManager.modifyOrientation(bitmap, path);
+
+            file = FileManager.saveBitmapToStream(b, f);
             IntentManager.crop(activity, Uri.fromFile(file));
         }
 
@@ -77,7 +83,10 @@ public class ResultManager {
         path = PathManager.localPath(activity, uri);
 
         if (path != null && bitmap != null) {
-            file = FileManager.writeBitmapToInternalCache(activity, BitmapManager.modifyOrientation(bitmap, path), "image");
+            File f = FileManager.createInternalCachePath(activity, "image");
+            Bitmap b = BitmapManager.modifyOrientation(bitmap, path);
+
+            file = FileManager.saveBitmapToStream(b, f);
             circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
 
             if (textView != null) {

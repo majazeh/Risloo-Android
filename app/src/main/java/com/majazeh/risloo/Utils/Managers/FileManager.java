@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.Objects;
 
 public class FileManager {
 
@@ -404,24 +403,8 @@ public class FileManager {
 
 
 
-
-
-
-
-
-    /*
-    ---------- Write ----------
-    */
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static File writeBitmapToInternalCache(Activity activity, Bitmap bitmap, String name) {
+    public static File saveBitmapToStream(Bitmap bitmap, File file) {
         try {
-            File file = new File(activity.getCacheDir(), name);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                file.getParentFile().mkdirs();
-            if (!file.exists())
-                file.createNewFile();
-
             FileOutputStream fos = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
@@ -430,63 +413,46 @@ public class FileManager {
             return file;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return file;
         }
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void writeObjectToInternalCache(Activity activity, JSONObject object, String name) {
+    public static File saveObjectToStream(JSONObject object, File file) {
         try {
-            File file = new File(activity.getCacheDir(), name);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                file.getParentFile().mkdirs();
-            if (!file.exists())
-                file.createNewFile();
-
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(object.toString());
             oos.flush();
             oos.close();
+
+            return file;
         } catch (IOException e) {
             e.printStackTrace();
+            return file;
         }
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void writeArrayToInternalCache(Activity activity, JSONArray array, String name) {
+    public static File saveArrayToStream(JSONArray array, File file) {
         try {
-            File file = new File(activity.getCacheDir(), name);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                file.getParentFile().mkdirs();
-            if (!file.exists())
-                file.createNewFile();
-
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(array.toString());
             oos.flush();
             oos.close();
+
+            return file;
         } catch (IOException e) {
             e.printStackTrace();
+            return file;
         }
     }
 
-    /*
-    ---------- Read ----------
-    */
-
-    public static Bitmap readBitmapFromInternalCache(Activity activity, String name) {
+    public static Bitmap loadBitmapFromStream(File file) {
         try {
-            File file = new File(activity.getCacheDir(), name);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                return null;
-            if (!file.exists())
-                return null;
-
             FileInputStream fis = new FileInputStream(file);
             Bitmap bitmap = BitmapFactory.decodeStream(fis);
             fis.close();
+
             return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
@@ -494,18 +460,13 @@ public class FileManager {
         }
     }
 
-    public static JSONObject readObjectFromInternalCache(Activity activity, String name) {
+    public static JSONObject loadObjectFromStream(File file) {
         try {
-            File file = new File(activity.getCacheDir(), name);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                return null;
-            if (!file.exists())
-                return null;
-
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             JSONObject object = new JSONObject(ois.readObject().toString());
             ois.close();
+
             return object;
         } catch (IOException | JSONException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -513,24 +474,45 @@ public class FileManager {
         }
     }
 
-    public static JSONArray readArrayFromInternalCache(Activity activity, String name) {
+    public static JSONArray loadArrayFromStream(File file) {
         try {
-            File file = new File(activity.getCacheDir(), name);
-            if (!Objects.requireNonNull(file.getParentFile()).exists())
-                return null;
-            if (!file.exists())
-                return null;
-
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             JSONArray array = new JSONArray(ois.readObject().toString());
             ois.close();
+
             return array;
         } catch (IOException | JSONException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -576,16 +558,6 @@ public class FileManager {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static File readFileFromInternalCache(Context context, String name) {
-        File file = new File(context.getCacheDir(), name);
-        if (!Objects.requireNonNull(file.getParentFile()).exists())
-            return null;
-        if (!file.exists())
-            return null;
-
-        return file;
     }
 
 }
