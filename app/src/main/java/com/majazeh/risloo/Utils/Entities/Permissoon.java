@@ -71,7 +71,7 @@ public class Permissoon {
     }
 
     public boolean showDownloads() {
-        return false;
+        return true;
     }
 
     /*

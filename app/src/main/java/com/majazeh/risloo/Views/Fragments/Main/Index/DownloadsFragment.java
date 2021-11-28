@@ -1,6 +1,7 @@
 package com.majazeh.risloo.Views.Fragments.Main.Index;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexDownloadAdapter;
 import com.majazeh.risloo.databinding.FragmentDownloadsBinding;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DownloadsFragment extends Fragment {
 
@@ -43,7 +50,23 @@ public class DownloadsFragment extends Fragment {
     }
 
     private void setData() {
-        // TODO : Place Code When Needed
+        File[] files = FileManager.listFilesExternalStoragePublicPath(Environment.DIRECTORY_DOWNLOADS, "Risloo");
+
+        if (files != null) {
+            ArrayList<File> items = new ArrayList<>(Arrays.asList(files));
+
+            adapter.setItems(items);
+            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+        } else if (adapter.getItemCount() == 0) {
+            binding.indexSingleLayout.recyclerView.setAdapter(null);
+
+            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.DownloadsFragmentEmpty));
+        }
+
+        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
     }
 
     @Override

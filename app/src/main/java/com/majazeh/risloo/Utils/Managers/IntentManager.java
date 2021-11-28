@@ -199,21 +199,21 @@ public class IntentManager {
     }
 
     public static void download(Activity activity, String url) {
-        String savePath;
-        String fullName = url.substring(url.lastIndexOf('/') + 1);
-        String subName = fullName.substring(0, fullName.indexOf("."));
+        Uri uri = Uri.parse(url);
 
-        if (fullName.startsWith("X1")) {
-            savePath = File.separator + "Risloo" + File.separator + subName + File.separator + fullName;
-            FileManager.createExternalCachePath(activity, File.separator + "Risloo" + File.separator + subName);
-        } else {
-            savePath = File.separator + "Risloo" + File.separator + fullName;
-            FileManager.createExternalCachePath(activity, File.separator + "Risloo");
-        }
+        String file = url.substring(url.lastIndexOf('/') + 1);
+        String folder = file.substring(0, file.indexOf("."));
 
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        String path;
+
+        if (file.startsWith("X1"))
+            path = File.separator + "Risloo" + File.separator + folder + File.separator + file;
+        else
+            path = File.separator + "Risloo" + File.separator + file;
+
+        DownloadManager.Request request = new DownloadManager.Request(uri);
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, savePath);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, path);
         request.allowScanningByMediaScanner();
 
         DownloadManager manager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
