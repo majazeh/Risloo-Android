@@ -296,6 +296,23 @@ public class DateManager {
         }
     }
 
+    public static String jalYYYYsNMMsDDsNDDnlHHsMM(long timestamp, String seperator) {
+        Date date = new Date(timestamp);
+        PersianDate persianDate = dateToPersian(date);
+
+        if (persianDate.getHour() < 10) {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+        } else {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + persianDate.getHour() + ":" + persianDate.getMinute();
+        }
+    }
+
     /*
     ---------- Calculate Timestamp's ----------
     */

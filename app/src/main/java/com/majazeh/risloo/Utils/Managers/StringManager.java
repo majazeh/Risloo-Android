@@ -34,6 +34,10 @@ public class StringManager {
         return "(" + value + ")";
     }
 
+    public static String sub(String value, char character) {
+        return value.substring(0, value.indexOf(character));
+    }
+
     public static String substring(String value, int index) {
         return value.substring(value.length() - index);
     }

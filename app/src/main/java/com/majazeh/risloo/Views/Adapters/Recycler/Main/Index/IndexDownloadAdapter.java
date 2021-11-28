@@ -1,6 +1,7 @@
 package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,11 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexDownloadHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexDownloadBinding;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHolder> {
@@ -21,7 +25,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
     private Activity activity;
 
     // Vars
-    private ArrayList<String> items;
+    private ArrayList<File> items;
 
     public IndexDownloadAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -35,11 +39,11 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
 
     @Override
     public void onBindViewHolder(@NonNull IndexDownloadHolder holder, int i) {
-//        String item = items.get(i);
+        File file = items.get(i);
 
         listener(holder);
 
-        setData(holder);
+        setData(holder, file);
     }
 
     @Override
@@ -47,10 +51,10 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
         if (this.items != null)
             return items.size();
         else
-            return 4;
+            return 0;
     }
 
-    public void setItems(ArrayList<String> items) {
+    public void setItems(ArrayList<File> items) {
         if (this.items == null)
             this.items = items;
         else
@@ -71,11 +75,15 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexDownloadHolder holder) {
-        holder.binding.titleTextView.setText("فايل");
-        holder.binding.dateTextView.setText("1400/00/00");
+    private void setData(IndexDownloadHolder holder, File file) {
+        if (file.getName().contains("."))
+            holder.binding.titleTextView.setText(StringManager.sub(file.getName(), '.'));
+        else
+            holder.binding.titleTextView.setText(file.getName());
 
-        Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(file.lastModified(), " "));
+
+        Picasso.get().load(Uri.fromFile(file)).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
     }
 
 }

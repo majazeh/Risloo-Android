@@ -265,58 +265,6 @@ public class FileManager {
     ---------- List ----------
     */
 
-    public static String[] listInternalCachePath(Activity activity, String name) {
-        File file = new File(activity.getCacheDir(), name);
-        if (file.exists())
-            return file.list();
-        else
-            return null;
-    }
-
-    public static String[] listInternalFilesPath(Activity activity, String name) {
-        File file = new File(activity.getFilesDir(), name);
-        if (file.exists())
-            return file.list();
-        else
-            return null;
-    }
-
-    public static String[] listExternalCachePath(Activity activity, String name) {
-        File file = new File(activity.getExternalCacheDir(), name);
-        if (file.exists())
-            return file.list();
-        else
-            return null;
-    }
-
-    public static String[] listExternalFilesPath(Activity activity, String type, String name) {
-        File file = new File(activity.getExternalFilesDir(type), name);
-        if (file.exists())
-            return file.list();
-        else
-            return null;
-    }
-
-    public static String[] listExternalStoragePath(String name) {
-        File file = new File(Environment.getExternalStorageDirectory(), name);
-        if (file.exists())
-            return file.list();
-        else
-            return null;
-    }
-
-    public static String[] listExternalStoragePublicPath(String type, String name) {
-        File file = new File(Environment.getExternalStoragePublicDirectory(type), name);
-        if (file.exists())
-            return file.list();
-        else
-            return null;
-    }
-
-    /*
-    ---------- ListFiles ----------
-    */
-
     public static File[] listFilesInternalCachePath(Activity activity, String name) {
         File file = new File(activity.getCacheDir(), name);
         if (file.exists())
