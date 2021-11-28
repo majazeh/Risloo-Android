@@ -60,7 +60,7 @@ public class EditCenterFragment extends Fragment {
         binding.tabLayout.getRoot().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.Risloo600), PorterDuff.Mode.SRC_IN);
+                Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.LightBlue800), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
