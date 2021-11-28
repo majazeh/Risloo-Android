@@ -39,6 +39,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Show.BulkSampleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CaseFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CenterAccountingFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.CenterFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Main.Show.FolderFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.MeFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.ReferenceFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Show.RoomFragmentArgs;
@@ -81,7 +82,7 @@ public class BreadCrumb {
     private UserModel userModel;
 
     // Vars
-    private String roomType = "", sessionType = "", clientReportsType = "", referenceType = "";
+    private String roomType = "", sessionType = "", clientReportsType = "", referenceType = "", folderName = "";
     private String chainId = null;
     private String[] sampleIds = null;
     private ArrayList<Integer> destinationIds;
@@ -324,6 +325,9 @@ public class BreadCrumb {
             } case R.id.centerFragment:
                 setModels(CenterFragmentArgs.fromBundle(arguments).getTypeModel());
                 return center();
+            case R.id.folderFragment:
+                folderName = FolderFragmentArgs.fromBundle(arguments).getFolderName();
+                return folder();
             case R.id.referenceFragment: {
                 UserModel userModel = (UserModel) ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
 
@@ -507,6 +511,9 @@ public class BreadCrumb {
                 break;
             case R.id.centerFragment:
                 ((MainActivity) activity).navigatoon.navigateToCenterFragment(centerModel);
+                break;
+            case R.id.folderFragment:
+                ((MainActivity) activity).navigatoon.navigateToFolderFragment(folderName);
                 break;
             case R.id.referenceFragment:
                 if (referenceType.equals("user"))
@@ -1749,6 +1756,20 @@ public class BreadCrumb {
     private ArrayList<Integer> centerIds() {
         ArrayList<Integer> list = centersIds();
         list.add(R.id.centerFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> folder() {
+        ArrayList<String> list = downloads();
+        list.add(folderName);
+
+        destinationIds = folderIds();
+        return list;
+    }
+    private ArrayList<Integer> folderIds() {
+        ArrayList<Integer> list = downloadsIds();
+        list.add(R.id.folderFragment);
 
         return list;
     }

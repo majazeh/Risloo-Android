@@ -369,6 +369,11 @@ public class Navigatoon {
         navController.navigate(action);
     }
 
+    public void navigateToFolderFragment(String folderName) {
+        NavDirections action = NavigationMainDirections.actionGlobalFolderFragment(folderName);
+        navController.navigate(action);
+    }
+
     public void navigateToMeFragment(TypeModel typeModel) {
         NavDirections action = NavigationMainDirections.actionGlobalMeFragment(typeModel);
         navController.navigate(action);

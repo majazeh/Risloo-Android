@@ -973,6 +973,13 @@
     <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
 
 
+    ---------- // FolderFragment
+
+    <string name="FolderFragmentTitle">پوشه</string>
+
+    <string name="FolderFragmentEmpty">هیچ فایلی در پوشه موجود نیست.</string>
+
+
     ---------- // MeFragment
 
     <string name="MeFragmentTitle">من</string>
