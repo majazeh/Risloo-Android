@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -91,7 +92,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                 switch (suffix) {
                     case "png":
                     case "jpg":
-//                        IntentManager.display(activity, "", "");
+                        IntentManager.display(activity, file.getName(), Uri.fromFile(file).toString());
                         break;
                 }
 
@@ -170,9 +171,9 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
     }
 
     private void setShare(IndexDownloadHolder holder, File file) {
-        if (file.getName().contains("."))
-            holder.binding.shareImageView.setVisibility(View.VISIBLE);
-        else
+//        if (file.getName().contains("."))
+//            holder.binding.shareImageView.setVisibility(View.VISIBLE);
+//        else
             holder.binding.shareImageView.setVisibility(View.GONE);
     }
 

@@ -112,16 +112,19 @@ public class DisplayActivity extends AppCompatActivity {
             if (!extras.getString("title").equals("")) {
                 title = extras.getString("title");
 
-                binding.titleTextView.setText(title);
                 binding.titleTextView.setVisibility(View.VISIBLE);
+                binding.titleTextView.setText(title);
             }
 
             if (!extras.getString("path").equals("")) {
                 path = extras.getString("path");
 
                 Picasso.get().load(path).placeholder(R.color.White).into(binding.avatarZoomageView);
-                binding.shareImageView.setVisibility(View.VISIBLE);
-                binding.downloadImageView.setVisibility(View.VISIBLE);
+
+                if (path.contains("https://") || path.contains(" http://")) {
+                    binding.shareImageView.setVisibility(View.VISIBLE);
+                    binding.downloadImageView.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
