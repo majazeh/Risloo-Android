@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexDownloadHolder;
+import com.majazeh.risloo.Views.Fragments.Main.Index.DownloadsFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexDownloadBinding;
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +25,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHolder> {
+
+    // Fragments
+    private Fragment current;
 
     // Objects
     private Activity activity;
@@ -41,6 +48,8 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
     @Override
     public void onBindViewHolder(@NonNull IndexDownloadHolder holder, int i) {
         File file = items.get(i);
+
+        initializer();
 
         listener(holder, file);
 
@@ -70,9 +79,27 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
         }
     }
 
+    private void initializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+    }
+
     private void listener(IndexDownloadHolder holder, File file) {
         CustomClickView.onDelayedListener(() -> {
-            // TODO : Place Code When Needed
+            if (file.getName().contains(".")) {
+                String suffix = StringManager.suffix(file.getName(), '.');
+
+                switch (suffix) {
+                    case "png":
+                    case "jpg":
+//                        IntentManager.display(activity, "", "");
+                        break;
+                }
+
+            } else {
+                if (current instanceof DownloadsFragment)
+                    ((MainActivity) activity).navigatoon.navigateToFolderFragment(file.getName());
+
+            }
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
@@ -136,9 +163,9 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
 
             holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
-            holder.binding.avatarIncludeLayout.iconImageView.setImageResource(R.drawable.ic_folder_light);
+            InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_vial_light, R.color.Risloo500);
 
-            holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_coolgray200);
+            holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_coolgray50);
         }
     }
 
