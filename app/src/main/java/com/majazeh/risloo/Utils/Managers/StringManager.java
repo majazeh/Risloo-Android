@@ -38,6 +38,10 @@ public class StringManager {
         return value.substring(0, value.indexOf(character));
     }
 
+    public static String suffix(String value, char character) {
+        return value.substring(value.lastIndexOf(character) + 1);
+    }
+
     public static String substring(String value, int index) {
         return value.substring(value.length() - index);
     }

@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 import android.app.Activity;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -76,14 +77,66 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
     }
 
     private void setData(IndexDownloadHolder holder, File file) {
-        if (file.getName().contains("."))
-            holder.binding.titleTextView.setText(StringManager.sub(file.getName(), '.'));
-        else
-            holder.binding.titleTextView.setText(file.getName());
+        holder.binding.dateTextView.setText(DateManager.jalNMMsDDsMMsDD(file.lastModified(), " "));
 
-        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(file.lastModified(), " "));
+        if (file.getName().contains(".")) {
+            holder.binding.nameTextView.setText(StringManager.sub(file.getName(), '.'));
 
-        Picasso.get().load(Uri.fromFile(file)).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
+            setAvatar(holder, Uri.fromFile(file));
+            setSuffix(holder, StringManager.suffix(file.getName(), '.'));
+        } else {
+            holder.binding.nameTextView.setText(file.getName());
+
+            setAvatar(holder, null);
+            setSuffix(holder, "");
+        }
+    }
+
+    private void setAvatar(IndexDownloadHolder holder, Uri url) {
+        if (url != null) {
+            holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
+            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
+            holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
+            holder.binding.avatarIncludeLayout.iconImageView.setImageResource(R.drawable.ic_folder_light);
+
+            holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_coolgray200);
+        }
+    }
+
+    private void setSuffix(IndexDownloadHolder holder, String suffix) {
+        if (!suffix.equals("")) {
+            holder.binding.suffixTextView.setVisibility(View.VISIBLE);
+            holder.binding.suffixTextView.setText(suffix);
+
+            switch (holder.binding.suffixTextView.getText().toString()) {
+                case "jpg":
+                case "png":
+                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
+                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_amber50);
+                    break;
+                case "html":
+                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_risloo50);
+                    break;
+                case "xlsx":
+                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
+                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_emerald50);
+                    break;
+                case "xml":
+                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
+                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_red50);
+                    break;
+                default:
+                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
+                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_coolgray50);
+                    break;
+            }
+
+        } else {
+            holder.binding.suffixTextView.setVisibility(View.GONE);
+            holder.binding.suffixTextView.setText("");
+        }
     }
 
 }

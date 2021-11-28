@@ -1,50 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/_8sdp"
-    android:paddingEnd="@dimen/_6sdp"
-    android:paddingStart="@dimen/_6sdp"
-    android:paddingTop="@dimen/_6sdp"
+    android:padding="@dimen/_8sdp"
     android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300"
-    tools:layout_margin="@dimen/_4sdp">
+    tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp">
 
-    <ImageView
-        android:id="@+id/avatar_imageView"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:scaleType="fitCenter"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    <include
+        android:id="@+id/avatar_includeLayout"
+        layout="@layout/component_main_avatar_52sdp_img"
+        android:layout_width="@dimen/_52sdp"
+        android:layout_height="@dimen/_52sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/title_textView"
-        android:layout_width="match_parent"
+        android:id="@+id/name_textView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="center"
-        android:textSize="@dimen/_10ssp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:gravity="right"
+        android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray700"
         android:textAlignment="gravity"
-        android:fontFamily="@font/dana_bold"
-        tools:text="عنوان" />
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintBottom_toTopOf="@id/date_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avatar_includeLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="نام فایل" />
 
     <TextView
         android:id="@+id/date_textView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_2sdp"
-        android:gravity="center"
-        android:textSize="@dimen/_9ssp"
+        android:gravity="right"
+        android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/CoolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toTopOf="@id/suffix_textView"
+        app:layout_constraintEnd_toEndOf="@id/name_textView"
+        app:layout_constraintStart_toStartOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/name_textView"
         tools:text="زمان دانلود" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/suffix_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:paddingBottom="@dimen/_2sdp"
+        android:paddingEnd="@dimen/_6sdp"
+        android:paddingStart="@dimen/_6sdp"
+        android:paddingTop="@dimen/_2sdp"
+        android:gravity="right"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_demi_bold"
+        app:layout_goneMarginTop="0dp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/name_textView"
+        app:layout_constraintStart_toStartOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/date_textView"
+        tools:text="پسوند"
+        tools:textColor="@color/CoolGray400"
+        android:background="@drawable/draw_16sdp_solid_coolgray50" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
