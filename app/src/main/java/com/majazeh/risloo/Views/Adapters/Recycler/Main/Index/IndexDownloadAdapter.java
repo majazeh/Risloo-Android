@@ -42,7 +42,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
     public void onBindViewHolder(@NonNull IndexDownloadHolder holder, int i) {
         File file = items.get(i);
 
-        listener(holder);
+        listener(holder, file);
 
         setData(holder, file);
     }
@@ -70,33 +70,71 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
         }
     }
 
-    private void listener(IndexDownloadHolder holder) {
+    private void listener(IndexDownloadHolder holder, File file) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.getRoot());
+
+        CustomClickView.onDelayedListener(() -> {
+//            IntentManager.share(activity, file.getPath(), activity.getResources().getString(R.string.AppShareImage));
+        }).widget(holder.binding.shareImageView);
     }
 
     private void setData(IndexDownloadHolder holder, File file) {
+        holder.binding.nameTextView.setText(file.getName());
         holder.binding.dateTextView.setText(DateManager.jalNMMsDDsMMsDD(file.lastModified(), " "));
 
-        if (file.getName().contains(".")) {
-            holder.binding.nameTextView.setText(StringManager.sub(file.getName(), '.'));
+        setAvatar(holder, file);
 
-            setAvatar(holder, Uri.fromFile(file));
-            setSuffix(holder, StringManager.suffix(file.getName(), '.'));
-        } else {
-            holder.binding.nameTextView.setText(file.getName());
-
-            setAvatar(holder, null);
-            setSuffix(holder, "");
-        }
+        setShare(holder, file);
     }
 
-    private void setAvatar(IndexDownloadHolder holder, Uri url) {
-        if (url != null) {
-            holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+    private void setAvatar(IndexDownloadHolder holder, File file) {
+        if (file.getName().contains(".")) {
+            String suffix = StringManager.suffix(file.getName(), '.');
+
+            if (suffix.equals("png") || suffix.equals("jpg")) {
+                holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
+
+                Picasso.get().load(Uri.fromFile(file)).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                holder.binding.avatarIncludeLayout.charTextView.setText(suffix);
+
+                holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
+
+                switch (suffix) {
+                    case "svg":
+                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
+                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_amber50);
+                        break;
+                    case "html":
+                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_risloo50);
+                        break;
+                    case "xlsx":
+                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
+                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_emerald50);
+                        break;
+                    case "pdf":
+                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
+                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_red50);
+                        break;
+                    case "json":
+                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Violet500));
+                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_violet50);
+                        break;
+                    default:
+                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
+                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_coolgray50);
+                        break;
+                }
+            }
+
         } else {
+            holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+
             holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
             holder.binding.avatarIncludeLayout.iconImageView.setImageResource(R.drawable.ic_folder_light);
 
@@ -104,39 +142,11 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
         }
     }
 
-    private void setSuffix(IndexDownloadHolder holder, String suffix) {
-        if (!suffix.equals("")) {
-            holder.binding.suffixTextView.setVisibility(View.VISIBLE);
-            holder.binding.suffixTextView.setText(suffix);
-
-            switch (holder.binding.suffixTextView.getText().toString()) {
-                case "jpg":
-                case "png":
-                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
-                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_amber50);
-                    break;
-                case "html":
-                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
-                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_risloo50);
-                    break;
-                case "xlsx":
-                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
-                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_emerald50);
-                    break;
-                case "xml":
-                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
-                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_red50);
-                    break;
-                default:
-                    holder.binding.suffixTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
-                    holder.binding.suffixTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_coolgray50);
-                    break;
-            }
-
-        } else {
-            holder.binding.suffixTextView.setVisibility(View.GONE);
-            holder.binding.suffixTextView.setText("");
-        }
+    private void setShare(IndexDownloadHolder holder, File file) {
+        if (file.getName().contains("."))
+            holder.binding.shareImageView.setVisibility(View.VISIBLE);
+        else
+            holder.binding.shareImageView.setVisibility(View.GONE);
     }
 
 }
