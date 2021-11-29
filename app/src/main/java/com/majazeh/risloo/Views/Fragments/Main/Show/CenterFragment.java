@@ -378,8 +378,8 @@ public class CenterFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showCenterDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentSessionPlatforms));
 
-//        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownRooms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
-//            items.add(requireActivity().getResources().getString(R.string.CenterFragmentRooms));
+        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownRooms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentRooms));
 
         if (((MainActivity) requireActivity()).permissoon.showCenterDropdownAccounting(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentAccounting));

@@ -11,10 +11,18 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomsBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -70,43 +78,50 @@ public class RoomsFragment extends Fragment {
     }
 
     private void getData() {
-//        Center.rooms(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                List items = (List) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        adapter.clearItems();
-//
-//                        if (!items.data().isEmpty()) {
-//                            adapter.setItems(items.data());
-//                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-//                            binding.indexSingleLayout.recyclerView.setAdapter(null);
-//
-//                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-//                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.RoomAdapterEmpty));
-//                        }
-//
-//                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
-//
+        Center.showDashboard(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            adapter.clearItems();
+
+                            List items = new List();
+                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++)
+                                items.add(new RoomModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
+
+                            if (!items.data().isEmpty()) {
+                                adapter.setItems(items.data());
+                                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                            } else if (adapter.getItemCount() == 0) {
+                                binding.indexSingleLayout.recyclerView.setAdapter(null);
+
+                                binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.RoomAdapterEmpty));
+                            }
+
+                            binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+
+                            hideShimmer();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
                         hideShimmer();
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        hideShimmer();
-//                    });
-//                }
-//            }
-//        });
+                    });
+                }
+            }
+        });
     }
 
     private void hideShimmer() {
