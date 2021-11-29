@@ -87,25 +87,12 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
     private void listener(IndexDownloadHolder holder, File file) {
         CustomClickView.onDelayedListener(() -> {
             if (file.getName().contains(".")) {
-                String suffix = StringManager.suffix(file.getName(), '.');
-
-                switch (suffix) {
-                    case "png":
-                    case "jpg":
-                        IntentManager.display(activity, file.getName(), Uri.fromFile(file).toString());
-                        break;
-                }
-
+                IntentManager.file(activity, file);
             } else {
                 if (current instanceof DownloadsFragment)
                     ((MainActivity) activity).navigatoon.navigateToFolderFragment(file.getName());
-
             }
         }).widget(holder.binding.getRoot());
-
-        CustomClickView.onDelayedListener(() -> {
-//            IntentManager.share(activity, file.getPath(), activity.getResources().getString(R.string.AppShareImage));
-        }).widget(holder.binding.shareImageView);
     }
 
     private void setData(IndexDownloadHolder holder, File file) {
@@ -113,8 +100,6 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
         holder.binding.dateTextView.setText(DateManager.jalNMMsDDsMMsDD(file.lastModified(), " "));
 
         setAvatar(holder, file);
-
-        setShare(holder, file);
     }
 
     private void setAvatar(IndexDownloadHolder holder, File file) {
@@ -168,13 +153,6 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
 
             holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_coolgray50);
         }
-    }
-
-    private void setShare(IndexDownloadHolder holder, File file) {
-//        if (file.getName().contains("."))
-//            holder.binding.shareImageView.setVisibility(View.VISIBLE);
-//        else
-            holder.binding.shareImageView.setVisibility(View.GONE);
     }
 
 }

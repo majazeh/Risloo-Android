@@ -12,6 +12,9 @@
     <string name="AppImageContent">تصویر</string>
     <string name="AppInputEmpty">فیلد خالی است.</string>
 
+    <string name="AppChooserFile">باز کردن با</string>
+    <string name="AppChooserShare">اشتراک گذاری با</string>
+
     <string name="AppSearchHint">جستجو</string>
     <string name="AppSearchEmpty">داده یافت نشده است.</string>
 
@@ -24,7 +27,6 @@
     <string name="AppDefaultUnknown">نامعلوم</string>
     <string name="AppDefaultWeek">00/00 تا 00/00</string>
 
-    <string name="AppShareImage">اشتراک گذاری</string>
     <string name="AppSessionPrice">مبلغ جلسه</string>
 
     <string name="AppEdit">ویرایش</string>
@@ -108,6 +110,7 @@
     <string name="ToastSampleDoublePressExit">برای خروج از نمونه دوباره کلیک کنید.</string>
     <string name="ToastSampleLinkSaved">لینک نمونه ذخیره شد.</string>
 
+    <string name="ToastActivityEmptyException">برنامه‌ای برای اجرا وجود ندارد.</string>
     <string name="ToastActivityPaymentException">برنامه‌ای برای بارگذاری درگاه پرداخت وجود ندارد.</string>
 
     <string name="ToastPermissionFileException">ریسلو دسترسی به آپلود فایل ندارد.</string>

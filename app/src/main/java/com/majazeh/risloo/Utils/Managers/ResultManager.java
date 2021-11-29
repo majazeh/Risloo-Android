@@ -58,7 +58,7 @@ public class ResultManager {
         Uri uri;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", new File(selectedPath));
+            uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", new File(selectedPath));
         else
             uri = Uri.fromFile(file);
 

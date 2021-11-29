@@ -208,7 +208,7 @@ public class PathManager {
     */
 
     private static boolean isLocalStorageDocument(Uri uri) {
-        return (BuildConfig.APPLICATION_ID + ".fileprovider").equals(uri.getAuthority());
+        return (BuildConfig.APPLICATION_ID + ".provider").equals(uri.getAuthority());
     }
 
     private static boolean isExternalStorageDocument(Uri uri) {

@@ -65,7 +65,7 @@ public class DisplayActivity extends AppCompatActivity {
         }).widget(binding.returnImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            IntentManager.share(this, path, getResources().getString(R.string.AppShareImage));
+            IntentManager.share(this, path);
         }).widget(binding.shareImageView);
 
         CustomClickView.onDelayedListener(() -> {

@@ -108,7 +108,7 @@ public class IntentManager {
             Uri uri;
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".fileprovider", file);
+                uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file);
             else
                 uri = Uri.fromFile(file);
 
@@ -176,13 +176,13 @@ public class IntentManager {
         context.startActivity(Intent.createChooser(intent, chooser));
     }
 
-    public static void share(Context context, String content, String chooser) {
+    public static void share(Context context, String content) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.putExtra(Intent.EXTRA_TEXT, content);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setType("text/plain");
 
-        context.startActivity(Intent.createChooser(intent, chooser));
+        context.startActivity(Intent.createChooser(intent, context.getResources().getString(R.string.AppChooserShare)));
     }
 
     public static void mediaScan(Activity activity, Uri uri) {
@@ -228,6 +228,27 @@ public class IntentManager {
             ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityPaymentException));
         }
         activity.startActivity(intent);
+    }
+
+    public static void file(Activity activity, File file) {
+        Intent intent;
+
+        try {
+            Uri uri;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file);
+            else
+                uri = Uri.fromFile(file);
+
+            intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            activity.startActivity(Intent.createChooser(intent, activity.getResources().getString(R.string.AppChooserFile)));
+        } catch (ActivityNotFoundException e) {
+            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityEmptyException));
+        }
     }
 
     public static void risloo(Context context) {
