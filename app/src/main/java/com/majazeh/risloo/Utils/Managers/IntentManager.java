@@ -198,7 +198,7 @@ public class IntentManager {
         manager.setPrimaryClip(clip);
     }
 
-    public static void download(Activity activity, String url) {
+    public static void download(Activity activity, String title, String url) {
         Uri uri = Uri.parse(url);
 
         String file = url.substring(url.lastIndexOf('/') + 1);
