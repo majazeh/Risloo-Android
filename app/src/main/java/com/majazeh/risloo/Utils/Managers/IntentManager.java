@@ -207,7 +207,7 @@ public class IntentManager {
         String path;
 
         if (file.startsWith("X1"))
-            path = File.separator + "Risloo" + File.separator + folder + File.separator + file;
+            path = File.separator + "Risloo" + File.separator + title + " " + StringManager.bracing(folder) + File.separator + file;
         else
             path = File.separator + "Risloo" + File.separator + file;
 
