@@ -29,6 +29,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Bank;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.IbanModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -362,7 +363,26 @@ public class BanksFragment extends Fragment {
     private void setData(UserModel model) {
         // TODO : Place Code When Needed
 
+        binding.settleGroup.setVisibility(View.VISIBLE);
         binding.totalIncludeLayout.amountTextView.setText("100.000" + " " + getResources().getString(R.string.MainToman));
+    }
+
+    private void setAccounts(List accounts) {
+        ArrayList<String> options = new ArrayList<>();
+
+        for (TypeModel typeModel : accounts.data()) {
+            IbanModel model = (IbanModel) typeModel;
+
+            if (model != null && model.getBank() != null && model.getStatus().equals("verified")) {
+                options.add(model.getIban() + "\n" + model.getOwner() + " " + StringManager.bracing(model.getBank().getTitle()));
+                accountIds.add(model.getId());
+            }
+        }
+
+        options.add("");
+        accountIds.add("");
+
+        InitManager.input12sspSpinner(requireActivity(), binding.accountIncludeLayout.selectSpinner, options);
     }
 
     private void getData() {
@@ -384,14 +404,12 @@ public class BanksFragment extends Fragment {
 
                                 binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
 
-                                binding.settleGroup.setVisibility(View.GONE);
+                                setAccounts(items);
                             } else if (adapter.getItemCount() == 0) {
                                 binding.indexSingleLayout.recyclerView.setAdapter(null);
 
                                 binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BankAdapterEmpty));
-
-                                binding.settleGroup.setVisibility(View.VISIBLE);
                             }
 
                             binding.createHeaderLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
