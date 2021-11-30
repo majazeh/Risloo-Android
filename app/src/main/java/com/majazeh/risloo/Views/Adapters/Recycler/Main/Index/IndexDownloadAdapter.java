@@ -86,11 +86,14 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
 
     private void listener(IndexDownloadHolder holder, File file) {
         CustomClickView.onDelayedListener(() -> {
-            if (file.getName().contains(".")) {
+            if (file.getName().startsWith("X1")) {
                 IntentManager.file(activity, file);
-            } else {
+            } else if (file.getName().contains("X1")) {
                 if (current instanceof DownloadsFragment)
                     ((MainActivity) activity).navigatoon.navigateToFolderFragment(file.getName());
+
+            } else {
+                IntentManager.file(activity, file);
             }
         }).widget(holder.binding.getRoot());
     }
@@ -103,55 +106,82 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
     }
 
     private void setAvatar(IndexDownloadHolder holder, File file) {
-        if (file.getName().contains(".")) {
+        if (file.getName().startsWith("X1")) {
             String suffix = StringManager.suffix(file.getName(), '.');
 
-            if (suffix.equals("png") || suffix.equals("jpg")) {
-                holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
+            switch (suffix) {
+                case "html":
+                    holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                    holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
 
-                Picasso.get().load(Uri.fromFile(file)).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
-            } else {
-                holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                holder.binding.avatarIncludeLayout.charTextView.setText(suffix);
+                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_code_light, R.color.Risloo500);
 
-                holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
+                    holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_risloo50);
+                    break;
+                case "xlsx":
+                    holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                    holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
 
-                switch (suffix) {
-                    case "svg":
-                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
-                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_amber50);
-                        break;
-                    case "html":
-                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
-                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_risloo50);
-                        break;
-                    case "xlsx":
-                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
-                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_emerald50);
-                        break;
-                    case "pdf":
-                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
-                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_red50);
-                        break;
-                    case "json":
-                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.Violet500));
-                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_violet50);
-                        break;
-                    default:
-                        holder.binding.avatarIncludeLayout.charTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
-                        holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_coolgray50);
-                        break;
-                }
+                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_excel_light, R.color.Emerald500);
+
+                    holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50);
+                    break;
+                case "pdf":
+                    holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                    holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
+
+                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_pdf_light, R.color.Red500);
+
+                    holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_red50);
+                    break;
+                case "png":
+                    holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                    holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
+
+                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_image_light, R.color.Pink500);
+
+                    holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_pink50);
+                    break;
+                case "svg":
+                    holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                    holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
+
+                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.Amber500));
+
+                    holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_amber50);
+                    break;
+                case "json":
+                    holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                    holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
+
+                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.Violet500));
+
+                    holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_violet50);
+                    break;
+                default:
+                    holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                    holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
+
+                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.CoolGray500));
+
+                    holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray100);
+                    break;
             }
 
+        } else if (file.getName().contains("X1")) {
+            holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
+
+            InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_folder_open_light, R.color.Risloo500);
+
+            holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray100);
         } else {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
 
-            holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
-            InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_vial_light, R.color.Risloo500);
+            Picasso.get().load(Uri.fromFile(file)).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarImageView);
 
-            holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_coolgray50);
+            holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200);
         }
     }
 
