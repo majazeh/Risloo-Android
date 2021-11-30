@@ -195,4 +195,12 @@ public class Room extends Model {
             e.printStackTrace();
         }
     }
+
+    public static void changeOrder(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.put(endpoint + "/" + data.get("id"), data, header, response, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

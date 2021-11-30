@@ -1,0 +1,9 @@
+query launch($region: RegionID!,$first: Int!) {
+    gifts(region:$region,first:$first){
+        data{
+            id
+            title
+            code
+        }
+    }
+}
