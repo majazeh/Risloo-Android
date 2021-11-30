@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexBankHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexBankBinding;
+import com.mre.ligheh.Model.TypeModel.IbanModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
@@ -37,11 +39,11 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull IndexBankHolder holder, int i) {
-//        BankModel model = (BankModel) items.get(i);
+        IbanModel model = (IbanModel) items.get(i);
 
-        listener(holder);
+        listener(holder, model);
 
-        setData(holder);
+        setData(holder, model);
     }
 
     @Override
@@ -49,7 +51,7 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
         if (this.items != null)
             return items.size();
         else
-            return 4;
+            return 0;
     }
 
     public void setItems(ArrayList<TypeModel> items) {
@@ -67,19 +69,23 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
         }
     }
 
-    private void listener(IndexBankHolder holder) {
+    private void listener(IndexBankHolder holder, IbanModel model) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexBankHolder holder) {
-        holder.binding.ibanTextView.setText("IR122223545487987987454544");
-        holder.binding.nameTextView.setText("حسن صالحی");
+    private void setData(IndexBankHolder holder, IbanModel model) {
+        holder.binding.ibanTextView.setText(model.getIban());
+
+        if (!model.getOwner().equals(""))
+            holder.binding.nameTextView.setText(model.getOwner());
+        else
+            holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 
         setAvatar(holder, "");
 
-        setStatus(holder);
+        setStatus(holder, model.getStatus());
     }
 
     private void setAvatar(IndexBankHolder holder, String url) {
@@ -94,27 +100,25 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
         }
     }
 
-    private void setStatus(IndexBankHolder holder) {
-        holder.binding.statusTextView.setText("در انتظار");
+    private void setStatus(IndexBankHolder holder, String status) {
+        holder.binding.statusTextView.setText(SelectionManager.getIbanStatus(activity, "fa", status));
 
-        switch (holder.binding.statusTextView.getText().toString()) {
-            case "در انتظار":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
-                holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_amber50);
-                break;
-            case "در حال انجام":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
-                holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_risloo50);
-                break;
-            case "پایان یافته":
+        switch (status) {
+            case "verified":
+                holder.binding.statusTextView.setVisibility(View.GONE);
+
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
                 holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_emerald50);
                 break;
-            case "لغو شده":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
-                holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_red50);
+            case "awaiting":
+                holder.binding.statusTextView.setVisibility(View.VISIBLE);
+
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
+                holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_amber50);
                 break;
             default:
+                holder.binding.statusTextView.setVisibility(View.VISIBLE);
+
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
                 holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_coolgray50);
                 break;

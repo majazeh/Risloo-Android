@@ -51,7 +51,7 @@ public class AccountingFragment extends Fragment {
         }).widget(binding.billingsIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-//            ((MainActivity) requireActivity()).navigatoon.navigateToBanksFragment(null);
+            ((MainActivity) requireActivity()).navigatoon.navigateToBanksFragment(null);
         }).widget(binding.banksIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {

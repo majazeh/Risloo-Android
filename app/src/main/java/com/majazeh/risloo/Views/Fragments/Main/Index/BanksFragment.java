@@ -16,17 +16,27 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexBankAdapter;
 import com.majazeh.risloo.databinding.FragmentBanksBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Bank;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.IbanModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class BanksFragment extends Fragment {
 
@@ -42,7 +52,7 @@ public class BanksFragment extends Fragment {
     // Vars
     private ArrayList<String> accountIds = new ArrayList<>();
     private String iban = "", account = "", type = "", amount = "", weekday = "", monthday = "";
-    private boolean userSelect = false, isLoading = true;
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -356,51 +366,59 @@ public class BanksFragment extends Fragment {
     }
 
     private void getData() {
-//        Bank.list(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                List items = (List) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        adapter.clearItems();
-//
-//                        if (!items.data().isEmpty()) {
-//                            adapter.setItems(items.data());
-                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
-//
-//                            binding.settleGroup.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-//                            binding.indexSingleLayout.recyclerView.setAdapter(null);
-//
-//                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-//                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BankAdapterEmpty));
-//
-//                            binding.settleGroup.setVisibility(View.VISIBLE);
-//                        }
-//
-//                        binding.createHeaderLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
-//
+        Bank.getIbans(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            adapter.clearItems();
+
+                            List items = new List();
+                            for (int i = 0; i < ((JSONObject) object).getJSONObject("data").getJSONArray("items").length(); i++)
+                                items.add(new IbanModel(((JSONObject) object).getJSONObject("data").getJSONArray("items").getJSONObject(i)));
+
+                            if (!items.data().isEmpty()) {
+                                adapter.setItems(items.data());
+                                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+
+                                binding.settleGroup.setVisibility(View.GONE);
+                            } else if (adapter.getItemCount() == 0) {
+                                binding.indexSingleLayout.recyclerView.setAdapter(null);
+
+                                binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BankAdapterEmpty));
+
+                                binding.settleGroup.setVisibility(View.VISIBLE);
+                            }
+
+                            binding.createHeaderLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+
+                            hideShimmer();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
                         hideShimmer();
-//                    });
-//
-//                    isLoading = false;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        hideShimmer();
-//                    });
-//
-//                    isLoading = false;
-//                }
-//            }
-//        });
+                    });
+                }
+            }
+        });
+    }
+
+    private void resetInputs() {
+        iban = "";
+        binding.ibanIncludeLayout.inputEditText.setText(iban);
+        binding.ibanIncludeLayout.footerTextView.setText(getResources().getString(R.string.MainIban) + " - " + "0");
     }
 
     private void setHashmap(String method) {
@@ -471,65 +489,70 @@ public class BanksFragment extends Fragment {
     }
 
     private void doWork(String method) {
-//        DialogManager.showLoadingDialog(requireActivity(), "");
-//
-//        setHashmap(method);
-//
-//        if (method.equals("create")) {
-//            Bank.add(data, header, new Response() {
-//                @Override
-//                public void onOK(Object object) {
-//                    if (isAdded()) {
-//                        requireActivity().runOnUiThread(() -> {
-//                            DialogManager.dismissLoadingDialog();
-//                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewIban));
-//                        });
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(String response) {
-//                    if (isAdded()) {
-//                        requireActivity().runOnUiThread(() -> {
-//                            try {
-//                                JSONObject responseObject = new JSONObject(response);
-//                                if (!responseObject.isNull("errors")) {
-//                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
-//
-//                                    Iterator<String> keys = (errorsObject.keys());
-//                                    StringBuilder allErrors = new StringBuilder();
-//
-//                                    while (keys.hasNext()) {
-//                                        String key = keys.next();
-//                                        StringBuilder keyErrors = new StringBuilder();
-//
-//                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-//                                            String error = errorsObject.getJSONArray(key).getString(i);
-//
-//                                            keyErrors.append(error);
-//                                            keyErrors.append("\n");
-//
-//                                            allErrors.append(error);
-//                                            allErrors.append("\n");
-//                                        }
-//
-//                                        switch (key) {
-//                                            case "iban":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                                break;
-//                                        }
-//                                    }
-//
-//                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-//                                }
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        });
-//                    }
-//                }
-//            });
-//        } else {
+        DialogManager.showLoadingDialog(requireActivity(), "");
+
+        setHashmap(method);
+
+        if (method.equals("create")) {
+            Bank.addIban(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            DialogManager.dismissLoadingDialog();
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewIban));
+
+                            resetInputs();
+                            showShimmer();
+
+                            getData();
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject responseObject = new JSONObject(response);
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder allErrors = new StringBuilder();
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        StringBuilder keyErrors = new StringBuilder();
+
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String error = errorsObject.getJSONArray(key).getString(i);
+
+                                            keyErrors.append(error);
+                                            keyErrors.append("\n");
+
+                                            allErrors.append(error);
+                                            allErrors.append("\n");
+                                        }
+
+                                        switch (key) {
+                                            case "iban":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                        }
+                                    }
+
+                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            });
+        } else {
 //            Bank.settle(data, header, new Response() {
 //                @Override
 //                public void onOK(Object object) {
@@ -595,7 +618,13 @@ public class BanksFragment extends Fragment {
 //                    }
 //                }
 //            });
-//        }
+        }
+    }
+
+    private void showShimmer() {
+        binding.indexSingleLayout.getRoot().setVisibility(View.GONE);
+        binding.indexShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.indexShimmerLayout.getRoot().startShimmer();
     }
 
     private void hideShimmer() {
@@ -609,7 +638,6 @@ public class BanksFragment extends Fragment {
         super.onDestroyView();
         binding = null;
         userSelect = false;
-        isLoading = true;
     }
 
 }

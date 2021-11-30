@@ -39,6 +39,10 @@ public class SelectionManager {
         return getSelection(activity, "Encryptions.json", local, value);
     }
 
+    public static String getIbanStatus(Activity activity, String local, String value) {
+        return getSelection(activity, "IbanStatus.json", local, value);
+    }
+
     public static String getIbanType(Activity activity, String local, String value) {
         return getSelection(activity, "IbanTypes.json", local, value);
     }
