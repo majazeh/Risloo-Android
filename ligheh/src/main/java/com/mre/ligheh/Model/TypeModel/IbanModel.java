@@ -15,7 +15,7 @@ public class IbanModel extends TypeModel {
         super(jsonObject);
         try {
             if (!jsonObject.isNull("id"))
-                setIban(jsonObject.getString("id"));
+                setId(jsonObject.getString("id"));
             if (!jsonObject.isNull("iban"))
                 setIban(jsonObject.getString("iban"));
             if (!jsonObject.isNull("bank"))

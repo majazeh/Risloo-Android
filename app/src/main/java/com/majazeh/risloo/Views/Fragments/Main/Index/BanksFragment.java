@@ -577,71 +577,71 @@ public class BanksFragment extends Fragment {
                 }
             });
         } else {
-//            Bank.settle(data, header, new Response() {
-//                @Override
-//                public void onOK(Object object) {
-//                    if (isAdded()) {
-//                        requireActivity().runOnUiThread(() -> {
-//                            DialogManager.dismissLoadingDialog();
-//                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackIbanSettled));
-//                        });
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(String response) {
-//                    if (isAdded()) {
-//                        requireActivity().runOnUiThread(() -> {
-//                            try {
-//                                JSONObject responseObject = new JSONObject(response);
-//                                if (!responseObject.isNull("errors")) {
-//                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
-//
-//                                    Iterator<String> keys = (errorsObject.keys());
-//                                    StringBuilder allErrors = new StringBuilder();
-//
-//                                    while (keys.hasNext()) {
-//                                        String key = keys.next();
-//                                        StringBuilder keyErrors = new StringBuilder();
-//
-//                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-//                                            String error = errorsObject.getJSONArray(key).getString(i);
-//
-//                                            keyErrors.append(error);
-//                                            keyErrors.append("\n");
-//
-//                                            allErrors.append(error);
-//                                            allErrors.append("\n");
-//                                        }
-//
-//                                        switch (key) {
-//                                            case "iban_id":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                                break;
-//                                            case "type":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                                break;
-//                                            case "amount":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                                break;
-//                                            case "weekday":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                                break;
-//                                            case "day":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                                break;
-//                                        }
-//                                    }
-//
-//                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-//                                }
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        });
-//                    }
-//                }
-//            });
+            Bank.settleds(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            DialogManager.dismissLoadingDialog();
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackIbanSettled));
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject responseObject = new JSONObject(response);
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder allErrors = new StringBuilder();
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        StringBuilder keyErrors = new StringBuilder();
+
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String error = errorsObject.getJSONArray(key).getString(i);
+
+                                            keyErrors.append(error);
+                                            keyErrors.append("\n");
+
+                                            allErrors.append(error);
+                                            allErrors.append("\n");
+                                        }
+
+                                        switch (key) {
+                                            case "iban_id":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "type":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "amount":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "weekday":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                            case "day":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                break;
+                                        }
+                                    }
+
+                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            });
         }
     }
 

@@ -27,7 +27,7 @@ public class Bank extends Model {
 
     public static void settleds(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
-            Model.post(endpoint, data, header, response, null);
+            Model.post(endpoint + "/" + "settleds", data, header, response, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
