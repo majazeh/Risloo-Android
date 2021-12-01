@@ -9,13 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexBankHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexBankBinding;
 import com.mre.ligheh.Model.TypeModel.IbanModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -83,20 +83,130 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
         else
             holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 
-        setAvatar(holder, "");
+        if (model.getBank() != null && !model.getBank().getTitle().equals(""))
+            setAvatar(holder, model.getBank().getId());
+        else
+            setAvatar(holder, "");
 
         setStatus(holder, model.getStatus());
     }
 
-    private void setAvatar(IndexBankHolder holder, String url) {
-        if (!url.equals("")) {
-            holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
-            holder.binding.avatarIncludeLayout.iconImageView.setImageResource(R.drawable.ic_university_light);
+    private void setAvatar(IndexBankHolder holder, String id) {
+        if (!id.equals("")) {
+            holder.binding.avatarImageView.setPadding((int) activity.getResources().getDimension(R.dimen._12sdp), (int) activity.getResources().getDimension(R.dimen._12sdp), (int) activity.getResources().getDimension(R.dimen._12sdp), (int) activity.getResources().getDimension(R.dimen._12sdp));
 
-            holder.binding.avatarIncludeLayout.avatarCircleImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_coolgray200);
+            switch (id) {
+                case "1":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_ansar);
+                    break;
+                case "2":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_ayandeh);
+                    break;
+                case "3":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_dey);
+                    break;
+                case "4":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_eghtesad_novin);
+                    break;
+                case "5":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_ghavamin);
+                    break;
+                case "6":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_hekmat_iranian);
+                    break;
+                case "7":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_iran_zamin);
+                    break;
+                case "8":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_karafarin);
+                    break;
+                case "9":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_keshavarzi);
+                    break;
+                case "10":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_khavarmianeh);
+                    break;
+                case "11":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_kosar);
+                    break;
+                case "12":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_markazi);
+                    break;
+                case "13":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_maskan);
+                    break;
+                case "14":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_mehr_eghtesad);
+                    break;
+                case "15":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_mehr_iran);
+                    break;
+                case "16":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_melal);
+                    break;
+                case "17":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_mellat);
+                    break;
+                case "18":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_melli_iran);
+                    break;
+                case "19":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_noor);
+                    break;
+                case "20":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_parsian);
+                    break;
+                case "21":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_pasargad);
+                    break;
+                case "22":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_post_bank);
+                    break;
+                case "23":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_refah);
+                    break;
+                case "24":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_resalat);
+                    break;
+                case "25":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_saderat);
+                    break;
+                case "26":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_saman);
+                    break;
+                case "27":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_sanat_madan);
+                    break;
+                case "28":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_sarmayeh);
+                    break;
+                case "29":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_sepah);
+                    break;
+                case "30":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_shahr);
+                    break;
+                case "31":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_sina);
+                    break;
+                case "32":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_taavon);
+                    break;
+                case "33":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_tejarat);
+                    break;
+                case "34":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_tosee);
+                    break;
+                case "35":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_tosee_saderat);
+                    break;
+                case "36":
+                    holder.binding.avatarImageView.setImageResource(R.drawable.bank_tourism);
+                    break;
+            }
+        } else {
+            InitManager.imgResTint(activity, holder.binding.avatarImageView, R.drawable.ic_university_light, R.color.CoolGray400);
         }
     }
 

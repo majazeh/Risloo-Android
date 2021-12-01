@@ -363,7 +363,6 @@ public class BanksFragment extends Fragment {
     private void setData(UserModel model) {
         // TODO : Place Code When Needed
 
-        binding.settleGroup.setVisibility(View.VISIBLE);
         binding.totalIncludeLayout.amountTextView.setText("100.000" + " " + getResources().getString(R.string.MainToman));
     }
 
@@ -381,6 +380,11 @@ public class BanksFragment extends Fragment {
 
         options.add("");
         accountIds.add("");
+
+        if (options.size() >= 2)
+            binding.settleGroup.setVisibility(View.VISIBLE);
+        else
+            binding.settleGroup.setVisibility(View.GONE);
 
         InitManager.input12sspSpinner(requireActivity(), binding.accountIncludeLayout.selectSpinner, options);
     }
@@ -410,6 +414,8 @@ public class BanksFragment extends Fragment {
 
                                 binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BankAdapterEmpty));
+
+                                binding.settleGroup.setVisibility(View.GONE);
                             }
 
                             binding.createHeaderLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));

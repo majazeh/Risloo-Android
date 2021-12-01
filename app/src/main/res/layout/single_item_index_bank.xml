@@ -11,14 +11,19 @@
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp">
 
-    <include
-        android:id="@+id/avatar_includeLayout"
-        layout="@layout/component_main_avatar_52sdp_img"
+    <ImageView
+        android:id="@+id/avatar_imageView"
         android:layout_width="@dimen/_52sdp"
         android:layout_height="@dimen/_52sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/_16sdp"
+        android:background="@drawable/draw_oval_solid_white_border_1sdp_coolgray200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_ellipsis_v_light"
+        tools:tint="@color/CoolGray400" />
 
     <TextView
         android:id="@+id/iban_textView"
@@ -33,7 +38,7 @@
         android:fontFamily="@font/dana_medium"
         app:layout_constraintBottom_toTopOf="@id/name_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/avatar_includeLayout"
+        app:layout_constraintStart_toEndOf="@id/avatar_imageView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="IR000000000000000000000000" />
 

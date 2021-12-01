@@ -113,9 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintEnd_toEndOf="@id/create_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/create_constraintLayout"
+            app:layout_constraintRight_toRightOf="@id/create_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/index_barrier"
             tools:layout_marginTop="@dimen/_6sdp" />
 
