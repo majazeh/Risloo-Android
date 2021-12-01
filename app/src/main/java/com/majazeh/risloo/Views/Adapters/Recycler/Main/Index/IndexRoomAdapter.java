@@ -18,6 +18,8 @@ import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexRoomHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Show.DashboardFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexRoomBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
@@ -99,16 +101,19 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
             ((MainActivity) activity).navigatoon.navigateToRoomFragment(model);
         }).widget(holder.binding.getRoot());
 
-        holder.binding.switchIncludeLayout.getRoot().setOnTouchListener((v, event) -> {
+        holder.binding.availableSwitchCompat.getRoot().setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
 
-        holder.binding.switchIncludeLayout.getRoot().setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+        holder.binding.availableSwitchCompat.getRoot().setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
-        holder.binding.switchIncludeLayout.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
+        holder.binding.availableSwitchCompat.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
-                doWork(holder, model, isChecked);
+                if (isChecked)
+                    doWork(holder, model, "1", "available");
+                else
+                    doWork(holder, model, "0", "available");
 
                 userSelect = false;
             }
@@ -152,7 +157,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
         }
 
         if (current instanceof RoomsFragment) {
-            setSelected(holder, true);
+            setAvailable(holder, true);
         }
     }
 
@@ -168,13 +173,69 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
         }
     }
 
-    private void setSelected(IndexRoomHolder holder, boolean isSelected) {
-        holder.binding.switchIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-        holder.binding.switchIncludeLayout.getRoot().setChecked(isSelected);
+    private void setAvailable(IndexRoomHolder holder, boolean isAvailable) {
+        holder.binding.availableSwitchCompat.getRoot().setVisibility(View.VISIBLE);
+        holder.binding.availableSwitchCompat.getRoot().setChecked(isAvailable);
     }
 
-    private void doWork(IndexRoomHolder holder, RoomModel model, boolean isSelected) {
-        // TODO : Place Code When Needed
+    private void setHashmap(RoomModel model, String value, String method) {
+        data.put("id", model.getRoomId());
+        data.put(method, value);
+
+        if (method.equals("available"))
+            data.remove("order");
+        else
+            data.remove("available");
+    }
+
+    private void doWork(IndexRoomHolder holder, RoomModel model, String value, String method) {
+        setHashmap(model, value, method);
+
+        if (method.equals("available")) {
+//            DialogManager.showLoadingDialog(activity,"");
+//
+//            Room.edit(data, header, new Response() {
+//                @Override
+//                public void onOK(Object object) {
+//                    activity.runOnUiThread(() -> {
+//                        DialogManager.dismissLoadingDialog();
+//                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+//                    });
+//                }
+//
+//                @Override
+//                public void onFailure(String response) {
+//                    activity.runOnUiThread(() -> {
+//                        resetWidget(holder, value, method);
+//                    });
+//                }
+//            });
+        } else {
+            Room.changeOrder(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    activity.runOnUiThread(() -> {
+                        // TODO : Place Code When Needed
+                    });
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    activity.runOnUiThread(() -> {
+                        resetWidget(holder, value, method);
+                    });
+                }
+            });
+        }
+    }
+
+    private void resetWidget(IndexRoomHolder holder, String value, String method) {
+        if (method.equals("available")) {
+            if (value.equals("1"))
+                setAvailable(holder, false);
+            else if (value.equals("0"))
+                setAvailable(holder, true);
+        }
     }
 
 }

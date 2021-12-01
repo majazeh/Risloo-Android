@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/switch_includeLayout"
+        android:id="@+id/available_switchCompat"
         layout="@layout/component_main_switch_small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
