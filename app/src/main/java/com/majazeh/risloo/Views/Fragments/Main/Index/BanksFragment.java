@@ -404,20 +404,116 @@ public class BanksFragment extends Fragment {
             binding.settleGroup.setVisibility(View.GONE);
 
         InitManager.input12sspSpinner(requireActivity(), binding.accountIncludeLayout.selectSpinner, options);
+
+        // Select First Account Item
+        account = accountIds.get(0);
+        binding.accountIncludeLayout.selectSpinner.setSelection(0);
     }
 
     private void setScheduling(JSONObject object) {
-//        try {
-//            if (object != null) {
-//                binding.scheduleHelperView.getRoot().setVisibility(View.GONE);
-//
-//                // TODO : Place Code Here
-//            } else {
-//                binding.scheduleHelperView.getRoot().setVisibility(View.VISIBLE);
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            JSONObject scheduling = object.getJSONObject("scheduling");
+
+            if (scheduling != null) {
+                binding.scheduleHelperView.getRoot().setVisibility(View.GONE);
+
+                if (scheduling.getString("type") != null && !scheduling.getString("type").equals("")) {
+                    type = SelectionManager.getIbanType(requireActivity(), "fa", scheduling.getString("type"));
+
+                    switch (type) {
+                        case "تسویه آنی":
+                            binding.typeIncludeLayout.selectSpinner.setSelection(0);
+
+                            binding.amountIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.weekdayIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.monthdayIncludeLayout.getRoot().setVisibility(View.GONE);
+
+                            binding.scheduleGuideLayout.getRoot().setVisibility(View.GONE);
+
+                            binding.settleTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BanksFragmentSettleImmediateButton));
+
+                            setAmount(scheduling.getString("value"));
+                            break;
+                        case "زمانبندی: روزانه":
+                            binding.typeIncludeLayout.selectSpinner.setSelection(1);
+
+                            binding.amountIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.weekdayIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.monthdayIncludeLayout.getRoot().setVisibility(View.GONE);
+
+                            binding.scheduleGuideLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.settleTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BanksFragmentSettleScheduleButton));
+                            break;
+                        case "زمانبندی: هفتگی":
+                            binding.typeIncludeLayout.selectSpinner.setSelection(2);
+
+                            binding.amountIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.weekdayIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.monthdayIncludeLayout.getRoot().setVisibility(View.GONE);
+
+                            binding.scheduleGuideLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.settleTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BanksFragmentSettleScheduleButton));
+
+                            setWeekday(scheduling.getString("value"));
+                            break;
+                        case "زمانبندی: ماهانه":
+                            binding.typeIncludeLayout.selectSpinner.setSelection(3);
+
+                            binding.amountIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.weekdayIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.monthdayIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.scheduleGuideLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.settleTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BanksFragmentSettleScheduleButton));
+
+                            setMonthday(scheduling.getString("value"));
+                            break;
+                    }
+                }
+            } else {
+                binding.scheduleHelperView.getRoot().setVisibility(View.VISIBLE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setAmount(String value) {
+        if (value != null && !value.equals("")) {
+            amount = value;
+            binding.amountIncludeLayout.inputEditText.setText(amount);
+
+            String money = StringManager.separate(amount) + " " + getResources().getString(R.string.MainToman);
+            binding.amountIncludeLayout.footerTextView.setText(money);
+        }
+    }
+
+    private void setWeekday(String value) {
+        if (value != null && !value.equals("")) {
+            weekday = value;
+            binding.weekdayIncludeLayout.selectSpinner.setSelection(Integer.parseInt(weekday));
+        }
+    }
+
+    private void setMonthday(String value) {
+        if (value != null && !value.equals("")) {
+            monthday = value;
+
+            switch(monthday) {
+                case "before_last":
+                    binding.monthdayIncludeLayout.selectSpinner.setSelection(binding.monthdayIncludeLayout.selectSpinner.getAdapter().getCount() - 2);
+                    break;
+                case "last_day":
+                    binding.monthdayIncludeLayout.selectSpinner.setSelection(binding.monthdayIncludeLayout.selectSpinner.getAdapter().getCount() - 1);
+                    break;
+                default:
+                    binding.monthdayIncludeLayout.selectSpinner.setSelection(Integer.parseInt(monthday) - 1);
+                    break;
+            }
+        }
     }
 
     private void getData() {
