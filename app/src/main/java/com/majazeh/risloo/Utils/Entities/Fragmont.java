@@ -97,6 +97,7 @@ import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabPasswordFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabPersonalFragment;
 import com.majazeh.risloo.Views.Fragments.Test.TestChainFragment;
 import com.majazeh.risloo.Views.Fragments.Test.TestDescriptionFragment;
+import com.majazeh.risloo.Views.Fragments.Test.TestDescriptiveFragment;
 import com.majazeh.risloo.Views.Fragments.Test.TestEndFragment;
 import com.majazeh.risloo.Views.Fragments.Test.TestEntityFragment;
 import com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragment;
@@ -359,6 +360,9 @@ public class Fragmont {
             return fragment;
 
         else if (fragment instanceof TestEntityFragment)
+            return fragment;
+
+        else if (fragment instanceof TestDescriptiveFragment)
             return fragment;
 
         else if (fragment instanceof TestOptionalFragment)

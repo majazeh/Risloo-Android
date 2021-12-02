@@ -431,6 +431,11 @@ public class Navigatoon {
         navController.navigate(action);
     }
 
+    public void navigateToTestDescriptiveFragment() {
+        NavDirections action = NavigationTestDirections.actionGlobalTestDescriptiveFragment();
+        navController.navigate(action);
+    }
+
     public void navigateToTestOptionalFragment() {
         NavDirections action = NavigationTestDirections.actionGlobalTestOptionalFragment();
         navController.navigate(action);

@@ -275,6 +275,11 @@
     <string name="EntityFragmentTitle">بخش</string>
 
 
+    ---------- // DescriptiveFragment
+
+    <string name="DescriptiveFragmentTitle">تست تشريحي</string>
+
+
     ---------- // OptionalFragment
 
     <string name="OptionalFragmentTitle">تست متنی</string>

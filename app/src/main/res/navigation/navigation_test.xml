@@ -33,6 +33,12 @@
         tools:layout="@layout/fragment_test_entity" />
 
     <fragment
+        android:id="@+id/testDescriptiveFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Test.TestDescriptiveFragment"
+        android:label="@string/DescriptiveFragmentTitle"
+        tools:layout="@layout/fragment_test_descriptive" />
+
+    <fragment
         android:id="@+id/testOptionalFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragment"
         android:label="@string/OptionalFragmentTitle"
@@ -73,6 +79,10 @@
     <action
         android:id="@+id/action_global_testEntityFragment"
         app:destination="@id/testEntityFragment" />
+
+    <action
+        android:id="@+id/action_global_testDescriptiveFragment"
+        app:destination="@id/testDescriptiveFragment" />
 
     <action
         android:id="@+id/action_global_testOptionalFragment"
