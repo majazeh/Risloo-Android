@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Utils.Widgets.ItemTouchHelperAdapter;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexRoomHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomsFragment;
@@ -27,9 +28,10 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
-public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
+public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> implements ItemTouchHelperAdapter {
 
     // Fragments
     private Fragment current;
@@ -222,7 +224,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
                 @Override
                 public void onFailure(String response) {
                     activity.runOnUiThread(() -> {
-                        resetWidget(holder, value, method);
+                        // TODO : Place Code When Needed
                     });
                 }
             });
@@ -236,6 +238,39 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> {
             else if (value.equals("0"))
                 setAvailable(holder, true);
         }
+    }
+
+    @Override
+    public void onItemMoved(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++)
+                Collections.swap(items, i, i + 1);
+        } else {
+            for (int i = fromPosition; i > toPosition; i--)
+                Collections.swap(items, i, i - 1);
+        }
+
+        RoomModel model = (RoomModel) items.get(fromPosition);
+        doWork(null, model, String.valueOf(toPosition), "order");
+
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onItemSwiped(int position) {
+        // TODO : Place Code If Needed
+
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onItemSelect(RecyclerView.ViewHolder viewHolder) {
+        viewHolder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue50_border_1sdp_lightblue300);
+    }
+
+    @Override
+    public void onItemClear(RecyclerView.ViewHolder viewHolder) {
+        viewHolder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
     }
 
 }

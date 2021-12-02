@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.ItemTouchHelperCallback;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomsBinding;
@@ -64,6 +66,11 @@ public class RoomsFragment extends Fragment {
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomsFragmentTitle));
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+
+        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+
+        touchHelper.attachToRecyclerView(binding.indexSingleLayout.recyclerView);
     }
 
     private void setArgs() {
