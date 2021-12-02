@@ -29,6 +29,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Bank;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.IbanModel;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -361,9 +362,25 @@ public class BanksFragment extends Fragment {
     }
 
     private void setData(UserModel model) {
-        // TODO : Place Code When Needed
+        if (model.getTreasuries() != null) {
+            int balance = 0;
 
-        binding.totalIncludeLayout.amountTextView.setText("100.000" + " " + getResources().getString(R.string.MainToman));
+            for (TypeModel typeModel : model.getTreasuries().data()) {
+                TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel;
+
+                if (treasuriesModel.getSymbol().equals("wallet")) {
+                    balance += treasuriesModel.getBalance();
+                }
+            }
+
+            if (balance != 0)
+                binding.totalIncludeLayout.amountTextView.setText(StringManager.separate(String.valueOf(balance)) + " " + getResources().getString(R.string.MainToman));
+            else
+                binding.totalIncludeLayout.amountTextView.setText("");
+
+        } else {
+            binding.totalIncludeLayout.amountTextView.setText("");
+        }
     }
 
     private void setAccounts(List accounts) {
@@ -387,6 +404,20 @@ public class BanksFragment extends Fragment {
             binding.settleGroup.setVisibility(View.GONE);
 
         InitManager.input12sspSpinner(requireActivity(), binding.accountIncludeLayout.selectSpinner, options);
+    }
+
+    private void setScheduling(JSONObject object) {
+//        try {
+//            if (object != null) {
+//                binding.scheduleHelperView.getRoot().setVisibility(View.GONE);
+//
+//                // TODO : Place Code Here
+//            } else {
+//                binding.scheduleHelperView.getRoot().setVisibility(View.VISIBLE);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void getData() {
@@ -419,6 +450,8 @@ public class BanksFragment extends Fragment {
                             }
 
                             binding.createHeaderLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+
+                            setScheduling(((JSONObject) object).getJSONObject("data"));
 
                             hideShimmer();
                         } catch (JSONException e) {
