@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Widgets;
+package com.majazeh.risloo.Utils.Interfaces;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
