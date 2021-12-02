@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
+import com.majazeh.risloo.Utils.Interfaces.CutCopyPasteListener;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordBinding;
 import com.mre.ligheh.API.Response;
@@ -108,19 +108,19 @@ public class AuthPasswordFragment extends Fragment {
             }
         });
 
-        binding.passwordIncludeLayout.inputEditText.setOnCutCopyPasteListener(new CutCopyPasteEditText.OnCutCopyPasteListener() {
+        binding.passwordIncludeLayout.inputEditText.setOnCutCopyPasteListener(new CutCopyPasteListener() {
             @Override
-            public void onCut() {
+            public void onCutListener() {
 
             }
 
             @Override
-            public void onCopy() {
+            public void onCopyListener() {
 
             }
 
             @Override
-            public void onPaste() {
+            public void onPasteListener() {
                 if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
                     if (binding.passwordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
                         binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.GONE);

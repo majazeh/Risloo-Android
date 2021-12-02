@@ -20,7 +20,7 @@ import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
+import com.majazeh.risloo.Utils.Interfaces.CutCopyPasteListener;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserTabPasswordBinding;
@@ -149,19 +149,19 @@ public class EditUserTabPasswordFragment extends Fragment {
             }
         });
 
-        binding.currentPasswordIncludeLayout.inputEditText.setOnCutCopyPasteListener(new CutCopyPasteEditText.OnCutCopyPasteListener() {
+        binding.currentPasswordIncludeLayout.inputEditText.setOnCutCopyPasteListener(new CutCopyPasteListener() {
             @Override
-            public void onCut() {
+            public void onCutListener() {
 
             }
 
             @Override
-            public void onCopy() {
+            public void onCopyListener() {
 
             }
 
             @Override
-            public void onPaste() {
+            public void onPasteListener() {
                 if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0) {
                     if (binding.currentPasswordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
                         binding.currentPasswordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
@@ -172,19 +172,19 @@ public class EditUserTabPasswordFragment extends Fragment {
             }
         });
 
-        binding.newPasswordIncludeLayout.inputEditText.setOnCutCopyPasteListener(new CutCopyPasteEditText.OnCutCopyPasteListener() {
+        binding.newPasswordIncludeLayout.inputEditText.setOnCutCopyPasteListener(new CutCopyPasteListener() {
             @Override
-            public void onCut() {
+            public void onCutListener() {
 
             }
 
             @Override
-            public void onCopy() {
+            public void onCopyListener() {
 
             }
 
             @Override
-            public void onPaste() {
+            public void onPasteListener() {
                 if (binding.newPasswordIncludeLayout.inputEditText.length() == 0) {
                     if (binding.newPasswordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
                         binding.newPasswordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
