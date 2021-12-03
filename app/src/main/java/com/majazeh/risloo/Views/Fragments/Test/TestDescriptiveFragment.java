@@ -2,9 +2,6 @@ package com.majazeh.risloo.Views.Fragments.Test;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,9 +22,6 @@ public class TestDescriptiveFragment extends Fragment {
     // Binding
     private FragmentTestDescriptiveBinding binding;
 
-    // Objects
-    private Handler handler;
-
     // Vars
     private String answer = "";
     private int key = -1;
@@ -37,8 +31,6 @@ public class TestDescriptiveFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentTestDescriptiveBinding.inflate(inflater, viewGroup, false);
 
-        initializer();
-
         listener();
 
         setArgs();
@@ -46,10 +38,6 @@ public class TestDescriptiveFragment extends Fragment {
         setAnimation();
 
         return binding.getRoot();
-    }
-
-    private void initializer() {
-        handler = new Handler();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -64,24 +52,9 @@ public class TestDescriptiveFragment extends Fragment {
             answer = binding.answerEditText.getRoot().getText().toString().trim();
         });
 
-        binding.answerEditText.getRoot().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (binding.answerEditText.getRoot().hasFocus()) {
-                    handler.removeCallbacksAndMessages(null);
-                    handler.postDelayed(() -> ((TestActivity) requireActivity()).sendItem(key, answer), 750);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+        binding.answerEditText.getRoot().setOnEditorActionListener((v, actionId, event) -> {
+            ((TestActivity) requireActivity()).sendItem(key, answer);
+            return false;
         });
     }
 

@@ -300,11 +300,12 @@ public class TestActivity extends AppCompatActivity {
                 ItemModel itemModel = (ItemModel) formModel.getObject();
 
                 switch (itemModel.getType()) {
-                    case "descriptive":
-                        navigatoon.navigateToTestDescriptiveFragment();
-                        break;
                     case "text":
-                        navigatoon.navigateToTestOptionalFragment();
+                        if (itemModel.getAnswer().getType().equals("descriptive"))
+                            navigatoon.navigateToTestDescriptiveFragment();
+                        else
+                            navigatoon.navigateToTestOptionalFragment();
+
                         break;
                     case "image_url":
                         navigatoon.navigateToTestPictoralFragment();
