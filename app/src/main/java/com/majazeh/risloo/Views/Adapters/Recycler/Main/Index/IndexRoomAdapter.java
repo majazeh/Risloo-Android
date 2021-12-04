@@ -28,6 +28,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> implements ItemTouchHelperAdapter {
@@ -41,6 +42,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
 
     // Vars
     private ArrayList<TypeModel> items;
+    private int dragFromPosition, dragToPosition;
     private boolean userSelect = false;
 
     public IndexRoomAdapter(@NonNull Activity activity) {
@@ -240,23 +242,27 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
     }
 
     @Override
-    public void onItemMove(int fromPosition, int toPosition) {
-//        if (fromPosition < toPosition) {
-//            for (int i = fromPosition; i < toPosition; i++)
-//                Collections.swap(items, i, i + 1);
-//        } else {
-//            for (int i = fromPosition; i > toPosition; i--)
-//                Collections.swap(items, i, i - 1);
-//        }
-//
-//        RoomModel model = (RoomModel) items.get(fromPosition);
-//        doWork(null, model, String.valueOf(toPosition), "order");
-//
-//        notifyItemMoved(fromPosition, toPosition);
+    public void onItemMove(RecyclerView.ViewHolder viewHolder, int fromPosition, int toPosition) {
+        this.dragFromPosition = fromPosition;
+        this.dragToPosition = toPosition;
+
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++)
+                Collections.swap(items, i, i + 1);
+        } else {
+            for (int i = fromPosition; i > toPosition; i--)
+                Collections.swap(items, i, i - 1);
+        }
+
+        if (viewHolder instanceof IndexRoomHolder) {
+            ((IndexRoomHolder) viewHolder).binding.positionTextView.setText(String.valueOf(toPosition + 1));
+        }
+
+        notifyItemMoved(fromPosition, toPosition);
     }
 
     @Override
-    public void onItemSwiped(int position) {
+    public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int position) {
         // TODO : Place Code If Needed
 
         notifyItemRemoved(position);
@@ -280,6 +286,9 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
             ((IndexRoomHolder) viewHolder).binding.positionTextView.setVisibility(View.GONE);
             ((IndexRoomHolder) viewHolder).binding.positionTextView.setText("");
         }
+
+        RoomModel model = (RoomModel) items.get(dragFromPosition);
+        doWork(null, model, String.valueOf(dragToPosition), "order");
     }
 
 }
