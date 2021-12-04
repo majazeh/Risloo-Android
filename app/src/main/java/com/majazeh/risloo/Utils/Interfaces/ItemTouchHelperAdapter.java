@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public interface ItemTouchHelperAdapter {
 
-    void onItemMoved(int fromPosition, int toPosition);
+    void onItemMove(int fromPosition, int toPosition);
 
     void onItemSwiped(int position);
 

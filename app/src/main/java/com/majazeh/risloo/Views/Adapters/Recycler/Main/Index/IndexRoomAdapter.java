@@ -240,7 +240,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
     }
 
     @Override
-    public void onItemMoved(int fromPosition, int toPosition) {
+    public void onItemMove(int fromPosition, int toPosition) {
 //        if (fromPosition < toPosition) {
 //            for (int i = fromPosition; i < toPosition; i++)
 //                Collections.swap(items, i, i + 1);
