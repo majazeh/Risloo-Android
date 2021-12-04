@@ -21,12 +21,14 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderFieldHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldTextHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldMultiHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldSelectHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldTextHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
 import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
-import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldMultiBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -57,6 +59,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (viewType == 1)
             return new TableFieldTextHolder(SingleItemTableFieldTextBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
         else if (viewType == 2)
+            return new TableFieldMultiHolder(SingleItemTableFieldMultiBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        else if (viewType == 3)
             return new TableFieldSelectHolder(SingleItemTableFieldSelectBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
         return new HeaderFieldHolder(HeaderItemTableFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
@@ -74,6 +78,14 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             listener((TableFieldTextHolder) holder, i);
 
             setData((TableFieldTextHolder) holder, model);
+        } else if (holder instanceof TableFieldMultiHolder) {
+            PrerequisitesModel model = (PrerequisitesModel) items.get(i - 1);
+
+            intializer();
+
+            listener((TableFieldMultiHolder) holder, i);
+
+            setData((TableFieldMultiHolder) holder, model);
         } else if (holder instanceof TableFieldSelectHolder) {
             PrerequisitesModel model = (PrerequisitesModel) items.get(i - 1);
 
@@ -93,10 +105,15 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         PrerequisitesModel model = (PrerequisitesModel) items.get(position - 1);
 
         try {
-            if (model.getAnswer().getString("type").equals("text") || model.getAnswer().getString("type").equals("number"))
-                return 1;
-            else if (model.getAnswer().getString("type").equals("select"))
-                return 2;
+            switch (model.getAnswer().getString("type")) {
+                case "text":
+                case "number":
+                    return 1;
+                case "descriptive":
+                    return 2;
+                case "select":
+                    return 3;
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -180,6 +197,39 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @SuppressLint("ClickableViewAccessibility")
+    private void listener(TableFieldMultiHolder holder, int item) {
+        holder.binding.inputEditText.setOnTouchListener((v, event) -> {
+            if (editable)
+                if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
+                    ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
+            return false;
+        });
+
+        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (holder.binding.inputEditText.hasFocus()) {
+                    handler.removeCallbacksAndMessages(null);
+                    handler.postDelayed(() -> {
+                        if (current instanceof SampleFragment)
+                            ((SampleFragment) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString());
+                    }, 750);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(TableFieldSelectHolder holder, int item) {
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
@@ -219,6 +269,14 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         setClickable(holder);
     }
 
+    private void setData(TableFieldMultiHolder holder, PrerequisitesModel model) {
+        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
+
+        setType(holder, model);
+
+        setClickable(holder);
+    }
+
     private void setData(TableFieldSelectHolder holder, PrerequisitesModel model, int position) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
@@ -250,6 +308,11 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
+    private void setType(TableFieldMultiHolder holder, PrerequisitesModel model) {
+        if (!model.getUser_answered().equals(""))
+            holder.binding.inputEditText.setText(model.getUser_answered());
+    }
+
     private void setType(TableFieldSelectHolder holder, PrerequisitesModel model, int position) {
         setSpinner(holder, model);
 
@@ -267,6 +330,16 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void setClickable(TableFieldTextHolder holder) {
+        if (editable) {
+            holder.binding.inputEditText.setFocusableInTouchMode(true);
+            holder.binding.getRoot().setAlpha((float) 1);
+        } else {
+            holder.binding.inputEditText.setFocusableInTouchMode(false);
+            holder.binding.getRoot().setAlpha((float) 0.6);
+        }
+    }
+
+    private void setClickable(TableFieldMultiHolder holder) {
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.getRoot().setAlpha((float) 1);

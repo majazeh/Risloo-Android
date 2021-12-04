@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreInputHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreMultiHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreSelectHolder;
-import com.majazeh.risloo.databinding.SingleItemTestPreInputBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreTextHolder;
+import com.majazeh.risloo.databinding.SingleItemTestPreMultiBinding;
 import com.majazeh.risloo.databinding.SingleItemTestPreSelectBinding;
+import com.majazeh.risloo.databinding.SingleItemTestPreTextBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -46,8 +48,10 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 1)
-            return new TestPreInputHolder(SingleItemTestPreInputBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new TestPreTextHolder(SingleItemTestPreTextBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
         else if (viewType == 2)
+            return new TestPreMultiHolder(SingleItemTestPreMultiBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        else if (viewType == 3)
             return new TestPreSelectHolder(SingleItemTestPreSelectBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
         return null;
@@ -55,14 +59,22 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof TestPreInputHolder) {
+        if (holder instanceof TestPreTextHolder) {
             PrerequisitesModel model = (PrerequisitesModel) items.get(i);
 
             initializer();
 
-            listener((TestPreInputHolder) holder, i);
+            listener((TestPreTextHolder) holder, i);
 
-            setData((TestPreInputHolder) holder, model);
+            setData((TestPreTextHolder) holder, model);
+        } else if (holder instanceof TestPreMultiHolder) {
+            PrerequisitesModel model = (PrerequisitesModel) items.get(i);
+
+            initializer();
+
+            listener((TestPreMultiHolder) holder, i);
+
+            setData((TestPreMultiHolder) holder, model);
         } else if (holder instanceof TestPreSelectHolder) {
             PrerequisitesModel model = (PrerequisitesModel) items.get(i);
 
@@ -79,10 +91,15 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
         PrerequisitesModel model = (PrerequisitesModel) items.get(position);
 
         try {
-            if (model.getAnswer().getString("type").equals("text") || model.getAnswer().getString("type").equals("number"))
-                return 1;
-            else if (model.getAnswer().getString("type").equals("select"))
-                return 2;
+            switch (model.getAnswer().getString("type")) {
+                case "text":
+                case "number":
+                    return 1;
+                case "descriptive":
+                    return 2;
+                case "select":
+                    return 3;
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -119,7 +136,36 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(TestPreInputHolder holder, int item) {
+    private void listener(TestPreTextHolder holder, int item) {
+        holder.binding.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
+                ((TestActivity) activity).inputon.select(holder.binding.inputEditText);
+            return false;
+        });
+
+        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (holder.binding.inputEditText.hasFocus()) {
+                    handler.removeCallbacksAndMessages(null);
+                    handler.postDelayed(() -> ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim()), 750);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener(TestPreMultiHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
                 ((TestActivity) activity).inputon.select(holder.binding.inputEditText);
@@ -173,7 +219,14 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
         });
     }
 
-    private void setData(TestPreInputHolder holder, PrerequisitesModel model) {
+    private void setData(TestPreTextHolder holder, PrerequisitesModel model) {
+        if (!model.getText().equals(""))
+            holder.binding.headerTextView.setText(model.getText());
+
+        setType(holder, model);
+    }
+
+    private void setData(TestPreMultiHolder holder, PrerequisitesModel model) {
         if (!model.getText().equals(""))
             holder.binding.headerTextView.setText(model.getText());
 
@@ -187,7 +240,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
         setType(holder, model, position);
     }
 
-    private void setType(TestPreInputHolder holder, PrerequisitesModel model) {
+    private void setType(TestPreTextHolder holder, PrerequisitesModel model) {
         try {
             switch (model.getAnswer().getString("type")) {
                 case "text":
@@ -208,6 +261,11 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setType(TestPreMultiHolder holder, PrerequisitesModel model) {
+        if (!model.getUser_answered().equals(""))
+            holder.binding.inputEditText.setText(model.getUser_answered());
     }
 
     private void setType(TestPreSelectHolder holder, PrerequisitesModel model, int position) {
