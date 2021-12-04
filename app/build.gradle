@@ -13,8 +13,8 @@ android {
         applicationId "com.majazeh.risloo"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 8
-        versionName "1.6.0"
+        versionCode 9
+        versionName "1.7.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
