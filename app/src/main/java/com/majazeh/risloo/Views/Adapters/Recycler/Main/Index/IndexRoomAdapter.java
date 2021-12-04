@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.ItemTouchHelperAdapter;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Interfaces.ItemTouchHelperAdapter;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexRoomHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomsFragment;
@@ -28,7 +28,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> implements ItemTouchHelperAdapter {
@@ -242,18 +241,18 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
 
     @Override
     public void onItemMoved(int fromPosition, int toPosition) {
-        if (fromPosition < toPosition) {
-            for (int i = fromPosition; i < toPosition; i++)
-                Collections.swap(items, i, i + 1);
-        } else {
-            for (int i = fromPosition; i > toPosition; i--)
-                Collections.swap(items, i, i - 1);
-        }
-
-        RoomModel model = (RoomModel) items.get(fromPosition);
-        doWork(null, model, String.valueOf(toPosition), "order");
-
-        notifyItemMoved(fromPosition, toPosition);
+//        if (fromPosition < toPosition) {
+//            for (int i = fromPosition; i < toPosition; i++)
+//                Collections.swap(items, i, i + 1);
+//        } else {
+//            for (int i = fromPosition; i > toPosition; i--)
+//                Collections.swap(items, i, i - 1);
+//        }
+//
+//        RoomModel model = (RoomModel) items.get(fromPosition);
+//        doWork(null, model, String.valueOf(toPosition), "order");
+//
+//        notifyItemMoved(fromPosition, toPosition);
     }
 
     @Override
@@ -266,11 +265,21 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
     @Override
     public void onItemSelect(RecyclerView.ViewHolder viewHolder) {
         viewHolder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_lightblue50_border_1sdp_lightblue300);
+
+        if (viewHolder instanceof IndexRoomHolder) {
+            ((IndexRoomHolder) viewHolder).binding.positionTextView.setVisibility(View.VISIBLE);
+            ((IndexRoomHolder) viewHolder).binding.positionTextView.setText(String.valueOf(viewHolder.getBindingAdapterPosition() + 1));
+        }
     }
 
     @Override
     public void onItemClear(RecyclerView.ViewHolder viewHolder) {
         viewHolder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
+
+        if (viewHolder instanceof IndexRoomHolder) {
+            ((IndexRoomHolder) viewHolder).binding.positionTextView.setVisibility(View.GONE);
+            ((IndexRoomHolder) viewHolder).binding.positionTextView.setText("");
+        }
     }
 
 }

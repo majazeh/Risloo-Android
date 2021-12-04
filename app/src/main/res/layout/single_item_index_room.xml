@@ -34,6 +34,25 @@
         tools:visibility="visible" />
 
     <TextView
+        android:id="@+id/position_textView"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingTop="@dimen/_1sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_11ssp"
+        android:textStyle="normal"
+        android:textColor="@color/White"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        android:background="@drawable/draw_oval_solid_risloo500"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
+
+    <TextView
         android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
