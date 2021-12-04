@@ -21,11 +21,11 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderFieldHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldInputHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldTextHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldSelectHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
 import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
-import com.majazeh.risloo.databinding.SingleItemTableFieldInputBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -55,7 +55,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 1)
-            return new TableFieldInputHolder(SingleItemTableFieldInputBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new TableFieldTextHolder(SingleItemTableFieldTextBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
         else if (viewType == 2)
             return new TableFieldSelectHolder(SingleItemTableFieldSelectBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
@@ -66,14 +66,14 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderFieldHolder) {
             setData((HeaderFieldHolder) holder);
-        } else if (holder instanceof TableFieldInputHolder) {
+        } else if (holder instanceof TableFieldTextHolder) {
             PrerequisitesModel model = (PrerequisitesModel) items.get(i - 1);
 
             intializer();
 
-            listener((TableFieldInputHolder) holder, i);
+            listener((TableFieldTextHolder) holder, i);
 
-            setData((TableFieldInputHolder) holder, model);
+            setData((TableFieldTextHolder) holder, model);
         } else if (holder instanceof TableFieldSelectHolder) {
             PrerequisitesModel model = (PrerequisitesModel) items.get(i - 1);
 
@@ -147,7 +147,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(TableFieldInputHolder holder, int item) {
+    private void listener(TableFieldTextHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
@@ -211,7 +211,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.binding.countTextView.setText(StringManager.bracing(itemsCount()));
     }
 
-    private void setData(TableFieldInputHolder holder, PrerequisitesModel model) {
+    private void setData(TableFieldTextHolder holder, PrerequisitesModel model) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
         setType(holder, model);
@@ -227,7 +227,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         setClickable(holder);
     }
 
-    private void setType(TableFieldInputHolder holder, PrerequisitesModel model) {
+    private void setType(TableFieldTextHolder holder, PrerequisitesModel model) {
         try {
             switch (model.getAnswer().getString("type")) {
                 case "text":
@@ -266,7 +266,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    private void setClickable(TableFieldInputHolder holder) {
+    private void setClickable(TableFieldTextHolder holder) {
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.getRoot().setAlpha((float) 1);
