@@ -566,8 +566,8 @@ public class RoomFragment extends Fragment {
         if (((MainActivity) requireActivity()).permissoon.showRoomDropdownTags(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
 
-        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownAccounting(((MainActivity) requireActivity()).singleton.getUserModel(), status))
-            items.add(requireActivity().getResources().getString(R.string.RoomFragmentAccounting));
+//        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownAccounting(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+//            items.add(requireActivity().getResources().getString(R.string.RoomFragmentAccounting));
 
         items.add("");
 
