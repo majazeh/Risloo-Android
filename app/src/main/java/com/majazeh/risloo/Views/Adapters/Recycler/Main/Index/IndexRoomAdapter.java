@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -287,8 +288,11 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
             ((IndexRoomHolder) viewHolder).binding.positionTextView.setText("");
         }
 
-        RoomModel model = (RoomModel) items.get(dragFromPosition);
-        doWork(null, model, String.valueOf(dragToPosition), "order");
+        RoomModel model = (RoomModel) items.get(dragToPosition);
+        doWork(null, model, String.valueOf(dragToPosition + 1), "order");
+
+        Log.e("a", model.getRoomManager().getName());
+        Log.e("b", String.valueOf(dragToPosition + 1));
     }
 
 }
