@@ -6,17 +6,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PrerequisitesModel extends TypeModel {
-    private String index ;
-    private String type="";
-    private String text="";
+    private String type = "";
+    private String text = "";
     private JSONObject answer;
-    private String alias="";
-    private String label="";
-    private String force="";
-    private String user_answered="";
+    private String alias = "";
+    private String label = "";
+    private String force = "";
+    private String user_answered = "";
+    private String index;
 
     public PrerequisitesModel(JSONObject jsonObject) {
         super(jsonObject);
+
         try {
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
@@ -103,7 +104,42 @@ public class PrerequisitesModel extends TypeModel {
         this.index = index;
     }
 
+    public boolean compareTo(PrerequisitesModel model) {
+        if (model != null) {
+            if (!type.equals(model.getType()))
+                return false;
 
+            if (!text.equals(model.getText()))
+                return false;
+
+            if (answer != model.getAnswer())
+                return false;
+
+            if (!alias.equals(model.getAlias()))
+                return false;
+
+            if (!label.equals(model.getLabel()))
+                return false;
+
+            if (!force.equals(model.getForce()))
+                return false;
+
+            if (!user_answered.equals(model.getUser_answered()))
+                return false;
+
+            if (!index.equals(model.getIndex()))
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public JSONObject toObject() {
+        return super.toObject();
+    }
 
     @NonNull
     @Override
@@ -116,6 +152,8 @@ public class PrerequisitesModel extends TypeModel {
                 ", label='" + label + '\'' +
                 ", force='" + force + '\'' +
                 ", user_answered='" + user_answered + '\'' +
+                ", index='" + index + '\'' +
                 '}';
     }
+
 }

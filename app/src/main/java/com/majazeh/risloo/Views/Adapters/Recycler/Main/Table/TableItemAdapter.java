@@ -14,9 +14,12 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -36,17 +39,19 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements MyDiffUtilAdapter {
+
+    // Instance
+    private final Activity activity;
 
     // Fragments
     private Fragment current;
 
     // Objects
-    private Activity activity;
+    private final AsyncListDiffer<TypeModel> differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
     private Handler handler;
 
     // Vars
-    private ArrayList<TypeModel> items;
     private boolean userSelect = false, editable = false;
 
     public TableItemAdapter(@NonNull Activity activity) {
@@ -71,7 +76,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (holder instanceof HeaderFieldHolder) {
             setData((HeaderFieldHolder) holder);
         } else if (holder instanceof TableFieldTextHolder) {
-            ItemModel model = (ItemModel) items.get(i - 1);
+            ItemModel model = (ItemModel) differ.getCurrentList().get(i - 1);
 
             intializer();
 
@@ -79,7 +84,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             setData((TableFieldTextHolder) holder, model);
         } else if (holder instanceof TableFieldMultiHolder) {
-            ItemModel model = (ItemModel) items.get(i - 1);
+            ItemModel model = (ItemModel) differ.getCurrentList().get(i - 1);
 
             intializer();
 
@@ -87,7 +92,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             setData((TableFieldMultiHolder) holder, model);
         } else if (holder instanceof TableFieldSelectHolder) {
-            ItemModel model = (ItemModel) items.get(i - 1);
+            ItemModel model = (ItemModel) differ.getCurrentList().get(i - 1);
 
             intializer();
 
@@ -102,7 +107,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (position == 0)
             return 0;
 
-        ItemModel model = (ItemModel) items.get(position - 1);
+        ItemModel model = (ItemModel) differ.getCurrentList().get(position - 1);
 
         switch (model.getAnswer().getType()) {
             case "text":
@@ -119,32 +124,21 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size() + 1;
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size() + 1;
         else
             return 0;
     }
 
     public int itemsCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+        differ.submitList(items);
     }
 
     public void setEditable(boolean editable) {
@@ -356,6 +350,22 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        ItemModel oldItemModel = (ItemModel) oldTypeModel;
+        ItemModel newItemModel = (ItemModel) newTypeModel;
+
+        return newItemModel.getIndex().equals(oldItemModel.getIndex());
+    }
+
+    @Override
+    public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        ItemModel oldItemModel = (ItemModel) oldTypeModel;
+        ItemModel newItemModel = (ItemModel) newTypeModel;
+
+        return newItemModel.compareTo(oldItemModel);
     }
 
 }

@@ -6,16 +6,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ItemModel extends TypeModel {
-    private String index ;
     private String type = "";
     private String image_url = "";
-    private String text;
+    private String text = "";
     private ItemAnswer answer;
-    private String category;
-    private String description;
+    private String category = "";
+    private String description = "";
     private String user_answered = "";
+    private String index = "";
 
     public ItemModel(JSONObject jsonObject) {
+        super(jsonObject);
+
         try {
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
@@ -98,11 +100,46 @@ public class ItemModel extends TypeModel {
         return index;
     }
 
-
     public void setIndex(String index) {
         this.index = index;
     }
 
+    public boolean compareTo(ItemModel model) {
+        if (model != null) {
+            if (!type.equals(model.getType()))
+                return false;
+
+            if (!image_url.equals(model.getImage_url()))
+                return false;
+
+            if (!text.equals(model.getText()))
+                return false;
+
+            if (answer != model.getAnswer())
+                return false;
+
+            if (!category.equals(model.getCategory()))
+                return false;
+
+            if (!description.equals(model.getDescription()))
+                return false;
+
+            if (!user_answered.equals(model.getUser_answered()))
+                return false;
+
+            if (!index.equals(model.getIndex()))
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public JSONObject toObject() {
+        return super.toObject();
+    }
 
     @NonNull
     @Override
@@ -110,8 +147,13 @@ public class ItemModel extends TypeModel {
         return "Item{" +
                 "type='" + type + '\'' +
                 ", image_url='" + image_url + '\'' +
+                ", text='" + text + '\'' +
                 ", answer=" + answer +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
                 ", user_answered='" + user_answered + '\'' +
+                ", index='" + index + '\'' +
                 '}';
     }
+
 }
