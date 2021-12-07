@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -22,13 +25,13 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> {
+public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> implements MyDiffUtilAdapter {
 
-    // Objects
-    private Activity activity;
+    // Instance
+    private final Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> items;
+    private final ArrayList<TypeModel> items = new ArrayList<>();
 
     public IndexCenterAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -58,18 +61,10 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-        notifyDataSetChanged();
-    }
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new MyDiffUtilCallback(this, this.items, items));
+        this.items.addAll(items);
 
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+        diffResult.dispatchUpdatesTo(this);
     }
 
     private void listener(IndexCenterHolder holder, CenterModel model) {
@@ -132,6 +127,22 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
 
             Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
+    }
+
+    @Override
+    public boolean isItemsTheSame(ArrayList<TypeModel> oldList, ArrayList<TypeModel> newList, int oldItemPosition, int newItemPosition) {
+        CenterModel oldCenterModel = (CenterModel) oldList.get(oldItemPosition);
+        CenterModel newCenterModel = (CenterModel) newList.get(newItemPosition);
+
+        return newCenterModel.getCenterId().equals(oldCenterModel.getCenterId());
+    }
+
+    @Override
+    public boolean isContentsTheSame(ArrayList<TypeModel> oldList, ArrayList<TypeModel> newList, int oldItemPosition, int newItemPosition) {
+        CenterModel oldCenterModel = (CenterModel) oldList.get(oldItemPosition);
+        CenterModel newCenterModel = (CenterModel) newList.get(newItemPosition);
+
+        return newCenterModel.compareTo(oldCenterModel);
     }
 
 }

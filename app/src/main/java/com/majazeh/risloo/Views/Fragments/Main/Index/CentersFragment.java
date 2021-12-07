@@ -149,9 +149,6 @@ public class CentersFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (Objects.equals(data.get("page"), 1))
-                            adapter.clearItems();
-
                         if (!items.data().isEmpty()) {
                             adapter.setItems(items.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);

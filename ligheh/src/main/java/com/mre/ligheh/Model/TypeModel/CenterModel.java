@@ -7,11 +7,10 @@ import com.mre.ligheh.Model.Madule.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class CenterModel extends TypeModel {
-    private String CenterId="";
-    private String centerStatus="";
-    private String centerType="";
+    private String centerId = "";
+    private String centerStatus = "";
+    private String centerType = "";
     private UserModel2 manager;
     private AcceptationModel acceptation;
     private JSONObject detail;
@@ -19,13 +18,9 @@ public class CenterModel extends TypeModel {
     private int updated_at;
     private List treasuries;
 
-
-    public CenterModel() {
-        super();
-    }
-
     public CenterModel(JSONObject jsonObject) throws JSONException {
         super(jsonObject);
+
         setCenterId(jsonObject.getString("id"));
         if (!jsonObject.isNull("manager"))
             setManager(new UserModel2(jsonObject.getJSONObject("manager")));
@@ -51,15 +46,14 @@ public class CenterModel extends TypeModel {
         } else {
             setTreasuries(new List());
         }
-
     }
 
     public String getCenterId() {
-        return CenterId;
+        return centerId;
     }
 
     public void setCenterId(String centerId) {
-        CenterId = centerId;
+        this.centerId = centerId;
     }
 
     public String getCenterStatus() {
@@ -126,6 +120,40 @@ public class CenterModel extends TypeModel {
         this.treasuries = treasuries;
     }
 
+    public boolean compareTo(CenterModel model) {
+        if (model != null) {
+            if (!centerId.equals(model.getCenterId()))
+                return false;
+
+            if (!centerStatus.equals(model.getCenterStatus()))
+                return false;
+
+            if (!centerType.equals(model.getCenterType()))
+                return false;
+
+            if (manager != model.getManager())
+                return false;
+
+            if (acceptation != model.getAcceptation())
+                return false;
+
+            if (detail != model.getDetail())
+                return false;
+
+            if (created_at != model.getCreated_at())
+                return false;
+
+            if (updated_at != model.getUpdated_at())
+                return false;
+
+            if (treasuries != model.getTreasuries())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public JSONObject toObject() {
@@ -136,7 +164,7 @@ public class CenterModel extends TypeModel {
     @Override
     public String toString() {
         return "CenterModel{" +
-                "CenterId='" + CenterId + '\'' +
+                "centerId='" + centerId + '\'' +
                 ", centerStatus='" + centerStatus + '\'' +
                 ", centerType='" + centerType + '\'' +
                 ", manager=" + manager +
@@ -144,6 +172,8 @@ public class CenterModel extends TypeModel {
                 ", detail=" + detail +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
+                ", treasuries=" + treasuries +
                 '}';
     }
+
 }
