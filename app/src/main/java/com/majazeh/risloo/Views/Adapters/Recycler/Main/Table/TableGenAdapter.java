@@ -2,10 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Handler;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -27,12 +24,11 @@ import java.util.ArrayList;
 
 public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    // Instance
+    private Activity activity;
+
     // Fragments
     private Fragment current;
-
-    // Objects
-    private Activity activity;
-    private Handler handler;
 
     // Vars
     private ArrayList<String> items;
@@ -60,7 +56,7 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             intializer();
 
-            listener((TableFieldTextHolder) holder, i);
+            listener((TableFieldTextHolder) holder);
 
             setData((TableFieldTextHolder) holder, item);
         }
@@ -111,40 +107,22 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void intializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
-
-        handler = new Handler();
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(TableFieldTextHolder holder, int item) {
+    private void listener(TableFieldTextHolder holder) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (editable)
-                if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
+            if (editable && MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
+                ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 
-        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
+            if (current instanceof SampleFragment)
+                ((SampleFragment) current).sendGen("cornometer", holder.binding.inputEditText.getText().toString().trim());
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (holder.binding.inputEditText.hasFocus()) {
-                    handler.removeCallbacksAndMessages(null);
-                    handler.postDelayed(() -> {
-                        if (current instanceof SampleFragment)
-                            ((SampleFragment) current).sendGen("cornometer", holder.binding.inputEditText.getText().toString());
-                    }, 750);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            ((MainActivity) activity).inputon.clear(((MainActivity) activity).inputon.editText);
+            return false;
         });
     }
 
