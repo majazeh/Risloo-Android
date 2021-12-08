@@ -62,15 +62,15 @@ public class TestPictoralFragment extends Fragment {
 
             if (item.getCategory() != null && !item.getCategory().equals("")) {
                 binding.entityTextView.getRoot().setText(item.getCategory());
-                binding.entityConstraintLayout.setVisibility(View.VISIBLE);
+                binding.entityTextView.getRoot().setVisibility(View.VISIBLE);
             } else {
-                binding.entityConstraintLayout.setVisibility(View.GONE);
+                binding.entityTextView.getRoot().setVisibility(View.GONE);
             }
 
             if (item.getImage_url() != null && !item.getImage_url().equals("")) {
-                Picasso.get().load(item.getImage_url()).placeholder(R.color.CoolGray100).into(binding.questionImageView);
+                Picasso.get().load(item.getImage_url()).placeholder(R.color.CoolGray100).into(binding.questionImageView.getRoot());
             } else {
-                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.questionImageView);
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.questionImageView.getRoot());
             }
 
             ArrayList<String> pics = new ArrayList<>();
@@ -89,7 +89,7 @@ public class TestPictoralFragment extends Fragment {
 
     private void setAnimation() {
         AnimateManager.animateViewAlpha(binding.entityTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.questionImageView, 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.questionImageView.getRoot(), 500, 0f, 1f);
         AnimateManager.animateViewAlpha(binding.listRecyclerView.getRoot(), 500, 0f, 1f);
     }
 

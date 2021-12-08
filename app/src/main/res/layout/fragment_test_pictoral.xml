@@ -43,20 +43,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/entity_textView">
 
-            <ImageView
+            <include
                 android:id="@+id/question_imageView"
+                layout="@layout/component_test_image"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_120sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:contentDescription="@string/AppImageContent"
-                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_height="@dimen/_120sdp"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <include
                 android:id="@+id/list_recyclerView"

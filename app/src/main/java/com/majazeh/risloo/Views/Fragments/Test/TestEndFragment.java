@@ -48,7 +48,7 @@ public class TestEndFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onDelayedListener(() -> ((TestActivity) requireActivity()).closeSample()).widget(binding.endTextView);
+        CustomClickView.onDelayedListener(() -> ((TestActivity) requireActivity()).closeSample()).widget(binding.endTextView.getRoot());
     }
 
     private void setArgs() {
@@ -60,7 +60,7 @@ public class TestEndFragment extends Fragment {
         FormModel formModel = model.getSampleForm().getModel("زنجیره");
 
         if (formModel == null)
-            binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
+            binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonSample));
         else {
             List items = (List) formModel.getObject();
 
@@ -68,10 +68,10 @@ public class TestEndFragment extends Fragment {
                 ChainModel chainModel = (ChainModel) items.data().get(i);
 
                 if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != items.data().size()) {
-                    binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonNext));
+                    binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonNext));
                     break;
                 } else {
-                    binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonChain));
+                    binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonChain));
                 }
             }
         }
@@ -80,7 +80,7 @@ public class TestEndFragment extends Fragment {
     private void setAnimation() {
         AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
         AnimateManager.animateViewAlpha(binding.descriptionTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.endTextView, 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.endTextView.getRoot(), 500, 0f, 1f);
     }
 
     @Override
