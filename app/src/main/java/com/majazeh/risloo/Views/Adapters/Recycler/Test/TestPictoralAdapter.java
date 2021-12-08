@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter2;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback2;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.TestActivity;
@@ -17,18 +20,22 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder> {
+public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder> implements MyDiffUtilAdapter2 {
+
+    // Activity
+    private final Activity activity;
 
     // Objects
-    private Activity activity;
+    private final AsyncListDiffer<String> differ;
 
     // Vars
-    private ArrayList<String> items;
     private int answer = -1, key = -1;
     private boolean userSelect = false;
 
     public TestPictoralAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback2(this));
     }
 
     @NonNull
@@ -39,7 +46,7 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
 
     @Override
     public void onBindViewHolder(@NonNull TestPictoralHolder holder, int i) {
-        String item = items.get(i);
+        String item = differ.getCurrentList().get(i);
 
         listener(holder, i);
 
@@ -48,38 +55,27 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
     public void setItems(ArrayList<String> items, String answer, String key) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-
         if (!answer.equals(""))
             this.answer = Integer.parseInt(answer) - 1;
 
         if (!key.equals(""))
             this.key = Integer.parseInt(key);
 
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+        differ.submitList(items);
     }
 
     private void listener(TestPictoralHolder holder, int position) {
         CustomClickView.onDelayedListener(() -> {
             answer = position;
             userSelect = true;
+
             notifyDataSetChanged();
 
             ((TestActivity) activity).sendItem(key, String.valueOf(answer + 1));
@@ -116,6 +112,16 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
             holder.itemView.setEnabled(true);
             holder.itemView.setClickable(true);
         }
+    }
+
+    @Override
+    public boolean areItemsTheSame(String oldString, String newString) {
+        return newString.equals(oldString);
+    }
+
+    @Override
+    public boolean areContentsTheSame(String oldString, String newString) {
+        return newString.equals(oldString);
     }
 
 }
