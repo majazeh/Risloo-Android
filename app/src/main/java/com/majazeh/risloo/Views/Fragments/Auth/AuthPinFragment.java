@@ -25,6 +25,7 @@ import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.Task;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -69,6 +70,8 @@ public class AuthPinFragment extends Fragment {
         listener();
 
         setArgs();
+
+        setAnimation();
 
         startSmsRetriver();
 
@@ -177,6 +180,21 @@ public class AuthPinFragment extends Fragment {
         }
 
         startCountDownTimer();
+    }
+
+    private void setAnimation() {
+        AnimateManager.animateViewAlpha(binding.headerTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.mobileTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.pinEditText.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.guideIncludeLayout.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.buttonTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.timerViewFlipper.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.loginLinkTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.registerLinkTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.passwordRecoverLinkTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.separatorView, 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.separatorView2, 500, 0f, 1f);
     }
 
     private void startCountDownTimer() {

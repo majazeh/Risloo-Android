@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -47,6 +48,8 @@ public class AuthPasswordRecoverFragment extends Fragment {
         initializer();
 
         listener();
+
+        setAnimation();
 
         return binding.getRoot();
     }
@@ -93,6 +96,19 @@ public class AuthPasswordRecoverFragment extends Fragment {
         CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment()).widget(binding.loginLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthRegisterFragment()).widget(binding.registerLinkTextView.getRoot());
+    }
+
+    private void setAnimation() {
+        AnimateManager.animateViewAlpha(binding.headerTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.mobileEditText.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.guideIncludeLayout.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.buttonTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.loginHelperTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.registerHelperTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.loginLinkTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.registerLinkTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.separatorView, 500, 0f, 1f);
     }
 
     private void setHashmap() {
