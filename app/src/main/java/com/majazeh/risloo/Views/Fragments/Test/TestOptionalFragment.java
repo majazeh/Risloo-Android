@@ -61,9 +61,9 @@ public class TestOptionalFragment extends Fragment {
 
             if (item.getCategory() != null && !item.getCategory().equals("")) {
                 binding.entityTextView.getRoot().setText(item.getCategory());
-                binding.entityTextView.getRoot().setVisibility(View.VISIBLE);
+                binding.entityConstraintLayout.setVisibility(View.VISIBLE);
             } else {
-                binding.entityTextView.getRoot().setVisibility(View.GONE);
+                binding.entityConstraintLayout.setVisibility(View.GONE);
             }
 
             if (item.getText() != null && !item.getText().equals("")) {
