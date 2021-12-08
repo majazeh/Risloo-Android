@@ -4,6 +4,8 @@
     // App Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <string name="AppVersion">نسخه</string>
+
     <string name="AppDebugTag">نسخه آزمایشی</string>
     <string name="AppDebugNote">شما هم اکنون در نسخه آزمایشی هستید</string>
     <string name="AppDebugClick">جهت انتقال به نسخه اصلی کلیک کنید</string>
@@ -122,13 +124,6 @@
     <string name="ToastIntentGalleryException">خطا در انتخاب تصویر! لطفا دوباره تلاش کنید.</string>
     <string name="ToastIntentCameraException">خطا در گرفتن تصویر! لطفا دوباره تلاش کنید.</string>
     <string name="ToastIntentCropException">خطا در کراپ تصویر! لطفا دوباره تلاش کنید.</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Splash Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="SplashVersion">نسخه</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

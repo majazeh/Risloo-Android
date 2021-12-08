@@ -54,7 +54,7 @@ public class IntroActivity extends AppCompatActivity {
     private void setData() {
         binding.descriptionTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.IntroDescription), 72, 92, getResources().getColor(R.color.CoolGray800), R.style.danaDemiBoldTextStyle));
 
-        String version = getResources().getString(R.string.IntroVersion) + " " + PackageManager.versionNameWithoutSuffix(this);
+        String version = getResources().getString(R.string.IntroVersion) + " " + PackageManager.versionNameNoSuffix(this);
         binding.versionTextView.setText(version);
     }
 

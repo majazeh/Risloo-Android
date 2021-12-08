@@ -61,9 +61,9 @@ public class SplashActivity extends AppCompatActivity {
         decoraton.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
 
         if (BuildConfig.BUILD_TYPE.equals("debug"))
-            binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
+            binding.debugTextView.setVisibility(View.VISIBLE);
         else
-            binding.debugTextView.getRoot().setVisibility(View.GONE);
+            binding.debugTextView.setVisibility(View.GONE);
     }
 
     private void initializer() {
@@ -76,29 +76,27 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        String version = getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionNameWithoutSuffix(this);
-        binding.versionTextView.setText(version);
+        binding.versionTextView.setText(PackageManager.versionNameWithText(this));
     }
 
     private void getData() {
         if (BuildConfig.BUILD_TYPE.equals("release")) {
-            handler.postDelayed(() -> binding.explodeProgressBar.setVisibility(View.VISIBLE), 500);
+            handler.postDelayed(this::showProgress, 500);
 
             Auth.explode(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    VersionModel model = new VersionModel((JSONObject) object);
+                    VersionModel versionModel = new VersionModel((JSONObject) object);
 
                     runOnUiThread(() -> {
-                        if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
-                            binding.explodeProgressBar.setVisibility(View.GONE);
+                        hideProgress();
 
-                        if (model.getAndroid() != null) {
-                            if (StringManager.compareVersionNames(PackageManager.versionNameWithoutSuffix(SplashActivity.this), model.getAndroid().getForce()) == 1) {
-                                DialogManager.showVersionDialog(SplashActivity.this, "force", model);
+                        if (versionModel.getAndroid() != null) {
+                            if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(SplashActivity.this), versionModel.getAndroid().getForce()) == 1) {
+                                DialogManager.showVersionDialog(SplashActivity.this, "force", versionModel);
                                 return;
-                            } else if (StringManager.compareVersionNames(model.getAndroid().getForce(), model.getAndroid().getCurrent()) == 1) {
-                                DialogManager.showVersionDialog(SplashActivity.this, "current", model);
+                            } else if (StringManager.compareVersionNames(versionModel.getAndroid().getForce(), versionModel.getAndroid().getCurrent()) == 1) {
+                                DialogManager.showVersionDialog(SplashActivity.this, "current", versionModel);
                                 return;
                             }
                         }
@@ -110,9 +108,7 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(String response) {
                     runOnUiThread(() -> {
-                        if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
-                            binding.explodeProgressBar.setVisibility(View.GONE);
-
+                        hideProgress();
                         navigate();
                     });
                 }
@@ -127,6 +123,16 @@ public class SplashActivity extends AppCompatActivity {
             IntentManager.main(this);
         else
             IntentManager.auth(this, "login");
+    }
+
+    private void showProgress() {
+        if (binding.explodeProgressBar.getVisibility() == View.GONE)
+            binding.explodeProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgress() {
+        if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
+            binding.explodeProgressBar.setVisibility(View.GONE);
     }
 
     public void responseDialog(String method) {
