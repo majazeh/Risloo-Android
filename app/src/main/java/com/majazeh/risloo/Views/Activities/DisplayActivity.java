@@ -60,13 +60,9 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        CustomClickView.onClickListener(() -> {
-                IntentManager.finish(this);
-        }).widget(binding.returnImageView);
+        CustomClickView.onClickListener(() -> IntentManager.finish(this)).widget(binding.returnImageView);
 
-        CustomClickView.onDelayedListener(() -> {
-            IntentManager.share(this, path);
-        }).widget(binding.shareImageView);
+        CustomClickView.onDelayedListener(() -> IntentManager.share(this, path)).widget(binding.shareImageView);
 
         CustomClickView.onDelayedListener(() -> {
             if (PermissionManager.storagePermission(this))
@@ -136,20 +132,16 @@ public class DisplayActivity extends AppCompatActivity {
         if (grantResults.length > 0) {
             for (int grantResult : grantResults) {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                    switch (requestCode) {
-                        case 200:
-                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionStorageException));
-                            break;
+                    if (requestCode == 200) {
+                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionStorageException));
                     }
 
                     return;
                 }
             }
 
-            switch (requestCode) {
-                case 200:
-                    IntentManager.download(this, title, path);
-                    break;
+            if (requestCode == 200) {
+                IntentManager.download(this, title, path);
             }
         }
     }
