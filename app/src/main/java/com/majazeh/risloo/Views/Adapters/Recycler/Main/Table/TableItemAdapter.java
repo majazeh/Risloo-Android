@@ -38,11 +38,11 @@ import java.util.ArrayList;
 
 public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements MyDiffUtilAdapter {
 
-    // Differ
-    private final AsyncListDiffer<TypeModel> differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
-
-    // Instance
+    // Activity
     private final Activity activity;
+
+    // Objects
+    private final AsyncListDiffer<TypeModel> differ;
 
     // Fragments
     private Fragment current;
@@ -52,6 +52,8 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public TableItemAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
     }
 
     @NonNull
@@ -213,7 +215,8 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setData(TableFieldTextHolder holder, ItemModel model) {
-        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
+        String header = holder.getBindingAdapterPosition() + " - " + model.getText();
+        holder.binding.headerTextView.setText(header);
 
         setType(holder, model);
 
@@ -221,7 +224,8 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setData(TableFieldMultiHolder holder, ItemModel model) {
-        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
+        String header = holder.getBindingAdapterPosition() + " - " + model.getText();
+        holder.binding.headerTextView.setText(header);
 
         setType(holder, model);
 
@@ -229,7 +233,8 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setData(TableFieldSelectHolder holder, ItemModel model) {
-        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
+        String header = holder.getBindingAdapterPosition() + " - " + model.getText();
+        holder.binding.headerTextView.setText(header);
 
         setType(holder, model);
 
@@ -237,22 +242,13 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setType(TableFieldTextHolder holder, ItemModel model) {
-        switch (model.getAnswer().getType()) {
-            case "text":
-                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+        if (model.getAnswer().getType().equals("text"))
+            holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+        else if (model.getAnswer().getType().equals("number"))
+            holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-                if (!model.getUser_answered().equals(""))
-                    holder.binding.inputEditText.setText(model.getUser_answered());
-
-                break;
-            case "number":
-                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-                if (!model.getUser_answered().equals(""))
-                    holder.binding.inputEditText.setText(model.getUser_answered());
-
-                break;
-        }
+        if (!model.getUser_answered().equals(""))
+            holder.binding.inputEditText.setText(model.getUser_answered());
     }
 
     private void setType(TableFieldMultiHolder holder, ItemModel model) {
@@ -316,18 +312,18 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
-        ItemModel oldItemModel = (ItemModel) oldTypeModel;
-        ItemModel newItemModel = (ItemModel) newTypeModel;
+        ItemModel oldModel = (ItemModel) oldTypeModel;
+        ItemModel newModel = (ItemModel) newTypeModel;
 
-        return newItemModel.getIndex().equals(oldItemModel.getIndex());
+        return newModel.getIndex().equals(oldModel.getIndex());
     }
 
     @Override
     public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
-        ItemModel oldItemModel = (ItemModel) oldTypeModel;
-        ItemModel newItemModel = (ItemModel) newTypeModel;
+        ItemModel oldModel = (ItemModel) oldTypeModel;
+        ItemModel newModel = (ItemModel) newTypeModel;
 
-        return newItemModel.compareTo(oldItemModel);
+        return newModel.compareTo(oldModel);
     }
 
 }

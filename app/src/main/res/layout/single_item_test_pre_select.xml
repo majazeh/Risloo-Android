@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:orientation="vertical"
     tools:layout_margin="@dimen/_12sdp">
 
     <TextView

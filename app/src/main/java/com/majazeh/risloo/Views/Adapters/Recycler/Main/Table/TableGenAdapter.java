@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter2;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback2;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderFieldHolder;
@@ -22,20 +25,24 @@ import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 
 import java.util.ArrayList;
 
-public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements MyDiffUtilAdapter2 {
 
-    // Instance
-    private Activity activity;
+    // Activity
+    private final Activity activity;
+
+    // Objects
+    private final AsyncListDiffer<String> differ;
 
     // Fragments
     private Fragment current;
 
     // Vars
-    private ArrayList<String> items;
     private boolean editable = false;
 
     public TableGenAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback2(this));
     }
 
     @NonNull
@@ -52,7 +59,7 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (holder instanceof HeaderFieldHolder) {
             setData((HeaderFieldHolder) holder);
         } else if (holder instanceof TableFieldTextHolder) {
-            String item = items.get(i - 1);
+            String item =differ.getCurrentList().get(i - 1);
 
             intializer();
 
@@ -72,32 +79,21 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size() + 1;
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size() + 1;
         else
             return 0;
     }
 
     public int itemsCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
     public void setItems(ArrayList<String> items) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+        differ.submitList(items);
     }
 
     public void setEditable(boolean editable) {
@@ -154,6 +150,16 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.binding.inputEditText.setFocusableInTouchMode(false);
             holder.binding.getRoot().setAlpha((float) 0.6);
         }
+    }
+
+    @Override
+    public boolean areItemsTheSame(String oldString, String newString) {
+        return newString.equals(oldString);
+    }
+
+    @Override
+    public boolean areContentsTheSame(String oldString, String newString) {
+        return newString.equals(oldString);
     }
 
 }

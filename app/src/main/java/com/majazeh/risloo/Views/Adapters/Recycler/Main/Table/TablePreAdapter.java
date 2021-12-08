@@ -38,11 +38,11 @@ import java.util.ArrayList;
 
 public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements MyDiffUtilAdapter {
 
-    // Differ
-    private final AsyncListDiffer<TypeModel> differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
-
-    // Instance
+    // Activity
     private final Activity activity;
+
+    // Objects
+    private final AsyncListDiffer<TypeModel> differ;
 
     // Fragments
     private Fragment current;
@@ -52,6 +52,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public TablePreAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
     }
 
     @NonNull
@@ -218,7 +220,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void setData(TableFieldTextHolder holder, PrerequisitesModel model) {
-        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
+        String header = holder.getBindingAdapterPosition() + " - " + model.getText();
+        holder.binding.headerTextView.setText(header);
 
         setType(holder, model);
 
@@ -226,7 +229,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void setData(TableFieldMultiHolder holder, PrerequisitesModel model) {
-        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
+        String header = holder.getBindingAdapterPosition() + " - " + model.getText();
+        holder.binding.headerTextView.setText(header);
 
         setType(holder, model);
 
@@ -234,7 +238,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void setData(TableFieldSelectHolder holder, PrerequisitesModel model, int position) {
-        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
+        String header = holder.getBindingAdapterPosition() + " - " + model.getText();
+        holder.binding.headerTextView.setText(header);
 
         setType(holder, model, position);
 
@@ -243,22 +248,14 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void setType(TableFieldTextHolder holder, PrerequisitesModel model) {
         try {
-            switch (model.getAnswer().getString("type")) {
-                case "text":
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            if (model.getAnswer().getString("type").equals("text"))
+                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            else if (model.getAnswer().getString("type").equals("number"))
+                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.inputEditText.setText(model.getUser_answered());
+            if (!model.getUser_answered().equals(""))
+                holder.binding.inputEditText.setText(model.getUser_answered());
 
-                    break;
-                case "number":
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.inputEditText.setText(model.getUser_answered());
-
-                    break;
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -332,18 +329,18 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
-        PrerequisitesModel oldPreModel = (PrerequisitesModel) oldTypeModel;
-        PrerequisitesModel newPreModel = (PrerequisitesModel) newTypeModel;
+        PrerequisitesModel oldModel = (PrerequisitesModel) oldTypeModel;
+        PrerequisitesModel newModel = (PrerequisitesModel) newTypeModel;
 
-        return newPreModel.getIndex().equals(oldPreModel.getIndex());
+        return newModel.getIndex().equals(oldModel.getIndex());
     }
 
     @Override
     public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
-        PrerequisitesModel oldPreModel = (PrerequisitesModel) oldTypeModel;
-        PrerequisitesModel newPreModel = (PrerequisitesModel) newTypeModel;
+        PrerequisitesModel oldModel = (PrerequisitesModel) oldTypeModel;
+        PrerequisitesModel newModel = (PrerequisitesModel) newTypeModel;
 
-        return newPreModel.compareTo(oldPreModel);
+        return newModel.compareTo(oldModel);
     }
 
 }

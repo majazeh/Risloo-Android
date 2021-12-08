@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="vertical"
     android:layoutDirection="rtl"
+    android:orientation="vertical"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp">
 
