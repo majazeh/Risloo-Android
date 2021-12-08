@@ -13,7 +13,6 @@ import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Decoraton;
-import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Inputon;
 import com.majazeh.risloo.Utils.Entities.Navigatoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -30,7 +29,6 @@ public class AuthActivity extends AppCompatActivity {
     private ActivityAuthBinding binding;
 
     // Entities
-    public Fragmont fragmont;
     public Inputon inputon;
     public Navigatoon navigatoon;
     public Singleton singleton;
@@ -76,8 +74,6 @@ public class AuthActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
         navigatoon = new Navigatoon(this, Objects.requireNonNull(navHostFragment));
-
-        fragmont = new Fragmont(navHostFragment);
 
         extras = getIntent().getExtras();
     }

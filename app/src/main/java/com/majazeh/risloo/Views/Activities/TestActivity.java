@@ -115,10 +115,10 @@ public class TestActivity extends AppCompatActivity {
         singleton = new Singleton(this);
         validatoon = new Validatoon(this);
 
-        sampleAnswers = new SampleAnswers();
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
         navigatoon = new Navigatoon(this, Objects.requireNonNull(navHostFragment));
+
+        sampleAnswers = new SampleAnswers();
 
         extras = getIntent().getExtras();
 
@@ -134,9 +134,7 @@ public class TestActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onClickListener(() -> {
-            IntentManager.risloo(this);
-        }).widget(binding.debugTextView.getRoot());
+        CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.debugTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             formModel = sampleModel.getSampleForm().prev();
@@ -237,6 +235,24 @@ public class TestActivity extends AppCompatActivity {
         setWidgets();
     }
 
+    private void setWidgets() {
+        String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
+        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
+
+        AnimateManager.animateProgressValue(binding.headerIncludeLayout.answeredProgressBar, 500, sampleModel.getSampleForm().itemSize(), sampleModel.getSampleForm().getItemPosition());
+
+        userSelect = false;
+
+        for (int i = 0; i < binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
+            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(formModel.getTitle())) {
+                binding.locationIncludeLayout.selectSpinner.setSelection(i);
+                break;
+            } else {
+                binding.locationIncludeLayout.selectSpinner.setSelection(0);
+            }
+        }
+    }
+
     private void getData() {
         Sample.show(data, header, new Response() {
             @Override
@@ -246,8 +262,7 @@ public class TestActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     setData();
 
-                    binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
-                    decorator(false);
+                    hideProgress();
                 });
             }
 
@@ -320,24 +335,6 @@ public class TestActivity extends AppCompatActivity {
         }
 
         setWidgets();
-    }
-
-    private void setWidgets() {
-        String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
-        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
-
-        AnimateManager.animateProgressValue(binding.headerIncludeLayout.answeredProgressBar, 500, sampleModel.getSampleForm().itemSize(), sampleModel.getSampleForm().getItemPosition());
-
-        userSelect = false;
-
-        for (int i = 0; i < binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
-            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(formModel.getTitle())) {
-                binding.locationIncludeLayout.selectSpinner.setSelection(i);
-                break;
-            } else {
-                binding.locationIncludeLayout.selectSpinner.setSelection(0);
-            }
-        }
     }
 
     private void sendPre() {
@@ -440,13 +437,13 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
-                    FormModel model = sampleModel.getSampleForm().getModel("زنجیره");
+                    FormModel formModel = sampleModel.getSampleForm().getModel("زنجیره");
 
-                    if (model == null) {
+                    if (formModel == null) {
                         DialogManager.dismissLoadingDialog();
                         IntentManager.main(TestActivity.this);
                     } else {
-                        List items = (List) model.getObject();
+                        List items = (List) formModel.getObject();
 
                         for (int i = 0; i < items.data().size(); i++) {
                             ChainModel chainModel = (ChainModel) items.data().get(i);
@@ -457,8 +454,7 @@ public class TestActivity extends AppCompatActivity {
                                 data.put("id", chainModel.getId());
                                 sampleAnswers.id = chainModel.getId();
 
-                                binding.loadingIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                                decorator(true);
+                                showProgress();
 
                                 getData();
                                 break;
@@ -502,16 +498,18 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        if (doubleBackPressed) {
-            IntentManager.finish(this);
-        } else {
-            doubleBackPressed = true;
-            handler.postDelayed(() -> doubleBackPressed = false, 2000);
+    private void showProgress() {
+        if (binding.loadingIncludeLayout.getRoot().getVisibility() == View.GONE)
+            binding.loadingIncludeLayout.getRoot().setVisibility(View.VISIBLE);
 
-            ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
-        }
+        decorator(true);
+    }
+
+    private void hideProgress() {
+        if (binding.loadingIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+            binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
+
+        decorator(false);
     }
 
     @Override
@@ -529,6 +527,18 @@ public class TestActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackPressed) {
+            IntentManager.finish(this);
+        } else {
+            doubleBackPressed = true;
+            handler.postDelayed(() -> doubleBackPressed = false, 2000);
+
+            ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
+        }
     }
 
     @Override
