@@ -93,13 +93,9 @@ public class AuthLoginFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> {
-            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthRegisterFragment();
-        }).widget(binding.registerLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthRegisterFragment()).widget(binding.registerLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> {
-            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment();
-        }).widget(binding.passwordRecoverLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment()).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setHashmap() {

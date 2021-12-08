@@ -90,13 +90,9 @@ public class AuthPasswordRecoverFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> {
-            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment();
-        }).widget(binding.loginLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment()).widget(binding.loginLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> {
-            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthRegisterFragment();
-        }).widget(binding.registerLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthRegisterFragment()).widget(binding.registerLinkTextView.getRoot());
     }
 
     private void setHashmap() {

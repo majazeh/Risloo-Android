@@ -317,7 +317,7 @@ public class AuthPinFragment extends Fragment {
         doWork("code");
     }
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -325,22 +325,18 @@ public class AuthPinFragment extends Fragment {
                 Bundle extras = intent.getExtras();
                 Status status = (Status) extras.get(SmsRetriever.EXTRA_STATUS);
 
-                switch(status.getStatusCode()) {
-                    case CommonStatusCodes.SUCCESS:
-                        String message = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
+                if (status.getStatusCode() == CommonStatusCodes.SUCCESS) {
+                    String message = (String) extras.get(SmsRetriever.EXTRA_SMS_MESSAGE);
 
-                        Pattern pattern = Pattern.compile("\\d+");
-                        Matcher matcher = pattern.matcher(message);
+                    Pattern pattern = Pattern.compile("\\d+");
+                    Matcher matcher = pattern.matcher(message);
 
-                        if (matcher.find()) {
-                            String code = matcher.group(0);
-                            autoSmsVerificate(code);
-                        }
-
-                        break;
-                    default:
-                        SnackManager.showDefaultSnack(requireActivity(), "onReceiveFail: " + status.getStatusMessage());
-                        break;
+                    if (matcher.find()) {
+                        String code = matcher.group(0);
+                        autoSmsVerificate(code);
+                    }
+                } else {
+                    SnackManager.showDefaultSnack(requireActivity(), "onReceiveFail: " + status.getStatusMessage());
                 }
             }
         }
@@ -361,8 +357,8 @@ public class AuthPinFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
         countDownTimer.cancel();
+        binding = null;
     }
 
 }

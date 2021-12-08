@@ -83,9 +83,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        CustomClickView.onClickListener(() -> {
-            IntentManager.risloo(this);
-        }).widget(binding.debugTextView.getRoot());
+        CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.debugTextView.getRoot());
     }
 
     private void setExtra() {
