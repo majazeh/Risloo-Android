@@ -59,9 +59,9 @@ public class TestEndFragment extends Fragment {
     private void setData(SampleModel model) {
         FormModel formModel = model.getSampleForm().getModel("زنجیره");
 
-        if (formModel == null)
-            binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonSample));
-        else {
+        if (formModel == null) {
+            binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonDone));
+        } else {
             List items = (List) formModel.getObject();
 
             for (int i = 0; i < items.data().size(); i++) {

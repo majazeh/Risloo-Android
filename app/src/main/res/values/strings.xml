@@ -259,7 +259,7 @@
     <string name="EndFragmentTitle">پایان نمونه‌گیری</string>
     <string name="EndFragmentDescription">اگر از اتمام نمونه مطمئن هستید و به تمامی گزینه‌ها پاسخ داده‌اید می‌توانید دکمه اتمام نمونه را بزنید. بعد از زدن این دکمه، دیگر قادر به ویرایش نمونه نمی‌باشید.</string>
 
-    <string name="EndFragmentButtonSample">اتمام نمونه</string>
+    <string name="EndFragmentButtonDone">اتمام نمونه</string>
     <string name="EndFragmentButtonNext">اتمام و انتقال به نمونه بعدی</string>
     <string name="EndFragmentButtonChain">اتمام نمونه زنجیره‌ای</string>
 
