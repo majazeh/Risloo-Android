@@ -2,10 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Test;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Handler;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreMultiHolder;
@@ -30,18 +30,21 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements MyDiffUtilAdapter {
+
+    // Activity
+    private final Activity activity;
 
     // Objects
-    private Activity activity;
-    private Handler handler;
+    private final AsyncListDiffer<TypeModel> differ;
 
     // Vars
-    private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
     public TestPrerequisiteAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
     }
 
     @NonNull
@@ -60,25 +63,19 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof TestPreTextHolder) {
-            PrerequisitesModel model = (PrerequisitesModel) items.get(i);
-
-            initializer();
+            PrerequisitesModel model = (PrerequisitesModel) differ.getCurrentList().get(i);
 
             listener((TestPreTextHolder) holder, i);
 
             setData((TestPreTextHolder) holder, model);
         } else if (holder instanceof TestPreMultiHolder) {
-            PrerequisitesModel model = (PrerequisitesModel) items.get(i);
-
-            initializer();
+            PrerequisitesModel model = (PrerequisitesModel) differ.getCurrentList().get(i);
 
             listener((TestPreMultiHolder) holder, i);
 
             setData((TestPreMultiHolder) holder, model);
         } else if (holder instanceof TestPreSelectHolder) {
-            PrerequisitesModel model = (PrerequisitesModel) items.get(i);
-
-            initializer();
+            PrerequisitesModel model = (PrerequisitesModel) differ.getCurrentList().get(i);
 
             listener((TestPreSelectHolder) holder, i);
 
@@ -88,7 +85,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemViewType(int position) {
-        PrerequisitesModel model = (PrerequisitesModel) items.get(position);
+        PrerequisitesModel model = (PrerequisitesModel) differ.getCurrentList().get(position);
 
         try {
             switch (model.getAnswer().getString("type")) {
@@ -110,29 +107,14 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
-    }
-
-    private void initializer() {
-        handler = new Handler();
+        differ.submitList(items);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -143,24 +125,10 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
             return false;
         });
 
-        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (holder.binding.inputEditText.hasFocus()) {
-                    handler.removeCallbacksAndMessages(null);
-                    handler.postDelayed(() -> ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim()), 750);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+        holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
+            ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
+            ((TestActivity) activity).inputon.clear(((TestActivity) activity).inputon.editText);
+            return false;
         });
     }
 
@@ -172,24 +140,10 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
             return false;
         });
 
-        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (holder.binding.inputEditText.hasFocus()) {
-                    handler.removeCallbacksAndMessages(null);
-                    handler.postDelayed(() -> ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim()), 750);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+        holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
+            ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
+            ((TestActivity) activity).inputon.clear(((TestActivity) activity).inputon.editText);
+            return false;
         });
     }
 
@@ -242,22 +196,14 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private void setType(TestPreTextHolder holder, PrerequisitesModel model) {
         try {
-            switch (model.getAnswer().getString("type")) {
-                case "text":
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            if (model.getAnswer().getString("type").equals("text"))
+                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+            else if (model.getAnswer().getString("type").equals("number"))
+                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.inputEditText.setText(model.getUser_answered());
+            if (!model.getUser_answered().equals(""))
+                holder.binding.inputEditText.setText(model.getUser_answered());
 
-                    break;
-                case "number":
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.inputEditText.setText(model.getUser_answered());
-
-                    break;
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -293,6 +239,22 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        PrerequisitesModel oldModel = (PrerequisitesModel) oldTypeModel;
+        PrerequisitesModel newModel = (PrerequisitesModel) newTypeModel;
+
+        return newModel.getIndex().equals(oldModel.getIndex());
+    }
+
+    @Override
+    public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        PrerequisitesModel oldModel = (PrerequisitesModel) oldTypeModel;
+        PrerequisitesModel newModel = (PrerequisitesModel) newTypeModel;
+
+        return newModel.compareTo(oldModel);
     }
 
 }

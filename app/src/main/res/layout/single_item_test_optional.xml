@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:orientation="horizontal"
     android:layoutDirection="rtl"
+    android:orientation="horizontal"
     android:padding="@dimen/_8sdp"
-    tools:layout_marginBottom="@dimen/_4sdp"
-    tools:layout_marginTop="@dimen/_4sdp"
+    tools:layout_margin="@dimen/_12sdp"
     tools:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300">
 
     <TextView

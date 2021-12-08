@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:layout_margin="0dp">
+    tools:layout_margin="@dimen/_12sdp">
 
     <View
         android:id="@+id/divider_view"

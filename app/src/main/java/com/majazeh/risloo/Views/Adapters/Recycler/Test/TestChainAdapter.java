@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestChainHolder;
@@ -18,16 +21,18 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> {
+public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> implements MyDiffUtilAdapter {
+
+    // Activity
+    private final Activity activity;
 
     // Objects
-    private Activity activity;
-
-    // Vars
-    private ArrayList<TypeModel> items;
+    private final AsyncListDiffer<TypeModel> differ;
 
     public TestChainAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
     }
 
     @NonNull
@@ -38,32 +43,21 @@ public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TestChainHolder holder, int i) {
-        ChainModel model = (ChainModel) items.get(i);
+        ChainModel model = (ChainModel) differ.getCurrentList().get(i);
 
         setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+        differ.submitList(items);
     }
 
     private void setData(TestChainHolder holder, ChainModel model) {
@@ -89,6 +83,22 @@ public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> {
             InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.CoolGray500), R.style.danaMediumTextStyle);
             InitManager.imgResTintBackground(activity, holder.binding.activeImageView, 0, R.color.CoolGray300, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray500);
         }
+    }
+
+    @Override
+    public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        ChainModel oldModel = (ChainModel) oldTypeModel;
+        ChainModel newModel = (ChainModel) newTypeModel;
+
+        return newModel.getId().equals(oldModel.getId());
+    }
+
+    @Override
+    public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        ChainModel oldModel = (ChainModel) oldTypeModel;
+        ChainModel newModel = (ChainModel) newTypeModel;
+
+        return newModel.compareTo(oldModel);
     }
 
 }
