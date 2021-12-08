@@ -45,7 +45,7 @@ public class TestChainFragment extends Fragment {
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.ChainFragmentTitle));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setArgs() {
@@ -58,13 +58,13 @@ public class TestChainFragment extends Fragment {
 
         if (!items.data().isEmpty()) {
             adapter.setItems(items.data());
-            binding.listRecyclerView.setAdapter(adapter);
+            binding.listRecyclerView.getRoot().setAdapter(adapter);
         }
     }
 
     private void setAnimation() {
         AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.listRecyclerView, 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.listRecyclerView.getRoot(), 500, 0f, 1f);
     }
 
     @Override

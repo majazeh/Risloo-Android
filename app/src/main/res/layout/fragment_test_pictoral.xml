@@ -74,25 +74,20 @@
                 tools:layout_height="@dimen/_120sdp"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <include
                 android:id="@+id/list_recyclerView"
+                layout="@layout/component_test_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:layoutDirection="rtl"
                 app:layout_constrainedHeight="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/question_imageView"
-                tools:layout_marginBottom="@dimen/_8sdp"
-                tools:layout_marginEnd="@dimen/_8sdp"
-                tools:layout_marginStart="@dimen/_8sdp"
-                tools:layout_marginTop="@dimen/_8sdp"
-                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/single_item_test_pictoral"
-                tools:itemCount="4"
-                tools:spanCount="2" />
+                tools:layout_marginBottom="@dimen/_12sdp"
+                tools:layout_marginEnd="@dimen/_12sdp"
+                tools:layout_marginStart="@dimen/_12sdp"
+                tools:layout_marginTop="@dimen/_16sdp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

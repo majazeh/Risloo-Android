@@ -47,7 +47,7 @@ public class TestOptionalFragment extends Fragment {
     private void initializer() {
         adapter = new TestOptionalAdapter(requireActivity());
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setArgs() {
@@ -86,7 +86,7 @@ public class TestOptionalFragment extends Fragment {
 
             if (options.size() != 0) {
                 adapter.setItems(options, item.getUser_answered(), item.getIndex());
-                binding.listRecyclerView.setAdapter(adapter);
+                binding.listRecyclerView.getRoot().setAdapter(adapter);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -97,7 +97,7 @@ public class TestOptionalFragment extends Fragment {
         AnimateManager.animateViewAlpha(binding.entityTextView.getRoot(), 500, 0f, 1f);
         AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
         AnimateManager.animateViewAlpha(binding.descriptionTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.listRecyclerView, 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.listRecyclerView.getRoot(), 500, 0f, 1f);
     }
 
     @Override
