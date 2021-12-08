@@ -1,17 +1,17 @@
 package com.majazeh.risloo.Views.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Utils.Entities.Decoraton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
-import com.majazeh.risloo.Utils.Entities.Decoraton;
+import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityIntroBinding;
 
 public class IntroActivity extends AppCompatActivity {
@@ -53,9 +53,7 @@ public class IntroActivity extends AppCompatActivity {
 
     private void setData() {
         binding.descriptionTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.IntroDescription), 72, 92, getResources().getColor(R.color.CoolGray800), R.style.danaDemiBoldTextStyle));
-
-        String version = getResources().getString(R.string.IntroVersion) + " " + PackageManager.versionNameNoSuffix(this);
-        binding.versionTextView.setText(version);
+        binding.versionTextView.setText(PackageManager.versionNameWithText(this));
     }
 
 }
