@@ -5,6 +5,7 @@
         android:duration="300"
         android:fromXDelta="0%"
         android:toXDelta="100%p" />
+
     <alpha
         android:duration="150"
         android:fromAlpha="1.0"
