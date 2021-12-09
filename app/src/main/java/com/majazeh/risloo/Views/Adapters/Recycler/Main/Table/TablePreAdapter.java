@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
-import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -53,7 +53,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public TablePreAdapter(@NonNull Activity activity) {
         this.activity = activity;
 
-        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
+        differ = new AsyncListDiffer<>(this, new DiffUtilTypeModelCallback(this));
     }
 
     @NonNull

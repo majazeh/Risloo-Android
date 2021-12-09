@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
-import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.MainNavHolder;
@@ -37,7 +37,7 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implemen
     public MainNavAdapter(@NonNull Activity activity) {
         this.activity = activity;
 
-        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
+        differ = new AsyncListDiffer<>(this, new DiffUtilTypeModelCallback(this));
     }
 
     @NonNull

@@ -3,13 +3,13 @@ package com.majazeh.risloo.Utils.Interfaces;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
-public class MyDiffUtilCallback2 extends DiffUtil.ItemCallback<String> {
+public class DiffUtilStringCallback extends DiffUtil.ItemCallback<String> {
 
     // Interfaces
     private final MyDiffUtilAdapter2 adapter;
 
     // Constructor
-    public MyDiffUtilCallback2(MyDiffUtilAdapter2 adapter) {
+    public DiffUtilStringCallback(MyDiffUtilAdapter2 adapter) {
         this.adapter = adapter;
     }
 

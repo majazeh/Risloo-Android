@@ -5,13 +5,13 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
-public class MyDiffUtilCallback extends DiffUtil.ItemCallback<TypeModel> {
+public class DiffUtilTypeModelCallback extends DiffUtil.ItemCallback<TypeModel> {
 
     // Interfaces
     private final MyDiffUtilAdapter adapter;
 
     // Constructor
-    public MyDiffUtilCallback(MyDiffUtilAdapter adapter) {
+    public DiffUtilTypeModelCallback(MyDiffUtilAdapter adapter) {
         this.adapter = adapter;
     }
 
