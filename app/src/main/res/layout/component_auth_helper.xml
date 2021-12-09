@@ -10,5 +10,5 @@
     android:textColor="@color/CoolGray400"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    tools:layout_margin="@dimen/_24sdp"
+    tools:layout_margin="@dimen/_12sdp"
     tools:text="متن مساعد" />

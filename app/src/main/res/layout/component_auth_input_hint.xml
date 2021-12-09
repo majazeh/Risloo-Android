@@ -13,5 +13,5 @@
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
     android:background="@drawable/draw_2sdp_solid_coolgray100_border_1sdp_coolgray200"
-    tools:layout_margin="@dimen/_24sdp"
+    tools:layout_margin="@dimen/_12sdp"
     tools:text="عنوان" />

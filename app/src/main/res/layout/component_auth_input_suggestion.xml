@@ -20,6 +20,6 @@
     android:completionThreshold="0"
     android:dropDownVerticalOffset="@dimen/_4sdp"
     android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
-    tools:layout_margin="@dimen/_24sdp"
+    tools:layout_margin="@dimen/_12sdp"
     tools:hint="عدد"
     tools:ignore="LabelFor" />

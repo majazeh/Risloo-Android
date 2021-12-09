@@ -11,5 +11,5 @@
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
     android:background="@drawable/draw_24sdp_solid_risloo500_ripple_risloo700"
-    tools:layout_margin="@dimen/_24sdp"
+    tools:layout_margin="@dimen/_12sdp"
     tools:text="دکمه" />

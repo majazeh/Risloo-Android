@@ -4,8 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_24sdp">
+    android:layoutDirection="rtl">
 
     <LinearLayout
         android:layout_width="wrap_content"
