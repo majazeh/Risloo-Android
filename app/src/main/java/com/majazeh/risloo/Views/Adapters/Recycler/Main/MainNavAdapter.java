@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.Adapters.Recycler.Main;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,41 +7,48 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.ImageViewCompat;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
+import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilCallback;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexNavHolder;
-import com.majazeh.risloo.databinding.SingleItemIndexNavBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Main.MainNavHolder;
+import com.majazeh.risloo.databinding.SingleItemMainNavBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class IndexNavAdapter extends RecyclerView.Adapter<IndexNavHolder> {
+public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implements MyDiffUtilAdapter {
+
+    // Activity
+    private final Activity activity;
 
     // Objects
-    private Activity activity;
+    private final AsyncListDiffer<TypeModel> differ;
 
     // Vars
-    private ArrayList<TypeModel> items;
     private int selectedPosition = 0;
 
-    public IndexNavAdapter(@NonNull Activity activity) {
+    public MainNavAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new MyDiffUtilCallback(this));
     }
 
     @NonNull
     @Override
-    public IndexNavHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new IndexNavHolder(SingleItemIndexNavBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public MainNavHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new MainNavHolder(SingleItemMainNavBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IndexNavHolder holder, int i) {
-        TypeModel model = items.get(i);
+    public void onBindViewHolder(@NonNull MainNavHolder holder, int i) {
+        TypeModel model = differ.getCurrentList().get(i);
 
         listener(holder);
 
@@ -50,36 +57,26 @@ public class IndexNavAdapter extends RecyclerView.Adapter<IndexNavHolder> {
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        this.items = items;
-        notifyDataSetChanged();
+        differ.submitList(items);
     }
 
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+    private void listener(MainNavHolder holder) {
+        CustomClickView.onDelayedListener(() -> ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString())).widget(holder.itemView);
     }
 
-    private void listener(IndexNavHolder holder) {
-        CustomClickView.onDelayedListener(() -> {
-            ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString());
-        }).widget(holder.itemView);
-    }
-
-    private void setData(IndexNavHolder holder, TypeModel model, int position) {
+    private void setData(MainNavHolder holder, TypeModel model, int position) {
         try {
-            holder.binding.nameTextView.setText(model.object.get("title").toString());
-            holder.binding.descriptionTextView.setText(model.object.get("description").toString());
+            holder.binding.nameTextView.setText(model.object.getString("title"));
+            holder.binding.descriptionTextView.setText(model.object.getString("description"));
 
-            holder.binding.iconImageView.setImageResource((Integer) model.object.get("image"));
+            holder.binding.iconImageView.setImageResource(model.object.getInt("image"));
 
             setActive(holder, position);
         } catch (JSONException e) {
@@ -87,7 +84,7 @@ public class IndexNavAdapter extends RecyclerView.Adapter<IndexNavHolder> {
         }
     }
 
-    private void setActive(IndexNavHolder holder, int position) {
+    private void setActive(MainNavHolder holder, int position) {
         if (selectedPosition == position) {
             holder.itemView.setBackgroundResource(R.drawable.draw_4sdp_solid_risloo500_ripple_risloo700);
 
@@ -151,6 +148,26 @@ public class IndexNavAdapter extends RecyclerView.Adapter<IndexNavHolder> {
             selectedPosition = 0;
 
         notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        try {
+            return newTypeModel.object.getString("title").equals(oldTypeModel.object.getString("title"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return false;
+    }
+
+    @Override
+    public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        try {
+            return newTypeModel.object.getString("title").equals(oldTypeModel.object.getString("title"))
+                    && newTypeModel.object.getString("description").equals(oldTypeModel.object.getString("description"))
+                    && newTypeModel.object.getInt("image") == oldTypeModel.object.getInt("image");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return false;
     }
 
 }

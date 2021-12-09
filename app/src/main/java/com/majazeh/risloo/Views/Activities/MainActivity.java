@@ -42,7 +42,7 @@ import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexNavAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Main.MainNavAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment;
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     public Validatoon validatoon;
 
     // Adapters
-    private IndexNavAdapter indexNavAdapter;
+    private MainNavAdapter mainNavAdapter;
 
     // Objects
     private HashMap data, header;
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         singleton = new Singleton(this);
         validatoon = new Validatoon(this);
 
-        indexNavAdapter = new IndexNavAdapter(this);
+        mainNavAdapter = new MainNavAdapter(this);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
         navigatoon = new Navigatoon(this, Objects.requireNonNull(navHostFragment));
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
 
-        InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(faBreadCump);
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
 
-            indexNavAdapter.setFocused(faBreadCump.toString());
+            mainNavAdapter.setFocused(faBreadCump.toString());
 
             ExtendEvent.cancelRequest();
         });
@@ -350,8 +350,8 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            indexNavAdapter.setItems(values);
-            binding.navIncludeLayout.listRecyclerView.setAdapter(indexNavAdapter);
+            mainNavAdapter.setItems(values);
+            binding.navIncludeLayout.listRecyclerView.getRoot().setAdapter(mainNavAdapter);
         }
     }
 
