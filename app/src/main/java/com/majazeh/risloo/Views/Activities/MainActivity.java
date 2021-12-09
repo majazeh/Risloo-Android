@@ -41,6 +41,7 @@ import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
+import com.majazeh.risloo.Utils.Managers.TreasuryManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.MainNavAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
@@ -53,7 +54,6 @@ import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
-import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
@@ -246,30 +246,13 @@ public class MainActivity extends AppCompatActivity {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
             }
 
-            if (model.getTreasuries() != null) {
-                int balance = 0;
+            if (model.getTreasuries() != null && !TreasuryManager.getWalletAndGift(model.getTreasuries()).equals("0")) {
+                String value = StringManager.separate(TreasuryManager.getWalletAndGift(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
 
-                for (TypeModel typeModel : model.getTreasuries().data()) {
-                    TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel;
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(value);
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.VISIBLE);
 
-                    if (treasuriesModel.getSymbol().equals("wallet") || treasuriesModel.getSymbol().equals("gift")) {
-                        balance += treasuriesModel.getBalance();
-                    }
-                }
-
-                if (balance != 0) {
-                    String wallet = StringManager.separate(String.valueOf(balance)) + " " + getResources().getString(R.string.MainToman);
-
-                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(wallet);
-                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.VISIBLE);
-
-                    binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(1);
-                } else {
-                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText("");
-                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
-
-                    binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(2);
-                }
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(1);
             } else {
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText("");
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
