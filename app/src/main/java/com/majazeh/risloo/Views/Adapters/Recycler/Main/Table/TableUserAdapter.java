@@ -122,7 +122,7 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     else if (pos.contains("@"))
                         IntentManager.email(activity, new String[]{pos}, "", "", "");
                     else if (pos.equals("ورود به کاربری"))
-                        ((MainActivity) activity).userChange("loginOtherUser", model.getId());
+                        ((MainActivity) activity).changeUser("loginOtherUser", model.getId());
                     else if (pos.equals("ویرایش"))
                         ((MainActivity) activity).navigatoon.navigateToEditUserFragment(model);
 

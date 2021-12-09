@@ -132,12 +132,12 @@ public class MainActivity extends AppCompatActivity {
         singleton = new Singleton(this);
         validatoon = new Validatoon(this);
 
-        mainNavAdapter = new MainNavAdapter(this);
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
         navigatoon = new Navigatoon(this, Objects.requireNonNull(navHostFragment));
 
         fragmont = new Fragmont(navHostFragment);
+
+        mainNavAdapter = new MainNavAdapter(this);
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -150,17 +150,11 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onClickListener(() -> {
-            IntentManager.risloo(this);
-        }).widget(binding.contentIncludeLayout.debugTextView.getRoot());
+        CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.contentIncludeLayout.debugTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> {
-            binding.getRoot().openDrawer(GravityCompat.START);
-        }).widget(binding.contentIncludeLayout.menuImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> {
-            userChange("logoutFormOtherUser", "");
-        }).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> changeUser("logoutFormOtherUser", "")).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
 
         binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
@@ -202,19 +196,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        navigatoon.getNavController().addOnDestinationChangedListener((controller, destination, arguments) -> {
-            SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
-
-            binding.contentIncludeLayout.headerAppBarLayout.setExpanded(true);
-
-            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(faBreadCump);
-            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
-
-            mainNavAdapter.setFocused(faBreadCump.toString());
-
-            ExtendEvent.cancelRequest();
-        });
-
         binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             if (verticalOffset == 0 && binding.contentIncludeLayout.seperateView.getVisibility() == View.VISIBLE) {
                 AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.White));
@@ -229,6 +210,19 @@ public class MainActivity extends AppCompatActivity {
 
                 binding.contentIncludeLayout.seperateView.setVisibility(View.VISIBLE);
             }
+        });
+
+        navigatoon.getNavController().addOnDestinationChangedListener((controller, destination, arguments) -> {
+            SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
+
+            binding.contentIncludeLayout.headerAppBarLayout.setExpanded(true);
+
+            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(faBreadCump);
+            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
+
+            mainNavAdapter.setFocused(faBreadCump.toString());
+
+            ExtendEvent.cancelRequest();
         });
     }
 
@@ -264,7 +258,9 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (balance != 0) {
-                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(StringManager.separate(String.valueOf(balance)) + " " + getResources().getString(R.string.MainToman));
+                    String wallet = StringManager.separate(String.valueOf(balance)) + " " + getResources().getString(R.string.MainToman);
+
+                    binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(wallet);
                     binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.VISIBLE);
 
                     binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setMaxLines(1);
@@ -298,43 +294,51 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> description = new ArrayList<>();
         ArrayList<Integer> images = new ArrayList<>();
 
+        // Dashboard
         titles.add(getResources().getString(R.string.MainTitleDashboard));
-        titles.add(getResources().getString(R.string.MainTitleCenters));
-        titles.add(getResources().getString(R.string.MainTitleSessions));
         description.add(getResources().getString(R.string.MainDescDashboard));
-        description.add(getResources().getString(R.string.MainDescCenters));
-        description.add(getResources().getString(R.string.MainDescSessions));
         images.add(R.drawable.ic_tachometer_alt_light);
+
+        // Centers
+        titles.add(getResources().getString(R.string.MainTitleCenters));
+        description.add(getResources().getString(R.string.MainDescCenters));
         images.add(R.drawable.ic_building_light);
+
+        // Sessions
+        titles.add(getResources().getString(R.string.MainTitleSessions));
+        description.add(getResources().getString(R.string.MainDescSessions));
         images.add(R.drawable.ic_user_friends_light);
 
+        // Users
         if (permissoon.showUsers(singleton.getUserModel())) {
             titles.add(getResources().getString(R.string.MainTitleUsers));
             description.add(getResources().getString(R.string.MainDescUsers));
             images.add(R.drawable.ic_users_light);
         }
 
+        // Samples
         titles.add(getResources().getString(R.string.MainTitleSamples));
         description.add(getResources().getString(R.string.MainDescSamples));
         images.add(R.drawable.ic_vial_light);
 
+        // BulkSamples
         if (permissoon.showBulkSamples(singleton.getUserModel())) {
             titles.add(getResources().getString(R.string.MainTitleBulkSamples));
             description.add(getResources().getString(R.string.MainDescBulkSamples));
             images.add(R.drawable.ic_users_medical_light);
         }
 
+        // Scales
         if (permissoon.showScales(singleton.getUserModel())) {
             titles.add(getResources().getString(R.string.MainTitleScales));
             description.add(getResources().getString(R.string.MainDescScales));
             images.add(R.drawable.ic_balance_scale_light);
         }
 
-        if (permissoon.showDownloads()) {
-            titles.add(getResources().getString(R.string.MainTitleDownloads));
-            description.add(getResources().getString(R.string.MainDescDownloads));
-            images.add(R.drawable.ic_arrow_to_bottom_light);
-        }
+        // Downloads
+        titles.add(getResources().getString(R.string.MainTitleDownloads));
+        description.add(getResources().getString(R.string.MainDescDownloads));
+        images.add(R.drawable.ic_arrow_to_bottom_light);
 
         for (int i = 0; i < titles.size(); i++) {
             try {
@@ -376,8 +380,28 @@ public class MainActivity extends AppCompatActivity {
         header.put("Authorization", singleton.getAuthorization());
     }
 
-    public void responseAdapter(String item) {
-        switch (item) {
+    private void resetUser(String method, AuthModel model) {
+        singleton.login(model);
+        singleton.otherUser(method.equals("loginOtherUser"));
+
+        setData();
+
+        setDrawer();
+
+        setToolbar();
+
+        DialogManager.dismissLoadingDialog();
+
+        if (method.equals("loginOtherUser"))
+            SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
+        else
+            SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
+
+        navigatoon.navigateToDashboardFragment();
+    }
+
+    public void changeFragment(String title) {
+        switch (title) {
             case "داشبورد":
                 navigatoon.navigateToDashboardFragment();
                 break;
@@ -413,7 +437,7 @@ public class MainActivity extends AppCompatActivity {
         binding.getRoot().closeDrawer(GravityCompat.START);
     }
 
-    public void userChange(String method, String userId) {
+    public void changeUser(String method, String userId) {
         DialogManager.showLoadingDialog(this, "");
 
         setHashmap(userId);
@@ -424,21 +448,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onOK(Object object) {
                     AuthModel model = (AuthModel) object;
 
-                    runOnUiThread(() -> {
-                        singleton.login(model);
-                        singleton.otherUser(true);
-
-                        setData();
-
-                        setDrawer();
-
-                        setToolbar();
-
-                        DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
-
-                        navigatoon.navigateToDashboardFragment();
-                    });
+                    runOnUiThread(() -> resetUser(method, model));
                 }
 
                 @Override
@@ -454,21 +464,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onOK(Object object) {
                     AuthModel model = (AuthModel) object;
 
-                    runOnUiThread(() -> {
-                        singleton.login(model);
-                        singleton.otherUser(false);
-
-                        setData();
-
-                        setDrawer();
-
-                        setToolbar();
-
-                        DialogManager.dismissLoadingDialog();
-                        SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
-
-                        navigatoon.navigateToDashboardFragment();
-                    });
+                    runOnUiThread(() -> resetUser(method, model));
                 }
 
                 @Override

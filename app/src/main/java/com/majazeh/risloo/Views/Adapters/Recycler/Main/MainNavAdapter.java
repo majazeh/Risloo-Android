@@ -68,7 +68,7 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implemen
     }
 
     private void listener(MainNavHolder holder) {
-        CustomClickView.onDelayedListener(() -> ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString())).widget(holder.itemView);
+        CustomClickView.onDelayedListener(() -> ((MainActivity) activity).changeFragment(holder.binding.nameTextView.getText().toString())).widget(holder.itemView);
     }
 
     private void setData(MainNavHolder holder, TypeModel model, int position) {

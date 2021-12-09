@@ -70,10 +70,6 @@ public class Permissoon {
         } return false;
     }
 
-    public boolean showDownloads() {
-        return true;
-    }
-
     /*
     ---------- Create ----------
     */
