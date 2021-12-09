@@ -21,6 +21,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.TreasuryManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexBankAdapter;
@@ -29,7 +30,6 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Bank;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.IbanModel;
-import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -362,22 +362,9 @@ public class BanksFragment extends Fragment {
     }
 
     private void setData(UserModel model) {
-        if (model.getTreasuries() != null) {
-            int balance = 0;
-
-            for (TypeModel typeModel : model.getTreasuries().data()) {
-                TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel;
-
-                if (treasuriesModel.getSymbol().equals("wallet")) {
-                    balance += treasuriesModel.getBalance();
-                }
-            }
-
-            if (balance != 0)
-                binding.totalIncludeLayout.amountTextView.setText(StringManager.separate(String.valueOf(balance)) + " " + getResources().getString(R.string.MainToman));
-            else
-                binding.totalIncludeLayout.amountTextView.setText("");
-
+        if (model.getTreasuries() != null && !TreasuryManager.getWallet(model.getTreasuries()).equals("0")) {
+            String value = StringManager.separate(TreasuryManager.getWallet(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
+            binding.totalIncludeLayout.amountTextView.setText(value);
         } else {
             binding.totalIncludeLayout.amountTextView.setText("");
         }
