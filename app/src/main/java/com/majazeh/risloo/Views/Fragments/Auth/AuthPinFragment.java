@@ -190,15 +190,15 @@ public class AuthPinFragment extends Fragment {
         if (bool) {
             countDownTimer.start();
 
-            binding.timerViewFlipper.getRoot().setInAnimation(requireActivity(), R.anim.slide_in_right_with_fade);
-            binding.timerViewFlipper.getRoot().setOutAnimation(requireActivity(), R.anim.slide_out_left_with_fade);
+            binding.timerViewFlipper.getRoot().setInAnimation(requireActivity(), R.anim.slide_and_fade_in_right);
+            binding.timerViewFlipper.getRoot().setOutAnimation(requireActivity(), R.anim.slide_and_fade_out_left);
 
             binding.timerViewFlipper.getRoot().showPrevious();
         } else {
             countDownTimer.cancel();
 
-            binding.timerViewFlipper.getRoot().setInAnimation(requireActivity(), R.anim.slide_in_left_with_fade);
-            binding.timerViewFlipper.getRoot().setOutAnimation(requireActivity(), R.anim.slide_out_right_with_fade);
+            binding.timerViewFlipper.getRoot().setInAnimation(requireActivity(), R.anim.slide_and_fade_in_left);
+            binding.timerViewFlipper.getRoot().setOutAnimation(requireActivity(), R.anim.slide_and_fade_out_right);
 
             binding.timerViewFlipper.getRoot().showNext();
         }
