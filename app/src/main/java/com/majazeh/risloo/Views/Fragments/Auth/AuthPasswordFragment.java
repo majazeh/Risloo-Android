@@ -15,14 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.AnimateManager;
+import com.majazeh.risloo.Utils.Interfaces.CutCopyPasteListener;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Interfaces.CutCopyPasteListener;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordBinding;
 import com.mre.ligheh.API.Response;
@@ -56,8 +55,6 @@ public class AuthPasswordFragment extends Fragment {
         listener();
 
         setArgs();
-
-        setAnimation();
 
         return binding.getRoot();
     }
@@ -187,20 +184,6 @@ public class AuthPasswordFragment extends Fragment {
 //
 //            binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
 //        }
-    }
-
-    private void setAnimation() {
-        AnimateManager.animateViewAlpha(binding.headerTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.mobileTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.passwordIncludeLayout.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.guideIncludeLayout.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.buttonTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.loginLinkTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.registerLinkTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.passwordRecoverLinkTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.separatorView, 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.separatorView2, 500, 0f, 1f);
     }
 
     private void setHashmap() {

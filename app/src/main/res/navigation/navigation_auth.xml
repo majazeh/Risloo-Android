@@ -68,30 +68,58 @@
         android:id="@+id/action_global_authLoginFragment"
         app:destination="@id/authLoginFragment"
         app:popUpTo="@id/authLoginFragment"
-        app:popUpToInclusive="true" />
+        app:popUpToInclusive="true"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left" />
 
     <action
         android:id="@+id/action_global_authPasswordChangeFragment"
-        app:destination="@id/authPasswordChangeFragment" />
+        app:destination="@id/authPasswordChangeFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left" />
 
     <action
         android:id="@+id/action_global_authPasswordFragment"
-        app:destination="@id/authPasswordFragment" />
+        app:destination="@id/authPasswordFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left" />
 
     <action
         android:id="@+id/action_global_authPasswordRecoverFragment"
-        app:destination="@id/authPasswordRecoverFragment" />
+        app:destination="@id/authPasswordRecoverFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left" />
 
     <action
         android:id="@+id/action_global_authPinFragment"
-        app:destination="@id/authPinFragment" />
+        app:destination="@id/authPinFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left" />
 
     <action
         android:id="@+id/action_global_authRegisterFragment"
-        app:destination="@id/authRegisterFragment" />
+        app:destination="@id/authRegisterFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left" />
 
     <action
         android:id="@+id/action_global_authSerialFragment"
-        app:destination="@id/authSerialFragment" />
+        app:destination="@id/authSerialFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left" />
 
 </navigation>

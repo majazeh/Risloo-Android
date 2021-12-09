@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -51,8 +50,6 @@ public class AuthSerialFragment extends Fragment {
         listener();
 
         setData();
-
-        setAnimation();
 
         return binding.getRoot();
     }
@@ -119,17 +116,6 @@ public class AuthSerialFragment extends Fragment {
             else
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
         }
-    }
-
-    private void setAnimation() {
-        AnimateManager.animateViewAlpha(binding.avatarIncludeLayout.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.serialEditText.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.guideIncludeLayout.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.buttonTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.dashboardLinkTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.logoutLinkTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.separatorView, 500, 0f, 1f);
     }
 
     private void setHashmap(String method) {
