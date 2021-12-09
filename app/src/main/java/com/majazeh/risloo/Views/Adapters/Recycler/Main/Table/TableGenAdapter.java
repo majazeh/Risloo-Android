@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter2;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilStringAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilStringCallback;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -25,7 +25,7 @@ import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 
 import java.util.ArrayList;
 
-public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements MyDiffUtilAdapter2 {
+public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilStringAdapter {
 
     // Activity
     private final Activity activity;

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
@@ -21,7 +21,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> implements MyDiffUtilAdapter {
+public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> implements DiffUtilTypeModelAdapter {
 
     // Activity
     private final Activity activity;

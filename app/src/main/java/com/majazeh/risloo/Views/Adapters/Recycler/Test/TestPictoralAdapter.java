@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter2;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilStringAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilStringCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder> implements MyDiffUtilAdapter2 {
+public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder> implements DiffUtilStringAdapter {
 
     // Activity
     private final Activity activity;

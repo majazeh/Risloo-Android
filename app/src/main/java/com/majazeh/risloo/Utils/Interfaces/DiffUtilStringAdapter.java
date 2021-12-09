@@ -1,6 +1,6 @@
 package com.majazeh.risloo.Utils.Interfaces;
 
-public interface MyDiffUtilAdapter2 {
+public interface DiffUtilStringAdapter {
 
     boolean areItemsTheSame(String oldString, String newString);
 

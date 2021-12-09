@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Interfaces.MyDiffUtilAdapter;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -23,7 +23,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implements MyDiffUtilAdapter {
+public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implements DiffUtilTypeModelAdapter {
 
     // Activity
     private final Activity activity;

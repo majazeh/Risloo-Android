@@ -8,10 +8,10 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 public class DiffUtilTypeModelCallback extends DiffUtil.ItemCallback<TypeModel> {
 
     // Interfaces
-    private final MyDiffUtilAdapter adapter;
+    private final DiffUtilTypeModelAdapter adapter;
 
     // Constructor
-    public DiffUtilTypeModelCallback(MyDiffUtilAdapter adapter) {
+    public DiffUtilTypeModelCallback(DiffUtilTypeModelAdapter adapter) {
         this.adapter = adapter;
     }
 

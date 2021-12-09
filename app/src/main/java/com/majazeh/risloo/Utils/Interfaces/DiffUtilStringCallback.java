@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil;
 public class DiffUtilStringCallback extends DiffUtil.ItemCallback<String> {
 
     // Interfaces
-    private final MyDiffUtilAdapter2 adapter;
+    private final DiffUtilStringAdapter adapter;
 
     // Constructor
-    public DiffUtilStringCallback(MyDiffUtilAdapter2 adapter) {
+    public DiffUtilStringCallback(DiffUtilStringAdapter adapter) {
         this.adapter = adapter;
     }
 

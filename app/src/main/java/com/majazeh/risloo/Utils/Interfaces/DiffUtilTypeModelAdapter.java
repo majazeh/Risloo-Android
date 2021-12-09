@@ -2,7 +2,7 @@ package com.majazeh.risloo.Utils.Interfaces;
 
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
-public interface MyDiffUtilAdapter {
+public interface DiffUtilTypeModelAdapter {
 
     boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel);
 
