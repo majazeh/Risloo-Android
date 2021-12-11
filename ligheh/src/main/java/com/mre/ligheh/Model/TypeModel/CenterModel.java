@@ -18,7 +18,7 @@ public class CenterModel extends TypeModel {
     private int updated_at;
     private List treasuries;
 
-    public CenterModel(JSONObject jsonObject) throws JSONException {
+    public CenterModel(JSONObject jsonObject) {
         super(jsonObject);
 
         try {
@@ -28,19 +28,22 @@ public class CenterModel extends TypeModel {
                 setStatus(jsonObject.getString("status"));
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
+            
             if (!jsonObject.isNull("manager"))
                 setManager(new UserModel2(jsonObject.getJSONObject("manager")));
             if (!jsonObject.isNull("acceptation"))
                 setAcceptation(new AcceptationModel(jsonObject.getJSONObject("acceptation")));
+
             if (!jsonObject.isNull("detail"))
                 setDetail(jsonObject.getJSONObject("detail"));
+
             if (!jsonObject.isNull("created_at"))
                 setCreatedAt(jsonObject.getInt("created_at"));
             if (!jsonObject.isNull("updated_at"))
                 setUpdatedAt(jsonObject.getInt("updated_at"));
 
             if (!jsonObject.isNull("treasuries")) {
-                List treasuries = new List();
+                treasuries = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++)
                     treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
@@ -168,7 +171,7 @@ public class CenterModel extends TypeModel {
             super.toObject().put("id", getId());
             super.toObject().put("status", getStatus());
             super.toObject().put("type", getType());
-            super.toObject().put("manager", getManager());
+            super.toObject().put("manager", getManager().toObject());
             super.toObject().put("acceptation", getAcceptation().toObject());
             super.toObject().put("detail", getDetail());
             super.toObject().put("created_at", getCreatedAt());

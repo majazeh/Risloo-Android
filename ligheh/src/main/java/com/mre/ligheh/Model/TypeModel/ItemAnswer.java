@@ -8,17 +8,18 @@ import org.json.JSONObject;
 
 public class ItemAnswer {
     private String type = "";
-    private JSONArray options;
     private String tiles = "";
+    private JSONArray options;
 
     public ItemAnswer(JSONObject jsonObject) {
         try {
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
-            if (!jsonObject.isNull("options"))
-                setOptions(jsonObject.getJSONArray("options"));
             if (!jsonObject.isNull("tiles"))
                 setTiles(jsonObject.getString("tiles"));
+
+            if (!jsonObject.isNull("options"))
+                setOptions(jsonObject.getJSONArray("options"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -30,6 +31,14 @@ public class ItemAnswer {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(String tiles) {
+        this.tiles = tiles;
     }
 
     public JSONArray getOptions() {
@@ -56,23 +65,15 @@ public class ItemAnswer {
         this.options = options;
     }
 
-    public String getTiles() {
-        return tiles;
-    }
-
-    public void setTiles(String tiles) {
-        this.tiles = tiles;
-    }
-
     public boolean compareTo(ItemAnswer model) {
         if (model != null) {
             if (!type.equals(model.getType()))
                 return false;
 
-            if (options != model.getOptions())
+            if (!tiles.equals(model.getTiles()))
                 return false;
 
-            if (!tiles.equals(model.getTiles()))
+            if (options != model.getOptions())
                 return false;
 
             return true;
@@ -86,8 +87,8 @@ public class ItemAnswer {
     public String toString() {
         return "ItemAnswer{" +
                 "type='" + type + '\'' +
-                ", options=" + options +
                 ", tiles='" + tiles + '\'' +
+                ", options=" + options +
                 '}';
     }
 

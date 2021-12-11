@@ -18,6 +18,7 @@ public class TagModel extends TypeModel {
                 setId(jsonObject.getString("id"));
             if (!jsonObject.isNull("title"))
                 setTitle(jsonObject.getString("title"));
+
             if (!jsonObject.isNull("order"))
                 setOrder(jsonObject.getInt("order"));
         } catch (JSONException e) {

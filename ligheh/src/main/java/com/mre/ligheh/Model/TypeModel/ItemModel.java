@@ -6,38 +6,47 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ItemModel extends TypeModel {
+    private String index = "";
     private String type = "";
     private String image_url = "";
     private String text = "";
-    private ItemAnswer answer;
     private String category = "";
     private String description = "";
     private String user_answered = "";
-    private String index = "";
+    private ItemAnswer answer;
 
     public ItemModel(JSONObject jsonObject) {
         super(jsonObject);
 
         try {
+            if (!jsonObject.isNull("index"))
+                setIndex(String.valueOf(jsonObject.getInt("index")));
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
             if (!jsonObject.isNull("image_url"))
                 setImageUrl(jsonObject.getString("image_url"));
             if (!jsonObject.isNull("text"))
                 setText(jsonObject.getString("text"));
-            if (!jsonObject.isNull("answer"))
-                setAnswer(new ItemAnswer(jsonObject.getJSONObject("answer")));
             if (!jsonObject.isNull("user_answered"))
                 setUserAnswered(jsonObject.getString("user_answered"));
             if (!jsonObject.isNull("category"))
                 setCategory(jsonObject.getString("category"));
             if (!jsonObject.isNull("description"))
                 setDescription(jsonObject.getString("description"));
-            if (!jsonObject.isNull("index"))
-                setIndex(String.valueOf(jsonObject.getInt("index")));
+
+            if (!jsonObject.isNull("answer"))
+                setAnswer(new ItemAnswer(jsonObject.getJSONObject("answer")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
     public String getType() {
@@ -64,14 +73,6 @@ public class ItemModel extends TypeModel {
         this.text = text;
     }
 
-    public ItemAnswer getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(ItemAnswer answer) {
-        this.answer = answer;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -96,16 +97,19 @@ public class ItemModel extends TypeModel {
         this.user_answered = user_answered;
     }
 
-    public String getIndex() {
-        return index;
+    public ItemAnswer getAnswer() {
+        return answer;
     }
 
-    public void setIndex(String index) {
-        this.index = index;
+    public void setAnswer(ItemAnswer answer) {
+        this.answer = answer;
     }
 
     public boolean compareTo(ItemModel model) {
         if (model != null) {
+            if (!index.equals(model.getIndex()))
+                return false;
+
             if (!type.equals(model.getType()))
                 return false;
 
@@ -113,9 +117,6 @@ public class ItemModel extends TypeModel {
                 return false;
 
             if (!text.equals(model.getText()))
-                return false;
-
-            if (answer != model.getAnswer())
                 return false;
 
             if (!category.equals(model.getCategory()))
@@ -127,7 +128,7 @@ public class ItemModel extends TypeModel {
             if (!user_answered.equals(model.getUserAnswered()))
                 return false;
 
-            if (!index.equals(model.getIndex()))
+            if (answer != model.getAnswer())
                 return false;
 
             return true;
@@ -139,14 +140,14 @@ public class ItemModel extends TypeModel {
     @Override
     public JSONObject toObject() {
         try {
+            super.toObject().put("index", getIndex());
             super.toObject().put("type", getType());
             super.toObject().put("image_url", getImageUrl());
             super.toObject().put("text", getText());
-            super.toObject().put("answer", getAnswer());
             super.toObject().put("category", getCategory());
             super.toObject().put("description", getDescription());
             super.toObject().put("user_answered", getUserAnswered());
-            super.toObject().put("index", getIndex());
+            super.toObject().put("answer", getAnswer());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -158,14 +159,14 @@ public class ItemModel extends TypeModel {
     @Override
     public String toString() {
         return "ItemModel{" +
-                "type='" + type + '\'' +
+                "index='" + index + '\'' +
+                ", type='" + type + '\'' +
                 ", image_url='" + image_url + '\'' +
                 ", text='" + text + '\'' +
-                ", answer=" + answer +
                 ", category='" + category + '\'' +
                 ", description='" + description + '\'' +
                 ", user_answered='" + user_answered + '\'' +
-                ", index='" + index + '\'' +
+                ", answer=" + answer +
                 '}';
     }
 

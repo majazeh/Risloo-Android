@@ -9,9 +9,9 @@ public class AcceptationModel extends TypeModel {
     private String id = "";
     private String name = "";
     private String position = "";
+    private String kicked_at = "";
     private int created_at;
     private int accepted_at;
-    private String kicked_at = "";
 
     public AcceptationModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -23,12 +23,13 @@ public class AcceptationModel extends TypeModel {
                 setName((jsonObject.getString("name")));
             if (!jsonObject.isNull("position"))
                 setPosition(jsonObject.getString("position"));
+            if (!jsonObject.isNull("kicked_at"))
+                setKickedAt(jsonObject.getString("kicked_at"));
+
             if (!jsonObject.isNull("created_at"))
                 setCreatedAt(jsonObject.getInt("created_at"));
             if (!jsonObject.isNull("accepted_at"))
                 setAcceptedAt(jsonObject.getInt("accepted_at"));
-            if (!jsonObject.isNull("kicked_at"))
-                setKickedAt(jsonObject.getString("kicked_at"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -58,6 +59,14 @@ public class AcceptationModel extends TypeModel {
         this.position = position;
     }
 
+    public String getKickedAt() {
+        return kicked_at;
+    }
+
+    public void setKickedAt(String kicked_at) {
+        this.kicked_at = kicked_at;
+    }
+
     public int getCreatedAt() {
         return created_at;
     }
@@ -74,14 +83,6 @@ public class AcceptationModel extends TypeModel {
         this.accepted_at = accepted_at;
     }
 
-    public String getKickedAt() {
-        return kicked_at;
-    }
-
-    public void setKickedAt(String kicked_at) {
-        this.kicked_at = kicked_at;
-    }
-
     public boolean compareTo(AcceptationModel model) {
         if (model != null) {
             if (!id.equals(model.getId()))
@@ -93,13 +94,13 @@ public class AcceptationModel extends TypeModel {
             if (!position.equals(model.getPosition()))
                 return false;
 
+            if (!kicked_at.equals(model.getKickedAt()))
+                return false;
+
             if (created_at != model.getCreatedAt())
                 return false;
 
             if (accepted_at != model.getAcceptedAt())
-                return false;
-
-            if (!kicked_at.equals(model.getKickedAt()))
                 return false;
 
             return true;
@@ -114,9 +115,9 @@ public class AcceptationModel extends TypeModel {
             super.toObject().put("id", getId());
             super.toObject().put("name", getName());
             super.toObject().put("position", getPosition());
+            super.toObject().put("kicked_at", getKickedAt());
             super.toObject().put("created_at", getCreatedAt());
             super.toObject().put("accepted_at", getAcceptedAt());
-            super.toObject().put("kicked_at", getKickedAt());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -131,9 +132,9 @@ public class AcceptationModel extends TypeModel {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", position='" + position + '\'' +
+                ", kicked_at='" + kicked_at + '\'' +
                 ", created_at=" + created_at +
                 ", accepted_at=" + accepted_at +
-                ", kicked_at='" + kicked_at + '\'' +
                 '}';
     }
 
