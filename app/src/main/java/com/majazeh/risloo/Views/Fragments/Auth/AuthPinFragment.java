@@ -171,8 +171,8 @@ public class AuthPinFragment extends Fragment {
             data.put("callback", model.getCallback());
         }
 
-        if (model.getAuthorized_key() != null && !model.getAuthorized_key().equals("")) {
-            mobile = model.getAuthorized_key();
+        if (model.getAuthorizedKey() != null && !model.getAuthorizedKey().equals("")) {
+            mobile = model.getAuthorizedKey();
             binding.mobileTextView.getRoot().setText(mobile);
         }
 

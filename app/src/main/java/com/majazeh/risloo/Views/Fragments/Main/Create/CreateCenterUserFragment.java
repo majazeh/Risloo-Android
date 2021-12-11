@@ -279,14 +279,10 @@ public class CreateCenterUserFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        try {
-                            AuthModel model = new AuthModel((JSONObject) object);
+                        AuthModel model = new AuthModel((JSONObject) object);
 
-                            DialogManager.dismissLoadingDialog();
-                            SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getUserModel());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        DialogManager.dismissLoadingDialog();
+                        SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getUserModel());
                     });
                 }
             }
