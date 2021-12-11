@@ -27,7 +27,7 @@ public class PaymentManager {
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        data.put("authorized_key", model.getAuthorized_key());
+        data.put("authorized_key", model.getAuthorizedKey());
 
         Payment.auth(data, header, new Response() {
             @Override
@@ -56,7 +56,7 @@ public class PaymentManager {
             String authorizedKey = uri.getQueryParameter("authorized_key");
 
             if (authorizedKey != null && !authorizedKey.equals("")) {
-                if (Paymont.getInstance().getPaymentModel() != null && Paymont.getInstance().getPaymentModel().getAuthorized_key().equals(authorizedKey)) {
+                if (Paymont.getInstance().getPaymentModel() != null && Paymont.getInstance().getPaymentModel().getAuthorizedKey().equals(authorizedKey)) {
                     finalize(activity);
                 }
             }

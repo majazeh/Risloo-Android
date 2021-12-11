@@ -111,7 +111,7 @@ public class TablePaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             holder.binding.treasuryTextView.setText(model.getTreasury().getTitle());
 
         holder.binding.descriptionTextView.setText(model.getTitle());
-        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreatedAt()), " "));
 
         if (model.getStatus().equals("expired")) {
             holder.binding.statusTextView.setText(SelectionManager.getPaymentType(activity, "fa", model.getStatus()));
