@@ -308,10 +308,10 @@ public class CenterFragment extends Fragment {
 
     private void setAcceptation(CenterModel model) {
         if (model.getAcceptation() != null) {
-            if (!model.getAcceptation().getKicked_at().equals("")) {
+            if (!model.getAcceptation().getKickedAt().equals("")) {
                 setStatus("kicked");
             } else {
-                if (model.getAcceptation().getAccepted_at() != 0)
+                if (model.getAcceptation().getAcceptedAt() != 0)
                     switch (model.getAcceptation().getPosition()) {
                         case "manager":
                         case "operator":

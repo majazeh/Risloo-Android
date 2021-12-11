@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,18 +15,20 @@ public class AcceptationModel extends TypeModel {
 
     public AcceptationModel(JSONObject jsonObject) {
         super(jsonObject);
+
         try {
-            setId(jsonObject.getString("id"));
+            if (!jsonObject.isNull("id"))
+                setId((jsonObject.getString("id")));
             if (!jsonObject.isNull("name"))
                 setName((jsonObject.getString("name")));
             if (!jsonObject.isNull("position"))
                 setPosition(jsonObject.getString("position"));
             if (!jsonObject.isNull("created_at"))
-                setCreated_at(jsonObject.getInt("created_at"));
+                setCreatedAt(jsonObject.getInt("created_at"));
             if (!jsonObject.isNull("accepted_at"))
-                setAccepted_at(jsonObject.getInt("accepted_at"));
+                setAcceptedAt(jsonObject.getInt("accepted_at"));
             if (!jsonObject.isNull("kicked_at"))
-                setKicked_at(jsonObject.getString("kicked_at"));
+                setKickedAt(jsonObject.getString("kicked_at"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -54,30 +58,55 @@ public class AcceptationModel extends TypeModel {
         this.position = position;
     }
 
-    public int getCreated_at() {
+    public int getCreatedAt() {
         return created_at;
     }
 
-    public void setCreated_at(int created_at) {
+    public void setCreatedAt(int created_at) {
         this.created_at = created_at;
     }
 
-    public int getAccepted_at() {
+    public int getAcceptedAt() {
         return accepted_at;
     }
 
-    public void setAccepted_at(int accepted_at) {
+    public void setAcceptedAt(int accepted_at) {
         this.accepted_at = accepted_at;
     }
 
-    public String getKicked_at() {
+    public String getKickedAt() {
         return kicked_at;
     }
 
-    public void setKicked_at(String kicked_at) {
+    public void setKickedAt(String kicked_at) {
         this.kicked_at = kicked_at;
     }
 
+    public boolean compareTo(AcceptationModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
+
+            if (!name.equals(model.getName()))
+                return false;
+
+            if (!position.equals(model.getPosition()))
+                return false;
+
+            if (created_at != model.getCreatedAt())
+                return false;
+
+            if (accepted_at != model.getAcceptedAt())
+                return false;
+
+            if (!kicked_at.equals(model.getKickedAt()))
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public JSONObject toObject() {
@@ -85,12 +114,27 @@ public class AcceptationModel extends TypeModel {
             super.toObject().put("id", getId());
             super.toObject().put("name", getName());
             super.toObject().put("position", getPosition());
-            super.toObject().put("created_at", getCreated_at());
-            super.toObject().put("accepted_at", getAccepted_at());
-            super.toObject().put("kicked_at", getKicked_at());
+            super.toObject().put("created_at", getCreatedAt());
+            super.toObject().put("accepted_at", getAcceptedAt());
+            super.toObject().put("kicked_at", getKickedAt());
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return super.toObject();
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "AcceptationModel{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", position='" + position + '\'' +
+                ", created_at=" + created_at +
+                ", accepted_at=" + accepted_at +
+                ", kicked_at='" + kicked_at + '\'' +
+                '}';
+    }
+
 }

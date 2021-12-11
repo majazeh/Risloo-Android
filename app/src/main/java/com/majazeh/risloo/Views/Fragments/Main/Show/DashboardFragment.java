@@ -125,7 +125,7 @@ public class DashboardFragment extends Fragment {
                 for (TypeModel typeModel : model.getCenterList().data()) {
                     CenterModel centerModel = (CenterModel) typeModel;
 
-                    if (centerModel != null && centerModel.getAcceptation() != null && centerModel.getAcceptation().getAccepted_at() != 0) {
+                    if (centerModel != null && centerModel.getAcceptation() != null && centerModel.getAcceptation().getAcceptedAt() != 0) {
                         binding.centerMissingLayout.getRoot().setVisibility(View.GONE);
                         break;
                     }

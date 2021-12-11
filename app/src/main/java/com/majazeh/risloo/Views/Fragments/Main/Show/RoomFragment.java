@@ -457,10 +457,10 @@ public class RoomFragment extends Fragment {
 
     private void setAcceptation(CenterModel model) {
         if (model.getAcceptation() != null) {
-            if (!model.getAcceptation().getKicked_at().equals("")) {
+            if (!model.getAcceptation().getKickedAt().equals("")) {
                 setStatus("kicked");
             } else {
-                if (model.getAcceptation().getAccepted_at() != 0)
+                if (model.getAcceptation().getAcceptedAt() != 0)
                     switch (model.getAcceptation().getPosition()) {
                         case "manager":
                         case "operator":
@@ -482,10 +482,10 @@ public class RoomFragment extends Fragment {
 
     private void setAcceptation(RoomModel model) {
         if (model.getRoomAcceptation() != null) {
-            if (!model.getRoomAcceptation().getKicked_at().equals("")) {
+            if (!model.getRoomAcceptation().getKickedAt().equals("")) {
                 setStatus("kicked");
             } else {
-                if (model.getRoomAcceptation().getAccepted_at() != 0)
+                if (model.getRoomAcceptation().getAcceptedAt() != 0)
                     switch (model.getRoomAcceptation().getPosition()) {
                         case "manager":
                         case "operator":

@@ -95,14 +95,14 @@ public class Permissoon {
 
     public boolean showReserveScheduleCase(ScheduleModel model) {
         if (model != null && model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getAcceptation() != null)
-            return model.getRoom().getRoomCenter().getAcceptation().getPosition().equals("client") && model.getRoom().getRoomCenter().getAcceptation().getKicked_at().equals("");
+            return model.getRoom().getRoomCenter().getAcceptation().getPosition().equals("client") && model.getRoom().getRoomCenter().getAcceptation().getKickedAt().equals("");
         else
             return false;
     }
 
     public boolean showReserveScheduleName(ScheduleModel model) {
         if (model != null && model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getAcceptation() != null)
-            return model.getRoom().getRoomCenter().getAcceptation().getPosition().equals("client") && !model.getRoom().getRoomCenter().getAcceptation().getKicked_at().equals("");
+            return model.getRoom().getRoomCenter().getAcceptation().getPosition().equals("client") && !model.getRoom().getRoomCenter().getAcceptation().getKickedAt().equals("");
         else
             return true;
     }
