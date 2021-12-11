@@ -176,7 +176,7 @@ public class SampleForm {
             jsonObject.put("title", formModel.getTitle());
             boolean answer = false;
             if (formModel.getObject().getClass().getName().equals("com.mre.ligheh.Model.TypeModel.ItemModel"))
-                if (!((ItemModel) formModel.getObject()).getUser_answered().equals(""))
+                if (!((ItemModel) formModel.getObject()).getUserAnswered().equals(""))
                     answer = true;
             jsonObject.put("answer", answer);
             forms.put(jsonObject);

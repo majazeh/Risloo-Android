@@ -247,20 +247,20 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         else if (model.getAnswer().getType().equals("number"))
             holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-        if (!model.getUser_answered().equals(""))
-            holder.binding.inputEditText.setText(model.getUser_answered());
+        if (!model.getUserAnswered().equals(""))
+            holder.binding.inputEditText.setText(model.getUserAnswered());
     }
 
     private void setType(TableFieldMultiHolder holder, ItemModel model) {
-        if (!model.getUser_answered().equals(""))
-            holder.binding.inputEditText.setText(model.getUser_answered());
+        if (!model.getUserAnswered().equals(""))
+            holder.binding.inputEditText.setText(model.getUserAnswered());
     }
 
     private void setType(TableFieldSelectHolder holder, ItemModel model) {
         setSpinner(holder, model);
 
-        if (!model.getUser_answered().equals(""))
-            holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
+        if (!model.getUserAnswered().equals(""))
+            holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUserAnswered()) - 1);
         else
             holder.binding.selectSpinner.setSelection(holder.binding.selectSpinner.getCount());
     }
@@ -298,8 +298,8 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void setSpinner(TableFieldSelectHolder holder, ItemModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
-            for (int i = 0; i < model.getAnswer().getAnswer().length(); i++) {
-                options.add(model.getAnswer().getAnswer().get(i).toString());
+            for (int i = 0; i < model.getAnswer().getOptions().length(); i++) {
+                options.add(model.getAnswer().getOptions().get(i).toString());
             }
 
             options.add("");

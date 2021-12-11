@@ -22,13 +22,13 @@ public class ItemModel extends TypeModel {
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
             if (!jsonObject.isNull("image_url"))
-                setImage_url(jsonObject.getString("image_url"));
+                setImageUrl(jsonObject.getString("image_url"));
             if (!jsonObject.isNull("text"))
                 setText(jsonObject.getString("text"));
             if (!jsonObject.isNull("answer"))
                 setAnswer(new ItemAnswer(jsonObject.getJSONObject("answer")));
             if (!jsonObject.isNull("user_answered"))
-                setUser_answered(jsonObject.getString("user_answered"));
+                setUserAnswered(jsonObject.getString("user_answered"));
             if (!jsonObject.isNull("category"))
                 setCategory(jsonObject.getString("category"));
             if (!jsonObject.isNull("description"))
@@ -48,8 +48,12 @@ public class ItemModel extends TypeModel {
         this.type = type;
     }
 
-    public String getImage_url() {
+    public String getImageUrl() {
         return image_url;
+    }
+
+    public void setImageUrl(String image_url) {
+        this.image_url = image_url + ".png";
     }
 
     public String getText() {
@@ -60,24 +64,12 @@ public class ItemModel extends TypeModel {
         this.text = text;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url + ".png";
-    }
-
     public ItemAnswer getAnswer() {
         return answer;
     }
 
     public void setAnswer(ItemAnswer answer) {
         this.answer = answer;
-    }
-
-    public String getUser_answered() {
-        return user_answered;
-    }
-
-    public void setUser_answered(String user_answered) {
-        this.user_answered = user_answered;
     }
 
     public String getCategory() {
@@ -96,6 +88,14 @@ public class ItemModel extends TypeModel {
         this.description = description;
     }
 
+    public String getUserAnswered() {
+        return user_answered;
+    }
+
+    public void setUserAnswered(String user_answered) {
+        this.user_answered = user_answered;
+    }
+
     public String getIndex() {
         return index;
     }
@@ -109,7 +109,7 @@ public class ItemModel extends TypeModel {
             if (!type.equals(model.getType()))
                 return false;
 
-            if (!image_url.equals(model.getImage_url()))
+            if (!image_url.equals(model.getImageUrl()))
                 return false;
 
             if (!text.equals(model.getText()))
@@ -124,7 +124,7 @@ public class ItemModel extends TypeModel {
             if (!description.equals(model.getDescription()))
                 return false;
 
-            if (!user_answered.equals(model.getUser_answered()))
+            if (!user_answered.equals(model.getUserAnswered()))
                 return false;
 
             if (!index.equals(model.getIndex()))
@@ -138,13 +138,26 @@ public class ItemModel extends TypeModel {
 
     @Override
     public JSONObject toObject() {
+        try {
+            super.toObject().put("type", getType());
+            super.toObject().put("image_url", getImageUrl());
+            super.toObject().put("text", getText());
+            super.toObject().put("answer", getAnswer());
+            super.toObject().put("category", getCategory());
+            super.toObject().put("description", getDescription());
+            super.toObject().put("user_answered", getUserAnswered());
+            super.toObject().put("index", getIndex());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return super.toObject();
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "Item{" +
+        return "ItemModel{" +
                 "type='" + type + '\'' +
                 ", image_url='" + image_url + '\'' +
                 ", text='" + text + '\'' +

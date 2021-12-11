@@ -1,13 +1,15 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ItemAnswer {
-    private String type="";
+    private String type = "";
     private JSONArray options;
-    private String tiles;
+    private String tiles = "";
 
     public ItemAnswer(JSONObject jsonObject) {
         try {
@@ -30,12 +32,13 @@ public class ItemAnswer {
         this.type = type;
     }
 
-    public JSONArray getAnswer() {
+    public JSONArray getOptions() {
         switch (type) {
             case "optional":
                 return options;
             case "optional_images":
                 JSONArray jsonArray = new JSONArray();
+
                 for (int i = 0; i < options.length(); i++) {
                     try {
                         jsonArray.put(options.getString(i) + ".png");
@@ -60,4 +63,32 @@ public class ItemAnswer {
     public void setTiles(String tiles) {
         this.tiles = tiles;
     }
+
+    public boolean compareTo(ItemAnswer model) {
+        if (model != null) {
+            if (!type.equals(model.getType()))
+                return false;
+
+            if (options != model.getOptions())
+                return false;
+
+            if (!tiles.equals(model.getTiles()))
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "ItemAnswer{" +
+                "type='" + type + '\'' +
+                ", options=" + options +
+                ", tiles='" + tiles + '\'' +
+                '}';
+    }
+
 }

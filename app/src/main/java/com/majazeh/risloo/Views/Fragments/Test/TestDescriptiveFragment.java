@@ -108,8 +108,8 @@ public class TestDescriptiveFragment extends Fragment {
             binding.descriptionTextView.getRoot().setVisibility(View.GONE);
         }
 
-        if (item.getUser_answered() != null && !item.getUser_answered().equals("")) {
-            answer = item.getUser_answered();
+        if (item.getUserAnswered() != null && !item.getUserAnswered().equals("")) {
+            answer = item.getUserAnswered();
             binding.answerEditText.inputEditText.setText(answer);
 
             setEditTextCount(binding.answerEditText.inputEditText.length());

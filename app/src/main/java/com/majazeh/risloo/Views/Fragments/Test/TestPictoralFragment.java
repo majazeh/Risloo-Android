@@ -67,19 +67,19 @@ public class TestPictoralFragment extends Fragment {
                 binding.entityConstraintLayout.setVisibility(View.GONE);
             }
 
-            if (item.getImage_url() != null && !item.getImage_url().equals("")) {
-                Picasso.get().load(item.getImage_url()).placeholder(R.color.CoolGray100).into(binding.questionImageView.getRoot());
+            if (item.getImageUrl() != null && !item.getImageUrl().equals("")) {
+                Picasso.get().load(item.getImageUrl()).placeholder(R.color.CoolGray100).into(binding.questionImageView.getRoot());
             } else {
                 Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.questionImageView.getRoot());
             }
 
             ArrayList<String> pics = new ArrayList<>();
-            for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {
-                pics.add(item.getAnswer().getAnswer().get(i).toString());
+            for (int i = 0; i < item.getAnswer().getOptions().length(); i++) {
+                pics.add(item.getAnswer().getOptions().get(i).toString());
             }
 
             if (pics.size() != 0) {
-                adapter.setItems(pics, item.getUser_answered(), item.getIndex());
+                adapter.setItems(pics, item.getUserAnswered(), item.getIndex());
                 binding.listRecyclerView.getRoot().setAdapter(adapter);
             }
         } catch (JSONException e) {

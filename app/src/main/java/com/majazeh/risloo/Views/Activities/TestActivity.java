@@ -395,7 +395,7 @@ public class TestActivity extends AppCompatActivity {
 
     public void sendItem(int key, String value) {
         ItemModel model = (ItemModel) formModel.getObject();
-        model.setUser_answered(value);
+        model.setUserAnswered(value);
 
         answers.set(sampleModel.getSampleForm().getPosition(), true);
 

@@ -80,12 +80,12 @@ public class TestOptionalFragment extends Fragment {
             }
 
             ArrayList<String> options = new ArrayList<>();
-            for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {
-                options.add(item.getAnswer().getAnswer().get(i).toString());
+            for (int i = 0; i < item.getAnswer().getOptions().length(); i++) {
+                options.add(item.getAnswer().getOptions().get(i).toString());
             }
 
             if (options.size() != 0) {
-                adapter.setItems(options, item.getUser_answered(), item.getIndex());
+                adapter.setItems(options, item.getUserAnswered(), item.getIndex());
                 binding.listRecyclerView.getRoot().setAdapter(adapter);
             }
         } catch (JSONException e) {
