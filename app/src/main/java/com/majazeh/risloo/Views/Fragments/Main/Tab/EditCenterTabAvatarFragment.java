@@ -102,8 +102,8 @@ public class EditCenterTabAvatarFragment extends Fragment {
                 model = ((EditCenterFragment) current).roomModel.getRoomCenter();
 
             try {
-                if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-                    data.put("id", model.getCenterId());
+                if (model.getId() != null && !model.getId().equals("")) {
+                    data.put("id", model.getId());
                 }
 
                 if (model.getDetail() != null && model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
@@ -115,8 +115,8 @@ public class EditCenterTabAvatarFragment extends Fragment {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getDetail().getString("title")));
-                    else if (model.getCenterId() != null && !model.getCenterId().equals(""))
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getCenterId()));
+                    else if (model.getId() != null && !model.getId().equals(""))
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getId()));
                     else
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
 

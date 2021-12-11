@@ -88,8 +88,8 @@ public class EditCenterFragment extends Fragment {
     }
 
     private void setData(CenterModel model) {
-        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
-            type = model.getCenterType();
+        if (model.getType() != null && !model.getType().equals("")) {
+            type = model.getType();
         }
 
         adapter = new EditCenterAdapter(requireActivity(), type);

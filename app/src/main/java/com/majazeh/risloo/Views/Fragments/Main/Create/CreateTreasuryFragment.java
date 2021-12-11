@@ -149,8 +149,8 @@ public class CreateTreasuryFragment extends Fragment {
             for (TypeModel typeModel : centers.data()) {
                 CenterModel model = (CenterModel) typeModel;
 
-                if (model != null && model.getAcceptation() != null && model.getAcceptation().getPosition().equals("manager") && model.getCenterType().equals("personal_clinic")) {
-                    personalClinicId = model.getCenterId();
+                if (model != null && model.getAcceptation() != null && model.getAcceptation().getPosition().equals("manager") && model.getType().equals("personal_clinic")) {
+                    personalClinicId = model.getId();
                     options.add("کلینیک شخصی");
                     break;
                 }

@@ -8,9 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CenterModel extends TypeModel {
-    private String centerId = "";
-    private String centerStatus = "";
-    private String centerType = "";
+    private String id = "";
+    private String status = "";
+    private String type = "";
     private UserModel2 manager;
     private AcceptationModel acceptation;
     private JSONObject detail;
@@ -21,55 +21,62 @@ public class CenterModel extends TypeModel {
     public CenterModel(JSONObject jsonObject) throws JSONException {
         super(jsonObject);
 
-        setCenterId(jsonObject.getString("id"));
-        if (!jsonObject.isNull("manager"))
-            setManager(new UserModel2(jsonObject.getJSONObject("manager")));
-        if (!jsonObject.isNull("acceptation"))
-            setAcceptation(new AcceptationModel(jsonObject.getJSONObject("acceptation")));
-        if (!jsonObject.isNull("status"))
-            setCenterStatus(jsonObject.getString("status"));
-        if (!jsonObject.isNull("type"))
-            setCenterType(jsonObject.getString("type"));
-        if (!jsonObject.isNull("detail"))
-            setDetail(jsonObject.getJSONObject("detail"));
-        if (!jsonObject.isNull("created_at"))
-            setCreated_at(jsonObject.getInt("created_at"));
-        if (!jsonObject.isNull("updated_at"))
-            setUpdated_at(jsonObject.getInt("updated_at"));
+        try {
+            if (!jsonObject.isNull("id"))
+                setId(jsonObject.getString("id"));
+            if (!jsonObject.isNull("status"))
+                setStatus(jsonObject.getString("status"));
+            if (!jsonObject.isNull("type"))
+                setType(jsonObject.getString("type"));
+            if (!jsonObject.isNull("manager"))
+                setManager(new UserModel2(jsonObject.getJSONObject("manager")));
+            if (!jsonObject.isNull("acceptation"))
+                setAcceptation(new AcceptationModel(jsonObject.getJSONObject("acceptation")));
+            if (!jsonObject.isNull("detail"))
+                setDetail(jsonObject.getJSONObject("detail"));
+            if (!jsonObject.isNull("created_at"))
+                setCreatedAt(jsonObject.getInt("created_at"));
+            if (!jsonObject.isNull("updated_at"))
+                setUpdatedAt(jsonObject.getInt("updated_at"));
 
-        if (!jsonObject.isNull("treasuries")) {
-            List treasuries = new List();
-            for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++) {
-                treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
+            if (!jsonObject.isNull("treasuries")) {
+                List treasuries = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++)
+                    treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
+
+                setTreasuries(treasuries);
+            } else {
+                setTreasuries(new List());
             }
-            setTreasuries(treasuries);
-        } else {
-            setTreasuries(new List());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
-    public String getCenterId() {
-        return centerId;
+    public String getId() {
+        return id;
     }
 
-    public void setCenterId(String centerId) {
-        this.centerId = centerId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getCenterStatus() {
-        return centerStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCenterStatus(String centerStatus) {
-        this.centerStatus = centerStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getCenterType() {
-        return centerType;
+    public String getType() {
+        return type;
     }
 
-    public void setCenterType(String centerType) {
-        this.centerType = centerType;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public UserModel2 getManager() {
@@ -96,19 +103,19 @@ public class CenterModel extends TypeModel {
         this.detail = detail;
     }
 
-    public int getCreated_at() {
+    public int getCreatedAt() {
         return created_at;
     }
 
-    public void setCreated_at(int created_at) {
+    public void setCreatedAt(int created_at) {
         this.created_at = created_at;
     }
 
-    public int getUpdated_at() {
+    public int getUpdatedAt() {
         return updated_at;
     }
 
-    public void setUpdated_at(int updated_at) {
+    public void setUpdatedAt(int updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -122,13 +129,13 @@ public class CenterModel extends TypeModel {
 
     public boolean compareTo(CenterModel model) {
         if (model != null) {
-            if (!centerId.equals(model.getCenterId()))
+            if (!id.equals(model.getId()))
                 return false;
 
-            if (!centerStatus.equals(model.getCenterStatus()))
+            if (!status.equals(model.getStatus()))
                 return false;
 
-            if (!centerType.equals(model.getCenterType()))
+            if (!type.equals(model.getType()))
                 return false;
 
             if (manager != model.getManager())
@@ -140,10 +147,10 @@ public class CenterModel extends TypeModel {
             if (detail != model.getDetail())
                 return false;
 
-            if (created_at != model.getCreated_at())
+            if (created_at != model.getCreatedAt())
                 return false;
 
-            if (updated_at != model.getUpdated_at())
+            if (updated_at != model.getUpdatedAt())
                 return false;
 
             if (treasuries != model.getTreasuries())
@@ -157,6 +164,20 @@ public class CenterModel extends TypeModel {
 
     @Override
     public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("status", getStatus());
+            super.toObject().put("type", getType());
+            super.toObject().put("manager", getManager());
+            super.toObject().put("acceptation", getAcceptation().toObject());
+            super.toObject().put("detail", getDetail());
+            super.toObject().put("created_at", getCreatedAt());
+            super.toObject().put("updated_at", getUpdatedAt());
+            super.toObject().put("treasuries", getTreasuries().toObject());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return super.toObject();
     }
 
@@ -164,9 +185,9 @@ public class CenterModel extends TypeModel {
     @Override
     public String toString() {
         return "CenterModel{" +
-                "centerId='" + centerId + '\'' +
-                ", centerStatus='" + centerStatus + '\'' +
-                ", centerType='" + centerType + '\'' +
+                "id='" + id + '\'' +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
                 ", manager=" + manager +
                 ", acceptation=" + acceptation +
                 ", detail=" + detail +

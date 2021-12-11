@@ -231,7 +231,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 case "references":
                     if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
                         CenterModel centerModel = (CenterModel) ((CreateCaseFragment) current).typeModel;
-                        data.put("id", centerModel.getCenterId());
+                        data.put("id", centerModel.getId());
                     } else if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
                         RoomModel roomModel = (RoomModel) ((CreateCaseFragment) current).typeModel;
                         data.put("id", roomModel.getRoomId());
@@ -242,10 +242,10 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 case "tags":
                     if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
                         CenterModel centerModel = (CenterModel) ((CreateCaseFragment) current).typeModel;
-                        data.put("region", centerModel.getCenterId());
+                        data.put("region", centerModel.getId());
                     } else if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
                         RoomModel roomModel = (RoomModel) ((CreateCaseFragment) current).typeModel;
-                        data.put("region", roomModel.getRoomCenter().getCenterId());
+                        data.put("region", roomModel.getRoomCenter().getId());
                     }
 
                     break;
@@ -270,13 +270,13 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CreateCenterUserFragment) {
             if (method.equals("rooms")) {
-                data.put("center", ((CreateCenterUserFragment) current).centerModel.getCenterId());
+                data.put("center", ((CreateCenterUserFragment) current).centerModel.getId());
             }
         }
 
         if (current instanceof CreateRoomFragment) {
             if (method.equals("psychologies")) {
-                data.put("id", ((CreateRoomFragment) current).centerModel.getCenterId());
+                data.put("id", ((CreateRoomFragment) current).centerModel.getId());
                 data.put("has_room", "no");
                 data.put("position", "manager,operator,psychologist,under_supervision");
             }
@@ -284,7 +284,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CreateRoomUserFragment) {
             if (method.equals("references")) {
-                data.put("id", ((CreateRoomUserFragment) current).roomModel.getRoomCenter().getCenterId());
+                data.put("id", ((CreateRoomUserFragment) current).roomModel.getRoomCenter().getId());
                 data.put("acceptation_room", ((CreateRoomUserFragment) current).roomModel.getRoomId());
             }
         }
@@ -344,7 +344,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CenterTagsFragment) {
             if (method.equals("tags"))
-                data.put("region", ((CenterTagsFragment) current).centerModel.getCenterId());
+                data.put("region", ((CenterTagsFragment) current).centerModel.getId());
         }
 
         if (current instanceof RoomTagsFragment) {

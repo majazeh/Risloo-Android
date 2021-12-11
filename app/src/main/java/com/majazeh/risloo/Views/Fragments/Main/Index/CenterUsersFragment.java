@@ -142,8 +142,8 @@ public class CenterUsersFragment extends Fragment {
     }
 
     private void setData(CenterModel model) {
-        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-            data.put("id", model.getCenterId());
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
         }
     }
 

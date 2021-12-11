@@ -296,8 +296,8 @@ public class ReserveScheduleFragment extends Fragment {
             roomId = model.getRoom().getRoomId();
         }
 
-        if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getCenterId() != null && !model.getRoom().getRoomCenter().getCenterId().equals("")) {
-            centerId = model.getRoom().getRoomCenter().getCenterId();
+        if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getId() != null && !model.getRoom().getRoomCenter().getId().equals("")) {
+            centerId = model.getRoom().getRoomCenter().getId();
         }
 
         if (model.getFields() != null && model.getFields().length() != 0) {
@@ -351,7 +351,7 @@ public class ReserveScheduleFragment extends Fragment {
             for (TypeModel typeModel : model.getCenterList().data()) {
                 CenterModel centerModel = (CenterModel) typeModel;
 
-                if (centerModel != null && centerModel.getCenterId() != null && centerModel.getCenterId().equals(centerId)) {
+                if (centerModel != null && centerModel.getId() != null && centerModel.getId().equals(centerId)) {
                     if (centerModel.getTreasuries() != null) {
                         setTreasury(centerModel.getTreasuries());
                     }

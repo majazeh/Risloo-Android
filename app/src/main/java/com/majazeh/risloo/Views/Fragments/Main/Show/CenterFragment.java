@@ -255,14 +255,14 @@ public class CenterFragment extends Fragment {
 
     private void setData(CenterModel model) {
         try {
-            if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-                data.put("id", model.getCenterId());
+            if (model.getId() != null && !model.getId().equals("")) {
+                data.put("id", model.getId());
             }
 
             if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
                 binding.nameTextView.setText(model.getDetail().getString("title"));
-            } else if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-                binding.nameTextView.setText(model.getCenterId());
+            } else if (model.getId() != null && !model.getId().equals("")) {
+                binding.nameTextView.setText(model.getId());
             } else {
                 binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             }

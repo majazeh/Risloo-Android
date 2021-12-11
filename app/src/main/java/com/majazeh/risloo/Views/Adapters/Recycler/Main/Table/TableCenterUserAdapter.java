@@ -295,7 +295,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private void setHashmap(UserModel model, String value, String method) {
         if (current instanceof CenterUsersFragment)
-            data.put("id", ((CenterUsersFragment) current).centerModel.getCenterId());
+            data.put("id", ((CenterUsersFragment) current).centerModel.getId());
 
         if (method.equals("position")) {
             data.put("userId", model.getId());

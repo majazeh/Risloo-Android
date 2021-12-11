@@ -142,7 +142,7 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
 
     private void setHashmap(TagModel model) {
         if (current instanceof CenterTagsFragment)
-            data.put("roomId", ((CenterTagsFragment) current).centerModel.getCenterId());
+            data.put("roomId", ((CenterTagsFragment) current).centerModel.getId());
         else if (current instanceof RoomTagsFragment)
             data.put("roomId", ((RoomTagsFragment) current).roomModel.getRoomId());
 

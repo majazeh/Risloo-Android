@@ -129,8 +129,8 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
 
                 if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals(""))
                     holder.binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
-                else if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals(""))
-                    holder.binding.nameTextView.setText(model.getRoomCenter().getCenterId());
+                else if (model.getRoomCenter() != null && model.getRoomCenter().getId() != null && !model.getRoomCenter().getId().equals(""))
+                    holder.binding.nameTextView.setText(model.getRoomCenter().getId());
                 else
                     holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 

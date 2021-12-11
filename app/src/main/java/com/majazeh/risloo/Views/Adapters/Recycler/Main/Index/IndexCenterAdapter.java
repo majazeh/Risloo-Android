@@ -74,7 +74,7 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
 
     private void listener(IndexCenterHolder holder, CenterModel model) {
         CustomClickView.onClickListener(() -> {
-            if (model.getCenterType().equals("counseling_center"))
+            if (model.getType().equals("counseling_center"))
                 ((MainActivity) activity).navigatoon.navigateToCenterFragment(model);
             else
                 ((MainActivity) activity).navigatoon.navigateToRoomFragment(model);
@@ -84,12 +84,12 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
 
     private void setData(IndexCenterHolder holder, CenterModel model) {
         try {
-            if (model.getCenterType().equals("counseling_center")) {
+            if (model.getType().equals("counseling_center")) {
 
                 if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
                     holder.binding.nameTextView.setText(model.getDetail().getString("title"));
-                else if (model.getCenterId() != null && !model.getCenterId().equals(""))
-                    holder.binding.nameTextView.setText(model.getCenterId());
+                else if (model.getId() != null && !model.getId().equals(""))
+                    holder.binding.nameTextView.setText(model.getId());
                 else
                     holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 

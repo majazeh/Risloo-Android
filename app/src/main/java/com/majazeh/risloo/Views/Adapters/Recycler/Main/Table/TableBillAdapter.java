@@ -216,7 +216,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         // Finall
         if (current instanceof SessionFragment) {
-            String centerId = ((SessionFragment) current).sessionModel.getRoom().getRoomCenter().getCenterId();
+            String centerId = ((SessionFragment) current).sessionModel.getRoom().getRoomCenter().getId();
 
             if (model.getType().equals("creditor")) {
                 UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
@@ -225,7 +225,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     for (TypeModel typeModel : userModel.getCenterList().data()) {
                         CenterModel centerModel = (CenterModel) typeModel;
 
-                        if (centerModel != null && centerModel.getCenterId() != null && centerModel.getCenterId().equals(centerId)) {
+                        if (centerModel != null && centerModel.getId() != null && centerModel.getId().equals(centerId)) {
                             if (centerModel.getTreasuries() != null) {
                                 for (TypeModel typeModel2 : centerModel.getTreasuries().data()) {
                                     TreasuriesModel treasuriesModel = (TreasuriesModel) typeModel2;

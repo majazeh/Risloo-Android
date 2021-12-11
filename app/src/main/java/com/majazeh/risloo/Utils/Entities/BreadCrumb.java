@@ -630,7 +630,7 @@ public class BreadCrumb {
                 break;
             case "CenterModel":
                 centerModel = (CenterModel) typeModel;
-                roomType = centerModel.getCenterType();
+                roomType = centerModel.getType();
 
                 break;
             case "RoomModel":
@@ -812,7 +812,7 @@ public class BreadCrumb {
 
                 if (treasuriesModel.getCenterModel() != null) {
                     centerModel = treasuriesModel.getCenterModel();
-                    roomType = centerModel.getCenterType();
+                    roomType = centerModel.getType();
                 } else {
                     centerModel = null;
                     roomType = null;
@@ -1742,8 +1742,8 @@ public class BreadCrumb {
         try {
             if (centerModel != null && centerModel.getDetail() != null && centerModel.getDetail().has("title") && !centerModel.getDetail().isNull("title") && !centerModel.getDetail().getString("title").equals(""))
                 list.add(centerModel.getDetail().getString("title"));
-            else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
-                list.add("مرکز درمان" + " " + centerModel.getCenterId());
+            else if (centerModel != null && centerModel.getId() != null && !centerModel.getId().equals(""))
+                list.add("مرکز درمان" + " " + centerModel.getId());
             else
                 list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         } catch (JSONException e) {
@@ -1822,8 +1822,8 @@ public class BreadCrumb {
         if (!roomType.equals("room")) {
             if (centerModel != null && centerModel.getManager() != null && centerModel.getManager().getName() != null && !centerModel.getManager().getName().equals(""))
                 list.add("کلینیک شخصی" + " " + centerModel.getManager().getName());
-            else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
-                list.add("کلینیک شخصی" + " " + centerModel.getCenterId());
+            else if (centerModel != null && centerModel.getId() != null && !centerModel.getId().equals(""))
+                list.add("کلینیک شخصی" + " " + centerModel.getId());
             else
                 list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         } else {

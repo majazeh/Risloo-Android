@@ -207,7 +207,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
 
     private void setHashmap(SessionPlatformModel model, String value, String method) {
         if (current instanceof CenterPlatformsFragment)
-            data.put("id", ((CenterPlatformsFragment) current).centerModel.getCenterId());
+            data.put("id", ((CenterPlatformsFragment) current).centerModel.getId());
 
         data.put("platformId", model.getId());
         data.put(method, value);

@@ -153,12 +153,12 @@ public class EditCenterTabDetailFragment extends Fragment {
                 model = ((EditCenterFragment) current).roomModel.getRoomCenter();
 
             try {
-                if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-                    data.put("id", model.getCenterId());
+                if (model.getId() != null && !model.getId().equals("")) {
+                    data.put("id", model.getId());
                 }
 
-                if (model.getCenterType() != null && !model.getCenterType().equals("")) {
-                    type = model.getCenterType();
+                if (model.getType() != null && !model.getType().equals("")) {
+                    type = model.getType();
                     switch (type) {
                         case "personal_clinic":
                             binding.counselingCenterGroup.setVisibility(View.GONE);

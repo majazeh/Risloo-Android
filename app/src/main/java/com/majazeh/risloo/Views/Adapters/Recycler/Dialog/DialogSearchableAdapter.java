@@ -258,7 +258,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 if (method.equals("rooms")) {
                     RoomModel model = (RoomModel) item;
 
-                    detector(holder, ((CreateCenterUserFragment) current).centerModel.getCenterId().equals(model.getRoomId()));
+                    detector(holder, ((CreateCenterUserFragment) current).centerModel.getId().equals(model.getRoomId()));
                 }
             }
 

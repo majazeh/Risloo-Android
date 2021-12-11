@@ -347,13 +347,13 @@ public class RoomFragment extends Fragment {
 
     private void setData(CenterModel model) {
         try {
-            if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-                data.put("id", model.getCenterId());
+            if (model.getId() != null && !model.getId().equals("")) {
+                data.put("id", model.getId());
                 data.put("session_platforms", 1);
             }
 
-            if (model.getCenterType() != null && !model.getCenterType().equals("")) {
-                type = model.getCenterType();
+            if (model.getType() != null && !model.getType().equals("")) {
+                type = model.getType();
             }
 
             if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals("")) {

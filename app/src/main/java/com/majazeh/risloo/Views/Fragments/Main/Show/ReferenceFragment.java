@@ -142,18 +142,18 @@ public class ReferenceFragment extends Fragment {
     }
 
     private void setData(CenterModel model) {
-        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-            data.put("id", model.getCenterId());
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
         }
 
-        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
-            type = model.getCenterType();
+        if (model.getType() != null && !model.getType().equals("")) {
+            type = model.getType();
         }
     }
 
     private void setData(RoomModel model) {
-        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
-            data.put("id", model.getRoomCenter().getCenterId());
+        if (model.getRoomCenter() != null && model.getRoomCenter().getId() != null && !model.getRoomCenter().getId().equals("")) {
+            data.put("id", model.getRoomCenter().getId());
         }
 
         if (model.getRoomType() != null && !model.getRoomType().equals("")) {
