@@ -7,10 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AvatarModel extends TypeModel {
-    private AvatarDetail large;
-    private AvatarDetail medium;
-    private AvatarDetail original;
-    private AvatarDetail small;
+    private ProfileModel large;
+    private ProfileModel medium;
+    private ProfileModel original;
+    private ProfileModel small;
 
     public AvatarModel(JSONArray jsonArray) {
         super(jsonArray);
@@ -20,16 +20,16 @@ public class AvatarModel extends TypeModel {
                 if (!jsonArray.getJSONObject(i).isNull("mode")) {
                     switch (jsonArray.getJSONObject(i).getString("mode")) {
                         case "large":
-                            setLarge(new AvatarDetail(jsonArray.getJSONObject(i)));
+                            setLarge(new ProfileModel(jsonArray.getJSONObject(i)));
                             break;
                         case "medium":
-                            setMedium(new AvatarDetail(jsonArray.getJSONObject(i)));
+                            setMedium(new ProfileModel(jsonArray.getJSONObject(i)));
                             break;
                         case "original":
-                            setOriginal(new AvatarDetail(jsonArray.getJSONObject(i)));
+                            setOriginal(new ProfileModel(jsonArray.getJSONObject(i)));
                             break;
                         case "small":
-                            setSmall(new AvatarDetail(jsonArray.getJSONObject(i)));
+                            setSmall(new ProfileModel(jsonArray.getJSONObject(i)));
                             break;
                     }
                 }
@@ -39,35 +39,35 @@ public class AvatarModel extends TypeModel {
         }
     }
 
-    public AvatarDetail getLarge() {
+    public ProfileModel getLarge() {
         return large;
     }
 
-    public void setLarge(AvatarDetail large) {
+    public void setLarge(ProfileModel large) {
         this.large = large;
     }
 
-    public AvatarDetail getMedium() {
+    public ProfileModel getMedium() {
         return medium;
     }
 
-    public void setMedium(AvatarDetail medium) {
+    public void setMedium(ProfileModel medium) {
         this.medium = medium;
     }
 
-    public AvatarDetail getOriginal() {
+    public ProfileModel getOriginal() {
         return original;
     }
 
-    public void setOriginal(AvatarDetail original) {
+    public void setOriginal(ProfileModel original) {
         this.original = original;
     }
 
-    public AvatarDetail getSmall() {
+    public ProfileModel getSmall() {
         return small;
     }
 
-    public void setSmall(AvatarDetail small) {
+    public void setSmall(ProfileModel small) {
         this.small = small;
     }
 
