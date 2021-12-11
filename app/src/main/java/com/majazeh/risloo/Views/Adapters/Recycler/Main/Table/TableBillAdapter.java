@@ -177,7 +177,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void setData(TableBillHolder holder, BillingModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.titleTextView.setText(model.getTitle());
-        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreatedAt()), " "));
 
         if (model.getCreditor() != null)
             holder.binding.creditorTextView.setText(model.getCreditor().getTitle());

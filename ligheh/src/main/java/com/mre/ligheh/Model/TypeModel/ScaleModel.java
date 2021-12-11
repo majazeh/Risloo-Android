@@ -1,21 +1,24 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ScaleModel extends TypeModel {
-    private String id;
-    private String title;
-    private String version;
-    private String edition;
+    private String id = "";
+    private String title = "";
+    private String version = "";
+    private String edition = "";
+    private String filler = "";
+    private String scaleId = "";
+    private String scaleTitle = "";
+    private String status = "";
     private int edition_version;
-    private String filler;
-    private String ScaleId;
-    private String ScaleTitle;
-    private String status;
 
     public ScaleModel(JSONObject jsonObject) {
         super(jsonObject);
+
         try {
             if (!jsonObject.isNull("id"))
                 setId(jsonObject.getString("id"));
@@ -25,19 +28,21 @@ public class ScaleModel extends TypeModel {
                 setVersion(jsonObject.getString("version"));
             if (!jsonObject.isNull("edition"))
                 setEdition(jsonObject.getString("edition"));
-            if (!jsonObject.isNull("edition_version"))
-                setEdition_version(jsonObject.getInt("edition_version"));
             if (!jsonObject.isNull("filler"))
                 setFiller(jsonObject.getString("filler"));
-            if (!jsonObject.isNull("sclae")){
-            JSONObject scale = jsonObject.getJSONObject("scale");
-            if (!jsonObject.isNull("ScaleId"))
-                setScaleId(scale.getString("ScaleId"));
-            if (!jsonObject.isNull("ScaleTitle"))
-                setScaleTitle(scale.getString("ScaleTitle"));
+            if (!jsonObject.isNull("scale")) {
+                JSONObject scale = jsonObject.getJSONObject("scale");
+
+                if (!jsonObject.isNull("ScaleId"))
+                    setScaleId(scale.getString("ScaleId"));
+                if (!jsonObject.isNull("ScaleTitle"))
+                    setScaleTitle(scale.getString("ScaleTitle"));
             }
             if (!jsonObject.isNull("status"))
                 setStatus(jsonObject.getString("status"));
+
+            if (!jsonObject.isNull("edition_version"))
+                setEditionVersion(jsonObject.getInt("edition_version"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -55,6 +60,10 @@ public class ScaleModel extends TypeModel {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getVersion() {
         return version;
     }
@@ -63,24 +72,12 @@ public class ScaleModel extends TypeModel {
         this.version = version;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getEdition() {
         return edition;
     }
 
     public void setEdition(String edition) {
         this.edition = edition;
-    }
-
-    public int getEdition_version() {
-        return edition_version;
-    }
-
-    public void setEdition_version(int edition_version) {
-        this.edition_version = edition_version;
     }
 
     public String getFiller() {
@@ -92,19 +89,19 @@ public class ScaleModel extends TypeModel {
     }
 
     public String getScaleId() {
-        return ScaleId;
+        return scaleId;
     }
 
     public void setScaleId(String scaleId) {
-        ScaleId = scaleId;
+        this.scaleId = scaleId;
     }
 
     public String getScaleTitle() {
-        return ScaleTitle;
+        return scaleTitle;
     }
 
     public void setScaleTitle(String scaleTitle) {
-        ScaleTitle = scaleTitle;
+        this.scaleTitle = scaleTitle;
     }
 
     public String getStatus() {
@@ -114,4 +111,83 @@ public class ScaleModel extends TypeModel {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public int getEditionVersion() {
+        return edition_version;
+    }
+
+    public void setEditionVersion(int edition_version) {
+        this.edition_version = edition_version;
+    }
+
+    public boolean compareTo(ScaleModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
+
+            if (!title.equals(model.getTitle()))
+                return false;
+
+            if (!version.equals(model.getVersion()))
+                return false;
+
+            if (!edition.equals(model.getEdition()))
+                return false;
+
+            if (!filler.equals(model.getFiller()))
+                return false;
+
+            if (!scaleId.equals(model.getScaleId()))
+                return false;
+
+            if (!scaleTitle.equals(model.getScaleTitle()))
+                return false;
+
+            if (!status.equals(model.getStatus()))
+                return false;
+
+            if (edition_version != model.getEditionVersion())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("title", getTitle());
+            super.toObject().put("version", getVersion());
+            super.toObject().put("edition", getEdition());
+            super.toObject().put("filler", getFiller());
+            super.toObject().put("scaleId", getScaleId());
+            super.toObject().put("scaleTitle", getScaleTitle());
+            super.toObject().put("status", getStatus());
+            super.toObject().put("edition_version", getEditionVersion());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return super.toObject();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "ScaleModel{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", version='" + version + '\'' +
+                ", edition='" + edition + '\'' +
+                ", filler='" + filler + '\'' +
+                ", scaleId='" + scaleId + '\'' +
+                ", scaleTitle='" + scaleTitle + '\'' +
+                ", status='" + status + '\'' +
+                ", edition_version=" + edition_version +
+                '}';
+    }
+
 }

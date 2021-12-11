@@ -1,47 +1,54 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class BillingModel extends TypeModel {
     private String id = "";
-    private TreasuriesModel creditor;
-    private TreasuriesModel debtor;
-    private int amount;
-    private JSONObject action;
     private String title = "";
     private String description = "";
-    private int created_at;
     private String type = "";
+    private int amount;
+    private int created_at;
+    private JSONObject action;
+    private TreasuriesModel creditor;
+    private TreasuriesModel debtor;
 
     public BillingModel(JSONObject jsonObject) {
         super(jsonObject);
+
         try {
             if (!jsonObject.isNull("id"))
                 setId(jsonObject.getString("id"));
-            if (!jsonObject.isNull("creditor"))
-                setCreditor(new TreasuriesModel(jsonObject.getJSONObject("creditor")));
-            if (!jsonObject.isNull("debtor"))
-                setDebtor(new TreasuriesModel(jsonObject.getJSONObject("debtor")));
+            if (!jsonObject.isNull("title"))
+                setTitle(jsonObject.getString("title"));
+            if (!jsonObject.isNull("description"))
+                setDescription(jsonObject.getString("description"));
+            if (!jsonObject.isNull("type"))
+                setType(jsonObject.getString("type"));
+
             if (!jsonObject.isNull("amount"))
                 setAmount(jsonObject.getInt("amount"));
+            if (!jsonObject.isNull("created_at"))
+                setCreatedAt(jsonObject.getInt("created_at"));
+
             if (!jsonObject.isNull("action")) {
                 if (jsonObject.get("action").getClass().getName().equals("org.json.JSONObject")) {
                     setAction(jsonObject.getJSONObject("action"));
                 } else {
-                    JSONObject jsonObject1 = new JSONObject();
-                    jsonObject1.put("method", jsonObject.getString("action"));
-                    setAction(jsonObject1);
+                    JSONObject object = new JSONObject();
+
+                    object.put("method", jsonObject.getString("action"));
+                    setAction(object);
                 }
             }
-            if (!jsonObject.isNull("description"))
-                setDescription(jsonObject.getString("description"));
-            if (!jsonObject.isNull("title"))
-                setTitle(jsonObject.getString("title"));
-            if (!jsonObject.isNull("created_at"))
-                setCreated_at(jsonObject.getInt("created_at"));
-            if (!jsonObject.isNull("type"))
-                setType(jsonObject.getString("type"));
+
+            if (!jsonObject.isNull("creditor"))
+                setCreditor(new TreasuriesModel(jsonObject.getJSONObject("creditor")));
+            if (!jsonObject.isNull("debtor"))
+                setDebtor(new TreasuriesModel(jsonObject.getJSONObject("debtor")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -53,6 +60,54 @@ public class BillingModel extends TypeModel {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getCreatedAt() {
+        return created_at;
+    }
+
+    public void setCreatedAt(int created_at) {
+        this.created_at = created_at;
+    }
+
+    public JSONObject getAction() {
+        return action;
+    }
+
+    public void setAction(JSONObject action) {
+        this.action = action;
     }
 
     public TreasuriesModel getCreditor() {
@@ -71,82 +126,74 @@ public class BillingModel extends TypeModel {
         this.debtor = debtor;
     }
 
-    public int getAmount() {
-        return amount;
-    }
+    public boolean compareTo(BillingModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
+            if (!title.equals(model.getTitle()))
+                return false;
 
-    public JSONObject getAction() {
-        return action;
-    }
+            if (!description.equals(model.getDescription()))
+                return false;
 
-    public void setAction(JSONObject action) {
-        this.action = action;
-    }
+            if (!type.equals(model.getType()))
+                return false;
 
-    public String getDescription() {
-        return description;
-    }
+            if (amount != model.getAmount())
+                return false;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+            if (created_at != model.getCreatedAt())
+                return false;
 
-    public String getTitle() {
-        return title;
-    }
+            if (action != model.getAction())
+                return false;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+            if (creditor != model.getCreditor())
+                return false;
 
-    public int getCreated_at() {
-        return created_at;
-    }
+            if (debtor != model.getDebtor())
+                return false;
 
-    public void setCreated_at(int created_at) {
-        this.created_at = created_at;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public JSONObject toObject() {
         try {
             super.toObject().put("id", getId());
-            super.toObject().put("creditor", getCreditor().toObject());
-            super.toObject().put("debtor", getDebtor().toObject());
-            super.toObject().put("amount", getAmount());
-            super.toObject().put("action", getAction());
             super.toObject().put("title", getTitle());
             super.toObject().put("description", getDescription());
-            super.toObject().put("created_at", getCreated_at());
             super.toObject().put("type", getType());
+            super.toObject().put("amount", getAmount());
+            super.toObject().put("created_at", getCreatedAt());
+            super.toObject().put("action", getAction());
+            super.toObject().put("creditor", getCreditor().toObject());
+            super.toObject().put("debtor", getDebtor().toObject());
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return super.toObject();
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return  "id='" + id + '\'' +
-                ", creditor=" + creditor +
-                ", debtor=" + debtor +
-                ", amount=" + amount +
-                ", action=" + action +
+        return "BillingModel{" +
+                "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", type='" + type + '\'' +
+                ", amount=" + amount +
                 ", created_at=" + created_at +
-                ", type='" + type + '\'';
+                ", action=" + action +
+                ", creditor=" + creditor +
+                ", debtor=" + debtor +
+                '}';
     }
+
 }

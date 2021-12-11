@@ -12,9 +12,12 @@ import org.json.JSONObject;
 import java.lang.reflect.InvocationTargetException;
 
 public class TypeModel implements Parcelable {
-
     public JSONObject object;
     public JSONArray array;
+
+    public TypeModel() {
+
+    }
 
     public TypeModel(JSONObject jsonObject) {
         this.object = jsonObject;
@@ -24,14 +27,9 @@ public class TypeModel implements Parcelable {
         this.array = jsonArray;
     }
 
-    public TypeModel() {
-
-    }
-
     protected Object returnValue(String key) {
         return returnValue(key, null);
     }
-
 
     protected Object returnValue(String key, Object defaultResult) {
         try {
@@ -53,15 +51,19 @@ public class TypeModel implements Parcelable {
     }
 
     protected List toList(String key, Class aClass) {
-        if (!object.isNull(key))
+        if (!object.isNull(key)) {
             try {
                 List list = new List();
-                for (int i = 0; i < ((JSONArray) object.get(key)).length(); i++) {
+
+                for (int i = 0; i < ((JSONArray) object.get(key)).length(); i++)
                     list.add((TypeModel) aClass.getDeclaredConstructor(key.getClass()).newInstance(object.get(key)));
-                }
+
                 return list;
             } catch (NoSuchMethodException | JSONException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+                e.printStackTrace();
             }
+        }
+
         return new List();
     }
 
@@ -82,6 +84,7 @@ public class TypeModel implements Parcelable {
     }
 
     public static final Creator<TypeModel> CREATOR = new Creator<TypeModel>() {
+
         @Override
         public TypeModel createFromParcel(Parcel in) {
             return new TypeModel(in);
@@ -91,6 +94,7 @@ public class TypeModel implements Parcelable {
         public TypeModel[] newArray(int size) {
             return new TypeModel[size];
         }
+
     };
 
     @Override
@@ -104,24 +108,15 @@ public class TypeModel implements Parcelable {
     }
 
     protected boolean notNull(Object object) {
-        if (object == null)
-            return false;
-        else
-            return true;
+        return object != null;
     }
 
     protected boolean notNull(String string) {
-        if (string == null)
-            return false;
-        else
-            return true;
+        return string != null;
     }
 
     protected boolean notNull(List list) {
-        if (list.size() == 0)
-            return false;
-        else
-            return true;
+        return list.size() != 0;
     }
 
     public JSONObject toObject() {

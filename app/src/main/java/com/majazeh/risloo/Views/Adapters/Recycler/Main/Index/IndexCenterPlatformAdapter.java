@@ -162,7 +162,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
         if (model.getIdentifier() != null && !model.getIdentifier().equals("")) {
             holder.binding.identifierGroup.setVisibility(View.VISIBLE);
 
-            switch (model.getIdentifier_type()) {
+            switch (model.getIdentifierType()) {
                 case "uri":
                     holder.binding.identifierImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_link_light, null));
                     holder.binding.identifierTextView.setText(model.getIdentifier());

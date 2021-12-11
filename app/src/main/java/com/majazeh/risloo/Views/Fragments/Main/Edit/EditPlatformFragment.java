@@ -233,8 +233,8 @@ public class EditPlatformFragment extends Fragment {
             }
         }
 
-        if (model.getIdentifier_type() != null && !model.getIdentifier_type().equals("")) {
-            indentifierType = SelectionManager.getPlatformIdentifier(requireActivity(), "fa", model.getIdentifier_type());
+        if (model.getIdentifierType() != null && !model.getIdentifierType().equals("")) {
+            indentifierType = SelectionManager.getPlatformIdentifier(requireActivity(), "fa", model.getIdentifierType());
             for (int i = 0; i < binding.indentifierTypeIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.indentifierTypeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(indentifierType)) {
                     binding.indentifierTypeIncludeLayout.selectSpinner.setSelection(i);

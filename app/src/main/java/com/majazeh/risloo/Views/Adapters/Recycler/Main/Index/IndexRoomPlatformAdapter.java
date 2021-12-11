@@ -226,7 +226,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
     }
 
     private void setLevel(IndexRoomPlatformHolder holder, SessionPlatformModel model) {
-        String level = SelectionManager.getPlatformLevel(activity, "fa", String.valueOf(model.getSelected_level()));
+        String level = SelectionManager.getPlatformLevel(activity, "fa", String.valueOf(model.getSelectedLevel()));
         for (int i = 0; i < holder.binding.levelSpinner.getCount(); i++) {
             if (holder.binding.levelSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(level)) {
                 holder.binding.levelSpinner.setSelection(i);
