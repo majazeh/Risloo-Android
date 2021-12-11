@@ -68,6 +68,14 @@ public class ChainModel extends TypeModel {
 
     @Override
     public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("title", getTitle());
+            super.toObject().put("status", getStatus());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return super.toObject();
     }
 
