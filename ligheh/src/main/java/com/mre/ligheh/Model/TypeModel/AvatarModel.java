@@ -12,24 +12,30 @@ public class AvatarModel extends TypeModel {
     private AvatarDetail original;
     private AvatarDetail small;
 
-    public AvatarModel(JSONArray jsonArray) throws JSONException {
+    public AvatarModel(JSONArray jsonArray) {
         super(jsonArray);
-        for (int i = 0; i < jsonArray.length(); i++) {
-            switch (jsonArray.getJSONObject(i).getString("mode")) {
-                case "small":
-                    setSmall(new AvatarDetail(jsonArray.getJSONObject(i)));
-                    break;
-                case "original":
-                    setOriginal(new AvatarDetail(jsonArray.getJSONObject(i)));
-                    break;
-                case "medium":
-                    setMedium(new AvatarDetail(jsonArray.getJSONObject(i)));
-                    break;
-                case "large":
-                    setLarge(new AvatarDetail(jsonArray.getJSONObject(i)));
-                    break;
-            }
 
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                if (!jsonArray.getJSONObject(i).isNull("mode")) {
+                    switch (jsonArray.getJSONObject(i).getString("mode")) {
+                        case "large":
+                            setLarge(new AvatarDetail(jsonArray.getJSONObject(i)));
+                            break;
+                        case "medium":
+                            setMedium(new AvatarDetail(jsonArray.getJSONObject(i)));
+                            break;
+                        case "original":
+                            setOriginal(new AvatarDetail(jsonArray.getJSONObject(i)));
+                            break;
+                        case "small":
+                            setSmall(new AvatarDetail(jsonArray.getJSONObject(i)));
+                            break;
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -65,6 +71,25 @@ public class AvatarModel extends TypeModel {
         this.small = small;
     }
 
+    public boolean compareTo(AvatarModel model) {
+        if (model != null) {
+            if (large != model.getLarge())
+                return false;
+
+            if (medium != model.getMedium())
+                return false;
+
+            if (original != model.getOriginal())
+                return false;
+
+            if (small != model.getSmall())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public JSONObject toObject() {
@@ -73,20 +98,22 @@ public class AvatarModel extends TypeModel {
             super.toObject().put("medium", getMedium().toObject());
             super.toObject().put("original", getOriginal().toObject());
             super.toObject().put("small", getSmall().toObject());
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return super.toObject();
     }
-
 
     @NonNull
     @Override
     public String toString() {
-        return "large=" + large +
+        return "AvatarModel{" +
+                "large=" + large +
                 ", medium=" + medium +
                 ", original=" + original +
-                ", small=" + small;
+                ", small=" + small +
+                '}';
     }
+
 }
