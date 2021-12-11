@@ -182,8 +182,8 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (model.getCreditor() != null)
             holder.binding.creditorTextView.setText(model.getCreditor().getTitle());
 
-        if (model.getDebtor() != null && model.getDebtor().getUserModel() != null)
-            holder.binding.debtorTextView.setText(model.getDebtor().getUserModel().getName() + " - " + model.getDebtor().getTitle());
+        if (model.getDebtor() != null && model.getDebtor().getUser() != null)
+            holder.binding.debtorTextView.setText(model.getDebtor().getUser().getName() + " - " + model.getDebtor().getTitle());
         else if (model.getDebtor() != null)
             holder.binding.debtorTextView.setText(model.getDebtor().getTitle());
 

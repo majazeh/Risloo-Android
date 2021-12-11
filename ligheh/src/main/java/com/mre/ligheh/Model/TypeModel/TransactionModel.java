@@ -1,31 +1,36 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TransactionModel extends TypeModel {
     private String id = "";
-    private BillingModel billing;
     private String credit = "";
     private String debt = "";
     private String balance = "";
     private int created_at;
+    private BillingModel billing;
 
     public TransactionModel(JSONObject jsonObject) {
         super(jsonObject);
+
         try {
             if (!jsonObject.isNull("id"))
                 setId(jsonObject.getString("id"));
-            if (!jsonObject.isNull("billing"))
-                setBilling(new BillingModel(jsonObject.getJSONObject("billing")));
             if (!jsonObject.isNull("credit"))
                 setCredit(jsonObject.getString("credit"));
             if (!jsonObject.isNull("debt"))
                 setDebt(jsonObject.getString("debt"));
             if (!jsonObject.isNull("balance"))
                 setBalance(jsonObject.getString("balance"));
+
             if (!jsonObject.isNull("created_at"))
-                setCreated_at(jsonObject.getInt("created_at"));
+                setCreatedAt(jsonObject.getInt("created_at"));
+
+            if (!jsonObject.isNull("billing"))
+                setBilling(new BillingModel(jsonObject.getJSONObject("billing")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -37,14 +42,6 @@ public class TransactionModel extends TypeModel {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public BillingModel getBilling() {
-        return billing;
-    }
-
-    public void setBilling(BillingModel billing) {
-        this.billing = billing;
     }
 
     public String getCredit() {
@@ -71,11 +68,75 @@ public class TransactionModel extends TypeModel {
         this.balance = balance;
     }
 
-    public int getCreated_at() {
+    public int getCreatedAt() {
         return created_at;
     }
 
-    public void setCreated_at(int created_at) {
+    public void setCreatedAt(int created_at) {
         this.created_at = created_at;
     }
+
+    public BillingModel getBilling() {
+        return billing;
+    }
+
+    public void setBilling(BillingModel billing) {
+        this.billing = billing;
+    }
+
+    public boolean compareTo(TransactionModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
+
+            if (!credit.equals(model.getCredit()))
+                return false;
+
+            if (!debt.equals(model.getDebt()))
+                return false;
+
+            if (!balance.equals(model.getBalance()))
+                return false;
+
+            if (created_at != model.getCreatedAt())
+                return false;
+
+            if (billing != model.getBilling())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("credit", getCredit());
+            super.toObject().put("debt", getDebt());
+            super.toObject().put("balance", getBalance());
+            super.toObject().put("created_at", getCreatedAt());
+            super.toObject().put("billing", getBilling().toObject());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return super.toObject();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "TransactionModel{" +
+                "id='" + id + '\'' +
+                ", credit='" + credit + '\'' +
+                ", debt='" + debt + '\'' +
+                ", balance='" + balance + '\'' +
+                ", created_at=" + created_at +
+                ", billing=" + billing +
+                '}';
+    }
+
 }

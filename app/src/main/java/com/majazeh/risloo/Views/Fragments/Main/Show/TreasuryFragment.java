@@ -84,8 +84,8 @@ public class TreasuryFragment extends Fragment {
                 binding.titleTextView.setText(model.getTitle());
             }
 
-            if (model.getCenterModel() != null && model.getCenterModel().getDetail() != null && model.getCenterModel().getDetail().has("title") && !model.getCenterModel().getDetail().isNull("title") && !model.getCenterModel().getDetail().getString("title").equals("")) {
-                binding.centerTextView.setText(model.getCenterModel().getDetail().getString("title"));
+            if (model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("title") && !model.getCenter().getDetail().isNull("title") && !model.getCenter().getDetail().getString("title").equals("")) {
+                binding.centerTextView.setText(model.getCenter().getDetail().getString("title"));
                 binding.centerTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.centerTextView.setVisibility(View.GONE);

@@ -109,7 +109,7 @@ public class TableTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private void setData(TableTransactionHolder holder, TransactionModel model) {
         holder.binding.serialTextView.setText(model.getId());
-        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreatedAt()), " "));
 
         holder.binding.creditorTextView.setText(StringManager.separate(model.getCredit()));
         holder.binding.debtorTextView.setText(StringManager.separate(model.getDebt()));

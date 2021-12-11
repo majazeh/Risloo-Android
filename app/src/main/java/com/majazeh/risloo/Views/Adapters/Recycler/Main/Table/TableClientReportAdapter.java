@@ -98,7 +98,7 @@ public class TableClientReportAdapter extends RecyclerView.Adapter<RecyclerView.
 
     private void setData(TableClientReportHolder holder, ReportModel model) {
         holder.binding.nameTextView.setText(model.getTitle());
-        holder.binding.timeTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(model.getReported_at()), "-"));
+        holder.binding.timeTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(model.getReportedAt()), "-"));
 
         setClients(holder, model.getClients());
         setViewers(holder, model.getViewers());

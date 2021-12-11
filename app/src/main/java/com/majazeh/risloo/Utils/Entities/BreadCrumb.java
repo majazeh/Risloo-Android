@@ -810,8 +810,8 @@ public class BreadCrumb {
             case "TreasuriesModel":
                 treasuriesModel = (TreasuriesModel) typeModel;
 
-                if (treasuriesModel.getCenterModel() != null) {
-                    centerModel = treasuriesModel.getCenterModel();
+                if (treasuriesModel.getCenter() != null) {
+                    centerModel = treasuriesModel.getCenter();
                     roomType = centerModel.getType();
                 } else {
                     centerModel = null;

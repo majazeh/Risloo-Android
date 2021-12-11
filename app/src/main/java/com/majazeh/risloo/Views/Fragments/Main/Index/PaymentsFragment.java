@@ -226,7 +226,7 @@ public class PaymentsFragment extends Fragment {
         for (TypeModel typeModel : treasuries.data()) {
             TreasuriesModel model = (TreasuriesModel) typeModel;
 
-            if (model != null && model.isCreditable() && model.isMy_treasury() && !model.getSymbol().equals("gift")) {
+            if (model != null && model.isCreditable() && model.isMyTreasury() && !model.getSymbol().equals("gift")) {
                 titles.add(model.getTitle());
                 balances.add(getResources().getString(R.string.PaymentsFragmentChargeBalanceHint) + " " + StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
                 treasuryIds.add(model.getId());
