@@ -6,19 +6,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class PrerequisitesModel extends TypeModel {
+    private String index = "";
     private String type = "";
     private String text = "";
-    private JSONObject answer;
     private String alias = "";
     private String label = "";
     private String force = "";
     private String user_answered = "";
-    private String index = "";
+    private JSONObject answer;
 
     public PrerequisitesModel(JSONObject jsonObject) {
         super(jsonObject);
 
         try {
+            if (!jsonObject.isNull("index"))
+                setIndex(String.valueOf(jsonObject.getInt("index")));
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
             if (!jsonObject.isNull("text"))
@@ -31,13 +33,20 @@ public class PrerequisitesModel extends TypeModel {
                 setLabel(jsonObject.getString("label"));
             if (!jsonObject.isNull("force"))
                 setForce(jsonObject.getString("force"));
+
             if (!jsonObject.isNull("user_answered"))
                 setUser_answered(jsonObject.getString("user_answered"));
-            if (!jsonObject.isNull("index"))
-                setIndex(String.valueOf(jsonObject.getInt("index")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
     public String getType() {
@@ -54,14 +63,6 @@ public class PrerequisitesModel extends TypeModel {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public JSONObject getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(JSONObject answer) {
-        this.answer = answer;
     }
 
     public String getAlias() {
@@ -96,23 +97,23 @@ public class PrerequisitesModel extends TypeModel {
         this.user_answered = user_answered;
     }
 
-    public String getIndex() {
-        return index;
+    public JSONObject getAnswer() {
+        return answer;
     }
 
-    public void setIndex(String index) {
-        this.index = index;
+    public void setAnswer(JSONObject answer) {
+        this.answer = answer;
     }
 
     public boolean compareTo(PrerequisitesModel model) {
         if (model != null) {
+            if (!index.equals(model.getIndex()))
+                return false;
+
             if (!type.equals(model.getType()))
                 return false;
 
             if (!text.equals(model.getText()))
-                return false;
-
-            if (answer != model.getAnswer())
                 return false;
 
             if (!alias.equals(model.getAlias()))
@@ -127,7 +128,7 @@ public class PrerequisitesModel extends TypeModel {
             if (!user_answered.equals(model.getUser_answered()))
                 return false;
 
-            if (!index.equals(model.getIndex()))
+            if (answer != model.getAnswer())
                 return false;
 
             return true;
@@ -138,21 +139,34 @@ public class PrerequisitesModel extends TypeModel {
 
     @Override
     public JSONObject toObject() {
+        try {
+            super.toObject().put("index", getIndex());
+            super.toObject().put("type", getType());
+            super.toObject().put("text", getText());
+            super.toObject().put("alias", getAlias());
+            super.toObject().put("label", getLabel());
+            super.toObject().put("force", getForce());
+            super.toObject().put("user_answered", getUser_answered());
+            super.toObject().put("answer", getAnswer());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return super.toObject();
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "Prerequisites{" +
-                "type='" + type + '\'' +
+        return "PrerequisitesModel{" +
+                "index='" + index + '\'' +
+                ", type='" + type + '\'' +
                 ", text='" + text + '\'' +
-                ", answer=" + answer +
                 ", alias='" + alias + '\'' +
                 ", label='" + label + '\'' +
                 ", force='" + force + '\'' +
                 ", user_answered='" + user_answered + '\'' +
-                ", index='" + index + '\'' +
+                ", answer=" + answer +
                 '}';
     }
 

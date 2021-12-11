@@ -75,7 +75,7 @@ public class IndexProfileAdapter extends RecyclerView.Adapter<IndexProfileHolder
 
     private void listener(IndexProfileHolder holder, ProfileModel model) {
         CustomClickView.onDelayedListener(() -> {
-            IntentManager.display(activity, SelectionManager.getProfileExtras(activity, "fa", getFileNameSub(model.getFile_name())), model.getUrl());
+            IntentManager.display(activity, SelectionManager.getProfileExtras(activity, "fa", getFileNameSub(model.getFileName())), model.getUrl());
         }).widget(holder.binding.getRoot());
     }
 
@@ -83,7 +83,7 @@ public class IndexProfileAdapter extends RecyclerView.Adapter<IndexProfileHolder
         Picasso.get().load(model.getUrl()).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
 
         if (showTitle) {
-            holder.binding.avatarTextView.setText(SelectionManager.getProfileExtras(activity, "fa", getFileNameSub(model.getFile_name())));
+            holder.binding.avatarTextView.setText(SelectionManager.getProfileExtras(activity, "fa", getFileNameSub(model.getFileName())));
             holder.binding.avatarTextView.setVisibility(View.VISIBLE);
         } else {
             holder.binding.avatarTextView.setText("");
