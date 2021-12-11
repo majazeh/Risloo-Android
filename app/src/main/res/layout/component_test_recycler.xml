@@ -7,4 +7,4 @@
     android:layoutDirection="rtl"
     android:overScrollMode="never"
     tools:layout_margin="@dimen/_12sdp"
-    tools:itemCount="4" />
+    tools:itemCount="8" />
