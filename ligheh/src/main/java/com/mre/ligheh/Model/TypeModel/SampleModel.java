@@ -162,7 +162,6 @@ public class SampleModel extends TypeModel {
                 setPrerequisites(new List());
             }
 
-
             if (!jsonObject.isNull("items") && jsonObject.getJSONArray("items").length() != 0) {
                 items = new List();
 
@@ -214,7 +213,7 @@ public class SampleModel extends TypeModel {
                 setProfilesExtra(new List());
             }
 
-            sampleForm = new SampleForm(items, psychologist_description, chains, entities, prerequisites, getDescription());
+            sampleForm = new SampleForm(psychologist_description, chains, prerequisites, description, entities, items);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,5 @@
 package com.mre.ligheh.Model.Madule;
 
-import androidx.annotation.Nullable;
-
 import com.mre.ligheh.Model.TypeModel.EntityModel;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
@@ -11,51 +9,52 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SampleForm {
-    private List items;
+    private String psychologist_description = "";
     private List chain;
     private List prerequisites;
-    private List entities;
     private String description = "";
-    private String psychologist_description;
+    private List entities;
+    private List items;
     private JSONArray sampleForm;
     private JSONArray itemPositions;
-    public FormModel currentForm;
+    private FormModel currentForm;
     private JSONArray forms;
     private int position = 0;
     private int itemPosition = 1;
 
-    public SampleForm(List items, String psychologist_description, @Nullable List chain, List entities, List prerequisites, String description) {
+    public SampleForm(String psychologist_description, List chain, List prerequisites, String description, List entities, List items) {
+        this.psychologist_description = psychologist_description;
+        this.chain = chain;
+        this.prerequisites = prerequisites;
+        this.description = description;
+        this.entities = entities;
         this.items = items;
-        if (chain != null)
-            this.chain = chain;
-        if (prerequisites != null)
-            this.prerequisites = prerequisites;
-        if (description != null)
-            this.description = description;
-        if (psychologist_description != null)
-            this.psychologist_description = psychologist_description;
-        if (entities != null)
-            this.entities = entities;
+
         sampleForm = new JSONArray();
         forms = new JSONArray();
         currentForm = new FormModel();
         itemPositions = new JSONArray();
+
         sampleFormInitializer();
     }
 
     private void sampleFormInitializer() {
-        if (psychologist_description != null) {
+        if (!psychologist_description.equals("")) {
             addForm(new FormModel("توضیحات روان\u200Cشناس", "psychologist_description", psychologist_description));
         }
-        if (chain != null) {
+
+        if (chain.size() != 0) {
             addForm(new FormModel("زنجیره", "chain", chain));
         }
-        if (prerequisites != null) {
+
+        if (prerequisites.size() != 0) {
             addForm(new FormModel("اطلاعات", "prerequisites", prerequisites));
         }
-        if (description != null) {
+
+        if (!description.equals("")) {
             addForm(new FormModel("توضیحات", "description", description));
         }
+
         for (int i = 0; i < items.size(); i++) {
             for (int j = 0; j < entities.size(); j++) {
                 if (entities.size() != 0) {
@@ -63,11 +62,12 @@ public class SampleForm {
                         addForm(new FormModel(((EntityModel) entities.data().get(j)).getTitle(), "entities", ((EntityModel) entities.data().get(j))));
                     }
                 }
-
             }
+            
             addForm(new FormModel(String.valueOf(i + 1), "item", items.data().get(i)));
             itemPosition++;
         }
+
         itemPosition--;
         addForm(new FormModel("پایان", "close", "close"));
     }
@@ -100,7 +100,6 @@ public class SampleForm {
         position = sampleForm.length() - 1;
         return getCurrentForm();
     }
-
 
     public FormModel goTo(String title) {
         for (int i = 0; i < sampleForm.length(); i++) {
@@ -186,6 +185,5 @@ public class SampleForm {
             e.printStackTrace();
         }
     }
-
 
 }
