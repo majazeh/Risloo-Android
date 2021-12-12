@@ -13,7 +13,7 @@ public class PrerequisitesModel extends TypeModel {
     private String label = "";
     private String force = "";
     private String user_answered = "";
-    private JSONObject answer;
+    private JSONObject answer = new JSONObject();
 
     public PrerequisitesModel(JSONObject jsonObject) {
         super(jsonObject);

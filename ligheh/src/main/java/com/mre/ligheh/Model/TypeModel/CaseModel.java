@@ -13,7 +13,7 @@ public class CaseModel extends TypeModel {
     private int created_at = 0;
     private UserModel manager;
     private RoomModel room;
-    private JSONObject detail;
+    private JSONObject detail = new JSONObject();
     private List clients = new List();
     private List sessions = new List();
     private List samples = new List();

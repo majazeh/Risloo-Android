@@ -12,10 +12,10 @@ public class VersionModel extends TypeModel {
         super(jsonObject);
 
         try {
-            jsonObject = jsonObject.getJSONObject("version");
-
-            if (!jsonObject.isNull("android"))
-                setAndroid(new ClientModel(jsonObject.getJSONObject("android")));
+            if (!jsonObject.isNull("version")) {
+                if (!jsonObject.getJSONObject("version").isNull("android"))
+                    setAndroid(new ClientModel(jsonObject.getJSONObject("version").getJSONObject("android")));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

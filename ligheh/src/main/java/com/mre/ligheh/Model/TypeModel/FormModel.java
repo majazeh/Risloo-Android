@@ -1,9 +1,9 @@
 package com.mre.ligheh.Model.TypeModel;
 
 public class FormModel {
-    private transient String title;
-    private transient String type;
-    private transient Object object;
+    private transient String title = "";
+    private transient String type = "";
+    private transient Object object = new Object();
 
     public FormModel(String title, String type, Object object) {
         this.title = title;

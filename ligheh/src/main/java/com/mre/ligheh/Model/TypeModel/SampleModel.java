@@ -37,7 +37,7 @@ public class SampleModel extends TypeModel {
     private RoomModel room;
     private CaseModel casse;
     private UserModel client;
-    private JSONArray terms;
+    private JSONArray terms = new JSONArray();
     private List members = new List();
     private List chains = new List();
     private List prerequisites = new List();

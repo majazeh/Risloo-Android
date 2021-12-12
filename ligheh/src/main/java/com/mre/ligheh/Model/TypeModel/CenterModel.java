@@ -15,7 +15,7 @@ public class CenterModel extends TypeModel {
     private int updated_at = 0;
     private UserModel manager;
     private AcceptationModel acceptation;
-    private JSONObject detail;
+    private JSONObject detail = new JSONObject();
     private List treasuries = new List();
 
     public CenterModel(JSONObject jsonObject) {

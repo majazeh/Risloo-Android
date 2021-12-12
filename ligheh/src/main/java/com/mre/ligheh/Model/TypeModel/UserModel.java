@@ -29,9 +29,9 @@ public class UserModel extends TypeModel {
     private UserModel creator;
     private FieldModel field;
     private SessionPlatformModel session_platform;
-    private JSONObject groups;
-    private JSONObject meta;
-    private JSONObject dalily_schedule_exports;
+    private JSONObject groups = new JSONObject();
+    private JSONObject meta = new JSONObject();
+    private JSONObject dalily_schedule_exports = new JSONObject();
     private List centers = new List();
     private List rooms = new List();
     private List cases = new List();

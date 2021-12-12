@@ -12,7 +12,7 @@ public class BillingModel extends TypeModel {
     private String type = "";
     private int amount = 0;
     private int created_at = 0;
-    private JSONObject action;
+    private JSONObject action = new JSONObject();
     private TreasuriesModel creditor;
     private TreasuriesModel debtor;
 
@@ -35,14 +35,10 @@ public class BillingModel extends TypeModel {
                 setCreatedAt(jsonObject.getInt("created_at"));
 
             if (!jsonObject.isNull("action")) {
-                if (jsonObject.get("action").getClass().getName().equals("org.json.JSONObject")) {
+                if (jsonObject.get("action").getClass().getName().equals("org.json.JSONObject"))
                     setAction(jsonObject.getJSONObject("action"));
-                } else {
-                    JSONObject method = new JSONObject();
-                    method.put("method", jsonObject.getString("action"));
-
-                    setAction(method);
-                }
+                else
+                    setAction(new JSONObject().put("method", jsonObject.getString("action")));
             }
 
             if (!jsonObject.isNull("creditor"))
