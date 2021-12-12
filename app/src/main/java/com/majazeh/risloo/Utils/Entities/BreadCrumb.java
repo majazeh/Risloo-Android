@@ -704,8 +704,8 @@ public class BreadCrumb {
             case "ScheduleModel":
                 scheduleModel = (ScheduleModel) typeModel;
 
-                if (scheduleModel.getCaseModel() != null) {
-                    caseModel = scheduleModel.getCaseModel();
+                if (scheduleModel.getCasse() != null) {
+                    caseModel = scheduleModel.getCasse();
 
                     if (caseModel.getRoom() != null) {
                         roomModel = caseModel.getRoom();
@@ -1887,7 +1887,7 @@ public class BreadCrumb {
 
         if (sessionType.equals("session") && sessionModel != null && sessionModel.getCasse() != null)
             list = casse();
-        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getCaseModel() != null)
+        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getCasse() != null)
             list = casse();
         else
             list = room();
@@ -1907,7 +1907,7 @@ public class BreadCrumb {
 
         if (sessionType.equals("session") && sessionModel != null && sessionModel.getCasse() != null)
             list = casseIds();
-        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getCaseModel() != null)
+        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getCasse() != null)
             list = casseIds();
         else
             list = roomIds();

@@ -210,8 +210,8 @@ public class SessionFragment extends Fragment {
             data.put("session_platforms", 1);
         }
 
-        if (model.getStarted_at() != 0) {
-            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStarted_at()), " "));
+        if (model.getStartedAt() != 0) {
+            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStartedAt()), " "));
         }
 
         if (model.getDuration() != 0) {
@@ -255,14 +255,14 @@ public class SessionFragment extends Fragment {
             e.printStackTrace();
         }
 
-        if (model.getSession_platforms() != null && model.getSession_platforms().data().size() != 0) {
+        if (model.getSessionPlatforms() != null && model.getSessionPlatforms().data().size() != 0) {
             binding.platformGroup.setVisibility(View.VISIBLE);
             binding.platformTextView.setText("");
-            for (int i = 0; i < model.getSession_platforms().data().size(); i++) {
-                SessionPlatformModel platform = (SessionPlatformModel) model.getSession_platforms().data().get(i);
+            for (int i = 0; i < model.getSessionPlatforms().data().size(); i++) {
+                SessionPlatformModel platform = (SessionPlatformModel) model.getSessionPlatforms().data().get(i);
                 if (platform != null) {
                     binding.platformTextView.append(platform.getTitle());
-                    if (i != model.getSession_platforms().data().size() - 1) {
+                    if (i != model.getSessionPlatforms().data().size() - 1) {
                         binding.platformTextView.append("  |  ");
                     }
                 }
@@ -275,30 +275,30 @@ public class SessionFragment extends Fragment {
             binding.info2ConstraintLayout.setVisibility(View.GONE);
         }
 
-        if (model.getPayment_status() != null && !model.getPayment_status().equals("")) {
+        if (model.getPaymentStatus() != null && !model.getPaymentStatus().equals("")) {
             binding.paymentGroup.setVisibility(View.VISIBLE);
-            binding.paymentTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPayment_status()));
+            binding.paymentTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPaymentStatus()));
         } else {
             binding.paymentGroup.setVisibility(View.GONE);
         }
 
-        if (model.getClients_type() != null && !model.getClients_type().equals("")) {
+        if (model.getClientsType() != null && !model.getClientsType().equals("")) {
             binding.clientGroup.setVisibility(View.VISIBLE);
-            binding.clientTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClients_type()));
+            binding.clientTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClientsType()));
         } else {
             binding.clientGroup.setVisibility(View.GONE);
         }
 
-        if (model.getOpens_at() != 0) {
+        if (model.getOpensAt() != 0) {
             binding.startTimeGroup.setVisibility(View.VISIBLE);
-            binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getOpens_at()), " "));
+            binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getOpensAt()), " "));
         } else {
             binding.startTimeGroup.setVisibility(View.GONE);
         }
 
-        if (model.getClosed_at() != 0) {
+        if (model.getClosedAt() != 0) {
             binding.endTimeGroup.setVisibility(View.VISIBLE);
-            binding.endTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getClosed_at()), " "));
+            binding.endTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getClosedAt()), " "));
         } else {
             binding.endTimeGroup.setVisibility(View.GONE);
         }

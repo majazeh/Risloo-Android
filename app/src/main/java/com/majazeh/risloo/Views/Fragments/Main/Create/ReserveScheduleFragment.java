@@ -284,8 +284,8 @@ public class ReserveScheduleFragment extends Fragment {
             data.put("id", model.getId());
         }
 
-        if (model.getStarted_at() != 0) {
-            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStarted_at()), " "));
+        if (model.getStartedAt() != 0) {
+            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStartedAt()), " "));
         }
 
         if (model.getDuration() != 0) {
@@ -304,12 +304,12 @@ public class ReserveScheduleFragment extends Fragment {
             setAxis(model.getFields());
         }
 
-        if (model.getSession_platforms() != null) {
-            setPlatform(model.getSession_platforms());
+        if (model.getSessionPlatforms() != null) {
+            setPlatform(model.getSessionPlatforms());
         }
 
-        if (model.getClients_type() != null && !model.getClients_type().equals("")) {
-            type = model.getClients_type();
+        if (model.getClientsType() != null && !model.getClientsType().equals("")) {
+            type = model.getClientsType();
             switch (type) {
                 case "case":
                     binding.typeIncludeLayout.secondRadioButton.setChecked(true);
@@ -331,11 +331,11 @@ public class ReserveScheduleFragment extends Fragment {
             }
         }
 
-        if (model.getCaseModel() != null && model.getCaseModel().getId() != null && !model.getCaseModel().getId().equals("")) {
-            caseId = model.getCaseModel().getId();
+        if (model.getCasse() != null && model.getCasse().getId() != null && !model.getCasse().getId().equals("")) {
+            caseId = model.getCasse().getId();
 
             binding.caseIncludeLayout.primaryTextView.setText(caseId);
-            setClients(model.getCaseModel().getClients());
+            setClients(model.getCasse().getClients());
 
             binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
         }

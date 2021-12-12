@@ -127,7 +127,7 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
     }
 
     private void setData(IndexScheduleHolder holder, ScheduleModel model) {
-        holder.binding.timeTextView.setText("ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())));
+        holder.binding.timeTextView.setText("ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())));
         holder.binding.durationTextView.setText(model.getDuration() + " دقیقه");
         holder.binding.nameTextView.setText(model.getRoom().getManager().getName());
 
@@ -135,9 +135,9 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
 
         setFields(holder, model.getFields());
 
-        setPlatforms(holder, model.getSession_platforms());
+        setPlatforms(holder, model.getSessionPlatforms());
 
-        setGroupSession(holder, model.isGroup_session());
+        setGroupSession(holder, model.isGroupSession());
 
         setStatus(holder, model.getStatus());
 
@@ -273,7 +273,7 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
                 ScheduleModel model = (ScheduleModel) items.get(i);
 
                 String selectedDate = DateManager.jalYYYYsMMsDD(String.valueOf(selectedTimestamp), "/");
-                String modelDate = DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), "/");
+                String modelDate = DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), "/");
 
                 if (selectedDate.equals(modelDate))
                     showingItems.add(model);
