@@ -558,8 +558,8 @@ public class BreadCrumb {
             case "BulkSampleModel":
                 bulkSampleModel = (BulkSampleModel) typeModel;
 
-                if (bulkSampleModel.getCaseModel() != null) {
-                    caseModel = bulkSampleModel.getCaseModel();
+                if (bulkSampleModel.getCasse() != null) {
+                    caseModel = bulkSampleModel.getCasse();
 
                     if (caseModel.getRoom() != null) {
                         roomModel = caseModel.getRoom();

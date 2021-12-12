@@ -203,16 +203,16 @@ public class BulkSampleFragment extends Fragment {
                 binding.avatarsIncludeLayout.subGroup.setVisibility(View.GONE);
             }
 
-            if (model.getCase_status() != null && !model.getCase_status().equals("")) {
-                binding.caseTextView.setText(SelectionManager.getCaseStatus(requireActivity(), "fa", model.getCase_status()));
+            if (model.getCaseStatus() != null && !model.getCaseStatus().equals("")) {
+                binding.caseTextView.setText(SelectionManager.getCaseStatus(requireActivity(), "fa", model.getCaseStatus()));
             }
 
             if (model.getStatus() != null && !model.getStatus().equals("")) {
                 binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", model.getStatus()));
             }
 
-            if (model.getMembers_count() != -1 && model.getJoined() != -1) {
-                binding.referencesHeaderLayout.countTextView.setText("(" + model.getMembers_count() + " / " + model.getJoined() + ")");
+            if (model.getMembersCount() != -1 && model.getJoined() != -1) {
+                binding.referencesHeaderLayout.countTextView.setText("(" + model.getMembersCount() + " / " + model.getJoined() + ")");
             }
 
             setDropdown(model);

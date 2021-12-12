@@ -162,7 +162,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         try {
             holder.binding.serialTextView.setText(model.getId());
             holder.binding.nameTextView.setText(model.getTitle());
-            holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCase_status()));
+            holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCaseStatus()));
 
             if (model.getRoom() != null && model.getRoom().getManager() != null)
                 holder.binding.roomTextView.setText(model.getRoom().getManager().getName());
@@ -174,7 +174,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 holder.binding.centerTextView.setVisibility(View.GONE);
 
             holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getStatus()));
-            holder.binding.referenceTextView.setText(model.getMembers_count() + " / " + model.getJoined());
+            holder.binding.referenceTextView.setText(model.getMembersCount() + " / " + model.getJoined());
 
             setMenu(holder, model);
         } catch (JSONException e) {
