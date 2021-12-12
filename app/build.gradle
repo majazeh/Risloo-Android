@@ -106,7 +106,7 @@ dependencies {
     implementation project(path: ':ligheh')
 
     /*
-     ---------- Firebase Api's ----------
+     ---------- Firebase Sdk's ----------
     */
 
     implementation platform('com.google.firebase:firebase-bom:29.0.1') // Firebase Bom
@@ -115,14 +115,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics' // Analytics
 
     /*
-     ---------- SMS Verification Api's ----------
+     ---------- SMS Verification Sdk's ----------
     */
 
     implementation 'com.google.android.gms:play-services-auth:19.2.0' // Auth
     implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.1' // Auth Phone
 
     /*
-     ---------- Androidx Api's ----------
+     ---------- Androidx Sdk's ----------
     */
 
     implementation 'androidx.appcompat:appcompat:1.4.0' // AppCompat
@@ -138,14 +138,14 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0' // SwipeRefreshLayout
 
     /*
-     ---------- Responsive Api's ----------
+     ---------- Responsive Sdk's ----------
     */
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6' // Responsive dp
     implementation 'com.intuit.ssp:ssp-android:1.0.6' // Responsive sp
 
     /*
-    ---------- Others Api's ----------
+    ---------- Others Sdk's ----------
    */
 
     implementation 'com.google.android.material:material:1.4.0' // Google Materials
@@ -165,11 +165,12 @@ dependencies {
     implementation files('../libs/bouncy-release.aar') // Recyclerview Bouncy
 
     /*
-    ---------- Test Api's ----------
+    ---------- Test Sdk's ----------
    */
 
     testImplementation 'junit:junit:4.13.2' // Unit Framework
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.3' // Unit Test
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0' // Espresso Core
+
 }

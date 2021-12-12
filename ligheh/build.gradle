@@ -39,13 +39,13 @@ android {
 dependencies {
 
     /*
-    ---------- Androidx Api's ----------
+    ---------- Androidx Sdk's ----------
     */
 
     implementation 'androidx.appcompat:appcompat:1.4.0' // AppCompat
 
     /*
-    ---------- Others Api's ----------
+    ---------- Others Sdk's ----------
    */
 
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2' // SquareUp Okhttp
@@ -53,7 +53,7 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2' // Kotlin Coroutines
 
     /*
-    ---------- Test Api's ----------
+    ---------- Test Sdk's ----------
     */
 
     testImplementation 'junit:junit:4.13.2' // Unit Framework
