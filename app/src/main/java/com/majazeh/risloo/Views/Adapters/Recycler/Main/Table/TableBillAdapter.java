@@ -221,8 +221,8 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (model.getType().equals("creditor")) {
                 UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
 
-                if (userModel.getCenterList() != null) {
-                    for (TypeModel typeModel : userModel.getCenterList().data()) {
+                if (userModel.getCenters() != null) {
+                    for (TypeModel typeModel : userModel.getCenters().data()) {
                         CenterModel centerModel = (CenterModel) typeModel;
 
                         if (centerModel != null && centerModel.getId() != null && centerModel.getId().equals(centerId)) {

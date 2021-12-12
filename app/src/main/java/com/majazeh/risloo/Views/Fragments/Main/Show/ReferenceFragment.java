@@ -263,8 +263,8 @@ public class ReferenceFragment extends Fragment {
                             setData(userModel);
 
                             // Rooms Data
-                            if (!userModel.getRoomList().data().isEmpty()) {
-                                indexRoomAdapter.setItems(userModel.getRoomList().data());
+                            if (!userModel.getRooms().data().isEmpty()) {
+                                indexRoomAdapter.setItems(userModel.getRooms().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(indexRoomAdapter);
 
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.GONE);
@@ -276,8 +276,8 @@ public class ReferenceFragment extends Fragment {
                             }
 
                             // Cases Data
-                            if (!userModel.getCaseList().data().isEmpty()) {
-                                tableCaseAdapter.setItems(userModel.getCaseList().data());
+                            if (!userModel.getCases().data().isEmpty()) {
+                                tableCaseAdapter.setItems(userModel.getCases().data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(tableCaseAdapter);
 
                                 binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
@@ -289,8 +289,8 @@ public class ReferenceFragment extends Fragment {
                             }
 
                             // Samples Data
-                            if (!userModel.getSampleList().data().isEmpty()) {
-                                tableSampleAdapter.setItems(userModel.getSampleList().data());
+                            if (!userModel.getSamples().data().isEmpty()) {
+                                tableSampleAdapter.setItems(userModel.getSamples().data());
                                 binding.samplesSingleLayout.recyclerView.setAdapter(tableSampleAdapter);
 
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
@@ -330,8 +330,8 @@ public class ReferenceFragment extends Fragment {
                             setData(userModel);
 
                             // Rooms Data
-                            if (!userModel.getRoomList().data().isEmpty()) {
-                                indexRoomAdapter.setItems(userModel.getRoomList().data());
+                            if (!userModel.getRooms().data().isEmpty()) {
+                                indexRoomAdapter.setItems(userModel.getRooms().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(indexRoomAdapter);
 
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.GONE);
@@ -343,8 +343,8 @@ public class ReferenceFragment extends Fragment {
                             }
 
                             // Cases Data
-                            if (!userModel.getCaseList().data().isEmpty()) {
-                                tableCaseAdapter.setItems(userModel.getCaseList().data());
+                            if (!userModel.getCases().data().isEmpty()) {
+                                tableCaseAdapter.setItems(userModel.getCases().data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(tableCaseAdapter);
 
                                 binding.casesSingleLayout.emptyView.setVisibility(View.GONE);
@@ -356,8 +356,8 @@ public class ReferenceFragment extends Fragment {
                             }
 
                             // Samples Data
-                            if (!userModel.getSampleList().data().isEmpty()) {
-                                tableSampleAdapter.setItems(userModel.getSampleList().data());
+                            if (!userModel.getSamples().data().isEmpty()) {
+                                tableSampleAdapter.setItems(userModel.getSamples().data());
                                 binding.samplesSingleLayout.recyclerView.setAdapter(tableSampleAdapter);
 
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);

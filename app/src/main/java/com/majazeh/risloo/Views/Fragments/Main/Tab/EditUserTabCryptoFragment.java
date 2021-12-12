@@ -109,8 +109,8 @@ public class EditUserTabCryptoFragment extends Fragment {
                 data.put("id", model.getId());
             }
 
-            if (model.getPublic_key() != null && !model.getPublic_key().equals("")) {
-                publicKey = model.getPublic_key();
+            if (model.getPublicKey() != null && !model.getPublicKey().equals("")) {
+                publicKey = model.getPublicKey();
                 binding.publicIncludeLayout.inputEditText.setText(publicKey);
             }
 

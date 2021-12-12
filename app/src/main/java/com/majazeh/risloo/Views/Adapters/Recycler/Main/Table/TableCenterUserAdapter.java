@@ -256,24 +256,24 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 items.add(activity.getResources().getString(R.string.CenterUserAdapterCreateRoom));
         }
 
-        if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
+        if (model.getKickedAt() != 0 && model.getAcceptedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
 
-            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
-            holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getAcceptedAt())));
+            holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getKickedAt())));
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
-        } else if (model.getUserKicked_at() != 0) {
+        } else if (model.getKickedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
 
             holder.binding.acceptedTextView.setText("");
-            holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
+            holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getKickedAt())));
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
-        } else if (model.getUserAccepted_at() != 0) {
+        } else if (model.getAcceptedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "accepted"));
 
-            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getAcceptedAt())));
             holder.binding.kickedTextView.setText("");
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterKick));

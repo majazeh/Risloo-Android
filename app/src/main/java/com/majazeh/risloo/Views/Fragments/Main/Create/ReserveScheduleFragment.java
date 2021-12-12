@@ -347,8 +347,8 @@ public class ReserveScheduleFragment extends Fragment {
     }
 
     private void setData(UserModel model) {
-        if (model.getCenterList() != null) {
-            for (TypeModel typeModel : model.getCenterList().data()) {
+        if (model.getCenters() != null) {
+            for (TypeModel typeModel : model.getCenters().data()) {
                 CenterModel centerModel = (CenterModel) typeModel;
 
                 if (centerModel != null && centerModel.getId() != null && centerModel.getId().equals(centerId)) {

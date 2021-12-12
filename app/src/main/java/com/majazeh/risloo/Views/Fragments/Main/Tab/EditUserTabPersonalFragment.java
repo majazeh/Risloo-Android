@@ -215,8 +215,8 @@ public class EditUserTabPersonalFragment extends Fragment {
                 binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
             }
 
-            if (model.getUserStatus() != null && !model.getUserStatus().equals("")) {
-                status = model.getUserStatus();
+            if (model.getStatus() != null && !model.getStatus().equals("")) {
+                status = model.getStatus();
                 switch (status) {
                     case "active":
                         binding.statusIncludeLayout.firstRadioButton.setChecked(true);
@@ -230,8 +230,8 @@ public class EditUserTabPersonalFragment extends Fragment {
                 }
             }
 
-            if (model.getUserType() != null && !model.getUserType().equals("")) {
-                type = model.getUserType();
+            if (model.getType() != null && !model.getType().equals("")) {
+                type = model.getType();
                 switch (type) {
                     case "admin":
                         binding.typeIncludeLayout.firstRadioButton.setChecked(true);

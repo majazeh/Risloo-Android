@@ -118,8 +118,8 @@ public class Singleton {
             jsonObject.put("mobile", userModel.getMobile());
             jsonObject.put("email", userModel.getEmail());
             jsonObject.put("birthday", userModel.getBirthday());
-            jsonObject.put("status", userModel.getUserStatus());
-            jsonObject.put("type", userModel.getUserType());
+            jsonObject.put("status", userModel.getStatus());
+            jsonObject.put("type", userModel.getType());
             jsonObject.put("gender", userModel.getGender());
 
             JSONArray avatarArray = new JSONArray();

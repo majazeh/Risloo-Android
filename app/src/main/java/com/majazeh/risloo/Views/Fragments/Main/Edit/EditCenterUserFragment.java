@@ -192,13 +192,13 @@ public class EditCenterUserFragment extends Fragment {
     }
 
     private void setAcceptation(UserModel model) {
-        if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
+        if (model.getKickedAt() != 0 && model.getAcceptedAt() != 0) {
             status = "kick";
             binding.statusIncludeLayout.secondRadioButton.setChecked(true);
-        } else if (model.getUserKicked_at() != 0) {
+        } else if (model.getKickedAt() != 0) {
             status = "kick";
             binding.statusIncludeLayout.secondRadioButton.setChecked(true);
-        } else if (model.getUserAccepted_at() != 0) {
+        } else if (model.getAcceptedAt() != 0) {
             status = "accept";
             binding.statusIncludeLayout.firstRadioButton.setChecked(true);
         } else {

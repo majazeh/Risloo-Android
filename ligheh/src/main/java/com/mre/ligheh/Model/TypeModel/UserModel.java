@@ -4,146 +4,154 @@ import androidx.annotation.NonNull;
 
 import com.mre.ligheh.Model.Madule.List;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserModel extends TypeModel {
-
     private String id = "";
-    private String userId = "";
+    private String user_id = "";
     private String name = "";
     private String email = "";
     private String mobile = "";
     private String gender = "";
-    private String userStatus = "";
-    private boolean no_password;
-    private String position = "";
-    private String userType = "";
-    private JSONObject groups;
-    private String username = "";
-    private UserModel creator;
-    private String public_key = "";
     private String birthday = "";
-    private int userCreated_at;
-    private int userUpdated_at;
-    private int userAccepted_at;
-    private int userKicked_at;
-    private JSONObject meta;
+    private String status = "";
+    private String position = "";
+    private String type = "";
+    private String username = "";
+    private String public_key = "";
+    private int created_at;
+    private int updated_at;
+    private int accepted_at;
+    private int kicked_at;
+    private boolean no_password;
     private AvatarModel avatar;
-    private List centerList;
-    private List roomList;
-    private List caseList;
-    private List sampleList;
-    private List treasuries;
+    private UserModel creator;
     private FieldModel field;
     private SessionPlatformModel session_platform;
+    private JSONObject groups;
+    private JSONObject meta;
     private JSONObject dalilyScheduleExports;
+    private List centers;
+    private List rooms;
+    private List cases;
+    private List samples;
+    private List treasuries;
 
-    public UserModel() {
-        super();
-    }
-
-    public UserModel(JSONObject jsonObject) throws JSONException {
+    public UserModel(JSONObject jsonObject) {
         super(jsonObject);
-        setId(jsonObject.getString("id"));
-        if (!jsonObject.isNull("name"))
-            setName(jsonObject.getString("name"));
-        if (!jsonObject.isNull("user_id"))
-            setUserId(jsonObject.getString("user_id"));
-        if (!jsonObject.isNull("email"))
-            setEmail(jsonObject.getString("email"));
-        if (!jsonObject.isNull("mobile"))
-            setMobile(jsonObject.getString("mobile"));
-        if (!jsonObject.isNull("gender"))
-            setGender(jsonObject.getString("gender"));
-        if (!jsonObject.isNull("status"))
-            setUserStatus(jsonObject.getString("status"));
-        if (!jsonObject.isNull("position"))
-            setPosition(jsonObject.getString("position"));
-        if (!jsonObject.isNull("public_key"))
-            setPublic_key(jsonObject.getString("public_key"));
-        if (!jsonObject.isNull("no_password"))
-            setNo_password(jsonObject.getBoolean("no_password"));
-        if (!jsonObject.isNull("type"))
-            setUserType(jsonObject.getString("type"));
-        if (!jsonObject.isNull("groups"))
-            setGroups(jsonObject.getJSONObject("groups"));
-        if (!jsonObject.isNull("username"))
-            setUsername(jsonObject.getString("username"));
-        if (!jsonObject.isNull("birthday"))
-            setBirthday(jsonObject.getString("birthday"));
-        if (!jsonObject.isNull("created_at"))
-            setUserCreated_at(jsonObject.getInt("created_at"));
-        if (!jsonObject.isNull("updated_at"))
-            setUserUpdated_at(jsonObject.getInt("updated_at"));
-        if (!jsonObject.isNull("accepted_at"))
-            setUserAccepted_at(jsonObject.getInt("accepted_at"));
-        if (!jsonObject.isNull("kicked_at"))
-            setUserKicked_at(jsonObject.getInt("kicked_at"));
-        if (!jsonObject.isNull("meta"))
-            setMeta(jsonObject.getJSONObject("meta"));
-        if (!jsonObject.isNull("creator"))
-            setCreator(new UserModel(jsonObject.getJSONObject("creator")));
-        if (!jsonObject.isNull("avatar"))
-            setAvatar(new AvatarModel(jsonObject.getJSONArray("avatar")));
 
-        if (!jsonObject.isNull("session_platform"))
-            setSession_platform(new SessionPlatformModel(jsonObject.getJSONObject("session_platform")));
+        try {
+            if (!jsonObject.isNull("id"))
+                setId(jsonObject.getString("id"));
+            if (!jsonObject.isNull("user_id"))
+                setUserId(jsonObject.getString("user_id"));
+            if (!jsonObject.isNull("name"))
+                setName(jsonObject.getString("name"));
+            if (!jsonObject.isNull("email"))
+                setEmail(jsonObject.getString("email"));
+            if (!jsonObject.isNull("mobile"))
+                setMobile(jsonObject.getString("mobile"));
+            if (!jsonObject.isNull("gender"))
+                setGender(jsonObject.getString("gender"));
+            if (!jsonObject.isNull("birthday"))
+                setBirthday(jsonObject.getString("birthday"));
+            if (!jsonObject.isNull("status"))
+                setStatus(jsonObject.getString("status"));
+            if (!jsonObject.isNull("position"))
+                setPosition(jsonObject.getString("position"));
+            if (!jsonObject.isNull("type"))
+                setType(jsonObject.getString("type"));
+            if (!jsonObject.isNull("username"))
+                setUsername(jsonObject.getString("username"));
+            if (!jsonObject.isNull("public_key"))
+                setPublicKey(jsonObject.getString("public_key"));
 
-        if (!jsonObject.isNull("field"))
-            setField(new FieldModel(jsonObject.getJSONObject("field")));
+            if (!jsonObject.isNull("created_at"))
+                setCreatedAt(jsonObject.getInt("created_at"));
+            if (!jsonObject.isNull("updated_at"))
+                setUpdatedAt(jsonObject.getInt("updated_at"));
+            if (!jsonObject.isNull("accepted_at"))
+                setAcceptedAt(jsonObject.getInt("accepted_at"));
+            if (!jsonObject.isNull("kicked_at"))
+                setKickedAt(jsonObject.getInt("kicked_at"));
 
-        if (!jsonObject.isNull("centers")) {
-            List centers = new List();
-            for (int i = 0; i < jsonObject.getJSONArray("centers").length(); i++) {
-                centers.add(new CenterModel(jsonObject.getJSONArray("centers").getJSONObject(i)));
+            if (!jsonObject.isNull("no_password"))
+                setNoPassword(jsonObject.getBoolean("no_password"));
+
+            if (!jsonObject.isNull("avatar"))
+                setAvatar(new AvatarModel(jsonObject.getJSONArray("avatar")));
+            if (!jsonObject.isNull("creator"))
+                setCreator(new UserModel(jsonObject.getJSONObject("creator")));
+            if (!jsonObject.isNull("field"))
+                setField(new FieldModel(jsonObject.getJSONObject("field")));
+            if (!jsonObject.isNull("session_platform"))
+                setSessionPlatform(new SessionPlatformModel(jsonObject.getJSONObject("session_platform")));
+
+            if (!jsonObject.isNull("groups"))
+                setGroups(jsonObject.getJSONObject("groups"));
+            if (!jsonObject.isNull("meta"))
+                setMeta(jsonObject.getJSONObject("meta"));
+            if (!jsonObject.isNull("dalily_schedule_exports"))
+                setDalilyScheduleExports(jsonObject.getJSONObject("dalily_schedule_exports"));
+
+            if (!jsonObject.isNull("centers")) {
+                centers = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("centers").length(); i++)
+                    centers.add(new CenterModel(jsonObject.getJSONArray("centers").getJSONObject(i)));
+
+                setCenters(centers);
+            } else {
+                setCenters(new List());
             }
-            setCenterList(centers);
-        } else {
-            setCenterList(new List());
-        }
-        if (!jsonObject.isNull("rooms")) {
-            List rooms = new List();
-            for (int i = 0; i < jsonObject.getJSONArray("rooms").length(); i++) {
-                rooms.add(new RoomModel(jsonObject.getJSONArray("rooms").getJSONObject(i)));
-            }
-            setRoomList(rooms);
-        } else {
-            setRoomList(new List());
-        }
-        if (!jsonObject.isNull("cases")) {
-            List cases = new List();
-            for (int i = 0; i < jsonObject.getJSONArray("cases").length(); i++) {
-                cases.add(new CaseModel(jsonObject.getJSONArray("cases").getJSONObject(i)));
-            }
-            setCaseList(cases);
-        } else {
-            setCaseList(new List());
-        }
-        if (!jsonObject.isNull("samples")) {
-            List samples = new List();
-            for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++) {
-                samples.add(new SampleModel(jsonObject.getJSONArray("samples").getJSONObject(i)));
-            }
-            setSampleList(samples);
-        } else {
-            setSampleList(new List());
-        }
 
+            if (!jsonObject.isNull("rooms")) {
+                rooms = new List();
 
-        if (!jsonObject.isNull("treasuries")) {
-            List treasuries = new List();
-            for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++) {
-                treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
+                for (int i = 0; i < jsonObject.getJSONArray("rooms").length(); i++)
+                    rooms.add(new RoomModel(jsonObject.getJSONArray("rooms").getJSONObject(i)));
+
+                setRooms(rooms);
+            } else {
+                setRooms(new List());
             }
-            setTreasuries(treasuries);
-        } else {
-            setTreasuries(new List());
-        }
 
-        if (!jsonObject.isNull("dalily_schedule_exports")) {
-            setDalilyScheduleExports(jsonObject.getJSONObject("dalily_schedule_exports"));
+            if (!jsonObject.isNull("cases")) {
+                cases = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("cases").length(); i++)
+                    cases.add(new CaseModel(jsonObject.getJSONArray("cases").getJSONObject(i)));
+
+                setCases(cases);
+            } else {
+                setCases(new List());
+            }
+
+            if (!jsonObject.isNull("samples")) {
+                samples = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++)
+                    samples.add(new SampleModel(jsonObject.getJSONArray("samples").getJSONObject(i)));
+
+                setSamples(samples);
+            } else {
+                setSamples(new List());
+            }
+
+            if (!jsonObject.isNull("treasuries")) {
+                treasuries = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++)
+                    treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
+
+                setTreasuries(treasuries);
+            } else {
+                setTreasuries(new List());
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -156,11 +164,11 @@ public class UserModel extends TypeModel {
     }
 
     public String getUserId() {
-        return userId;
+        return user_id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {
@@ -195,20 +203,20 @@ public class UserModel extends TypeModel {
         this.gender = gender;
     }
 
-    public boolean isNo_password() {
-        return no_password;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setNo_password(boolean no_password) {
-        this.no_password = no_password;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
-    public String getUserStatus() {
-        return userStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getPosition() {
@@ -219,20 +227,12 @@ public class UserModel extends TypeModel {
         this.position = position;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getType() {
+        return type;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    public JSONObject getGroups() {
-        return groups;
-    }
-
-    public void setGroups(JSONObject groups) {
-        this.groups = groups;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getUsername() {
@@ -243,36 +243,52 @@ public class UserModel extends TypeModel {
         this.username = username;
     }
 
-    public String getPublic_key() {
+    public String getPublicKey() {
         return public_key;
     }
 
-    public void setPublic_key(String public_key) {
+    public void setPublicKey(String public_key) {
         this.public_key = public_key;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public int getCreatedAt() {
+        return created_at;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setCreatedAt(int created_at) {
+        this.created_at = created_at;
     }
 
-    public int getUserCreated_at() {
-        return userCreated_at;
+    public int getUpdatedAt() {
+        return updated_at;
     }
 
-    public void setUserCreated_at(int userCreated_at) {
-        this.userCreated_at = userCreated_at;
+    public void setUpdatedAt(int updated_at) {
+        this.updated_at = updated_at;
     }
 
-    public int getUserUpdated_at() {
-        return userUpdated_at;
+    public int getAcceptedAt() {
+        return accepted_at;
     }
 
-    public void setUserUpdated_at(int userUpdated_at) {
-        this.userUpdated_at = userUpdated_at;
+    public void setAcceptedAt(int accepted_at) {
+        this.accepted_at = accepted_at;
+    }
+
+    public int getKickedAt() {
+        return kicked_at;
+    }
+
+    public void setKickedAt(int kicked_at) {
+        this.kicked_at = kicked_at;
+    }
+
+    public boolean isNoPassword() {
+        return no_password;
+    }
+
+    public void setNoPassword(boolean no_password) {
+        this.no_password = no_password;
     }
 
     public AvatarModel getAvatar() {
@@ -283,14 +299,6 @@ public class UserModel extends TypeModel {
         this.avatar = avatar;
     }
 
-    public List getCenterList() {
-        return centerList;
-    }
-
-    public void setCenterList(List centerList) {
-        this.centerList = centerList;
-    }
-
     public UserModel getCreator() {
         return creator;
     }
@@ -299,52 +307,28 @@ public class UserModel extends TypeModel {
         this.creator = creator;
     }
 
-    public List getRoomList() {
-        return roomList;
+    public FieldModel getField() {
+        return field;
     }
 
-    public void setRoomList(List roomList) {
-        this.roomList = roomList;
+    public void setField(FieldModel field) {
+        this.field = field;
     }
 
-    public List getCaseList() {
-        return caseList;
+    public SessionPlatformModel getSessionPlatform() {
+        return session_platform;
     }
 
-    public void setCaseList(List caseList) {
-        this.caseList = caseList;
+    public void setSessionPlatform(SessionPlatformModel session_platform) {
+        this.session_platform = session_platform;
     }
 
-    public List getSampleList() {
-        return sampleList;
+    public JSONObject getGroups() {
+        return groups;
     }
 
-    public void setSampleList(List sampleList) {
-        this.sampleList = sampleList;
-    }
-
-    public List getTreasuries() {
-        return treasuries;
-    }
-
-    public void setTreasuries(List treasuries) {
-        this.treasuries = treasuries;
-    }
-
-    public int getUserAccepted_at() {
-        return userAccepted_at;
-    }
-
-    public void setUserAccepted_at(int userAccepted_at) {
-        this.userAccepted_at = userAccepted_at;
-    }
-
-    public int getUserKicked_at() {
-        return userKicked_at;
-    }
-
-    public void setUserKicked_at(int userKicked_at) {
-        this.userKicked_at = userKicked_at;
+    public void setGroups(JSONObject groups) {
+        this.groups = groups;
     }
 
     public JSONObject getMeta() {
@@ -363,20 +347,139 @@ public class UserModel extends TypeModel {
         this.dalilyScheduleExports = dalilyScheduleExports;
     }
 
-    public FieldModel getField() {
-        return field;
+    public List getCenters() {
+        return centers;
     }
 
-    public void setField(FieldModel field) {
-        this.field = field;
+    public void setCenters(List centers) {
+        this.centers = centers;
     }
 
-    public SessionPlatformModel getSession_platform() {
-        return session_platform;
+    public List getRooms() {
+        return rooms;
     }
 
-    public void setSession_platform(SessionPlatformModel session_platform) {
-        this.session_platform = session_platform;
+    public void setRooms(List rooms) {
+        this.rooms = rooms;
+    }
+
+    public List getCases() {
+        return cases;
+    }
+
+    public void setCases(List cases) {
+        this.cases = cases;
+    }
+
+    public List getSamples() {
+        return samples;
+    }
+
+    public void setSamples(List samples) {
+        this.samples = samples;
+    }
+
+    public List getTreasuries() {
+        return treasuries;
+    }
+
+    public void setTreasuries(List treasuries) {
+        this.treasuries = treasuries;
+    }
+
+    public boolean compareTo(UserModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
+
+            if (!user_id.equals(model.getUserId()))
+                return false;
+
+            if (!name.equals(model.getName()))
+                return false;
+
+            if (!email.equals(model.getEmail()))
+                return false;
+
+            if (!mobile.equals(model.getMobile()))
+                return false;
+
+            if (!gender.equals(model.getGender()))
+                return false;
+
+            if (!birthday.equals(model.getBirthday()))
+                return false;
+
+            if (!status.equals(model.getStatus()))
+                return false;
+
+            if (!position.equals(model.getPosition()))
+                return false;
+
+            if (!type.equals(model.getType()))
+                return false;
+
+            if (!username.equals(model.getUsername()))
+                return false;
+
+            if (!public_key.equals(model.getPublicKey()))
+                return false;
+
+            if (!isNoPassword())
+                return false;
+
+            if (created_at != model.getCreatedAt())
+                return false;
+
+            if (updated_at != model.getUpdatedAt())
+                return false;
+
+            if (accepted_at != model.getAcceptedAt())
+                return false;
+
+            if (kicked_at != model.getKickedAt())
+                return false;
+
+            if (avatar != model.getAvatar())
+                return false;
+
+            if (creator != model.getCreator())
+                return false;
+
+            if (field != model.getField())
+                return false;
+
+            if (session_platform != model.getSessionPlatform())
+                return false;
+
+            if (groups != model.getGroups())
+                return false;
+
+            if (meta != model.getMeta())
+                return false;
+
+            if (dalilyScheduleExports != model.getDalilyScheduleExports())
+                return false;
+
+            if (centers != model.getCenters())
+                return false;
+
+            if (rooms != model.getRooms())
+                return false;
+
+            if (cases != model.getCases())
+                return false;
+
+            if (samples != model.getSamples())
+                return false;
+
+            if (treasuries != model.getTreasuries())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -388,95 +491,70 @@ public class UserModel extends TypeModel {
             super.toObject().put("email", getEmail());
             super.toObject().put("mobile", getMobile());
             super.toObject().put("gender", getGender());
-            super.toObject().put("status", getUserStatus());
-            super.toObject().put("position", getPosition());
-            super.toObject().put("public_key", getPublic_key());
-            super.toObject().put("no_password", isNo_password());
-            super.toObject().put("type", getUserType());
-            super.toObject().put("group", getGroups());
-            super.toObject().put("username", isNo_password());
             super.toObject().put("birthday", getBirthday());
-            super.toObject().put("created_at", getUserCreated_at());
-            super.toObject().put("updated_at", getUserUpdated_at());
-            super.toObject().put("accepted_at", getUserAccepted_at());
-            super.toObject().put("kicked_at", getUserKicked_at());
-            super.toObject().put("session_platform", getSession_platform().toObject());
-            super.toObject().put("field", getField().toObject());
-            super.toObject().put("meta", getMeta());
-            super.toObject().put("creator", getCreator().toObject());
+            super.toObject().put("status", getStatus());
+            super.toObject().put("position", getPosition());
+            super.toObject().put("type", getType());
+            super.toObject().put("username", getUsername());
+            super.toObject().put("public_key", getPublicKey());
+            super.toObject().put("no_password", isNoPassword());
+            super.toObject().put("created_at", getCreatedAt());
+            super.toObject().put("updated_at", getUpdatedAt());
+            super.toObject().put("accepted_at", getAcceptedAt());
+            super.toObject().put("kicked_at", getKickedAt());
             super.toObject().put("avatar", getAvatar().toObject());
-            JSONArray centers = new JSONArray();
-            for (int i = 0; i < getCenterList().size(); i++) {
-                CenterModel centerModel = (CenterModel) getCenterList().data().get(i);
-                centers.put(centerModel.toObject());
-            }
-            super.toObject().put("centers", centers);
-
-            JSONArray rooms = new JSONArray();
-            for (int i = 0; i < getRoomList().size(); i++) {
-                RoomModel roomModel = (RoomModel) getCenterList().data().get(i);
-                rooms.put(roomModel.toObject());
-            }
-            super.toObject().put("rooms", rooms);
-
-            JSONArray cases = new JSONArray();
-            for (int i = 0; i < getCaseList().size(); i++) {
-                CaseModel caseModel = (CaseModel) getCenterList().data().get(i);
-                cases.put(caseModel.toObject());
-            }
-            super.toObject().put("cases", cases);
-
-            JSONArray samples = new JSONArray();
-            for (int i = 0; i < getSampleList().size(); i++) {
-                SampleModel sampleModel = (SampleModel) getCenterList().data().get(i);
-                samples.put(sampleModel.toObject());
-            }
-            super.toObject().put("samples", samples);
-
-            JSONArray treasuries = new JSONArray();
-            for (int i = 0; i < getTreasuries().size(); i++) {
-                TreasuriesModel treasuriesModel = (TreasuriesModel) getCenterList().data().get(i);
-                treasuries.put(treasuriesModel.toObject());
-            }
-            super.toObject().put("treasuries", treasuries);
-
+            super.toObject().put("creator", getCreator().toObject());
+            super.toObject().put("field", getField().toObject());
+            super.toObject().put("session_platform", getSessionPlatform().toObject());
+            super.toObject().put("groups", getGroups());
+            super.toObject().put("meta", getMeta());
             super.toObject().put("dalily_schedule_exports", getDalilyScheduleExports());
+            super.toObject().put("centers", getCenters());
+            super.toObject().put("rooms", getRooms());
+            super.toObject().put("cases", getCases());
+            super.toObject().put("samples", getSamples());
+            super.toObject().put("treasuries", getTreasuries());
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         return super.toObject();
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "UserModel{" +
                 "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
+                ", userId='" + user_id + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", gender='" + gender + '\'' +
-                ", userStatus='" + userStatus + '\'' +
-                ", no_password=" + no_password +
-                ", position='" + position + '\'' +
-                ", userType='" + userType + '\'' +
-                ", groups=" + groups +
-                ", username='" + username + '\'' +
-                ", creator=" + creator +
-                ", public_key='" + public_key + '\'' +
                 ", birthday='" + birthday + '\'' +
-                ", userCreated_at=" + userCreated_at +
-                ", userUpdated_at=" + userUpdated_at +
-                ", userAccepted_at=" + userAccepted_at +
-                ", userKicked_at=" + userKicked_at +
-                ", meta=" + meta +
+                ", status='" + status + '\'' +
+                ", position='" + position + '\'' +
+                ", type='" + type + '\'' +
+                ", username='" + username + '\'' +
+                ", public_key='" + public_key + '\'' +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                ", accepted_at=" + accepted_at +
+                ", kicked_at=" + kicked_at +
+                ", no_password=" + no_password +
                 ", avatar=" + avatar +
-                ", centerList=" + centerList +
-                ", roomList=" + roomList +
-                ", caseList=" + caseList +
-                ", sampleList=" + sampleList +
-                ", treasuries=" + treasuries +
+                ", creator=" + creator +
+                ", field=" + field +
+                ", session_platform=" + session_platform +
+                ", groups=" + groups +
+                ", meta=" + meta +
                 ", dalilyScheduleExports=" + dalilyScheduleExports +
+                ", centers=" + centers +
+                ", rooms=" + rooms +
+                ", cases=" + cases +
+                ", samples=" + samples +
+                ", treasuries=" + treasuries +
                 '}';
     }
+
 }

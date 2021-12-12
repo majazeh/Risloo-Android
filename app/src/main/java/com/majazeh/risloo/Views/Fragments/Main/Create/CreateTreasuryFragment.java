@@ -137,7 +137,7 @@ public class CreateTreasuryFragment extends Fragment {
     }
 
     private void setData(UserModel model) {
-        setRegion(model.getCenterList());
+        setRegion(model.getCenters());
     }
 
     private void setRegion(List centers) {

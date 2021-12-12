@@ -142,8 +142,8 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void setData(TableUserHolder holder, UserModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
-        holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
-        holder.binding.statusTextView.setText(SelectionManager.getUserStatus(activity, "fa", model.getUserStatus()));
+        holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getType()));
+        holder.binding.statusTextView.setText(SelectionManager.getUserStatus(activity, "fa", model.getStatus()));
 
         setMenu(holder, model);
     }

@@ -114,15 +114,15 @@ public class DashboardFragment extends Fragment {
         try {
 
             //  Password Missings Data
-            if (!model.isNo_password()) {
+            if (!model.isNoPassword()) {
                 binding.passwordMissingLayout.getRoot().setVisibility(View.GONE);
             } else {
                 binding.passwordMissingLayout.getRoot().setVisibility(View.VISIBLE);
             }
 
             //  Center Missings Data
-            if (model.getCenterList() != null && !model.getCenterList().data().isEmpty()) {
-                for (TypeModel typeModel : model.getCenterList().data()) {
+            if (model.getCenters() != null && !model.getCenters().data().isEmpty()) {
+                for (TypeModel typeModel : model.getCenters().data()) {
                     CenterModel centerModel = (CenterModel) typeModel;
 
                     if (centerModel != null && centerModel.getAcceptation() != null && centerModel.getAcceptation().getAcceptedAt() != 0) {
@@ -157,10 +157,10 @@ public class DashboardFragment extends Fragment {
             }
 
             //  Rooms Data
-            if (model.getRoomList() != null && !model.getRoomList().data().isEmpty()) {
+            if (model.getRooms() != null && !model.getRooms().data().isEmpty()) {
                 ArrayList<TypeModel> items = new ArrayList<>();
 
-                for (TypeModel typeModel : model.getRoomList().data()) {
+                for (TypeModel typeModel : model.getRooms().data()) {
                     RoomModel roomModel = (RoomModel) typeModel;
 
                     if (roomModel != null && roomModel.getAcceptation() != null && roomModel.getAcceptation().getPosition().equals("manager"))
