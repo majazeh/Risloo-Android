@@ -23,7 +23,9 @@ import com.majazeh.risloo.databinding.FragmentScalesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -40,6 +42,7 @@ public class ScalesFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
+    private ArrayList<TypeModel> items;
     private boolean isLoading = true;
 
     @Nullable
@@ -128,15 +131,17 @@ public class ScalesFragment extends Fragment {
         Sample.assessmentsList(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                List items = (List) object;
+                List list = (List) object;
+
+                if (Objects.equals(data.get("page"), 1))
+                    items = list.data();
+                else
+                    items.addAll(list.data());
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (Objects.equals(data.get("page"), 1))
-                            adapter.clearItems();
-
-                        if (!items.data().isEmpty()) {
-                            adapter.setItems(items.data());
+                        if (!items.isEmpty()) {
+                            adapter.setItems(items);
                             binding.tableSingleLayout.recyclerView.setAdapter(adapter);
 
                             binding.tableSingleLayout.emptyView.setVisibility(View.GONE);
@@ -150,7 +155,7 @@ public class ScalesFragment extends Fragment {
                                 binding.tableSingleLayout.emptyView.setText(getResources().getString(R.string.ScalesFragmentEmpty));
                         }
 
-                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(list.getTotal()));
 
                         hideShimmer();
                     });

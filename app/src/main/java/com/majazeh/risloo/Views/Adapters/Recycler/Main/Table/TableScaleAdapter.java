@@ -7,8 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderScaleHolder;
@@ -22,19 +25,21 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilTypeModelAdapter {
+
+    // Activity
+    private final Activity activity;
 
     // Fragments
     private Fragment current;
 
     // Objects
-    private Activity activity;
-
-    // Vars
-    private ArrayList<TypeModel> items;
+    private final AsyncListDiffer<TypeModel> differ;
 
     public TableScaleAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new DiffUtilTypeModelCallback(this));
     }
 
     @NonNull
@@ -49,7 +54,7 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof TableScaleHolder) {
-            ScaleModel model = (ScaleModel) items.get(i - 1);
+            ScaleModel model = (ScaleModel) differ.getCurrentList().get(i - 1);
 
             initializer();
 
@@ -71,32 +76,21 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size() + 1;
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size() + 1;
         else
             return 0;
     }
 
     public int itemsCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+        differ.submitList(items);
     }
 
     private void initializer() {
@@ -134,6 +128,22 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             holder.binding.editionTextView.setText(model.getEdition());
         else
             holder.binding.editionTextView.setText("-");
+    }
+
+    @Override
+    public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        ScaleModel oldModel = (ScaleModel) oldTypeModel;
+        ScaleModel newModel = (ScaleModel) newTypeModel;
+
+        return newModel.getId().equals(oldModel.getId());
+    }
+
+    @Override
+    public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        ScaleModel oldModel = (ScaleModel) oldTypeModel;
+        ScaleModel newModel = (ScaleModel) newTypeModel;
+
+        return newModel.compareTo(oldModel);
     }
 
 }
