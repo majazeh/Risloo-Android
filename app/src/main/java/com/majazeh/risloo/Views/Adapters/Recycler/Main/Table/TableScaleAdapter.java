@@ -102,9 +102,7 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToCreateSampleFragment(model);
-        }).widget(holder.binding.createTextView);
+        CustomClickView.onClickListener(() -> ((MainActivity) activity).navigatoon.navigateToCreateSampleFragment(model)).widget(holder.binding.createTextView);
     }
 
     private void setPermission(TableScaleHolder holder) {
@@ -120,14 +118,17 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getTitle());
 
-        if (!model.getEdition().equals("") && !model.getVersion().equals(""))
-            holder.binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
-        else if (!model.getVersion().equals(""))
-            holder.binding.editionTextView.setText("نسخه " + model.getVersion());
-        else if (!model.getEdition().equals(""))
+        if (!model.getEdition().equals("") && !model.getVersion().equals("")) {
+            String edition = model.getEdition() + " - نسخه " + model.getVersion();
+            holder.binding.editionTextView.setText(edition);
+        } else if (!model.getVersion().equals("")) {
+            String edition = "نسخه " + model.getVersion();
+            holder.binding.editionTextView.setText(edition);
+        } else if (!model.getEdition().equals("")) {
             holder.binding.editionTextView.setText(model.getEdition());
-        else
+        } else {
             holder.binding.editionTextView.setText("-");
+        }
     }
 
     @Override
