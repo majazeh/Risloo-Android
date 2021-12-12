@@ -81,8 +81,8 @@ public class EditSessionFragment extends Fragment {
             data.put("id", sessionModel.getId());
         }
 
-        if (sessionModel.getCaseModel() != null && sessionModel.getCaseModel().getId() != null && !sessionModel.getCaseModel().getId().equals("")) {
-            data.put("case_id", sessionModel.getCaseModel().getId());
+        if (sessionModel.getCasse() != null && sessionModel.getCasse().getId() != null && !sessionModel.getCasse().getId().equals("")) {
+            data.put("case_id", sessionModel.getCasse().getId());
             data.put("clients_type", "case");
 
             hasCase = true;

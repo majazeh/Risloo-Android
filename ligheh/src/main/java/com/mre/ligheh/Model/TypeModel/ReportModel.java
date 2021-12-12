@@ -29,7 +29,7 @@ public class ReportModel extends TypeModel {
             if (!jsonObject.isNull("reported_at"))
                 setReportedAt(jsonObject.getInt("reported_at"));
 
-            if (!jsonObject.isNull("clients")) {
+            if (!jsonObject.isNull("clients") && jsonObject.getJSONArray("clients").length() != 0) {
                 clients = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++)
@@ -40,7 +40,7 @@ public class ReportModel extends TypeModel {
                 setClients(new List());
             }
 
-            if (!jsonObject.isNull("viewers")) {
+            if (!jsonObject.isNull("viewers") && jsonObject.getJSONArray("viewers").length() != 0) {
                 viewers = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("viewers").length(); i++)

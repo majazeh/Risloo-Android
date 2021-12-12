@@ -89,8 +89,8 @@ public class EditSessionTabTimeFragment extends Fragment {
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
-            if (model.getStarted_at() != 0) {
-                startTime = String.valueOf(model.getStarted_at());
+            if (model.getStartedAt() != 0) {
+                startTime = String.valueOf(model.getStartedAt());
                 binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
             } else {
                 startTime = String.valueOf(DateManager.currentTimestamp());
@@ -104,8 +104,8 @@ public class EditSessionTabTimeFragment extends Fragment {
                 binding.durationIncludeLayout.inputEditText.setText(duration);
             }
 
-            if (model.getStarted_at() != 0) {
-                startDate = String.valueOf(model.getStarted_at());
+            if (model.getStartedAt() != 0) {
+                startDate = String.valueOf(model.getStartedAt());
                 binding.startDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(startDate, "-"));
             } else {
                 startDate = String.valueOf(DateManager.currentTimestamp());

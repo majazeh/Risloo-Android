@@ -329,12 +329,12 @@ public class EditSessionTabSessionFragment extends Fragment {
                         if (status.equals("زمان\u200Cبندی شده")) {
                             binding.scheduledGroup.setVisibility(View.VISIBLE);
 
-                            if (model.getOpens_at_type() != null && !model.getOpens_at_type().equals("") && model.getOpens_at_type().equals("absolute")) {
+                            if (model.getOpensAtType() != null && !model.getOpensAtType().equals("") && model.getOpensAtType().equals("absolute")) {
                                 binding.startAccurateIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                                 binding.startRelativeIncludeLayout.getRoot().setVisibility(View.GONE);
                             }
 
-                            if (model.getClosed_at_type() != null && !model.getClosed_at_type().equals("") && model.getClosed_at_type().equals("absolute")) {
+                            if (model.getClosedAtType() != null && !model.getClosedAtType().equals("") && model.getClosedAtType().equals("absolute")) {
                                 binding.endAccurateIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                                 binding.endRelativeIncludeLayout.getRoot().setVisibility(View.GONE);
                             }
@@ -351,13 +351,13 @@ public class EditSessionTabSessionFragment extends Fragment {
                 binding.descriptionIncludeLayout.inputEditText.setText(description);
             }
 
-            if (model.getClient_reminder() != null && !model.getClient_reminder().equals("")) {
-                coordination = model.getClient_reminder();
+            if (model.getClientReminder() != null && !model.getClientReminder().equals("")) {
+                coordination = model.getClientReminder();
                 binding.coordinationIncludeLayout.inputEditText.setText(coordination);
             }
 
-            if (model.getOpens_at_type() != null && !model.getOpens_at_type().equals("")) {
-                startType = model.getOpens_at_type();
+            if (model.getOpensAtType() != null && !model.getOpensAtType().equals("")) {
+                startType = model.getOpensAtType();
                 switch (startType) {
                     case "absolute":
                         binding.startTypeIncludeLayout.firstRadioButton.setChecked(true);
@@ -368,8 +368,8 @@ public class EditSessionTabSessionFragment extends Fragment {
                 }
             }
 
-            if (model.getClosed_at_type() != null && !model.getClosed_at_type().equals("")) {
-                endType = model.getClosed_at_type();
+            if (model.getClosedAtType() != null && !model.getClosedAtType().equals("")) {
+                endType = model.getClosedAtType();
                 switch (endType) {
                     case "absolute":
                         binding.endTypeIncludeLayout.firstRadioButton.setChecked(true);
@@ -413,9 +413,9 @@ public class EditSessionTabSessionFragment extends Fragment {
                 binding.endRelativeIncludeLayout.minuteEditText.setFocusableInTouchMode(false);
             }
 
-            if (model.getOpens_at() != 0 && startType.equals("absolute")) {
-                startAccurateTime = String.valueOf(model.getOpens_at());
-                startAccurateDate = String.valueOf(model.getOpens_at());
+            if (model.getOpensAt() != 0 && startType.equals("absolute")) {
+                startAccurateTime = String.valueOf(model.getOpensAt());
+                startAccurateDate = String.valueOf(model.getOpensAt());
 
                 binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
                 binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
@@ -427,9 +427,9 @@ public class EditSessionTabSessionFragment extends Fragment {
                 binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
             }
 
-            if (model.getClosed_at() != 0 && endType.equals("absolute")) {
-                endAccurateTime = String.valueOf(model.getClosed_at());
-                endAccurateDate = String.valueOf(model.getClosed_at());
+            if (model.getClosedAt() != 0 && endType.equals("absolute")) {
+                endAccurateTime = String.valueOf(model.getClosedAt());
+                endAccurateDate = String.valueOf(model.getClosedAt());
 
                 binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
                 binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));

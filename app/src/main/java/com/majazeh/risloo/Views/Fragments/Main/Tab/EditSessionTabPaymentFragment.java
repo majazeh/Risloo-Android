@@ -93,8 +93,8 @@ public class EditSessionTabPaymentFragment extends Fragment {
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
-            if (model.getPayment_status() != null && !model.getPayment_status().equals("")) {
-                payment = SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPayment_status());
+            if (model.getPaymentStatus() != null && !model.getPaymentStatus().equals("")) {
+                payment = SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPaymentStatus());
                 for (int i = 0; i < binding.paymentIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.paymentIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(payment)) {
                         binding.paymentIncludeLayout.selectSpinner.setSelection(i);

@@ -152,7 +152,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void setData(TableSession2Holder holder, SessionModel model) {
         holder.binding.serialTextView.setText(model.getId());
-        holder.binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getStarted_at()), " "));
+        holder.binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getStartedAt()), " "));
         holder.binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
 
         setStatus(holder, model);

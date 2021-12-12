@@ -39,7 +39,7 @@ public class CaseModel extends TypeModel {
             if (!jsonObject.isNull("created_at"))
                 setCreatedAt(jsonObject.getInt("created_at"));
 
-            if (!jsonObject.isNull("clients")) {
+            if (!jsonObject.isNull("clients") && jsonObject.getJSONArray("clients").length() != 0) {
                 clients = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++)
@@ -50,7 +50,7 @@ public class CaseModel extends TypeModel {
                 setClients(new List());
             }
 
-            if (!jsonObject.isNull("sessions")) {
+            if (!jsonObject.isNull("sessions") && jsonObject.getJSONArray("sessions").length() != 0) {
                 sessions = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("sessions").length(); i++)
@@ -61,7 +61,7 @@ public class CaseModel extends TypeModel {
                 setSessions(new List());
             }
 
-            if (!jsonObject.isNull("samples")) {
+            if (!jsonObject.isNull("samples") && jsonObject.getJSONArray("samples").length() != 0) {
                 samples = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++)
@@ -72,7 +72,7 @@ public class CaseModel extends TypeModel {
                 setSamples(new List());
             }
 
-            if (!jsonObject.isNull("tags")) {
+            if (!jsonObject.isNull("tags") && jsonObject.getJSONArray("tags").length() != 0) {
                 tags = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("tags").length(); i++)

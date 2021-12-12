@@ -95,7 +95,7 @@ public class UserModel extends TypeModel {
             if (!jsonObject.isNull("dalily_schedule_exports"))
                 setDalilyScheduleExports(jsonObject.getJSONObject("dalily_schedule_exports"));
 
-            if (!jsonObject.isNull("centers")) {
+            if (!jsonObject.isNull("centers") && jsonObject.getJSONArray("centers").length() != 0) {
                 centers = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("centers").length(); i++)
@@ -106,7 +106,7 @@ public class UserModel extends TypeModel {
                 setCenters(new List());
             }
 
-            if (!jsonObject.isNull("rooms")) {
+            if (!jsonObject.isNull("rooms") && jsonObject.getJSONArray("rooms").length() != 0) {
                 rooms = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("rooms").length(); i++)
@@ -117,7 +117,7 @@ public class UserModel extends TypeModel {
                 setRooms(new List());
             }
 
-            if (!jsonObject.isNull("cases")) {
+            if (!jsonObject.isNull("cases") && jsonObject.getJSONArray("cases").length() != 0) {
                 cases = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("cases").length(); i++)
@@ -128,7 +128,7 @@ public class UserModel extends TypeModel {
                 setCases(new List());
             }
 
-            if (!jsonObject.isNull("samples")) {
+            if (!jsonObject.isNull("samples") && jsonObject.getJSONArray("samples").length() != 0) {
                 samples = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++)
@@ -139,7 +139,7 @@ public class UserModel extends TypeModel {
                 setSamples(new List());
             }
 
-            if (!jsonObject.isNull("treasuries")) {
+            if (!jsonObject.isNull("treasuries") && jsonObject.getJSONArray("treasuries").length() != 0) {
                 treasuries = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++)

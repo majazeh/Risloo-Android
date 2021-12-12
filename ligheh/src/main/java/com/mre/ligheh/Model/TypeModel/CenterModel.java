@@ -42,7 +42,7 @@ public class CenterModel extends TypeModel {
             if (!jsonObject.isNull("updated_at"))
                 setUpdatedAt(jsonObject.getInt("updated_at"));
 
-            if (!jsonObject.isNull("treasuries")) {
+            if (!jsonObject.isNull("treasuries") && jsonObject.getJSONArray("treasuries").length() != 0) {
                 treasuries = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++)

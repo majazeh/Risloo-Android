@@ -187,8 +187,8 @@ public class EditSessionTabReferenceFragment extends Fragment {
                 setTypes(model.getRoom());
             }
 
-            if (model.getClients_type() != null && !model.getClients_type().equals("")) {
-                switch (model.getClients_type()) {
+            if (model.getClientsType() != null && !model.getClientsType().equals("")) {
+                switch (model.getClientsType()) {
                     case "risloo":
                         type = binding.typeIncludeLayout.selectSpinner.getItemAtPosition(0).toString();
                         binding.typeIncludeLayout.selectSpinner.setSelection(0);
@@ -215,8 +215,8 @@ public class EditSessionTabReferenceFragment extends Fragment {
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
 
-                    if (model.getCaseModel().getId() != null && !model.getCaseModel().getId().equals("")) {
-                        caseId = model.getCaseModel().getId();
+                    if (model.getCasse().getId() != null && !model.getCasse().getId().equals("")) {
+                        caseId = model.getCasse().getId();
 
                         binding.caseIncludeLayout.primaryTextView.setText(caseId);
                         setClients(model.getClients());
@@ -237,20 +237,20 @@ public class EditSessionTabReferenceFragment extends Fragment {
                 }
             }
 
-            if (model.isGroup_session()) {
+            if (model.isGroupSession()) {
                 binding.bulkSessionCheckBox.getRoot().setChecked(true);
                 groupSession = "on";
 
                 binding.countIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             }
 
-            if (model.isGroup_session() && model.getClients_number() != 0) {
-                count = String.valueOf(model.getClients_number());
+            if (model.isGroupSession() && model.getClientsNumber() != 0) {
+                count = String.valueOf(model.getClientsNumber());
                 binding.countIncludeLayout.inputEditText.setText(count);
             }
 
-            if (model.getSelection_type() != null && !model.getSelection_type().equals("")) {
-                selection = SelectionManager.getSelectionType(requireActivity(), "fa", model.getSelection_type());
+            if (model.getSelectionType() != null && !model.getSelectionType().equals("")) {
+                selection = SelectionManager.getSelectionType(requireActivity(), "fa", model.getSelectionType());
                 for (int i = 0; i < binding.selectionIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.selectionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(selection)) {
                         binding.selectionIncludeLayout.selectSpinner.setSelection(i);

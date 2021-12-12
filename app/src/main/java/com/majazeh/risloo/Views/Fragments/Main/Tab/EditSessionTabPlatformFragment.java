@@ -71,8 +71,8 @@ public class EditSessionTabPlatformFragment extends Fragment {
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
-            if (!model.getSession_platforms().data().isEmpty()) {
-                ArrayList<TypeModel> sessionPlatforms = model.getSession_platforms().data();
+            if (!model.getSessionPlatforms().data().isEmpty()) {
+                ArrayList<TypeModel> sessionPlatforms = model.getSessionPlatforms().data();
 
                 for (int i = 0; i < sessionPlatforms.size(); i++) {
                     SessionPlatformModel spm = (SessionPlatformModel) sessionPlatforms.get(i);

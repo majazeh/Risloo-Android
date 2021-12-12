@@ -415,18 +415,18 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void setData(SessionModel model) {
-        if (model.getCaseModel() != null && model.getCaseModel().getId() != null && !model.getCaseModel().getId().equals("")) {
-            caseId = model.getCaseModel().getId();
+        if (model.getCasse() != null && model.getCasse().getId() != null && !model.getCasse().getId().equals("")) {
+            caseId = model.getCasse().getId();
 
             binding.caseIncludeLayout.primaryTextView.setText(caseId);
-            setClients(model.getCaseModel().getClients());
+            setClients(model.getCasse().getClients());
         }
 
         if (model.getId() != null && !model.getId().equals("")) {
             sessionId = model.getId();
 
             String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
-            String secondaryText = DateManager.jalDayName(String.valueOf(model.getStarted_at())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())) + " / " + model.getDuration() + " " + "دقیقه";
+            String secondaryText = DateManager.jalDayName(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
             binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.CoolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
             binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
@@ -565,7 +565,7 @@ public class CreateSampleFragment extends Fragment {
                         sessionId = model.getId();
 
                         String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
-                        String secondaryText = DateManager.jalDayName(String.valueOf(model.getStarted_at())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())) + " / " + model.getDuration() + " " + "دقیقه";
+                        String secondaryText = DateManager.jalDayName(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
                         binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.CoolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
                         binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);

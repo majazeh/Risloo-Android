@@ -180,12 +180,12 @@ public class CreateSessionUserFragment extends Fragment {
             setAxis(model.getFields());
         }
 
-        if (model.getSession_platforms() != null) {
-            setPlatform(model.getSession_platforms());
+        if (model.getSessionPlatforms() != null) {
+            setPlatform(model.getSessionPlatforms());
         }
 
-        if (model.getCaseModel() != null) {
-            setClients(model.getCaseModel().getClients());
+        if (model.getCasse() != null) {
+            setClients(model.getCasse().getClients());
         }
 
         if (model.getDescription() != null && !model.getDescription().equals("")) {

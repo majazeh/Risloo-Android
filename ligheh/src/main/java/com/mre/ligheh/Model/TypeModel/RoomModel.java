@@ -45,7 +45,7 @@ public class RoomModel extends TypeModel {
             if (!jsonObject.isNull("acceptation"))
                 setAcceptation(new AcceptationModel(jsonObject.getJSONObject("acceptation")));
 
-            if (!jsonObject.isNull("session_platforms")) {
+            if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
                 session_platforms = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++)
@@ -56,7 +56,7 @@ public class RoomModel extends TypeModel {
                 setSessionPlatforms(new List());
             }
 
-            if (!jsonObject.isNull("pinned_tags")) {
+            if (!jsonObject.isNull("pinned_tags") && jsonObject.getJSONArray("pinned_tags").length() != 0) {
                 pinned_tags = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("pinned_tags").length(); i++)

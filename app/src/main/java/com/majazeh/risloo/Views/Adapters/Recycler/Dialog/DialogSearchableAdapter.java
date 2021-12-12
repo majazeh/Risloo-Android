@@ -181,7 +181,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                     SessionModel model = (SessionModel) item;
 
                     String primaryText = model.getId() + " " + "(" + SelectionManager.getSessionStatus(activity, "fa", model.getStatus()) + ")";
-                    String secondaryText = DateManager.jalDayName(String.valueOf(model.getStarted_at())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())) + " / " + model.getDuration() + " " + "دقیقه";
+                    String secondaryText = DateManager.jalDayName(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
                     holder.binding.titleTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), activity.getResources().getColor(R.color.CoolGray600), (int) activity.getResources().getDimension(R.dimen._8ssp)));
 

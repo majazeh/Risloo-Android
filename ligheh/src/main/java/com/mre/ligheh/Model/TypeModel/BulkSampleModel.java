@@ -46,7 +46,7 @@ public class BulkSampleModel extends TypeModel {
             if (!jsonObject.isNull("joined"))
                 setJoined(jsonObject.getInt("joined"));
 
-            if (!jsonObject.isNull("scales")) {
+            if (!jsonObject.isNull("scales") && jsonObject.getJSONArray("scales").length() != 0) {
                 scales = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("scales").length(); i++)
@@ -57,7 +57,7 @@ public class BulkSampleModel extends TypeModel {
                 setScales(new List());
             }
 
-            if (!jsonObject.isNull("members")) {
+            if (!jsonObject.isNull("members") && jsonObject.getJSONArray("members").length() != 0) {
                 members = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("members").length(); i++)
@@ -68,7 +68,7 @@ public class BulkSampleModel extends TypeModel {
                 setMembers(new List());
             }
 
-            if (!jsonObject.isNull("samples")) {
+            if (!jsonObject.isNull("samples") && jsonObject.getJSONArray("samples").length() != 0) {
                 samples = new List();
 
                 for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++)
