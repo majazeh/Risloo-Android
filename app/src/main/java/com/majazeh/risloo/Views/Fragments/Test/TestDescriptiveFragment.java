@@ -88,27 +88,27 @@ public class TestDescriptiveFragment extends Fragment {
     private void setData(FormModel model) {
         ItemModel item = (ItemModel) model.getObject();
 
-        if (item.getCategory() != null && !item.getCategory().equals("")) {
+        if (!item.getCategory().equals("")) {
             binding.entityTextView.getRoot().setText(item.getCategory());
             binding.entityConstraintLayout.setVisibility(View.VISIBLE);
         } else {
             binding.entityConstraintLayout.setVisibility(View.GONE);
         }
 
-        if (item.getText() != null && !item.getText().equals("")) {
+        if (!item.getText().equals("")) {
             binding.titleTextView.getRoot().setText(item.getText());
         } else {
             binding.titleTextView.getRoot().setText("نامعلوم");
         }
 
-        if (item.getDescription() != null && !item.getDescription().equals("")) {
+        if (!item.getDescription().equals("")) {
             binding.descriptionTextView.getRoot().setText(item.getDescription());
             binding.descriptionTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
             binding.descriptionTextView.getRoot().setVisibility(View.GONE);
         }
 
-        if (item.getUserAnswered() != null && !item.getUserAnswered().equals("")) {
+        if (!item.getUserAnswered().equals("")) {
             answer = item.getUserAnswered();
             binding.answerEditText.inputEditText.setText(answer);
 
@@ -119,7 +119,7 @@ public class TestDescriptiveFragment extends Fragment {
             setEditTextCount(0);
         }
 
-        if (item.getIndex() != null && !item.getIndex().equals("")) {
+        if (!item.getIndex().equals("")) {
             key = Integer.parseInt(item.getIndex());
         }
     }

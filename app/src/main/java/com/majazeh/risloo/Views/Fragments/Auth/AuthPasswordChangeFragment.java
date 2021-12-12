@@ -165,15 +165,15 @@ public class AuthPasswordChangeFragment extends Fragment {
     }
 
     private void setData(AuthModel model) {
-        if (model.getKey() != null && !model.getKey().equals("")) {
+        if (!model.getKey().equals("")) {
             data.put("key", model.getKey());
         }
 
-        if (model.getCallback() != null && !model.getCallback().equals("")) {
+        if (!model.getCallback().equals("")) {
             data.put("callback", model.getCallback());
         }
 
-        if (model.getAuthorizedKey() != null && !model.getAuthorizedKey().equals("")) {
+        if (!model.getAuthorizedKey().equals("")) {
             mobile = model.getAuthorizedKey();
             binding.mobileTextView.getRoot().setText(mobile);
         }

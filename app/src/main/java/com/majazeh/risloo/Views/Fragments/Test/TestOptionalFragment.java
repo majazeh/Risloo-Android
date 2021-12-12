@@ -59,20 +59,20 @@ public class TestOptionalFragment extends Fragment {
         try {
             ItemModel item = (ItemModel) model.getObject();
 
-            if (item.getCategory() != null && !item.getCategory().equals("")) {
+            if (!item.getCategory().equals("")) {
                 binding.entityTextView.getRoot().setText(item.getCategory());
                 binding.entityConstraintLayout.setVisibility(View.VISIBLE);
             } else {
                 binding.entityConstraintLayout.setVisibility(View.GONE);
             }
 
-            if (item.getText() != null && !item.getText().equals("")) {
+            if (!item.getText().equals("")) {
                 binding.titleTextView.getRoot().setText(item.getText());
             } else {
                 binding.titleTextView.getRoot().setText("نامعلوم");
             }
 
-            if (item.getDescription() != null && !item.getDescription().equals("")) {
+            if (!item.getDescription().equals("")) {
                 binding.descriptionTextView.getRoot().setText(item.getDescription());
                 binding.descriptionTextView.getRoot().setVisibility(View.VISIBLE);
             } else {

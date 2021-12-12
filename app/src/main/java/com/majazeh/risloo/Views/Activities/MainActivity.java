@@ -230,15 +230,15 @@ public class MainActivity extends AppCompatActivity {
         if (!singleton.getToken().equals("")) {
             UserModel model = singleton.getUserModel();
 
-            if (model.getName() != null && !model.getName().equals("")) {
+            if (!model.getName().equals("")) {
                 binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(model.getName());
-            } else if (model.getId() != null && !model.getId().equals("")) {
+            } else if (!model.getId().equals("")) {
                 binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(model.getId());
             } else {
                 binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             }
 
-            if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+            if (model.getAvatar() != null && model.getAvatar().getMedium() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
                 Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
             } else {
@@ -246,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
             }
 
-            if (model.getTreasuries() != null && !TreasuryManager.getWalletAndGift(model.getTreasuries()).equals("0")) {
+            if (!TreasuryManager.getWalletAndGift(model.getTreasuries()).equals("0")) {
                 String value = StringManager.separate(TreasuryManager.getWalletAndGift(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
 
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(value);

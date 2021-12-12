@@ -183,11 +183,11 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        if (sampleModel.getScaleTitle() != null && !sampleModel.getScaleTitle().equals("")) {
+        if (!sampleModel.getScaleTitle().equals("")) {
             binding.headerIncludeLayout.titleTextView.setText(sampleModel.getScaleTitle());
         }
 
-        if (sampleModel.getEdition() != null && !sampleModel.getEdition().equals("")) {
+        if (!sampleModel.getEdition().equals("")) {
             String title = binding.headerIncludeLayout.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getEdition());
             binding.headerIncludeLayout.titleTextView.setText(StringManager.foregroundSize(title, binding.headerIncludeLayout.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.CoolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
         }

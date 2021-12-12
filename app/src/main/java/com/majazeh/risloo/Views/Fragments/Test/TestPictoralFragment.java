@@ -60,14 +60,14 @@ public class TestPictoralFragment extends Fragment {
         try {
             ItemModel item = (ItemModel) model.getObject();
 
-            if (item.getCategory() != null && !item.getCategory().equals("")) {
+            if (!item.getCategory().equals("")) {
                 binding.entityTextView.getRoot().setText(item.getCategory());
                 binding.entityConstraintLayout.setVisibility(View.VISIBLE);
             } else {
                 binding.entityConstraintLayout.setVisibility(View.GONE);
             }
 
-            if (item.getImageUrl() != null && !item.getImageUrl().equals("")) {
+            if (!item.getImageUrl().equals("")) {
                 Picasso.get().load(item.getImageUrl()).placeholder(R.color.CoolGray100).into(binding.questionImageView.getRoot());
             } else {
                 Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.questionImageView.getRoot());

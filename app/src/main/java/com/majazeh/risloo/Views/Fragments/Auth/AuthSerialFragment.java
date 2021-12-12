@@ -104,14 +104,14 @@ public class AuthSerialFragment extends Fragment {
     private void setData() {
         userModel = ((AuthActivity) requireActivity()).singleton.getUserModel();
 
-        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar() .getMedium().getUrl() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
+        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.LightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (userModel.getName() != null && !userModel.getName().equals(""))
+            if (!userModel.getName().equals(""))
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(userModel.getName()));
-            else if (userModel.getId() != null && !userModel.getId().equals(""))
+            else if (!userModel.getId().equals(""))
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(userModel.getId()));
             else
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));

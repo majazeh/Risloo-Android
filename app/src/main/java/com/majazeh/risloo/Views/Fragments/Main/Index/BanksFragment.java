@@ -362,7 +362,7 @@ public class BanksFragment extends Fragment {
     }
 
     private void setData(UserModel model) {
-        if (model.getTreasuries() != null && !TreasuryManager.getWallet(model.getTreasuries()).equals("0")) {
+        if (!TreasuryManager.getWallet(model.getTreasuries()).equals("0")) {
             String value = StringManager.separate(TreasuryManager.getWallet(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
             binding.totalIncludeLayout.amountTextView.setText(value);
         } else {
