@@ -11,14 +11,14 @@ public class RoomModel extends TypeModel {
     private String id = "";
     private String status = "";
     private String type = "";
-    private int created_at;
-    private int updated_at;
+    private int created_at = 0;
+    private int updated_at = 0;
     private UserModel creator;
     private UserModel manager;
     private CenterModel center;
     private AcceptationModel acceptation;
-    private List session_platforms;
-    private List pinned_tags;
+    private List session_platforms = new List();
+    private List pinned_tags = new List();
 
     public RoomModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -46,25 +46,13 @@ public class RoomModel extends TypeModel {
                 setAcceptation(new AcceptationModel(jsonObject.getJSONObject("acceptation")));
 
             if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
-                session_platforms = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++)
                     session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("session_platforms").getJSONObject(i)));
-
-                setSessionPlatforms(session_platforms);
-            } else {
-                setSessionPlatforms(new List());
             }
 
             if (!jsonObject.isNull("pinned_tags") && jsonObject.getJSONArray("pinned_tags").length() != 0) {
-                pinned_tags = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("pinned_tags").length(); i++)
                     pinned_tags.add(new TagModel(jsonObject.getJSONArray("pinned_tags").getJSONObject(i)));
-
-                setPinnedTags(pinned_tags);
-            } else {
-                setPinnedTags(new List());
             }
 
         } catch (JSONException e) {

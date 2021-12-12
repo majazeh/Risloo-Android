@@ -22,22 +22,22 @@ public class SessionModel extends TypeModel {
     private String encryption_type = "";
     private String opens_at_type = "";
     private String closed_at_type = "";
-    private int duration;
-    private int clients_number;
-    private int opens_at;
-    private int closed_at;
-    private int started_at;
-    private int canceled_at;
-    private boolean group_session;
+    private int duration = 0;
+    private int clients_number = 0;
+    private int opens_at = 0;
+    private int closed_at = 0;
+    private int started_at = 0;
+    private int canceled_at = 0;
+    private boolean group_session = false;
     private RoomModel room;
     private CaseModel casse;
-    private JSONArray fields;
-    private JSONArray practices;
-    private List clients;
-    private List samples;
-    private List session_platforms;
-    private List transactions;
-    private List available_session_platforms;
+    private JSONArray fields = new JSONArray();
+    private JSONArray practices = new JSONArray();
+    private List clients = new List();
+    private List samples = new List();
+    private List session_platforms = new List();
+    private List transactions = new List();
+    private List available_session_platforms = new List();
 
     public SessionModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -92,80 +92,38 @@ public class SessionModel extends TypeModel {
                 setCasse(new CaseModel(jsonObject.getJSONObject("case")));
 
             if (!jsonObject.isNull("fields") && jsonObject.getJSONArray("fields").length() != 0) {
-                fields = new JSONArray();
-
                 for (int i = 0; i < jsonObject.getJSONArray("fields").length(); i++)
                     fields.put(jsonObject.getJSONArray("fields").getJSONObject(i));
-
-                setFields(fields);
-            } else {
-                setFields(new JSONArray());
             }
 
             if (!jsonObject.isNull("practices") && jsonObject.getJSONArray("practices").length() != 0) {
-                practices = new JSONArray();
-
                 for (int i = 0; i < jsonObject.getJSONArray("practices").length(); i++)
                     practices.put(jsonObject.getJSONArray("practices").getJSONObject(i));
-
-                setPractices(practices);
-            } else {
-                setPractices(new JSONArray());
             }
 
             if (!jsonObject.isNull("clients") && jsonObject.getJSONArray("clients").length() != 0) {
-                clients = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++)
                     clients.add(new UserModel(jsonObject.getJSONArray("clients").getJSONObject(i)));
-
-                setClients(clients);
-            } else {
-                setClients(new List());
             }
 
             if (!jsonObject.isNull("samples") && jsonObject.getJSONArray("samples").length() != 0) {
-                samples = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++)
                     samples.add(new SampleModel(jsonObject.getJSONArray("samples").getJSONObject(i)));
-
-                setSamples(samples);
-            } else {
-                setSamples(new List());
             }
 
             if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
-                session_platforms = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++)
                     session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("session_platforms").getJSONObject(i)));
-
-                setSessionPlatforms(session_platforms);
-            } else {
-                setSessionPlatforms(new List());
             }
 
-            if (!jsonObject.isNull("transactions")) {
-                transactions = new List();
-
+            if (!jsonObject.isNull("transactions") && jsonObject.getJSONArray("transactions").length() != 0) {
                 for (int i = 0; i < jsonObject.getJSONArray("transactions").length(); i++)
                     transactions.add(new BillingModel(jsonObject.getJSONArray("transactions").getJSONObject(i)));
-
-                setTransactions(transactions);
-            } else {
-                setTransactions(new List());
             }
 
             if (!jsonObject.isNull("available_session_platforms") && jsonObject.getJSONArray("available_session_platforms").length() != 0) {
-                available_session_platforms = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("available_session_platforms").length(); i++)
                     available_session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("available_session_platforms").getJSONObject(i)));
-
-                setAvailableSessionPlatforms(available_session_platforms);
-            } else {
-                setAvailableSessionPlatforms(new List());
             }
 
         } catch (JSONException e) {

@@ -13,13 +13,13 @@ public class BulkSampleModel extends TypeModel {
     private String link = "";
     private String status = "";
     private String case_status = "";
+    private int members_count = 0;
+    private int joined = 0;
     private RoomModel room;
     private CaseModel casse;
-    private int members_count;
-    private int joined;
-    private List scales;
-    private List members;
-    private List samples;
+    private List scales = new List();
+    private List members = new List();
+    private List samples = new List();
 
     public BulkSampleModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -36,47 +36,29 @@ public class BulkSampleModel extends TypeModel {
             if (!jsonObject.isNull("case_status"))
                 setCaseStatus(jsonObject.getString("case_status"));
 
-            if (!jsonObject.isNull("room"))
-                setRoom(new RoomModel(jsonObject.getJSONObject("room")));
-            if (!jsonObject.isNull("case"))
-                setCasse(new CaseModel(jsonObject.getJSONObject("case")));
-
             if (!jsonObject.isNull("members_count"))
                 setMembersCount(jsonObject.getInt("members_count"));
             if (!jsonObject.isNull("joined"))
                 setJoined(jsonObject.getInt("joined"));
 
-            if (!jsonObject.isNull("scales") && jsonObject.getJSONArray("scales").length() != 0) {
-                scales = new List();
+            if (!jsonObject.isNull("room"))
+                setRoom(new RoomModel(jsonObject.getJSONObject("room")));
+            if (!jsonObject.isNull("case"))
+                setCasse(new CaseModel(jsonObject.getJSONObject("case")));
 
+            if (!jsonObject.isNull("scales") && jsonObject.getJSONArray("scales").length() != 0) {
                 for (int i = 0; i < jsonObject.getJSONArray("scales").length(); i++)
                     scales.add(new ScaleModel(jsonObject.getJSONArray("scales").getJSONObject(i)));
-
-                setScales(scales);
-            } else {
-                setScales(new List());
             }
 
             if (!jsonObject.isNull("members") && jsonObject.getJSONArray("members").length() != 0) {
-                members = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("members").length(); i++)
                     members.add(new UserModel(jsonObject.getJSONArray("members").getJSONObject(i)));
-
-                setMembers(members);
-            } else {
-                setMembers(new List());
             }
 
             if (!jsonObject.isNull("samples") && jsonObject.getJSONArray("samples").length() != 0) {
-                samples = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++)
                     samples.add(new SampleModel(jsonObject.getJSONArray("samples").getJSONObject(i)));
-
-                setSamples(samples);
-            } else {
-                setSamples(new List());
             }
 
         } catch (JSONException e) {
@@ -124,22 +106,6 @@ public class BulkSampleModel extends TypeModel {
         this.case_status = case_status;
     }
 
-    public RoomModel getRoom() {
-        return room;
-    }
-
-    public void setRoom(RoomModel room) {
-        this.room = room;
-    }
-
-    public CaseModel getCasse() {
-        return casse;
-    }
-
-    public void setCasse(CaseModel casse) {
-        this.casse = casse;
-    }
-
     public int getMembersCount() {
         return members_count;
     }
@@ -154,6 +120,22 @@ public class BulkSampleModel extends TypeModel {
 
     public void setJoined(int joined) {
         this.joined = joined;
+    }
+
+    public RoomModel getRoom() {
+        return room;
+    }
+
+    public void setRoom(RoomModel room) {
+        this.room = room;
+    }
+
+    public CaseModel getCasse() {
+        return casse;
+    }
+
+    public void setCasse(CaseModel casse) {
+        this.casse = casse;
     }
 
     public List getScales() {
@@ -197,16 +179,16 @@ public class BulkSampleModel extends TypeModel {
             if (!case_status.equals(model.getCaseStatus()))
                 return false;
 
-            if (room != model.getRoom())
-                return false;
-
-            if (casse != model.getCasse())
-                return false;
-
             if (members_count != model.getMembersCount())
                 return false;
 
             if (joined != model.getJoined())
+                return false;
+
+            if (room != model.getRoom())
+                return false;
+
+            if (casse != model.getCasse())
                 return false;
 
             if (scales != model.getScales())
@@ -232,10 +214,10 @@ public class BulkSampleModel extends TypeModel {
             super.toObject().put("link", getLink());
             super.toObject().put("status", getStatus());
             super.toObject().put("case_status", getCaseStatus());
-            super.toObject().put("room", getRoom().toObject());
-            super.toObject().put("case", getCasse().toObject());
             super.toObject().put("members_count", getMembersCount());
             super.toObject().put("joined", getJoined());
+            super.toObject().put("room", getRoom().toObject());
+            super.toObject().put("case", getCasse().toObject());
             super.toObject().put("scales", getScales());
             super.toObject().put("members", getMembers());
             super.toObject().put("samples", getSamples());
@@ -255,10 +237,10 @@ public class BulkSampleModel extends TypeModel {
                 ", link='" + link + '\'' +
                 ", status='" + status + '\'' +
                 ", case_status='" + case_status + '\'' +
-                ", room=" + room +
-                ", case=" + casse +
                 ", members_count=" + members_count +
                 ", joined=" + joined +
+                ", room=" + room +
+                ", case=" + casse +
                 ", scales=" + scales +
                 ", members=" + members +
                 ", samples=" + samples +

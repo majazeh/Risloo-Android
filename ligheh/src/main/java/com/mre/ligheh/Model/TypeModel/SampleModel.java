@@ -24,28 +24,28 @@ public class SampleModel extends TypeModel {
     private String case_status = "";
     private String session_id = "";
     private String chain_id = "";
-    private int version;
-    private int edition_version;
-    private int code;
-    private int cornometer;
-    private int members_count;
-    private int joined;
-    private int scored_at;
-    private int closed_at;
-    private int created_at;
-    private int started_at;
+    private int version = 0;
+    private int edition_version = 0;
+    private int code = 0;
+    private int cornometer = 0;
+    private int members_count = 0;
+    private int joined = 0;
+    private int scored_at = 0;
+    private int closed_at = 0;
+    private int created_at = 0;
+    private int started_at = 0;
     private RoomModel room;
     private CaseModel casse;
     private UserModel client;
     private JSONArray terms;
-    private List members;
-    private List chains;
-    private List prerequisites;
-    private List items;
-    private List entities;
-    private List profiles;
-    private List profiles_half;
-    private List profiles_extra;
+    private List members = new List();
+    private List chains = new List();
+    private List prerequisites = new List();
+    private List items = new List();
+    private List entities = new List();
+    private List profiles = new List();
+    private List profiles_half = new List();
+    private List profiles_extra = new List();
     private SampleForm sampleForm;
 
     public SampleModel(JSONObject jsonObject) {
@@ -113,14 +113,8 @@ public class SampleModel extends TypeModel {
                 setTerms(jsonObject.getJSONArray("terms"));
 
             if (!jsonObject.isNull("members") && jsonObject.getJSONArray("members").length() != 0) {
-                members = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("members").length(); i++)
                     members.add(new UserModel(jsonObject.getJSONArray("members").getJSONObject(i)));
-
-                setMembers(members);
-            } else {
-                setMembers(new List());
             }
 
             if (!jsonObject.isNull("chain") && jsonObject.getJSONArray("chain").length() != 0) {
@@ -131,68 +125,37 @@ public class SampleModel extends TypeModel {
                         setChainId(chain.getString("id"));
 
                     if (!chain.isNull("list")) {
-                        chains = new List();
-
                         for (int i = 0; i < chain.getJSONArray("list").length(); i++)
                             chains.add(new ChainModel(chain.getJSONArray("list").getJSONObject(i)));
-
-                        setChains(chains);
-                    } else {
-                        setChains(new List());
                     }
 
                 } else {
                     setChainId(jsonObject.getString("chain"));
-                    setChains(new List());
                 }
-            } else {
-                setChains(new List());
             }
 
             if (!jsonObject.isNull("prerequisites") && jsonObject.getJSONArray("prerequisites").length() != 0) {
-                prerequisites = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("prerequisites").length(); i++) {
                     jsonObject.getJSONArray("prerequisites").getJSONObject(i).put("index", i + 1);
                     prerequisites.add(new PrerequisitesModel(jsonObject.getJSONArray("prerequisites").getJSONObject(i)));
                 }
-
-                setPrerequisites(prerequisites);
-            } else {
-                setPrerequisites(new List());
             }
 
             if (!jsonObject.isNull("items") && jsonObject.getJSONArray("items").length() != 0) {
-                items = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("items").length(); i++) {
                     jsonObject.getJSONArray("items").getJSONObject(i).put("index", i + 1);
                     items.add(new ItemModel(jsonObject.getJSONArray("items").getJSONObject(i)));
                 }
-
-                setItems(items);
-            } else {
-                setItems(new List());
             }
 
             if (!jsonObject.isNull("entities") && jsonObject.getJSONArray("entities").length() != 0) {
-                entities = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("entities").length(); i++) {
                     jsonObject.getJSONArray("entities").getJSONObject(i).put("position", i + 1);
                     entities.add(new EntityModel(jsonObject.getJSONArray("entities").getJSONObject(i)));
                 }
-
-                setEntities(entities);
-            } else {
-                setEntities(new List());
             }
 
             if (!jsonObject.isNull("profiles") && jsonObject.getJSONArray("profiles").length() != 0) {
-                profiles = new List();
-                profiles_half = new List();
-                profiles_extra = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("profiles").length(); i++) {
                     profiles.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
 
@@ -201,16 +164,7 @@ public class SampleModel extends TypeModel {
 
                     if (!jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").startsWith("profile_png") && jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").endsWith("png"))
                         profiles_extra.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
-
                 }
-
-                setProfiles(profiles);
-                setProfilesHalf(profiles_half);
-                setProfilesExtra(profiles_extra);
-            } else {
-                setProfiles(new List());
-                setProfilesHalf(new List());
-                setProfilesExtra(new List());
             }
 
             sampleForm = new SampleForm(psychologist_description, chains, prerequisites, description, entities, items);

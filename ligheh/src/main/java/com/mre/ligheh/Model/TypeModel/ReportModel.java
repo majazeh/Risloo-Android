@@ -11,9 +11,9 @@ public class ReportModel extends TypeModel {
     private String id = "";
     private String title = "";
     private String content = "";
-    private int reported_at;
-    private List clients;
-    private List viewers;
+    private int reported_at = 0;
+    private List clients = new List();
+    private List viewers = new List();
 
     public ReportModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -30,25 +30,13 @@ public class ReportModel extends TypeModel {
                 setReportedAt(jsonObject.getInt("reported_at"));
 
             if (!jsonObject.isNull("clients") && jsonObject.getJSONArray("clients").length() != 0) {
-                clients = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++)
                     clients.add(new UserModel(jsonObject.getJSONArray("clients").getJSONObject(i)));
-
-                setClients(clients);
-            } else {
-                setClients(new List());
             }
 
             if (!jsonObject.isNull("viewers") && jsonObject.getJSONArray("viewers").length() != 0) {
-                viewers = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("viewers").length(); i++)
                     viewers.add(new UserModel(jsonObject.getJSONArray("viewers").getJSONObject(i)));
-
-                setViewers(viewers);
-            } else {
-                setViewers(new List());
             }
 
         } catch (JSONException e) {

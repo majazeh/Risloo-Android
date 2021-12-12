@@ -14,7 +14,7 @@ public class ScaleModel extends TypeModel {
     private String scale_id = "";
     private String scale_title = "";
     private String status = "";
-    private int edition_version;
+    private int edition_version = 0;
 
     public ScaleModel(JSONObject jsonObject) {
         super(jsonObject);

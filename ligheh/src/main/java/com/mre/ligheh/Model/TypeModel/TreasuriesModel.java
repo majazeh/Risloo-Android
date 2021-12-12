@@ -9,9 +9,9 @@ public class TreasuriesModel extends TypeModel {
     private String id = "";
     private String symbol = "";
     private String title = "";
-    private int balance;
-    private boolean creditable;
-    private boolean my_treasury;
+    private int balance = 0;
+    private boolean creditable = false;
+    private boolean my_treasury = false;
     private UserModel user;
     private CenterModel center;
 

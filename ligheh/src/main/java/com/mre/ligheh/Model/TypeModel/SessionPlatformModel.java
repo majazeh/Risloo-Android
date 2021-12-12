@@ -11,11 +11,11 @@ public class SessionPlatformModel extends TypeModel {
     private String title = "";
     private String identifier = "";
     private String identifier_type = "";
-    private int selected_level;
-    private boolean selected;
-    private boolean available;
-    private boolean pin;
-    private boolean selected_default;
+    private int selected_level = 0;
+    private boolean selected = false;
+    private boolean available = false;
+    private boolean pin = false;
+    private boolean selected_default = false;
 
     public SessionPlatformModel(JSONObject jsonObject) {
         super(jsonObject);

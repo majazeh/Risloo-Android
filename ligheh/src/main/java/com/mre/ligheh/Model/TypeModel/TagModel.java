@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class TagModel extends TypeModel {
     private String id = "";
     private String title = "";
-    private int order;
+    private int order = 0;
 
     public TagModel(JSONObject jsonObject) {
         super(jsonObject);

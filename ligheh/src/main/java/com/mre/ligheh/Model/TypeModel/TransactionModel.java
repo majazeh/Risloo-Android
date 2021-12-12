@@ -10,7 +10,7 @@ public class TransactionModel extends TypeModel {
     private String credit = "";
     private String debt = "";
     private String balance = "";
-    private int created_at;
+    private int created_at = 0;
     private BillingModel billing;
 
     public TransactionModel(JSONObject jsonObject) {

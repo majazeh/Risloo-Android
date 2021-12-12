@@ -20,11 +20,11 @@ public class UserModel extends TypeModel {
     private String type = "";
     private String username = "";
     private String public_key = "";
-    private int created_at;
-    private int updated_at;
-    private int accepted_at;
-    private int kicked_at;
-    private boolean no_password;
+    private int created_at = 0;
+    private int updated_at = 0;
+    private int accepted_at = 0;
+    private int kicked_at = 0;
+    private boolean no_password = false;
     private AvatarModel avatar;
     private UserModel creator;
     private FieldModel field;
@@ -32,11 +32,11 @@ public class UserModel extends TypeModel {
     private JSONObject groups;
     private JSONObject meta;
     private JSONObject dalily_schedule_exports;
-    private List centers;
-    private List rooms;
-    private List cases;
-    private List samples;
-    private List treasuries;
+    private List centers = new List();
+    private List rooms = new List();
+    private List cases = new List();
+    private List samples = new List();
+    private List treasuries = new List();
 
     public UserModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -96,58 +96,28 @@ public class UserModel extends TypeModel {
                 setDalilyScheduleExports(jsonObject.getJSONObject("dalily_schedule_exports"));
 
             if (!jsonObject.isNull("centers") && jsonObject.getJSONArray("centers").length() != 0) {
-                centers = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("centers").length(); i++)
                     centers.add(new CenterModel(jsonObject.getJSONArray("centers").getJSONObject(i)));
-
-                setCenters(centers);
-            } else {
-                setCenters(new List());
             }
 
             if (!jsonObject.isNull("rooms") && jsonObject.getJSONArray("rooms").length() != 0) {
-                rooms = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("rooms").length(); i++)
                     rooms.add(new RoomModel(jsonObject.getJSONArray("rooms").getJSONObject(i)));
-
-                setRooms(rooms);
-            } else {
-                setRooms(new List());
             }
 
             if (!jsonObject.isNull("cases") && jsonObject.getJSONArray("cases").length() != 0) {
-                cases = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("cases").length(); i++)
                     cases.add(new CaseModel(jsonObject.getJSONArray("cases").getJSONObject(i)));
-
-                setCases(cases);
-            } else {
-                setCases(new List());
             }
 
             if (!jsonObject.isNull("samples") && jsonObject.getJSONArray("samples").length() != 0) {
-                samples = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++)
                     samples.add(new SampleModel(jsonObject.getJSONArray("samples").getJSONObject(i)));
-
-                setSamples(samples);
-            } else {
-                setSamples(new List());
             }
 
             if (!jsonObject.isNull("treasuries") && jsonObject.getJSONArray("treasuries").length() != 0) {
-                treasuries = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++)
                     treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
-
-                setTreasuries(treasuries);
-            } else {
-                setTreasuries(new List());
             }
 
         } catch (JSONException e) {

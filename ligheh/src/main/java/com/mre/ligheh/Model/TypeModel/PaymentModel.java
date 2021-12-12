@@ -11,10 +11,10 @@ public class PaymentModel extends TypeModel {
     private String status = "";
     private String title = "";
     private String authorized_key = "";
-    private int amount;
-    private int expires_at;
-    private int created_at;
-    private int updated_at;
+    private int amount = 0;
+    private int expires_at = 0;
+    private int created_at = 0;
+    private int updated_at = 0;
     private TreasuriesModel treasury;
 
     public PaymentModel(JSONObject jsonObject) {

@@ -16,19 +16,19 @@ public class ScheduleModel extends TypeModel {
     private String payment_status = "";
     private String selection_type = "";
     private String clients_type = "";
-    private int duration;
-    private int clients_number;
-    private int opens_at;
-    private int closed_at;
-    private int started_at;
-    private int canceled_at;
+    private int duration = 0;
+    private int clients_number = 0;
+    private int opens_at = 0;
+    private int closed_at = 0;
+    private int started_at = 0;
+    private int canceled_at = 0;
     private boolean group_session = false;
     private RoomModel room;
     private CaseModel casse;
-    private JSONArray fields;
-    private List clients;
-    private List session_platforms;
-    private List treasuries;
+    private JSONArray fields = new JSONArray();
+    private List clients = new List();
+    private List session_platforms = new List();
+    private List treasuries = new List();
 
     public ScheduleModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -71,47 +71,23 @@ public class ScheduleModel extends TypeModel {
                 setCasse(new CaseModel(jsonObject.getJSONObject("case")));
 
             if (!jsonObject.isNull("fields") && jsonObject.getJSONArray("fields").length() != 0) {
-                fields = new JSONArray();
-
                 for (int i = 0; i < jsonObject.getJSONArray("fields").length(); i++)
                     fields.put(jsonObject.getJSONArray("fields").getJSONObject(i));
-
-                setFields(fields);
-            } else {
-                setFields(new JSONArray());
             }
 
             if (!jsonObject.isNull("clients") && jsonObject.getJSONArray("clients").length() != 0) {
-                clients = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++)
                     clients.add(new UserModel(jsonObject.getJSONArray("clients").getJSONObject(i)));
-
-                setClients(clients);
-            } else {
-                setClients(new List());
             }
 
             if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
-                session_platforms = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++)
                     session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("session_platforms").getJSONObject(i)));
-
-                setSessionPlatforms(session_platforms);
-            } else {
-                setSessionPlatforms(new List());
             }
 
             if (!jsonObject.isNull("treasuries") && jsonObject.getJSONArray("treasuries").length() != 0) {
-                treasuries = new List();
-
                 for (int i = 0; i < jsonObject.getJSONArray("treasuries").length(); i++)
                     treasuries.add(new TreasuriesModel(jsonObject.getJSONArray("treasuries").getJSONObject(i)));
-
-                setTreasuries(treasuries);
-            } else {
-                setTreasuries(new List());
             }
 
         } catch (JSONException e) {

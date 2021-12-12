@@ -6,8 +6,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class EntityModel extends TypeModel {
-    private int offset;
-    private int position;
+    private int offset = 0;
+    private int position = 0;
     private String title = "";
     private String description = "";
 

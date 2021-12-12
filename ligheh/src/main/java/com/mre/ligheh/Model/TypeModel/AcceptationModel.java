@@ -10,8 +10,8 @@ public class AcceptationModel extends TypeModel {
     private String name = "";
     private String position = "";
     private String kicked_at = "";
-    private int created_at;
-    private int accepted_at;
+    private int created_at = 0;
+    private int accepted_at = 0;
 
     public AcceptationModel(JSONObject jsonObject) {
         super(jsonObject);
