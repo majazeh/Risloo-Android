@@ -20,7 +20,7 @@ public class RoomModel extends TypeModel {
     private List session_platforms;
     private List pinned_tags;
 
-    public RoomModel(JSONObject jsonObject) throws JSONException {
+    public RoomModel(JSONObject jsonObject) {
         super(jsonObject);
 
         try {

@@ -77,9 +77,9 @@ public class IndexCaseAdapter extends RecyclerView.Adapter<IndexCaseHolder> {
     }
 
     private void setData(IndexCaseHolder holder, CaseModel model) {
-        holder.binding.serialTextView.setText(model.getCaseId());
-        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDD(String.valueOf(model.getCaseCreated_at()), " "));
-        holder.binding.sessionCountTextView.setText(model.getSessions_count() + " " + activity.getResources().getString(R.string.CaseAdapterSession));
+        holder.binding.serialTextView.setText(model.getId());
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDD(String.valueOf(model.getCreatedAt()), " "));
+        holder.binding.sessionCountTextView.setText(model.getSessionsCount() + " " + activity.getResources().getString(R.string.CaseAdapterSession));
 
         setClients(holder, model.getClients());
     }

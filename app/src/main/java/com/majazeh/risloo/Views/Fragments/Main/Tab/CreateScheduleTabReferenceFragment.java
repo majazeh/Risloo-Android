@@ -219,12 +219,12 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
             case "cases": {
                 CaseModel model = (CaseModel) item;
 
-                if (!caseId.equals(model.getCaseId())) {
-                    caseId = model.getCaseId();
+                if (!caseId.equals(model.getId())) {
+                    caseId = model.getId();
 
                     binding.caseIncludeLayout.primaryTextView.setText(caseId);
                     setClients(model.getClients());
-                } else if (caseId.equals(model.getCaseId())) {
+                } else if (caseId.equals(model.getId())) {
                     caseId = "";
 
                     binding.caseIncludeLayout.primaryTextView.setText("");

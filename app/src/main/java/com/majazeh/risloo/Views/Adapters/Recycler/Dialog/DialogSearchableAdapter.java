@@ -158,7 +158,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 case "cases": {
                     CaseModel model = (CaseModel) item;
 
-                    holder.binding.titleTextView.setText(model.getCaseId());
+                    holder.binding.titleTextView.setText(model.getId());
 
                     if (model.getClients() != null && !model.getClients().data().isEmpty()) {
                         holder.binding.subTextView.setVisibility(View.VISIBLE);
@@ -301,7 +301,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                     case "cases": {
                         CaseModel model = (CaseModel) item;
 
-                        detector(holder, ((CreateSampleFragment) current).caseId.equals(model.getCaseId()));
+                        detector(holder, ((CreateSampleFragment) current).caseId.equals(model.getId()));
                     } break;
                     case "sessions": {
                         SessionModel model = (SessionModel) item;
@@ -315,7 +315,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 if (method.equals("cases")) {
                     CaseModel model = (CaseModel) item;
 
-                    detector(holder, ((CreateScheduleTabReferenceFragment) child).caseId.equals(model.getCaseId()));
+                    detector(holder, ((CreateScheduleTabReferenceFragment) child).caseId.equals(model.getId()));
                 }
             }
 
@@ -343,7 +343,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                     case "cases": {
                         CaseModel model = (CaseModel) item;
 
-                        detector(holder, ((ReserveScheduleFragment) current).caseId.equals(model.getCaseId()));
+                        detector(holder, ((ReserveScheduleFragment) current).caseId.equals(model.getId()));
                     } break;
                 }
             }

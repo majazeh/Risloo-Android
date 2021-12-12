@@ -207,7 +207,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.binding.roomTextView.setText(model.getSampleRoom().getManager().getName());
 
         if (model.getSampleCase() != null)
-            holder.binding.caseTextView.setText("پرونده " + model.getSampleCase().getCaseId());
+            holder.binding.caseTextView.setText("پرونده " + model.getSampleCase().getId());
 
         if (model.getClient() != null)
             holder.binding.referenceTextView.setText(model.getClient().getName());

@@ -165,9 +165,9 @@ public class CaseFragment extends Fragment {
 
     private void setData(CaseModel model) {
         try {
-            if (model.getCaseId() != null && !model.getCaseId().equals("")) {
-                binding.serialTextView.setText(model.getCaseId());
-                data.put("id", model.getCaseId());
+            if (model.getId() != null && !model.getId().equals("")) {
+                binding.serialTextView.setText(model.getId());
+                data.put("id", model.getId());
                 data.put("session_platforms", 1);
             }
 
@@ -175,8 +175,8 @@ public class CaseFragment extends Fragment {
                 binding.problemTextView.setText(model.getDetail().getString("problem"));
             }
 
-            if (model.getCaseCreated_at() != 0) {
-                binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCaseCreated_at()), " "));
+            if (model.getCreatedAt() != 0) {
+                binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCreatedAt()), " "));
             }
 
             if (model.getTags() != null && model.getTags().data().size() != 0) {
@@ -258,8 +258,8 @@ public class CaseFragment extends Fragment {
                         setData(caseModel);
 
                         List psychologists = new List();
-                        if (caseModel.getCaseManager() != null)
-                            psychologists.add(caseModel.getCaseManager());
+                        if (caseModel.getManager() != null)
+                            psychologists.add(caseModel.getManager());
 
                         // Psychologists Data
                         if (!psychologists.data().isEmpty()) {

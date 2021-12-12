@@ -561,8 +561,8 @@ public class BreadCrumb {
                 if (bulkSampleModel.getCaseModel() != null) {
                     caseModel = bulkSampleModel.getCaseModel();
 
-                    if (caseModel.getCaseRoom() != null) {
-                        roomModel = caseModel.getCaseRoom();
+                    if (caseModel.getRoom() != null) {
+                        roomModel = caseModel.getRoom();
                         roomType = roomModel.getType();
 
                         if (roomModel.getCenter() != null)
@@ -611,8 +611,8 @@ public class BreadCrumb {
             case "CaseModel":
                 caseModel = (CaseModel) typeModel;
 
-                if (caseModel.getCaseRoom() != null) {
-                    roomModel = caseModel.getCaseRoom();
+                if (caseModel.getRoom() != null) {
+                    roomModel = caseModel.getRoom();
                     roomType = roomModel.getType();
 
                     if (roomModel.getCenter() != null)
@@ -649,8 +649,8 @@ public class BreadCrumb {
                 if (sampleModel.getSampleCase() != null) {
                     caseModel = sampleModel.getSampleCase();
 
-                    if (caseModel.getCaseRoom() != null) {
-                        roomModel = caseModel.getCaseRoom();
+                    if (caseModel.getRoom() != null) {
+                        roomModel = caseModel.getRoom();
                         roomType = roomModel.getType();
 
                         if (roomModel.getCenter() != null)
@@ -707,8 +707,8 @@ public class BreadCrumb {
                 if (scheduleModel.getCaseModel() != null) {
                     caseModel = scheduleModel.getCaseModel();
 
-                    if (caseModel.getCaseRoom() != null) {
-                        roomModel = caseModel.getCaseRoom();
+                    if (caseModel.getRoom() != null) {
+                        roomModel = caseModel.getRoom();
                         roomType = roomModel.getType();
 
                         if (roomModel.getCenter() != null)
@@ -760,8 +760,8 @@ public class BreadCrumb {
                 if (sessionModel.getCaseModel() != null) {
                     caseModel = sessionModel.getCaseModel();
 
-                    if (caseModel.getCaseRoom() != null) {
-                        roomModel = caseModel.getCaseRoom();
+                    if (caseModel.getRoom() != null) {
+                        roomModel = caseModel.getRoom();
                         roomType = roomModel.getType();
 
                         if (roomModel.getCenter() != null)
@@ -1695,8 +1695,8 @@ public class BreadCrumb {
     private ArrayList<String> casse() {
         ArrayList<String> list = room();
 
-        if (caseModel != null && caseModel.getCaseId() != null && !caseModel.getCaseId().equals(""))
-            list.add("پرونده" + " " + caseModel.getCaseId());
+        if (caseModel != null && caseModel.getId() != null && !caseModel.getId().equals(""))
+            list.add("پرونده" + " " + caseModel.getId());
         else
             list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 

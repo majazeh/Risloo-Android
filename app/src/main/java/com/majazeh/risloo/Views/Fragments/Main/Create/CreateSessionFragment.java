@@ -89,12 +89,12 @@ public class CreateSessionFragment extends Fragment {
     }
 
     private void setData(CaseModel model) {
-        if (model.getCaseRoom() != null && model.getCaseRoom().getId() != null && !model.getCaseRoom().getId().equals("")) {
-            data.put("id", model.getCaseRoom().getId());
+        if (model.getRoom() != null && model.getRoom().getId() != null && !model.getRoom().getId().equals("")) {
+            data.put("id", model.getRoom().getId());
         }
 
-        if (model.getCaseId() != null && !model.getCaseId().equals("")) {
-            data.put("case_id", model.getCaseId());
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("case_id", model.getId());
             data.put("clients_type", "case");
         }
 

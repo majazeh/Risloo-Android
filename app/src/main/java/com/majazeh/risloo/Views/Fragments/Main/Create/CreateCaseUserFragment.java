@@ -107,8 +107,8 @@ public class CreateCaseUserFragment extends Fragment {
     }
 
     private void setData(CaseModel model) {
-        if (model.getCaseId() != null && !model.getCaseId().equals("")) {
-            data.put("id", model.getCaseId());
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");

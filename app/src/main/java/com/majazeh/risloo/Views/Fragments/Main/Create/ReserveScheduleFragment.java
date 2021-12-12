@@ -331,8 +331,8 @@ public class ReserveScheduleFragment extends Fragment {
             }
         }
 
-        if (model.getCaseModel() != null && model.getCaseModel().getCaseId() != null && !model.getCaseModel().getCaseId().equals("")) {
-            caseId = model.getCaseModel().getCaseId();
+        if (model.getCaseModel() != null && model.getCaseModel().getId() != null && !model.getCaseModel().getId().equals("")) {
+            caseId = model.getCaseModel().getId();
 
             binding.caseIncludeLayout.primaryTextView.setText(caseId);
             setClients(model.getCaseModel().getClients());
@@ -518,14 +518,14 @@ public class ReserveScheduleFragment extends Fragment {
             case "cases": {
                 CaseModel model = (CaseModel) item;
 
-                if (!caseId.equals(model.getCaseId())) {
-                    caseId = model.getCaseId();
+                if (!caseId.equals(model.getId())) {
+                    caseId = model.getId();
 
                     binding.caseIncludeLayout.primaryTextView.setText(caseId);
                     setClients(model.getClients());
 
                     binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
-                } else if (caseId.equals(model.getCaseId())) {
+                } else if (caseId.equals(model.getId())) {
                     caseId = "";
 
                     binding.caseIncludeLayout.primaryTextView.setText("");

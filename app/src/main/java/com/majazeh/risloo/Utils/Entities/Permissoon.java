@@ -172,12 +172,12 @@ public class Permissoon {
     }
 
     public boolean showSamplesFragmentSample(UserModel userModel, SampleModel sampleModel) {
-        if (userModel != null && sampleModel != null && sampleModel.getSampleCase() != null && sampleModel.getSampleCase().getCaseRoom() != null && sampleModel.getSampleCase().getCaseRoom().getAcceptation() != null && sampleModel.getSampleCase().getCaseRoom().getCenter() != null && sampleModel.getSampleCase().getCaseRoom().getCenter().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || sampleModel.getSampleCase().getCaseRoom().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleCase().getCaseRoom().getCenter().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleCase().getCaseRoom().getCenter().getAcceptation().getPosition().equals("operator");
+        if (userModel != null && sampleModel != null && sampleModel.getSampleCase() != null && sampleModel.getSampleCase().getRoom() != null && sampleModel.getSampleCase().getRoom().getAcceptation() != null && sampleModel.getSampleCase().getRoom().getCenter() != null && sampleModel.getSampleCase().getRoom().getCenter().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || sampleModel.getSampleCase().getRoom().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleCase().getRoom().getCenter().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleCase().getRoom().getCenter().getAcceptation().getPosition().equals("operator");
         else if (userModel != null && sampleModel != null && sampleModel.getSampleRoom() != null && sampleModel.getSampleRoom().getAcceptation() != null && sampleModel.getSampleRoom().getCenter() != null && sampleModel.getSampleRoom().getCenter().getAcceptation() != null)
             return userModel.getUserType().equals("admin") || sampleModel.getSampleRoom().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleRoom().getCenter().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleRoom().getCenter().getAcceptation().getPosition().equals("operator");
-        else if (userModel != null && sampleModel != null && sampleModel.getSampleCase() != null && sampleModel.getSampleCase().getCaseRoom() != null && sampleModel.getSampleCase().getCaseRoom().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || sampleModel.getSampleCase().getCaseRoom().getAcceptation().getPosition().equals("manager");
+        else if (userModel != null && sampleModel != null && sampleModel.getSampleCase() != null && sampleModel.getSampleCase().getRoom() != null && sampleModel.getSampleCase().getRoom().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || sampleModel.getSampleCase().getRoom().getAcceptation().getPosition().equals("manager");
         else if (userModel != null && sampleModel != null && sampleModel.getSampleRoom() != null && sampleModel.getSampleRoom().getAcceptation() != null)
             return userModel.getUserType().equals("admin") || sampleModel.getSampleRoom().getAcceptation().getPosition().equals("manager");
         else if (userModel != null)
@@ -212,10 +212,10 @@ public class Permissoon {
     // -------------------- Case
 
     public boolean showCaseDropdownReports(UserModel userModel, CaseModel caseModel) {
-        if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null && caseModel.getCaseRoom().getCenter() != null && caseModel.getCaseRoom().getCenter().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("operator");
-        else if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager");
+        if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null && caseModel.getRoom().getCenter() != null && caseModel.getRoom().getCenter().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager");
         else if (userModel != null)
             return userModel.getUserType().equals("admin");
         else
@@ -223,10 +223,10 @@ public class Permissoon {
     }
 
     public boolean showCaseDropdownEdit(UserModel userModel, CaseModel caseModel) {
-        if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null && caseModel.getCaseRoom().getCenter() != null && caseModel.getCaseRoom().getCenter().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("operator");
-        else if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager");
+        if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null && caseModel.getRoom().getCenter() != null && caseModel.getRoom().getCenter().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager");
         else if (userModel != null)
             return userModel.getUserType().equals("admin");
         else
@@ -234,10 +234,10 @@ public class Permissoon {
     }
 
     public boolean showCaseCreateReference(UserModel userModel, CaseModel caseModel) {
-        if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null && caseModel.getCaseRoom().getCenter() != null && caseModel.getCaseRoom().getCenter().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("operator");
-        else if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager");
+        if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null && caseModel.getRoom().getCenter() != null && caseModel.getRoom().getCenter().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager");
         else if (userModel != null)
             return userModel.getUserType().equals("admin");
         else
@@ -245,10 +245,10 @@ public class Permissoon {
     }
 
     public boolean showCaseCreateSession(UserModel userModel, CaseModel caseModel) {
-        if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null && caseModel.getCaseRoom().getCenter() != null && caseModel.getCaseRoom().getCenter().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("operator");
-        else if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager");
+        if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null && caseModel.getRoom().getCenter() != null && caseModel.getRoom().getCenter().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager");
         else if (userModel != null)
             return userModel.getUserType().equals("admin");
         else
@@ -256,10 +256,10 @@ public class Permissoon {
     }
 
     public boolean showCaseCreateSample(UserModel userModel, CaseModel caseModel) {
-        if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null && caseModel.getCaseRoom().getCenter() != null && caseModel.getCaseRoom().getCenter().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getCaseRoom().getCenter().getAcceptation().getPosition().equals("operator");
-        else if (userModel != null && caseModel != null && caseModel.getCaseRoom() != null && caseModel.getCaseRoom().getAcceptation() != null)
-            return userModel.getUserType().equals("admin") || caseModel.getCaseRoom().getAcceptation().getPosition().equals("manager");
+        if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null && caseModel.getRoom().getCenter() != null && caseModel.getRoom().getCenter().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("manager") || caseModel.getRoom().getCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && caseModel != null && caseModel.getRoom() != null && caseModel.getRoom().getAcceptation() != null)
+            return userModel.getUserType().equals("admin") || caseModel.getRoom().getAcceptation().getPosition().equals("manager");
         else if (userModel != null)
             return userModel.getUserType().equals("admin");
         else

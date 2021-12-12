@@ -162,8 +162,8 @@ public class ClientReportsFragment extends Fragment {
     private void setData(CaseModel model) {
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ClientReportsFragmentCaseTitle));
 
-        if (model.getCaseId() != null && !model.getCaseId().equals("")) {
-            data.put("id", model.getCaseId());
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
         }
     }
 

@@ -388,23 +388,23 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void setData(CaseModel model) {
-        if (model.getCaseRoom() != null && model.getCaseRoom().getId() != null && !model.getCaseRoom().getId().equals("")) {
-            roomId = model.getCaseRoom().getId();
+        if (model.getRoom() != null && model.getRoom().getId() != null && !model.getRoom().getId().equals("")) {
+            roomId = model.getRoom().getId();
         }
 
-        if (model.getCaseRoom() != null && model.getCaseRoom().getManager() != null && model.getCaseRoom().getManager().getName() != null && !model.getCaseRoom().getManager().getName().equals("")) {
-            binding.roomIncludeLayout.primaryTextView.setText(model.getCaseRoom().getManager().getName());
+        if (model.getRoom() != null && model.getRoom().getManager() != null && model.getRoom().getManager().getName() != null && !model.getRoom().getManager().getName().equals("")) {
+            binding.roomIncludeLayout.primaryTextView.setText(model.getRoom().getManager().getName());
         }
 
         try {
-            if (model.getCaseRoom() != null && model.getCaseRoom().getCenter() != null && model.getCaseRoom().getCenter().getDetail() != null && model.getCaseRoom().getCenter().getDetail().has("title") && !model.getCaseRoom().getCenter().getDetail().getString("title").equals(""))
-                binding.roomIncludeLayout.secondaryTextView.setText(model.getCaseRoom().getCenter().getDetail().getString("title"));
+            if (model.getRoom() != null && model.getRoom().getCenter() != null && model.getRoom().getCenter().getDetail() != null && model.getRoom().getCenter().getDetail().has("title") && !model.getRoom().getCenter().getDetail().getString("title").equals(""))
+                binding.roomIncludeLayout.secondaryTextView.setText(model.getRoom().getCenter().getDetail().getString("title"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        if (model.getCaseId() != null && !model.getCaseId().equals("")) {
-            caseId = model.getCaseId();
+        if (model.getId() != null && !model.getId().equals("")) {
+            caseId = model.getId();
 
             binding.caseIncludeLayout.primaryTextView.setText(caseId);
             setClients(model.getClients());
@@ -415,8 +415,8 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void setData(SessionModel model) {
-        if (model.getCaseModel() != null && model.getCaseModel().getCaseId() != null && !model.getCaseModel().getCaseId().equals("")) {
-            caseId = model.getCaseModel().getCaseId();
+        if (model.getCaseModel() != null && model.getCaseModel().getId() != null && !model.getCaseModel().getId().equals("")) {
+            caseId = model.getCaseModel().getId();
 
             binding.caseIncludeLayout.primaryTextView.setText(caseId);
             setClients(model.getCaseModel().getClients());
@@ -542,12 +542,12 @@ public class CreateSampleFragment extends Fragment {
                 case "cases": {
                     CaseModel model = (CaseModel) item;
 
-                    if (!caseId.equals(model.getCaseId())) {
-                        caseId = model.getCaseId();
+                    if (!caseId.equals(model.getId())) {
+                        caseId = model.getId();
 
                         binding.caseIncludeLayout.primaryTextView.setText(caseId);
                         setClients(model.getClients());
-                    } else if (caseId.equals(model.getCaseId())) {
+                    } else if (caseId.equals(model.getId())) {
                         caseId = "";
 
                         binding.caseIncludeLayout.primaryTextView.setText("");

@@ -117,7 +117,7 @@ public class TableSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
 
             if (model.getCaseModel() != null)
-                holder.binding.caseTextView.setText(model.getCaseModel().getCaseId());
+                holder.binding.caseTextView.setText(model.getCaseModel().getId());
 
         } catch (JSONException e) {
             e.printStackTrace();

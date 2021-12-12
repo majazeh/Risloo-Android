@@ -215,8 +215,8 @@ public class EditSessionTabReferenceFragment extends Fragment {
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
 
-                    if (model.getCaseModel().getCaseId() != null && !model.getCaseModel().getCaseId().equals("")) {
-                        caseId = model.getCaseModel().getCaseId();
+                    if (model.getCaseModel().getId() != null && !model.getCaseModel().getId().equals("")) {
+                        caseId = model.getCaseModel().getId();
 
                         binding.caseIncludeLayout.primaryTextView.setText(caseId);
                         setClients(model.getClients());
@@ -311,12 +311,12 @@ public class EditSessionTabReferenceFragment extends Fragment {
             case "cases": {
                 CaseModel model = (CaseModel) item;
 
-                if (!caseId.equals(model.getCaseId())) {
-                    caseId = model.getCaseId();
+                if (!caseId.equals(model.getId())) {
+                    caseId = model.getId();
 
                     binding.caseIncludeLayout.primaryTextView.setText(caseId);
                     setClients(model.getClients());
-                } else if (caseId.equals(model.getCaseId())) {
+                } else if (caseId.equals(model.getId())) {
                     caseId = "";
 
                     binding.caseIncludeLayout.primaryTextView.setText("");
