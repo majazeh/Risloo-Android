@@ -11,8 +11,8 @@ public class ScaleModel extends TypeModel {
     private String version = "";
     private String edition = "";
     private String filler = "";
-    private String scaleId = "";
-    private String scaleTitle = "";
+    private String scale_id = "";
+    private String scale_title = "";
     private String status = "";
     private int edition_version;
 
@@ -31,12 +31,10 @@ public class ScaleModel extends TypeModel {
             if (!jsonObject.isNull("filler"))
                 setFiller(jsonObject.getString("filler"));
             if (!jsonObject.isNull("scale")) {
-                JSONObject scale = jsonObject.getJSONObject("scale");
-
-                if (!jsonObject.isNull("ScaleId"))
-                    setScaleId(scale.getString("ScaleId"));
-                if (!jsonObject.isNull("ScaleTitle"))
-                    setScaleTitle(scale.getString("ScaleTitle"));
+                if (!jsonObject.getJSONObject("scale").isNull("id"))
+                    setScaleId(jsonObject.getJSONObject("scale").getString("id"));
+                if (!jsonObject.getJSONObject("scale").isNull("title"))
+                    setScaleTitle(jsonObject.getJSONObject("scale").getString("title"));
             }
             if (!jsonObject.isNull("status"))
                 setStatus(jsonObject.getString("status"));
@@ -89,19 +87,19 @@ public class ScaleModel extends TypeModel {
     }
 
     public String getScaleId() {
-        return scaleId;
+        return scale_id;
     }
 
-    public void setScaleId(String scaleId) {
-        this.scaleId = scaleId;
+    public void setScaleId(String scale_id) {
+        this.scale_id = scale_id;
     }
 
     public String getScaleTitle() {
-        return scaleTitle;
+        return scale_title;
     }
 
-    public void setScaleTitle(String scaleTitle) {
-        this.scaleTitle = scaleTitle;
+    public void setScaleTitle(String scale_title) {
+        this.scale_title = scale_title;
     }
 
     public String getStatus() {
@@ -137,10 +135,10 @@ public class ScaleModel extends TypeModel {
             if (!filler.equals(model.getFiller()))
                 return false;
 
-            if (!scaleId.equals(model.getScaleId()))
+            if (!scale_id.equals(model.getScaleId()))
                 return false;
 
-            if (!scaleTitle.equals(model.getScaleTitle()))
+            if (!scale_title.equals(model.getScaleTitle()))
                 return false;
 
             if (!status.equals(model.getStatus()))
@@ -163,8 +161,8 @@ public class ScaleModel extends TypeModel {
             super.toObject().put("version", getVersion());
             super.toObject().put("edition", getEdition());
             super.toObject().put("filler", getFiller());
-            super.toObject().put("scaleId", getScaleId());
-            super.toObject().put("scaleTitle", getScaleTitle());
+            super.toObject().put("scale_id", getScaleId());
+            super.toObject().put("scale_title", getScaleTitle());
             super.toObject().put("status", getStatus());
             super.toObject().put("edition_version", getEditionVersion());
         } catch (JSONException e) {
@@ -183,8 +181,8 @@ public class ScaleModel extends TypeModel {
                 ", version='" + version + '\'' +
                 ", edition='" + edition + '\'' +
                 ", filler='" + filler + '\'' +
-                ", scaleId='" + scaleId + '\'' +
-                ", scaleTitle='" + scaleTitle + '\'' +
+                ", scale_id='" + scale_id + '\'' +
+                ", scale_title='" + scale_title + '\'' +
                 ", status='" + status + '\'' +
                 ", edition_version=" + edition_version +
                 '}';

@@ -172,14 +172,14 @@ public class Permissoon {
     }
 
     public boolean showSamplesFragmentSample(UserModel userModel, SampleModel sampleModel) {
-        if (userModel != null && sampleModel != null && sampleModel.getSampleCase() != null && sampleModel.getSampleCase().getRoom() != null && sampleModel.getSampleCase().getRoom().getAcceptation() != null && sampleModel.getSampleCase().getRoom().getCenter() != null && sampleModel.getSampleCase().getRoom().getCenter().getAcceptation() != null)
-            return userModel.getType().equals("admin") || sampleModel.getSampleCase().getRoom().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleCase().getRoom().getCenter().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleCase().getRoom().getCenter().getAcceptation().getPosition().equals("operator");
-        else if (userModel != null && sampleModel != null && sampleModel.getSampleRoom() != null && sampleModel.getSampleRoom().getAcceptation() != null && sampleModel.getSampleRoom().getCenter() != null && sampleModel.getSampleRoom().getCenter().getAcceptation() != null)
-            return userModel.getType().equals("admin") || sampleModel.getSampleRoom().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleRoom().getCenter().getAcceptation().getPosition().equals("manager") || sampleModel.getSampleRoom().getCenter().getAcceptation().getPosition().equals("operator");
-        else if (userModel != null && sampleModel != null && sampleModel.getSampleCase() != null && sampleModel.getSampleCase().getRoom() != null && sampleModel.getSampleCase().getRoom().getAcceptation() != null)
-            return userModel.getType().equals("admin") || sampleModel.getSampleCase().getRoom().getAcceptation().getPosition().equals("manager");
-        else if (userModel != null && sampleModel != null && sampleModel.getSampleRoom() != null && sampleModel.getSampleRoom().getAcceptation() != null)
-            return userModel.getType().equals("admin") || sampleModel.getSampleRoom().getAcceptation().getPosition().equals("manager");
+        if (userModel != null && sampleModel != null && sampleModel.getCasse() != null && sampleModel.getCasse().getRoom() != null && sampleModel.getCasse().getRoom().getAcceptation() != null && sampleModel.getCasse().getRoom().getCenter() != null && sampleModel.getCasse().getRoom().getCenter().getAcceptation() != null)
+            return userModel.getType().equals("admin") || sampleModel.getCasse().getRoom().getAcceptation().getPosition().equals("manager") || sampleModel.getCasse().getRoom().getCenter().getAcceptation().getPosition().equals("manager") || sampleModel.getCasse().getRoom().getCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && sampleModel != null && sampleModel.getRoom() != null && sampleModel.getRoom().getAcceptation() != null && sampleModel.getRoom().getCenter() != null && sampleModel.getRoom().getCenter().getAcceptation() != null)
+            return userModel.getType().equals("admin") || sampleModel.getRoom().getAcceptation().getPosition().equals("manager") || sampleModel.getRoom().getCenter().getAcceptation().getPosition().equals("manager") || sampleModel.getRoom().getCenter().getAcceptation().getPosition().equals("operator");
+        else if (userModel != null && sampleModel != null && sampleModel.getCasse() != null && sampleModel.getCasse().getRoom() != null && sampleModel.getCasse().getRoom().getAcceptation() != null)
+            return userModel.getType().equals("admin") || sampleModel.getCasse().getRoom().getAcceptation().getPosition().equals("manager");
+        else if (userModel != null && sampleModel != null && sampleModel.getRoom() != null && sampleModel.getRoom().getAcceptation() != null)
+            return userModel.getType().equals("admin") || sampleModel.getRoom().getAcceptation().getPosition().equals("manager");
         else if (userModel != null)
             return userModel.getType().equals("admin");
         else

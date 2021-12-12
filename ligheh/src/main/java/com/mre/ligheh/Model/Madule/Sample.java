@@ -216,7 +216,7 @@ public class Sample extends Model {
                             public void onOK(Object object) {
                                 boolean repeat = false;
                                 SampleModel sampleModel = (SampleModel) object;
-                                if (sampleModel.getSampleStatus().equals("scoring") || (sampleModel.getSampleStatus().equals("creating_files"))) {
+                                if (sampleModel.getStatus().equals("scoring") || (sampleModel.getStatus().equals("creating_files"))) {
                                     repeat = true;
                                 }
 

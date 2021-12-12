@@ -131,10 +131,10 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            if (model.getSampleStatus().equals("closed"))
+            if (model.getStatus().equals("closed"))
                 doWork(holder, model, position);
             else
-                IntentManager.test(activity, model.getSampleId());
+                IntentManager.test(activity, model.getId());
 
         }).widget(holder.binding.statusTextView);
 
@@ -182,19 +182,19 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void setData(TableSampleHolder holder, SampleModel model) {
-        holder.binding.serialTextView.setText(model.getSampleId());
+        holder.binding.serialTextView.setText(model.getId());
 
-        if (!model.getSampleScaleTitle().equals(""))
-            holder.binding.nameTextView.setText(model.getSampleScaleTitle());
+        if (!model.getScaleTitle().equals(""))
+            holder.binding.nameTextView.setText(model.getScaleTitle());
         else
-            holder.binding.nameTextView.setText(model.getSampleTitle());
+            holder.binding.nameTextView.setText(model.getTitle());
 
-        if (!model.getSampleEdition().equals("") && model.getSampleVersion() != 0)
-            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
-        else if (model.getSampleVersion() != 0)
-            holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
-        else if (!model.getSampleEdition().equals(""))
-            holder.binding.editionTextView.setText(model.getSampleEdition());
+        if (!model.getEdition().equals("") && model.getVersion() != 0)
+            holder.binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
+        else if (model.getVersion() != 0)
+            holder.binding.editionTextView.setText("نسخه " + model.getVersion());
+        else if (!model.getEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getEdition());
         else
             holder.binding.editionTextView.setText("-");
 
@@ -203,16 +203,16 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         else
             holder.binding.bulkTextView.setVisibility(View.GONE);
 
-        if (model.getSampleRoom() != null && model.getSampleRoom().getManager() != null)
-            holder.binding.roomTextView.setText(model.getSampleRoom().getManager().getName());
+        if (model.getRoom() != null && model.getRoom().getManager() != null)
+            holder.binding.roomTextView.setText(model.getRoom().getManager().getName());
 
-        if (model.getSampleCase() != null)
-            holder.binding.caseTextView.setText("پرونده " + model.getSampleCase().getId());
+        if (model.getCasse() != null)
+            holder.binding.caseTextView.setText("پرونده " + model.getCasse().getId());
 
         if (model.getClient() != null)
             holder.binding.referenceTextView.setText(model.getClient().getName());
 
-        setStatus(holder, model.getSampleStatus());
+        setStatus(holder, model.getStatus());
     }
 
     private void setStatus(TableSampleHolder holder, String status) {
@@ -244,7 +244,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void setHashmap(SampleModel model) {
-        data.put("id", model.getSampleId());
+        data.put("id", model.getId());
     }
 
     private void doWork(TableSampleHolder holder, SampleModel model, int position) {
@@ -260,7 +260,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
                 activity.runOnUiThread(() -> {
                     DialogManager.dismissLoadingDialog();
-                    setStatus(holder, sampleModel.getSampleStatus());
+                    setStatus(holder, sampleModel.getStatus());
                 });
             }
 

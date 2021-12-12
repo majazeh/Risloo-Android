@@ -187,23 +187,23 @@ public class SampleFragment extends Fragment {
     }
 
     private void setData(SampleModel model) {
-        if (model.getSampleId() != null && !model.getSampleId().equals("")) {
-            binding.serialTextView.setText(model.getSampleId());
+        if (model.getId() != null && !model.getId().equals("")) {
+            binding.serialTextView.setText(model.getId());
 
-            data.put("id", model.getSampleId());
-            sampleAnswers.id = model.getSampleId();
+            data.put("id", model.getId());
+            sampleAnswers.id = model.getId();
         }
 
-        if (model.getSampleScaleTitle() != null && !model.getSampleScaleTitle().equals("")) {
-            binding.scaleTextView.setText(model.getSampleScaleTitle());
+        if (model.getScaleTitle() != null && !model.getScaleTitle().equals("")) {
+            binding.scaleTextView.setText(model.getScaleTitle());
         }
 
-        if (model.getSampleScaleTitle() != null && !model.getSampleEdition().equals("") && model.getSampleVersion() != 0) {
-            binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
-        } else if (model.getSampleVersion() != 0) {
-            binding.editionTextView.setText("نسخه " + model.getSampleVersion());
-        } else if (model.getSampleScaleTitle() != null && !model.getSampleEdition().equals("")) {
-            binding.editionTextView.setText(model.getSampleEdition());
+        if (model.getScaleTitle() != null && !model.getEdition().equals("") && model.getVersion() != 0) {
+            binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
+        } else if (model.getVersion() != 0) {
+            binding.editionTextView.setText("نسخه " + model.getVersion());
+        } else if (model.getScaleTitle() != null && !model.getEdition().equals("")) {
+            binding.editionTextView.setText(model.getEdition());
         } else {
             binding.editionTextView.setText("-");
         }
@@ -212,7 +212,7 @@ public class SampleFragment extends Fragment {
             binding.referenceTextView.setText(model.getClient().getName());
         }
 
-        setStatus(model.getSampleStatus());
+        setStatus(model.getStatus());
     }
 
     private void setStatus(String status) {
@@ -663,7 +663,7 @@ public class SampleFragment extends Fragment {
                             requireActivity().runOnUiThread(() -> {
                                 DialogManager.dismissLoadingDialog();
 
-                                setStatus(sampleModel.getSampleStatus());
+                                setStatus(sampleModel.getStatus());
                             });
                         }
                     }

@@ -764,7 +764,7 @@ public class CreateSampleFragment extends Fragment {
                                 ArrayList<String> ids = new ArrayList<>();
                                 for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
                                     SampleModel model = new SampleModel(((JSONObject) object).getJSONArray("data").getJSONObject(i));
-                                    ids.add(model.getSampleId());
+                                    ids.add(model.getId());
                                 }
 
                                 String[] sampleIds = new String[ids.size()];

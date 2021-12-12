@@ -1,7 +1,5 @@
 package com.mre.ligheh.Model.TypeModel;
 
-import androidx.annotation.NonNull;
-
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.SampleForm;
 
@@ -10,219 +8,366 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SampleModel extends TypeModel {
-    private String sampleId = "";
-    private String sampleTitle = "";
-    private int sampleVersion;
-    private String sampleEdition = "";
-    private int sampleEditionVersion;
+    private String id = "";
+    private String title = "";
+    private String edition = "";
     private String filler = "";
-    private String sampleScaleId = "";
-    private String sampleScaleTitle = "";
-    private String sampleDescription = "";
-    private List items;
-    private String caseStatus = "";
-    private int membersCount;
+    private String scale_id = "";
+    private String scale_title = "";
+    private String status = "";
+    private String description = "";
+    private String psychologist_description = "";
+    private String primary_term = "";
+    private String case_id = "";
+    private String case_status = "";
+    private String session_id = "";
+    private String chain_id = "";
+    private int version;
+    private int edition_version;
+    private int code;
+    private int cornometer;
+    private int members_count;
     private int joined;
-    private List chain;
-    private String chainId = "";
-    private RoomModel SampleRoom;
-    private CaseModel SampleCase;
-    private List prerequisites;
-    private JSONArray terms;
-    private String primaryTerm = "";
-    private String sampleStatus = "";
-    private String caseId = "";
-    private String sessionId = "";
-    private SampleForm sampleForm;
-    private UserModel client;
-    private List entities;
-    private List members;
-    private List profiles;
-    private List profilesHalf;
-    private List profilesExtra;
-    private String psychologist_description;
-    private int created_at;
-    private int started_at;
     private int scored_at;
     private int closed_at;
-    private int cornometer;
-    private int code;
+    private int created_at;
+    private int started_at;
+    private RoomModel room;
+    private CaseModel casse;
+    private UserModel client;
+    private JSONArray terms;
+    private List members;
+    private List chains;
+    private List prerequisites;
+    private List items;
+    private List entities;
+    private List profiles;
+    private List profiles_half;
+    private List profiles_extra;
+    private SampleForm sampleForm;
 
-    public SampleModel(JSONObject jsonObject) throws JSONException {
+    public SampleModel(JSONObject jsonObject) {
         super(jsonObject);
-        if (!jsonObject.isNull("id"))
-            setSampleId(jsonObject.getString("id"));
-        if (!jsonObject.isNull("title"))
-            setSampleTitle(jsonObject.getString("title"));
-        if (!jsonObject.isNull("version"))
-            setSampleVersion(jsonObject.getInt("version"));
-        if (!jsonObject.isNull("edition"))
-            setSampleEdition(jsonObject.getString("edition"));
-        if (!jsonObject.isNull("psychologist_description"))
-            setPsychologist_description(jsonObject.getString("psychologist_description"));
-        if (!jsonObject.isNull("room"))
-            setSampleRoom(new RoomModel(jsonObject.getJSONObject("room")));
-        if (!jsonObject.isNull("case"))
-            setSampleCase(new CaseModel(jsonObject.getJSONObject("case")));
-        if (!jsonObject.isNull("edition_version"))
-            setSampleEditionVersion(jsonObject.getInt("edition_version"));
-        if (!jsonObject.isNull("created_at"))
-            setCreated_at(jsonObject.getInt("created_at"));
-        if (!jsonObject.isNull("case_id"))
-            setCaseId(jsonObject.getString("case_id"));
-        if (!jsonObject.isNull("case_status"))
-            setCaseStatus(jsonObject.getString("case_status"));
-        if (!jsonObject.isNull("session_id"))
-            setSessionId(jsonObject.getString("session_id"));
-        if (!jsonObject.isNull("started_at"))
-            setStarted_at(jsonObject.getInt("started_at"));
-        if (!jsonObject.isNull("scored_at"))
-            setScored_at(jsonObject.getInt("scored_at"));
-        if (!jsonObject.isNull("closed_at"))
-            setClosed_at(jsonObject.getInt("closed_at"));
-        if (!jsonObject.isNull("members_count"))
-            setMembersCount(jsonObject.getInt("members_count"));
-        if (!jsonObject.isNull("joined"))
-            setJoined(jsonObject.getInt("joined"));
-        if (!jsonObject.isNull("code"))
-            setCode(jsonObject.getInt("code"));
-        if (!jsonObject.isNull("filler"))
-            setFiller(jsonObject.getString("filler"));
-        if (!jsonObject.isNull("scale")) {
-            if (!jsonObject.getJSONObject("scale").isNull("id"))
-                setSampleScaleId(jsonObject.getJSONObject("scale").getString("id"));
-            if (!jsonObject.getJSONObject("scale").isNull("title"))
-                setSampleScaleTitle(jsonObject.getJSONObject("scale").getString("title"));
-        }
-        if (!jsonObject.isNull("members")) {
-            com.mre.ligheh.Model.Madule.List members = new com.mre.ligheh.Model.Madule.List();
-            for (int i = 0; i < jsonObject.getJSONArray("members").length(); i++) {
-                members.add(new UserModel(jsonObject.getJSONArray("members").getJSONObject(i)));
-            }
-            setMembers(members);
-        } else {
-            setMembers(new com.mre.ligheh.Model.Madule.List());
-        }
-        if (!jsonObject.isNull("entities")) {
-            com.mre.ligheh.Model.Madule.List entities = new com.mre.ligheh.Model.Madule.List();
-            for (int i = 0; i < jsonObject.getJSONArray("entities").length(); i++) {
-                jsonObject.getJSONArray("entities").getJSONObject(i).put("position", i + 1);
-                entities.add(new EntityModel(jsonObject.getJSONArray("entities").getJSONObject(i)));
-            }
-            setEntities(entities);
-        } else {
-            setEntities(new com.mre.ligheh.Model.Madule.List());
-        }
-        if (!jsonObject.isNull("description"))
-            setSampleDescription(jsonObject.getString("description"));
-        if (!jsonObject.isNull("client"))
-            setClient(new UserModel(jsonObject.getJSONObject("client")));
 
-        if (!jsonObject.isNull("items")) {
-            com.mre.ligheh.Model.Madule.List items = new com.mre.ligheh.Model.Madule.List();
-            for (int i = 0; i < jsonObject.getJSONArray("items").length(); i++) {
-                jsonObject.getJSONArray("items").getJSONObject(i).put("index", i+1);
-                items.add(new ItemModel(jsonObject.getJSONArray("items").getJSONObject(i)));
+        try {
+            if (!jsonObject.isNull("id"))
+                setId(jsonObject.getString("id"));
+            if (!jsonObject.isNull("title"))
+                setTitle(jsonObject.getString("title"));
+            if (!jsonObject.isNull("edition"))
+                setEdition(jsonObject.getString("edition"));
+            if (!jsonObject.isNull("filler"))
+                setFiller(jsonObject.getString("filler"));
+            if (!jsonObject.isNull("scale")) {
+                if (!jsonObject.getJSONObject("scale").isNull("id"))
+                    setScaleId(jsonObject.getJSONObject("scale").getString("id"));
+                if (!jsonObject.getJSONObject("scale").isNull("title"))
+                    setScaleTitle(jsonObject.getJSONObject("scale").getString("title"));
             }
-            setItems(items);
-        } else {
-            setItems(new com.mre.ligheh.Model.Madule.List());
-        }
+            if (!jsonObject.isNull("status"))
+                setStatus(jsonObject.getString("status"));
+            if (!jsonObject.isNull("description"))
+                setDescription(jsonObject.getString("description"));
+            if (!jsonObject.isNull("psychologist_description"))
+                setPsychologistDescription(jsonObject.getString("psychologist_description"));
+            if (!jsonObject.isNull("primary_term"))
+                setPrimaryTerm(jsonObject.getString("primary_term"));
+            if (!jsonObject.isNull("case_id"))
+                setCaseId(jsonObject.getString("case_id"));
+            if (!jsonObject.isNull("case_status"))
+                setCaseStatus(jsonObject.getString("case_status"));
+            if (!jsonObject.isNull("session_id"))
+                setSessionId(jsonObject.getString("session_id"));
 
-        if (!jsonObject.isNull("chain")) {
-            if (jsonObject.get("chain").getClass().getName().equals("org.json.JSONObject")) {
-                JSONObject jsonObject1 = jsonObject.getJSONObject("chain");
-                if (!jsonObject1.isNull("list")) {
-                    com.mre.ligheh.Model.Madule.List chains = new com.mre.ligheh.Model.Madule.List();
-                    for (int i = 0; i < jsonObject1.getJSONArray("list").length(); i++) {
-                        chains.add(new ChainModel(jsonObject1.getJSONArray("list").getJSONObject(i)));
-                    }
-                    setChain(chains);
-                }
-                if (!jsonObject1.isNull("id"))
-                    setChainId(jsonObject1.getString("id"));
+            if (!jsonObject.isNull("version"))
+                setVersion(jsonObject.getInt("version"));
+            if (!jsonObject.isNull("edition_version"))
+                setEditionVersion(jsonObject.getInt("edition_version"));
+            if (!jsonObject.isNull("code"))
+                setCode(jsonObject.getInt("code"));
+            if (!jsonObject.isNull("cornometer"))
+                setCornometer(jsonObject.getInt("cornometer"));
+            if (!jsonObject.isNull("members_count"))
+                setMembersCount(jsonObject.getInt("members_count"));
+            if (!jsonObject.isNull("joined"))
+                setJoined(jsonObject.getInt("joined"));
+            if (!jsonObject.isNull("scored_at"))
+                setScoredAt(jsonObject.getInt("scored_at"));
+            if (!jsonObject.isNull("closed_at"))
+                setClosedAt(jsonObject.getInt("closed_at"));
+            if (!jsonObject.isNull("created_at"))
+                setCreatedAt(jsonObject.getInt("created_at"));
+            if (!jsonObject.isNull("started_at"))
+                setStartedAt(jsonObject.getInt("started_at"));
+
+            if (!jsonObject.isNull("room"))
+                setRoom(new RoomModel(jsonObject.getJSONObject("room")));
+            if (!jsonObject.isNull("case"))
+                setCasse(new CaseModel(jsonObject.getJSONObject("case")));
+            if (!jsonObject.isNull("client"))
+                setClient(new UserModel(jsonObject.getJSONObject("client")));
+
+            if (!jsonObject.isNull("terms"))
+                setTerms(jsonObject.getJSONArray("terms"));
+
+            if (!jsonObject.isNull("members") && jsonObject.getJSONArray("members").length() != 0) {
+                members = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("members").length(); i++)
+                    members.add(new UserModel(jsonObject.getJSONArray("members").getJSONObject(i)));
+
+                setMembers(members);
             } else {
-                setChainId(jsonObject.getString("chain"));
+                setMembers(new List());
             }
-        }
 
-        if (!jsonObject.isNull("prerequisites")) {
-            com.mre.ligheh.Model.Madule.List prerequisites = new com.mre.ligheh.Model.Madule.List();
-            for (int i = 0; i < jsonObject.getJSONArray("prerequisites").length(); i++) {
-                jsonObject.getJSONArray("prerequisites").getJSONObject(i).put("index", i+1);
-                prerequisites.add(new PrerequisitesModel(jsonObject.getJSONArray("prerequisites").getJSONObject(i)));
-            }
-            setPrerequisites(prerequisites);
-        } else {
-            setPrerequisites(new com.mre.ligheh.Model.Madule.List());
-        }
-        sampleForm = new SampleForm(items, psychologist_description, chain, entities, prerequisites, getSampleDescription());
+            if (!jsonObject.isNull("chain") && jsonObject.getJSONArray("chain").length() != 0) {
+                if (jsonObject.get("chain").getClass().getName().equals("org.json.JSONObject")) {
+                    JSONObject chain = jsonObject.getJSONObject("chain");
 
-        if (!jsonObject.isNull("profiles")) {
-            com.mre.ligheh.Model.Madule.List profiles = new com.mre.ligheh.Model.Madule.List();
-            com.mre.ligheh.Model.Madule.List profilesHalf = new com.mre.ligheh.Model.Madule.List();
-            com.mre.ligheh.Model.Madule.List profilesExtra = new com.mre.ligheh.Model.Madule.List();
-            for (int i = 0; i < jsonObject.getJSONArray("profiles").length(); i++) {
-                profiles.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
-                if (jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").equals("profile_png")) {
-                    profilesHalf.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+                    if (!chain.isNull("id"))
+                        setChainId(chain.getString("id"));
+
+                    if (!chain.isNull("list")) {
+                        chains = new List();
+
+                        for (int i = 0; i < chain.getJSONArray("list").length(); i++)
+                            chains.add(new ChainModel(chain.getJSONArray("list").getJSONObject(i)));
+
+                        setChains(chains);
+                    } else {
+                        setChains(new List());
+                    }
+
+                } else {
+                    setChainId(jsonObject.getString("chain"));
+                    setChains(new List());
                 }
-                if (!jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").startsWith("profile_png") && jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").endsWith("png")) {
-                    profilesExtra.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
-                }
+            } else {
+                setChains(new List());
             }
-            setProfiles(profiles);
-            setProfilesHalf(profilesHalf);
-            setProfilesExtra(profilesExtra);
-        } else {
-            setProfiles(new com.mre.ligheh.Model.Madule.List());
+
+            if (!jsonObject.isNull("prerequisites") && jsonObject.getJSONArray("prerequisites").length() != 0) {
+                prerequisites = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("prerequisites").length(); i++) {
+                    jsonObject.getJSONArray("prerequisites").getJSONObject(i).put("index", i + 1);
+                    prerequisites.add(new PrerequisitesModel(jsonObject.getJSONArray("prerequisites").getJSONObject(i)));
+                }
+
+                setPrerequisites(prerequisites);
+            } else {
+                setPrerequisites(new List());
+            }
+
+
+            if (!jsonObject.isNull("items") && jsonObject.getJSONArray("items").length() != 0) {
+                items = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("items").length(); i++) {
+                    jsonObject.getJSONArray("items").getJSONObject(i).put("index", i + 1);
+                    items.add(new ItemModel(jsonObject.getJSONArray("items").getJSONObject(i)));
+                }
+
+                setItems(items);
+            } else {
+                setItems(new List());
+            }
+
+            if (!jsonObject.isNull("entities") && jsonObject.getJSONArray("entities").length() != 0) {
+                entities = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("entities").length(); i++) {
+                    jsonObject.getJSONArray("entities").getJSONObject(i).put("position", i + 1);
+                    entities.add(new EntityModel(jsonObject.getJSONArray("entities").getJSONObject(i)));
+                }
+
+                setEntities(entities);
+            } else {
+                setEntities(new List());
+            }
+
+            if (!jsonObject.isNull("profiles") && jsonObject.getJSONArray("profiles").length() != 0) {
+                profiles = new List();
+                profiles_half = new List();
+                profiles_extra = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("profiles").length(); i++) {
+                    profiles.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+
+                    if (jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").equals("profile_png"))
+                        profiles_half.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+
+                    if (!jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").startsWith("profile_png") && jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").endsWith("png"))
+                        profiles_extra.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+
+                }
+
+                setProfiles(profiles);
+                setProfilesHalf(profiles_half);
+                setProfilesExtra(profiles_extra);
+            } else {
+                setProfiles(new List());
+                setProfilesHalf(new List());
+                setProfilesExtra(new List());
+            }
+
+            sampleForm = new SampleForm(items, psychologist_description, chains, entities, prerequisites, getDescription());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-
-        if (!jsonObject.isNull("terms"))
-
-            setTerms(jsonObject.getJSONArray("terms"));
-        if (!jsonObject.isNull("cornometer"))
-
-            setCornometer(jsonObject.getInt("cornometer"));
-        if (!jsonObject.isNull("primary_term"))
-
-            setPrimaryTerm(jsonObject.getString("primary_term"));
-        if (!jsonObject.isNull("status"))
-
-            setSampleStatus(jsonObject.getString("status"));
     }
 
-    public String getSampleId() {
-        return sampleId;
+    public String getId() {
+        return id;
     }
 
-    public void setSampleId(String sampleId) {
-        this.sampleId = sampleId;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getEdition() {
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+    public String getFiller() {
+        return filler;
+    }
+
+    public void setFiller(String filler) {
+        this.filler = filler;
+    }
+
+    public String getScaleId() {
+        return scale_id;
+    }
+
+    public void setScaleId(String scale_id) {
+        this.scale_id = scale_id;
+    }
+
+    public String getScaleTitle() {
+        return scale_title;
+    }
+
+    public void setScaleTitle(String scale_title) {
+        this.scale_title = scale_title;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPsychologistDescription() {
+        return psychologist_description;
+    }
+
+    public void setPsychologistDescription(String psychologist_description) {
+        this.psychologist_description = psychologist_description;
+    }
+
+    public String getPrimaryTerm() {
+        return primary_term;
+    }
+
+    public void setPrimaryTerm(String primary_term) {
+        this.primary_term = primary_term;
+    }
+
+    public String getCaseId() {
+        return case_id;
+    }
+
+    public void setCaseId(String case_id) {
+        this.case_id = case_id;
     }
 
     public String getCaseStatus() {
-        return caseStatus;
+        return case_status;
     }
 
-    public void setCaseStatus(String caseStatus) {
-        this.caseStatus = caseStatus;
+    public void setCaseStatus(String case_status) {
+        this.case_status = case_status;
+    }
+
+    public String getSessionId() {
+        return session_id;
+    }
+
+    public void setSessionId(String session_id) {
+        this.session_id = session_id;
+    }
+
+    public String getChainId() {
+        return chain_id;
+    }
+
+    public void setChainId(String chain_id) {
+        this.chain_id = chain_id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+
+    public int getEditionVersion() {
+        return edition_version;
+    }
+
+    public void setEditionVersion(int edition_version) {
+        this.edition_version = edition_version;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getCornometer() {
+        return cornometer;
+    }
+
+    public void setCornometer(int cornometer) {
+        this.cornometer = cornometer;
     }
 
     public int getMembersCount() {
-        return membersCount;
+        return members_count;
     }
 
-    public List getEntities() {
-        return entities;
-    }
-
-    public void setEntities(List entities) {
-        this.entities = entities;
-    }
-
-    public void setMembersCount(int membersCount) {
-        this.membersCount = membersCount;
+    public void setMembersCount(int members_count) {
+        this.members_count = members_count;
     }
 
     public int getJoined() {
@@ -233,20 +378,68 @@ public class SampleModel extends TypeModel {
         this.joined = joined;
     }
 
-    public String getSampleTitle() {
-        return sampleTitle;
+    public int getScoredAt() {
+        return scored_at;
     }
 
-    public void setSampleTitle(String sampleTitle) {
-        this.sampleTitle = sampleTitle;
+    public void setScoredAt(int scored_at) {
+        this.scored_at = scored_at;
     }
 
-    public int getSampleVersion() {
-        return sampleVersion;
+    public int getClosedAt() {
+        return closed_at;
     }
 
-    public void setSampleVersion(int sampleVersion) {
-        this.sampleVersion = sampleVersion;
+    public void setClosedAt(int closed_at) {
+        this.closed_at = closed_at;
+    }
+
+    public int getCreatedAt() {
+        return created_at;
+    }
+
+    public void setCreatedAt(int created_at) {
+        this.created_at = created_at;
+    }
+
+    public int getStartedAt() {
+        return started_at;
+    }
+
+    public void setStartedAt(int started_at) {
+        this.started_at = started_at;
+    }
+
+    public RoomModel getRoom() {
+        return room;
+    }
+
+    public void setRoom(RoomModel room) {
+        this.room = room;
+    }
+
+    public CaseModel getCasse() {
+        return casse;
+    }
+
+    public void setCasse(CaseModel casse) {
+        this.casse = casse;
+    }
+
+    public UserModel getClient() {
+        return client;
+    }
+
+    public void setClient(UserModel client) {
+        this.client = client;
+    }
+
+    public JSONArray getTerms() {
+        return terms;
+    }
+
+    public void setTerms(JSONArray terms) {
+        this.terms = terms;
     }
 
     public List getMembers() {
@@ -257,8 +450,36 @@ public class SampleModel extends TypeModel {
         this.members = members;
     }
 
-    public String getChainId() {
-        return chainId;
+    public List getChains() {
+        return chains;
+    }
+
+    public void setChains(List chains) {
+        this.chains = chains;
+    }
+
+    public List getPrerequisites() {
+        return prerequisites;
+    }
+
+    public void setPrerequisites(List prerequisites) {
+        this.prerequisites = prerequisites;
+    }
+
+    public List getItems() {
+        return items;
+    }
+
+    public void setItems(List items) {
+        this.items = items;
+    }
+
+    public List getEntities() {
+        return entities;
+    }
+
+    public void setEntities(List entities) {
+        this.entities = entities;
     }
 
     public List getProfiles() {
@@ -270,159 +491,19 @@ public class SampleModel extends TypeModel {
     }
 
     public List getProfilesHalf() {
-        return profilesHalf;
+        return profiles_half;
     }
 
-    public void setProfilesHalf(List profilesHalf) {
-        this.profilesHalf = profilesHalf;
+    public void setProfilesHalf(List profiles_half) {
+        this.profiles_half = profiles_half;
     }
 
     public List getProfilesExtra() {
-        return profilesExtra;
+        return profiles_extra;
     }
 
-    public void setProfilesExtra(List profilesExtra) {
-        this.profilesExtra = profilesExtra;
-    }
-
-    public void setChainId(String chainId) {
-        this.chainId = chainId;
-    }
-
-    public String getSampleEdition() {
-        return sampleEdition;
-    }
-
-    public void setSampleEdition(String sampleEdition) {
-        this.sampleEdition = sampleEdition;
-    }
-
-    public int getSampleEditionVersion() {
-        return sampleEditionVersion;
-    }
-
-    public void setSampleEditionVersion(int sampleEditionVersion) {
-        this.sampleEditionVersion = sampleEditionVersion;
-    }
-
-    public UserModel getClient() {
-        return client;
-    }
-
-    public void setClient(UserModel client) {
-        this.client = client;
-    }
-
-    public RoomModel getSampleRoom() {
-        return SampleRoom;
-    }
-
-    public int getCornometer() {
-        return cornometer;
-    }
-
-    public void setCornometer(int cornometer) {
-        this.cornometer = cornometer;
-    }
-
-    public void setSampleRoom(RoomModel sampleRoom) {
-        SampleRoom = sampleRoom;
-    }
-
-    public String getFiller() {
-        return filler;
-    }
-
-    public void setFiller(String filler) {
-        this.filler = filler;
-    }
-
-    public String getSampleScaleId() {
-        return sampleScaleId;
-    }
-
-    public void setSampleScaleId(String sampleScaleId) {
-        this.sampleScaleId = sampleScaleId;
-    }
-
-    public String getSampleScaleTitle() {
-        return sampleScaleTitle;
-    }
-
-    public void setSampleScaleTitle(String sampleScaleTitle) {
-        this.sampleScaleTitle = sampleScaleTitle;
-    }
-
-    public String getSampleDescription() {
-        return sampleDescription;
-    }
-
-    public void setSampleDescription(String sampleDescription) {
-        this.sampleDescription = sampleDescription;
-    }
-
-    public JSONArray getTerms() {
-        return terms;
-    }
-
-    public void setTerms(JSONArray terms) {
-        this.terms = terms;
-    }
-
-    public String getPrimaryTerm() {
-        return primaryTerm;
-    }
-
-    public void setPrimaryTerm(String primaryTerm) {
-        this.primaryTerm = primaryTerm;
-    }
-
-    public String getSampleStatus() {
-        return sampleStatus;
-    }
-
-    public void setSampleStatus(String sampleStatus) {
-        this.sampleStatus = sampleStatus;
-    }
-
-    public List getItems() {
-        return items;
-    }
-
-    public void setItems(List items) {
-        this.items = items;
-    }
-
-    public List getChain() {
-        return chain;
-    }
-
-    public void setChain(List chain) {
-        this.chain = chain;
-    }
-
-    public String getCaseId() {
-        return caseId;
-    }
-
-    public void setCaseId(String caseId) {
-        this.caseId = caseId;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public List getPrerequisites() {
-        return prerequisites;
-    }
-
-    public void setPrerequisites(List prerequisites) {
-        this.prerequisites = prerequisites;
+    public void setProfilesExtra(List profiles_extra) {
+        this.profiles_extra = profiles_extra;
     }
 
     public SampleForm getSampleForm() {
@@ -433,80 +514,4 @@ public class SampleModel extends TypeModel {
         this.sampleForm = sampleForm;
     }
 
-    public CaseModel getSampleCase() {
-        return SampleCase;
-    }
-
-    public void setSampleCase(CaseModel sampleCase) {
-        SampleCase = sampleCase;
-    }
-
-    public String getPsychologist_description() {
-        return psychologist_description;
-    }
-
-    public void setPsychologist_description(String psychologist_description) {
-        this.psychologist_description = psychologist_description;
-    }
-
-    public int getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(int created_at) {
-        this.created_at = created_at;
-    }
-
-    public int getStarted_at() {
-        return started_at;
-    }
-
-    public void setStarted_at(int started_at) {
-        this.started_at = started_at;
-    }
-
-    public int getScored_at() {
-        return scored_at;
-    }
-
-    public void setScored_at(int scored_at) {
-        this.scored_at = scored_at;
-    }
-
-    public int getClosed_at() {
-        return closed_at;
-    }
-
-    public void setClosed_at(int closed_at) {
-        this.closed_at = closed_at;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "SampleModel{" +
-                "sampleId='" + sampleId + '\'' +
-                ", sampleTitle='" + sampleTitle + '\'' +
-                ", sampleVersion=" + sampleVersion +
-                ", sampleEdition='" + sampleEdition + '\'' +
-                ", sampleEditionVersion=" + sampleEditionVersion +
-                ", filler='" + filler + '\'' +
-                ", sampleScaleId='" + sampleScaleId + '\'' +
-                ", sampleScaleTitle='" + sampleScaleTitle + '\'' +
-                ", sampleDescription='" + sampleDescription + '\'' +
-                ", items=" + items +
-                ", terms=" + terms +
-                ", primaryTerm='" + primaryTerm + '\'' +
-                ", sampleStatus='" + sampleStatus + '\'' +
-                ", sampleForm=" + sampleForm +
-                '}';
-    }
 }

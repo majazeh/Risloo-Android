@@ -646,8 +646,8 @@ public class BreadCrumb {
             case "SampleModel":
                 sampleModel = (SampleModel) typeModel;
 
-                if (sampleModel.getSampleCase() != null) {
-                    caseModel = sampleModel.getSampleCase();
+                if (sampleModel.getCasse() != null) {
+                    caseModel = sampleModel.getCasse();
 
                     if (caseModel.getRoom() != null) {
                         roomModel = caseModel.getRoom();
@@ -658,8 +658,8 @@ public class BreadCrumb {
                         else
                             centerModel = null;
 
-                    } else if (sampleModel.getSampleRoom() != null) {
-                        roomModel = sampleModel.getSampleRoom();
+                    } else if (sampleModel.getRoom() != null) {
+                        roomModel = sampleModel.getRoom();
                         roomType = roomModel.getType();
 
                         if (roomModel.getCenter() != null)
@@ -677,8 +677,8 @@ public class BreadCrumb {
                 } else {
                     caseModel = null;
 
-                    if (sampleModel.getSampleRoom() != null) {
-                        roomModel = sampleModel.getSampleRoom();
+                    if (sampleModel.getRoom() != null) {
+                        roomModel = sampleModel.getRoom();
                         roomType = roomModel.getType();
 
                         if (roomModel.getCenter() != null)
@@ -1859,10 +1859,10 @@ public class BreadCrumb {
         else
             list = reference();
 
-        if (sampleModel != null && sampleModel.getSampleTitle() != null && !sampleModel.getSampleTitle().equals(""))
-            list.add(sampleModel.getSampleTitle());
-        else if (sampleModel != null && sampleModel.getSampleId() != null && !sampleModel.getSampleId().equals(""))
-            list.add("نمونه" + " " + sampleModel.getSampleId());
+        if (sampleModel != null && sampleModel.getTitle() != null && !sampleModel.getTitle().equals(""))
+            list.add(sampleModel.getTitle());
+        else if (sampleModel != null && sampleModel.getId() != null && !sampleModel.getId().equals(""))
+            list.add("نمونه" + " " + sampleModel.getId());
         else
             list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
 

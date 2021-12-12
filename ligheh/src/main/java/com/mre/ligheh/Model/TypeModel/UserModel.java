@@ -31,7 +31,7 @@ public class UserModel extends TypeModel {
     private SessionPlatformModel session_platform;
     private JSONObject groups;
     private JSONObject meta;
-    private JSONObject dalilyScheduleExports;
+    private JSONObject dalily_schedule_exports;
     private List centers;
     private List rooms;
     private List cases;
@@ -340,11 +340,11 @@ public class UserModel extends TypeModel {
     }
 
     public JSONObject getDalilyScheduleExports() {
-        return dalilyScheduleExports;
+        return dalily_schedule_exports;
     }
 
-    public void setDalilyScheduleExports(JSONObject dalilyScheduleExports) {
-        this.dalilyScheduleExports = dalilyScheduleExports;
+    public void setDalilyScheduleExports(JSONObject dalily_schedule_exports) {
+        this.dalily_schedule_exports = dalily_schedule_exports;
     }
 
     public List getCenters() {
@@ -458,7 +458,7 @@ public class UserModel extends TypeModel {
             if (meta != model.getMeta())
                 return false;
 
-            if (dalilyScheduleExports != model.getDalilyScheduleExports())
+            if (dalily_schedule_exports != model.getDalilyScheduleExports())
                 return false;
 
             if (centers != model.getCenters())
@@ -526,7 +526,7 @@ public class UserModel extends TypeModel {
     public String toString() {
         return "UserModel{" +
                 "id='" + id + '\'' +
-                ", userId='" + user_id + '\'' +
+                ", user_id='" + user_id + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", mobile='" + mobile + '\'' +
@@ -548,7 +548,7 @@ public class UserModel extends TypeModel {
                 ", session_platform=" + session_platform +
                 ", groups=" + groups +
                 ", meta=" + meta +
-                ", dalilyScheduleExports=" + dalilyScheduleExports +
+                ", dalily_schedule_exports=" + dalily_schedule_exports +
                 ", centers=" + centers +
                 ", rooms=" + rooms +
                 ", cases=" + cases +
