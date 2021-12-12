@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.SampleForm;
 
@@ -512,6 +514,201 @@ public class SampleModel extends TypeModel {
 
     public void setSampleForm(SampleForm sampleForm) {
         this.sampleForm = sampleForm;
+    }
+
+    public boolean compareTo(SampleModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
+
+            if (!title.equals(model.getTitle()))
+                return false;
+
+            if (!edition.equals(model.getEdition()))
+                return false;
+
+            if (!filler.equals(model.getFiller()))
+                return false;
+
+            if (!scale_id.equals(model.getScaleId()))
+                return false;
+
+            if (!scale_title.equals(model.getScaleTitle()))
+                return false;
+
+            if (!status.equals(model.getStatus()))
+                return false;
+
+            if (!description.equals(model.getDescription()))
+                return false;
+
+            if (!psychologist_description.equals(model.getPsychologistDescription()))
+                return false;
+
+            if (!primary_term.equals(model.getPrimaryTerm()))
+                return false;
+
+            if (!case_id.equals(model.getCaseId()))
+                return false;
+
+            if (!case_status.equals(model.getCaseStatus()))
+                return false;
+
+            if (!session_id.equals(model.getSessionId()))
+                return false;
+
+            if (!chain_id.equals(model.getChainId()))
+                return false;
+
+            if (version != model.getVersion())
+                return false;
+
+            if (edition_version != model.getEditionVersion())
+                return false;
+
+            if (code != model.getCode())
+                return false;
+
+            if (cornometer != model.getCornometer())
+                return false;
+
+            if (members_count != model.getMembersCount())
+                return false;
+
+            if (joined != model.getJoined())
+                return false;
+
+            if (scored_at != model.getScoredAt())
+                return false;
+
+            if (closed_at != model.getClosedAt())
+                return false;
+
+            if (created_at != model.getCreatedAt())
+                return false;
+
+            if (started_at != model.getStartedAt())
+                return false;
+
+            if (room != model.getRoom())
+                return false;
+
+            if (casse != model.getCasse())
+                return false;
+
+            if (client != model.getClient())
+                return false;
+
+            if (terms != model.getTerms())
+                return false;
+
+            if (members != model.getMembers())
+                return false;
+
+            if (chains != model.getChains())
+                return false;
+
+            if (prerequisites != model.getPrerequisites())
+                return false;
+
+            if (items != model.getItems())
+                return false;
+
+            if (entities != model.getEntities())
+                return false;
+
+            if (profiles != model.getProfiles())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("title", getTitle());
+            super.toObject().put("edition", getEdition());
+            super.toObject().put("filler", getFiller());
+            super.toObject().put("scale_id", getScaleId());
+            super.toObject().put("scale_title", getScaleTitle());
+            super.toObject().put("status", getStatus());
+            super.toObject().put("description", getDescription());
+            super.toObject().put("psychologist_description", getPsychologistDescription());
+            super.toObject().put("primary_term", getPrimaryTerm());
+            super.toObject().put("case_id", getCaseId());
+            super.toObject().put("case_status", getCaseStatus());
+            super.toObject().put("session_id", getStatus());
+            super.toObject().put("chain_id", getChainId());
+            super.toObject().put("version", getVersion());
+            super.toObject().put("edition_version", getEditionVersion());
+            super.toObject().put("code", getCode());
+            super.toObject().put("cornometer", getCornometer());
+            super.toObject().put("members_count", getMembersCount());
+            super.toObject().put("joined", getJoined());
+            super.toObject().put("scored_at", getScoredAt());
+            super.toObject().put("closed_at", getClosedAt());
+            super.toObject().put("created_at", getCreatedAt());
+            super.toObject().put("started_at", getStartedAt());
+            super.toObject().put("room", getRoom().toObject());
+            super.toObject().put("casse", getCasse().toObject());
+            super.toObject().put("client", getClient().toObject());
+            super.toObject().put("terms", getTerms());
+            super.toObject().put("members", getMembers());
+            super.toObject().put("chains", getChains());
+            super.toObject().put("prerequisites", getPrerequisites());
+            super.toObject().put("items", getItems());
+            super.toObject().put("entities", getEntities());
+            super.toObject().put("profiles", getProfiles());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return super.toObject();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "SampleModel{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", edition='" + edition + '\'' +
+                ", filler='" + filler + '\'' +
+                ", scale_id='" + scale_id + '\'' +
+                ", scale_title='" + scale_title + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", psychologist_description='" + psychologist_description + '\'' +
+                ", primary_term='" + primary_term + '\'' +
+                ", case_id='" + case_id + '\'' +
+                ", case_status='" + case_status + '\'' +
+                ", session_id='" + session_id + '\'' +
+                ", chain_id='" + chain_id + '\'' +
+                ", version=" + version +
+                ", edition_version=" + edition_version +
+                ", code=" + code +
+                ", cornometer=" + cornometer +
+                ", members_count=" + members_count +
+                ", joined=" + joined +
+                ", scored_at=" + scored_at +
+                ", closed_at=" + closed_at +
+                ", created_at=" + created_at +
+                ", started_at=" + started_at +
+                ", room=" + room +
+                ", casse=" + casse +
+                ", client=" + client +
+                ", terms=" + terms +
+                ", members=" + members +
+                ", chains=" + chains +
+                ", prerequisites=" + prerequisites +
+                ", items=" + items +
+                ", entities=" + entities +
+                ", profiles=" + profiles +
+                '}';
     }
 
 }
