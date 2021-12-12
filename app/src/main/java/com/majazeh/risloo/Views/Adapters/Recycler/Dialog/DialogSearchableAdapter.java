@@ -150,10 +150,10 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 case "rooms": {
                     RoomModel model = (RoomModel) item;
 
-                    holder.binding.titleTextView.setText(model.getRoomManager().getName());
+                    holder.binding.titleTextView.setText(model.getManager().getName());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    holder.binding.subTextView.setText(model.getRoomCenter().getDetail().getString("title"));
+                    holder.binding.subTextView.setText(model.getCenter().getDetail().getString("title"));
                 } break;
                 case "cases": {
                     CaseModel model = (CaseModel) item;
@@ -258,7 +258,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 if (method.equals("rooms")) {
                     RoomModel model = (RoomModel) item;
 
-                    detector(holder, ((CreateCenterUserFragment) current).centerModel.getId().equals(model.getRoomId()));
+                    detector(holder, ((CreateCenterUserFragment) current).centerModel.getId().equals(model.getId()));
                 }
             }
 
@@ -296,7 +296,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                     case "rooms": {
                         RoomModel model = (RoomModel) item;
 
-                        detector(holder, ((CreateSampleFragment) current).roomId.equals(model.getRoomId()));
+                        detector(holder, ((CreateSampleFragment) current).roomId.equals(model.getId()));
                     } break;
                     case "cases": {
                         CaseModel model = (CaseModel) item;

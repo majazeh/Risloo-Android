@@ -105,7 +105,7 @@ public class RoomFragment extends Fragment {
                         e.printStackTrace();
                     }
                 } else {
-                    IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), roomModel.getRoomManager().getAvatar() .getMedium().getUrl());
+                    IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), roomModel.getManager().getAvatar() .getMedium().getUrl());
                 }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
@@ -117,7 +117,7 @@ public class RoomFragment extends Fragment {
                         if (centerModel != null)
                             ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
                         else
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(roomModel.getCenter());
 
                     } else {
                         ((MainActivity) requireActivity()).navigatoon.navigateToRoomUsersFragment(roomModel);
@@ -127,7 +127,7 @@ public class RoomFragment extends Fragment {
                         if (centerModel != null)
                             ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                         else
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getCenter());
 
                     } else {
                         ((MainActivity) requireActivity()).navigatoon.navigateToRoomSchedulesFragment(roomModel);
@@ -140,7 +140,7 @@ public class RoomFragment extends Fragment {
                         if (centerModel != null)
                             ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                         else
-                            ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel.getRoomCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel.getCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
 
                     } else {
                         ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel, ((MainActivity) requireActivity()).singleton.getUserModel());
@@ -150,7 +150,7 @@ public class RoomFragment extends Fragment {
                         if (centerModel != null)
                             ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
                         else
-                            ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel.getCenter());
 
                     } else {
                         ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel);
@@ -160,7 +160,7 @@ public class RoomFragment extends Fragment {
                         if (centerModel != null)
                             ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
                         else
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(roomModel.getCenter());
 
                     } else {
                         ((MainActivity) requireActivity()).navigatoon.navigateToRoomPlatformsFragment(roomModel);
@@ -170,7 +170,7 @@ public class RoomFragment extends Fragment {
                         if (centerModel != null)
                             ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(centerModel);
                         else
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(roomModel.getCenter());
 
                     } else {
                         ((MainActivity) requireActivity()).navigatoon.navigateToRoomTagsFragment(roomModel);
@@ -180,7 +180,7 @@ public class RoomFragment extends Fragment {
                         if (centerModel != null)
                             ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
                         else
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(roomModel.getRoomCenter());
+                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(roomModel.getCenter());
 
                     }
                 } break;
@@ -207,7 +207,7 @@ public class RoomFragment extends Fragment {
                                 if (centerModel != null)
                                     ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
                                 else
-                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(roomModel.getCenter());
 
                             } else {
                                 ((MainActivity) requireActivity()).navigatoon.navigateToRoomUsersFragment(roomModel);
@@ -217,7 +217,7 @@ public class RoomFragment extends Fragment {
                                 if (centerModel != null)
                                     ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                                 else
-                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getCenter());
 
                             } else {
                                 ((MainActivity) requireActivity()).navigatoon.navigateToRoomSchedulesFragment(roomModel);
@@ -230,7 +230,7 @@ public class RoomFragment extends Fragment {
                                 if (centerModel != null)
                                     ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
                                 else
-                                    ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel.getRoomCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel.getCenter(), ((MainActivity) requireActivity()).singleton.getUserModel());
 
                             } else {
                                 ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(roomModel, ((MainActivity) requireActivity()).singleton.getUserModel());
@@ -240,7 +240,7 @@ public class RoomFragment extends Fragment {
                                 if (centerModel != null)
                                     ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
                                 else
-                                    ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel.getCenter());
 
                             } else {
                                 ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(roomModel);
@@ -250,7 +250,7 @@ public class RoomFragment extends Fragment {
                                 if (centerModel != null)
                                     ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
                                 else
-                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(roomModel.getCenter());
 
                             } else {
                                 ((MainActivity) requireActivity()).navigatoon.navigateToRoomPlatformsFragment(roomModel);
@@ -260,7 +260,7 @@ public class RoomFragment extends Fragment {
                                 if (centerModel != null)
                                     ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(centerModel);
                                 else
-                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterTagsFragment(roomModel.getCenter());
 
                             } else {
                                 ((MainActivity) requireActivity()).navigatoon.navigateToRoomTagsFragment(roomModel);
@@ -270,7 +270,7 @@ public class RoomFragment extends Fragment {
                                 if (centerModel != null)
                                     ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
                                 else
-                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(roomModel.getRoomCenter());
+                                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(roomModel.getCenter());
 
                             }
                         } break;
@@ -296,7 +296,7 @@ public class RoomFragment extends Fragment {
                     if (centerModel != null)
                         ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                     else
-                        ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getRoomCenter());
+                        ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(roomModel.getCenter());
 
                 } else {
                     ((MainActivity) requireActivity()).navigatoon.navigateToRoomSchedulesFragment(roomModel);
@@ -398,40 +398,40 @@ public class RoomFragment extends Fragment {
 
     private void setData(RoomModel model) {
         try {
-            if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-                data.put("id", model.getRoomId());
+            if (model.getId() != null && !model.getId().equals("")) {
+                data.put("id", model.getId());
                 data.put("session_platforms", 1);
             }
 
-            if (model.getRoomType() != null && !model.getRoomType().equals("")) {
-                type = model.getRoomType();
+            if (model.getType() != null && !model.getType().equals("")) {
+                type = model.getType();
             }
 
             if (!type.equals("room")) {
-                if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
-                    binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName());
-                else if (model.getRoomManager() != null && model.getRoomManager().getId() != null && !model.getRoomManager().getId().equals(""))
-                    binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getId());
+                if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals(""))
+                    binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getManager().getName());
+                else if (model.getManager() != null && model.getManager().getId() != null && !model.getManager().getId().equals(""))
+                    binding.nameTextView.setText(requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getManager().getId());
                 else
                     binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             } else {
-                if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
-                    binding.nameTextView.setText(model.getRoomManager().getName());
-                else if (model.getRoomManager() != null && model.getRoomManager().getId() != null && !model.getRoomManager().getId().equals(""))
-                    binding.nameTextView.setText(model.getRoomManager().getId());
+                if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals(""))
+                    binding.nameTextView.setText(model.getManager().getName());
+                else if (model.getManager() != null && model.getManager().getId() != null && !model.getManager().getId().equals(""))
+                    binding.nameTextView.setText(model.getManager().getId());
                 else
                     binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
             }
 
-            if (!type.equals("room") && model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("description") && !model.getRoomCenter().getDetail().isNull("description") && !model.getRoomCenter().getDetail().getString("description").equals("")) {
-                binding.descriptionTextView.setText(model.getRoomCenter().getDetail().getString("description"));
+            if (!type.equals("room") && model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("description") && !model.getCenter().getDetail().isNull("description") && !model.getCenter().getDetail().getString("description").equals("")) {
+                binding.descriptionTextView.setText(model.getCenter().getDetail().getString("description"));
                 binding.descriptionGroup.setVisibility(View.VISIBLE);
             } else {
                 binding.descriptionGroup.setVisibility(View.GONE);
             }
 
-            if (!type.equals("room") && model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("phone_numbers") && !model.getRoomCenter().getDetail().isNull("phone_numbers") && model.getRoomCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
-                binding.mobileTextView.setText(StringManager.phones(requireActivity(), model.getRoomCenter().getDetail().getJSONArray("phone_numbers")));
+            if (!type.equals("room") && model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("phone_numbers") && !model.getCenter().getDetail().isNull("phone_numbers") && model.getCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
+                binding.mobileTextView.setText(StringManager.phones(requireActivity(), model.getCenter().getDetail().getJSONArray("phone_numbers")));
                 binding.mobileTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 binding.mobileGroup.setVisibility(View.VISIBLE);
@@ -439,9 +439,9 @@ public class RoomFragment extends Fragment {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
 
-            if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null && model.getRoomManager().getAvatar() .getMedium().getUrl() != null && !model.getRoomManager().getAvatar().getMedium().getUrl().equals("")) {
+            if (model.getManager() != null && model.getManager().getAvatar() != null && model.getManager().getAvatar().getMedium() != null && model.getManager().getAvatar() .getMedium().getUrl() != null && !model.getManager().getAvatar().getMedium().getUrl().equals("")) {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoomManager().getAvatar() .getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(model.getManager().getAvatar() .getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
@@ -481,17 +481,17 @@ public class RoomFragment extends Fragment {
     }
 
     private void setAcceptation(RoomModel model) {
-        if (model.getRoomAcceptation() != null) {
-            if (!model.getRoomAcceptation().getKickedAt().equals("")) {
+        if (model.getAcceptation() != null) {
+            if (!model.getAcceptation().getKickedAt().equals("")) {
                 setStatus("kicked");
             } else {
-                if (model.getRoomAcceptation().getAcceptedAt() != 0)
-                    switch (model.getRoomAcceptation().getPosition()) {
+                if (model.getAcceptation().getAcceptedAt() != 0)
+                    switch (model.getAcceptation().getPosition()) {
                         case "manager":
                         case "operator":
                         case "psychologist":
                         case "client":
-                            setStatus(model.getRoomAcceptation().getPosition());
+                            setStatus(model.getAcceptation().getPosition());
                             break;
                         default:
                             setStatus("accepted");
@@ -626,7 +626,7 @@ public class RoomFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         try {
                             roomModel = new RoomModel(((JSONObject) object).getJSONObject("room"));
-                            centerModel = roomModel.getRoomCenter();
+                            centerModel = roomModel.getCenter();
                             setData(roomModel);
 
                             if (binding.casesGroup.getVisibility() == View.VISIBLE) {
@@ -654,8 +654,8 @@ public class RoomFragment extends Fragment {
 
                                 // Tags Data
                                 if (!isFiltered) {
-                                    if (!roomModel.getPinned_tags().data().isEmpty()) {
-                                        filterTagAdapter.setItems(roomModel.getPinned_tags().data());
+                                    if (!roomModel.getPinnedTags().data().isEmpty()) {
+                                        filterTagAdapter.setItems(roomModel.getPinnedTags().data());
                                         binding.tagsRecyclerView.setAdapter(filterTagAdapter);
 
                                         binding.casesFilterView.setVisibility(View.VISIBLE);
@@ -698,7 +698,7 @@ public class RoomFragment extends Fragment {
             @Override
             public void onOK(Object object) {
                 roomModel = (RoomModel) object;
-                centerModel = roomModel.getRoomCenter();
+                centerModel = roomModel.getCenter();
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {

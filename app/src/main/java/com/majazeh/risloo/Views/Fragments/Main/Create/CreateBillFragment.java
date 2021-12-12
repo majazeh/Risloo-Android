@@ -231,8 +231,8 @@ public class CreateBillFragment extends Fragment {
             setClients(model.getClients());
         }
 
-        if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getTreasuries() != null && model.getRoom().getRoomCenter().getTreasuries().size() != 0) {
-            setTreasury(model.getRoom().getRoomCenter().getTreasuries());
+        if (model.getRoom() != null && model.getRoom().getCenter() != null && model.getRoom().getCenter().getTreasuries() != null && model.getRoom().getCenter().getTreasuries().size() != 0) {
+            setTreasury(model.getRoom().getCenter().getTreasuries());
         }
     }
 

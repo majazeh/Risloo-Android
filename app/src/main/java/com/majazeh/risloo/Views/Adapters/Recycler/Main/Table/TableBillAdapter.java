@@ -216,7 +216,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         // Finall
         if (current instanceof SessionFragment) {
-            String centerId = ((SessionFragment) current).sessionModel.getRoom().getRoomCenter().getId();
+            String centerId = ((SessionFragment) current).sessionModel.getRoom().getCenter().getId();
 
             if (model.getType().equals("creditor")) {
                 UserModel userModel = ((MainActivity) activity).singleton.getUserModel();

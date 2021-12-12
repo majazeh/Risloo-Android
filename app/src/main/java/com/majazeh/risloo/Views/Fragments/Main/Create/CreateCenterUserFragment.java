@@ -207,12 +207,12 @@ public class CreateCenterUserFragment extends Fragment {
                 case "rooms": {
                     RoomModel model = (RoomModel) item;
 
-                    if (!roomId.equals(model.getRoomId())) {
-                        roomId = model.getRoomId();
+                    if (!roomId.equals(model.getId())) {
+                        roomId = model.getId();
 
-                        binding.roomIncludeLayout.primaryTextView.setText(model.getRoomManager().getName());
-                        binding.roomIncludeLayout.secondaryTextView.setText(model.getRoomCenter().getDetail().getString("title"));
-                    } else if (roomId.equals(model.getRoomId())) {
+                        binding.roomIncludeLayout.primaryTextView.setText(model.getManager().getName());
+                        binding.roomIncludeLayout.secondaryTextView.setText(model.getCenter().getDetail().getString("title"));
+                    } else if (roomId.equals(model.getId())) {
                         roomId = "";
 
                         binding.roomIncludeLayout.primaryTextView.setText("");

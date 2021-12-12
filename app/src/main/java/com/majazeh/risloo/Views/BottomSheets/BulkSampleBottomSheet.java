@@ -124,17 +124,17 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                 Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
 
-            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomCenter() != null && bulkSampleModel.getRoom().getRoomCenter().getDetail() != null && bulkSampleModel.getRoom().getRoomCenter().getDetail().has("title") && !bulkSampleModel.getRoom().getRoomCenter().getDetail().getString("title").equals("")) {
-                binding.centerTextView.setText(bulkSampleModel.getRoom().getRoomCenter().getDetail().getString("title"));
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getDetail() != null && bulkSampleModel.getRoom().getCenter().getDetail().has("title") && !bulkSampleModel.getRoom().getCenter().getDetail().getString("title").equals("")) {
+                binding.centerTextView.setText(bulkSampleModel.getRoom().getCenter().getDetail().getString("title"));
             }
 
-            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomManager() != null && bulkSampleModel.getRoom().getRoomManager().getName() != null) {
-                binding.psychologyTextView.setText(bulkSampleModel.getRoom().getRoomManager().getName());
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getManager() != null && bulkSampleModel.getRoom().getManager().getName() != null) {
+                binding.psychologyTextView.setText(bulkSampleModel.getRoom().getManager().getName());
             }
 
-            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomCenter() != null && bulkSampleModel.getRoom().getRoomCenter().getDetail() != null && bulkSampleModel.getRoom().getRoomCenter().getDetail().has("avatar") && !bulkSampleModel.getRoom().getRoomCenter().getDetail().getString("avatar").equals("") && bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getDetail() != null && bulkSampleModel.getRoom().getCenter().getDetail().has("avatar") && !bulkSampleModel.getRoom().getCenter().getDetail().getString("avatar").equals("") && bulkSampleModel.getRoom().getCenter().getDetail().getJSONArray("avatar").length() != 0) {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(bulkSampleModel.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
@@ -142,9 +142,9 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                 Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             }
 
-            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomManager() != null && bulkSampleModel.getRoom().getRoomManager().getAvatar() != null && bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium() != null && bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getManager() != null && bulkSampleModel.getRoom().getManager().getAvatar() != null && bulkSampleModel.getRoom().getManager().getAvatar().getMedium() != null && bulkSampleModel.getRoom().getManager().getAvatar().getMedium().getUrl() != null) {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-                Picasso.get().load(bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+                Picasso.get().load(bulkSampleModel.getRoom().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
                 binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
@@ -152,7 +152,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                 Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             }
 
-            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomType() != null && bulkSampleModel.getRoom().getRoomType().equals("personal_clinic")) {
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getType() != null && bulkSampleModel.getRoom().getType().equals("personal_clinic")) {
                 binding.psychologyTextView.setVisibility(View.GONE);
                 binding.avatarsIncludeLayout.subGroup.setVisibility(View.GONE);
             }
@@ -162,7 +162,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                 binding.listRecyclerView.setAdapter(sampleAdapter);
             }
 
-            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomCenter() != null && bulkSampleModel.getRoom().getRoomCenter().getAcceptation() != null) {
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getAcceptation() != null) {
                 binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1));
                 binding.nicknameGroup.setVisibility(View.GONE);
             } else {

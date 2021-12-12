@@ -99,7 +99,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
             if (((EditCenterFragment) current).centerModel != null)
                 model = ((EditCenterFragment) current).centerModel;
             else
-                model = ((EditCenterFragment) current).roomModel.getRoomCenter();
+                model = ((EditCenterFragment) current).roomModel.getCenter();
 
             try {
                 if (model.getId() != null && !model.getId().equals("")) {

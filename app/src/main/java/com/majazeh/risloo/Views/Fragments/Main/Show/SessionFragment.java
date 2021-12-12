@@ -510,8 +510,8 @@ public class SessionFragment extends Fragment {
                         setData(sessionModel);
 
                         List psychologists = new List();
-                        if (sessionModel.getRoom() != null && sessionModel.getRoom().getRoomManager() != null)
-                            psychologists.add(sessionModel.getRoom().getRoomManager());
+                        if (sessionModel.getRoom() != null && sessionModel.getRoom().getManager() != null)
+                            psychologists.add(sessionModel.getRoom().getManager());
 
                         // Psychologists Data
                         if (!psychologists.data().isEmpty()) {

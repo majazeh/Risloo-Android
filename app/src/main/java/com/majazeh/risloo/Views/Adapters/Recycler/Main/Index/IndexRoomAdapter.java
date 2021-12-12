@@ -127,15 +127,15 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
         if (current instanceof DashboardFragment) {
             try {
 
-                if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals(""))
-                    holder.binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
-                else if (model.getRoomCenter() != null && model.getRoomCenter().getId() != null && !model.getRoomCenter().getId().equals(""))
-                    holder.binding.nameTextView.setText(model.getRoomCenter().getId());
+                if (model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("title") && !model.getCenter().getDetail().isNull("title") && !model.getCenter().getDetail().getString("title").equals(""))
+                    holder.binding.nameTextView.setText(model.getCenter().getDetail().getString("title"));
+                else if (model.getCenter() != null && model.getCenter().getId() != null && !model.getCenter().getId().equals(""))
+                    holder.binding.nameTextView.setText(model.getCenter().getId());
                 else
                     holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 
-                if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("avatar") && !model.getRoomCenter().getDetail().isNull("avatar") && model.getRoomCenter().getDetail().getJSONArray("avatar").length() != 0)
-                    setAvatar(holder, model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                if (model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("avatar") && !model.getCenter().getDetail().isNull("avatar") && model.getCenter().getDetail().getJSONArray("avatar").length() != 0)
+                    setAvatar(holder, model.getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                 else
                     setAvatar(holder, "");
 
@@ -145,15 +145,15 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
 
         } else {
 
-            if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
-                holder.binding.nameTextView.setText(model.getRoomManager().getName());
-            else if (model.getRoomManager() != null && model.getRoomManager().getId() != null && !model.getRoomManager().getId().equals(""))
-                holder.binding.nameTextView.setText(model.getRoomManager().getId());
+            if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals(""))
+                holder.binding.nameTextView.setText(model.getManager().getName());
+            else if (model.getManager() != null && model.getManager().getId() != null && !model.getManager().getId().equals(""))
+                holder.binding.nameTextView.setText(model.getManager().getId());
             else
                 holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 
-            if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
-                setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
+            if (model.getManager() != null && model.getManager().getAvatar() != null && model.getManager().getAvatar().getMedium() != null)
+                setAvatar(holder, model.getManager().getAvatar().getMedium().getUrl());
             else
                 setAvatar(holder, "");
 
@@ -182,7 +182,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
     }
 
     private void setHashmap(RoomModel model, String value, String method) {
-        data.put("id", model.getRoomId());
+        data.put("id", model.getId());
         data.put(method, value);
 
         if (method.equals("available"))

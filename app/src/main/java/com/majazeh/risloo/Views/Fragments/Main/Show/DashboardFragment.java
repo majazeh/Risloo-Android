@@ -163,7 +163,7 @@ public class DashboardFragment extends Fragment {
                 for (TypeModel typeModel : model.getRoomList().data()) {
                     RoomModel roomModel = (RoomModel) typeModel;
 
-                    if (roomModel != null && roomModel.getRoomAcceptation() != null && roomModel.getRoomAcceptation().getPosition().equals("manager"))
+                    if (roomModel != null && roomModel.getAcceptation() != null && roomModel.getAcceptation().getPosition().equals("manager"))
                         items.add(roomModel);
                 }
 

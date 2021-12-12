@@ -135,7 +135,7 @@ public class ReferenceFragment extends Fragment {
             if (!type.equals("room"))
                 setData(this.centerModel.getAcceptation());
             else
-                setData(this.roomModel.getRoomAcceptation());
+                setData(this.roomModel.getAcceptation());
         } else {
             setData(userModel);
         }
@@ -152,12 +152,12 @@ public class ReferenceFragment extends Fragment {
     }
 
     private void setData(RoomModel model) {
-        if (model.getRoomCenter() != null && model.getRoomCenter().getId() != null && !model.getRoomCenter().getId().equals("")) {
-            data.put("id", model.getRoomCenter().getId());
+        if (model.getCenter() != null && model.getCenter().getId() != null && !model.getCenter().getId().equals("")) {
+            data.put("id", model.getCenter().getId());
         }
 
-        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
-            type = model.getRoomType();
+        if (model.getType() != null && !model.getType().equals("")) {
+            type = model.getType();
         }
     }
 

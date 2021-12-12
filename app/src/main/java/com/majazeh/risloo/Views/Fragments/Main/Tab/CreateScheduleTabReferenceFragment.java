@@ -161,8 +161,8 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
         if (current instanceof CreateScheduleFragment) {
             RoomModel model = ((CreateScheduleFragment) current).roomModel;
 
-            if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-                roomId = model.getRoomId();
+            if (model.getId() != null && !model.getId().equals("")) {
+                roomId = model.getId();
             }
 
             setTypes(model);
@@ -175,14 +175,14 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
         options.add(requireActivity().getResources().getString(R.string.CreateScheduleTabReferenceTypeRisloo));
 
         try {
-            if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals(""))
-                options.add(model.getRoomCenter().getDetail().getString("title"));
+            if (model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("title") && !model.getCenter().getDetail().isNull("title") && !model.getCenter().getDetail().getString("title").equals(""))
+                options.add(model.getCenter().getDetail().getString("title"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
-            String name = requireActivity().getResources().getString(R.string.CreateScheduleTabReferenceRoom) + " " + model.getRoomManager().getName();
+        if (model.getManager().getName() != null && !model.getManager().getName().equals("")) {
+            String name = requireActivity().getResources().getString(R.string.CreateScheduleTabReferenceRoom) + " " + model.getManager().getName();
             options.add(name);
         }
 

@@ -108,10 +108,10 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
                 case "rooms": {
                     RoomModel model = (RoomModel) item;
 
-                    if (model.getRoomManager() != null && !model.getRoomManager().getName().equals(""))
-                        holder.binding.getRoot().setText(model.getRoomManager().getName());
+                    if (model.getManager() != null && !model.getManager().getName().equals(""))
+                        holder.binding.getRoot().setText(model.getManager().getName());
                     else
-                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.DialogScheduleFilterHint) + " " + model.getRoomId());
+                        holder.binding.getRoot().setText(activity.getResources().getString(R.string.DialogScheduleFilterHint) + " " + model.getId());
                 } break;
                 case "status": {
                     String status = item.object.get("id").toString();
@@ -131,7 +131,7 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
                     case "rooms": {
                         RoomModel model = (RoomModel) item;
 
-                        detector(holder, ((CenterSchedulesFragment) current).filterRoom.equals(model.getRoomId()));
+                        detector(holder, ((CenterSchedulesFragment) current).filterRoom.equals(model.getId()));
                     } break;
                     case "status": {
                         String status = item.object.get("id").toString();

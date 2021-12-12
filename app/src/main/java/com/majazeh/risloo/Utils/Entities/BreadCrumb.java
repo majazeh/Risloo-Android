@@ -563,19 +563,19 @@ public class BreadCrumb {
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
                     } else if (bulkSampleModel.getRoom() != null) {
                         roomModel = bulkSampleModel.getRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
@@ -591,10 +591,10 @@ public class BreadCrumb {
 
                     if (bulkSampleModel.getRoom() != null) {
                         roomModel = bulkSampleModel.getRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
@@ -613,10 +613,10 @@ public class BreadCrumb {
 
                 if (caseModel.getCaseRoom() != null) {
                     roomModel = caseModel.getCaseRoom();
-                    roomType = roomModel.getRoomType();
+                    roomType = roomModel.getType();
 
-                    if (roomModel.getRoomCenter() != null)
-                        centerModel = roomModel.getRoomCenter();
+                    if (roomModel.getCenter() != null)
+                        centerModel = roomModel.getCenter();
                     else
                         centerModel = null;
 
@@ -635,10 +635,10 @@ public class BreadCrumb {
                 break;
             case "RoomModel":
                 roomModel = (RoomModel) typeModel;
-                roomType = roomModel.getRoomType();
+                roomType = roomModel.getType();
 
-                if (roomModel.getRoomCenter() != null)
-                    centerModel = roomModel.getRoomCenter();
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
                 else if (navDestination.getId() != R.id.roomFragment)
                     centerModel = null;
 
@@ -651,19 +651,19 @@ public class BreadCrumb {
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
                     } else if (sampleModel.getSampleRoom() != null) {
                         roomModel = sampleModel.getSampleRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
@@ -679,10 +679,10 @@ public class BreadCrumb {
 
                     if (sampleModel.getSampleRoom() != null) {
                         roomModel = sampleModel.getSampleRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
@@ -709,19 +709,19 @@ public class BreadCrumb {
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
                     } else if (scheduleModel.getRoom() != null) {
                         roomModel = scheduleModel.getRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
@@ -737,10 +737,10 @@ public class BreadCrumb {
 
                     if (scheduleModel.getRoom() != null) {
                         roomModel = scheduleModel.getRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
@@ -762,19 +762,19 @@ public class BreadCrumb {
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
                     } else if (sessionModel.getRoom() != null) {
                         roomModel = sessionModel.getRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
@@ -790,10 +790,10 @@ public class BreadCrumb {
 
                     if (sessionModel.getRoom() != null) {
                         roomModel = sessionModel.getRoom();
-                        roomType = roomModel.getRoomType();
+                        roomType = roomModel.getType();
 
-                        if (roomModel.getRoomCenter() != null)
-                            centerModel = roomModel.getRoomCenter();
+                        if (roomModel.getCenter() != null)
+                            centerModel = roomModel.getCenter();
                         else
                             centerModel = null;
 
@@ -1827,10 +1827,10 @@ public class BreadCrumb {
             else
                 list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         } else {
-            if (roomModel != null && roomModel.getRoomManager() != null && roomModel.getRoomManager().getName() != null && !roomModel.getRoomManager().getName().equals(""))
-                list.add("اتاق درمان" + " " + roomModel.getRoomManager().getName());
-            else if (roomModel != null && roomModel.getRoomId() != null && !roomModel.getRoomId().equals(""))
-                list.add("اتاق درمان" + " " + roomModel.getRoomId());
+            if (roomModel != null && roomModel.getManager() != null && roomModel.getManager().getName() != null && !roomModel.getManager().getName().equals(""))
+                list.add("اتاق درمان" + " " + roomModel.getManager().getName());
+            else if (roomModel != null && roomModel.getId() != null && !roomModel.getId().equals(""))
+                list.add("اتاق درمان" + " " + roomModel.getId());
             else
                 list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
         }

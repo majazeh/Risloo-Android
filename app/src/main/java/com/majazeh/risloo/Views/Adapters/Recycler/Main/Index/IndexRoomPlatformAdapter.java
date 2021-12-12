@@ -281,7 +281,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
 
     private void setHashmap(SessionPlatformModel model, String value, String method) {
         if (current instanceof RoomPlatformsFragment)
-            data.put("id", ((RoomPlatformsFragment) current).roomModel.getRoomId());
+            data.put("id", ((RoomPlatformsFragment) current).roomModel.getId());
 
         data.put("platformId", model.getId());
         data.put(method, value);

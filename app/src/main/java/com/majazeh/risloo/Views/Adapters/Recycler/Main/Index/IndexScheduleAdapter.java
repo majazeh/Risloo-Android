@@ -129,7 +129,7 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
     private void setData(IndexScheduleHolder holder, ScheduleModel model) {
         holder.binding.timeTextView.setText("ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())));
         holder.binding.durationTextView.setText(model.getDuration() + " دقیقه");
-        holder.binding.nameTextView.setText(model.getRoom().getRoomManager().getName());
+        holder.binding.nameTextView.setText(model.getRoom().getManager().getName());
 
         setClients(holder, model.getClients());
 
@@ -141,8 +141,8 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
 
         setStatus(holder, model.getStatus());
 
-        if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null)
-            setAvatar(holder, model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
+        if (model.getRoom() != null && model.getRoom().getManager() != null && model.getRoom().getManager().getAvatar() != null && model.getRoom().getManager().getAvatar().getMedium() != null)
+            setAvatar(holder, model.getRoom().getManager().getAvatar().getMedium().getUrl());
         else
             setAvatar(holder, "");
     }

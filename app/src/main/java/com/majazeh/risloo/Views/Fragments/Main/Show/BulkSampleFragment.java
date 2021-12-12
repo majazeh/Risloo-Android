@@ -97,7 +97,7 @@ public class BulkSampleFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             if (binding.avatarsIncludeLayout.charTextView.getVisibility() == View.GONE) {
                 try {
-                    IntentManager.display(requireActivity(), binding.centerTextView.getText().toString(), bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                    IntentManager.display(requireActivity(), binding.centerTextView.getText().toString(), bulkSampleModel.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -106,7 +106,7 @@ public class BulkSampleFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.avatarsIncludeLayout.charSubTextView.getVisibility() == View.GONE)
-                IntentManager.display(requireActivity(), binding.psychologyTextView.getText().toString(), bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
+                IntentManager.display(requireActivity(), binding.psychologyTextView.getText().toString(), bulkSampleModel.getRoom().getManager().getAvatar().getMedium().getUrl());
         }).widget(binding.avatarsIncludeLayout.avatarSubCircleImageView);
 
         CustomClickView.onClickListener(() -> {
@@ -170,17 +170,17 @@ public class BulkSampleFragment extends Fragment {
                 data.put("id", model.getId());
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().getString("title").equals("")) {
-                binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
+            if (model.getRoom() != null && model.getRoom().getCenter() != null && model.getRoom().getCenter().getDetail() != null && model.getRoom().getCenter().getDetail().has("title") && !model.getRoom().getCenter().getDetail().getString("title").equals("")) {
+                binding.centerTextView.setText(model.getRoom().getCenter().getDetail().getString("title"));
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getName() != null) {
-                binding.psychologyTextView.setText(model.getRoom().getRoomManager().getName());
+            if (model.getRoom() != null && model.getRoom().getManager() != null && model.getRoom().getManager().getName() != null) {
+                binding.psychologyTextView.setText(model.getRoom().getManager().getName());
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("avatar") && !model.getRoom().getRoomCenter().getDetail().getString("avatar").equals("") && model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
+            if (model.getRoom() != null && model.getRoom().getCenter() != null && model.getRoom().getCenter().getDetail() != null && model.getRoom().getCenter().getDetail().has("avatar") && !model.getRoom().getCenter().getDetail().getString("avatar").equals("") && model.getRoom().getCenter().getDetail().getJSONArray("avatar").length() != 0) {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(model.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
@@ -188,9 +188,9 @@ public class BulkSampleFragment extends Fragment {
                 Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null && model.getRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
+            if (model.getRoom() != null && model.getRoom().getManager() != null && model.getRoom().getManager().getAvatar() != null && model.getRoom().getManager().getAvatar().getMedium() != null && model.getRoom().getManager().getAvatar().getMedium().getUrl() != null) {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+                Picasso.get().load(model.getRoom().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
                 binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
@@ -198,7 +198,7 @@ public class BulkSampleFragment extends Fragment {
                 Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomType() != null && model.getRoom().getRoomType().equals("personal_clinic")) {
+            if (model.getRoom() != null && model.getRoom().getType() != null && model.getRoom().getType().equals("personal_clinic")) {
                 binding.psychologyTextView.setVisibility(View.GONE);
                 binding.avatarsIncludeLayout.subGroup.setVisibility(View.GONE);
             }

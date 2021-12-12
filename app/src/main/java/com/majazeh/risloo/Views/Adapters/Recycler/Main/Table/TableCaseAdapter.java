@@ -105,8 +105,8 @@ public class TableCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (model.getCaseManager() != null)
                 holder.binding.roomTextView.setText(model.getCaseManager().getName());
 
-            if (model.getCaseRoom() != null && model.getCaseRoom().getRoomCenter() != null && model.getCaseRoom().getRoomCenter().getDetail() != null && model.getCaseRoom().getRoomCenter().getDetail().has("title") && !model.getCaseRoom().getRoomCenter().getDetail().getString("title").equals(""))
-                holder.binding.centerTextView.setText(model.getCaseRoom().getRoomCenter().getDetail().getString("title"));
+            if (model.getCaseRoom() != null && model.getCaseRoom().getCenter() != null && model.getCaseRoom().getCenter().getDetail() != null && model.getCaseRoom().getCenter().getDetail().has("title") && !model.getCaseRoom().getCenter().getDetail().getString("title").equals(""))
+                holder.binding.centerTextView.setText(model.getCaseRoom().getCenter().getDetail().getString("title"));
 
             setClients(holder, model.getClients());
         } catch (JSONException e) {

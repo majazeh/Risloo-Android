@@ -80,8 +80,8 @@ public class EditSessionTabPlatformFragment extends Fragment {
                     adapter.addItem(spm);
                 }
 
-                if (model.getRoom() != null && !model.getRoom().getSession_platforms().data().isEmpty()) {
-                    ArrayList<TypeModel> roomPlatforms = model.getRoom().getSession_platforms().data();
+                if (model.getRoom() != null && !model.getRoom().getSessionPlatforms().data().isEmpty()) {
+                    ArrayList<TypeModel> roomPlatforms = model.getRoom().getSessionPlatforms().data();
 
                     for (int i = 0; i < roomPlatforms.size(); i++) {
                         SessionPlatformModel rpm = (SessionPlatformModel) roomPlatforms.get(i);
@@ -99,8 +99,8 @@ public class EditSessionTabPlatformFragment extends Fragment {
 
                 binding.platformsSingleLayout.recyclerView.setAdapter(adapter);
                 binding.platformsSingleLayout.emptyView.setVisibility(View.GONE);
-            } else if (model.getRoom() != null && !model.getRoom().getSession_platforms().data().isEmpty()) {
-                ArrayList<TypeModel> roomPlatforms = model.getRoom().getSession_platforms().data();
+            } else if (model.getRoom() != null && !model.getRoom().getSessionPlatforms().data().isEmpty()) {
+                ArrayList<TypeModel> roomPlatforms = model.getRoom().getSessionPlatforms().data();
 
                 for (int i = 0; i < roomPlatforms.size(); i++) {
                     SessionPlatformModel rpm = (SessionPlatformModel) roomPlatforms.get(i);

@@ -220,16 +220,16 @@ public class CenterSchedulesFragment extends Fragment {
                 if (item != null) {
                     RoomModel model = (RoomModel) item;
 
-                    if (!filterRoom.equals(model.getRoomId())) {
-                        filterRoom = model.getRoomId();
+                    if (!filterRoom.equals(model.getId())) {
+                        filterRoom = model.getId();
 
-                        if (model.getRoomManager() != null && !model.getRoomManager().getName().equals(""))
-                            binding.filterIncludeLayout.roomFilterLayout.titleTextView.setText(model.getRoomManager().getName());
+                        if (model.getManager() != null && !model.getManager().getName().equals(""))
+                            binding.filterIncludeLayout.roomFilterLayout.titleTextView.setText(model.getManager().getName());
                         else
                             binding.filterIncludeLayout.roomFilterLayout.titleTextView.setText(requireActivity().getResources().getString(R.string.DialogScheduleFilterHint) + " " + filterRoom);
 
                         binding.filterIncludeLayout.roomFilterLayout.getRoot().setVisibility(View.VISIBLE);
-                    } else if (filterRoom.equals(model.getRoomId())) {
+                    } else if (filterRoom.equals(model.getId())) {
                         filterRoom = "";
 
                         binding.filterIncludeLayout.roomFilterLayout.titleTextView.setText("");

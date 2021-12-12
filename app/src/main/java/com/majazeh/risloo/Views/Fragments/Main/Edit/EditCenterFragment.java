@@ -102,8 +102,8 @@ public class EditCenterFragment extends Fragment {
     }
 
     private void setData(RoomModel model) {
-        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
-            type = model.getRoomType();
+        if (model.getType() != null && !model.getType().equals("")) {
+            type = model.getType();
         }
 
         adapter = new EditCenterAdapter(requireActivity(), type);

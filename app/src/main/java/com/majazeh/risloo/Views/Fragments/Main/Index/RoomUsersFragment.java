@@ -142,8 +142,8 @@ public class RoomUsersFragment extends Fragment {
     }
 
     private void setData(RoomModel model) {
-        if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            data.put("id", model.getRoomId());
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
         }
     }
 

@@ -203,8 +203,8 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         else
             holder.binding.bulkTextView.setVisibility(View.GONE);
 
-        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null)
-            holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
+        if (model.getSampleRoom() != null && model.getSampleRoom().getManager() != null)
+            holder.binding.roomTextView.setText(model.getSampleRoom().getManager().getName());
 
         if (model.getSampleCase() != null)
             holder.binding.caseTextView.setText("پرونده " + model.getSampleCase().getCaseId());

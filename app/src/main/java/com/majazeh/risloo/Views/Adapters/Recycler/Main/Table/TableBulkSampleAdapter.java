@@ -164,13 +164,13 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             holder.binding.nameTextView.setText(model.getTitle());
             holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCase_status()));
 
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null)
-                holder.binding.roomTextView.setText(model.getRoom().getRoomManager().getName());
+            if (model.getRoom() != null && model.getRoom().getManager() != null)
+                holder.binding.roomTextView.setText(model.getRoom().getManager().getName());
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().getString("title").equals(""))
-                holder.binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
+            if (model.getRoom() != null && model.getRoom().getCenter() != null && model.getRoom().getCenter().getDetail() != null && model.getRoom().getCenter().getDetail().has("title") && !model.getRoom().getCenter().getDetail().getString("title").equals(""))
+                holder.binding.centerTextView.setText(model.getRoom().getCenter().getDetail().getString("title"));
 
-            if (model.getRoom() != null && model.getRoom().getRoomType() != null && model.getRoom().getRoomType().equals("personal_clinic"))
+            if (model.getRoom() != null && model.getRoom().getType() != null && model.getRoom().getType().equals("personal_clinic"))
                 holder.binding.centerTextView.setVisibility(View.GONE);
 
             holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getStatus()));

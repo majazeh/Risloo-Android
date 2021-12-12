@@ -234,7 +234,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                         data.put("id", centerModel.getId());
                     } else if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
                         RoomModel roomModel = (RoomModel) ((CreateCaseFragment) current).typeModel;
-                        data.put("id", roomModel.getRoomId());
+                        data.put("id", roomModel.getId());
                     }
 
                     data.put("usage", "create_case");
@@ -245,7 +245,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                         data.put("region", centerModel.getId());
                     } else if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
                         RoomModel roomModel = (RoomModel) ((CreateCaseFragment) current).typeModel;
-                        data.put("region", roomModel.getRoomCenter().getId());
+                        data.put("region", roomModel.getCenter().getId());
                     }
 
                     break;
@@ -254,7 +254,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CreateCaseUserFragment) {
             if (method.equals("references")) {
-                data.put("id", ((CreateCaseUserFragment) current).caseModel.getCaseRoom().getRoomId());
+                data.put("id", ((CreateCaseUserFragment) current).caseModel.getCaseRoom().getId());
                 data.put("not_in_case", ((CreateCaseUserFragment) current).caseModel.getCaseId());
             }
         }
@@ -284,8 +284,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof CreateRoomUserFragment) {
             if (method.equals("references")) {
-                data.put("id", ((CreateRoomUserFragment) current).roomModel.getRoomCenter().getId());
-                data.put("acceptation_room", ((CreateRoomUserFragment) current).roomModel.getRoomId());
+                data.put("id", ((CreateRoomUserFragment) current).roomModel.getCenter().getId());
+                data.put("acceptation_room", ((CreateRoomUserFragment) current).roomModel.getId());
             }
         }
 
@@ -349,7 +349,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (current instanceof RoomTagsFragment) {
             if (method.equals("tags"))
-                data.put("region", ((RoomTagsFragment) current).roomModel.getRoomId());
+                data.put("region", ((RoomTagsFragment) current).roomModel.getId());
         }
 
         getData();

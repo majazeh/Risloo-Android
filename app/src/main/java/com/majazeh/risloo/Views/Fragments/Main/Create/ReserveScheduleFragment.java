@@ -292,12 +292,12 @@ public class ReserveScheduleFragment extends Fragment {
             binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
         }
 
-        if (model.getRoom() != null && model.getRoom().getRoomId() != null && !model.getRoom().getRoomId().equals("")) {
-            roomId = model.getRoom().getRoomId();
+        if (model.getRoom() != null && model.getRoom().getId() != null && !model.getRoom().getId().equals("")) {
+            roomId = model.getRoom().getId();
         }
 
-        if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getId() != null && !model.getRoom().getRoomCenter().getId().equals("")) {
-            centerId = model.getRoom().getRoomCenter().getId();
+        if (model.getRoom() != null && model.getRoom().getCenter() != null && model.getRoom().getCenter().getId() != null && !model.getRoom().getCenter().getId().equals("")) {
+            centerId = model.getRoom().getCenter().getId();
         }
 
         if (model.getFields() != null && model.getFields().length() != 0) {

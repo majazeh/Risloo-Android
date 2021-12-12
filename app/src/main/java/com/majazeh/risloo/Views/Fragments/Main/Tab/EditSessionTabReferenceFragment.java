@@ -179,8 +179,8 @@ public class EditSessionTabReferenceFragment extends Fragment {
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
-            if (model.getRoom() != null && model.getRoom().getRoomId() != null) {
-                roomId = model.getRoom().getRoomId();
+            if (model.getRoom() != null && model.getRoom().getId() != null) {
+                roomId = model.getRoom().getId();
             }
 
             if (model.getRoom() != null) {
@@ -266,14 +266,14 @@ public class EditSessionTabReferenceFragment extends Fragment {
         options.add(requireActivity().getResources().getString(R.string.EditSessionTabReferenceTypeRisloo));
 
         try {
-            if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals(""))
-                options.add(model.getRoomCenter().getDetail().getString("title"));
+            if (model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("title") && !model.getCenter().getDetail().isNull("title") && !model.getCenter().getDetail().getString("title").equals(""))
+                options.add(model.getCenter().getDetail().getString("title"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
-            String name = requireActivity().getResources().getString(R.string.EditSessionTabReferenceRoom) + " " + model.getRoomManager().getName();
+        if (model.getManager().getName() != null && !model.getManager().getName().equals("")) {
+            String name = requireActivity().getResources().getString(R.string.EditSessionTabReferenceRoom) + " " + model.getManager().getName();
             options.add(name);
         }
 

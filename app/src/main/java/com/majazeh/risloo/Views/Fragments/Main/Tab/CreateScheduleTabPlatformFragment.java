@@ -68,8 +68,8 @@ public class CreateScheduleTabPlatformFragment extends Fragment {
         if (current instanceof CreateScheduleFragment) {
             RoomModel model = ((CreateScheduleFragment) current).roomModel;
 
-            if (!model.getSession_platforms().data().isEmpty()) {
-                adapter.setItems(model.getSession_platforms().data());
+            if (!model.getSessionPlatforms().data().isEmpty()) {
+                adapter.setItems(model.getSessionPlatforms().data());
                 binding.platformsSingleLayout.recyclerView.setAdapter(adapter);
 
                 binding.platformsSingleLayout.emptyView.setVisibility(View.GONE);

@@ -1,145 +1,243 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import com.mre.ligheh.Model.Madule.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RoomModel extends TypeModel {
-    private String RoomId="";
-    private UserModel RoomCreator;
-    private UserModel RoomManager;
-    private CenterModel RoomCenter;
-    private AcceptationModel RoomAcceptation;
-    private String RoomStatus="";
-    private String RoomType="";
-    private int RoomCreated_at;
-    private int RoomUpdated_at;
+    private String id = "";
+    private String status = "";
+    private String type = "";
+    private int created_at;
+    private int updated_at;
+    private UserModel creator;
+    private UserModel manager;
+    private CenterModel center;
+    private AcceptationModel acceptation;
     private List session_platforms;
     private List pinned_tags;
 
     public RoomModel(JSONObject jsonObject) throws JSONException {
         super(jsonObject);
-        setRoomId(jsonObject.getString("id"));
-        if (!jsonObject.isNull("creator"))
-            setRoomCreator(new UserModel(jsonObject.getJSONObject("creator")));
-        if (!jsonObject.isNull("manager"))
-            setRoomManager(new UserModel(jsonObject.getJSONObject("manager")));
-        if (!jsonObject.isNull("center"))
-            setRoomCenter(new CenterModel(jsonObject.getJSONObject("center")));
-        if (!jsonObject.isNull("acceptation"))
-            setRoomAcceptation(new AcceptationModel(jsonObject.getJSONObject("acceptation")));
-        if (!jsonObject.isNull("status"))
-            setRoomStatus(jsonObject.getString("status"));
-        if (!jsonObject.isNull("type"))
-            setRoomType(jsonObject.getString("type"));
-        if (!jsonObject.isNull("created_at"))
-            setRoomCreated_at(jsonObject.getInt("created_at"));
-        if (!jsonObject.isNull("updated_at"))
-            setRoomUpdated_at(jsonObject.getInt("updated_at"));
-        if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
-            session_platforms = new com.mre.ligheh.Model.Madule.List();
-            for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++) {
-                session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("session_platforms").getJSONObject(i)));
+
+        try {
+            if (!jsonObject.isNull("id"))
+                setId(jsonObject.getString("id"));
+            if (!jsonObject.isNull("status"))
+                setStatus(jsonObject.getString("status"));
+            if (!jsonObject.isNull("type"))
+                setType(jsonObject.getString("type"));
+
+            if (!jsonObject.isNull("created_at"))
+                setCreatedAt(jsonObject.getInt("created_at"));
+            if (!jsonObject.isNull("updated_at"))
+                setUpdatedAt(jsonObject.getInt("updated_at"));
+
+            if (!jsonObject.isNull("creator"))
+                setCreator(new UserModel(jsonObject.getJSONObject("creator")));
+            if (!jsonObject.isNull("manager"))
+                setManager(new UserModel(jsonObject.getJSONObject("manager")));
+            if (!jsonObject.isNull("center"))
+                setCenter(new CenterModel(jsonObject.getJSONObject("center")));
+            if (!jsonObject.isNull("acceptation"))
+                setAcceptation(new AcceptationModel(jsonObject.getJSONObject("acceptation")));
+
+            if (!jsonObject.isNull("session_platforms")) {
+                session_platforms = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++)
+                    session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("session_platforms").getJSONObject(i)));
+
+                setSessionPlatforms(session_platforms);
+            } else {
+                setSessionPlatforms(new List());
             }
-        }else{
-            setSession_platforms(new List());
-        }
-        if (!jsonObject.isNull("pinned_tags") && jsonObject.getJSONArray("pinned_tags").length() != 0) {
-            pinned_tags = new com.mre.ligheh.Model.Madule.List();
-            for (int i = 0; i < jsonObject.getJSONArray("pinned_tags").length(); i++) {
-                pinned_tags.add(new TagModel(jsonObject.getJSONArray("pinned_tags").getJSONObject(i)));
+
+            if (!jsonObject.isNull("pinned_tags")) {
+                pinned_tags = new List();
+
+                for (int i = 0; i < jsonObject.getJSONArray("pinned_tags").length(); i++)
+                    pinned_tags.add(new TagModel(jsonObject.getJSONArray("pinned_tags").getJSONObject(i)));
+
+                setPinnedTags(pinned_tags);
+            } else {
+                setPinnedTags(new List());
             }
-        }else{
-            setPinned_tags(new List());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
-    public String getRoomId() {
-        return RoomId;
+    public String getId() {
+        return id;
     }
 
-    public void setRoomId(String roomId) {
-        RoomId = roomId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public UserModel getRoomCreator() {
-        return RoomCreator;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRoomCreator(UserModel roomCreator) {
-        RoomCreator = roomCreator;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public UserModel getRoomManager() {
-        return RoomManager;
+    public String getType() {
+        return type;
     }
 
-    public void setRoomManager(UserModel roomManager) {
-        RoomManager = roomManager;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public CenterModel getRoomCenter() {
-        return RoomCenter;
+    public int getCreatedAt() {
+        return created_at;
     }
 
-    public void setRoomCenter(CenterModel roomCenter) {
-        RoomCenter = roomCenter;
+    public void setCreatedAt(int created_at) {
+        this.created_at = created_at;
     }
 
-    public AcceptationModel getRoomAcceptation() {
-        return RoomAcceptation;
+    public int getUpdatedAt() {
+        return updated_at;
     }
 
-    public void setRoomAcceptation(AcceptationModel roomAcceptation) {
-        RoomAcceptation = roomAcceptation;
+    public void setUpdatedAt(int updated_at) {
+        this.updated_at = updated_at;
     }
 
-    public String getRoomStatus() {
-        return RoomStatus;
+    public UserModel getCreator() {
+        return creator;
     }
 
-    public void setRoomStatus(String roomStatus) {
-        RoomStatus = roomStatus;
+    public void setCreator(UserModel creator) {
+        this.creator = creator;
     }
 
-    public String getRoomType() {
-        return RoomType;
+    public UserModel getManager() {
+        return manager;
     }
 
-    public void setRoomType(String roomType) {
-        RoomType = roomType;
+    public void setManager(UserModel manager) {
+        this.manager = manager;
     }
 
-    public int getRoomCreated_at() {
-        return RoomCreated_at;
+    public CenterModel getCenter() {
+        return center;
     }
 
-    public void setRoomCreated_at(int roomCreated_at) {
-        RoomCreated_at = roomCreated_at;
+    public void setCenter(CenterModel center) {
+        this.center = center;
     }
 
-    public int getRoomUpdated_at() {
-        return RoomUpdated_at;
+    public AcceptationModel getAcceptation() {
+        return acceptation;
     }
 
-    public void setRoomUpdated_at(int roomUpdated_at) {
-        RoomUpdated_at = roomUpdated_at;
+    public void setAcceptation(AcceptationModel acceptation) {
+        this.acceptation = acceptation;
     }
 
-    public List getSession_platforms() {
+    public List getSessionPlatforms() {
         return session_platforms;
     }
 
-    public void setSession_platforms(List session_platforms) {
+    public void setSessionPlatforms(List session_platforms) {
         this.session_platforms = session_platforms;
     }
 
-    public List getPinned_tags() {
+    public List getPinnedTags() {
         return pinned_tags;
     }
 
-    public void setPinned_tags(List pinned_tags) {
+    public void setPinnedTags(List pinned_tags) {
         this.pinned_tags = pinned_tags;
     }
+
+    public boolean compareTo(RoomModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
+
+            if (!status.equals(model.getStatus()))
+                return false;
+
+            if (!type.equals(model.getType()))
+                return false;
+
+            if (created_at != model.getCreatedAt())
+                return false;
+
+            if (updated_at != model.getUpdatedAt())
+                return false;
+
+            if (creator != model.getCreator())
+                return false;
+
+            if (manager != model.getManager())
+                return false;
+
+            if (center != model.getCenter())
+                return false;
+
+            if (acceptation != model.getAcceptation())
+                return false;
+
+            if (session_platforms != model.getSessionPlatforms())
+                return false;
+
+            if (pinned_tags != model.getPinnedTags())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("status", getStatus());
+            super.toObject().put("type", getType());
+            super.toObject().put("created_at", getCreatedAt());
+            super.toObject().put("updated_at", getUpdatedAt());
+            super.toObject().put("creator", getCreator().toObject());
+            super.toObject().put("center", getCenter().toObject());
+            super.toObject().put("manager", getManager().toObject());
+            super.toObject().put("acceptation", getAcceptation().toObject());
+            super.toObject().put("session_platforms", getSessionPlatforms().toObject());
+            super.toObject().put("pinned_tags", getPinnedTags().toObject());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return super.toObject();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "RoomModel{" +
+                "id='" + id + '\'' +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
+                ", created_at=" + created_at +
+                ", updated_at=" + updated_at +
+                ", creator=" + creator +
+                ", manager=" + manager +
+                ", center=" + center +
+                ", acceptation=" + acceptation +
+                ", session_platforms=" + session_platforms +
+                ", pinned_tags=" + pinned_tags +
+                '}';
+    }
+
 }
