@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import com.mre.ligheh.Model.Madule.List;
 
 import org.json.JSONArray;
@@ -401,6 +403,176 @@ public class SessionModel extends TypeModel {
 
     public void setAvailableSessionPlatforms(List available_session_platforms) {
         this.available_session_platforms = available_session_platforms;
+    }
+
+    public boolean compareTo(SessionModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
+
+            if (!status.equals(model.getStatus()))
+                return false;
+
+            if (!type.equals(model.getType()))
+                return false;
+
+            if (!description.equals(model.getDescription()))
+                return false;
+
+            if (!report.equals(model.getReport()))
+                return false;
+
+            if (!selected_field.equals(model.getSelectedField()))
+                return false;
+
+            if (!client_reminder.equals(model.getClientReminder()))
+                return false;
+
+            if (!payment_status.equals(model.getPaymentStatus()))
+                return false;
+
+            if (!selection_type.equals(model.getSelectionType()))
+                return false;
+
+            if (!clients_type.equals(model.getClientsType()))
+                return false;
+
+            if (!encryption_type.equals(model.getEncryptionType()))
+                return false;
+
+            if (!opens_at_type.equals(model.getOpensAtType()))
+                return false;
+
+            if (!closed_at_type.equals(model.getClosedAtType()))
+                return false;
+
+            if (duration != model.getDuration())
+                return false;
+
+            if (clients_number != model.getClientsNumber())
+                return false;
+
+            if (opens_at != model.getOpensAt())
+                return false;
+
+            if (closed_at != model.getClosedAt())
+                return false;
+
+            if (started_at != model.getStartedAt())
+                return false;
+
+            if (canceled_at != model.getCanceledAt())
+                return false;
+
+            if (!isGroupSession())
+                return false;
+
+            if (room != model.getRoom())
+                return false;
+
+            if (casse != model.getCasse())
+                return false;
+
+            if (fields != model.getFields())
+                return false;
+
+            if (practices != model.getPractices())
+                return false;
+
+            if (clients != model.getClients())
+                return false;
+
+            if (samples != model.getSamples())
+                return false;
+
+            if (session_platforms != model.getSessionPlatforms())
+                return false;
+
+            if (transactions != model.getTransactions())
+                return false;
+
+            if (available_session_platforms != model.getAvailableSessionPlatforms())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("status", getStatus());
+            super.toObject().put("type", getType());
+            super.toObject().put("description", getDescription());
+            super.toObject().put("report", getReport());
+            super.toObject().put("selected_field", getSelectedField());
+            super.toObject().put("client_reminder", getClientReminder());
+            super.toObject().put("payment_status", getPaymentStatus());
+            super.toObject().put("selection_type", getSelectionType());
+            super.toObject().put("clients_type", getClientsType());
+            super.toObject().put("encryption_type", getEncryptionType());
+            super.toObject().put("opens_at_type", getOpensAtType());
+            super.toObject().put("closed_at_type", getClosedAtType());
+            super.toObject().put("duration", getDuration());
+            super.toObject().put("clients_number", getClientsNumber());
+            super.toObject().put("opens_at", getOpensAt());
+            super.toObject().put("closed_at", getClosedAt());
+            super.toObject().put("started_at", getStartedAt());
+            super.toObject().put("canceled_at", getCanceledAt());
+            super.toObject().put("group_session", isGroupSession());
+            super.toObject().put("room", getRoom().toObject());
+            super.toObject().put("casse", getCasse().toObject());
+            super.toObject().put("fields", getFields());
+            super.toObject().put("practices", getPractices());
+            super.toObject().put("clients", getClients());
+            super.toObject().put("samples", getSamples());
+            super.toObject().put("session_platforms", getSessionPlatforms());
+            super.toObject().put("transactions", getTransactions());
+            super.toObject().put("available_session_platforms", getAvailableSessionPlatforms());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return super.toObject();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "SessionModel{" +
+                "id='" + id + '\'' +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", report='" + report + '\'' +
+                ", selected_field='" + selected_field + '\'' +
+                ", client_reminder='" + client_reminder + '\'' +
+                ", payment_status='" + payment_status + '\'' +
+                ", selection_type='" + selection_type + '\'' +
+                ", clients_type='" + clients_type + '\'' +
+                ", encryption_type='" + encryption_type + '\'' +
+                ", opens_at_type='" + opens_at_type + '\'' +
+                ", closed_at_type='" + closed_at_type + '\'' +
+                ", duration=" + duration +
+                ", clients_number=" + clients_number +
+                ", opens_at=" + opens_at +
+                ", closed_at=" + closed_at +
+                ", started_at=" + started_at +
+                ", canceled_at=" + canceled_at +
+                ", group_session=" + group_session +
+                ", room=" + room +
+                ", casse=" + casse +
+                ", fields=" + fields +
+                ", practices=" + practices +
+                ", clients=" + clients +
+                ", samples=" + samples +
+                ", session_platforms=" + session_platforms +
+                ", transactions=" + transactions +
+                ", available_session_platforms=" + available_session_platforms +
+                '}';
     }
 
 }

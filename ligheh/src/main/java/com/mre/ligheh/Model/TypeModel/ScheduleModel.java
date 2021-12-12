@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import com.mre.ligheh.Model.Madule.List;
 
 import org.json.JSONArray;
@@ -275,6 +277,126 @@ public class ScheduleModel extends TypeModel {
 
     public void setTreasuries(List treasuries) {
         this.session_platforms = session_platforms;
+    }
+
+    public boolean compareTo(ScheduleModel model) {
+        if (model != null) {
+            if (!id.equals(model.getId()))
+                return false;
+
+            if (!status.equals(model.getStatus()))
+                return false;
+
+            if (!type.equals(model.getType()))
+                return false;
+
+            if (!description.equals(model.getDescription()))
+                return false;
+
+            if (!payment_status.equals(model.getPaymentStatus()))
+                return false;
+
+            if (!selection_type.equals(model.getSelectionType()))
+                return false;
+
+            if (!clients_type.equals(model.getClientsType()))
+                return false;
+
+            if (duration != model.getDuration())
+                return false;
+
+            if (clients_number != model.getClientsNumber())
+                return false;
+
+            if (opens_at != model.getOpensAt())
+                return false;
+
+            if (closed_at != model.getClosedAt())
+                return false;
+
+            if (started_at != model.getStartedAt())
+                return false;
+
+            if (canceled_at != model.getCanceledAt())
+                return false;
+
+            if (!isGroupSession())
+                return false;
+
+            if (room != model.getRoom())
+                return false;
+
+            if (casse != model.getCasse())
+                return false;
+
+            if (fields != model.getFields())
+                return false;
+
+            if (clients != model.getClients())
+                return false;
+
+            if (session_platforms != model.getSessionPlatforms())
+                return false;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public JSONObject toObject() {
+        try {
+            super.toObject().put("id", getId());
+            super.toObject().put("status", getStatus());
+            super.toObject().put("type", getType());
+            super.toObject().put("description", getDescription());
+            super.toObject().put("payment_status", getPaymentStatus());
+            super.toObject().put("selection_type", getSelectionType());
+            super.toObject().put("clients_type", getClientsType());
+            super.toObject().put("duration", getDuration());
+            super.toObject().put("clients_number", getClientsNumber());
+            super.toObject().put("opens_at", getOpensAt());
+            super.toObject().put("closed_at", getClosedAt());
+            super.toObject().put("started_at", getStartedAt());
+            super.toObject().put("canceled_at", getCanceledAt());
+            super.toObject().put("group_session", isGroupSession());
+            super.toObject().put("room", getRoom().toObject());
+            super.toObject().put("casse", getCasse().toObject());
+            super.toObject().put("fields", getFields());
+            super.toObject().put("clients", getClients());
+            super.toObject().put("session_platforms", getSessionPlatforms());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return super.toObject();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "ScheduleModel{" +
+                "id='" + id + '\'' +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", payment_status='" + payment_status + '\'' +
+                ", selection_type='" + selection_type + '\'' +
+                ", clients_type='" + clients_type + '\'' +
+                ", duration=" + duration +
+                ", clients_number=" + clients_number +
+                ", opens_at=" + opens_at +
+                ", closed_at=" + closed_at +
+                ", started_at=" + started_at +
+                ", canceled_at=" + canceled_at +
+                ", group_session=" + group_session +
+                ", room=" + room +
+                ", casse=" + casse +
+                ", fields=" + fields +
+                ", clients=" + clients +
+                ", session_platforms=" + session_platforms +
+                '}';
     }
 
 }
