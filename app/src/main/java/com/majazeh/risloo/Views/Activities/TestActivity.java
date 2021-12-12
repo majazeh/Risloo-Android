@@ -365,7 +365,7 @@ public class TestActivity extends AppCompatActivity {
 
     public void sendPre(int key, String value) {
         PrerequisitesModel model = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
-        model.setUser_answered(value);
+        model.setUserAnswered(value);
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));

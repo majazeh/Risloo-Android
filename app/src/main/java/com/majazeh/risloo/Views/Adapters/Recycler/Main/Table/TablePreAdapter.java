@@ -253,8 +253,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             else if (model.getAnswer().getString("type").equals("number"))
                 holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-            if (!model.getUser_answered().equals(""))
-                holder.binding.inputEditText.setText(model.getUser_answered());
+            if (!model.getUserAnswered().equals(""))
+                holder.binding.inputEditText.setText(model.getUserAnswered());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -262,15 +262,15 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void setType(TableFieldMultiHolder holder, PrerequisitesModel model) {
-        if (!model.getUser_answered().equals(""))
-            holder.binding.inputEditText.setText(model.getUser_answered());
+        if (!model.getUserAnswered().equals(""))
+            holder.binding.inputEditText.setText(model.getUserAnswered());
     }
 
     private void setType(TableFieldSelectHolder holder, PrerequisitesModel model, int position) {
         setSpinner(holder, model);
 
-        if (!model.getUser_answered().equals("")) {
-            holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
+        if (!model.getUserAnswered().equals("")) {
+            holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUserAnswered()) - 1);
 
             if (current instanceof SampleFragment)
                 ((SampleFragment) current).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(holder.binding.selectSpinner.getSelectedItemPosition() + 1));

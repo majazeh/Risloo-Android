@@ -35,7 +35,7 @@ public class PrerequisitesModel extends TypeModel {
                 setForce(jsonObject.getString("force"));
 
             if (!jsonObject.isNull("user_answered"))
-                setUser_answered(jsonObject.getString("user_answered"));
+                setUserAnswered(jsonObject.getString("user_answered"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -89,11 +89,11 @@ public class PrerequisitesModel extends TypeModel {
         this.force = force;
     }
 
-    public String getUser_answered() {
+    public String getUserAnswered() {
         return user_answered;
     }
 
-    public void setUser_answered(String user_answered) {
+    public void setUserAnswered(String user_answered) {
         this.user_answered = user_answered;
     }
 
@@ -125,7 +125,7 @@ public class PrerequisitesModel extends TypeModel {
             if (!force.equals(model.getForce()))
                 return false;
 
-            if (!user_answered.equals(model.getUser_answered()))
+            if (!user_answered.equals(model.getUserAnswered()))
                 return false;
 
             if (answer != model.getAnswer())
@@ -146,7 +146,7 @@ public class PrerequisitesModel extends TypeModel {
             super.toObject().put("alias", getAlias());
             super.toObject().put("label", getLabel());
             super.toObject().put("force", getForce());
-            super.toObject().put("user_answered", getUser_answered());
+            super.toObject().put("user_answered", getUserAnswered());
             super.toObject().put("answer", getAnswer());
         } catch (JSONException e) {
             e.printStackTrace();
