@@ -107,19 +107,17 @@
         app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
         app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <include
         android:id="@+id/list_recyclerView"
+        layout="@layout/component_sheet_recycler"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxHeight="@dimen/_100sdp"
-        android:layoutDirection="rtl"
-        android:overScrollMode="always"
         app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
         app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
         app:layout_constraintTop_toBottomOf="@id/list_textView"
-        tools:layout_marginTop="@dimen/_6sdp"
-        tools:itemCount="4" />
+        tools:layout_marginTop="@dimen/_6sdp" />
 
     <TextView
         android:id="@+id/description_textView"
@@ -174,13 +172,6 @@
         app:layout_constraintStart_toStartOf="@id/nickname_editText"
         app:layout_constraintTop_toBottomOf="@id/nickname_editText" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/nickname_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="nickname_textView, nickname_editText" />
-
     <include
         android:id="@+id/entry_textView"
         layout="@layout/component_sheet_button"
@@ -192,5 +183,12 @@
         app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
         app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
         app:layout_constraintTop_toBottomOf="@id/nickname_errorLayout" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/nickname_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="nickname_textView, nickname_editText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
