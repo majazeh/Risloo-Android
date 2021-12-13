@@ -11,7 +11,7 @@
 
     <include
         android:id="@+id/title_textView"
-        layout="@layout/component_pop_title"
+        layout="@layout/component_sheet_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/minute_numberPicker"
-        layout="@layout/component_pop_number_picker"
+        layout="@layout/component_sheet_number_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_12sdp"
@@ -33,7 +33,7 @@
 
     <include
         android:id="@+id/hour_numberPicker"
-        layout="@layout/component_pop_number_picker"
+        layout="@layout/component_sheet_number_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/minute_numberPicker"
@@ -43,7 +43,7 @@
 
     <include
         android:id="@+id/entry_textView"
-        layout="@layout/component_pop_button"
+        layout="@layout/component_sheet_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_16sdp"

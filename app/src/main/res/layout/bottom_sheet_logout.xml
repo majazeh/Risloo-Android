@@ -11,7 +11,7 @@
 
     <include
         android:id="@+id/background_imageView"
-        layout="@layout/component_pop_background"
+        layout="@layout/component_sheet_background"
         android:layout_width="0dp"
         android:layout_height="@dimen/_64sdp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
 
     <include
         android:id="@+id/name_textView"
-        layout="@layout/component_pop_name"
+        layout="@layout/component_sheet_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
@@ -42,7 +42,7 @@
 
     <include
         android:id="@+id/entry_textView"
-        layout="@layout/component_pop_button"
+        layout="@layout/component_sheet_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_16sdp"

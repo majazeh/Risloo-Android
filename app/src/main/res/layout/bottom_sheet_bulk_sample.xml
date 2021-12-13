@@ -186,7 +186,7 @@
 
     <include
         android:id="@+id/entry_textView"
-        layout="@layout/component_pop_button"
+        layout="@layout/component_sheet_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_16sdp"

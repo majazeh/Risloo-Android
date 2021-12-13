@@ -11,7 +11,7 @@
 
     <include
         android:id="@+id/title_textView"
-        layout="@layout/component_pop_title"
+        layout="@layout/component_sheet_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/desc_textView"
-        layout="@layout/component_pop_desc"
+        layout="@layout/component_sheet_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
@@ -33,7 +33,7 @@
 
     <include
         android:id="@+id/download_textView"
-        layout="@layout/component_pop_button"
+        layout="@layout/component_sheet_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_24sdp"
@@ -43,7 +43,7 @@
 
     <include
         android:id="@+id/return_textView"
-        layout="@layout/component_pop_button"
+        layout="@layout/component_sheet_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_16sdp"
