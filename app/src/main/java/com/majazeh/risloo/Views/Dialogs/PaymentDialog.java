@@ -28,7 +28,7 @@ public class PaymentDialog extends AppCompatDialogFragment {
     private PaymentModel paymentModel;
 
     // Vars
-    private String method;
+    private String method = "";
 
     @NonNull
     @Override
@@ -64,9 +64,9 @@ public class PaymentDialog extends AppCompatDialogFragment {
             binding.loadingTextView.setText(requireActivity().getResources().getString(R.string.DialogPaymentFinalizeLoading));
         }
 
-        if (paymentModel.getTitle() != null && !paymentModel.getTitle().equals("")) {
+        if (!paymentModel.getTitle().equals("")) {
             binding.titleTextView.setText(paymentModel.getTitle());
-        } else if (paymentModel.getId() != null && !paymentModel.getId().equals("")) {
+        } else if (!paymentModel.getId().equals("")) {
             binding.titleTextView.setText(paymentModel.getId());
         } else {
             binding.titleTextView.setText(getResources().getString(R.string.AppDefaultUnknown));

@@ -23,7 +23,7 @@ public class LoadingDialog extends AppCompatDialogFragment {
     private DialogLoadingBinding binding;
 
     // Vars
-    private String title;
+    private String title = "";
 
     @NonNull
     @Override

@@ -38,8 +38,8 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     private Fragment child;
 
     // Vars
-    private int year, month, day, hour, minute, second;
-    private String method;
+    private int year = 0, month = 0, day = 0, hour = 0, minute = 0, second = 0;
+    private String method = "";
 
     @NonNull
     @Override
