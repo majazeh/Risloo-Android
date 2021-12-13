@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -36,7 +37,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
     private HashMap data, header;
 
     // Vars
-    private String key;
+    private String key = "";
 
     @NonNull
     @Override
@@ -62,27 +63,29 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetAuthEntry), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {
-        CustomClickView.onDelayedListener(this::doWork).widget(binding.entryButton);
+        CustomClickView.onDelayedListener(this::doWork).widget(binding.entryTextView.getRoot());
     }
 
     private void setDialog() {
-        if (userModel.getName() != null && !userModel.getName().equals("")) {
-            binding.nameTextView.setText(userModel.getName());
-        } else if (userModel.getId() != null && !userModel.getId().equals("")) {
-            binding.nameTextView.setText(userModel.getId());
+        if (!userModel.getName().equals("")) {
+            binding.nameTextView.getRoot().setText(userModel.getName());
+        } else if (!userModel.getId().equals("")) {
+            binding.nameTextView.getRoot().setText(userModel.getId());
         } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultUnknown));
+            binding.nameTextView.getRoot().setText(getResources().getString(R.string.AppDefaultUnknown));
         }
 
-        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && userModel.getAvatar().getMedium().getUrl() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
+        if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getRoot().getText().toString()));
 
             Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }

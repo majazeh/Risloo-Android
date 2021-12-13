@@ -9,13 +9,11 @@
     android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_coolgray200"
     tools:context=".Views.BottomSheets.LogoutBottomSheet">
 
-    <ImageView
+    <include
         android:id="@+id/background_imageView"
+        layout="@layout/component_sheet_background"
         android:layout_width="0dp"
         android:layout_height="@dimen/_64sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:scaleType="fitCenter"
-        android:background="@drawable/draw_grad_12sdp_solid_coolgray200_coolgray100_border_bottom_1sdp_coolgray200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,38 +28,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/background_imageView" />
 
-    <TextView
+    <include
         android:id="@+id/name_textView"
+        layout="@layout/component_sheet_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:gravity="center"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="bold"
-        android:textColor="@color/CoolGray700"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
-        tools:text="نام و نام خانوادگی" />
+        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout" />
 
-    <TextView
-        android:id="@+id/entry_button"
+    <include
+        android:id="@+id/entry_textView"
+        layout="@layout/component_sheet_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_24sdp"
-        android:gravity="center"
-        android:text="@string/BottomSheetLogoutEntry"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="normal"
-        android:textColor="@color/White"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_24sdp_solid_red600_ripple_red800"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="@id/name_textView"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_64sdp"
+    android:layout_gravity="center"
+    android:contentDescription="@string/AppImageContent"
+    android:scaleType="fitCenter"
+    android:background="@drawable/draw_grad_12sdp_solid_coolgray200_coolgray100_border_bottom_1sdp_coolgray200"
+    tools:layout_margin="@dimen/_12sdp" />
