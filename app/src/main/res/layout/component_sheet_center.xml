@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    android:padding="@dimen/_6sdp"
+    android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_coolgray200"
+    tools:layout_margin="@dimen/_12sdp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_circleImageView"
+        android:layout_width="@dimen/_42sdp"
+        android:layout_height="@dimen/_42sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/draw_oval_solid_coolgray100" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_sub_circleImageView"
+        android:layout_width="@dimen/_34sdp"
+        android:layout_height="@dimen/_34sdp"
+        app:civ_border_color="@color/White"
+        app:civ_border_width="@dimen/_2sdp"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_circleImageView"
+        app:layout_constraintEnd_toEndOf="@id/avatar_circleImageView"
+        app:layout_constraintStart_toEndOf="@id/avatar_circleImageView"
+        app:layout_constraintTop_toBottomOf="@id/avatar_circleImageView"
+        tools:background="@drawable/draw_oval_solid_coolgray100_border_2sdp_white" />
+
+    <TextView
+        android:id="@+id/char_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_circleImageView"
+        app:layout_constraintEnd_toEndOf="@id/avatar_circleImageView"
+        app:layout_constraintStart_toStartOf="@id/avatar_circleImageView"
+        app:layout_constraintTop_toTopOf="@id/avatar_circleImageView"
+        tools:text="مد"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/char_sub_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_sub_circleImageView"
+        app:layout_constraintEnd_toEndOf="@id/avatar_sub_circleImageView"
+        app:layout_constraintStart_toStartOf="@id/avatar_sub_circleImageView"
+        app:layout_constraintTop_toTopOf="@id/avatar_sub_circleImageView"
+        tools:text="رش"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="right"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_goneMarginBottom="@dimen/_8sdp"
+        app:layout_constraintBottom_toTopOf="@id/name_sub_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avatars_barrier"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="مرکز درمانی" />
+
+    <TextView
+        android:id="@+id/name_sub_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:gravity="right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/name_textView"
+        app:layout_constraintStart_toStartOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/name_textView"
+        tools:text="روان‌شناس" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/avatars_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="avatar_circleImageView, avatar_sub_circleImageView" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/sub_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="avatar_sub_circleImageView, char_sub_textView, name_sub_textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -130,36 +130,35 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getDetail() != null && bulkSampleModel.getRoom().getCenter().getDetail().has("title") && !bulkSampleModel.getRoom().getCenter().getDetail().getString("title").equals("")) {
-                binding.centerTextView.setText(bulkSampleModel.getRoom().getCenter().getDetail().getString("title"));
-            }
-
-            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getManager() != null && !bulkSampleModel.getRoom().getManager().getName().equals("")) {
-                binding.psychologyTextView.setText(bulkSampleModel.getRoom().getManager().getName());
+                binding.centerIncludeLayout.nameTextView.setText(bulkSampleModel.getRoom().getCenter().getDetail().getString("title"));
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getDetail() != null && bulkSampleModel.getRoom().getCenter().getDetail().has("avatar") && !bulkSampleModel.getRoom().getCenter().getDetail().getString("avatar").equals("") && bulkSampleModel.getRoom().getCenter().getDetail().getJSONArray("avatar").length() != 0) {
-                binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(bulkSampleModel.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+                binding.centerIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(bulkSampleModel.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.centerIncludeLayout.avatarCircleImageView);
             } else {
-                binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
+                binding.centerIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.centerIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerIncludeLayout.nameTextView.getText().toString()));
 
-                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.centerIncludeLayout.avatarCircleImageView);
+            }
+
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getManager() != null && !bulkSampleModel.getRoom().getManager().getName().equals("")) {
+                binding.centerIncludeLayout.nameSubTextView.setText(bulkSampleModel.getRoom().getManager().getName());
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getManager() != null && bulkSampleModel.getRoom().getManager().getAvatar() != null && bulkSampleModel.getRoom().getManager().getAvatar().getMedium() != null && !bulkSampleModel.getRoom().getManager().getAvatar().getMedium().getUrl().equals("")) {
-                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-                Picasso.get().load(bulkSampleModel.getRoom().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+                binding.centerIncludeLayout.charSubTextView.setVisibility(View.GONE);
+                Picasso.get().load(bulkSampleModel.getRoom().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.centerIncludeLayout.avatarSubCircleImageView);
             } else {
-                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
-                binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
+                binding.centerIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
+                binding.centerIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.centerIncludeLayout.nameSubTextView.getText().toString()));
 
-                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.centerIncludeLayout.avatarSubCircleImageView);
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getType().equals("personal_clinic")) {
-                binding.psychologyTextView.setVisibility(View.GONE);
-                binding.avatarsIncludeLayout.subGroup.setVisibility(View.GONE);
+                binding.centerIncludeLayout.subGroup.setVisibility(View.GONE);
             }
 
             if (bulkSampleModel.getScales().size() != 0) {

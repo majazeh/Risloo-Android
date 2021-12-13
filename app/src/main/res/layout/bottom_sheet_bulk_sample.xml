@@ -28,68 +28,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/background_imageView" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/info_constraintLayout"
+    <include
+        android:id="@+id/center_includeLayout"
+        layout="@layout/component_sheet_center"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_coolgray200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout">
-
-        <include
-            android:id="@+id/avatars_includeLayout"
-            layout="@layout/component_main_avatar_multi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/center_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:gravity="right"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/CoolGray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_bold"
-            app:layout_goneMarginBottom="@dimen/_8sdp"
-            app:layout_constraintBottom_toTopOf="@id/psychology_textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/avatars_includeLayout"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="مرکز درمانی" />
-
-        <TextView
-            android:id="@+id/psychology_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:gravity="right"
-            android:textSize="@dimen/_8ssp"
-            android:textStyle="normal"
-            android:textColor="@color/CoolGray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/center_textView"
-            app:layout_constraintStart_toStartOf="@id/center_textView"
-            app:layout_constraintTop_toBottomOf="@id/center_textView"
-            tools:text="روان‌شناس" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout" />
 
     <include
         android:id="@+id/list_textView"
@@ -97,9 +46,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-        app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
+        app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+        app:layout_constraintStart_toStartOf="@id/center_includeLayout"
+        app:layout_constraintTop_toBottomOf="@id/center_includeLayout" />
 
     <include
         android:id="@+id/list_recyclerView"
@@ -108,8 +57,8 @@
         android:layout_height="wrap_content"
         android:maxHeight="@dimen/_100sdp"
         app:layout_constrainedHeight="true"
-        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+        app:layout_constraintStart_toStartOf="@id/center_includeLayout"
         app:layout_constraintTop_toBottomOf="@id/list_textView"
         tools:layout_marginTop="@dimen/_6sdp" />
 
@@ -119,8 +68,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_12sdp"
-        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+        app:layout_constraintStart_toStartOf="@id/center_includeLayout"
         app:layout_constraintTop_toBottomOf="@id/list_recyclerView" />
 
     <include
@@ -129,8 +78,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+        app:layout_constraintStart_toStartOf="@id/center_includeLayout"
         app:layout_constraintTop_toBottomOf="@id/desc_textView" />
 
     <include
@@ -139,8 +88,8 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_6sdp"
-        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+        app:layout_constraintStart_toStartOf="@id/center_includeLayout"
         app:layout_constraintTop_toBottomOf="@id/nickname_textView" />
 
     <include
@@ -162,8 +111,8 @@
         android:layout_marginBottom="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-        app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+        app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+        app:layout_constraintStart_toStartOf="@id/center_includeLayout"
         app:layout_constraintTop_toBottomOf="@id/nickname_errorLayout" />
 
     <androidx.constraintlayout.widget.Group
