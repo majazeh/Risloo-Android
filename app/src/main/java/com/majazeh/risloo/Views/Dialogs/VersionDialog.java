@@ -32,7 +32,7 @@ public class VersionDialog extends AppCompatDialogFragment {
     private VersionModel versionModel;
 
     // Vars
-    private String method;
+    private String method = "";
 
     @NonNull
     @Override
@@ -56,6 +56,8 @@ public class VersionDialog extends AppCompatDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = DialogVersionBinding.inflate(inflater, viewGroup, false);
 
+        initializer();
+
         listener();
 
         setDialog();
@@ -63,30 +65,36 @@ public class VersionDialog extends AppCompatDialogFragment {
         return binding.getRoot();
     }
 
+    private void initializer() {
+        InitManager.txtTextColorBackground(binding.downloadTextView.getRoot(), getResources().getString(R.string.DialogVersionDownload), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onDelayedListener(() -> {
-            IntentManager.googlePlay(requireActivity());
-        }).widget(binding.downloadButton);
+        CustomClickView.onDelayedListener(() -> IntentManager.googlePlay(requireActivity())).widget(binding.downloadTextView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
             ((SplashActivity) requireActivity()).responseDialog(method);
 
             dismiss();
-        }).widget(binding.returnButton);
+        }).widget(binding.returnTextView.getRoot());
     }
 
     private void setDialog() {
         if (method.equals("force")) {
-            binding.titleTextView.setText(requireActivity().getResources().getString(R.string.DialogVersionTitle) + " " + versionModel.getAndroid().getForce());
-            binding.descTextView.setText(requireActivity().getResources().getString(R.string.DialogVersionForceDesc));
+            String force = requireActivity().getResources().getString(R.string.DialogVersionTitle) + " " + versionModel.getAndroid().getForce();
 
-            InitManager.txtTextColorBackground(binding.returnButton, getResources().getString(R.string.DialogVersionForceReturn), getResources().getColor(R.color.Red600), R.drawable.draw_24sdp_solid_white_border_1sdp_red600_ripple_red300);
+            binding.titleTextView.getRoot().setText(force);
+            binding.descTextView.getRoot().setText(requireActivity().getResources().getString(R.string.DialogVersionForceDesc));
+
+            InitManager.txtTextColorBackground(binding.returnTextView.getRoot(), getResources().getString(R.string.DialogVersionForceReturn), getResources().getColor(R.color.Red600), R.drawable.draw_24sdp_solid_white_border_1sdp_red600_ripple_red300);
         } else {
-            binding.titleTextView.setText(requireActivity().getResources().getString(R.string.DialogVersionTitle) + " " + versionModel.getAndroid().getCurrent());
-            binding.descTextView.setText(requireActivity().getResources().getString(R.string.DialogVersionCurrentDesc));
+            String current = requireActivity().getResources().getString(R.string.DialogVersionTitle) + " " + versionModel.getAndroid().getCurrent();
 
-            InitManager.txtTextColorBackground(binding.returnButton, getResources().getString(R.string.DialogVersionCurrentReturn), getResources().getColor(R.color.CoolGray400), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
+            binding.titleTextView.getRoot().setText(current);
+            binding.descTextView.getRoot().setText(requireActivity().getResources().getString(R.string.DialogVersionCurrentDesc));
+
+            InitManager.txtTextColorBackground(binding.returnTextView.getRoot(), getResources().getString(R.string.DialogVersionCurrentReturn), getResources().getColor(R.color.CoolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
         }
     }
 

@@ -60,9 +60,8 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            if (PermissionManager.galleryPermission(requireActivity())) {
+            if (PermissionManager.galleryPermission(requireActivity()))
                 IntentManager.gallery(requireActivity());
-            }
 
             dismiss();
         }).widget(binding.galleryTextView.getRoot());

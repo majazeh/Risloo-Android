@@ -11,8 +11,7 @@
     android:paddingStart="@dimen/_10sdp"
     android:paddingTop="@dimen/_10sdp"
     android:background="@drawable/draw_12sdp_solid_white"
-    tools:layout_marginEnd="@dimen/_12sdp"
-    tools:layout_marginStart="@dimen/_12sdp"
+    tools:layout_margin="@dimen/_12sdp"
     tools:context=".Views.Dialogs.PaymentDialog">
 
     <View
