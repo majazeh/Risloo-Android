@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
@@ -52,6 +53,9 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
     private void intializer() {
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
         child = ((MainActivity) requireActivity()).fragmont.getChild();
+
+        InitManager.txtTextColorBackground(binding.galleryTextView.getRoot(), getResources().getString(R.string.BottomSheetImageGallery), getResources().getColor(R.color.CoolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
+        InitManager.txtTextColorBackground(binding.cameraTextView.getRoot(), getResources().getString(R.string.BottomSheetImageCamera), getResources().getColor(R.color.CoolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
     }
 
     private void listener() {
@@ -61,7 +65,7 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
             }
 
             dismiss();
-        }).widget(binding.galleryButton);
+        }).widget(binding.galleryTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
@@ -76,18 +80,18 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
             }
 
             dismiss();
-        }).widget(binding.cameraButton);
+        }).widget(binding.cameraTextView.getRoot());
     }
 
     private void setDialog() {
         if (current instanceof CreateCenterFragment)
-            binding.titleTextView.setText(getResources().getString(R.string.BottomSheetImageCreateCenterTitle));
+            binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetImageCreateCenterTitle));
 
         if (child instanceof EditCenterTabAvatarFragment)
-            binding.titleTextView.setText(getResources().getString(R.string.BottomSheetImageEditCenterTitle));
+            binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetImageEditCenterTitle));
 
         if (child instanceof EditUserTabAvatarFragment)
-            binding.titleTextView.setText(getResources().getString(R.string.BottomSheetImageEditUserTitle));
+            binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetImageEditUserTitle));
     }
 
     @Override

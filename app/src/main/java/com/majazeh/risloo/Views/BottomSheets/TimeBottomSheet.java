@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -70,6 +71,8 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
 
     private void initializer() {
         child = ((MainActivity) requireActivity()).fragmont.getChild();
+
+        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetTimeEntry), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {
@@ -93,46 +96,46 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                 ((EditSessionTabSessionFragment) child).responseBottomSheet(method, getTime());
 
             dismiss();
-        }).widget(binding.entryButton);
+        }).widget(binding.entryTextView.getRoot());
     }
 
     private void setDialog() {
         switch (method) {
             case "startTime":
                 if (child instanceof CreateScheduleTabTimeFragment)
-                    binding.titleTextView.setText(getResources().getString(R.string.BottomSheetScheduleStartTimeTitle));
+                    binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetScheduleStartTimeTitle));
 
                 if (child instanceof CreateSessionTabTimeFragment || child instanceof EditSessionTabTimeFragment)
-                    binding.titleTextView.setText(getResources().getString(R.string.BottomSheetSessionStartTimeTitle));
+                    binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetSessionStartTimeTitle));
 
                 break;
             case "accurateStartTime":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateStartTimeTitle));
+                binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetAccurateStartTimeTitle));
                 break;
             case "accurateEndTime":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateEndTimeTitle));
+                binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetAccurateEndTimeTitle));
                 break;
         }
     }
 
     private void setNumberPicker() {
-        binding.hourNumberPicker.setMinValue(0);
-        binding.hourNumberPicker.setMaxValue(23);
-        binding.hourNumberPicker.setValue(hour);
+        binding.hourNumberPicker.getRoot().setMinValue(0);
+        binding.hourNumberPicker.getRoot().setMaxValue(23);
+        binding.hourNumberPicker.getRoot().setValue(hour);
 
-        binding.minuteNumberPicker.setMinValue(0);
-        binding.minuteNumberPicker.setMaxValue(59);
-        binding.minuteNumberPicker.setValue(minute);
+        binding.minuteNumberPicker.getRoot().setMinValue(0);
+        binding.minuteNumberPicker.getRoot().setMaxValue(59);
+        binding.minuteNumberPicker.getRoot().setValue(minute);
     }
 
     private void clearNumberPicker() {
-        binding.hourNumberPicker.setValue(hour);
-        binding.minuteNumberPicker.setValue(minute);
+        binding.hourNumberPicker.getRoot().setValue(hour);
+        binding.minuteNumberPicker.getRoot().setValue(minute);
     }
 
     private String getTime() {
-        hour = binding.hourNumberPicker.getValue();
-        minute = binding.minuteNumberPicker.getValue();
+        hour = binding.hourNumberPicker.getRoot().getValue();
+        minute = binding.minuteNumberPicker.getRoot().getValue();
 
         PersianDate persianDate = DateManager.createPersianDate(year, month, day, hour, minute, second);
         Date date = DateManager.persianToDate(persianDate);

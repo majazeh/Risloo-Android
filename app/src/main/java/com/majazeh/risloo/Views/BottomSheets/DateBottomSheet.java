@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -73,15 +74,17 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
     private void initializer() {
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
         child = ((MainActivity) requireActivity()).fragmont.getChild();
+
+        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetDateEntry), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {
-        binding.monthNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
-            if (picker == binding.monthNumberPicker) {
+        binding.monthNumberPicker.getRoot().setOnValueChangedListener((picker, oldVal, newVal) -> {
+            if (picker == binding.monthNumberPicker.getRoot()) {
                 if (newVal <= 6)
-                    binding.dayNumberPicker.setMaxValue(31);
+                    binding.dayNumberPicker.getRoot().setMaxValue(31);
                 else
-                    binding.dayNumberPicker.setMaxValue(30);
+                    binding.dayNumberPicker.getRoot().setMaxValue(30);
             }
         });
 
@@ -111,67 +114,67 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 ((EditUserTabPersonalFragment) child).responseBottomSheet(method, getDate());
 
             dismiss();
-        }).widget(binding.entryButton);
+        }).widget(binding.entryTextView.getRoot());
     }
 
     private void setDialog() {
         switch (method) {
             case "birthday":
                 if (child instanceof EditUserTabPersonalFragment)
-                    binding.titleTextView.setText(getResources().getString(R.string.BottomSheetMeBirthDateTitle));
+                    binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetMeBirthDateTitle));
 
                 if (current instanceof CreateUserFragment)
-                    binding.titleTextView.setText(getResources().getString(R.string.BottomSheetUserBirthDateTitle));
+                    binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetUserBirthDateTitle));
 
                 break;
             case "startDate":
                 if (child instanceof EditSessionTabTimeFragment)
-                    binding.titleTextView.setText(getResources().getString(R.string.BottomSheetSessionStartDateTitle));
+                    binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetSessionStartDateTitle));
 
                 break;
             case "accurateStartDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateStartDateTitle));
+                binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetAccurateStartDateTitle));
                 break;
             case "accurateEndDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateEndDateTitle));
+                binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetAccurateEndDateTitle));
                 break;
             case "periodStartDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetPeriodStartDateTitle));
+                binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetPeriodStartDateTitle));
                 break;
             case "periodEndDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetPeriodEndDateTitle));
+                binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetPeriodEndDateTitle));
                 break;
             case "specifiedDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetSpecifiedDateTitle));
+                binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetSpecifiedDateTitle));
                 break;
         }
     }
 
     private void setNumberPicker() {
-        binding.yearNumberPicker.setMinValue(1300);
-        binding.yearNumberPicker.setMaxValue(2100);
-        binding.yearNumberPicker.setValue(year);
+        binding.yearNumberPicker.getRoot().setMinValue(1300);
+        binding.yearNumberPicker.getRoot().setMaxValue(2100);
+        binding.yearNumberPicker.getRoot().setValue(year);
 
-        binding.monthNumberPicker.setMinValue(1);
-        binding.monthNumberPicker.setMaxValue(12);
-        binding.monthNumberPicker.setValue(month);
-        binding.monthNumberPicker.setDisplayedValues(requireActivity().getResources().getStringArray(R.array.YearMonths));
+        binding.monthNumberPicker.getRoot().setMinValue(1);
+        binding.monthNumberPicker.getRoot().setMaxValue(12);
+        binding.monthNumberPicker.getRoot().setValue(month);
+        binding.monthNumberPicker.getRoot().setDisplayedValues(requireActivity().getResources().getStringArray(R.array.YearMonths));
 
-        binding.dayNumberPicker.setMinValue(1);
-        binding.dayNumberPicker.setMaxValue(31);
-        binding.dayNumberPicker.setValue(day);
+        binding.dayNumberPicker.getRoot().setMinValue(1);
+        binding.dayNumberPicker.getRoot().setMaxValue(31);
+        binding.dayNumberPicker.getRoot().setValue(day);
     }
 
     private void clearNumberPicker() {
-        binding.yearNumberPicker.setValue(year);
-        binding.monthNumberPicker.setValue(month);
-        binding.dayNumberPicker.setValue(day);
+        binding.yearNumberPicker.getRoot().setValue(year);
+        binding.monthNumberPicker.getRoot().setValue(month);
+        binding.dayNumberPicker.getRoot().setValue(day);
     }
 
     private String getDate() {
-        year = binding.yearNumberPicker.getValue();
-        month = binding.monthNumberPicker.getValue();
-        day = binding.dayNumberPicker.getValue();
+        year = binding.yearNumberPicker.getRoot().getValue();
+        month = binding.monthNumberPicker.getRoot().getValue();
+        day = binding.dayNumberPicker.getRoot().getValue();
 
         PersianDate persianDate = DateManager.createPersianDate(year, month, day, hour, minute, second);
         Date date = DateManager.persianToDate(persianDate);

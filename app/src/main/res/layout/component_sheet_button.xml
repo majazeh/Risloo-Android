@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_36sdp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:textSize="@dimen/_12ssp"
+    android:textStyle="normal"
+    android:textAlignment="gravity"
+    android:fontFamily="@font/dana_medium"
+    tools:layout_margin="@dimen/_12sdp"
+    tools:text="دکمه"
+    tools:textColor="@color/CoolGray500"
+    tools:background="@drawable/draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300" />

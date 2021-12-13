@@ -9,68 +9,55 @@
     android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_coolgray200"
     tools:context=".Views.BottomSheets.DateBottomSheet">
 
-    <TextView
+    <include
         android:id="@+id/title_textView"
+        layout="@layout/component_sheet_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:gravity="right"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="bold"
-        android:textColor="@color/CoolGray700"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="تاریخ را انتخاب کنید." />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.majazeh.risloo.Utils.Widgets.SingleNumberPicker
+    <include
         android:id="@+id/day_numberPicker"
+        layout="@layout/component_sheet_number_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_12sdp"
-        android:theme="@style/NumberPickerTheme"
         app:layout_constraintEnd_toStartOf="@id/month_numberPicker"
         app:layout_constraintStart_toStartOf="@id/title_textView"
         app:layout_constraintTop_toBottomOf="@id/title_textView" />
 
-    <com.majazeh.risloo.Utils.Widgets.SingleNumberPicker
+    <include
         android:id="@+id/month_numberPicker"
+        layout="@layout/component_sheet_number_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/NumberPickerTheme"
         app:layout_constraintBottom_toBottomOf="@id/day_numberPicker"
         app:layout_constraintEnd_toStartOf="@id/year_numberPicker"
         app:layout_constraintStart_toEndOf="@id/day_numberPicker"
         app:layout_constraintTop_toTopOf="@id/day_numberPicker" />
 
-    <com.majazeh.risloo.Utils.Widgets.SingleNumberPicker
+    <include
         android:id="@+id/year_numberPicker"
+        layout="@layout/component_sheet_number_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:theme="@style/NumberPickerTheme"
         app:layout_constraintBottom_toBottomOf="@id/month_numberPicker"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toEndOf="@id/month_numberPicker"
         app:layout_constraintTop_toTopOf="@id/month_numberPicker" />
 
-    <TextView
-        android:id="@+id/entry_button"
+    <include
+        android:id="@+id/entry_textView"
+        layout="@layout/component_sheet_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:gravity="center"
-        android:text="@string/BottomSheetDateEntry"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="normal"
-        android:textColor="@color/White"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_24sdp_solid_risloo500_ripple_risloo700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
