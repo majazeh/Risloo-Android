@@ -184,20 +184,13 @@
         android:visibility="gone"
         app:constraint_referenced_ids="nickname_textView, nickname_editText" />
 
-    <TextView
-        android:id="@+id/entry_button"
+    <include
+        android:id="@+id/entry_textView"
+        layout="@layout/component_pop_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:gravity="center"
-        android:text="@string/BottomSheetBulkSampleEntry"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="normal"
-        android:textColor="@color/White"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_24sdp_solid_risloo500_ripple_risloo700"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
         app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
