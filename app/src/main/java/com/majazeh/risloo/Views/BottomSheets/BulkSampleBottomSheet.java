@@ -165,10 +165,10 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getAcceptation() != null) {
-                binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1));
+                binding.descTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1));
                 binding.nicknameGroup.setVisibility(View.GONE);
             } else {
-                binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1) + "\n" + getResources().getString(R.string.BottomSheetBulkSampleDescription2));
+                binding.descTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1) + "\n" + getResources().getString(R.string.BottomSheetBulkSampleDescription2));
                 binding.nicknameGroup.setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {

@@ -119,21 +119,15 @@
         app:layout_constraintTop_toBottomOf="@id/list_textView"
         tools:layout_marginTop="@dimen/_6sdp" />
 
-    <TextView
-        android:id="@+id/description_textView"
+    <include
+        android:id="@+id/desc_textView"
+        layout="@layout/component_sheet_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_12sdp"
-        android:gravity="right"
-        android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
-        android:textColor="@color/CoolGray500"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
         app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-        app:layout_constraintTop_toBottomOf="@id/list_recyclerView"
-        tools:text="توضیحات" />
+        app:layout_constraintTop_toBottomOf="@id/list_recyclerView" />
 
     <TextView
         android:id="@+id/nickname_textView"
@@ -149,7 +143,7 @@
         android:fontFamily="@font/dana_bold"
         app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
         app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-        app:layout_constraintTop_toBottomOf="@id/description_textView" />
+        app:layout_constraintTop_toBottomOf="@id/desc_textView" />
 
     <include
         android:id="@+id/nickname_editText"
