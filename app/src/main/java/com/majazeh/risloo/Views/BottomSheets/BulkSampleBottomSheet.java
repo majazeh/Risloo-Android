@@ -81,6 +81,9 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
+        binding.listTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleList));
+        binding.nicknameTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleNickname));
+
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._6sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetBulkSampleEntry), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
