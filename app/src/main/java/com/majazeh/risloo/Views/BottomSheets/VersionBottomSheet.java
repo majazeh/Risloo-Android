@@ -1,6 +1,7 @@
 package com.majazeh.risloo.Views.BottomSheets;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,12 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        ((SplashActivity) requireActivity()).responseDialog(method);
+    }
+
     private void initializer() {
         InitManager.txtTextColorBackground(binding.downloadTextView.getRoot(), getResources().getString(R.string.BottomSheetVersionDownload), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
@@ -86,8 +93,6 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-
-        ((SplashActivity) requireActivity()).responseDialog(method);
     }
 
 }

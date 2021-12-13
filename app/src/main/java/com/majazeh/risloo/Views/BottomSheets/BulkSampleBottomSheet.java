@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Sheet.SheetSampleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Sheet.SheetScaleAdapter;
 import com.majazeh.risloo.databinding.BottomSheetBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -42,7 +42,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
     private BottomSheetBulkSampleBinding binding;
 
     // Adapters
-    private SheetSampleAdapter sampleAdapter;
+    private SheetScaleAdapter scaleAdapter;
 
     // Models
     private UserModel userModel;
@@ -75,7 +75,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        sampleAdapter = new SheetSampleAdapter(requireActivity());
+        scaleAdapter = new SheetScaleAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -130,7 +130,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                 binding.centerTextView.setText(bulkSampleModel.getRoom().getCenter().getDetail().getString("title"));
             }
 
-            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getManager() != null && bulkSampleModel.getRoom().getManager().getName() != null) {
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getManager() != null && !bulkSampleModel.getRoom().getManager().getName().equals("")) {
                 binding.psychologyTextView.setText(bulkSampleModel.getRoom().getManager().getName());
             }
 
@@ -159,9 +159,9 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                 binding.avatarsIncludeLayout.subGroup.setVisibility(View.GONE);
             }
 
-            if (bulkSampleModel.getScales() != null) {
-                sampleAdapter.setItems(bulkSampleModel.getScales().data());
-                binding.listRecyclerView.setAdapter(sampleAdapter);
+            if (bulkSampleModel.getScales().size() != 0) {
+                scaleAdapter.setItems(bulkSampleModel.getScales().data());
+                binding.listRecyclerView.setAdapter(scaleAdapter);
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getAcceptation() != null) {
