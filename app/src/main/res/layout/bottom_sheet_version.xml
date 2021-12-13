@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_coolgray200"
+    tools:context=".Views.BottomSheets.VersionBottomSheet">
+
+    <include
+        android:id="@+id/title_textView"
+        layout="@layout/component_pop_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/desc_textView"
+        layout="@layout/component_pop_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/title_textView" />
+
+    <include
+        android:id="@+id/download_textView"
+        layout="@layout/component_pop_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_24sdp"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/desc_textView" />
+
+    <include
+        android:id="@+id/return_textView"
+        layout="@layout/component_pop_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/download_textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

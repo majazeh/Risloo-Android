@@ -11,8 +11,10 @@ import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
+import com.majazeh.risloo.Views.BottomSheets.VersionBottomSheet;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
+import com.mre.ligheh.Model.TypeModel.VersionModel;
 
 public class SheetManager {
 
@@ -23,6 +25,7 @@ public class SheetManager {
     private static ImageBottomSheet imageBottomSheet = null;
     private static LogoutBottomSheet logoutBottomSheet = null;
     private static TimeBottomSheet timeBottomSheet = null;
+    private static VersionBottomSheet versionBottomSheet = null;
 
     /*
     ---------- Show ----------
@@ -61,6 +64,12 @@ public class SheetManager {
         timeBottomSheet = new TimeBottomSheet();
         timeBottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "timeBottomSheet");
         timeBottomSheet.setTime(timestamp, method);
+    }
+
+    public static void showVersionBottomSheet(Activity activity, VersionModel versionModel, String method) {
+        versionBottomSheet = new VersionBottomSheet();
+        versionBottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "versionBottomSheet");
+        versionBottomSheet.setData(versionModel, method);
     }
 
     /*
@@ -109,6 +118,13 @@ public class SheetManager {
         }
     }
 
+    public static void dismissVersionBottomSheet() {
+        if (versionBottomSheet != null) {
+            versionBottomSheet.dismiss();
+            versionBottomSheet = null;
+        }
+    }
+
     /*
     ---------- Getter ----------
     */
@@ -151,6 +167,13 @@ public class SheetManager {
     public static TimeBottomSheet getTimeBottomSheet() {
         if (timeBottomSheet != null && timeBottomSheet.isVisible())
             return timeBottomSheet;
+
+        return null;
+    }
+
+    public static VersionBottomSheet getVersionBottomSheet() {
+        if (versionBottomSheet != null && versionBottomSheet.isVisible())
+            return versionBottomSheet;
 
         return null;
     }

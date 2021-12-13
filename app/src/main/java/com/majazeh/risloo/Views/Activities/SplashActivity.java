@@ -11,9 +11,9 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Decoraton;
 import com.majazeh.risloo.Utils.Entities.Singleton;
-import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.databinding.ActivitySplashBinding;
 import com.mre.ligheh.API.Response;
@@ -93,10 +93,10 @@ public class SplashActivity extends AppCompatActivity {
 
                         if (versionModel.getAndroid() != null) {
                             if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(SplashActivity.this), versionModel.getAndroid().getForce()) == 1) {
-                                DialogManager.showVersionDialog(SplashActivity.this, "force", versionModel);
+                                SheetManager.showVersionBottomSheet(SplashActivity.this, versionModel, "force");
                                 return;
                             } else if (StringManager.compareVersionNames(versionModel.getAndroid().getForce(), versionModel.getAndroid().getCurrent()) == 1) {
-                                DialogManager.showVersionDialog(SplashActivity.this, "current", versionModel);
+                                SheetManager.showVersionBottomSheet(SplashActivity.this, versionModel, "current");
                                 return;
                             }
                         }
