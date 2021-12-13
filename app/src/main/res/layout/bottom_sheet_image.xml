@@ -11,7 +11,7 @@
 
     <include
         android:id="@+id/title_textView"
-        layout="@layout/component_sheet_title"
+        layout="@layout/component_pop_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/gallery_textView"
-        layout="@layout/component_sheet_button"
+        layout="@layout/component_pop_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_24sdp"
@@ -33,7 +33,7 @@
 
     <include
         android:id="@+id/camera_textView"
-        layout="@layout/component_sheet_button"
+        layout="@layout/component_pop_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_16sdp"
