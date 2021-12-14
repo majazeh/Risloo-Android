@@ -23,15 +23,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/avatar_includeLayout"
-        layout="@layout/component_main_avatar_border_big"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/avatar_circleImageView"
         android:layout_width="@dimen/_86sdp"
         android:layout_height="@dimen/_86sdp"
+        app:civ_border_color="@color/White"
+        app:civ_border_width="@dimen/_4sdp"
         app:layout_constraintBottom_toBottomOf="@id/background_imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/background_imageView" />
+        app:layout_constraintTop_toBottomOf="@id/background_imageView"
+        tools:background="@drawable/draw_oval_solid_coolgray100_border_4sdp_white" />
+
+    <TextView
+        android:id="@+id/char_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="normal"
+        android:textColor="@color/CoolGray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_circleImageView"
+        app:layout_constraintEnd_toEndOf="@id/avatar_circleImageView"
+        app:layout_constraintStart_toStartOf="@id/avatar_circleImageView"
+        app:layout_constraintTop_toTopOf="@id/avatar_circleImageView"
+        tools:text="ال"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/name_textView"
@@ -48,7 +68,7 @@
         android:fontFamily="@font/dana_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
+        app:layout_constraintTop_toBottomOf="@id/avatar_circleImageView"
         tools:text="نام و نام خانوادگی" />
 
     <TextView

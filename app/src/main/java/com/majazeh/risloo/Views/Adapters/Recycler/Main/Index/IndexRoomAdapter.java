@@ -104,14 +104,14 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
             ((MainActivity) activity).navigatoon.navigateToRoomFragment(model);
         }).widget(holder.binding.getRoot());
 
-        holder.binding.availableSwitchCompat.getRoot().setOnTouchListener((v, event) -> {
+        holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
 
-        holder.binding.availableSwitchCompat.getRoot().setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+        holder.binding.availableSwitchCompat.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
-        holder.binding.availableSwitchCompat.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
+        holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
                 if (isChecked)
                     doWork(holder, model, "1", "available");
@@ -166,19 +166,19 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
 
     private void setAvatar(IndexRoomHolder holder, String url) {
         if (!url.equals("")) {
-            holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            holder.binding.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarCircleImageView);
         } else {
-            holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
+            holder.binding.charTextView.setVisibility(View.VISIBLE);
+            holder.binding.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarCircleImageView);
         }
     }
 
     private void setAvailable(IndexRoomHolder holder, boolean isAvailable) {
-        holder.binding.availableSwitchCompat.getRoot().setVisibility(View.VISIBLE);
-        holder.binding.availableSwitchCompat.getRoot().setChecked(isAvailable);
+        holder.binding.availableSwitchCompat.setVisibility(View.VISIBLE);
+        holder.binding.availableSwitchCompat.setChecked(isAvailable);
     }
 
     private void setHashmap(RoomModel model, String value, String method) {
