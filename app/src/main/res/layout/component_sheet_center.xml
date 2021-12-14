@@ -74,7 +74,7 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="right"
         android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
+        android:textStyle="bold"
         android:textColor="@color/CoolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_bold"

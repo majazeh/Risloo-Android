@@ -73,35 +73,26 @@
         app:layout_constraintTop_toBottomOf="@id/list_recyclerView" />
 
     <include
-        android:id="@+id/nickname_textView"
-        layout="@layout/component_sheet_header"
+        android:id="@+id/nickname_includeLayout"
+        layout="@layout/component_sheet_input_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_16sdp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
         app:layout_constraintStart_toStartOf="@id/center_includeLayout"
         app:layout_constraintTop_toBottomOf="@id/desc_textView" />
 
     <include
-        android:id="@+id/nickname_editText"
-        layout="@layout/component_auth_input_text"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
-        android:layout_marginTop="@dimen/_6sdp"
-        app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
-        app:layout_constraintStart_toStartOf="@id/center_includeLayout"
-        app:layout_constraintTop_toBottomOf="@id/nickname_textView" />
-
-    <include
         android:id="@+id/nickname_errorLayout"
-        layout="@layout/component_auth_error"
+        layout="@layout/component_sheet_error"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/nickname_editText"
-        app:layout_constraintStart_toStartOf="@id/nickname_editText"
-        app:layout_constraintTop_toBottomOf="@id/nickname_editText" />
+        app:layout_constraintEnd_toEndOf="@id/nickname_includeLayout"
+        app:layout_constraintStart_toStartOf="@id/nickname_includeLayout"
+        app:layout_constraintTop_toBottomOf="@id/nickname_includeLayout" />
 
     <include
         android:id="@+id/entry_textView"
@@ -114,12 +105,5 @@
         app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
         app:layout_constraintStart_toStartOf="@id/center_includeLayout"
         app:layout_constraintTop_toBottomOf="@id/nickname_errorLayout" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/nickname_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="nickname_textView, nickname_editText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -82,7 +82,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.listTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleList));
-        binding.nicknameTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleNickname));
+        binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleNickname));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._6sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
 
@@ -91,14 +91,14 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.nicknameEditText.getRoot().setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameEditText.getRoot().hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.nicknameEditText.getRoot());
+        binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputon.select(binding.nicknameIncludeLayout.inputEditText);
             return false;
         });
 
-        binding.nicknameEditText.getRoot().setOnFocusChangeListener((v, hasFocus) -> {
-            nickname = binding.nicknameEditText.getRoot().getText().toString().trim();
+        binding.nicknameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         CustomClickView.onDelayedListener(() -> {
@@ -112,11 +112,11 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
     private void setDialog() {
         try {
             if (!userModel.getName().equals("")) {
-                binding.nicknameEditText.getRoot().setText(userModel.getName());
+                binding.nicknameIncludeLayout.inputEditText.setText(userModel.getName());
             } else if (!userModel.getId().equals("")) {
-                binding.nicknameEditText.getRoot().setText(userModel.getId());
+                binding.nicknameIncludeLayout.inputEditText.setText(userModel.getId());
             } else {
-                binding.nicknameEditText.getRoot().setText("");
+                binding.nicknameIncludeLayout.inputEditText.setText("");
             }
 
             if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
@@ -124,7 +124,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                 Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nicknameEditText.getRoot().getText().toString()));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nicknameIncludeLayout.inputEditText.getText().toString()));
 
                 Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
@@ -168,10 +168,10 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getAcceptation() != null) {
                 binding.descTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1));
-                binding.nicknameGroup.setVisibility(View.GONE);
+                binding.nicknameIncludeLayout.getRoot().setVisibility(View.GONE);
             } else {
                 binding.descTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1) + "\n" + getResources().getString(R.string.BottomSheetBulkSampleDescription2));
-                binding.nicknameGroup.setVisibility(View.VISIBLE);
+                binding.nicknameIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -187,7 +187,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
     private void setHashmap() {
         data.put("key", key);
 
-        if (binding.nicknameGroup.getVisibility() == View.VISIBLE)
+        if (binding.nicknameIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
             data.put("nickname", nickname);
         else
             data.remove("nickname");
