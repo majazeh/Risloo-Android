@@ -23,29 +23,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="سرتيتر" />
 
-    <EditText
-        android:id="@+id/input_editText"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_recyclerView"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
-        android:paddingEnd="@dimen/_12sdp"
-        android:paddingStart="@dimen/_12sdp"
-        android:imeOptions="actionDone"
-        android:inputType="text"
-        android:gravity="center|right"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="normal"
-        android:textColor="@color/CoolGray700"
-        android:textColorHint="@color/CoolGray400"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_medium"
-        android:importantForAutofill="no"
-        android:saveEnabled="false"
-        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray200"
+        android:maxHeight="@dimen/_100sdp"
+        android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView"
-        tools:hint="عنوان"
-        tools:ignore="LabelFor" />
+        tools:itemCount="4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

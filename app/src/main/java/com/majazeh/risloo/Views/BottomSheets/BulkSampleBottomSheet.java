@@ -81,10 +81,10 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.listTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleList));
-        binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleNickname));
+        binding.scaleIncludeLayout.headerTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleScaleHeader));
+        binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleNicknameHeader));
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._6sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.scaleIncludeLayout.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetBulkSampleEntry), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
@@ -163,7 +163,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
 
             if (bulkSampleModel.getScales().size() != 0) {
                 scaleAdapter.setItems(bulkSampleModel.getScales().data());
-                binding.listRecyclerView.getRoot().setAdapter(scaleAdapter);
+                binding.scaleIncludeLayout.listRecyclerView.setAdapter(scaleAdapter);
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getCenter() != null && bulkSampleModel.getRoom().getCenter().getAcceptation() != null) {
