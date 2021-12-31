@@ -167,9 +167,7 @@ public class ScalesFragment extends Fragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        hideShimmer();
-                    });
+                    requireActivity().runOnUiThread(() -> hideShimmer());
 
                     isLoading = false;
                 }

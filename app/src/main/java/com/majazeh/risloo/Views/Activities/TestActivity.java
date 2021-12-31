@@ -34,6 +34,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.Madule.SampleAnswers;
+import com.mre.ligheh.Model.Madule.SampleForm;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
@@ -62,6 +63,7 @@ public class TestActivity extends AppCompatActivity {
     // Models
     public SampleAnswers sampleAnswers;
     public SampleModel sampleModel;
+    public SampleForm sampleForm;
     public FormModel formModel;
 
     // Objects
@@ -137,12 +139,12 @@ public class TestActivity extends AppCompatActivity {
         CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.debugTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            formModel = sampleModel.getSampleForm().prev();
+            formModel = sampleForm.prev();
             navigate();
         }).widget(binding.backwardImageView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            formModel = sampleModel.getSampleForm().next();
+            formModel = sampleForm.next();
             navigate();
         }).widget(binding.forwardImageView.getRoot());
 
@@ -159,7 +161,7 @@ public class TestActivity extends AppCompatActivity {
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    formModel = sampleModel.getSampleForm().goTo(pos);
+                    formModel = sampleForm.goTo(pos);
                     navigate();
 
                     userSelect = false;
@@ -192,14 +194,14 @@ public class TestActivity extends AppCompatActivity {
             binding.headerIncludeLayout.titleTextView.setText(StringManager.foregroundSize(title, binding.headerIncludeLayout.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.CoolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
         }
 
-        if (sampleModel.getSampleForm() != null && sampleModel.getSampleForm().getForms() != null && sampleModel.getSampleForm().getForms().length() != 0) {
+        if (sampleForm.getForms().length() != 0) {
             try {
                 ArrayList<String> options = new ArrayList<>();
                 answers = new ArrayList<>();
 
-                for (int i = 0; i < sampleModel.getSampleForm().getForms().length(); i++) {
-                    options.add(sampleModel.getSampleForm().getForms().getJSONObject(i).getString("title"));
-                    answers.add(sampleModel.getSampleForm().getForms().getJSONObject(i).getBoolean("answer"));
+                for (int i = 0; i < sampleForm.getForms().length(); i++) {
+                    options.add(sampleForm.getForms().getJSONObject(i).getString("title"));
+                    answers.add(sampleForm.getForms().getJSONObject(i).getBoolean("answer"));
                 }
 
                 options.add("");
@@ -211,8 +213,8 @@ public class TestActivity extends AppCompatActivity {
             }
         }
 
-        if (sampleModel.getSampleForm() != null && sampleModel.getSampleForm().getCurrentForm() != null) {
-            formModel = sampleModel.getSampleForm().getCurrentForm();
+        if (sampleForm.getCurrentForm() != null) {
+            formModel = sampleForm.getCurrentForm();
 
             switch (formModel.getType()) {
                 case "psychologist_description":
@@ -236,10 +238,10 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void setWidgets() {
-        String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
-        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
+        String indexSum = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
+        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleForm.itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
-        AnimateManager.animateProgressValue(binding.headerIncludeLayout.answeredProgressBar, 500, sampleModel.getSampleForm().itemSize(), sampleModel.getSampleForm().getItemPosition());
+        AnimateManager.animateProgressValue(binding.headerIncludeLayout.answeredProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
 
         userSelect = false;
 
@@ -260,9 +262,16 @@ public class TestActivity extends AppCompatActivity {
                 sampleModel = (SampleModel) object;
 
                 runOnUiThread(() -> {
-                    setData();
+                    sampleForm = sampleModel.getSampleForm();
 
-                    hideProgress();
+                    if (sampleForm == null) {
+                        ToastManager.showErrorToast(TestActivity.this, getResources().getString(R.string.ToastSampleDoublePressExit));
+                        IntentManager.finish(TestActivity.this);
+                    } else {
+                        setData();
+
+                        hideProgress();
+                    }
                 });
             }
 
@@ -397,7 +406,7 @@ public class TestActivity extends AppCompatActivity {
         ItemModel model = (ItemModel) formModel.getObject();
         model.setUserAnswered(value);
 
-        answers.set(sampleModel.getSampleForm().getPosition(), true);
+        answers.set(sampleForm.getPosition(), true);
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
@@ -425,7 +434,7 @@ public class TestActivity extends AppCompatActivity {
         });
 
         handler.postDelayed(() -> {
-            formModel = sampleModel.getSampleForm().next();
+            formModel = sampleForm.next();
             navigate();
         }, 500);
     }
@@ -437,7 +446,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
-                    FormModel formModel = sampleModel.getSampleForm().getModel("زنجیره");
+                    FormModel formModel = sampleForm.getModel("زنجیره");
 
                     if (formModel == null) {
                         DialogManager.dismissLoadingDialog();

@@ -29,7 +29,7 @@ android {
     }
 
     buildTypes {
-        debug{
+        debug {
             debuggable true
             minifyEnabled false
             shrinkResources false
@@ -118,8 +118,8 @@ dependencies {
      ---------- SMS Verification Sdk's ----------
     */
 
-    implementation 'com.google.android.gms:play-services-auth:19.2.0' // Auth
-    implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.1' // Auth Phone
+    implementation 'com.google.android.gms:play-services-auth:20.0.0' // Auth
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.0' // Auth Phone
 
     /*
      ---------- Androidx Sdk's ----------
