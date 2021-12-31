@@ -29,6 +29,7 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
     private final AsyncListDiffer<String> differ;
 
     // Vars
+    private ArrayList<String> items = new ArrayList<>();
     private int answer = -1, key = -1;
     private boolean userSelect = false;
 
@@ -62,6 +63,8 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
     }
 
     public void setItems(ArrayList<String> items, String answer, String key) {
+        this.items = items;
+
         if (!answer.equals(""))
             this.answer = Integer.parseInt(answer) - 1;
 
@@ -72,7 +75,8 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
     }
 
     private void resetItems() {
-        notifyDataSetChanged();
+        differ.submitList(null);
+        differ.submitList(items);
     }
 
     private void listener(TestPictoralHolder holder, int position) {

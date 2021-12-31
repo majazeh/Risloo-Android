@@ -48,6 +48,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Fragment current;
 
     // Vars
+    private ArrayList<TypeModel> items = new ArrayList<>();
     private boolean userSelect = false, editable = false;
 
     public TableItemAdapter(@NonNull Activity activity) {
@@ -136,11 +137,14 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public void setItems(ArrayList<TypeModel> items) {
+        this.items = items;
+
         differ.submitList(items);
     }
 
     private void resetItems() {
-        notifyDataSetChanged();
+        differ.submitList(null);
+        differ.submitList(items);
     }
 
     private void intializer() {

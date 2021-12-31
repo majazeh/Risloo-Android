@@ -32,6 +32,7 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implemen
     private final AsyncListDiffer<TypeModel> differ;
 
     // Vars
+    private ArrayList<TypeModel> items = new ArrayList<>();
     private int selectedPosition = 0;
 
     public MainNavAdapter(@NonNull Activity activity) {
@@ -64,11 +65,14 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implemen
     }
 
     public void setItems(ArrayList<TypeModel> items) {
+        this.items = items;
+
         differ.submitList(items);
     }
 
     private void resetItems() {
-        notifyDataSetChanged();
+        differ.submitList(null);
+        differ.submitList(items);
     }
 
     private void listener(MainNavHolder holder) {

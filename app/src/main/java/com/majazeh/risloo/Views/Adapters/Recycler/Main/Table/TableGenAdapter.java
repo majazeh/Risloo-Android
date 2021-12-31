@@ -37,6 +37,7 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Fragment current;
 
     // Vars
+    private ArrayList<String> items = new ArrayList<>();
     private boolean editable = false;
 
     public TableGenAdapter(@NonNull Activity activity) {
@@ -93,11 +94,14 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public void setItems(ArrayList<String> items) {
+        this.items = items;
+
         differ.submitList(items);
     }
 
     private void resetItems() {
-        notifyDataSetChanged();
+        differ.submitList(null);
+        differ.submitList(items);
     }
 
     private void intializer() {

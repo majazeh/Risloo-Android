@@ -28,6 +28,7 @@ public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder
     private final AsyncListDiffer<String> differ;
 
     // Vars
+    private ArrayList<String> items = new ArrayList<>();
     private int answer = -1, key = -1;
     private boolean userSelect = false;
 
@@ -61,6 +62,8 @@ public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder
     }
 
     public void setItems(ArrayList<String> items, String answer, String key) {
+        this.items = items;
+
         if (!answer.equals(""))
             this.answer = Integer.parseInt(answer) - 1;
 
@@ -71,7 +74,8 @@ public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder
     }
 
     private void resetItems() {
-        notifyDataSetChanged();
+        differ.submitList(null);
+        differ.submitList(items);
     }
 
     private void listener(TestOptionalHolder holder, int position) {
