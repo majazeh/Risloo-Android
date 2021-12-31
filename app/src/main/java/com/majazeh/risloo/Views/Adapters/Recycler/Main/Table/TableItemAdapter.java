@@ -139,8 +139,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         differ.submitList(items);
     }
 
-    public void setEditable(boolean editable) {
-        this.editable = editable;
+    private void resetItems() {
         notifyDataSetChanged();
     }
 
@@ -308,6 +307,12 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+
+        resetItems();
     }
 
     @Override

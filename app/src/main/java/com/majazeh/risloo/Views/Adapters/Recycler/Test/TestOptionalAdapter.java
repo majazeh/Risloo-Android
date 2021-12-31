@@ -70,12 +70,16 @@ public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder
         differ.submitList(items);
     }
 
+    private void resetItems() {
+        notifyDataSetChanged();
+    }
+
     private void listener(TestOptionalHolder holder, int position) {
         CustomClickView.onDelayedListener(() -> {
             answer = position;
             userSelect = true;
 
-            notifyDataSetChanged();
+            resetItems();
 
             ((TestActivity) activity).sendItem(key, String.valueOf(answer + 1));
         }).widget(holder.itemView);

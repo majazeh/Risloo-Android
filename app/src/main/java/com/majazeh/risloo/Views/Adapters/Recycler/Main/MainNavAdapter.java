@@ -67,6 +67,10 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implemen
         differ.submitList(items);
     }
 
+    private void resetItems() {
+        notifyDataSetChanged();
+    }
+
     private void listener(MainNavHolder holder) {
         CustomClickView.onDelayedListener(() -> ((MainActivity) activity).changeFragment(holder.binding.nameTextView.getText().toString())).widget(holder.itemView);
     }
@@ -147,7 +151,7 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implemen
         else
             selectedPosition = 0;
 
-        notifyDataSetChanged();
+        resetItems();
     }
 
     @Override

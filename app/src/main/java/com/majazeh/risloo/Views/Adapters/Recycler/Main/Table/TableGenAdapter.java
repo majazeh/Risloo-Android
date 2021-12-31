@@ -96,8 +96,7 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         differ.submitList(items);
     }
 
-    public void setEditable(boolean editable) {
-        this.editable = editable;
+    private void resetItems() {
         notifyDataSetChanged();
     }
 
@@ -150,6 +149,12 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.binding.inputEditText.setFocusableInTouchMode(false);
             holder.binding.getRoot().setAlpha((float) 0.6);
         }
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+
+        resetItems();
     }
 
     @Override

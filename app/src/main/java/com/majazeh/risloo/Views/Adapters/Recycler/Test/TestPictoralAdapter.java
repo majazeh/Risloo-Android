@@ -71,12 +71,16 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
         differ.submitList(items);
     }
 
+    private void resetItems() {
+        notifyDataSetChanged();
+    }
+
     private void listener(TestPictoralHolder holder, int position) {
         CustomClickView.onDelayedListener(() -> {
             answer = position;
             userSelect = true;
 
-            notifyDataSetChanged();
+            resetItems();
 
             ((TestActivity) activity).sendItem(key, String.valueOf(answer + 1));
         }).widget(holder.itemView);
