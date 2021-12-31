@@ -26,7 +26,7 @@ public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> impl
     // Activity
     private final Activity activity;
 
-    // Objects
+    // Differ
     private final AsyncListDiffer<TypeModel> differ;
 
     public TestChainAdapter(@NonNull Activity activity) {

@@ -24,7 +24,7 @@ public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder
     // Activity
     private final Activity activity;
 
-    // Objects
+    // Differ
     private final AsyncListDiffer<String> differ;
 
     // Vars

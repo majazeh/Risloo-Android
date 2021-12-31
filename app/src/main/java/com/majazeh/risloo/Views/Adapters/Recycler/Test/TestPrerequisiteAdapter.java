@@ -35,7 +35,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
     // Activity
     private final Activity activity;
 
-    // Objects
+    // Differ
     private final AsyncListDiffer<TypeModel> differ;
 
     // Vars

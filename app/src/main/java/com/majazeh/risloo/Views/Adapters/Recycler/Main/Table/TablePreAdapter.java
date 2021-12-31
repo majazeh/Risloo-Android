@@ -41,7 +41,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     // Activity
     private final Activity activity;
 
-    // Objects
+    // Differ
     private final AsyncListDiffer<TypeModel> differ;
 
     // Fragments

@@ -25,7 +25,7 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
     // Activity
     private final Activity activity;
 
-    // Objects
+    // Differ
     private final AsyncListDiffer<String> differ;
 
     // Vars

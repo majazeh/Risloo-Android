@@ -30,11 +30,11 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     // Activity
     private final Activity activity;
 
+    // Differ
+    private final AsyncListDiffer<TypeModel> differ;
+
     // Fragments
     private Fragment current;
-
-    // Objects
-    private final AsyncListDiffer<TypeModel> differ;
 
     public TableScaleAdapter(@NonNull Activity activity) {
         this.activity = activity;

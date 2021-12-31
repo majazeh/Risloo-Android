@@ -30,7 +30,7 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     // Activity
     private final Activity activity;
 
-    // Objects
+    // Differ
     private final AsyncListDiffer<String> differ;
 
     // Fragments

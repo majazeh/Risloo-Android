@@ -28,7 +28,7 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implemen
     // Activity
     private final Activity activity;
 
-    // Objects
+    // Differ
     private final AsyncListDiffer<TypeModel> differ;
 
     // Vars
