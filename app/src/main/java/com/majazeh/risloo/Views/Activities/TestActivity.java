@@ -265,7 +265,7 @@ public class TestActivity extends AppCompatActivity {
                     sampleForm = sampleModel.getSampleForm();
 
                     if (sampleForm == null) {
-                        ToastManager.showErrorToast(TestActivity.this, getResources().getString(R.string.ToastSampleDoublePressExit));
+                        ToastManager.showErrorToast(TestActivity.this, getResources().getString(R.string.ToastSampleFormIsNull));
                         IntentManager.finish(TestActivity.this);
                     } else {
                         setData();
