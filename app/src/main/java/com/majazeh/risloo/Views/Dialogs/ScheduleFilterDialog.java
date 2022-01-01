@@ -40,8 +40,8 @@ public class ScheduleFilterDialog extends AppCompatDialogFragment {
     private Fragment current;
 
     // Vars
-    private ArrayList<TypeModel> rooms, status;
-    private String method;
+    private ArrayList<TypeModel> rooms = new ArrayList<>(), status = new ArrayList<>();
+    private String method = "";
 
     @NonNull
     @Override

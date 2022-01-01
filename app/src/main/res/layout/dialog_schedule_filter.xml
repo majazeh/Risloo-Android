@@ -7,8 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_solid_coolgray50"
-    tools:layout_marginEnd="@dimen/_12sdp"
-    tools:layout_marginStart="@dimen/_12sdp"
+    tools:layout_margin="@dimen/_12sdp"
     tools:context=".Views.Dialogs.ScheduleFilterDialog">
 
     <TextView

@@ -6,8 +6,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Filter.FilterTagHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Show.RoomFragment;
@@ -17,20 +20,24 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class FilterTagAdapter extends RecyclerView.Adapter<FilterTagHolder> {
+public class FilterTagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilTypeModelAdapter {
+
+    // Activity
+    private final Activity activity;
+
+    // Differ
+    private final AsyncListDiffer<TypeModel> differ;
+
+    // Vars
+    private final ArrayList<String> ids = new ArrayList<>();
 
     // Fragments
     private Fragment current;
 
-    // Objects
-    private Activity activity;
-
-    // Vars
-    private ArrayList<TypeModel> items;
-    private ArrayList<String> ids = new ArrayList<>();
-
     public FilterTagAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new DiffUtilTypeModelCallback(this));
     }
 
     @NonNull
@@ -40,39 +47,26 @@ public class FilterTagAdapter extends RecyclerView.Adapter<FilterTagHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FilterTagHolder holder, int i) {
-        TagModel model = (TagModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        TagModel model = (TagModel) differ.getCurrentList().get(i);
 
         intializer();
 
-        listener(holder, model);
+        listener((FilterTagHolder) holder, model);
 
-        setData(holder, model);
+        setData((FilterTagHolder) holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
-    public ArrayList<String> getIds() {
-        return ids;
-    }
-
     public void setItems(ArrayList<TypeModel> items) {
-        this.items = items;
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            items.clear();
-            ids.clear();
-            notifyDataSetChanged();
-        }
+        differ.submitList(items);
     }
 
     private void intializer() {
@@ -92,6 +86,26 @@ public class FilterTagAdapter extends RecyclerView.Adapter<FilterTagHolder> {
 
     private void setData(FilterTagHolder holder, TagModel model) {
         holder.binding.getRoot().setText(model.getTitle());
+    }
+
+    public ArrayList<String> getIds() {
+        return ids;
+    }
+
+    @Override
+    public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        TagModel oldModel = (TagModel) oldTypeModel;
+        TagModel newModel = (TagModel) newTypeModel;
+
+        return newModel.getId().equals(oldModel.getId());
+    }
+
+    @Override
+    public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        TagModel oldModel = (TagModel) oldTypeModel;
+        TagModel newModel = (TagModel) newTypeModel;
+
+        return newModel.compareTo(oldModel);
     }
 
 }

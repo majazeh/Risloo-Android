@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -24,20 +27,24 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder> {
+public class DialogFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilTypeModelAdapter {
+
+    // Activity
+    private final Activity activity;
+
+    // Differ
+    private final AsyncListDiffer<TypeModel> differ;
 
     // Fragments
     private Fragment current;
 
-    // Objects
-    private Activity activity;
-
     // Vars
-    private ArrayList<TypeModel> items;
-    private String method;
+    private String method = "";
 
     public DialogFilterAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new DiffUtilTypeModelCallback(this));
     }
 
     @NonNull
@@ -47,22 +54,22 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DialogFilterHolder holder, int i) {
-        TypeModel model = items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        TypeModel model = differ.getCurrentList().get(i);
 
         intializer();
 
-        listener(holder, model);
+        listener((DialogFilterHolder) holder, model);
 
-        setData(holder, model);
+        setData((DialogFilterHolder) holder, model);
 
-        setActive(holder, model);
+        setActive((DialogFilterHolder) holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
@@ -70,18 +77,7 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
     public void setItems(ArrayList<TypeModel> items, String method) {
         this.method = method;
 
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+        differ.submitList(items);
     }
 
     private void intializer() {
@@ -97,9 +93,7 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(DialogFilterHolder holder, TypeModel item) {
-        CustomClickView.onClickListener(() -> {
-            responseDialog(item);
-        }).widget(holder.binding.getRoot());
+        CustomClickView.onClickListener(() -> responseDialog(item)).widget(holder.binding.getRoot());
     }
 
     private void setData(DialogFilterHolder holder, TypeModel item) {
@@ -142,12 +136,10 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
             }
 
             if (current instanceof RoomSchedulesFragment) {
-                switch (method) {
-                    case "status": {
-                        String status = item.object.get("id").toString();
+                if (method.equals("status")) {
+                    String status = item.object.get("id").toString();
 
-                        detector(holder, ((RoomSchedulesFragment) current).filterStatus.equals(status));
-                    } break;
+                    detector(holder, ((RoomSchedulesFragment) current).filterStatus.equals(status));
                 }
             }
         } catch (JSONException e) {
@@ -161,6 +153,44 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<DialogFilterHolder
 
         if (current instanceof RoomSchedulesFragment)
             ((RoomSchedulesFragment) current).responseDialog(method, item);
+    }
+
+    @Override
+    public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        switch (method) {
+            case "rooms":
+                RoomModel oldModel = (RoomModel) oldTypeModel;
+                RoomModel newModel = (RoomModel) newTypeModel;
+
+                return newModel.getId().equals(oldModel.getId());
+
+            case "status":
+                try {
+                    return newTypeModel.object.getString("id").equals(oldTypeModel.object.getString("id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } return false;
+
+        } return false;
+    }
+
+    @Override
+    public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        switch (method) {
+            case "rooms":
+                RoomModel oldModel = (RoomModel) oldTypeModel;
+                RoomModel newModel = (RoomModel) newTypeModel;
+
+                return newModel.compareTo(oldModel);
+
+            case "status":
+                try {
+                    return newTypeModel.object.getString("id").equals(oldTypeModel.object.getString("id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } return false;
+
+        } return false;
     }
 
 }
