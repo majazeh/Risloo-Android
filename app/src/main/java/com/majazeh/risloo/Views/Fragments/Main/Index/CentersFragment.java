@@ -24,8 +24,10 @@ import com.majazeh.risloo.databinding.FragmentCentersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -42,6 +44,7 @@ public class CentersFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
+    private ArrayList<TypeModel> items;
     private boolean isLoading = true;
 
     @Nullable
@@ -127,9 +130,7 @@ public class CentersFragment extends Fragment {
             }
         });
 
-        CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToCreateCenterFragment(null);
-        }).widget(binding.addImageView.getRoot());
+        CustomClickView.onClickListener(() -> ((MainActivity) requireActivity()).navigatoon.navigateToCreateCenterFragment(null)).widget(binding.addImageView.getRoot());
     }
 
     private void setPermission() {
@@ -145,15 +146,17 @@ public class CentersFragment extends Fragment {
         Center.list(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                List items = (List) object;
+                List list = (List) object;
+
+                if (Objects.equals(data.get("page"), 1))
+                    items = list.data();
+                else
+                    items.addAll(list.data());
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        if (Objects.equals(data.get("page"), 1))
-                            adapter.clearItems();
-
-                        if (!items.data().isEmpty()) {
-                            adapter.setItems(items.data());
+                        if (!items.isEmpty()) {
+                            adapter.setItems(items);
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
@@ -167,7 +170,7 @@ public class CentersFragment extends Fragment {
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.CentersFragmentEmpty));
                         }
 
-                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(items.getTotal()));
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(list.getTotal()));
 
                         hideShimmer();
                     });
@@ -179,9 +182,7 @@ public class CentersFragment extends Fragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        hideShimmer();
-                    });
+                    requireActivity().runOnUiThread(() -> hideShimmer());
 
                     isLoading = false;
                 }

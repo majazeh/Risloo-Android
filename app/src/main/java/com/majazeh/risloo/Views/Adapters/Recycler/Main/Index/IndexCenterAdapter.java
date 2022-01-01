@@ -6,9 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -22,16 +25,18 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> {
+public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilTypeModelAdapter {
 
-    // Objects
-    private Activity activity;
+    // Activity
+    private final Activity activity;
 
-    // Vars
-    private ArrayList<TypeModel> items;
+    // Differ
+    private final AsyncListDiffer<TypeModel> differ;
 
     public IndexCenterAdapter(@NonNull Activity activity) {
         this.activity = activity;
+
+        differ = new AsyncListDiffer<>(this, new DiffUtilTypeModelCallback(this));
     }
 
     @NonNull
@@ -41,35 +46,26 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull IndexCenterHolder holder, int i) {
-        CenterModel model = (CenterModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof IndexCenterHolder) {
+            CenterModel model = (CenterModel) differ.getCurrentList().get(i);
 
-        listener(holder, model);
+            listener((IndexCenterHolder) holder, model);
 
-        setData(holder, model);
+            setData((IndexCenterHolder) holder, model);
+        }
     }
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size();
+        if (this.differ.getCurrentList() != null)
+            return differ.getCurrentList().size();
         else
             return 0;
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void clearItems() {
-        if (this.items != null) {
-            this.items.clear();
-            notifyDataSetChanged();
-        }
+        differ.submitList(items);
     }
 
     private void listener(IndexCenterHolder holder, CenterModel model) {
@@ -132,6 +128,22 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<IndexCenterHolder> 
 
             Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarCircleImageView);
         }
+    }
+
+    @Override
+    public boolean areItemsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        CenterModel oldModel = (CenterModel) oldTypeModel;
+        CenterModel newModel = (CenterModel) newTypeModel;
+
+        return newModel.getId().equals(oldModel.getId());
+    }
+
+    @Override
+    public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
+        CenterModel oldModel = (CenterModel) oldTypeModel;
+        CenterModel newModel = (CenterModel) newTypeModel;
+
+        return newModel.compareTo(oldModel);
     }
 
 }
