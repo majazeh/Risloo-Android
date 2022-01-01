@@ -53,7 +53,7 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        ((SplashActivity) requireActivity()).responseDialog(method);
+        navigate();
     }
 
     private void initializer() {
@@ -87,6 +87,20 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
     public void setData(VersionModel model, String method) {
         this.versionModel = model;
         this.method = method;
+    }
+
+    private void navigate() {
+        switch (method) {
+            case "force":
+                IntentManager.finish(requireActivity());
+                break;
+            case "current":
+                if (!((SplashActivity) requireActivity()).singleton.getToken().equals(""))
+                    IntentManager.main(requireActivity());
+                else
+                    IntentManager.auth(requireActivity(), "login");
+                break;
+        }
     }
 
     @Override

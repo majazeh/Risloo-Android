@@ -30,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
     private ActivitySplashBinding binding;
 
     // Entities
-    private Singleton singleton;
+    public Singleton singleton;
 
     // Objects
     private HashMap data, header;
@@ -109,6 +109,7 @@ public class SplashActivity extends AppCompatActivity {
                 public void onFailure(String response) {
                     runOnUiThread(() -> {
                         hideProgress();
+
                         navigate();
                     });
                 }
@@ -133,17 +134,6 @@ public class SplashActivity extends AppCompatActivity {
     private void hideProgress() {
         if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
             binding.explodeProgressBar.setVisibility(View.GONE);
-    }
-
-    public void responseDialog(String method) {
-        switch (method) {
-            case "force":
-                IntentManager.finish(this);
-                break;
-            case "current":
-                navigate();
-                break;
-        }
     }
 
     @Override

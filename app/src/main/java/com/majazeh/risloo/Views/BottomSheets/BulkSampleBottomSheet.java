@@ -170,7 +170,9 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                 binding.descTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1));
                 binding.nicknameIncludeLayout.getRoot().setVisibility(View.GONE);
             } else {
-                binding.descTextView.getRoot().setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1) + "\n" + getResources().getString(R.string.BottomSheetBulkSampleDescription2));
+                String desc = getResources().getString(R.string.BottomSheetBulkSampleDescription1) + "\n" + getResources().getString(R.string.BottomSheetBulkSampleDescription2);
+
+                binding.descTextView.getRoot().setText(desc);
                 binding.nicknameIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {
