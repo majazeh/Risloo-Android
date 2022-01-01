@@ -17,12 +17,12 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class SheetScaleAdapter extends RecyclerView.Adapter<SheetScaleHolder> implements DiffUtilTypeModelAdapter {
+public class SheetScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilTypeModelAdapter {
 
     // Activity
     private final Activity activity;
 
-    // Objects
+    // Differ
     private final AsyncListDiffer<TypeModel> differ;
 
     public SheetScaleAdapter(@NonNull Activity activity) {
@@ -38,10 +38,10 @@ public class SheetScaleAdapter extends RecyclerView.Adapter<SheetScaleHolder> im
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SheetScaleHolder holder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         ScaleModel model = (ScaleModel) differ.getCurrentList().get(i);
 
-        setData(holder, model);
+        setData((SheetScaleHolder) holder, model);
     }
 
     @Override

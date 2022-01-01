@@ -23,7 +23,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implements DiffUtilTypeModelAdapter {
+public class MainNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilTypeModelAdapter {
 
     // Activity
     private final Activity activity;
@@ -48,12 +48,12 @@ public class MainNavAdapter extends RecyclerView.Adapter<MainNavHolder> implemen
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainNavHolder holder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         TypeModel model = differ.getCurrentList().get(i);
 
-        listener(holder);
+        listener((MainNavHolder) holder);
 
-        setData(holder, model, i);
+        setData((MainNavHolder) holder, model, i);
     }
 
     @Override

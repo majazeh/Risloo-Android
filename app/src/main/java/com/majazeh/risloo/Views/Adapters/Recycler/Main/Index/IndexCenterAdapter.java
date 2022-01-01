@@ -47,13 +47,11 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof IndexCenterHolder) {
-            CenterModel model = (CenterModel) differ.getCurrentList().get(i);
+        CenterModel model = (CenterModel) differ.getCurrentList().get(i);
 
-            listener((IndexCenterHolder) holder, model);
+        listener((IndexCenterHolder) holder, model);
 
-            setData((IndexCenterHolder) holder, model);
-        }
+        setData((IndexCenterHolder) holder, model);
     }
 
     @Override
@@ -82,25 +80,25 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         try {
             if (model.getType().equals("counseling_center")) {
 
-                if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
+                if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
                     holder.binding.nameTextView.setText(model.getDetail().getString("title"));
-                else if (model.getId() != null && !model.getId().equals(""))
+                else if (!model.getId().equals(""))
                     holder.binding.nameTextView.setText(model.getId());
                 else
                     holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 
-                if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals(""))
+                if (model.getManager() != null && !model.getManager().getName().equals(""))
                     holder.binding.typeTextView.setText(model.getManager().getName());
-                else if (model.getManager() != null && model.getManager().getId() != null && !model.getManager().getId().equals(""))
+                else if (model.getManager() != null && !model.getManager().getId().equals(""))
                     holder.binding.typeTextView.setText(model.getManager().getId());
                 else
                     holder.binding.typeTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
 
             } else {
 
-                if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals(""))
+                if (model.getManager() != null && !model.getManager().getName().equals(""))
                     holder.binding.nameTextView.setText(model.getManager().getName());
-                else if (model.getManager() != null && model.getManager().getId() != null && !model.getManager().getId().equals(""))
+                else if (model.getManager() != null && !model.getManager().getId().equals(""))
                     holder.binding.nameTextView.setText(model.getManager().getId());
                 else
                     holder.binding.nameTextView.setText(activity.getResources().getString(R.string.AppDefaultUnknown));
@@ -109,7 +107,7 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             }
 
-            if (model.getDetail() != null && model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
+            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
                 setAvatar(holder, model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
             else
                 setAvatar(holder, "");

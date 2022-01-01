@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder> implements DiffUtilStringAdapter {
+public class TestPictoralAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilStringAdapter {
 
     // Activity
     private final Activity activity;
@@ -46,12 +46,12 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestPictoralHolder holder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         String item = differ.getCurrentList().get(i);
 
-        listener(holder, i);
+        listener((TestPictoralHolder) holder, i);
 
-        setData(holder, item, i);
+        setData((TestPictoralHolder) holder, item, i);
     }
 
     @Override

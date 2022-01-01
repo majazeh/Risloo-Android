@@ -21,7 +21,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> implements DiffUtilTypeModelAdapter {
+public class TestChainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilTypeModelAdapter {
 
     // Activity
     private final Activity activity;
@@ -42,10 +42,10 @@ public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> impl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestChainHolder holder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         ChainModel model = (ChainModel) differ.getCurrentList().get(i);
 
-        setData(holder, model);
+        setData((TestChainHolder) holder, model);
     }
 
     @Override

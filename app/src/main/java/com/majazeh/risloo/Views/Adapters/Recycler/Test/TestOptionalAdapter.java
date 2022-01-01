@@ -19,7 +19,7 @@ import com.majazeh.risloo.databinding.SingleItemTestOptionalBinding;
 
 import java.util.ArrayList;
 
-public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder> implements DiffUtilStringAdapter {
+public class TestOptionalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements DiffUtilStringAdapter {
 
     // Activity
     private final Activity activity;
@@ -45,12 +45,12 @@ public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestOptionalHolder holder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         String item = differ.getCurrentList().get(i);
 
-        listener(holder, i);
+        listener((TestOptionalHolder) holder, i);
 
-        setData(holder, item, i);
+        setData((TestOptionalHolder) holder, item, i);
     }
 
     @Override

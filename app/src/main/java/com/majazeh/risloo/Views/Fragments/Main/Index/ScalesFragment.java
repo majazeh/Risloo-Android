@@ -42,7 +42,7 @@ public class ScalesFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private ArrayList<TypeModel> items;
+    private ArrayList<TypeModel> items = new ArrayList<>();
     private boolean isLoading = true;
 
     @Nullable
