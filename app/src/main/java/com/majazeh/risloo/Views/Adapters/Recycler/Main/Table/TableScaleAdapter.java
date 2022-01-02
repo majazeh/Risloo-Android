@@ -93,6 +93,10 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         differ.submitList(items);
     }
 
+    public void clearItems() {
+        differ.submitList(null);
+    }
+
     private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
     }

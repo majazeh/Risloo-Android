@@ -148,10 +148,12 @@ public class CentersFragment extends Fragment {
             public void onOK(Object object) {
                 List list = (List) object;
 
-                if (Objects.equals(data.get("page"), 1))
+                if (Objects.equals(data.get("page"), 1)) {
+                    adapter.clearItems();
                     items = list.data();
-                else
+                } else {
                     items.addAll(list.data());
+                }
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {

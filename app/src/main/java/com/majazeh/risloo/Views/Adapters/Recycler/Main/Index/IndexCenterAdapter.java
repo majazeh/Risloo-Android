@@ -66,6 +66,10 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         differ.submitList(items);
     }
 
+    public void clearItems() {
+        differ.submitList(null);
+    }
+
     private void listener(IndexCenterHolder holder, CenterModel model) {
         CustomClickView.onClickListener(() -> {
             if (model.getType().equals("counseling_center"))
