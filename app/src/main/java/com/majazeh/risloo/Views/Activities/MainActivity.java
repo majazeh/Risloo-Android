@@ -32,7 +32,6 @@ import com.majazeh.risloo.Utils.Entities.Navigatoon;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
-import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -196,26 +195,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.contentIncludeLayout.headerAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
-            if (verticalOffset == 0 && binding.contentIncludeLayout.seperateView.getVisibility() == View.VISIBLE) {
-                AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.White));
-                AnimateManager.animateAppBarColor(binding.contentIncludeLayout.headerAppBarLayout, 300, getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.White));
-
-                binding.contentIncludeLayout.seperateView.setVisibility(View.GONE);
-            }
-
-            if (Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange() && binding.contentIncludeLayout.seperateView.getVisibility() == View.GONE) {
-                AnimateManager.animateStatusBarColor(this, 300, getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
-                AnimateManager.animateAppBarColor(binding.contentIncludeLayout.headerAppBarLayout, 300, getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
-
-                binding.contentIncludeLayout.seperateView.setVisibility(View.VISIBLE);
-            }
-        });
-
         navigatoon.getNavController().addOnDestinationChangedListener((controller, destination, arguments) -> {
             SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
-
-            binding.contentIncludeLayout.headerAppBarLayout.setExpanded(true);
 
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(faBreadCump);
             binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
