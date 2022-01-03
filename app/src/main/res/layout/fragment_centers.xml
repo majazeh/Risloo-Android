@@ -13,9 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/_12sdp"
-        tools:paddingBottom="0dp">
+        android:layout_height="wrap_content">
 
         <include
             android:id="@+id/header_includeLayout"
