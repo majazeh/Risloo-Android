@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start">
+
+        <OnSwipe
+            motion:touchAnchorId="@id/menu_imageView"
+            motion:touchAnchorSide="bottom"
+            motion:dragDirection="dragUp" />
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/background_view" >
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="@color/White" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/debug_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent">
+            <PropertySet
+                motion:applyMotionScene="false"
+                motion:visibilityMode="ignore" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/menu_imageView"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/debug_textView" />
+
+        <Constraint
+            android:id="@+id/logout_imageView" >
+            <PropertySet
+                motion:applyMotionScene="false"
+                motion:visibilityMode="ignore" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/seperate_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@color/CoolGray200"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/breadcump_includeLayout" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/background_view" >
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="@color/CoolGray50" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/debug_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            motion:layout_constraintBottom_toTopOf="@id/menu_imageView"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent">
+            <PropertySet
+                motion:applyMotionScene="false"
+                motion:visibilityMode="ignore" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/menu_imageView"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginBottom="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/logout_imageView" >
+            <PropertySet
+                motion:applyMotionScene="false"
+                motion:visibilityMode="ignore" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/seperate_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@color/CoolGray200"
+            android:visibility="visible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/breadcump_includeLayout" />
+
+    </ConstraintSet>
+
+</MotionScene>

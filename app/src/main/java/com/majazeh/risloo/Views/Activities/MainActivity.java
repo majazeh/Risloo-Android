@@ -17,6 +17,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -191,6 +192,31 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.contentIncludeLayout.getRoot().addTransitionListener(new MotionLayout.TransitionListener() {
+            @Override
+            public void onTransitionStarted(MotionLayout motionLayout, int startId, int endId) {
+
+            }
+
+            @Override
+            public void onTransitionChange(MotionLayout motionLayout, int startId, int endId, float progress) {
+
+            }
+
+            @Override
+            public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {
+                if (currentId == motionLayout.getStartState())
+                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.White));
+                else if (currentId == motionLayout.getEndState())
+                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.CoolGray50));
+            }
+
+            @Override
+            public void onTransitionTrigger(MotionLayout motionLayout, int triggerId, boolean positive, float progress) {
 
             }
         });
