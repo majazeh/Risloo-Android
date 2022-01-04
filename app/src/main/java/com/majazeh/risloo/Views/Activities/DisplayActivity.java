@@ -81,24 +81,14 @@ public class DisplayActivity extends AppCompatActivity {
                 systemUiVisibility = true;
 
                 TransitionManager.reverseTransition(binding.getRoot(), 300);
-                TransitionManager.reverseTransition(binding.toolbarContainer, 300);
-                TransitionManager.reverseTransition(binding.topView, 300);
-                TransitionManager.reverseTransition(binding.bottomView, 300);
 
-                binding.toolbarContainer.setVisibility(View.VISIBLE);
-                binding.topView.setVisibility(View.VISIBLE);
-                binding.bottomView.setVisibility(View.VISIBLE);
+                binding.rootMotionLayout.transitionToStart();
             } else {
                 systemUiVisibility = false;
 
                 TransitionManager.startTransition(binding.getRoot(), 300);
-                TransitionManager.startTransition(binding.toolbarContainer, 300);
-                TransitionManager.startTransition(binding.topView, 300);
-                TransitionManager.startTransition(binding.bottomView, 300);
 
-                binding.toolbarContainer.setVisibility(View.GONE);
-                binding.topView.setVisibility(View.GONE);
-                binding.bottomView.setVisibility(View.GONE);
+                binding.rootMotionLayout.transitionToEnd();
             }
         });
     }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/draw_tran_rec_solid_white_black"
@@ -9,12 +10,13 @@
     android:focusableInTouchMode="true"
     android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
+    app:layoutDescription="@xml/activity_display_scene"
     tools:context=".Views.Activities.DisplayActivity">
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/avatar_zoomageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +25,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar_container"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_6sdp"
         android:paddingEnd="@dimen/_2sdp"
         android:paddingStart="@dimen/_2sdp"
         android:paddingTop="@dimen/_6sdp"
-        android:background="@drawable/draw_tran_rec_solid_coolgray50_black"
+        android:background="@color/CoolGray50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -104,7 +106,7 @@
         android:id="@+id/top_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
-        android:background="@drawable/draw_tran_rec_solid_coolgray200_black"
+        android:background="@color/CoolGray200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_container" />
@@ -113,9 +115,9 @@
         android:id="@+id/bottom_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
-        android:background="@drawable/draw_tran_rec_solid_coolgray200_black"
+        android:background="@color/CoolGray200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
