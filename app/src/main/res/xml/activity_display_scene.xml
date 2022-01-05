@@ -8,12 +8,20 @@
         motion:constraintSetStart="@id/start"
         motion:duration="300">
 
+        <KeyFrameSet>
+
+        </KeyFrameSet>
+
     </Transition>
 
     <Transition
         motion:constraintSetStart="@+id/end"
         motion:constraintSetEnd="@+id/start"
         motion:duration="300" >
+
+        <KeyFrameSet>
+
+        </KeyFrameSet>
 
     </Transition>
 
