@@ -8,24 +8,12 @@
         motion:constraintSetStart="@id/start"
         motion:duration="300">
 
-        <KeyFrameSet>
-
-
-
-        </KeyFrameSet>
-
     </Transition>
 
     <Transition
         motion:constraintSetStart="@+id/end"
         motion:constraintSetEnd="@+id/start"
         motion:duration="300" >
-
-        <KeyFrameSet>
-
-
-
-        </KeyFrameSet>
 
     </Transition>
 
@@ -54,19 +42,55 @@
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@+id/toolbar_container">
+            android:id="@+id/background_view" >
+            <PropertySet
+                android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/return_imageView">
+            <Transform
+                android:translationY="@dimen/_minus36sdp" />
+            <PropertySet
+                android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/title_textView">
+            <Transform
+                android:translationY="@dimen/_minus36sdp" />
+            <PropertySet
+                android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/share_imageView">
+            <Transform
+                android:translationY="@dimen/_minus36sdp" />
+            <PropertySet
+                android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/download_imageView">
+            <Transform
+                android:translationY="@dimen/_minus36sdp" />
             <PropertySet
                 android:visibility="invisible" />
         </Constraint>
 
         <Constraint
             android:id="@+id/top_view" >
+            <Transform
+                android:translationY="@dimen/_minus36sdp" />
             <PropertySet
                 android:visibility="invisible" />
         </Constraint>
 
         <Constraint
             android:id="@+id/bottom_view" >
+            <Transform
+                android:translationY="@dimen/_36sdp" />
             <PropertySet
                 android:visibility="invisible" />
         </Constraint>

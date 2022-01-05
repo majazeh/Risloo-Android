@@ -82,13 +82,13 @@ public class DisplayActivity extends AppCompatActivity {
 
                 TransitionManager.reverseTransition(binding.getRoot(), 300);
 
-                binding.rootMotionLayout.transitionToStart();
+                binding.rootMotionLayout.transitionToState(R.id.start);
             } else {
                 systemUiVisibility = false;
 
                 TransitionManager.startTransition(binding.getRoot(), 300);
 
-                binding.rootMotionLayout.transitionToEnd();
+                binding.rootMotionLayout.transitionToState(R.id.end);
             }
         });
     }
