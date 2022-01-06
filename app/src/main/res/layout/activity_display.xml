@@ -5,7 +5,7 @@
     android:id="@+id/root_motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/draw_tran_rec_solid_white_black"
+    android:background="@color/White"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:fitsSystemWindows="true"
@@ -26,12 +26,20 @@
     <View
         android:id="@+id/background_view"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/_48sdp"
         android:background="@color/CoolGray50"
-        app:layout_constraintBottom_toTopOf="@id/top_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/border_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/CoolGray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_view" />
 
     <ImageView
         android:id="@+id/return_imageView"
@@ -103,17 +111,7 @@
         tools:visibility="visible" />
 
     <View
-        android:id="@+id/top_view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:background="@color/CoolGray200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/return_imageView" />
-
-    <View
-        android:id="@+id/bottom_view"
+        android:id="@+id/divider_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/CoolGray200"

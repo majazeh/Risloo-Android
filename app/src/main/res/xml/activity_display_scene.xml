@@ -6,18 +6,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="300">
-
-        <KeyFrameSet>
-
-        </KeyFrameSet>
-
-    </Transition>
-
-    <Transition
-        motion:constraintSetStart="@+id/end"
-        motion:constraintSetEnd="@+id/start"
-        motion:duration="300" >
+        motion:duration="200">
 
         <KeyFrameSet>
 
@@ -56,9 +45,15 @@
         </Constraint>
 
         <Constraint
+            android:id="@+id/border_view" >
+            <PropertySet
+                android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint
             android:id="@+id/return_imageView">
             <Transform
-                android:translationY="@dimen/_minus36sdp" />
+                android:translationY="@dimen/_minus24sdp" />
             <PropertySet
                 android:visibility="invisible" />
         </Constraint>
@@ -66,7 +61,7 @@
         <Constraint
             android:id="@+id/title_textView">
             <Transform
-                android:translationY="@dimen/_minus36sdp" />
+                android:translationY="@dimen/_minus24sdp" />
             <PropertySet
                 android:visibility="invisible" />
         </Constraint>
@@ -74,7 +69,7 @@
         <Constraint
             android:id="@+id/share_imageView">
             <Transform
-                android:translationY="@dimen/_minus36sdp" />
+                android:translationY="@dimen/_minus24sdp" />
             <PropertySet
                 android:visibility="invisible" />
         </Constraint>
@@ -82,23 +77,13 @@
         <Constraint
             android:id="@+id/download_imageView">
             <Transform
-                android:translationY="@dimen/_minus36sdp" />
+                android:translationY="@dimen/_minus24sdp" />
             <PropertySet
                 android:visibility="invisible" />
         </Constraint>
 
         <Constraint
-            android:id="@+id/top_view" >
-            <Transform
-                android:translationY="@dimen/_minus36sdp" />
-            <PropertySet
-                android:visibility="invisible" />
-        </Constraint>
-
-        <Constraint
-            android:id="@+id/bottom_view" >
-            <Transform
-                android:translationY="@dimen/_36sdp" />
+            android:id="@+id/divider_view" >
             <PropertySet
                 android:visibility="invisible" />
         </Constraint>

@@ -12,7 +12,6 @@ import com.majazeh.risloo.Utils.Entities.Decoraton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
-import com.majazeh.risloo.Utils.Managers.TransitionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.squareup.picasso.Picasso;
@@ -80,13 +79,9 @@ public class DisplayActivity extends AppCompatActivity {
             if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                 systemUiVisibility = true;
 
-                TransitionManager.reverseTransition(binding.getRoot(), 300);
-
                 binding.rootMotionLayout.transitionToState(R.id.start);
             } else {
                 systemUiVisibility = false;
-
-                TransitionManager.startTransition(binding.getRoot(), 300);
 
                 binding.rootMotionLayout.transitionToState(R.id.end);
             }
