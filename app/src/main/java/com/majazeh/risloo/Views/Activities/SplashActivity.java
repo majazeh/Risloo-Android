@@ -81,59 +81,53 @@ public class SplashActivity extends AppCompatActivity {
 
     private void getData() {
         if (BuildConfig.BUILD_TYPE.equals("release")) {
-            handler.postDelayed(this::showProgress, 500);
+            handler.postDelayed(() -> {
+                binding.getRoot().transitionToEnd();
 
-            Auth.explode(data, header, new Response() {
-                @Override
-                public void onOK(Object object) {
-                    VersionModel versionModel = new VersionModel((JSONObject) object);
+                Auth.explode(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        VersionModel versionModel = new VersionModel((JSONObject) object);
 
-                    runOnUiThread(() -> {
-                        hideProgress();
+                        runOnUiThread(() -> {
+                            binding.getRoot().transitionToStart();
 
-                        if (versionModel.getAndroid() != null) {
-                            if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(SplashActivity.this), versionModel.getAndroid().getForce()) == 1) {
-                                SheetManager.showVersionBottomSheet(SplashActivity.this, versionModel, "force");
-                                return;
-                            } else if (StringManager.compareVersionNames(versionModel.getAndroid().getForce(), versionModel.getAndroid().getCurrent()) == 1) {
-                                SheetManager.showVersionBottomSheet(SplashActivity.this, versionModel, "current");
-                                return;
+                            if (versionModel.getAndroid() != null) {
+                                if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(SplashActivity.this), versionModel.getAndroid().getForce()) == 1) {
+                                    SheetManager.showVersionBottomSheet(SplashActivity.this, versionModel, "force");
+                                    return;
+                                } else if (StringManager.compareVersionNames(versionModel.getAndroid().getForce(), versionModel.getAndroid().getCurrent()) == 1) {
+                                    SheetManager.showVersionBottomSheet(SplashActivity.this, versionModel, "current");
+                                    return;
+                                }
                             }
-                        }
 
-                        navigate();
-                    });
-                }
+                            navigate();
+                        });
+                    }
 
-                @Override
-                public void onFailure(String response) {
-                    runOnUiThread(() -> {
-                        hideProgress();
+                    @Override
+                    public void onFailure(String response) {
+                        runOnUiThread(() -> {
+                            binding.getRoot().transitionToStart();
 
-                        navigate();
-                    });
-                }
-            });
+                            navigate();
+                        });
+                    }
+                });
+            }, 500);
         } else {
-            handler.postDelayed(this::navigate, 1000);
+            navigate();
         }
     }
 
     private void navigate() {
-        if (!singleton.getToken().equals(""))
-            IntentManager.main(this);
-        else
-            IntentManager.auth(this, "login");
-    }
-
-    private void showProgress() {
-        if (binding.explodeProgressBar.getVisibility() == View.GONE)
-            binding.explodeProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgress() {
-        if (binding.explodeProgressBar.getVisibility() == View.VISIBLE)
-            binding.explodeProgressBar.setVisibility(View.GONE);
+        handler.postDelayed(() -> {
+            if (!singleton.getToken().equals(""))
+                IntentManager.main(this);
+            else
+                IntentManager.auth(this, "login");
+        }, 1000);
     }
 
     @Override
