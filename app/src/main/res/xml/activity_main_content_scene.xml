@@ -23,9 +23,8 @@
 
         <Constraint
             android:id="@+id/background_view" >
-            <CustomAttribute
-                motion:attributeName="backgroundColor"
-                motion:customColorValue="@color/White" />
+            <PropertySet
+                android:visibility="invisible" />
         </Constraint>
 
         <Constraint
@@ -46,9 +45,20 @@
 
         <Constraint
             android:id="@+id/background_view" >
-            <CustomAttribute
-                motion:attributeName="backgroundColor"
-                motion:customColorValue="@color/CoolGray50" />
+            <PropertySet
+                android:visibility="visible" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/debug_textView">
+            <PropertySet
+                motion:visibilityMode="ignore" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/logout_imageView" >
+            <PropertySet
+                motion:visibilityMode="ignore" />
         </Constraint>
 
         <Constraint
@@ -73,12 +83,6 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 motion:layout_constraintBottom_toTopOf="parent"
                 motion:layout_constraintStart_toStartOf="parent" />
-        </Constraint>
-
-        <Constraint
-            android:id="@+id/seperate_view">
-            <PropertySet
-                android:visibility="visible" />
         </Constraint>
 
     </ConstraintSet>
