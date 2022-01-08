@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Views.Activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+@SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
 
     // Binding
@@ -82,7 +84,7 @@ public class SplashActivity extends AppCompatActivity {
     private void getData() {
         if (BuildConfig.BUILD_TYPE.equals("release")) {
             handler.postDelayed(() -> {
-                binding.getRoot().transitionToEnd();
+                binding.getRoot().transitionToState(R.id.end);
 
                 Auth.explode(data, header, new Response() {
                     @Override
@@ -90,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
                         VersionModel versionModel = new VersionModel((JSONObject) object);
 
                         runOnUiThread(() -> {
-                            binding.getRoot().transitionToStart();
+                            binding.getRoot().transitionToState(R.id.start);
 
                             if (versionModel.getAndroid() != null) {
                                 if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(SplashActivity.this), versionModel.getAndroid().getForce()) == 1) {
@@ -109,7 +111,7 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(String response) {
                         runOnUiThread(() -> {
-                            binding.getRoot().transitionToStart();
+                            binding.getRoot().transitionToState(R.id.start);
 
                             navigate();
                         });

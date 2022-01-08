@@ -79,11 +79,11 @@ public class DisplayActivity extends AppCompatActivity {
             if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                 systemUiVisibility = true;
 
-                binding.rootMotionLayout.transitionToState(R.id.start);
+                binding.getRoot().transitionToState(R.id.start);
             } else {
                 systemUiVisibility = false;
 
-                binding.rootMotionLayout.transitionToState(R.id.end);
+                binding.getRoot().transitionToState(R.id.end);
             }
         });
     }
