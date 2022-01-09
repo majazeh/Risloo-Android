@@ -284,7 +284,8 @@ public class TestActivity extends AppCompatActivity {
 
     private void navigate() {
         if (navigatoon.getCurrentDestinationId() == R.id.testPrerequisiteFragment) {
-            sendPre();
+            int key = -1;
+            sendPre(key, "");
         }
 
         switch (formModel.getType()) {
@@ -346,41 +347,20 @@ public class TestActivity extends AppCompatActivity {
         setWidgets();
     }
 
-    private void sendPre() {
-        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
-        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
-        binding.statusTextView.getRoot().requestLayout();
-
-        sampleAnswers.sendPrerequisites(singleton.getToken(), new Response() {
-            @Override
-            public void onOK(Object object) {
-                runOnUiThread(() -> {
-                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-                    binding.statusTextView.getRoot().requestLayout();
-                });
-            }
-
-            @Override
-            public void onFailure(String response) {
-                runOnUiThread(() -> {
-                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-                    binding.statusTextView.getRoot().requestLayout();
-                });
-            }
-        });
-    }
-
     public void sendPre(int key, String value) {
-        PrerequisitesModel model = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
-        model.setUserAnswered(value);
+        if (key != -1) {
+            PrerequisitesModel model = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
+            model.setUserAnswered(value);
+        }
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
         binding.statusTextView.getRoot().requestLayout();
 
-        sampleAnswers.addToPrerequisites(key, value);
+        if (key != -1) {
+            sampleAnswers.addToPrerequisites(key, value);
+        }
+
         sampleAnswers.sendPrerequisites(singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {
