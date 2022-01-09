@@ -95,13 +95,8 @@ public class SplashActivity extends AppCompatActivity {
                             binding.getRoot().transitionToState(R.id.start);
 
                             if (versionModel.getAndroid() != null) {
-                                if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(SplashActivity.this), versionModel.getAndroid().getForce()) == 1) {
-                                    SheetManager.showVersionBottomSheet(SplashActivity.this, versionModel, "force");
-                                    return;
-                                } else if (StringManager.compareVersionNames(versionModel.getAndroid().getForce(), versionModel.getAndroid().getCurrent()) == 1) {
-                                    SheetManager.showVersionBottomSheet(SplashActivity.this, versionModel, "current");
-                                    return;
-                                }
+                                updateAvailable(versionModel);
+                                return;
                             }
 
                             navigate();
@@ -121,6 +116,13 @@ public class SplashActivity extends AppCompatActivity {
         } else {
             navigate();
         }
+    }
+
+    private void updateAvailable(VersionModel model) {
+        if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(SplashActivity.this), model.getAndroid().getForce()) == 1)
+            SheetManager.showVersionBottomSheet(SplashActivity.this, model, "force");
+        else if (StringManager.compareVersionNames(model.getAndroid().getForce(), model.getAndroid().getCurrent()) == 1)
+            SheetManager.showVersionBottomSheet(SplashActivity.this, model, "current");
     }
 
     private void navigate() {

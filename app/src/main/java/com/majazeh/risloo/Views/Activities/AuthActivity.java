@@ -84,14 +84,12 @@ public class AuthActivity extends AppCompatActivity {
 
     private void setExtra() {
         if (extras != null) {
-            if (extras.getString("theory") != null) {
-                if (extras.getString("theory").equals("login"))
-                    navigatoon.setStartDestinationId(R.id.authLoginFragment);
-                else if (extras.getString("theory").equals("register"))
-                    navigatoon.setStartDestinationId(R.id.authRegisterFragment);
-                else
-                    navigatoon.setStartDestinationId(R.id.authPasswordRecoverFragment);
-            }
+            if (extras.getString("theory").equals("login"))
+                navigatoon.setStartDestinationId(R.id.authLoginFragment);
+            else if (extras.getString("theory").equals("register"))
+                navigatoon.setStartDestinationId(R.id.authRegisterFragment);
+            else
+                navigatoon.setStartDestinationId(R.id.authPasswordRecoverFragment);
         }
     }
 

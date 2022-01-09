@@ -29,7 +29,6 @@ public class DisplayActivity extends AppCompatActivity {
 
     // Vars
     private String title = "", path = "";
-    private boolean systemUiVisibility = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,30 +60,25 @@ public class DisplayActivity extends AppCompatActivity {
     private void listener() {
         CustomClickView.onClickListener(() -> IntentManager.finish(this)).widget(binding.returnImageView);
 
-        CustomClickView.onDelayedListener(() -> IntentManager.share(this, path)).widget(binding.shareImageView);
+        CustomClickView.onClickListener(() -> IntentManager.share(this, path)).widget(binding.shareImageView);
 
-        CustomClickView.onDelayedListener(() -> {
+        CustomClickView.onClickListener(() -> {
             if (PermissionManager.storagePermission(this))
                 IntentManager.download(this, title, path);
         }).widget(binding.downloadImageView);
 
         CustomClickView.onClickListener(() -> {
-            if (!systemUiVisibility)
+            if (binding.getRoot().getCurrentState() == R.id.end)
                 decoraton.showSystemUI(true, true);
             else
                 decoraton.immersiveHideSystemUI();
         }).widget(binding.avatarZoomageView);
 
         getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(visibility -> {
-            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                systemUiVisibility = true;
-
+            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0)
                 binding.getRoot().transitionToState(R.id.start);
-            } else {
-                systemUiVisibility = false;
-
+            else
                 binding.getRoot().transitionToState(R.id.end);
-            }
         });
     }
 
