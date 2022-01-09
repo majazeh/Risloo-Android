@@ -118,8 +118,8 @@ dependencies {
      ---------- SMS Verification Sdk's ----------
     */
 
-    implementation 'com.google.android.gms:play-services-auth:20.0.0' // Auth
-    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.0' // Auth Phone
+    implementation 'com.google.android.gms:play-services-auth:20.0.1' // Auth
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1' // Auth Phone
 
     /*
      ---------- Androidx Sdk's ----------
