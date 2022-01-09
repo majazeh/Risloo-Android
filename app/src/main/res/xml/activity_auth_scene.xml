@@ -5,9 +5,25 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="500">
+        motion:duration="1000">
 
        <KeyFrameSet>
+
+           <KeyAttribute
+               motion:motionTarget="@+id/debug_textView"
+               motion:framePosition="0"
+               android:scaleX="0"
+               android:scaleY="0" />
+
+           <KeyAttribute
+               motion:motionTarget="@+id/debug_textView"
+               motion:framePosition="50"
+               android:alpha="0" />
+
+           <KeyAttribute
+               motion:motionTarget="@+id/debug_textView"
+               motion:framePosition="100"
+               android:alpha="1" />
 
        </KeyFrameSet>
 
@@ -18,7 +34,7 @@
         <Constraint
             android:id="@+id/debug_textView">
             <PropertySet
-                motion:visibilityMode="ignore" />
+                android:visibility="invisible" />
         </Constraint>
 
     </ConstraintSet>
@@ -28,7 +44,7 @@
         <Constraint
             android:id="@+id/debug_textView">
             <PropertySet
-                motion:visibilityMode="ignore" />
+                android:visibility="visible" />
         </Constraint>
 
     </ConstraintSet>
