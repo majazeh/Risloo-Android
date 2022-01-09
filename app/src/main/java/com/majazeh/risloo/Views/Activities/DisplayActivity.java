@@ -93,7 +93,6 @@ public class DisplayActivity extends AppCompatActivity {
             if (!extras.getString("title").equals("")) {
                 title = extras.getString("title");
 
-                binding.titleTextView.setVisibility(View.VISIBLE);
                 binding.titleTextView.setText(title);
             }
 

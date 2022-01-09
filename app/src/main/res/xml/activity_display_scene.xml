@@ -16,12 +16,6 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/title_textView">
-            <PropertySet
-                motion:visibilityMode="ignore" />
-        </Constraint>
-
-        <Constraint
             android:id="@+id/share_imageView">
             <PropertySet
                 motion:visibilityMode="ignore" />

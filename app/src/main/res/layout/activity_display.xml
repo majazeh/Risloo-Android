@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
+    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
     app:layoutDescription="@xml/activity_display_scene"
     tools:context=".Views.Activities.DisplayActivity">
@@ -55,18 +55,17 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:gravity="center|right"
+        android:text="@string/AppDefaultUnknown"
         android:textSize="@dimen/_10ssp"
         android:textStyle="bold"
         android:textColor="@color/CoolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_demi_bold"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/return_imageView"
         app:layout_constraintEnd_toStartOf="@id/share_imageView"
         app:layout_constraintStart_toEndOf="@id/return_imageView"
         app:layout_constraintTop_toTopOf="@id/return_imageView"
-        tools:text="عنوان"
-        tools:visibility="visible" />
+        tools:text="عنوان" />
 
     <ImageView
         android:id="@+id/share_imageView"
