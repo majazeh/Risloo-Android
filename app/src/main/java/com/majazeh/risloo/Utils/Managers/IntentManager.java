@@ -19,7 +19,6 @@ import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.DisplayActivity;
-import com.majazeh.risloo.Views.Activities.IntroActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.yalantis.ucrop.UCrop;
@@ -31,13 +30,6 @@ public class IntentManager {
     /*
     ---------- Activities ----------
     */
-
-    public static void intro(Activity activity) {
-        Intent intent = new Intent(activity, IntroActivity.class);
-
-        activity.startActivity(intent);
-        activity.finish();
-    }
 
     public static void main(Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
