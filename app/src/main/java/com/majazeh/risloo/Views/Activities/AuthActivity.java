@@ -64,7 +64,7 @@ public class AuthActivity extends AppCompatActivity {
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
         else
-            binding.debugTextView.getRoot().setVisibility(View.GONE);
+            binding.debugTextView.getRoot().setVisibility(View.INVISIBLE);
     }
 
     private void initializer() {
@@ -87,8 +87,10 @@ public class AuthActivity extends AppCompatActivity {
             if (extras.getString("theory") != null) {
                 if (extras.getString("theory").equals("login"))
                     navigatoon.setStartDestinationId(R.id.authLoginFragment);
-                else
+                else if (extras.getString("theory").equals("register"))
                     navigatoon.setStartDestinationId(R.id.authRegisterFragment);
+                else
+                    navigatoon.setStartDestinationId(R.id.authPasswordRecoverFragment);
             }
         }
     }
@@ -117,8 +119,13 @@ public class AuthActivity extends AppCompatActivity {
                 navigatoon.navigateUp();
             else
                 IntentManager.finish(this);
-        } else {
+        } else if (navigatoon.getStartDestinationId() == R.id.authRegisterFragment) {
             if (navigatoon.getCurrentDestinationId() != R.id.authRegisterFragment && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
+                navigatoon.navigateUp();
+            else
+                IntentManager.finish(this);
+        } else {
+            if (navigatoon.getCurrentDestinationId() != R.id.authPasswordRecoverFragment && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
                 navigatoon.navigateUp();
             else
                 IntentManager.finish(this);

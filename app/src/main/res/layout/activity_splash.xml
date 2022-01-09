@@ -42,7 +42,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_4sdp_solid_red600"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/logo_imageView"
         app:layout_constraintEnd_toEndOf="@id/logo_imageView"
         app:layout_constraintStart_toEndOf="@id/logo_imageView"

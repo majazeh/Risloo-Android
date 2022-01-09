@@ -65,7 +65,7 @@ public class SplashActivity extends AppCompatActivity {
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.debugTextView.setVisibility(View.VISIBLE);
         else
-            binding.debugTextView.setVisibility(View.GONE);
+            binding.debugTextView.setVisibility(View.INVISIBLE);
     }
 
     private void initializer() {
