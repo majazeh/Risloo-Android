@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
+    android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
     app:layoutDescription="@xml/activity_main_content_scene"
     tools:context=".Views.Activities.MainActivity">

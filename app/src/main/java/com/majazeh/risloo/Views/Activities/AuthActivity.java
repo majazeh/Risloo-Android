@@ -62,7 +62,9 @@ public class AuthActivity extends AppCompatActivity {
         decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
 
         if (BuildConfig.BUILD_TYPE.equals("debug"))
-            binding.getRoot().transitionToState(R.id.end);
+            binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.debugTextView.getRoot().setVisibility(View.GONE);
     }
 
     private void initializer() {

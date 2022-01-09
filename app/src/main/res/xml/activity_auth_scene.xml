@@ -9,22 +9,6 @@
 
        <KeyFrameSet>
 
-           <KeyAttribute
-               motion:motionTarget="@+id/debug_textView"
-               motion:framePosition="0"
-               android:scaleX="0"
-               android:scaleY="0" />
-
-           <KeyAttribute
-               motion:motionTarget="@+id/debug_textView"
-               motion:framePosition="50"
-               android:alpha="0" />
-
-           <KeyAttribute
-               motion:motionTarget="@+id/debug_textView"
-               motion:framePosition="100"
-               android:alpha="1" />
-
        </KeyFrameSet>
 
     </Transition>
@@ -34,7 +18,7 @@
         <Constraint
             android:id="@+id/debug_textView">
             <PropertySet
-                android:visibility="invisible" />
+                motion:visibilityMode="ignore" />
         </Constraint>
 
     </ConstraintSet>
@@ -44,7 +28,7 @@
         <Constraint
             android:id="@+id/debug_textView">
             <PropertySet
-                android:visibility="visible" />
+                motion:visibilityMode="ignore" />
         </Constraint>
 
     </ConstraintSet>
