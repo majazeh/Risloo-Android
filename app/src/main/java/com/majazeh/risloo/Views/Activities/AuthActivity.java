@@ -46,6 +46,8 @@ public class AuthActivity extends AppCompatActivity {
 
         decorator();
 
+        varianter();
+
         initializer();
 
         ExtendException.activity = this;
@@ -60,7 +62,9 @@ public class AuthActivity extends AppCompatActivity {
 
         decoraton.showSystemUI(true, true);
         decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
+    }
 
+    private void varianter() {
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
         else
@@ -84,12 +88,12 @@ public class AuthActivity extends AppCompatActivity {
 
     private void setExtra() {
         if (extras != null) {
-            if (extras.getString("theory").equals("login"))
-                navigatoon.setStartDestinationId(R.id.authLoginFragment);
+            if (extras.getString("theory").equals("recover"))
+                navigatoon.setStartDestinationId(R.id.authPasswordRecoverFragment);
             else if (extras.getString("theory").equals("register"))
                 navigatoon.setStartDestinationId(R.id.authRegisterFragment);
             else
-                navigatoon.setStartDestinationId(R.id.authPasswordRecoverFragment);
+                navigatoon.setStartDestinationId(R.id.authLoginFragment);
         }
     }
 
@@ -112,22 +116,10 @@ public class AuthActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (navigatoon.getStartDestinationId() == R.id.authLoginFragment) {
-            if (navigatoon.getCurrentDestinationId() != R.id.authLoginFragment && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
-                navigatoon.navigateUp();
-            else
-                IntentManager.finish(this);
-        } else if (navigatoon.getStartDestinationId() == R.id.authRegisterFragment) {
-            if (navigatoon.getCurrentDestinationId() != R.id.authRegisterFragment && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
-                navigatoon.navigateUp();
-            else
-                IntentManager.finish(this);
-        } else {
-            if (navigatoon.getCurrentDestinationId() != R.id.authPasswordRecoverFragment && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
-                navigatoon.navigateUp();
-            else
-                IntentManager.finish(this);
-        }
+        if (navigatoon.getCurrentDestinationId() != navigatoon.getStartDestinationId() && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
+            navigatoon.navigateUp();
+        else
+            IntentManager.finish(this);
     }
 
 }
