@@ -13,8 +13,8 @@ import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.VersionBottomSheet;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
+import com.mre.ligheh.Model.TypeModel.ClientModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
-import com.mre.ligheh.Model.TypeModel.VersionModel;
 
 public class SheetManager {
 
@@ -66,10 +66,10 @@ public class SheetManager {
         timeBottomSheet.setTime(timestamp, method);
     }
 
-    public static void showVersionBottomSheet(Activity activity, VersionModel versionModel, String method) {
+    public static void showVersionBottomSheet(Activity activity, ClientModel clientModel, String method) {
         versionBottomSheet = new VersionBottomSheet();
         versionBottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "versionBottomSheet");
-        versionBottomSheet.setData(versionModel, method);
+        versionBottomSheet.setData(clientModel, method);
     }
 
     /*

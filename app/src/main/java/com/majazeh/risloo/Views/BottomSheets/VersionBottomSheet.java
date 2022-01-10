@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.SplashActivity;
 import com.majazeh.risloo.databinding.BottomSheetVersionBinding;
-import com.mre.ligheh.Model.TypeModel.VersionModel;
+import com.mre.ligheh.Model.TypeModel.ClientModel;
 
 public class VersionBottomSheet extends BottomSheetDialogFragment {
 
@@ -25,7 +25,7 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
     private BottomSheetVersionBinding binding;
 
     // Models
-    private VersionModel versionModel;
+    private ClientModel clientModel;
 
     // Vars
     private String method = "";
@@ -68,14 +68,14 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
 
     private void setDialog() {
         if (method.equals("force")) {
-            String force = requireActivity().getResources().getString(R.string.BottomSheetVersionTitle) + " " + versionModel.getAndroid().getForce();
+            String force = requireActivity().getResources().getString(R.string.BottomSheetVersionTitle) + " " + clientModel.getForce();
 
             binding.titleTextView.getRoot().setText(force);
             binding.descTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BottomSheetVersionForceDesc));
 
             InitManager.txtTextColorBackground(binding.returnTextView.getRoot(), getResources().getString(R.string.BottomSheetVersionForceReturn), getResources().getColor(R.color.Red600), R.drawable.draw_24sdp_solid_white_border_1sdp_red600_ripple_red300);
         } else {
-            String current = requireActivity().getResources().getString(R.string.BottomSheetVersionTitle) + " " + versionModel.getAndroid().getCurrent();
+            String current = requireActivity().getResources().getString(R.string.BottomSheetVersionTitle) + " " + clientModel.getCurrent();
 
             binding.titleTextView.getRoot().setText(current);
             binding.descTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BottomSheetVersionCurrentDesc));
@@ -84,8 +84,8 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void setData(VersionModel model, String method) {
-        this.versionModel = model;
+    public void setData(ClientModel model, String method) {
+        this.clientModel = model;
         this.method = method;
     }
 

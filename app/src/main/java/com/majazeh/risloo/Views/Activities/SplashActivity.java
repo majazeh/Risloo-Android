@@ -19,6 +19,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.databinding.ActivitySplashBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.ClientModel;
 import com.mre.ligheh.Model.TypeModel.VersionModel;
 
 import org.json.JSONObject;
@@ -47,6 +48,8 @@ public class SplashActivity extends AppCompatActivity {
 
         decorator();
 
+        varianter();
+
         initializer();
 
         ExtendException.activity = this;
@@ -61,7 +64,9 @@ public class SplashActivity extends AppCompatActivity {
 
         decoraton.showSystemUI(false, false);
         decoraton.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
+    }
 
+    private void varianter() {
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.debugTextView.setVisibility(View.VISIBLE);
         else
@@ -90,12 +95,13 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void onOK(Object object) {
                         VersionModel versionModel = new VersionModel((JSONObject) object);
+                        ClientModel clientModel = versionModel.getAndroid();
 
                         runOnUiThread(() -> {
                             binding.getRoot().transitionToState(R.id.start);
 
-                            if (versionModel.getAndroid() != null) {
-                                updateAvailable(versionModel);
+                            if (clientModel != null) {
+                                newVersion(clientModel);
                                 return;
                             }
 
@@ -118,11 +124,11 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void updateAvailable(VersionModel model) {
-        if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(SplashActivity.this), model.getAndroid().getForce()) == 1)
-            SheetManager.showVersionBottomSheet(SplashActivity.this, model, "force");
-        else if (StringManager.compareVersionNames(model.getAndroid().getForce(), model.getAndroid().getCurrent()) == 1)
-            SheetManager.showVersionBottomSheet(SplashActivity.this, model, "current");
+    private void newVersion(ClientModel model) {
+        if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(this), model.getForce()) == 1)
+            SheetManager.showVersionBottomSheet(this, model, "force");
+        else if (StringManager.compareVersionNames(model.getForce(), model.getCurrent()) == 1)
+            SheetManager.showVersionBottomSheet(this, model, "current");
     }
 
     private void navigate() {
