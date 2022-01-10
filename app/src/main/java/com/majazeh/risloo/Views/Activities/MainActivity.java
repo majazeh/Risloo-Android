@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Activities;
 
 import static android.content.RestrictionsManager.RESULT_ERROR;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
@@ -86,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
     // Objects
     private HashMap data, header;
 
-    // Vars
-    private boolean userSelect = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         decorator();
+
+        varianter();
 
         initializer();
 
@@ -118,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
 
         decoraton.showSystemUI(true, true);
         decoraton.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
+    }
 
+    private void varianter() {
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
         else
@@ -148,54 +148,7 @@ public class MainActivity extends AppCompatActivity {
         InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.contentIncludeLayout.debugTextView.getRoot());
-
-        CustomClickView.onDelayedListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.contentIncludeLayout.menuImageView.getRoot());
-
-        CustomClickView.onDelayedListener(() -> changeUser("logoutFormOtherUser", "")).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
-
-        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
-        });
-
-        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
-
-        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
-
-                    switch (pos) {
-                        case "مشاهده پروفایل":
-                            navigatoon.navigateToMeFragment(singleton.getUserModel());
-                            break;
-                        case "حسابداری":
-                            navigatoon.navigateToAccountingFragment();
-                            break;
-                        case "شارژ حساب":
-                            navigatoon.navigateToPaymentsFragment(null);
-                            break;
-                        case "خروج":
-                            SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
-                            break;
-                    }
-
-                    parent.setSelection(parent.getAdapter().getCount());
-
-                    userSelect = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         binding.contentIncludeLayout.getRoot().addTransitionListener(new MotionLayout.TransitionListener() {
             @Override
             public void onTransitionStarted(MotionLayout motionLayout, int startId, int endId) {
@@ -220,6 +173,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.contentIncludeLayout.debugTextView.getRoot());
+
+        CustomClickView.onDelayedListener(() -> changeDrawer("open")).widget(binding.contentIncludeLayout.menuImageView.getRoot());
+
+        CustomClickView.onDelayedListener(() -> changeUser("logoutFormOtherUser", "")).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
 
         navigatoon.getNavController().addOnDestinationChangedListener((controller, destination, arguments) -> {
             SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
@@ -359,6 +318,33 @@ public class MainActivity extends AppCompatActivity {
         items.add("");
 
         InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, items);
+
+        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String pos = parent.getItemAtPosition(position).toString();
+
+                switch (pos) {
+                    case "مشاهده پروفایل":
+                        navigatoon.navigateToMeFragment(singleton.getUserModel());
+                        break;
+                    case "حسابداری":
+                        navigatoon.navigateToAccountingFragment();
+                        break;
+                    case "شارژ حساب":
+                        navigatoon.navigateToPaymentsFragment(null);
+                        break;
+                    case "خروج":
+                        SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setHashmap(String userId) {
@@ -383,9 +369,9 @@ public class MainActivity extends AppCompatActivity {
         DialogManager.dismissLoadingDialog();
 
         if (method.equals("loginOtherUser"))
-            SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
+            SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLoginOtherUser));
         else
-            SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
+            SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLogoutFormOtherUser));
 
         navigatoon.navigateToDashboardFragment();
     }
@@ -423,8 +409,13 @@ public class MainActivity extends AppCompatActivity {
                 navigatoon.navigateToDownloadsFragment();
                 break;
         }
+    }
 
-        binding.getRoot().closeDrawer(GravityCompat.START);
+    public void changeDrawer(String method) {
+        if (method.equals("open"))
+            binding.getRoot().openDrawer(GravityCompat.START);
+        else
+            binding.getRoot().closeDrawer(GravityCompat.START);
     }
 
     public void changeUser(String method, String userId) {
@@ -610,8 +601,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (binding.getRoot().isDrawerOpen(GravityCompat.START))
-            binding.getRoot().closeDrawer(GravityCompat.START);
-        else if (navigatoon.getCurrentDestinationId() != R.id.dashboardFragment)
+            changeDrawer("close");
+        else if (navigatoon.getCurrentDestinationId() != navigatoon.getStartDestinationId())
             navigatoon.navigateUp();
         else
             IntentManager.finish(this);

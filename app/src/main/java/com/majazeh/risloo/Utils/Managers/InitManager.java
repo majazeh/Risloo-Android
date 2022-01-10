@@ -784,7 +784,7 @@ public class InitManager {
         };
 
         spinner.setAdapter(adapter);
-        spinner.setSelection(adapter.getCount());
+        spinner.setSelection(adapter.getCount(), false);
     }
 
     // -------------------- Select Custom Spinner
