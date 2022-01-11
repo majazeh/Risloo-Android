@@ -84,6 +84,8 @@ public class TestActivity extends AppCompatActivity {
 
         decorator(true);
 
+        varianter();
+
         initializer();
 
         ExtendException.activity = this;
@@ -104,12 +106,14 @@ public class TestActivity extends AppCompatActivity {
         } else {
             decoraton.showSystemUI(true, true);
             decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
-
-            if (BuildConfig.BUILD_TYPE.equals("debug"))
-                binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
-            else
-                binding.debugTextView.getRoot().setVisibility(View.GONE);
         }
+    }
+
+    private void varianter() {
+        if (BuildConfig.BUILD_TYPE.equals("debug"))
+            binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.debugTextView.getRoot().setVisibility(View.GONE);
     }
 
     private void initializer() {
@@ -133,6 +137,43 @@ public class TestActivity extends AppCompatActivity {
         InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500);
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500, 180);
     }
+
+    private void setExtra() {
+        if (extras != null) {
+            if (!extras.getString("id").equals("")) {
+                data.put("id", extras.getString("id"));
+                sampleAnswers.id = extras.getString("id");
+            }
+        }
+    }
+
+    private void postHandler() {
+        doubleBackPressed = true;
+        handler.postDelayed(() -> doubleBackPressed = false, 2000);
+
+        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
@@ -173,15 +214,6 @@ public class TestActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void setExtra() {
-        if (extras != null) {
-            if (extras.getString("id") != null) {
-                data.put("id", extras.getString("id"));
-                sampleAnswers.id = extras.getString("id");
-            }
-        }
     }
 
     private void setData() {
@@ -270,7 +302,8 @@ public class TestActivity extends AppCompatActivity {
                     } else {
                         setData();
 
-                        hideProgress();
+                        binding.getRoot().transitionToState(R.id.end);
+                        decorator(false);
                     }
                 });
             }
@@ -443,7 +476,8 @@ public class TestActivity extends AppCompatActivity {
                                 data.put("id", chainModel.getId());
                                 sampleAnswers.id = chainModel.getId();
 
-                                showProgress();
+                                binding.getRoot().transitionToState(R.id.start);
+                                decorator(true);
 
                                 getData();
                                 break;
@@ -487,19 +521,32 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-    private void showProgress() {
-        if (binding.loadingIncludeLayout.getRoot().getVisibility() == View.GONE)
-            binding.loadingIncludeLayout.getRoot().setVisibility(View.VISIBLE);
 
-        decorator(true);
-    }
 
-    private void hideProgress() {
-        if (binding.loadingIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-            binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
 
-        decorator(false);
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -520,14 +567,10 @@ public class TestActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (doubleBackPressed) {
+        if (!doubleBackPressed)
+            postHandler();
+        else
             IntentManager.finish(this);
-        } else {
-            doubleBackPressed = true;
-            handler.postDelayed(() -> doubleBackPressed = false, 2000);
-
-            ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
-        }
     }
 
     @Override

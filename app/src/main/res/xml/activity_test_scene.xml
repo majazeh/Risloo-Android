@@ -5,7 +5,7 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="500">
 
        <KeyFrameSet>
 
@@ -24,7 +24,7 @@
         <Constraint
             android:id="@+id/loading_includeLayout">
             <PropertySet
-                motion:visibilityMode="ignore" />
+                android:visibility="visible" />
         </Constraint>
 
     </ConstraintSet>
@@ -40,7 +40,7 @@
         <Constraint
             android:id="@+id/loading_includeLayout">
             <PropertySet
-                motion:visibilityMode="ignore" />
+                android:visibility="invisible" />
         </Constraint>
 
     </ConstraintSet>
