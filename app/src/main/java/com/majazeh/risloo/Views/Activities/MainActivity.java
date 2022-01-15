@@ -102,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
         setDrawer();
 
-        setToolbar();
-
         PaymentManager.callback(this);
     }
 
@@ -142,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
 
         InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, ListManager.getToolbar(this));
     }
 
     private void listener() {
@@ -172,9 +171,36 @@ public class MainActivity extends AppCompatActivity {
 
         CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.contentIncludeLayout.debugTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> changeDrawer("open")).widget(binding.contentIncludeLayout.menuImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> changeDrawer("openDrawer")).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> changeUser("logoutFormOtherUser", "")).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
+
+        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String pos = parent.getItemAtPosition(position).toString();
+
+                switch (pos) {
+                    case "مشاهده پروفایل":
+                        navigatoon.navigateToMeFragment(singleton.getUserModel());
+                        break;
+                    case "حسابداری":
+                        navigatoon.navigateToAccountingFragment();
+                        break;
+                    case "شارژ حساب":
+                        navigatoon.navigateToPaymentsFragment(null);
+                        break;
+                    case "خروج":
+                        SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         navigatoon.getNavController().addOnDestinationChangedListener((controller, destination, arguments) -> {
             SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
@@ -237,37 +263,6 @@ public class MainActivity extends AppCompatActivity {
         binding.navIncludeLayout.listRecyclerView.getRoot().setAdapter(mainNavAdapter);
     }
 
-    private void setToolbar() {
-        InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, ListManager.getToolbar(this));
-
-        binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String pos = parent.getItemAtPosition(position).toString();
-
-                switch (pos) {
-                    case "مشاهده پروفایل":
-                        navigatoon.navigateToMeFragment(singleton.getUserModel());
-                        break;
-                    case "حسابداری":
-                        navigatoon.navigateToAccountingFragment();
-                        break;
-                    case "شارژ حساب":
-                        navigatoon.navigateToPaymentsFragment(null);
-                        break;
-                    case "خروج":
-                        SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
     private void setHashmap(String userId) {
         if (!userId.equals(""))
             data.put("id", userId);
@@ -285,8 +280,6 @@ public class MainActivity extends AppCompatActivity {
 
         setDrawer();
 
-        setToolbar();
-
         DialogManager.dismissLoadingDialog();
 
         if (method.equals("loginOtherUser"))
@@ -294,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
         else
             SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLogoutFormOtherUser));
 
-        navigatoon.navigateToDashboardFragment();
+        changeFragment("داشبورد");
     }
 
     public void changeFragment(String title) {
@@ -333,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeDrawer(String method) {
-        if (method.equals("open"))
+        if (method.equals("openDrawer"))
             binding.getRoot().openDrawer(GravityCompat.START);
         else
             binding.getRoot().closeDrawer(GravityCompat.START);
@@ -522,7 +515,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (binding.getRoot().isDrawerOpen(GravityCompat.START))
-            changeDrawer("close");
+            changeDrawer("closeDrawer");
         else if (navigatoon.getCurrentDestinationId() != navigatoon.getStartDestinationId())
             navigatoon.navigateUp();
         else

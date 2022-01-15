@@ -77,8 +77,10 @@ public class MainNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void listener(MainNavHolder holder) {
         CustomClickView.onDelayedListener(() -> {
-            ((MainActivity) activity).changeFragment(holder.binding.nameTextView.getText().toString());
-            ((MainActivity) activity).changeDrawer("close");
+            String title = holder.binding.nameTextView.getText().toString();
+
+            ((MainActivity) activity).changeFragment(title);
+            ((MainActivity) activity).changeDrawer("closeDrawer");
         }).widget(holder.itemView);
     }
 
