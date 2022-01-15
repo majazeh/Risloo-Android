@@ -87,48 +87,44 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        if (BuildConfig.BUILD_TYPE.equals("release")) {
-            handler.postDelayed(() -> {
-                binding.getRoot().transitionToState(R.id.end);
-
-                Auth.explode(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        VersionModel versionModel = new VersionModel((JSONObject) object);
-                        ClientModel clientModel = versionModel.getAndroid();
-
-                        runOnUiThread(() -> {
-                            binding.getRoot().transitionToState(R.id.start);
-
-                            if (clientModel != null) {
-                                newVersion(clientModel);
-                                return;
-                            }
-
-                            navigate();
-                        });
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-                        runOnUiThread(() -> {
-                            binding.getRoot().transitionToState(R.id.start);
-
-                            navigate();
-                        });
-                    }
-                });
-            }, 500);
-        } else {
+        if (BuildConfig.BUILD_TYPE.equals("release"))
+            explode();
+        else
             navigate();
-        }
     }
 
-    private void newVersion(ClientModel model) {
-        if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(this), model.getForce()) == 1)
-            SheetManager.showVersionBottomSheet(this, model, "force");
-        else if (StringManager.compareVersionNames(model.getForce(), model.getCurrent()) == 1)
-            SheetManager.showVersionBottomSheet(this, model, "current");
+    private void explode() {
+        handler.postDelayed(() -> {
+            binding.getRoot().transitionToState(R.id.end);
+
+            Auth.explode(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    VersionModel versionModel = new VersionModel((JSONObject) object);
+                    ClientModel clientModel = versionModel.getAndroid();
+
+                    runOnUiThread(() -> {
+                        binding.getRoot().transitionToState(R.id.start);
+
+                        if (clientModel != null) {
+                            newVersion(clientModel);
+                            return;
+                        }
+
+                        navigate();
+                    });
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    runOnUiThread(() -> {
+                        binding.getRoot().transitionToState(R.id.start);
+
+                        navigate();
+                    });
+                }
+            });
+        }, 500);
     }
 
     private void navigate() {
@@ -138,6 +134,13 @@ public class SplashActivity extends AppCompatActivity {
             else
                 IntentManager.auth(this, "login");
         }, 1000);
+    }
+
+    private void newVersion(ClientModel model) {
+        if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(this), model.getForce()) == 1)
+            SheetManager.showVersionBottomSheet(this, model, "force");
+        else if (StringManager.compareVersionNames(model.getForce(), model.getCurrent()) == 1)
+            SheetManager.showVersionBottomSheet(this, model, "current");
     }
 
     @Override
