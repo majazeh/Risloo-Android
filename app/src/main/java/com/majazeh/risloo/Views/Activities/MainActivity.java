@@ -139,36 +139,12 @@ public class MainActivity extends AppCompatActivity {
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
 
-        InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, ListManager.getToolbar(this));
+
+        InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void listener() {
-        binding.contentIncludeLayout.getRoot().addTransitionListener(new MotionLayout.TransitionListener() {
-            @Override
-            public void onTransitionStarted(MotionLayout motionLayout, int startId, int endId) {
-
-            }
-
-            @Override
-            public void onTransitionChange(MotionLayout motionLayout, int startId, int endId, float progress) {
-
-            }
-
-            @Override
-            public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {
-                if (currentId == motionLayout.getStartState())
-                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.White));
-                else if (currentId == motionLayout.getEndState())
-                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.CoolGray50));
-            }
-
-            @Override
-            public void onTransitionTrigger(MotionLayout motionLayout, int triggerId, boolean positive, float progress) {
-
-            }
-        });
-
         CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.contentIncludeLayout.debugTextView.getRoot());
 
         CustomClickView.onDelayedListener(() -> changeDrawer("openDrawer")).widget(binding.contentIncludeLayout.menuImageView.getRoot());
@@ -198,6 +174,31 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.contentIncludeLayout.getRoot().addTransitionListener(new MotionLayout.TransitionListener() {
+            @Override
+            public void onTransitionStarted(MotionLayout motionLayout, int startId, int endId) {
+
+            }
+
+            @Override
+            public void onTransitionChange(MotionLayout motionLayout, int startId, int endId, float progress) {
+
+            }
+
+            @Override
+            public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {
+                if (currentId == motionLayout.getStartState())
+                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.White));
+                else if (currentId == motionLayout.getEndState())
+                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.CoolGray50));
+            }
+
+            @Override
+            public void onTransitionTrigger(MotionLayout motionLayout, int triggerId, boolean positive, float progress) {
 
             }
         });
@@ -272,9 +273,13 @@ public class MainActivity extends AppCompatActivity {
         header.put("Authorization", singleton.getAuthorization());
     }
 
-    private void resetUser(String method, AuthModel model) {
+    private void setSingleton(String method, AuthModel model) {
         singleton.login(model);
         singleton.otherUser(method.equals("loginOtherUser"));
+    }
+
+    private void resetUser(String method, AuthModel model) {
+        setSingleton(method, model);
 
         setData();
 
@@ -290,8 +295,8 @@ public class MainActivity extends AppCompatActivity {
         changeFragment("داشبورد");
     }
 
-    public void changeFragment(String title) {
-        switch (title) {
+    public void changeFragment(String method) {
+        switch (method) {
             case "داشبورد":
                 navigatoon.navigateToDashboardFragment();
                 break;
@@ -341,9 +346,9 @@ public class MainActivity extends AppCompatActivity {
             Auth.loginOtherUser(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    AuthModel model = (AuthModel) object;
+                    AuthModel authModel = (AuthModel) object;
 
-                    runOnUiThread(() -> resetUser(method, model));
+                    runOnUiThread(() -> resetUser(method, authModel));
                 }
 
                 @Override
@@ -357,9 +362,9 @@ public class MainActivity extends AppCompatActivity {
             Auth.logoutFromOtherUser(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    AuthModel model = (AuthModel) object;
+                    AuthModel authModel = (AuthModel) object;
 
-                    runOnUiThread(() -> resetUser(method, model));
+                    runOnUiThread(() -> resetUser(method, authModel));
                 }
 
                 @Override
