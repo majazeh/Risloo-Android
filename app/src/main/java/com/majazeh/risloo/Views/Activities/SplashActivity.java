@@ -107,7 +107,7 @@ public class SplashActivity extends AppCompatActivity {
                         binding.getRoot().transitionToState(R.id.start);
 
                         if (clientModel != null) {
-                            newVersion(clientModel);
+                            update(clientModel);
                             return;
                         }
 
@@ -136,7 +136,7 @@ public class SplashActivity extends AppCompatActivity {
         }, 1000);
     }
 
-    private void newVersion(ClientModel model) {
+    private void update(ClientModel model) {
         if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(this), model.getForce()) == 1)
             SheetManager.showVersionBottomSheet(this, model, "force");
         else if (StringManager.compareVersionNames(model.getForce(), model.getCurrent()) == 1)
