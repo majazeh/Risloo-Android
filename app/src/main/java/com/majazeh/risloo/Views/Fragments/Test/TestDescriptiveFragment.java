@@ -56,6 +56,7 @@ public class TestDescriptiveFragment extends Fragment {
             answer = binding.answerEditText.inputEditText.getText().toString().trim();
 
             ((TestActivity) requireActivity()).sendItem(key, answer);
+            ((TestActivity) requireActivity()).changeFragment();
             ((TestActivity) requireActivity()).inputon.clear(((TestActivity) requireActivity()).inputon.editText);
             return false;
         });

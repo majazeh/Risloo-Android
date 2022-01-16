@@ -87,6 +87,7 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             resetItems();
 
             ((TestActivity) activity).sendItem(key, String.valueOf(answer + 1));
+            ((TestActivity) activity).changeFragment();
         }).widget(holder.itemView);
     }
 

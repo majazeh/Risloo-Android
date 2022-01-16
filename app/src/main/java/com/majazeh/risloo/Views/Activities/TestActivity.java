@@ -147,12 +147,7 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    private void postHandler() {
-        doubleBackPressed = true;
-        handler.postDelayed(() -> doubleBackPressed = false, 2000);
 
-        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
-    }
 
 
 
@@ -182,11 +177,15 @@ public class TestActivity extends AppCompatActivity {
         CustomClickView.onClickListener(() -> {
             formModel = sampleForm.prev();
             navigate();
+
+            setWidgets();
         }).widget(binding.backwardImageView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             formModel = sampleForm.next();
             navigate();
+
+            setWidgets();
         }).widget(binding.forwardImageView.getRoot());
 
         binding.locationIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
@@ -204,6 +203,8 @@ public class TestActivity extends AppCompatActivity {
 
                     formModel = sampleForm.goTo(pos);
                     navigate();
+
+                    setWidgets();
 
                     userSelect = false;
                 }
@@ -264,7 +265,7 @@ public class TestActivity extends AppCompatActivity {
             }
         }
 
-        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+        setStatus("fixed");
 
         setWidgets();
     }
@@ -317,8 +318,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void navigate() {
         if (navigatoon.getCurrentDestinationId() == R.id.testPrerequisiteFragment) {
-            int key = -1;
-            sendPre(key, "");
+            sendPre();
         }
 
         switch (formModel.getType()) {
@@ -376,80 +376,114 @@ public class TestActivity extends AppCompatActivity {
 
                 break;
         }
-
-        setWidgets();
     }
 
-    public void sendPre(int key, String value) {
-        if (key != -1) {
-            PrerequisitesModel model = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
-            model.setUserAnswered(value);
+    public void changeFragment() {
+        handler.postDelayed(() -> {
+            formModel = sampleForm.next();
+            navigate();
+
+            setWidgets();
+        }, 500);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void setStatus(String method) {
+        if (method.equals("saving")) {
+            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
+            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
+        } else {
+            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
         }
 
-        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
-        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
         binding.statusTextView.getRoot().requestLayout();
+    }
 
-        if (key != -1) {
-            sampleAnswers.addToPrerequisites(key, value);
-        }
+    private void doubleBackPress() {
+        doubleBackPressed = true;
+        handler.postDelayed(() -> doubleBackPressed = false, 2000);
+
+        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
+    }
+
+    private void sendPre() {
+        setStatus("saving");
 
         sampleAnswers.sendPrerequisites(singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {
-                runOnUiThread(() -> {
-                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-                    binding.statusTextView.getRoot().requestLayout();
-                });
+                runOnUiThread(() -> setStatus("fixed"));
             }
 
             @Override
             public void onFailure(String response) {
-                runOnUiThread(() -> {
-                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-                    binding.statusTextView.getRoot().requestLayout();
-                });
+                runOnUiThread(() -> setStatus("fixed"));
+            }
+        });
+    }
+
+    public void sendPre(int key, String value) {
+        setStatus("saving");
+
+        PrerequisitesModel model = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
+        model.setUserAnswered(value);
+
+        sampleAnswers.addToPrerequisites(key, value);
+        sampleAnswers.sendPrerequisites(singleton.getToken(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                runOnUiThread(() -> setStatus("fixed"));
+            }
+
+            @Override
+            public void onFailure(String response) {
+                runOnUiThread(() -> setStatus("fixed"));
             }
         });
     }
 
     public void sendItem(int key, String value) {
+        setStatus("saving");
+
         ItemModel model = (ItemModel) formModel.getObject();
         model.setUserAnswered(value);
 
         answers.set(sampleForm.getPosition(), true);
 
-        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
-        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
-        binding.statusTextView.getRoot().requestLayout();
-
         sampleAnswers.add(key, value);
         sampleAnswers.sendRequest(singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {
-                runOnUiThread(() -> {
-                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-                    binding.statusTextView.getRoot().requestLayout();
-                });
+                runOnUiThread(() -> setStatus("fixed"));
             }
 
             @Override
             public void onFailure(String response) {
-                runOnUiThread(() -> {
-                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-                    binding.statusTextView.getRoot().requestLayout();
-                });
+                runOnUiThread(() -> setStatus("fixed"));
             }
         });
-
-        handler.postDelayed(() -> {
-            formModel = sampleForm.next();
-            navigate();
-        }, 500);
     }
 
     public void closeSample() {
@@ -458,13 +492,10 @@ public class TestActivity extends AppCompatActivity {
         Sample.close(sampleAnswers, data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                runOnUiThread(() -> {
-                    FormModel formModel = sampleForm.getModel("زنجیره");
+                FormModel formModel = sampleForm.getModel("زنجیره");
 
-                    if (formModel == null) {
-                        DialogManager.dismissLoadingDialog();
-                        IntentManager.main(TestActivity.this);
-                    } else {
+                runOnUiThread(() -> {
+                    if (formModel != null) {
                         List items = (List) formModel.getObject();
 
                         for (int i = 0; i < items.data().size(); i++) {
@@ -480,13 +511,14 @@ public class TestActivity extends AppCompatActivity {
                                 decorator(true);
 
                                 getData();
-                                break;
-                            } else {
-                                DialogManager.dismissLoadingDialog();
-                                IntentManager.main(TestActivity.this);
+
+                                return;
                             }
                         }
                     }
+
+                    DialogManager.dismissLoadingDialog();
+                    IntentManager.main(TestActivity.this);
                 });
             }
 
@@ -521,33 +553,6 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -568,7 +573,7 @@ public class TestActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (!doubleBackPressed)
-            postHandler();
+            doubleBackPress();
         else
             IntentManager.finish(this);
     }
