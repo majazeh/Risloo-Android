@@ -138,55 +138,13 @@ public class TestActivity extends AppCompatActivity {
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500, 180);
     }
 
-    private void setExtra() {
-        if (extras != null) {
-            if (!extras.getString("id").equals("")) {
-                data.put("id", extras.getString("id"));
-                sampleAnswers.id = extras.getString("id");
-            }
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.debugTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> {
-            formModel = sampleForm.prev();
-            navigate();
+        CustomClickView.onClickListener(() -> setFormModel("prev")).widget(binding.backwardImageView.getRoot());
 
-            setWidgets();
-        }).widget(binding.backwardImageView.getRoot());
-
-        CustomClickView.onClickListener(() -> {
-            formModel = sampleForm.next();
-            navigate();
-
-            setWidgets();
-        }).widget(binding.forwardImageView.getRoot());
+        CustomClickView.onClickListener(() -> setFormModel("next")).widget(binding.forwardImageView.getRoot());
 
         binding.locationIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
@@ -201,10 +159,7 @@ public class TestActivity extends AppCompatActivity {
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    formModel = sampleForm.goTo(pos);
-                    navigate();
-
-                    setWidgets();
+                    setFormModel(pos);
 
                     userSelect = false;
                 }
@@ -213,6 +168,44 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+    }
+
+    private void setExtra() {
+        if (extras != null) {
+            if (!extras.getString("id").equals("")) {
+                data.put("id", extras.getString("id"));
+                sampleAnswers.id = extras.getString("id");
+            }
+        }
+    }
+
+    private void getData() {
+        Sample.show(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                sampleModel = (SampleModel) object;
+                sampleForm = sampleModel.getSampleForm();
+
+                runOnUiThread(() -> {
+                    if (sampleForm != null) {
+                        binding.getRoot().transitionToState(R.id.end);
+                        decorator(false);
+
+                        setData();
+
+                        return;
+                    }
+
+                    ToastManager.showDefaultToast(TestActivity.this, getResources().getString(R.string.ToastSampleFormIsNull));
+                    IntentManager.finish(TestActivity.this);
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                runOnUiThread(() -> IntentManager.finish(TestActivity.this));
             }
         });
     }
@@ -267,14 +260,14 @@ public class TestActivity extends AppCompatActivity {
 
         setStatus("fixed");
 
-        setWidgets();
+        setProgress();
     }
 
-    private void setWidgets() {
-        String indexSum = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
-        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleForm.itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
-
+    private void setProgress() {
         AnimateManager.animateProgressValue(binding.headerIncludeLayout.answeredProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
+
+        String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
+        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
         userSelect = false;
 
@@ -288,35 +281,32 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    private void getData() {
-        Sample.show(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                sampleModel = (SampleModel) object;
+    private void setStatus(String type) {
+        if (type.equals("saving")) {
+            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
+            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
+        } else {
+            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
+        }
 
-                runOnUiThread(() -> {
-                    sampleForm = sampleModel.getSampleForm();
-
-                    if (sampleForm == null) {
-                        ToastManager.showErrorToast(TestActivity.this, getResources().getString(R.string.ToastSampleFormIsNull));
-                        IntentManager.finish(TestActivity.this);
-                    } else {
-                        setData();
-
-                        binding.getRoot().transitionToState(R.id.end);
-                        decorator(false);
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(String response) {
-                runOnUiThread(() -> IntentManager.finish(TestActivity.this));
-            }
-        });
+        binding.statusTextView.getRoot().requestLayout();
     }
 
-    private void navigate() {
+    private void setFormModel(String type) {
+        if (type.equals("prev"))
+            formModel = sampleForm.prev();
+        else if (type.equals("next"))
+            formModel = sampleForm.next();
+        else
+            formModel = sampleForm.goTo(type);
+
+        changeFramgent();
+
+        setProgress();
+    }
+    
+    private void changeFramgent() {
         if (navigatoon.getCurrentDestinationId() == R.id.testPrerequisiteFragment) {
             sendPre();
         }
@@ -378,56 +368,6 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    public void changeFragment() {
-        handler.postDelayed(() -> {
-            formModel = sampleForm.next();
-            navigate();
-
-            setWidgets();
-        }, 500);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void setStatus(String method) {
-        if (method.equals("saving")) {
-            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
-            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
-        } else {
-            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-        }
-
-        binding.statusTextView.getRoot().requestLayout();
-    }
-
-    private void doubleBackPress() {
-        doubleBackPressed = true;
-        handler.postDelayed(() -> doubleBackPressed = false, 2000);
-
-        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
-    }
-
     private void sendPre() {
         setStatus("saving");
 
@@ -445,10 +385,10 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void sendPre(int key, String value) {
-        setStatus("saving");
-
         PrerequisitesModel model = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
         model.setUserAnswered(value);
+
+        setStatus("saving");
 
         sampleAnswers.addToPrerequisites(key, value);
         sampleAnswers.sendPrerequisites(singleton.getToken(), new Response() {
@@ -465,10 +405,10 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void sendItem(int key, String value) {
-        setStatus("saving");
-
         ItemModel model = (ItemModel) formModel.getObject();
         model.setUserAnswered(value);
+
+        setStatus("saving");
 
         answers.set(sampleForm.getPosition(), true);
 
@@ -484,6 +424,8 @@ public class TestActivity extends AppCompatActivity {
                 runOnUiThread(() -> setStatus("fixed"));
             }
         });
+
+        handler.postDelayed(() -> setFormModel("next"), 500);
     }
 
     public void closeSample() {
@@ -531,19 +473,19 @@ public class TestActivity extends AppCompatActivity {
                             JSONObject errorsObject = responseObject.getJSONObject("errors");
 
                             Iterator<String> keys = (errorsObject.keys());
-                            StringBuilder errors = new StringBuilder();
+                            StringBuilder allErrors = new StringBuilder();
 
                             while (keys.hasNext()) {
                                 String key = keys.next();
                                 for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
                                     String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                    errors.append(validation);
-                                    errors.append("\n");
+                                    allErrors.append(validation);
+                                    allErrors.append("\n");
                                 }
                             }
 
-                            SnackManager.showErrorSnack(TestActivity.this, errors.substring(0, errors.length() - 1));
+                            SnackManager.showErrorSnack(TestActivity.this, allErrors.substring(0, allErrors.length() - 1));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -551,6 +493,13 @@ public class TestActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void doubleBackPress() {
+        doubleBackPressed = true;
+        handler.postDelayed(() -> doubleBackPressed = false, 2000);
+
+        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastSampleDoublePressExit));
     }
 
     @Override
