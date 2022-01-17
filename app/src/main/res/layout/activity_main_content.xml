@@ -39,15 +39,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <include
+    <ImageView
         android:id="@+id/menu_imageView"
-        layout="@layout/component_main_button_square"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_12sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_bars_light"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray300_ripple_coolgray300"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/debug_textView" />
+        app:layout_constraintTop_toBottomOf="@id/debug_textView"
+        app:tint="@color/CoolGray500" />
 
     <include
         android:id="@+id/toolbar_includeLayout"
@@ -63,28 +68,39 @@
         app:layout_constraintStart_toEndOf="@id/menu_imageView"
         app:layout_constraintTop_toTopOf="@id/menu_imageView" />
 
-    <include
+    <ImageView
         android:id="@+id/logout_imageView"
-        layout="@layout/component_main_button_square"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_12sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_user_crown_light"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray300_ripple_coolgray300"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/menu_imageView"
+        app:tint="@color/CoolGray500"
         tools:visibility="visible" />
 
-    <include
-        android:id="@+id/breadcump_includeLayout"
-        layout="@layout/component_main_breadcump"
+    <TextView
+        android:id="@+id/breadcump_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="start"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="bold"
+        android:textColor="@color/CoolGray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_demi_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menu_imageView" />
+        app:layout_constraintTop_toBottomOf="@id/menu_imageView"
+        tools:text="آدرس" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_navHostFragment"
@@ -96,7 +112,7 @@
         app:layout_constraintBottom_toTopOf="@id/divider_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/breadcump_includeLayout"
+        app:layout_constraintTop_toBottomOf="@id/breadcump_textView"
         app:navGraph="@navigation/navigation_main" />
 
     <View

@@ -136,20 +136,17 @@ public class MainActivity extends AppCompatActivity {
         data = new HashMap<>();
         header = new HashMap<>();
 
-        InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.CoolGray500);
-        InitManager.imgResTint(this, binding.contentIncludeLayout.logoutImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.CoolGray500);
-
         InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, ListManager.getToolbar(this));
 
-        InitManager.fixedVerticalRecyclerView2(this, binding.navIncludeLayout.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView2(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void listener() {
         CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.contentIncludeLayout.debugTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> setDrawer("openDrawer")).widget(binding.contentIncludeLayout.menuImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> setDrawer("openDrawer")).widget(binding.contentIncludeLayout.menuImageView);
 
-        CustomClickView.onDelayedListener(() -> setUser("logoutFormOtherUser", "")).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> setUser("logoutFormOtherUser", "")).widget(binding.contentIncludeLayout.logoutImageView);
 
         binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -206,8 +203,8 @@ public class MainActivity extends AppCompatActivity {
         navigatoon.getNavController().addOnDestinationChangedListener((controller, destination, arguments) -> {
             SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
 
-            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(faBreadCump);
-            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
+            binding.contentIncludeLayout.breadcumpTextView.setText(faBreadCump);
+            binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
             mainNavAdapter.setFocused(faBreadCump.toString());
 
@@ -250,9 +247,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (singleton.getOtherUser()) {
-                binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.VISIBLE);
+                binding.contentIncludeLayout.logoutImageView.setVisibility(View.VISIBLE);
             } else {
-                binding.contentIncludeLayout.logoutImageView.getRoot().setVisibility(View.GONE);
+                binding.contentIncludeLayout.logoutImageView.setVisibility(View.GONE);
             }
         } else {
             IntentManager.auth(this, "login");
@@ -261,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDrawer() {
         mainNavAdapter.setItems(ListManager.getDrawer(this, permissoon, singleton));
-        binding.navIncludeLayout.listRecyclerView.getRoot().setAdapter(mainNavAdapter);
+        binding.navIncludeLayout.listRecyclerView.setAdapter(mainNavAdapter);
     }
 
     private void setHashmap(String userId) {

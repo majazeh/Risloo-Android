@@ -13,23 +13,29 @@
     app:layoutDescription="@xml/activity_main_nav_scene"
     tools:context=".Views.Activities.MainActivity">
 
-    <include
+    <TextView
         android:id="@+id/header_textView"
-        layout="@layout/component_main_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="right"
+        android:text="@string/MainHeader"
+        android:textSize="@dimen/_24ssp"
+        android:textStyle="bold"
+        android:textColor="@color/Risloo500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_extra_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_recyclerView"
-        layout="@layout/component_main_recycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:overScrollMode="never"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/divider_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +44,8 @@
         tools:layout_marginBottom="@dimen/_12sdp"
         tools:layout_marginEnd="@dimen/_12sdp"
         tools:layout_marginStart="@dimen/_12sdp"
-        tools:layout_marginTop="@dimen/_16sdp" />
+        tools:layout_marginTop="@dimen/_16sdp"
+        tools:itemCount="4" />
 
     <View
         android:id="@+id/divider_view"
