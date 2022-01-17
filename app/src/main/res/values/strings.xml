@@ -96,6 +96,8 @@
     <string name="SnackSampleClosed">نمونه بسته شد.</string>
     <string name="SnackSampleOpened">نمونه باز شد.</string>
 
+    <string name="SnackSampleNull">نمونه خالی است.</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Toast Strings
@@ -110,7 +112,6 @@
     <string name="ToastImageNotSelected">تصویر انتخاب نشده است.</string>
 
     <string name="ToastSampleDoublePressExit">برای خروج از نمونه دوباره کلیک کنید.</string>
-    <string name="ToastSampleFormIsNull">نمونه فرم ندارد.</string>
     <string name="ToastSampleLinkSaved">لینک نمونه ذخیره شد.</string>
 
     <string name="ToastActivityEmptyException">برنامه‌ای برای اجرا وجود ندارد.</string>

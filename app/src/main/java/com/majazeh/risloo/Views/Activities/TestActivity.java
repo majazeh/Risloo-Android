@@ -198,7 +198,7 @@ public class TestActivity extends AppCompatActivity {
                         return;
                     }
 
-                    ToastManager.showDefaultToast(TestActivity.this, getResources().getString(R.string.ToastSampleFormIsNull));
+                    SnackManager.showErrorSnack(TestActivity.this, getResources().getString(R.string.SnackSampleNull));
                     IntentManager.finish(TestActivity.this);
                 });
             }
@@ -209,6 +209,37 @@ public class TestActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setStatus(String type) {
+        if (type.equals("saving")) {
+            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
+            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
+        } else {
+            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
+        }
+
+        binding.statusTextView.getRoot().requestLayout();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void setData() {
         if (!sampleModel.getScaleTitle().equals("")) {
@@ -281,31 +312,6 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    private void setStatus(String type) {
-        if (type.equals("saving")) {
-            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
-            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
-        } else {
-            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
-        }
-
-        binding.statusTextView.getRoot().requestLayout();
-    }
-
-    private void setFormModel(String type) {
-        if (type.equals("prev"))
-            formModel = sampleForm.prev();
-        else if (type.equals("next"))
-            formModel = sampleForm.next();
-        else
-            formModel = sampleForm.goTo(type);
-
-        changeFramgent();
-
-        setProgress();
-    }
-    
     private void changeFramgent() {
         if (navigatoon.getCurrentDestinationId() == R.id.testPrerequisiteFragment) {
             sendPre();
@@ -368,6 +374,42 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
+    private void setFormModel(String type) {
+        if (type.equals("prev"))
+            formModel = sampleForm.prev();
+        else if (type.equals("next"))
+            formModel = sampleForm.next();
+        else
+            formModel = sampleForm.goTo(type);
+
+        changeFramgent();
+
+        setProgress();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private void sendPre() {
         setStatus("saving");
 
@@ -410,8 +452,6 @@ public class TestActivity extends AppCompatActivity {
 
         setStatus("saving");
 
-        answers.set(sampleForm.getPosition(), true);
-
         sampleAnswers.add(key, value);
         sampleAnswers.sendRequest(singleton.getToken(), new Response() {
             @Override
@@ -425,6 +465,8 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
+        answers.set(sampleForm.getPosition(), true);
+
         handler.postDelayed(() -> setFormModel("next"), 500);
     }
 
@@ -434,7 +476,7 @@ public class TestActivity extends AppCompatActivity {
         Sample.close(sampleAnswers, data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                FormModel formModel = sampleForm.getModel("زنجیره");
+                formModel = sampleForm.getModel("زنجیره");
 
                 runOnUiThread(() -> {
                     if (formModel != null) {
@@ -460,7 +502,9 @@ public class TestActivity extends AppCompatActivity {
                     }
 
                     DialogManager.dismissLoadingDialog();
-                    IntentManager.main(TestActivity.this);
+
+                    SnackManager.showSuccesSnack(TestActivity.this, getResources().getString(R.string.SnackSampleClosed));
+                    IntentManager.finish(TestActivity.this);
                 });
             }
 
@@ -495,7 +539,7 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-    private void doubleBackPress() {
+    private void doublePressExit() {
         doubleBackPressed = true;
         handler.postDelayed(() -> doubleBackPressed = false, 2000);
 
@@ -522,7 +566,7 @@ public class TestActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (!doubleBackPressed)
-            doubleBackPress();
+            doublePressExit();
         else
             IntentManager.finish(this);
     }
