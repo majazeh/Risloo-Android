@@ -46,7 +46,7 @@
         tools:text="آزمون" />
 
     <ProgressBar
-        android:id="@+id/answer_progressBar"
+        android:id="@+id/index_progressBar"
         android:layout_width="0dp"
         android:layout_height="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
@@ -67,7 +67,7 @@
         app:layout_constraintBottom_toTopOf="@id/status_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/answer_progressBar"
+        app:layout_constraintTop_toBottomOf="@id/index_progressBar"
         app:defaultNavHost="true" />
 
     <TextView
@@ -81,7 +81,7 @@
         android:textColor="@color/CoolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toTopOf="@id/backward_imageView"
+        app:layout_constraintBottom_toTopOf="@id/prev_imageView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
         tools:text="وضعیت" />
 
@@ -96,12 +96,12 @@
         android:textColor="@color/CoolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toTopOf="@id/backward_imageView"
+        app:layout_constraintBottom_toTopOf="@id/prev_imageView"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         tools:text="موقعیت" />
 
     <ImageView
-        android:id="@+id/backward_imageView"
+        android:id="@+id/prev_imageView"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginBottom="@dimen/_12sdp"
@@ -115,7 +115,7 @@
         app:tint="@color/CoolGray500" />
 
     <ImageView
-        android:id="@+id/forward_imageView"
+        android:id="@+id/next_imageView"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -125,9 +125,9 @@
         android:rotation="180"
         android:src="@drawable/ic_angle_right_regular"
         android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray300_ripple_coolgray300"
-        app:layout_constraintBottom_toBottomOf="@id/backward_imageView"
-        app:layout_constraintStart_toEndOf="@id/backward_imageView"
-        app:layout_constraintTop_toTopOf="@id/backward_imageView"
+        app:layout_constraintBottom_toBottomOf="@id/prev_imageView"
+        app:layout_constraintStart_toEndOf="@id/prev_imageView"
+        app:layout_constraintTop_toTopOf="@id/prev_imageView"
         app:tint="@color/CoolGray500" />
 
     <Spinner
@@ -139,10 +139,10 @@
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="@dimen/_40sdp"
         android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray300_ripple_coolgray300"
-        app:layout_constraintBottom_toBottomOf="@id/forward_imageView"
+        app:layout_constraintBottom_toBottomOf="@id/next_imageView"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
-        app:layout_constraintStart_toEndOf="@id/forward_imageView"
-        app:layout_constraintTop_toTopOf="@id/forward_imageView" />
+        app:layout_constraintStart_toEndOf="@id/next_imageView"
+        app:layout_constraintTop_toTopOf="@id/next_imageView" />
 
     <ImageView
         android:id="@+id/index_imageView"

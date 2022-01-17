@@ -139,9 +139,9 @@ public class TestActivity extends AppCompatActivity {
     private void listener() {
         CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.debugTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> setFormModel("prev")).widget(binding.backwardImageView);
+        CustomClickView.onClickListener(() -> setFormModel("prev")).widget(binding.prevImageView);
 
-        CustomClickView.onClickListener(() -> setFormModel("next")).widget(binding.forwardImageView);
+        CustomClickView.onClickListener(() -> setFormModel("next")).widget(binding.nextImageView);
 
         binding.indexSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
@@ -219,6 +219,19 @@ public class TestActivity extends AppCompatActivity {
         binding.statusTextView.requestLayout();
     }
 
+    private void setFormModel(String type) {
+        if (type.equals("prev"))
+            formModel = sampleForm.prev();
+        else if (type.equals("next"))
+            formModel = sampleForm.next();
+        else
+            formModel = sampleForm.goTo(type);
+
+        setFramgent();
+
+        setIndex();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -288,11 +301,11 @@ public class TestActivity extends AppCompatActivity {
 
         setStatus("fixed");
 
-        setProgress();
+        setIndex();
     }
 
-    private void setProgress() {
-        AnimateManager.animateProgressValue(binding.answerProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
+    private void setIndex() {
+        AnimateManager.animateProgressValue(binding.indexProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
 
         String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
         binding.indexTextView.setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
@@ -309,7 +322,7 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    private void changeFramgent() {
+    private void setFramgent() {
         if (navigatoon.getCurrentDestinationId() == R.id.testPrerequisiteFragment) {
             sendPre();
         }
@@ -371,18 +384,7 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    private void setFormModel(String type) {
-        if (type.equals("prev"))
-            formModel = sampleForm.prev();
-        else if (type.equals("next"))
-            formModel = sampleForm.next();
-        else
-            formModel = sampleForm.goTo(type);
 
-        changeFramgent();
-
-        setProgress();
-    }
 
 
 
