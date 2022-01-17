@@ -198,7 +198,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                             break;
                         case "ورود به کاربری":
-                            ((MainActivity) activity).changeUser("loginOtherUser", model.getId());
+                            ((MainActivity) activity).setUser("loginOtherUser", model.getId());
                             break;
                     }
 

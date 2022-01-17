@@ -68,7 +68,7 @@ public class UserFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).changeUser("loginOtherUser", userModel.getId());
+            ((MainActivity) requireActivity()).setUser("loginOtherUser", userModel.getId());
         }).widget(binding.loginImageView.getRoot());
 
         CustomClickView.onClickListener(() -> {

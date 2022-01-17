@@ -147,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
     private void listener() {
         CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.contentIncludeLayout.debugTextView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> changeDrawer("openDrawer")).widget(binding.contentIncludeLayout.menuImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> setDrawer("openDrawer")).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> changeUser("logoutFormOtherUser", "")).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> setUser("logoutFormOtherUser", "")).widget(binding.contentIncludeLayout.logoutImageView.getRoot());
 
         binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -278,25 +278,8 @@ public class MainActivity extends AppCompatActivity {
         singleton.otherUser(method.equals("loginOtherUser"));
     }
 
-    private void resetUser(String method, AuthModel model) {
-        setSingleton(method, model);
-
-        setData();
-
-        setDrawer();
-
-        DialogManager.dismissLoadingDialog();
-
-        if (method.equals("loginOtherUser"))
-            SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLoginOtherUser));
-        else
-            SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLogoutFormOtherUser));
-
-        changeFragment("داشبورد");
-    }
-
-    public void changeFragment(String method) {
-        switch (method) {
+    public void setFragment(String destination) {
+        switch (destination) {
             case "داشبورد":
                 navigatoon.navigateToDashboardFragment();
                 break;
@@ -330,14 +313,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void changeDrawer(String method) {
-        if (method.equals("openDrawer"))
+    public void setDrawer(String type) {
+        if (type.equals("openDrawer"))
             binding.getRoot().openDrawer(GravityCompat.START);
         else
             binding.getRoot().closeDrawer(GravityCompat.START);
     }
 
-    public void changeUser(String method, String userId) {
+    public void setUser(String method, String userId) {
         DialogManager.showLoadingDialog(this, "");
 
         setHashmap(userId);
@@ -375,6 +358,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void resetUser(String method, AuthModel model) {
+        setSingleton(method, model);
+
+        setData();
+
+        setDrawer();
+
+        DialogManager.dismissLoadingDialog();
+
+        if (method.equals("loginOtherUser"))
+            SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLoginOtherUser));
+        else
+            SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLogoutFormOtherUser));
+
+        setFragment("داشبورد");
     }
 
     @Override
@@ -520,7 +520,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (binding.getRoot().isDrawerOpen(GravityCompat.START))
-            changeDrawer("closeDrawer");
+            setDrawer("closeDrawer");
         else if (navigatoon.getCurrentDestinationId() != navigatoon.getStartDestinationId())
             navigatoon.navigateUp();
         else

@@ -207,6 +207,89 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
+    private void setData() {
+        if (!sampleModel.getScaleTitle().equals("")) {
+            binding.titleTextView.setText(sampleModel.getScaleTitle());
+        }
+
+        if (!sampleModel.getEdition().equals("")) {
+            String title = binding.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getEdition());
+            binding.titleTextView.setText(StringManager.foregroundSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.CoolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
+        }
+
+        if (sampleForm.getForms().length() != 0) {
+            setSpinner();
+        }
+
+        if (sampleForm.getCurrentForm() != null) {
+            setStartDest();
+        }
+
+        setStatus("fixed");
+
+        setButtons();
+
+        setIndex();
+    }
+
+    private void setSpinner() {
+        try {
+            ArrayList<String> options = new ArrayList<>();
+            answers = new ArrayList<>();
+
+            for (int i = 0; i < sampleForm.getForms().length(); i++) {
+                options.add(sampleForm.getForms().getJSONObject(i).getString("title"));
+                answers.add(sampleForm.getForms().getJSONObject(i).getBoolean("answer"));
+            }
+
+            options.add("");
+            answers.add(false);
+
+            InitManager.inputCustomTestSpinner(this, binding.indexSpinner, options, answers);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setStartDest() {
+        formModel = sampleForm.getCurrentForm();
+
+        switch (formModel.getType()) {
+            case "psychologist_description":
+                navigatoon.setStartDestinationId(R.id.testPsyDescFragment);
+                break;
+            case "chain":
+                navigatoon.setStartDestinationId(R.id.testChainFragment);
+                break;
+            case "prerequisites":
+                navigatoon.setStartDestinationId(R.id.testPrerequisiteFragment);
+                break;
+            case "description":
+                navigatoon.setStartDestinationId(R.id.testDescriptionFragment);
+                break;
+            case "entities":
+                navigatoon.setStartDestinationId(R.id.testEntityFragment);
+                break;
+            case "item":
+                ItemModel itemModel = (ItemModel) formModel.getObject();
+
+                switch (itemModel.getType()) {
+                    case "text":
+                        if (itemModel.getAnswer().getType().equals("descriptive"))
+                            navigatoon.setStartDestinationId(R.id.testDescriptiveFragment);
+                        else
+                            navigatoon.setStartDestinationId(R.id.testOptionalFragment);
+
+                        break;
+                    case "image_url":
+                        navigatoon.setStartDestinationId(R.id.testPictoralFragment);
+                        break;
+                }
+
+                break;
+        }
+    }
+
     private void setStatus(String type) {
         if (type.equals("saving")) {
             binding.statusTextView.setText(getResources().getString(R.string.TestSaving));
@@ -229,97 +312,9 @@ public class TestActivity extends AppCompatActivity {
 
         setFramgent();
 
-        setIndex();
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void setData() {
-        if (!sampleModel.getScaleTitle().equals("")) {
-            binding.titleTextView.setText(sampleModel.getScaleTitle());
-        }
-
-        if (!sampleModel.getEdition().equals("")) {
-            String title = binding.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getEdition());
-            binding.titleTextView.setText(StringManager.foregroundSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.CoolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
-        }
-
-        if (sampleForm.getForms().length() != 0) {
-            try {
-                ArrayList<String> options = new ArrayList<>();
-                answers = new ArrayList<>();
-
-                for (int i = 0; i < sampleForm.getForms().length(); i++) {
-                    options.add(sampleForm.getForms().getJSONObject(i).getString("title"));
-                    answers.add(sampleForm.getForms().getJSONObject(i).getBoolean("answer"));
-                }
-
-                options.add("");
-                answers.add(false);
-
-                InitManager.inputCustomTestSpinner(this, binding.indexSpinner, options, answers);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (sampleForm.getCurrentForm() != null) {
-            formModel = sampleForm.getCurrentForm();
-
-            switch (formModel.getType()) {
-                case "psychologist_description":
-                    navigatoon.setStartDestinationId(R.id.testPsyDescFragment);
-                    break;
-                case "chain":
-                    navigatoon.setStartDestinationId(R.id.testChainFragment);
-                    break;
-                case "prerequisites":
-                    navigatoon.setStartDestinationId(R.id.testPrerequisiteFragment);
-                    break;
-                case "description":
-                    navigatoon.setStartDestinationId(R.id.testDescriptionFragment);
-                    break;
-            }
-        }
-
-        setStatus("fixed");
+        setButtons();
 
         setIndex();
-    }
-
-    private void setIndex() {
-        AnimateManager.animateProgressValue(binding.indexProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
-
-        String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
-        binding.indexTextView.setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
-
-        userSelect = false;
-
-        for (int i = 0; i < binding.indexSpinner.getCount(); i++) {
-            if (binding.indexSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(formModel.getTitle())) {
-                binding.indexSpinner.setSelection(i);
-                break;
-            } else {
-                binding.indexSpinner.setSelection(0);
-            }
-        }
     }
 
     private void setFramgent() {
@@ -329,36 +324,19 @@ public class TestActivity extends AppCompatActivity {
 
         switch (formModel.getType()) {
             case "psychologist_description":
-                if (navigatoon.getCurrentDestinationId() != R.id.testPsyDescFragment)
-                    navigatoon.navigateToTestPsyDescFragment();
-                else
-                    IntentManager.finish(this);
-
+                navigatoon.navigateToTestPsyDescFragment();
                 break;
             case "chain":
-                if (navigatoon.getCurrentDestinationId() != R.id.testChainFragment)
-                    navigatoon.navigateToTestChainFragment();
-                else
-                    IntentManager.finish(this);
-
+                navigatoon.navigateToTestChainFragment();
                 break;
             case "prerequisites":
-                if (navigatoon.getCurrentDestinationId() != R.id.testPrerequisiteFragment)
-                    navigatoon.navigateToTestPrerequisiteFragment();
-                else
-                    IntentManager.finish(this);
-
+                navigatoon.navigateToTestPrerequisiteFragment();
                 break;
             case "description":
-                if (navigatoon.getCurrentDestinationId() != R.id.testDescriptionFragment)
-                    navigatoon.navigateToTestDescriptionFragment();
-                else
-                    IntentManager.finish(this);
-
+                navigatoon.navigateToTestDescriptionFragment();
                 break;
             case "entities":
                 navigatoon.navigateToTestEntityFragment();
-
                 break;
             case "item":
                 ItemModel itemModel = (ItemModel) formModel.getObject();
@@ -379,35 +357,49 @@ public class TestActivity extends AppCompatActivity {
                 break;
             case "close":
                 navigatoon.navigateToTestEndFragment();
-
                 break;
         }
     }
 
+    private void setButtons() {
+        if (navigatoon.getCurrentDestinationId() == navigatoon.getStartDestinationId()) {
+            binding.prevImageView.setClickable(false);
+            binding.prevImageView.setAlpha(0.5F);
 
+            binding.nextImageView.setClickable(true);
+            binding.nextImageView.setAlpha(1F);
+        } else if (navigatoon.getCurrentDestinationId() == R.id.testEndFragment) {
+            binding.prevImageView.setClickable(true);
+            binding.prevImageView.setAlpha(1F);
 
+            binding.nextImageView.setClickable(false);
+            binding.nextImageView.setAlpha(0.5F);
+        } else {
+            binding.prevImageView.setClickable(true);
+            binding.prevImageView.setAlpha(1F);
 
+            binding.nextImageView.setClickable(true);
+            binding.nextImageView.setAlpha(1F);
+        }
+    }
 
+    private void setIndex() {
+        AnimateManager.animateProgressValue(binding.indexProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
 
+        String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
+        binding.indexTextView.setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
+        userSelect = false;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        for (int i = 0; i < binding.indexSpinner.getCount(); i++) {
+            if (binding.indexSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(formModel.getTitle())) {
+                binding.indexSpinner.setSelection(i);
+                break;
+            } else {
+                binding.indexSpinner.setSelection(0);
+            }
+        }
+    }
 
     private void sendPre() {
         setStatus("saving");
