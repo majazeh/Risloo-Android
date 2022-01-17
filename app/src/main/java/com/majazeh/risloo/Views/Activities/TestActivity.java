@@ -133,27 +133,24 @@ public class TestActivity extends AppCompatActivity {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", singleton.getAuthorization());
-
-        InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500);
-        InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.CoolGray500, 180);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> IntentManager.risloo(this)).widget(binding.debugTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> setFormModel("prev")).widget(binding.backwardImageView.getRoot());
+        CustomClickView.onClickListener(() -> setFormModel("prev")).widget(binding.backwardImageView);
 
-        CustomClickView.onClickListener(() -> setFormModel("next")).widget(binding.forwardImageView.getRoot());
+        CustomClickView.onClickListener(() -> setFormModel("next")).widget(binding.forwardImageView);
 
-        binding.locationIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+        binding.indexSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
 
-        binding.locationIncludeLayout.selectSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
+        binding.indexSpinner.setOnFocusChangeListener((v, hasFocus) -> userSelect = false);
 
-        binding.locationIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.indexSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
@@ -212,14 +209,14 @@ public class TestActivity extends AppCompatActivity {
 
     private void setStatus(String type) {
         if (type.equals("saving")) {
-            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
-            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Amber500));
+            binding.statusTextView.setText(getResources().getString(R.string.TestSaving));
+            binding.statusTextView.setTextColor(getResources().getColor(R.color.Amber500));
         } else {
-            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
+            binding.statusTextView.setText(getResources().getString(R.string.TestFixed));
+            binding.statusTextView.setTextColor(getResources().getColor(R.color.CoolGray600));
         }
 
-        binding.statusTextView.getRoot().requestLayout();
+        binding.statusTextView.requestLayout();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -243,12 +240,12 @@ public class TestActivity extends AppCompatActivity {
 
     private void setData() {
         if (!sampleModel.getScaleTitle().equals("")) {
-            binding.headerIncludeLayout.titleTextView.setText(sampleModel.getScaleTitle());
+            binding.titleTextView.setText(sampleModel.getScaleTitle());
         }
 
         if (!sampleModel.getEdition().equals("")) {
-            String title = binding.headerIncludeLayout.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getEdition());
-            binding.headerIncludeLayout.titleTextView.setText(StringManager.foregroundSize(title, binding.headerIncludeLayout.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.CoolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
+            String title = binding.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getEdition());
+            binding.titleTextView.setText(StringManager.foregroundSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.CoolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
         }
 
         if (sampleForm.getForms().length() != 0) {
@@ -264,7 +261,7 @@ public class TestActivity extends AppCompatActivity {
                 options.add("");
                 answers.add(false);
 
-                InitManager.inputCustomTestSpinner(this, binding.locationIncludeLayout.selectSpinner, options, answers);
+                InitManager.inputCustomTestSpinner(this, binding.indexSpinner, options, answers);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -295,19 +292,19 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void setProgress() {
-        AnimateManager.animateProgressValue(binding.headerIncludeLayout.answeredProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
+        AnimateManager.animateProgressValue(binding.answerProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
 
         String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
-        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
+        binding.indexTextView.setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
         userSelect = false;
 
-        for (int i = 0; i < binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
-            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(formModel.getTitle())) {
-                binding.locationIncludeLayout.selectSpinner.setSelection(i);
+        for (int i = 0; i < binding.indexSpinner.getCount(); i++) {
+            if (binding.indexSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(formModel.getTitle())) {
+                binding.indexSpinner.setSelection(i);
                 break;
             } else {
-                binding.locationIncludeLayout.selectSpinner.setSelection(0);
+                binding.indexSpinner.setSelection(0);
             }
         }
     }
