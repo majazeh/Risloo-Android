@@ -202,10 +202,7 @@ public class TestActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(String response) {
-                runOnUiThread(() -> {
-                    SnackManager.showErrorSnack(TestActivity.this, getResources().getString(R.string.SnackSampleError));
-                    IntentManager.finish(TestActivity.this);
-                });
+                runOnUiThread(() -> IntentManager.finish(TestActivity.this));
             }
         });
     }

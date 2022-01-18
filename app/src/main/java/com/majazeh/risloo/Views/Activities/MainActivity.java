@@ -58,11 +58,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 import com.yalantis.ucrop.UCrop;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -346,29 +342,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(String response) {
                     runOnUiThread(() -> {
-                        try {
-                            JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder allErrors = new StringBuilder();
-
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
-
-                                        allErrors.append(validation);
-                                        allErrors.append("\n");
-                                    }
-                                }
-
-                                SnackManager.showErrorSnack(MainActivity.this, allErrors.substring(0, allErrors.length() - 1));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        // TODO : Place Code If Needed
                     });
                 }
             });
@@ -393,29 +367,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(String response) {
                     runOnUiThread(() -> {
-                        try {
-                            JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder allErrors = new StringBuilder();
-
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
-
-                                        allErrors.append(validation);
-                                        allErrors.append("\n");
-                                    }
-                                }
-
-                                SnackManager.showErrorSnack(MainActivity.this, allErrors.substring(0, allErrors.length() - 1));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        // TODO : Place Code If Needed
                     });
                 }
             });
