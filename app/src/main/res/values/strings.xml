@@ -96,7 +96,8 @@
     <string name="SnackSampleClosed">نمونه بسته شد.</string>
     <string name="SnackSampleOpened">نمونه باز شد.</string>
 
-    <string name="SnackSampleNull">نمونه خالی است.</string>
+    <string name="SnackSampleNull">فرم نمونه خالی می باشد.</string>
+    <string name="SnackSampleError">دریافت نمونه با خطا مواجه شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

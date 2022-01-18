@@ -195,14 +195,17 @@ public class TestActivity extends AppCompatActivity {
                         return;
                     }
 
-                    SnackManager.showErrorSnack(TestActivity.this, getResources().getString(R.string.SnackSampleNull));
+                    SnackManager.showDefaultSnack(TestActivity.this, getResources().getString(R.string.SnackSampleNull));
                     IntentManager.finish(TestActivity.this);
                 });
             }
 
             @Override
             public void onFailure(String response) {
-                runOnUiThread(() -> IntentManager.finish(TestActivity.this));
+                runOnUiThread(() -> {
+                    SnackManager.showErrorSnack(TestActivity.this, getResources().getString(R.string.SnackSampleError));
+                    IntentManager.finish(TestActivity.this);
+                });
             }
         });
     }
