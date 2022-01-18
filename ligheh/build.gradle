@@ -42,7 +42,7 @@ dependencies {
     ---------- Androidx Sdk's ----------
     */
 
-    implementation 'androidx.appcompat:appcompat:1.4.0' // AppCompat
+    implementation 'androidx.appcompat:appcompat:1.4.1' // AppCompat
 
     /*
     ---------- Others Sdk's ----------
