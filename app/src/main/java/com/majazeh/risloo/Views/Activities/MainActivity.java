@@ -153,20 +153,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String pos = parent.getItemAtPosition(position).toString();
 
-                switch (pos) {
-                    case "مشاهده پروفایل":
-                        navigatoon.navigateToMeFragment(singleton.getUserModel());
-                        break;
-                    case "حسابداری":
-                        navigatoon.navigateToAccountingFragment();
-                        break;
-                    case "شارژ حساب":
-                        navigatoon.navigateToPaymentsFragment(null);
-                        break;
-                    case "خروج":
-                        SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
-                        break;
-                }
+                setFragment(pos);
             }
 
             @Override
@@ -251,14 +238,12 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 binding.contentIncludeLayout.logoutImageView.setVisibility(View.GONE);
             }
+
+            mainNavAdapter.setItems(ListManager.getDrawer(this, permissoon, singleton));
+            binding.navIncludeLayout.listRecyclerView.setAdapter(mainNavAdapter);
         } else {
             IntentManager.auth(this, "login");
         }
-    }
-
-    private void setDrawer() {
-        mainNavAdapter.setItems(ListManager.getDrawer(this, permissoon, singleton));
-        binding.navIncludeLayout.listRecyclerView.setAdapter(mainNavAdapter);
     }
 
     private void setHashmap(String userId) {
@@ -270,13 +255,24 @@ public class MainActivity extends AppCompatActivity {
         header.put("Authorization", singleton.getAuthorization());
     }
 
-    private void setSingleton(String method, AuthModel model) {
-        singleton.login(model);
-        singleton.otherUser(method.equals("loginOtherUser"));
-    }
-
     public void setFragment(String destination) {
         switch (destination) {
+
+            // Toolbar
+            case "مشاهده پروفایل":
+                navigatoon.navigateToMeFragment(singleton.getUserModel());
+                break;
+            case "حسابداری":
+                navigatoon.navigateToAccountingFragment();
+                break;
+            case "شارژ حساب":
+                navigatoon.navigateToPaymentsFragment(null);
+                break;
+            case "خروج":
+                SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
+                break;
+
+            // Drawer
             case "داشبورد":
                 navigatoon.navigateToDashboardFragment();
                 break;
@@ -328,7 +324,17 @@ public class MainActivity extends AppCompatActivity {
                 public void onOK(Object object) {
                     AuthModel authModel = (AuthModel) object;
 
-                    runOnUiThread(() -> resetUser(method, authModel));
+                    runOnUiThread(() -> {
+                        singleton.login(authModel);
+                        singleton.otherUser(true);
+
+                        setData();
+
+                        DialogManager.dismissLoadingDialog();
+
+                        SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
+                        navigatoon.navigateToDashboardFragment();
+                    });
                 }
 
                 @Override
@@ -344,7 +350,17 @@ public class MainActivity extends AppCompatActivity {
                 public void onOK(Object object) {
                     AuthModel authModel = (AuthModel) object;
 
-                    runOnUiThread(() -> resetUser(method, authModel));
+                    runOnUiThread(() -> {
+                        singleton.login(authModel);
+                        singleton.otherUser(false);
+
+                        setData();
+
+                        DialogManager.dismissLoadingDialog();
+
+                        SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
+                        navigatoon.navigateToDashboardFragment();
+                    });
                 }
 
                 @Override
@@ -355,23 +371,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    private void resetUser(String method, AuthModel model) {
-        setSingleton(method, model);
-
-        setData();
-
-        setDrawer();
-
-        DialogManager.dismissLoadingDialog();
-
-        if (method.equals("loginOtherUser"))
-            SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLoginOtherUser));
-        else
-            SnackManager.showSuccesSnack(this, getResources().getString(R.string.SnackLogoutFormOtherUser));
-
-        setFragment("داشبورد");
     }
 
     @Override
