@@ -46,7 +46,7 @@ dependencies {
 
     /*
     ---------- Others Sdk's ----------
-   */
+    */
 
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2' // SquareUp Okhttp
     implementation 'com.apollographql.apollo:apollo-runtime:2.5.11' // Graphql Apollo
