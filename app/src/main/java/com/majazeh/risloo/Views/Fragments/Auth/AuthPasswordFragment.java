@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Auth;
+package com.majazeh.risloo.Views.fragments.auth;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

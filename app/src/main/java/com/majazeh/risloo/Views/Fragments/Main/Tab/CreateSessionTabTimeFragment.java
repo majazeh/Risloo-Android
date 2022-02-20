@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Main.Tab;
+package com.majazeh.risloo.Views.fragments.main.tab;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
-import com.majazeh.risloo.Views.Fragments.Main.Create.CreateSessionFragment;
+import com.majazeh.risloo.Views.fragments.main.create.CreateSessionFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.utils.widgets.CustomClickView;

@@ -17,9 +17,9 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.PermissionManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.EditUserTabAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.EditCenterTabAvatarFragment;
+import com.majazeh.risloo.Views.fragments.main.create.CreateCenterFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.EditUserTabAvatarFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.EditCenterTabAvatarFragment;
 import com.majazeh.risloo.databinding.BottomSheetImageBinding;
 
 public class ImageBottomSheet extends BottomSheetDialogFragment {

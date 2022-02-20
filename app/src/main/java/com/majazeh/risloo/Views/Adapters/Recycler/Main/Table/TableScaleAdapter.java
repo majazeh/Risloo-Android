@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderScaleHolder;
 import com.majazeh.risloo.Views.adapters.holder.main.Table.TableScaleHolder;
-import com.majazeh.risloo.Views.Fragments.Main.Index.ScalesFragment;
+import com.majazeh.risloo.Views.fragments.main.index.ScalesFragment;
 import com.majazeh.risloo.databinding.HeaderItemTableScaleBinding;
 import com.majazeh.risloo.databinding.SingleItemTableScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;

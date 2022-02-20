@@ -26,12 +26,12 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.ParamsManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.EditCenterTabDetailFragment;
+import com.majazeh.risloo.Views.fragments.main.create.CreateCenterFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabPaymentFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateSessionTabSessionFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
 
 import org.json.JSONException;

@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.holder.main.Index.IndexDownloadHolder;
-import com.majazeh.risloo.Views.Fragments.Main.Index.DownloadsFragment;
+import com.majazeh.risloo.Views.fragments.main.index.DownloadsFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexDownloadBinding;
 import com.squareup.picasso.Picasso;
 

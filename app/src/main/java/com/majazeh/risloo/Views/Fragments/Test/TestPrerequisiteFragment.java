@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Test;
+package com.majazeh.risloo.Views.fragments.test;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

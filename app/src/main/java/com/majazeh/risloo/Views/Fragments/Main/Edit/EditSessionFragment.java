@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Main.Edit;
+package com.majazeh.risloo.Views.fragments.main.edit;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,11 +15,11 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.tab.EditSessionAdapter;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabPlatformFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabTimeFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabPlatformFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabReferenceFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabSessionFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;

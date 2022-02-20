@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Main.Create;
+package com.majazeh.risloo.Views.fragments.main.create;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,11 +16,11 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.tab.CreateScheduleAdapter;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabPlatformFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabTimeFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabPaymentFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabPlatformFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabReferenceFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabTimeFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;

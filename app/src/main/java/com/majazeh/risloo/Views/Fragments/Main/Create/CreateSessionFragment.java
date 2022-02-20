@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Main.Create;
+package com.majazeh.risloo.Views.fragments.main.create;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,10 +16,10 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.tab.CreateSessionAdapter;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabPlatformFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabTimeFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateSessionTabPlatformFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateSessionTabSessionFragment;
+import com.majazeh.risloo.Views.fragments.main.tab.CreateSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;

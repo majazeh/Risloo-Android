@@ -10,55 +10,55 @@
 
     <fragment
         android:id="@+id/testChainFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestChainFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestChainFragment"
         android:label="@string/ChainFragmentTitle"
         tools:layout="@layout/fragment_test_chain" />
 
     <fragment
         android:id="@+id/testDescriptionFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestDescriptionFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestDescriptionFragment"
         android:label="@string/DescriptionFragmentTitle"
         tools:layout="@layout/fragment_test_description" />
 
     <fragment
         android:id="@+id/testEndFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestEndFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestEndFragment"
         android:label="@string/EndFragmentTitle"
         tools:layout="@layout/fragment_test_end" />
 
     <fragment
         android:id="@+id/testEntityFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestEntityFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestEntityFragment"
         android:label="@string/EntityFragmentTitle"
         tools:layout="@layout/fragment_test_entity" />
 
     <fragment
         android:id="@+id/testDescriptiveFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestDescriptiveFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestDescriptiveFragment"
         android:label="@string/DescriptiveFragmentTitle"
         tools:layout="@layout/fragment_test_descriptive" />
 
     <fragment
         android:id="@+id/testOptionalFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestOptionalFragment"
         android:label="@string/OptionalFragmentTitle"
         tools:layout="@layout/fragment_test_optional" />
 
     <fragment
         android:id="@+id/testPictoralFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestPictoralFragment"
         android:label="@string/PictoralFragmentTitle"
         tools:layout="@layout/fragment_test_pictoral" />
 
     <fragment
         android:id="@+id/testPrerequisiteFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestPrerequisiteFragment"
         android:label="@string/PrerequisiteFragmentTitle"
         tools:layout="@layout/fragment_test_prerequisite" />
 
     <fragment
         android:id="@+id/testPsyDescFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestPsyDescFragment"
+        android:name="com.majazeh.risloo.Views.fragments.test.TestPsyDescFragment"
         android:label="@string/PsyDescFragmentTitle"
         tools:layout="@layout/fragment_test_psy_desc" />
 

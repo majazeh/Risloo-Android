@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Main.Tab;
+package com.majazeh.risloo.Views.fragments.main.tab;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.recycler.dialog.DialogSelectedAdapter;
-import com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterFragment;
+import com.majazeh.risloo.Views.fragments.main.edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.FragmentEditCenterTabDetailBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;

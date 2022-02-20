@@ -13,7 +13,7 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.holder.main.Filter.FilterTagHolder;
-import com.majazeh.risloo.Views.Fragments.Main.Show.RoomFragment;
+import com.majazeh.risloo.Views.fragments.main.show.RoomFragment;
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

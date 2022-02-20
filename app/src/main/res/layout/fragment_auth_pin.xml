@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="never"
     android:layoutDirection="rtl"
-    tools:context=".Views.Fragments.Auth.AuthPinFragment">
+    tools:context=".Views.fragments.auth.AuthPinFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

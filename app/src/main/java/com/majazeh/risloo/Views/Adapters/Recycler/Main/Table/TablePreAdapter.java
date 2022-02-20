@@ -24,7 +24,7 @@ import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.Views.adapters.holder.main.Table.TableFieldMultiHolder;
 import com.majazeh.risloo.Views.adapters.holder.main.Table.TableFieldSelectHolder;
 import com.majazeh.risloo.Views.adapters.holder.main.Table.TableFieldTextHolder;
-import com.majazeh.risloo.Views.Fragments.Main.Show.SampleFragment;
+import com.majazeh.risloo.Views.fragments.main.show.SampleFragment;
 import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldMultiBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
