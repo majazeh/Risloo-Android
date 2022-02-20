@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderBillHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableBillHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.BillingsFragment;

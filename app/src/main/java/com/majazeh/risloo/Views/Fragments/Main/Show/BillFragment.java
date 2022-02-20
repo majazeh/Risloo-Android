@@ -14,7 +14,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableTimeAdapter;
 import com.majazeh.risloo.databinding.FragmentBillBinding;
 import com.mre.ligheh.API.Response;

@@ -11,7 +11,7 @@
     android:focusableInTouchMode="true"
     android:layoutDirection="rtl"
     app:layoutDescription="@xml/activity_main_nav_scene"
-    tools:context=".Views.Activities.MainActivity">
+    tools:context=".Views.activities.MainActivity">
 
     <TextView
         android:id="@+id/header_textView"

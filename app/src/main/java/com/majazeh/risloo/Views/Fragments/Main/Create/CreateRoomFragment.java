@@ -16,7 +16,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;

@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderCaseHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableCaseHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableCaseBinding;

@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexTagHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomTagsFragment;

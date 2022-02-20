@@ -13,7 +13,7 @@ import androidx.navigation.NavDestination;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Main.Create.ReserveScheduleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterUserFragmentArgs;

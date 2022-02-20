@@ -13,8 +13,9 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestChainHolder;
+import com.majazeh.risloo.Views.activities.TestActivity;
+import com.majazeh.risloo.databinding.SingleItemTestChainBinding;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 

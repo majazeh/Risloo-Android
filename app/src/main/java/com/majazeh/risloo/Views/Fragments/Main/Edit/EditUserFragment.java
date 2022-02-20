@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditUserAdapter;
 import com.majazeh.risloo.databinding.FragmentEditUserBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;

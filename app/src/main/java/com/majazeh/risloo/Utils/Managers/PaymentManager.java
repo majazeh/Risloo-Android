@@ -5,7 +5,7 @@ import android.net.Uri;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Instances.Paymont;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Payment;
 import com.mre.ligheh.Model.Madule.User;

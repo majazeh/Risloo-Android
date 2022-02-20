@@ -15,7 +15,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderUserHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableUserHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableUserBinding;

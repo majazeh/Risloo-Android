@@ -15,7 +15,7 @@ import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogFilterHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomSchedulesFragment;

@@ -17,10 +17,10 @@ import androidx.core.content.FileProvider;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.Views.Activities.DisplayActivity;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.activities.AuthActivity;
+import com.majazeh.risloo.Views.activities.DisplayActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
+import com.majazeh.risloo.Views.activities.TestActivity;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;

@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.Views.activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordChangeBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;

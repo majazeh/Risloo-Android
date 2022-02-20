@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Activities;
+package com.majazeh.risloo.Views.activities;
 
 import static android.content.RestrictionsManager.RESULT_ERROR;
 

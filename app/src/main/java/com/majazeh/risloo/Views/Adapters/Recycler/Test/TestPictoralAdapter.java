@@ -13,7 +13,7 @@ import com.majazeh.risloo.Utils.Interfaces.DiffUtilStringAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilStringCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPictoralHolder;
 import com.majazeh.risloo.databinding.SingleItemTestPictoralBinding;
 import com.squareup.picasso.Picasso;

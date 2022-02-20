@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreMultiHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreSelectHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPreTextHolder;

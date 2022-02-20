@@ -19,7 +19,7 @@ import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldMultiHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableFieldSelectHolder;

@@ -14,7 +14,7 @@ import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderSampleHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableSampleHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.SamplesFragment;

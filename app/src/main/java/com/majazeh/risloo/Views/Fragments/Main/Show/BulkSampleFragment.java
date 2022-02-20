@@ -20,7 +20,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexReferenceAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableScaleAdapter;

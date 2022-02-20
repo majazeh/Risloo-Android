@@ -25,7 +25,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSearchableAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCaseUserFragment;

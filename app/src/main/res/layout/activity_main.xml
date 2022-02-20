@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
     tools:openDrawer="start"
-    tools:context=".Views.Activities.MainActivity">
+    tools:context=".Views.activities.MainActivity">
 
     <include
         android:id="@+id/content_includeLayout"

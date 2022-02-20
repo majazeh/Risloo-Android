@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.Utils.Managers.AnimateManager;
-import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEntityBinding;
 import com.mre.ligheh.Model.TypeModel.EntityModel;
 import com.mre.ligheh.Model.TypeModel.FormModel;

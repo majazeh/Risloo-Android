@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Create.CreateAxisHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCreateAxisBinding;
 
 import org.json.JSONException;

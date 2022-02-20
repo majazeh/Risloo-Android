@@ -14,7 +14,7 @@ import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexCenterHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexCenterBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;

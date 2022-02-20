@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestOptionalAdapter;
 import com.majazeh.risloo.databinding.FragmentTestOptionalBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;

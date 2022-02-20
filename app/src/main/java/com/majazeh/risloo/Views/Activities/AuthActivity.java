@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Activities;
+package com.majazeh.risloo.Views.activities;
 
 import android.graphics.Rect;
 import android.os.Bundle;

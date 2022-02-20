@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderCommissionHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableCommissionHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableCommissionBinding;
