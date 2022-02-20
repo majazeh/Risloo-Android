@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Entities;
+package com.majazeh.risloo.Utils.entities;
 
 import static android.view.WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
 

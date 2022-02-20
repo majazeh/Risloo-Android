@@ -1,10 +1,10 @@
-package com.majazeh.risloo.Utils.Config;
+package com.majazeh.risloo.Utils.configs;
 
 import android.app.Activity;
 
-import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Utils.Managers.ToastManager;
+import com.majazeh.risloo.Utils.managers.DialogManager;
+import com.majazeh.risloo.Utils.managers.SnackManager;
+import com.majazeh.risloo.Utils.managers.ToastManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.API.onFailureException;
 

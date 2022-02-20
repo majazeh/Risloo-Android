@@ -11,14 +11,14 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Config.ExtendException;
-import com.majazeh.risloo.Utils.Entities.Decoraton;
-import com.majazeh.risloo.Utils.Entities.Inputon;
-import com.majazeh.risloo.Utils.Entities.Navigatoon;
-import com.majazeh.risloo.Utils.Entities.Singleton;
-import com.majazeh.risloo.Utils.Entities.Validatoon;
-import com.majazeh.risloo.Utils.Managers.IntentManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Utils.configs.ExtendException;
+import com.majazeh.risloo.Utils.entities.Decoraton;
+import com.majazeh.risloo.Utils.entities.Inputon;
+import com.majazeh.risloo.Utils.entities.Navigatoon;
+import com.majazeh.risloo.Utils.entities.Singleton;
+import com.majazeh.risloo.Utils.entities.Validatoon;
+import com.majazeh.risloo.Utils.managers.IntentManager;
+import com.majazeh.risloo.Utils.widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;

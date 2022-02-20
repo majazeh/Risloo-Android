@@ -11,8 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.AnimateManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Utils.managers.AnimateManager;
+import com.majazeh.risloo.Utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
 import com.mre.ligheh.Model.Madule.List;

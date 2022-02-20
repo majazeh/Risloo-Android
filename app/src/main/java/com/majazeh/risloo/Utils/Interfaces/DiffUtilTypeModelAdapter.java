@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Interfaces;
+package com.majazeh.risloo.Utils.interfaces;
 
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 

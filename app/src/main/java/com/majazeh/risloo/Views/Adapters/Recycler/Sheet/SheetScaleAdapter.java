@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
-import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
+import com.majazeh.risloo.Utils.interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.Utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Views.adapters.holder.sheet.SheetScaleHolder;
 import com.majazeh.risloo.databinding.SingleItemSheetScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;

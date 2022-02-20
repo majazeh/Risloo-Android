@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.widgets.CustomClickView;
+import com.majazeh.risloo.Utils.managers.DateManager;
 import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderClientReportHolder;
 import com.majazeh.risloo.Views.adapters.holder.main.Table.TableClientReportHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableClientReportBinding;

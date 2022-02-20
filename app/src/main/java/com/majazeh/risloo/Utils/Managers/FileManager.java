@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Managers;
+package com.majazeh.risloo.Utils.managers;
 
 import android.app.Activity;
 import android.os.Environment;

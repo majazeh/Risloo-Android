@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Entities;
+package com.majazeh.risloo.Utils.entities;
 
 import android.app.Activity;
 

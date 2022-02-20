@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Managers;
+package com.majazeh.risloo.Utils.managers;
 
 import android.graphics.drawable.TransitionDrawable;
 import android.view.View;

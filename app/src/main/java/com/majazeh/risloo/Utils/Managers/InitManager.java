@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Managers;
+package com.majazeh.risloo.Utils.managers;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.RecyclerViewDecoration;
+import com.majazeh.risloo.Utils.widgets.RecyclerViewDecoration;
 
 import java.util.ArrayList;
 import java.util.Collections;

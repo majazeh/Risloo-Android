@@ -1,10 +1,10 @@
-package com.majazeh.risloo.Utils.Managers;
+package com.majazeh.risloo.Utils.managers;
 
 import android.app.Activity;
 import android.net.Uri;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Instances.Paymont;
+import com.majazeh.risloo.Utils.instances.Paymont;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Payment;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Entities;
+package com.majazeh.risloo.Utils.entities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDestination;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.managers.StringManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Main.Create.ReserveScheduleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterFragmentArgs;

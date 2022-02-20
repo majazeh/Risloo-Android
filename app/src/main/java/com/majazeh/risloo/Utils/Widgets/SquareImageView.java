@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Widgets;
+package com.majazeh.risloo.Utils.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;

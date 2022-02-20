@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
-import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Utils.interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.Utils.interfaces.DiffUtilTypeModelCallback;
+import com.majazeh.risloo.Utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderScaleHolder;
 import com.majazeh.risloo.Views.adapters.holder.main.Table.TableScaleHolder;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Interfaces;
+package com.majazeh.risloo.Utils.interfaces;
 
 import android.content.Context;
 import android.util.AttributeSet;

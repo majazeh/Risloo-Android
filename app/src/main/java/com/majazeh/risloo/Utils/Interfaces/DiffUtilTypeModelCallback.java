@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Interfaces;
+package com.majazeh.risloo.Utils.interfaces;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;

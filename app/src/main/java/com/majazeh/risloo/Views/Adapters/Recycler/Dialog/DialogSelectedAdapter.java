@@ -10,13 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.Utils.Managers.DialogManager;
-import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.managers.DialogManager;
+import com.majazeh.risloo.Utils.managers.StringManager;
 import com.majazeh.risloo.Views.adapters.holder.dialog.DialogSelectedHolder;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateSessionTabPaymentFragment;
