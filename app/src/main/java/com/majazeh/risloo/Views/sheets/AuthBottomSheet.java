@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.BottomSheets;
+package com.majazeh.risloo.Views.sheets;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -13,28 +13,31 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.databinding.BottomSheetLogoutBinding;
+import com.majazeh.risloo.databinding.BottomSheetAuthBinding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-public class LogoutBottomSheet extends BottomSheetDialogFragment {
+public class AuthBottomSheet extends BottomSheetDialogFragment {
 
     // Binding
-    private BottomSheetLogoutBinding binding;
+    private BottomSheetAuthBinding binding;
 
     // Models
     private UserModel userModel;
 
     // Objects
     private HashMap data, header;
+
+    // Vars
+    private String key = "";
 
     @NonNull
     @Override
@@ -45,7 +48,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetLogoutBinding.inflate(inflater, viewGroup, false);
+        binding = BottomSheetAuthBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -61,7 +64,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetLogoutEntry), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_red600_ripple_red800);
+        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetAuthEntry), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {
@@ -88,22 +91,29 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void setData(UserModel userModel) {
+    public void setData(String key, UserModel userModel) {
+        this.key = key;
         this.userModel = userModel;
+    }
+
+    private void setHashmap() {
+        data.put("key", key);
     }
 
     private void doWork() {
         DialogManager.showLoadingDialog(requireActivity(), "");
 
-        Auth.logout(data, header, new Response() {
+        setHashmap();
+
+        Center.theory(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
-                        ((MainActivity) requireActivity()).singleton.logout();
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCenterUser));
 
-                        IntentManager.auth(requireActivity(), "login");
+                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
 
                         dismiss();
                     });

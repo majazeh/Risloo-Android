@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.BottomSheets;
+package com.majazeh.risloo.Views.sheets;
 
 import android.app.Dialog;
 import android.os.Bundle;

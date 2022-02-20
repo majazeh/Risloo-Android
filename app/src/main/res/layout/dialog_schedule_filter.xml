@@ -8,7 +8,7 @@
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_solid_coolgray50"
     tools:layout_margin="@dimen/_12sdp"
-    tools:context=".Views.Dialogs.ScheduleFilterDialog">
+    tools:context=".Views.dialogs.ScheduleFilterDialog">
 
     <TextView
         android:id="@+id/room_textView"

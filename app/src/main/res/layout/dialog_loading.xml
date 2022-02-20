@@ -11,7 +11,7 @@
     android:paddingStart="@dimen/_10sdp"
     android:paddingTop="@dimen/_12sdp"
     android:background="@drawable/draw_12sdp_solid_white"
-    tools:context=".Views.Dialogs.LoadingDialog">
+    tools:context=".Views.dialogs.LoadingDialog">
 
     <ProgressBar
         android:id="@+id/loading_progressBar"

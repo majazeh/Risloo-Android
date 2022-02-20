@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Dialogs;
+package com.majazeh.risloo.Views.dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
