@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
 
-    // Domain Xml
+    // Domain Config
     //////////////////////////////////////////////////////////////////////////////////////
 
     <domain-config cleartextTrafficPermitted="true">

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
+<data-extraction-rules xmlns:tools="http://schemas.android.com/tools">
 
-    // Domain Config
+    // Cloud Backup
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">dev.risloo.ir</domain>
-    </domain-config>
+    <cloud-backup>
+        <include domain="" tools:ignore="FullBackupContent" />
+    </cloud-backup>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-</network-security-config>
+</data-extraction-rules>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.majazeh.risloo">
 
+    <!-- Codes For App Persmissions -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -10,14 +11,16 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!-- Codes For Needed Packages -->
+    <!-- Codes For App Packages -->
     <queries>
         <package android:name="com.majazeh.risloo" />
     </queries>
 
+    <!-- Codes For App Informations -->
     <application
         android:name=".Utils.Config.App"
         android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="false"
         android:icon="${appIcon}"
         android:label="${appLabel}"
@@ -32,7 +35,7 @@
         tools:ignore="UnusedAttribute"
         tools:replace="android:label">
 
-        <!-- Codes For File Provider -->
+        <!-- Codes For App File Provider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${appAuthorities}"
@@ -40,14 +43,15 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
+                android:resource="@xml/external_provider_paths" />
         </provider>
 
+        <!-- Codes For App Activities -->
         <activity
             android:name=".Views.Activities.SplashActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/LauncherTheme"
-            android:exported="true">
+            android:theme="@style/LauncherTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,14 +63,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Views.Activities.MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
 
-            <!-- Codes For Payment - Please Place It Inside Activity That Will Be Directed To -->
+            <!-- Codes For App Payment Response - Please Place It Inside The Activity That Will Be Redirected Back To -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="${appScheme}" />
             </intent-filter>
 
