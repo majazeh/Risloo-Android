@@ -18,7 +18,7 @@
 
     <!-- Codes For App Informations -->
     <application
-        android:name=".Utils.configs.App"
+        android:name=".utils.configs.App"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="false"

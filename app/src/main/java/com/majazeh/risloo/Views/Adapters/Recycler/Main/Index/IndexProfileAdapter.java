@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.widgets.CustomClickView;
-import com.majazeh.risloo.Utils.managers.IntentManager;
-import com.majazeh.risloo.Utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.managers.IntentManager;
+import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.Views.adapters.holder.main.Index.IndexProfileHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexProfileBinding;
 import com.mre.ligheh.Model.TypeModel.ProfileModel;

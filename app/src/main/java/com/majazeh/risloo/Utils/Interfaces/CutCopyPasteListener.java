@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.interfaces;
+package com.majazeh.risloo.utils.interfaces;
 
 public interface CutCopyPasteListener {
 

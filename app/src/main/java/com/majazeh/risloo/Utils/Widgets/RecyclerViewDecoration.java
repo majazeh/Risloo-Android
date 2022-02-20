@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.widgets;
+package com.majazeh.risloo.utils.widgets;
 
 import android.graphics.Rect;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.instances;
+package com.majazeh.risloo.utils.instances;
 
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

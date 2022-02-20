@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.configs;
+package com.majazeh.risloo.utils.configs;
 
 import android.app.Application;
 import android.content.res.Configuration;

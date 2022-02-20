@@ -19,12 +19,12 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.managers.StringManager;
-import com.majazeh.risloo.Utils.managers.ToastManager;
+import com.majazeh.risloo.utils.managers.StringManager;
+import com.majazeh.risloo.utils.managers.ToastManager;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.widgets.CustomClickView;
-import com.majazeh.risloo.Utils.managers.InitManager;
-import com.majazeh.risloo.Utils.managers.ParamsManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.ParamsManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.CreateScheduleTabPaymentFragment;

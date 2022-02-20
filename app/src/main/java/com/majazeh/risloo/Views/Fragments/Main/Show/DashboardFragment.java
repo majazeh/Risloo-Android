@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.managers.InitManager;
-import com.majazeh.risloo.Utils.managers.IntentManager;
-import com.majazeh.risloo.Utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.IntentManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.recycler.main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentDashboardBinding;

@@ -1,10 +1,10 @@
-package com.majazeh.risloo.Utils.managers;
+package com.majazeh.risloo.utils.managers;
 
 import android.app.Activity;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.entities.Permissoon;
-import com.majazeh.risloo.Utils.entities.Singleton;
+import com.majazeh.risloo.utils.entities.Permissoon;
+import com.majazeh.risloo.utils.entities.Singleton;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;

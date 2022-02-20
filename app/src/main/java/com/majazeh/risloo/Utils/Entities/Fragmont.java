@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.entities;
+package com.majazeh.risloo.utils.entities;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

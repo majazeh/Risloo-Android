@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.managers.AnimateManager;
-import com.majazeh.risloo.Utils.managers.StringManager;
+import com.majazeh.risloo.utils.managers.AnimateManager;
+import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.Views.activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestDescriptiveBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;

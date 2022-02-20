@@ -13,12 +13,12 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.managers.DialogManager;
-import com.majazeh.risloo.Utils.managers.SnackManager;
-import com.majazeh.risloo.Utils.widgets.CustomClickView;
-import com.majazeh.risloo.Utils.managers.InitManager;
-import com.majazeh.risloo.Utils.managers.IntentManager;
-import com.majazeh.risloo.Utils.managers.StringManager;
+import com.majazeh.risloo.utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.IntentManager;
+import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.Views.activities.AuthActivity;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.recycler.sheet.SheetScaleAdapter;

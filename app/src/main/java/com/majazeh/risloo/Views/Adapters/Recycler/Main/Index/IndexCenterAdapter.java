@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.interfaces.DiffUtilTypeModelAdapter;
-import com.majazeh.risloo.Utils.interfaces.DiffUtilTypeModelCallback;
-import com.majazeh.risloo.Utils.managers.StringManager;
-import com.majazeh.risloo.Utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
+import com.majazeh.risloo.utils.managers.StringManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.holder.main.Index.IndexCenterHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexCenterBinding;

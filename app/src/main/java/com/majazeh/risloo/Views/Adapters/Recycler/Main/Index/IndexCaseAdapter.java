@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.managers.DateManager;
-import com.majazeh.risloo.Utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.managers.DateManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.Views.adapters.holder.main.Index.IndexCaseHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexCaseBinding;

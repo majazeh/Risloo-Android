@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.managers.FileManager;
-import com.majazeh.risloo.Utils.managers.InitManager;
-import com.majazeh.risloo.Utils.managers.StringManager;
+import com.majazeh.risloo.utils.managers.FileManager;
+import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.Views.adapters.recycler.main.Index.IndexDownloadAdapter;
 import com.majazeh.risloo.databinding.FragmentDownloadsBinding;
 

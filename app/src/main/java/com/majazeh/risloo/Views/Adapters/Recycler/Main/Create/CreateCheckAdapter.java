@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.Utils.managers.StringManager;
+import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.Views.adapters.holder.main.Create.CreateCheckHolder;
 import com.majazeh.risloo.databinding.SingleItemCreateCheckBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

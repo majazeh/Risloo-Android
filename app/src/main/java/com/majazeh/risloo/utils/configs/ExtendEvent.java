@@ -1,6 +1,6 @@
-package com.majazeh.risloo.Utils.configs;
+package com.majazeh.risloo.utils.configs;
 
-import com.majazeh.risloo.Utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.DialogManager;
 
 import com.mre.ligheh.API.APIEvents;
 import com.mre.ligheh.API.APIRequest;

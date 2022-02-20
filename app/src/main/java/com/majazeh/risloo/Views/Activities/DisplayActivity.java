@@ -8,11 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.entities.Decoraton;
-import com.majazeh.risloo.Utils.managers.IntentManager;
-import com.majazeh.risloo.Utils.managers.PermissionManager;
-import com.majazeh.risloo.Utils.managers.ToastManager;
-import com.majazeh.risloo.Utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.entities.Decoraton;
+import com.majazeh.risloo.utils.managers.IntentManager;
+import com.majazeh.risloo.utils.managers.PermissionManager;
+import com.majazeh.risloo.utils.managers.ToastManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.squareup.picasso.Picasso;
 

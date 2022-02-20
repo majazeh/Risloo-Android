@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.managers.ParamsManager;
-import com.majazeh.risloo.Utils.managers.StringManager;
+import com.majazeh.risloo.utils.managers.ParamsManager;
+import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.databinding.DialogPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 

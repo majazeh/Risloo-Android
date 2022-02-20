@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.widgets.CustomClickView;
-import com.majazeh.risloo.Utils.managers.InitManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderDocumentHolder;
 import com.majazeh.risloo.Views.adapters.holder.main.Table.TableDocumentHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableDocumentBinding;

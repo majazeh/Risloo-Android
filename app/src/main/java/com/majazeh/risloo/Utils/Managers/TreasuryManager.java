@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.managers;
+package com.majazeh.risloo.utils.managers;
 
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;

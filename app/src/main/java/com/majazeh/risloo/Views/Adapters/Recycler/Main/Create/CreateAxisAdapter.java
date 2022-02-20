@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.managers.StringManager;
+import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.Views.adapters.holder.main.Create.CreateAxisHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Views.activities.MainActivity;

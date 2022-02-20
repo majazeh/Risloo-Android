@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.managers;
+package com.majazeh.risloo.utils.managers;
 
 import android.app.Activity;
 import android.app.DownloadManager;
