@@ -64,7 +64,7 @@ public class AuthSerialFragment extends Fragment {
         binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.SerialFragmentGuide));
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentButton));
 
-        InitManager.txtTextAppearance(requireActivity(), binding.dashboardLinkTextView.getRoot(), getResources().getString(R.string.AuthDashboardLink), R.style.danaDemiBoldTextStyle);
+        InitManager.txtTextAppearance(requireActivity(), binding.dashboardLinkTextView.getRoot(), getResources().getString(R.string.AuthDashboardLink), R.style.danaDemiBold);
         binding.logoutLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLogoutLink));
     }
 

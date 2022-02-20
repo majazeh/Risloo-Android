@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    // Text Styles
+    // Dana Styles
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <style name="danaThinTextStyle">
+    <style name="danaThin">
         <item name="android:fontFamily">@font/dana_thin</item>
     </style>
 
-    <style name="danaExtraLightTextStyle">
+    <style name="danaExtraLight">
         <item name="android:fontFamily">@font/dana_extra_light</item>
     </style>
 
-    <style name="danaLightTextStyle">
+    <style name="danaLight">
         <item name="android:fontFamily">@font/dana_light</item>
     </style>
 
-    <style name="danaRegularTextStyle">
+    <style name="danaRegular">
         <item name="android:fontFamily">@font/dana_regular</item>
     </style>
 
-    <style name="danaMediumTextStyle">
+    <style name="danaMedium">
         <item name="android:fontFamily">@font/dana_medium</item>
     </style>
 
-    <style name="danaDemiBoldTextStyle">
+    <style name="danaDemiBold">
         <item name="android:fontFamily">@font/dana_demi_bold</item>
     </style>
 
-    <style name="danaBoldTextStyle">
+    <style name="danaBold">
         <item name="android:fontFamily">@font/dana_bold</item>
     </style>
 
-    <style name="danaExtraBoldTextStyle">
+    <style name="danaExtraBold">
         <item name="android:fontFamily">@font/dana_extra_bold</item>
     </style>
 
-    <style name="danaBlackTextStyle">
+    <style name="danaBlack">
         <item name="android:fontFamily">@font/dana_black</item>
     </style>
 

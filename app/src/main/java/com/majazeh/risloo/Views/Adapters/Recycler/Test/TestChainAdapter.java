@@ -73,13 +73,13 @@ public class TestChainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void setActive(TestChainHolder holder, ChainModel model) {
         if (!model.getId().equals("") && model.getId().equals(((TestActivity) activity).sampleAnswers.id)) {
-            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.risloo500), R.style.danaDemiBoldTextStyle);
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.risloo500), R.style.danaDemiBold);
             InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_chevron_circle_left_solid, R.color.risloo500, 0);
         } else if (!model.getStatus().equals("") && !model.getStatus().equals("seald") && !model.getStatus().equals("open")) {
-            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.coolGray300), R.style.danaMediumTextStyle);
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.coolGray300), R.style.danaMedium);
             InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_check_circle_light, R.color.coolGray300, 0);
         } else {
-            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.coolGray500), R.style.danaMediumTextStyle);
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.coolGray500), R.style.danaMedium);
             InitManager.imgResTintBackground(activity, holder.binding.activeImageView, 0, R.color.coolGray300, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray500);
         }
     }

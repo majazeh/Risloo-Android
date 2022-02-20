@@ -64,7 +64,7 @@ public class AuthLoginFragment extends Fragment {
         binding.registerHelperTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterHelper));
         binding.passwordRecoverHelperTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverHelper));
 
-        InitManager.txtTextAppearance(requireActivity(), binding.registerLinkTextView.getRoot(), getResources().getString(R.string.AuthRegisterLink), R.style.danaDemiBoldTextStyle);
+        InitManager.txtTextAppearance(requireActivity(), binding.registerLinkTextView.getRoot(), getResources().getString(R.string.AuthRegisterLink), R.style.danaDemiBold);
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
 
         InitManager.input12sspAutoComplete(requireActivity(), binding.mobileEditText.getRoot(), ((AuthActivity) requireActivity()).singleton.getRegistMobiles());
