@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.sheets;
+package com.majazeh.risloo.views.sheets;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.SplashActivity;
+import com.majazeh.risloo.views.activities.SplashActivity;
 import com.majazeh.risloo.databinding.BottomSheetVersionBinding;
 import com.mre.ligheh.Model.TypeModel.ClientModel;
 

@@ -12,9 +12,9 @@ import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.NavigationTestDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Views.activities.AuthActivity;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.AuthActivity;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.TestActivity;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.Objects;

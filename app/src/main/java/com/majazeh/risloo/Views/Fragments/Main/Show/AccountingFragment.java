@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.main.show;
+package com.majazeh.risloo.views.fragments.main.show;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentAccountingBinding;
 
 public class AccountingFragment extends Fragment {

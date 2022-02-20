@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.main.Filter;
+package com.majazeh.risloo.views.adapters.recycler.main.Filter;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.holder.main.Filter.FilterTagHolder;
-import com.majazeh.risloo.Views.fragments.main.show.RoomFragment;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.holder.main.Filter.FilterTagHolder;
+import com.majazeh.risloo.views.fragments.main.show.RoomFragment;
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

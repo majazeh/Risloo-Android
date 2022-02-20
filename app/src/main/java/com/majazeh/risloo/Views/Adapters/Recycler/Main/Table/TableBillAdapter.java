@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.main.Table;
+package com.majazeh.risloo.views.adapters.recycler.main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,11 +21,11 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderBillHolder;
-import com.majazeh.risloo.Views.adapters.holder.main.Table.TableBillHolder;
-import com.majazeh.risloo.Views.fragments.main.index.BillingsFragment;
-import com.majazeh.risloo.Views.fragments.main.show.SessionFragment;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderBillHolder;
+import com.majazeh.risloo.views.adapters.holder.main.Table.TableBillHolder;
+import com.majazeh.risloo.views.fragments.main.index.BillingsFragment;
+import com.majazeh.risloo.views.fragments.main.show.SessionFragment;
 import com.majazeh.risloo.databinding.HeaderItemTableBillBinding;
 import com.majazeh.risloo.databinding.SingleItemTableBillBinding;
 import com.mre.ligheh.API.Response;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.test;
+package com.majazeh.risloo.views.adapters.recycler.test;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -13,8 +13,8 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.Views.adapters.holder.test.TestChainHolder;
-import com.majazeh.risloo.Views.activities.TestActivity;
+import com.majazeh.risloo.views.adapters.holder.test.TestChainHolder;
+import com.majazeh.risloo.views.activities.TestActivity;
 import com.majazeh.risloo.databinding.SingleItemTestChainBinding;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

@@ -10,7 +10,7 @@
     android:overScrollMode="always"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_solid_white"
-    tools:context=".Views.dialogs.SearchableDialog">
+    tools:context=".views.dialogs.SearchableDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

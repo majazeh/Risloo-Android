@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.activities;
+package com.majazeh.risloo.views.activities;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;

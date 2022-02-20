@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.main.index;
+package com.majazeh.risloo.views.fragments.main.index;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.FileManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.Views.adapters.recycler.main.Index.IndexDownloadAdapter;
+import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexDownloadAdapter;
 import com.majazeh.risloo.databinding.FragmentDownloadsBinding;
 
 import java.io.File;

@@ -7,7 +7,7 @@
     android:layout_gravity="bottom"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_coolgray200"
-    tools:context=".Views.sheets.DateBottomSheet">
+    tools:context=".views.sheets.DateBottomSheet">
 
     <include
         android:id="@+id/title_textView"

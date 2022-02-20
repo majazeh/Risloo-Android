@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.activities;
+package com.majazeh.risloo.views.activities;
 
 import static android.content.RestrictionsManager.RESULT_ERROR;
 
@@ -43,13 +43,13 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.managers.TreasuryManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.adapters.recycler.main.MainNavAdapter;
-import com.majazeh.risloo.Views.fragments.main.create.CreateCenterFragment;
-import com.majazeh.risloo.Views.fragments.main.create.CreateDocumentFragment;
-import com.majazeh.risloo.Views.fragments.main.create.CreatePracticeFragment;
-import com.majazeh.risloo.Views.fragments.main.show.SampleFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditCenterTabAvatarFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditUserTabAvatarFragment;
+import com.majazeh.risloo.views.adapters.recycler.main.MainNavAdapter;
+import com.majazeh.risloo.views.fragments.main.create.CreateCenterFragment;
+import com.majazeh.risloo.views.fragments.main.create.CreateDocumentFragment;
+import com.majazeh.risloo.views.fragments.main.create.CreatePracticeFragment;
+import com.majazeh.risloo.views.fragments.main.show.SampleFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditCenterTabAvatarFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;

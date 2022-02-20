@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.sheets;
+package com.majazeh.risloo.views.sheets;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -19,9 +19,9 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.Views.activities.AuthActivity;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.recycler.sheet.SheetScaleAdapter;
+import com.majazeh.risloo.views.activities.AuthActivity;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.recycler.sheet.SheetScaleAdapter;
 import com.majazeh.risloo.databinding.BottomSheetBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;

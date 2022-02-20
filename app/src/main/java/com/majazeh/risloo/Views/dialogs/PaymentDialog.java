@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.dialogs;
+package com.majazeh.risloo.views.dialogs;
 
 import android.app.Dialog;
 import android.graphics.Color;

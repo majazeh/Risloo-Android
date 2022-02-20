@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.test;
+package com.majazeh.risloo.views.fragments.test;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.AnimateManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.Views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestDescriptiveBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;

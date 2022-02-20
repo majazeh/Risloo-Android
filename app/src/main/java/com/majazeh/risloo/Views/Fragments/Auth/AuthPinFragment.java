@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.auth;
+package com.majazeh.risloo.views.fragments.auth;
 
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -31,7 +31,7 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.AuthActivity;
+import com.majazeh.risloo.views.activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;

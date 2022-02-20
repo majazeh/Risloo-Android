@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.main.Table;
+package com.majazeh.risloo.views.adapters.recycler.main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
-import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderClientReportHolder;
-import com.majazeh.risloo.Views.adapters.holder.main.Table.TableClientReportHolder;
+import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderClientReportHolder;
+import com.majazeh.risloo.views.adapters.holder.main.Table.TableClientReportHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableClientReportBinding;
 import com.majazeh.risloo.databinding.SingleItemTableClientReportBinding;
 import com.mre.ligheh.Model.Madule.List;

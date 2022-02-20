@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.test;
+package com.majazeh.risloo.views.fragments.test;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.utils.managers.AnimateManager;
-import com.majazeh.risloo.Views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestDescriptionBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 

@@ -6,7 +6,7 @@
     android:background="@null"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    tools:context=".Views.fragments.main.create.CreateScheduleFragment">
+    tools:context=".views.fragments.main.create.CreateScheduleFragment">
 
     <include
         android:id="@+id/tabLayout"

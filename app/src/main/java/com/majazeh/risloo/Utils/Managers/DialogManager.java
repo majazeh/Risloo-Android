@@ -5,11 +5,11 @@ import android.app.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
-import com.majazeh.risloo.Views.dialogs.LoadingDialog;
-import com.majazeh.risloo.Views.dialogs.PaymentDialog;
-import com.majazeh.risloo.Views.dialogs.ScheduleFilterDialog;
-import com.majazeh.risloo.Views.dialogs.SearchableDialog;
-import com.majazeh.risloo.Views.dialogs.SelectedDialog;
+import com.majazeh.risloo.views.dialogs.LoadingDialog;
+import com.majazeh.risloo.views.dialogs.PaymentDialog;
+import com.majazeh.risloo.views.dialogs.ScheduleFilterDialog;
+import com.majazeh.risloo.views.dialogs.SearchableDialog;
+import com.majazeh.risloo.views.dialogs.SelectedDialog;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.test;
+package com.majazeh.risloo.views.adapters.recycler.test;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -13,8 +13,8 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilStringAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilStringCallback;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.TestActivity;
-import com.majazeh.risloo.Views.adapters.holder.test.TestOptionalHolder;
+import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.adapters.holder.test.TestOptionalHolder;
 import com.majazeh.risloo.databinding.SingleItemTestOptionalBinding;
 
 import java.util.ArrayList;

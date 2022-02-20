@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/_10sdp"
     android:background="@drawable/draw_12sdp_solid_white"
     tools:layout_margin="@dimen/_12sdp"
-    tools:context=".Views.dialogs.PaymentDialog">
+    tools:context=".views.dialogs.PaymentDialog">
 
     <View
         android:id="@+id/background_view"

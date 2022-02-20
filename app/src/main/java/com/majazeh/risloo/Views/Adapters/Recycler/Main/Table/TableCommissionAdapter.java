@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.main.Table;
+package com.majazeh.risloo.views.adapters.recycler.main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderCommissionHolder;
-import com.majazeh.risloo.Views.adapters.holder.main.Table.TableCommissionHolder;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderCommissionHolder;
+import com.majazeh.risloo.views.adapters.holder.main.Table.TableCommissionHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableCommissionBinding;
 import com.majazeh.risloo.databinding.SingleItemTableCommissionBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

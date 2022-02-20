@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.sheets;
+package com.majazeh.risloo.views.sheets;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -16,15 +16,15 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabSessionFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.CreateScheduleTabTimeFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.CreateSessionTabTimeFragment;
-import com.majazeh.risloo.Views.fragments.main.create.CreateUserFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditUserTabPersonalFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabSessionFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabTimeFragment;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabTimeFragment;
+import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabSessionFragment;
+import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabTimeFragment;
+import com.majazeh.risloo.views.fragments.main.create.CreateUserFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditUserTabPersonalFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabSessionFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
 
 import java.util.Date;

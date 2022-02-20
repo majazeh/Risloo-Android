@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.main.tab;
+package com.majazeh.risloo.views.fragments.main.tab;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -21,8 +21,8 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.interfaces.CutCopyPasteListener;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.fragments.main.edit.EditUserFragment;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.fragments.main.edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserTabPasswordBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;

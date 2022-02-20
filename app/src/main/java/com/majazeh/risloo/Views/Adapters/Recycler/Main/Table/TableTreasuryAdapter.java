@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.main.Table;
+package com.majazeh.risloo.views.adapters.recycler.main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderTreasuryHolder;
-import com.majazeh.risloo.Views.adapters.holder.main.Table.TableTreasuryHolder;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderTreasuryHolder;
+import com.majazeh.risloo.views.adapters.holder.main.Table.TableTreasuryHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableTreasuryBinding;
 import com.majazeh.risloo.databinding.SingleItemTableTreasuryBinding;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;

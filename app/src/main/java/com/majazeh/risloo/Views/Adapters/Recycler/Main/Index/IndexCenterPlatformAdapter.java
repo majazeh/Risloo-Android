@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.main.Index;
+package com.majazeh.risloo.views.adapters.recycler.main.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,9 +17,9 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.holder.main.Index.IndexCenterPlatformHolder;
-import com.majazeh.risloo.Views.fragments.main.index.CenterPlatformsFragment;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.holder.main.Index.IndexCenterPlatformHolder;
+import com.majazeh.risloo.views.fragments.main.index.CenterPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexCenterPlatformBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;

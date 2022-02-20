@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.main;
+package com.majazeh.risloo.views.adapters.recycler.main;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.holder.main.MainNavHolder;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.holder.main.MainNavHolder;
 import com.majazeh.risloo.databinding.SingleItemMainNavBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 

@@ -1,15 +1,15 @@
-package com.majazeh.risloo.Views.adapters.tab;
+package com.majazeh.risloo.views.adapters.tab;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabPaymentFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabPlatformFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabReferenceFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabSessionFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditSessionTabTimeFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabPaymentFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabPlatformFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabReferenceFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabSessionFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabTimeFragment;
 
 import java.util.HashMap;
 

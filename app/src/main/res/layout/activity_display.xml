@@ -11,7 +11,7 @@
     android:focusableInTouchMode="true"
     android:layoutDirection="rtl"
     app:layoutDescription="@xml/activity_display_scene"
-    tools:context=".Views.activities.DisplayActivity">
+    tools:context=".views.activities.DisplayActivity">
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/avatar_zoomageView"

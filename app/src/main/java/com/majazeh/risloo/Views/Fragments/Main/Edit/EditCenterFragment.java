@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.main.edit;
+package com.majazeh.risloo.views.fragments.main.edit;
 
 import android.annotation.SuppressLint;
 import android.graphics.PorterDuff;
@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.Views.adapters.tab.EditCenterAdapter;
+import com.majazeh.risloo.views.adapters.tab.EditCenterAdapter;
 import com.majazeh.risloo.databinding.FragmentEditCenterBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.test;
+package com.majazeh.risloo.views.adapters.recycler.test;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.Views.activities.TestActivity;
-import com.majazeh.risloo.Views.adapters.holder.test.TestPreMultiHolder;
-import com.majazeh.risloo.Views.adapters.holder.test.TestPreSelectHolder;
-import com.majazeh.risloo.Views.adapters.holder.test.TestPreTextHolder;
+import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.adapters.holder.test.TestPreMultiHolder;
+import com.majazeh.risloo.views.adapters.holder.test.TestPreSelectHolder;
+import com.majazeh.risloo.views.adapters.holder.test.TestPreTextHolder;
 import com.majazeh.risloo.databinding.SingleItemTestPreMultiBinding;
 import com.majazeh.risloo.databinding.SingleItemTestPreSelectBinding;
 import com.majazeh.risloo.databinding.SingleItemTestPreTextBinding;

@@ -1,14 +1,14 @@
-package com.majazeh.risloo.Views.adapters.tab;
+package com.majazeh.risloo.views.adapters.tab;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.Views.fragments.main.tab.EditUserTabAvatarFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditUserTabCryptoFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditUserTabPasswordFragment;
-import com.majazeh.risloo.Views.fragments.main.tab.EditUserTabPersonalFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditUserTabAvatarFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditUserTabCryptoFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditUserTabPasswordFragment;
+import com.majazeh.risloo.views.fragments.main.tab.EditUserTabPersonalFragment;
 
 import java.util.HashMap;
 

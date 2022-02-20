@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.adapters.recycler.dialog;
+package com.majazeh.risloo.views.adapters.recycler.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,10 +15,10 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.holder.dialog.DialogFilterHolder;
-import com.majazeh.risloo.Views.fragments.main.index.CenterSchedulesFragment;
-import com.majazeh.risloo.Views.fragments.main.index.RoomSchedulesFragment;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.holder.dialog.DialogFilterHolder;
+import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
+import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.SingleItemDialogFilterBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

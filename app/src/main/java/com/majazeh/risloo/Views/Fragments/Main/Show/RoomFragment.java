@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.main.show;
+package com.majazeh.risloo.views.fragments.main.show;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -20,9 +20,9 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.recycler.main.Filter.FilterTagAdapter;
-import com.majazeh.risloo.Views.adapters.recycler.main.Index.IndexCaseAdapter;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.recycler.main.Filter.FilterTagAdapter;
+import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexCaseAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;

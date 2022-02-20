@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.main.index;
+package com.majazeh.risloo.views.fragments.main.index;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -23,8 +23,8 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.TreasuryManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.recycler.main.Index.IndexBankAdapter;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexBankAdapter;
 import com.majazeh.risloo.databinding.FragmentBanksBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Bank;

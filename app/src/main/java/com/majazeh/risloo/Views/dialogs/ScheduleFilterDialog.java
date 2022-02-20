@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.dialogs;
+package com.majazeh.risloo.views.dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -19,10 +19,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.ParamsManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.recycler.dialog.DialogFilterAdapter;
-import com.majazeh.risloo.Views.fragments.main.index.CenterSchedulesFragment;
-import com.majazeh.risloo.Views.fragments.main.index.RoomSchedulesFragment;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.recycler.dialog.DialogFilterAdapter;
+import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
+import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.DialogScheduleFilterBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 

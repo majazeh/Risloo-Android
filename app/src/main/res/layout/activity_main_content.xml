@@ -11,7 +11,7 @@
     android:focusableInTouchMode="true"
     android:layoutDirection="rtl"
     app:layoutDescription="@xml/activity_main_content_scene"
-    tools:context=".Views.activities.MainActivity">
+    tools:context=".views.activities.MainActivity">
 
     <View
         android:id="@+id/background_view"

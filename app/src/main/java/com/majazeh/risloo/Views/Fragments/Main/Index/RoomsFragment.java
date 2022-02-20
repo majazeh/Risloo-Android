@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.fragments.main.index;
+package com.majazeh.risloo.views.fragments.main.index;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,8 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.interfaces.ItemTouchHelperCallback;
-import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.adapters.recycler.main.Index.IndexRoomAdapter;
+import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;

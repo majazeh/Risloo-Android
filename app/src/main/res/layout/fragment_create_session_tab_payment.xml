@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
-    tools:context=".Views.fragments.main.tab.CreateSessionTabPaymentFragment">
+    tools:context=".views.fragments.main.tab.CreateSessionTabPaymentFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
