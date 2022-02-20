@@ -53,11 +53,11 @@
                 app:tabGravity="start"
                 app:tabMode="fixed"
                 app:tabMaxWidth="0dp"
-                app:tabTextColor="@color/Risloo500"
-                app:tabSelectedTextColor="@color/White"
+                app:tabTextColor="@color/risloo500"
+                app:tabSelectedTextColor="@color/white"
                 app:tabTextAppearance="@style/TabTextAppearance2"
-                app:tabRippleColor="@color/CoolGray300"
-                app:tabIndicatorColor="@color/Risloo500"
+                app:tabRippleColor="@color/coolGray300"
+                app:tabIndicatorColor="@color/risloo500"
                 app:tabIndicatorHeight="@dimen/_28sdp">
 
                 <com.google.android.material.tabs.TabItem

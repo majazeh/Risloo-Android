@@ -41,7 +41,7 @@
                 tools:text="توضیحات"
                 tools:textSize="@dimen/_10ssp"
                 tools:textStyle="normal"
-                tools:textColor="@color/CoolGray600"
+                tools:textColor="@color/coolGray600"
                 tools:textAlignment="gravity"
                 tools:fontFamily="@font/dana_regular" />
 

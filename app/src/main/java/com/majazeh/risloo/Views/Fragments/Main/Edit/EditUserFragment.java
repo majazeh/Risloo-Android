@@ -63,7 +63,7 @@ public class EditUserFragment extends Fragment {
 
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, i) -> {
             tab.setIcon(images.get(i));
-            Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.CoolGray400), PorterDuff.Mode.SRC_IN);
+            Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.coolGray400), PorterDuff.Mode.SRC_IN);
         });
     }
 
@@ -72,12 +72,12 @@ public class EditUserFragment extends Fragment {
         binding.tabLayout.getRoot().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.LightBlue800), PorterDuff.Mode.SRC_IN);
+                Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.lightBlue800), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.CoolGray400), PorterDuff.Mode.SRC_IN);
+                Objects.requireNonNull(tab.getIcon()).setColorFilter(ContextCompat.getColor(requireActivity(), R.color.coolGray400), PorterDuff.Mode.SRC_IN);
             }
 
             @Override

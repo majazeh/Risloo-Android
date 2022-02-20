@@ -204,9 +204,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
             }
 
             @Override
@@ -258,9 +258,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
             }
 
             @Override
@@ -314,9 +314,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
             }
 
             @Override
@@ -368,9 +368,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
             }
 
             @Override
@@ -424,9 +424,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
             }
 
             @Override
@@ -478,9 +478,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
             }
 
             @Override
@@ -536,9 +536,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
 
                 if (arrayList2.get(position))
                     dropdownImageView.setVisibility(View.VISIBLE);
@@ -609,12 +609,12 @@ public class InitManager {
 
             private void setData(int position) {
                 primaryTextView.setText(arrayList.get(position));
-                secondaryTextView.setText(StringManager.foreground(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.Emerald600)));
+                secondaryTextView.setText(StringManager.foreground(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
             }
 
             private void setDataDropDown(int position) {
                 dropdownPrimaryTextView.setText(arrayList.get(position));
-                dropdownSecondaryTextView.setText(StringManager.foreground(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.Emerald600)));
+                dropdownSecondaryTextView.setText(StringManager.foreground(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
             }
 
             @Override
@@ -669,9 +669,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (dropdownTextView.getText().toString().equals("پرداخت"))
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Emerald600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.emerald600));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
             }
 
             @Override
@@ -771,9 +771,9 @@ public class InitManager {
                 dropdownTextView.setText(arrayList.get(position));
 
                 if (dropdownTextView.getText().toString().equals("خروج"))
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Red600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.red600));
                 else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
             }
 
             @Override

@@ -12,7 +12,7 @@
         android:id="@+id/top_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/CoolGray200"
+        android:background="@color/coolGray200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +28,7 @@
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray700"
+        android:textColor="@color/coolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.25"
@@ -47,7 +47,7 @@
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray700"
+        android:textColor="@color/coolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_goneMarginEnd="@dimen/_8sdp"
@@ -64,7 +64,7 @@
         android:gravity="center|right"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray500"
+        android:textColor="@color/coolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/name_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view"
-        app:tint="@color/CoolGray500" />
+        app:tint="@color/coolGray500" />
 
     <Spinner
         android:id="@+id/menu_spinner"

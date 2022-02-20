@@ -11,5 +11,5 @@
     android:fontFamily="@font/dana_medium"
     tools:layout_margin="@dimen/_12sdp"
     tools:text="دکمه"
-    tools:textColor="@color/CoolGray500"
+    tools:textColor="@color/coolGray500"
     tools:background="@drawable/draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300" />

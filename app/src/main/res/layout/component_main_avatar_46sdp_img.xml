@@ -23,7 +23,7 @@
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:visibility="gone"
-        app:tint="@color/CoolGray400"
+        app:tint="@color/coolGray400"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

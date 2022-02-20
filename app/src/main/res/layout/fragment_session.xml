@@ -40,7 +40,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/serial_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/serial_textView"
-                app:tint="@color/LightBlue700" />
+                app:tint="@color/lightBlue700" />
 
             <TextView
                 android:id="@+id/serial_textView"
@@ -52,7 +52,7 @@
                 android:gravity="left"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
-                android:textColor="@color/LightBlue700"
+                android:textColor="@color/lightBlue700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
                 app:layout_constraintEnd_toStartOf="@id/serial_imageView"
@@ -70,7 +70,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/date_textView"
                 app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/date_textView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/date_textView"
@@ -81,7 +81,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
@@ -99,7 +99,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/duration_textView"
                 app:layout_constraintStart_toStartOf="@id/serial_textView"
                 app:layout_constraintTop_toTopOf="@id/duration_textView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/duration_textView"
@@ -110,7 +110,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
@@ -137,7 +137,7 @@
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_goneMarginEnd="0dp"
@@ -181,7 +181,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/reference_headerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/reference_headerView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/reference_headerView"
@@ -193,7 +193,7 @@
                 android:text="@string/SessionFragmentReferenceHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/reference_imageView"
@@ -208,7 +208,7 @@
                 android:gravity="center|right"
                 android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -234,7 +234,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/axis_headerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/axis_headerView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/axis_headerView"
@@ -246,7 +246,7 @@
                 android:text="@string/SessionFragmentAxisHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/axis_imageView"
@@ -261,7 +261,7 @@
                 android:gravity="center|right"
                 android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -286,7 +286,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/platform_headerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/platform_headerView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/platform_headerView"
@@ -298,7 +298,7 @@
                 android:text="@string/SessionFragmentPlatformHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/platform_imageView"
@@ -313,7 +313,7 @@
                 android:gravity="center|right"
                 android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -371,7 +371,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/payment_headerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/payment_headerView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/payment_headerView"
@@ -383,7 +383,7 @@
                 android:text="@string/SessionFragmentPaymentHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/payment_imageView"
@@ -398,7 +398,7 @@
                 android:gravity="center|right"
                 android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -423,7 +423,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/client_headerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/client_headerView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/client_headerView"
@@ -435,7 +435,7 @@
                 android:text="@string/SessionFragmentClientHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/client_imageView"
@@ -450,7 +450,7 @@
                 android:gravity="center|right"
                 android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -475,7 +475,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/start_time_headerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/start_time_headerView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/start_time_headerView"
@@ -487,7 +487,7 @@
                 android:text="@string/SessionFragmentStartTimeHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/start_time_imageView"
@@ -502,7 +502,7 @@
                 android:gravity="center|right"
                 android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -527,7 +527,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/end_time_headerView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/end_time_headerView"
-                app:tint="@color/CoolGray500" />
+                app:tint="@color/coolGray500" />
 
             <TextView
                 android:id="@+id/end_time_headerView"
@@ -539,7 +539,7 @@
                 android:text="@string/SessionFragmentEndTimeHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/end_time_imageView"
@@ -554,7 +554,7 @@
                 android:gravity="center|right"
                 android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
-                android:textColor="@color/CoolGray500"
+                android:textColor="@color/coolGray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"

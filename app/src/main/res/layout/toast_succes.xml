@@ -12,7 +12,7 @@
     android:gravity="center"
     android:textSize="@dimen/_10ssp"
     android:textStyle="normal"
-    android:textColor="@color/Emerald800"
+    android:textColor="@color/emerald800"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
     android:background="@drawable/draw_16sdp_solid_emerald100"

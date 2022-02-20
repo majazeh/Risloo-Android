@@ -72,7 +72,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterTabAvatarAvatarGuide));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabAvatarButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabAvatarButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {
@@ -110,7 +110,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
                     avatarPath = model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url");
 
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                    Picasso.get().load(avatarPath).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(avatarPath).placeholder(R.color.coolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
@@ -120,7 +120,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
                     else
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
 
-                    Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

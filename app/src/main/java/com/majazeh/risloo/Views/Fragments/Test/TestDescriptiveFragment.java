@@ -129,7 +129,7 @@ public class TestDescriptiveFragment extends Fragment {
         int endIndex = String.valueOf(availableChar).length();
 
         String value = availableChar + " / " + "255";
-        binding.answerEditText.countTextView.setText(StringManager.foregroundSize(value, 0, endIndex, getResources().getColor(R.color.CoolGray700), (int) getResources().getDimension(R.dimen._11ssp)));
+        binding.answerEditText.countTextView.setText(StringManager.foregroundSize(value, 0, endIndex, getResources().getColor(R.color.coolGray700), (int) getResources().getDimension(R.dimen._11ssp)));
     }
 
     private void setAnimation() {

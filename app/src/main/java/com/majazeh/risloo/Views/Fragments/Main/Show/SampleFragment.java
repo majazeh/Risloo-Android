@@ -166,13 +166,13 @@ public class SampleFragment extends Fragment {
 
         binding.fieldsCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                binding.fieldsCheckBox.setTextColor(getResources().getColor(R.color.CoolGray900));
+                binding.fieldsCheckBox.setTextColor(getResources().getColor(R.color.coolGray900));
 
                 tableGenAdapter.setEditable(true);
                 tablePreAdapter.setEditable(true);
                 tableItemAdapter.setEditable(true);
             } else {
-                binding.fieldsCheckBox.setTextColor(getResources().getColor(R.color.CoolGray600));
+                binding.fieldsCheckBox.setTextColor(getResources().getColor(R.color.coolGray600));
 
                 tableGenAdapter.setEditable(false);
                 tablePreAdapter.setEditable(false);
@@ -235,10 +235,10 @@ public class SampleFragment extends Fragment {
         switch (status) {
             case "scoring":
             case "creating_files":
-                binding.statusTextView.setTextColor(getResources().getColor(R.color.Amber500));
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.amber500));
                 break;
             default:
-                binding.statusTextView.setTextColor(getResources().getColor(R.color.CoolGray500));
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.coolGray500));
                 break;
         }
     }
@@ -250,16 +250,16 @@ public class SampleFragment extends Fragment {
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
 
-                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_coolgray500_ripple_coolgray300);
-                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentClose), getResources().getColor(R.color.CoolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_coolgray500_ripple_coolgray300);
+                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.coolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_coolgray500_ripple_coolgray300);
+                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentClose), getResources().getColor(R.color.coolGray500), R.drawable.draw_16sdp_solid_white_border_1sdp_coolgray500_ripple_coolgray300);
 
                 break;
             case "closed":
                 binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
 
-                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentOpen), getResources().getColor(R.color.Risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
-                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
+                InitManager.txtTextColorBackground(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentOpen), getResources().getColor(R.color.risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.white), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
 
                 break;
             case "scoring":
@@ -271,8 +271,8 @@ public class SampleFragment extends Fragment {
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.GONE);
 
-                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
-                InitManager.spinnerRect(requireActivity(), binding.profilesTextView.selectSpinner, binding.profilesTextView.selectTextView, binding.profilesTextView.angleImageView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Risloo500), R.color.Risloo500, R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+                InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.white), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
+                InitManager.spinnerRect(requireActivity(), binding.profilesTextView.selectSpinner, binding.profilesTextView.selectTextView, binding.profilesTextView.angleImageView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.risloo500), R.color.risloo500, R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 break;
         }

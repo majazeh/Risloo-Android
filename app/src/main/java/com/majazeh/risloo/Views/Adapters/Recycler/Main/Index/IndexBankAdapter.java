@@ -206,7 +206,7 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
                     break;
             }
         } else {
-            InitManager.imgResTint(activity, holder.binding.avatarImageView, R.drawable.ic_university_light, R.color.CoolGray400);
+            InitManager.imgResTint(activity, holder.binding.avatarImageView, R.drawable.ic_university_light, R.color.coolGray400);
         }
     }
 
@@ -217,19 +217,19 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
             case "verified":
                 holder.binding.statusTextView.setVisibility(View.GONE);
 
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.emerald500));
                 holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_emerald50);
                 break;
             case "awaiting":
                 holder.binding.statusTextView.setVisibility(View.VISIBLE);
 
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.amber500));
                 holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_amber50);
                 break;
             default:
                 holder.binding.statusTextView.setVisibility(View.VISIBLE);
 
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.coolGray500));
                 holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_coolgray50);
                 break;
         }

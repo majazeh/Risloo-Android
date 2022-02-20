@@ -214,7 +214,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
 
     private void setData(IndexRoomPlatformHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType()));
-        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.CoolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.coolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         holder.binding.identifierEditText.setText(model.getIdentifier());
 
@@ -253,7 +253,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
             holder.binding.availableSwitchCompat.setChecked(true);
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
-            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
+            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.emerald700));
 
             holder.binding.centerCheckBox.setEnabled(true);
             holder.binding.centerCheckBox.setAlpha((float) 1);
@@ -265,7 +265,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
             holder.binding.availableSwitchCompat.setChecked(false);
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
-            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.coolGray600));
 
             holder.binding.centerCheckBox.setEnabled(false);
             holder.binding.centerCheckBox.setAlpha((float) 0.6);

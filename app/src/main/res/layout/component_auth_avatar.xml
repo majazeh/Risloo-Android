@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        android:background="@color/CoolGray100" />
+        android:background="@color/coolGray100" />
 
     <TextView
         android:id="@+id/char_textView"
@@ -23,7 +23,7 @@
         android:gravity="center"
         android:textSize="@dimen/_16ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray400"
+        android:textColor="@color/coolGray400"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         android:visibility="gone"

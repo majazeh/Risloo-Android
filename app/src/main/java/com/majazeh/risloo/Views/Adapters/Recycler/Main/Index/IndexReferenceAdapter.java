@@ -100,7 +100,7 @@ public class IndexReferenceAdapter extends RecyclerView.Adapter<IndexReferenceHo
     private void setAvatar(IndexReferenceHolder holder, String url) {
         if (!url.equals("")) {
             holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(url).placeholder(R.color.coolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
             holder.binding.avatarIncludeLayout.iconImageView.setImageResource(R.drawable.ic_user_light);

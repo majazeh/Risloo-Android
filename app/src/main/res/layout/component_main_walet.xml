@@ -17,7 +17,7 @@
         android:gravity="center"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray500"
+        android:textColor="@color/coolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         tools:text="عنوان" />
@@ -29,7 +29,7 @@
         android:gravity="center"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
-        android:textColor="@color/Emerald600"
+        android:textColor="@color/emerald600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_demi_bold"
         tools:text="100.000 تومان" />

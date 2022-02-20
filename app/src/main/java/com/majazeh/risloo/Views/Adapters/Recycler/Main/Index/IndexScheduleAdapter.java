@@ -223,29 +223,29 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
         switch (status) {
             case "registration_awaiting":
             case "registration":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.amber500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_amber600);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_amber50);
                 break;
             case "client_awaiting":
             case "session_awaiting":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_risloo500);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_risloo50);
                 break;
             case "in_session":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Emerald500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.emerald500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_emerald600);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50);
                 break;
             case "canceled_by_client":
             case "canceled_by_center":
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.red500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_red600);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_red50);
                 break;
             default:
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.coolGray500));
                 holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_coolgray400);
                 holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray50);
                 break;
@@ -255,12 +255,12 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
     private void setAvatar(IndexScheduleHolder holder, String url) {
         if (!url.equals("")) {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(url).placeholder(R.color.coolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 

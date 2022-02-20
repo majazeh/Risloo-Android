@@ -75,7 +75,7 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
         child = ((MainActivity) requireActivity()).fragmont.getChild();
 
-        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetDateEntry), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetDateEntry), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {

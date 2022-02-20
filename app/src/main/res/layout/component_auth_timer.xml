@@ -18,7 +18,7 @@
             android:text="@string/PinFragmentTimer"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
-            android:textColor="@color/CoolGray400"
+            android:textColor="@color/coolGray400"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular" />
 
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
-            android:textColor="@color/CoolGray700"
+            android:textColor="@color/coolGray700"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_demi_bold"
             tools:text="05:00" />
@@ -44,7 +44,7 @@
         android:gravity="center"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray400"
+        android:textColor="@color/coolGray400"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular" />
 

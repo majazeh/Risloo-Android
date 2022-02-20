@@ -7,6 +7,6 @@
     android:text="@string/AuthHeader"
     android:textSize="@dimen/_18ssp"
     android:textStyle="bold"
-    android:textColor="@color/Risloo500"
+    android:textColor="@color/risloo500"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_extra_bold" />

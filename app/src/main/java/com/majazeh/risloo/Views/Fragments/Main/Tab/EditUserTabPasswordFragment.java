@@ -78,7 +78,7 @@ public class EditUserTabPasswordFragment extends Fragment {
 
         binding.newPasswordGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserTabPasswordNewPasswordGuide));
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabPasswordButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabPasswordButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -198,20 +198,20 @@ public class EditUserTabPasswordFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             if (binding.currentPasswordIncludeLayout.visibilityImageView.getTag().equals("invisible")) {
                 binding.currentPasswordIncludeLayout.inputEditText.setTransformationMethod(null);
-                InitManager.imgResTintTag(requireActivity(), binding.currentPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.Risloo500, "visible");
+                InitManager.imgResTintTag(requireActivity(), binding.currentPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.risloo500, "visible");
             } else {
                 binding.currentPasswordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
-                InitManager.imgResTintTag(requireActivity(), binding.currentPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.CoolGray500, "invisible");
+                InitManager.imgResTintTag(requireActivity(), binding.currentPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.coolGray500, "invisible");
             }
         }).widget(binding.currentPasswordIncludeLayout.visibilityImageView);
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.newPasswordIncludeLayout.visibilityImageView.getTag().equals("invisible")) {
                 binding.newPasswordIncludeLayout.inputEditText.setTransformationMethod(null);
-                InitManager.imgResTintTag(requireActivity(), binding.newPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.Risloo500, "visible");
+                InitManager.imgResTintTag(requireActivity(), binding.newPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.risloo500, "visible");
             } else {
                 binding.newPasswordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
-                InitManager.imgResTintTag(requireActivity(), binding.newPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.CoolGray500, "invisible");
+                InitManager.imgResTintTag(requireActivity(), binding.newPasswordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.coolGray500, "invisible");
             }
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 

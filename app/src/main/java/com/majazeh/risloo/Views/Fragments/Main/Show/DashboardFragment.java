@@ -137,23 +137,23 @@ public class DashboardFragment extends Fragment {
             //  Today Schedules Data
             if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("today") && !model.getDalilyScheduleExports().isNull("today") && model.getDalilyScheduleExports().getJSONObject("today").length() != 0) {
                 binding.schedulesTodayLayout.getRoot().setVisibility(View.VISIBLE);
-                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), getResources().getColor(R.color.Risloo500), R.drawable.ic_calendar_day_light, R.color.Risloo500, R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTodayTitle), getResources().getColor(R.color.risloo500), R.drawable.ic_calendar_day_light, R.color.risloo500, R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 setDropdowns("today", model.getDalilyScheduleExports().getJSONObject("today"));
             } else {
                 binding.schedulesTodayLayout.getRoot().setVisibility(View.VISIBLE);
-                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTodayTitle), getResources().getColor(R.color.CoolGray400), R.drawable.ic_calendar_day_light, R.color.CoolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTodayLayout.getRoot(), binding.schedulesTodayLayout.titleTextView, binding.schedulesTodayLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTodayTitle), getResources().getColor(R.color.coolGray400), R.drawable.ic_calendar_day_light, R.color.coolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
             }
 
             //  Tomorrow Schedules Data
             if (model.getDalilyScheduleExports() != null && model.getDalilyScheduleExports().has("tomorrow") && !model.getDalilyScheduleExports().isNull("tomorrow") && model.getDalilyScheduleExports().getJSONObject("tomorrow").length() != 0) {
                 binding.schedulesTomorrowLayout.getRoot().setVisibility(View.VISIBLE);
-                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), getResources().getColor(R.color.Risloo500), R.drawable.ic_calendar_alt_light, R.color.Risloo500, R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentHasSchedulesTomorrowTitle), getResources().getColor(R.color.risloo500), R.drawable.ic_calendar_alt_light, R.color.risloo500, R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 setDropdowns("tomorrow", model.getDalilyScheduleExports().getJSONObject("tomorrow"));
             } else {
                 binding.schedulesTomorrowLayout.getRoot().setVisibility(View.VISIBLE);
-                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTomorrowTitle), getResources().getColor(R.color.CoolGray400), R.drawable.ic_calendar_alt_light, R.color.CoolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
+                InitManager.layoutTextColorResTintBackground(requireActivity(), binding.schedulesTomorrowLayout.getRoot(), binding.schedulesTomorrowLayout.titleTextView, binding.schedulesTomorrowLayout.avatarImageView, getResources().getString(R.string.DashboardFragmentNoSchedulesTomorrowTitle), getResources().getColor(R.color.coolGray400), R.drawable.ic_calendar_alt_light, R.color.coolGray400, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
             }
 
             //  Rooms Data

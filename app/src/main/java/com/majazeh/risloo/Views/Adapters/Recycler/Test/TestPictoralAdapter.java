@@ -92,7 +92,7 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void setData(TestPictoralHolder holder, String url, int position) {
         holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
-        Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.answerImageView);
+        Picasso.get().load(url).placeholder(R.color.coolGray100).into(holder.binding.answerImageView);
 
         setActive(holder, position);
 
@@ -102,10 +102,10 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private void setActive(TestPictoralHolder holder, int position) {
         if (position == answer) {
             holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500_ripple_coolgray300);
-            InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.White), R.drawable.draw_oval_solid_risloo500);
+            InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.white), R.drawable.draw_oval_solid_risloo500);
         } else {
             holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
-            InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.CoolGray700), R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray200);
+            InitManager.txtColorBackground(holder.binding.numberTextView, activity.getResources().getColor(R.color.coolGray700), R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray200);
 
             if (userSelect)
                 holder.binding.getRoot().setAlpha((float) 0.4);

@@ -15,7 +15,6 @@ import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Test.TestChainHolder;
-import com.majazeh.risloo.databinding.SingleItemTestChainBinding;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -74,14 +73,14 @@ public class TestChainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void setActive(TestChainHolder holder, ChainModel model) {
         if (!model.getId().equals("") && model.getId().equals(((TestActivity) activity).sampleAnswers.id)) {
-            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.Risloo500), R.style.danaDemiBoldTextStyle);
-            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_chevron_circle_left_solid, R.color.Risloo500, 0);
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.risloo500), R.style.danaDemiBoldTextStyle);
+            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_chevron_circle_left_solid, R.color.risloo500, 0);
         } else if (!model.getStatus().equals("") && !model.getStatus().equals("seald") && !model.getStatus().equals("open")) {
-            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.CoolGray300), R.style.danaMediumTextStyle);
-            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_check_circle_light, R.color.CoolGray300, 0);
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.coolGray300), R.style.danaMediumTextStyle);
+            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_check_circle_light, R.color.coolGray300, 0);
         } else {
-            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.CoolGray500), R.style.danaMediumTextStyle);
-            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, 0, R.color.CoolGray300, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray500);
+            InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.coolGray500), R.style.danaMediumTextStyle);
+            InitManager.imgResTintBackground(activity, holder.binding.activeImageView, 0, R.color.coolGray300, R.drawable.draw_oval_solid_transparent_border_1sdp_coolgray500);
         }
     }
 

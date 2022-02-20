@@ -223,20 +223,20 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case "open":
             case "closed":
                 holder.binding.statusTextView.setEnabled(true);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Risloo500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
 
                 holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
                 break;
             case "scoring":
             case "creating_files":
                 holder.binding.statusTextView.setEnabled(false);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Amber500));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.amber500));
 
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;
             default:
                 holder.binding.statusTextView.setEnabled(false);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray700));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.coolGray700));
 
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;

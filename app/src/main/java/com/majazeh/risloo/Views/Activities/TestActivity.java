@@ -102,10 +102,10 @@ public class TestActivity extends AppCompatActivity {
 
         if (dark) {
             decoraton.showSystemUI(false, true);
-            decoraton.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.CoolGray50));
+            decoraton.setSystemUIColor(getResources().getColor(R.color.risloo500), getResources().getColor(R.color.coolGray50));
         } else {
             decoraton.showSystemUI(true, true);
-            decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
+            decoraton.setSystemUIColor(getResources().getColor(R.color.coolGray50), getResources().getColor(R.color.coolGray50));
         }
     }
 
@@ -214,7 +214,7 @@ public class TestActivity extends AppCompatActivity {
 
         if (!sampleModel.getEdition().equals("")) {
             String title = binding.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getEdition());
-            binding.titleTextView.setText(StringManager.foregroundSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.CoolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
+            binding.titleTextView.setText(StringManager.foregroundSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.coolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
         }
 
         if (sampleForm.getForms().length() != 0) {
@@ -293,10 +293,10 @@ public class TestActivity extends AppCompatActivity {
     private void setStatus(String type) {
         if (type.equals("saving")) {
             binding.statusTextView.setText(getResources().getString(R.string.TestSaving));
-            binding.statusTextView.setTextColor(getResources().getColor(R.color.Amber500));
+            binding.statusTextView.setTextColor(getResources().getColor(R.color.amber500));
         } else {
             binding.statusTextView.setText(getResources().getString(R.string.TestFixed));
-            binding.statusTextView.setTextColor(getResources().getColor(R.color.CoolGray600));
+            binding.statusTextView.setTextColor(getResources().getColor(R.color.coolGray600));
         }
 
         binding.statusTextView.requestLayout();
@@ -387,7 +387,7 @@ public class TestActivity extends AppCompatActivity {
         AnimateManager.animateProgressValue(binding.indexProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
 
         String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
-        binding.indexTextView.setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.Risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
+        binding.indexTextView.setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
         userSelect = false;
 

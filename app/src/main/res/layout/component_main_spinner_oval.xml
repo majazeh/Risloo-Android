@@ -31,6 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_ellipsis_v_light"
-        tools:tint="@color/CoolGray500" />
+        tools:tint="@color/coolGray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

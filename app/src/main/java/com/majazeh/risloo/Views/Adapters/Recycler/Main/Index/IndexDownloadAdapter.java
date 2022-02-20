@@ -114,7 +114,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                     holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                     holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
 
-                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_code_light, R.color.Risloo500);
+                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_code_light, R.color.risloo500);
 
                     holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_risloo50);
                     break;
@@ -122,7 +122,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                     holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                     holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
 
-                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_excel_light, R.color.Emerald500);
+                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_excel_light, R.color.emerald500);
 
                     holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_emerald50);
                     break;
@@ -130,7 +130,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                     holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                     holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
 
-                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_pdf_light, R.color.Red500);
+                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_pdf_light, R.color.red500);
 
                     holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_red50);
                     break;
@@ -138,7 +138,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                     holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                     holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
 
-                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_image_light, R.color.Pink500);
+                    InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_file_image_light, R.color.pink500);
 
                     holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_pink50);
                     break;
@@ -146,7 +146,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                     holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
 
-                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.Amber500));
+                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.amber500));
 
                     holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_amber50);
                     break;
@@ -154,7 +154,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                     holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
 
-                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.Violet500));
+                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.violet500));
 
                     holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_violet50);
                     break;
@@ -162,7 +162,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                     holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
 
-                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.CoolGray500));
+                    InitManager.txtTextColor(holder.binding.avatarIncludeLayout.charTextView, suffix, activity.getResources().getColor(R.color.coolGray500));
 
                     holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray100);
                     break;
@@ -172,14 +172,14 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.VISIBLE);
 
-            InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_folder_open_light, R.color.Risloo500);
+            InitManager.imgResTint(activity, holder.binding.avatarIncludeLayout.iconImageView, R.drawable.ic_folder_open_light, R.color.risloo500);
 
             holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_coolgray100);
         } else {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             holder.binding.avatarIncludeLayout.iconImageView.setVisibility(View.GONE);
 
-            Picasso.get().load(Uri.fromFile(file)).placeholder(R.color.CoolGray100).into(holder.binding.avatarIncludeLayout.avatarImageView);
+            Picasso.get().load(Uri.fromFile(file)).placeholder(R.color.coolGray100).into(holder.binding.avatarIncludeLayout.avatarImageView);
 
             holder.binding.avatarIncludeLayout.avatarImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200);
         }

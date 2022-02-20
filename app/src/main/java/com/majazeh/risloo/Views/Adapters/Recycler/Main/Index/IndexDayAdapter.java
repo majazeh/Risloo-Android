@@ -110,13 +110,13 @@ public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
         if (selectedTimestamp == timestamp) {
             detector(holder, timestamp);
 
-            holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.White));
-            holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.White));
+            holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.white));
+            holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.white));
         } else {
             detector(holder, timestamp);
 
-            holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
-            holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+            holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
+            holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
         }
     }
 

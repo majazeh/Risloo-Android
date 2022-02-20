@@ -50,7 +50,7 @@ public class DisplayActivity extends AppCompatActivity {
         decoraton = new Decoraton(this);
 
         decoraton.showSystemUI(true, true);
-        decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
+        decoraton.setSystemUIColor(getResources().getColor(R.color.coolGray50), getResources().getColor(R.color.coolGray50));
     }
 
     private void initializer() {
@@ -93,7 +93,7 @@ public class DisplayActivity extends AppCompatActivity {
             if (!extras.getString("path").equals("")) {
                 path = extras.getString("path");
 
-                Picasso.get().load(path).placeholder(R.color.White).into(binding.avatarZoomageView);
+                Picasso.get().load(path).placeholder(R.color.white).into(binding.avatarZoomageView);
 
                 if (path.contains("https://") || path.contains(" http://")) {
                     binding.shareImageView.setVisibility(View.VISIBLE);

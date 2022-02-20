@@ -61,7 +61,7 @@ public class AuthActivity extends AppCompatActivity {
         Decoraton decoraton = new Decoraton(this);
 
         decoraton.showSystemUI(true, true);
-        decoraton.setSystemUIColor(getResources().getColor(R.color.CoolGray50), getResources().getColor(R.color.CoolGray50));
+        decoraton.setSystemUIColor(getResources().getColor(R.color.coolGray50), getResources().getColor(R.color.coolGray50));
     }
 
     private void varianter() {

@@ -8,5 +8,5 @@
     android:scaleType="fitCenter"
     android:padding="@dimen/_6sdp"
     tools:src="@drawable/ic_ellipsis_v_light"
-    tools:tint="@color/CoolGray500"
+    tools:tint="@color/coolGray500"
     tools:background="@drawable/draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300" />

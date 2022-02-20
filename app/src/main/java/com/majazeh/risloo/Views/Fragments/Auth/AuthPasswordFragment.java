@@ -134,10 +134,10 @@ public class AuthPasswordFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             if (binding.passwordIncludeLayout.visibilityImageView.getTag().equals("invisible")) {
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(null);
-                InitManager.imgResTintTag(requireActivity(), binding.passwordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.Risloo500, "visible");
+                InitManager.imgResTintTag(requireActivity(), binding.passwordIncludeLayout.visibilityImageView, R.drawable.ic_eye_light, R.color.risloo500, "visible");
             } else {
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
-                InitManager.imgResTintTag(requireActivity(), binding.passwordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.CoolGray500, "invisible");
+                InitManager.imgResTintTag(requireActivity(), binding.passwordIncludeLayout.visibilityImageView, R.drawable.ic_eye_slash_light, R.color.coolGray500, "invisible");
             }
         }).widget(binding.passwordIncludeLayout.visibilityImageView);
 

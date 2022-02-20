@@ -101,17 +101,17 @@ public class MainNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (selectedPosition == position) {
             holder.itemView.setBackgroundResource(R.drawable.draw_4sdp_solid_risloo500_ripple_risloo700);
 
-            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.White));
-            holder.binding.descriptionTextView.setTextColor(activity.getResources().getColor(R.color.White));
+            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.white));
+            holder.binding.descriptionTextView.setTextColor(activity.getResources().getColor(R.color.white));
 
-            ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.White));
+            ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.white));
         } else {
             holder.itemView.setBackgroundResource(R.drawable.draw_4sdp_solid_coolgray50_ripple_coolgray300);
 
-            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray900));
-            holder.binding.descriptionTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.coolGray900));
+            holder.binding.descriptionTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
 
-            ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.CoolGray900));
+            ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.coolGray900));
         }
     }
 

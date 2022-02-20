@@ -15,7 +15,7 @@
         android:gravity="center"
         android:textSize="@dimen/_11ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray800"
+        android:textColor="@color/coolGray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         app:layout_constraintHorizontal_bias="0"
@@ -49,6 +49,6 @@
         app:layout_constraintBottom_toBottomOf="@id/select_spinner"
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
-        app:tint="@color/CoolGray500" />
+        app:tint="@color/coolGray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

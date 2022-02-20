@@ -75,12 +75,12 @@ public class CreateBillFragment extends Fragment {
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateBillFragmentReferenceHeader));
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateBillFragmentTypeHeader));
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateBillFragmentTreasuryHeader));
-        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateBillFragmentAmountHeader), 5, 12, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateBillFragmentAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
         InitManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.BillStatus);
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateBillFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateBillFragmentButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -17,7 +17,7 @@
         android:gravity="center|start"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray700"
+        android:textColor="@color/coolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray500"
@@ -36,7 +36,7 @@
         app:layout_constraintBottom_toBottomOf="@id/time_textView"
         app:layout_constraintEnd_toEndOf="@id/time_textView"
         app:layout_constraintTop_toTopOf="@id/time_textView"
-        app:tint="@color/CoolGray500" />
+        app:tint="@color/coolGray500" />
 
     <TextView
         android:id="@+id/date_textView"
@@ -48,7 +48,7 @@
         android:gravity="center|start"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray700"
+        android:textColor="@color/coolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray500"
@@ -67,6 +67,6 @@
         app:layout_constraintBottom_toBottomOf="@id/date_textView"
         app:layout_constraintEnd_toEndOf="@id/date_textView"
         app:layout_constraintTop_toTopOf="@id/date_textView"
-        app:tint="@color/CoolGray500" />
+        app:tint="@color/coolGray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

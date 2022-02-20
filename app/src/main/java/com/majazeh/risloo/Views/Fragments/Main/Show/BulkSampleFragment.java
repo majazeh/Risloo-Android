@@ -180,22 +180,22 @@ public class BulkSampleFragment extends Fragment {
 
             if (model.getRoom() != null && model.getRoom().getCenter() != null && model.getRoom().getCenter().getDetail() != null && model.getRoom().getCenter().getDetail().has("avatar") && !model.getRoom().getCenter().getDetail().getString("avatar").equals("") && model.getRoom().getCenter().getDetail().getJSONArray("avatar").length() != 0) {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(model.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.coolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
 
-                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             }
 
             if (model.getRoom() != null && model.getRoom().getManager() != null && model.getRoom().getManager().getAvatar() != null && model.getRoom().getManager().getAvatar().getMedium() != null && model.getRoom().getManager().getAvatar().getMedium().getUrl() != null) {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoom().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+                Picasso.get().load(model.getRoom().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.coolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
                 binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
 
-                Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+                Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             }
 
             if (model.getRoom() != null && model.getRoom().getType() != null && model.getRoom().getType().equals("personal_clinic")) {
@@ -232,15 +232,15 @@ public class BulkSampleFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
+            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.coolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
             InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "لینک ثبت نام":
-                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_link_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_link_light, R.color.coolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "کپی کردن لینک":
-                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_copy_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_copy_light, R.color.coolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
             }
         } else {

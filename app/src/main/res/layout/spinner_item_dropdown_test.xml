@@ -21,7 +21,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_check_circle_light"
         android:visibility="gone"
-        app:tint="@color/Emerald600"
+        app:tint="@color/emerald600"
         tools:visibility="visible" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:gravity="center|right"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray600"
+        android:textColor="@color/coolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         tools:text="عنوان" />

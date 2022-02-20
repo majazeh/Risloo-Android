@@ -24,7 +24,7 @@
             android:text="@string/AppFilters"
             android:textSize="@dimen/_9ssp"
             android:textStyle="normal"
-            android:textColor="@color/CoolGray600"
+            android:textColor="@color/coolGray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular" />
 

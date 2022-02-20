@@ -5,13 +5,13 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:orientation="vertical"
-    tools:background="@color/White">
+    tools:background="@color/white">
 
     <View
         android:id="@+id/border_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/CoolGray200" />
+        android:background="@color/coolGray200" />
 
     <View
         android:layout_width="match_parent"

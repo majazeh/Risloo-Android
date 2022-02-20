@@ -57,7 +57,7 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        InitManager.txtTextColorBackground(binding.downloadTextView.getRoot(), getResources().getString(R.string.BottomSheetVersionDownload), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.downloadTextView.getRoot(), getResources().getString(R.string.BottomSheetVersionDownload), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {
@@ -73,14 +73,14 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
             binding.titleTextView.getRoot().setText(force);
             binding.descTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BottomSheetVersionForceDesc));
 
-            InitManager.txtTextColorBackground(binding.returnTextView.getRoot(), getResources().getString(R.string.BottomSheetVersionForceReturn), getResources().getColor(R.color.Red600), R.drawable.draw_24sdp_solid_white_border_1sdp_red600_ripple_red300);
+            InitManager.txtTextColorBackground(binding.returnTextView.getRoot(), getResources().getString(R.string.BottomSheetVersionForceReturn), getResources().getColor(R.color.red600), R.drawable.draw_24sdp_solid_white_border_1sdp_red600_ripple_red300);
         } else {
             String current = requireActivity().getResources().getString(R.string.BottomSheetVersionTitle) + " " + clientModel.getCurrent();
 
             binding.titleTextView.getRoot().setText(current);
             binding.descTextView.getRoot().setText(requireActivity().getResources().getString(R.string.BottomSheetVersionCurrentDesc));
 
-            InitManager.txtTextColorBackground(binding.returnTextView.getRoot(), getResources().getString(R.string.BottomSheetVersionCurrentReturn), getResources().getColor(R.color.CoolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
+            InitManager.txtTextColorBackground(binding.returnTextView.getRoot(), getResources().getString(R.string.BottomSheetVersionCurrentReturn), getResources().getColor(R.color.coolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
         }
     }
 

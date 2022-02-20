@@ -75,7 +75,7 @@
                     android:gravity="right"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/CoolGray900"
+                    android:textColor="@color/coolGray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +93,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/email_textView"
                     app:layout_constraintStart_toStartOf="@id/name_textView"
                     app:layout_constraintTop_toTopOf="@id/email_textView"
-                    app:tint="@color/CoolGray500" />
+                    app:tint="@color/coolGray500" />
 
                 <TextView
                     android:id="@+id/email_textView"
@@ -104,7 +104,7 @@
                     android:gravity="right"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/CoolGray500"
+                    android:textColor="@color/coolGray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
                     app:layout_constraintEnd_toEndOf="@id/name_textView"
@@ -123,7 +123,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/mobile_textView"
                     app:layout_constraintStart_toStartOf="@id/name_textView"
                     app:layout_constraintTop_toTopOf="@id/mobile_textView"
-                    app:tint="@color/CoolGray500" />
+                    app:tint="@color/coolGray500" />
 
                 <TextView
                     android:id="@+id/mobile_textView"
@@ -134,7 +134,7 @@
                     android:gravity="right"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/CoolGray500"
+                    android:textColor="@color/coolGray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
                     app:layout_constraintEnd_toEndOf="@id/name_textView"
@@ -150,7 +150,7 @@
                     android:gravity="right"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/CoolGray600"
+                    android:textColor="@color/coolGray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
                     app:layout_constraintEnd_toEndOf="@id/name_textView"

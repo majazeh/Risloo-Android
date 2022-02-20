@@ -98,7 +98,7 @@ public class TableBalanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void setWidget(HeaderBalanceHolder holder) {
-        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BalanceAdapterAmount), 10, 17, activity.getResources().getColor(R.color.CoolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BalanceAdapterAmount), 10, 17, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -152,13 +152,13 @@ public class TableBalanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (amount.equals("0")) {
             holder.binding.amountTextView.setText(amount);
-            holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.CoolGray700));
+            holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.coolGray700));
         } else if (amount.contains("-")) {
             holder.binding.amountTextView.setText(StringManager.minusSeparate(amount));
-            holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.Red600));
+            holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.red600));
         } else {
             holder.binding.amountTextView.setText(StringManager.separate(amount));
-            holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.Emerald600));
+            holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.emerald600));
         }
 
         setMenu(holder);

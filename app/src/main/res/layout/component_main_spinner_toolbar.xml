@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
-            android:background="@color/CoolGray100" />
+            android:background="@color/coolGray100" />
 
         <TextView
             android:id="@+id/char_textView"
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
-            android:textColor="@color/CoolGray400"
+            android:textColor="@color/coolGray400"
             android:fontFamily="@font/dana_medium"
             android:visibility="gone"
             tools:text="ال"
@@ -65,7 +65,7 @@
         android:ellipsize="end"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray700"
+        android:textColor="@color/coolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         app:layout_constrainedWidth="true"
@@ -87,7 +87,7 @@
         android:ellipsize="end"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Emerald600"
+        android:textColor="@color/emerald600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:visibility="gone"

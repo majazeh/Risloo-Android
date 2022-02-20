@@ -21,7 +21,7 @@
         android:gravity="center"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray700"
+        android:textColor="@color/coolGray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_bold"
         tools:text="شنبه" />
@@ -33,7 +33,7 @@
         android:gravity="center"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray500"
+        android:textColor="@color/coolGray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         tools:text="1400/01/01" />

@@ -93,13 +93,13 @@ public class TreasuryFragment extends Fragment {
 
             if (model.getBalance() == 0) {
                 binding.amountTextView.setText(model.getBalance() + " " + getResources().getString(R.string.MainToman));
-                binding.amountTextView.setTextColor(getResources().getColor(R.color.CoolGray700));
+                binding.amountTextView.setTextColor(getResources().getColor(R.color.coolGray700));
             } else if (String.valueOf(model.getBalance()).contains("-")) {
                 binding.amountTextView.setText(StringManager.minusSeparate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
-                binding.amountTextView.setTextColor(getResources().getColor(R.color.Red600));
+                binding.amountTextView.setTextColor(getResources().getColor(R.color.red600));
             } else {
                 binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
-                binding.amountTextView.setTextColor(getResources().getColor(R.color.Emerald600));
+                binding.amountTextView.setTextColor(getResources().getColor(R.color.emerald600));
             }
 
         } catch (JSONException e) {

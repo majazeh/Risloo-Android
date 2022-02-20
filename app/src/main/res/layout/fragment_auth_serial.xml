@@ -98,7 +98,7 @@
             android:layout_height="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_6sdp"
             android:layout_marginStart="@dimen/_6sdp"
-            android:background="@color/CoolGray500"
+            android:background="@color/coolGray500"
             app:layout_constraintBottom_toBottomOf="@id/dashboard_link_textView"
             app:layout_constraintEnd_toStartOf="@id/logout_link_textView"
             app:layout_constraintStart_toEndOf="@id/dashboard_link_textView"

@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         Decoraton decoraton = new Decoraton(this);
 
         decoraton.showSystemUI(true, true);
-        decoraton.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.CoolGray50));
+        decoraton.setSystemUIColor(getResources().getColor(R.color.white), getResources().getColor(R.color.coolGray50));
     }
 
     private void varianter() {
@@ -174,9 +174,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {
                 if (currentId == motionLayout.getStartState())
-                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.White));
+                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.white));
                 else if (currentId == motionLayout.getEndState())
-                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.CoolGray50));
+                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.coolGray50));
             }
 
             @Override
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (model.getAvatar() != null && model.getAvatar().getMedium() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.CoolGray100).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
+                Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.coolGray100).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
             } else {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));

@@ -123,12 +123,12 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void setAvatar(IndexCenterHolder holder, String url) {
         if (!url.equals("")) {
             holder.binding.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(url).placeholder(R.color.CoolGray100).into(holder.binding.avatarCircleImageView);
+            Picasso.get().load(url).placeholder(R.color.coolGray100).into(holder.binding.avatarCircleImageView);
         } else {
             holder.binding.charTextView.setVisibility(View.VISIBLE);
             holder.binding.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.CoolGray100).placeholder(R.color.CoolGray100).into(holder.binding.avatarCircleImageView);
+            Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(holder.binding.avatarCircleImageView);
         }
     }
 

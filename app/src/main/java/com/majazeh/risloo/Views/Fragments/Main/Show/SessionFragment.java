@@ -98,10 +98,10 @@ public class SessionFragment extends Fragment {
         binding.samplesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
         binding.billsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.imgResTintBackground(requireActivity(), binding.usersAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
-        InitManager.imgResTintBackground(requireActivity(), binding.practicesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
-        InitManager.imgResTintBackground(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
-        InitManager.imgResTintBackground(requireActivity(), binding.billsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White, R.drawable.draw_oval_solid_emerald600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.usersAddView.getRoot(), R.drawable.ic_plus_light, R.color.white, R.drawable.draw_oval_solid_emerald600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.practicesAddView.getRoot(), R.drawable.ic_plus_light, R.color.white, R.drawable.draw_oval_solid_emerald600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.white, R.drawable.draw_oval_solid_emerald600_ripple_white);
+        InitManager.imgResTintBackground(requireActivity(), binding.billsAddView.getRoot(), R.drawable.ic_plus_light, R.color.white, R.drawable.draw_oval_solid_emerald600_ripple_white);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.usersSingleLayout.recyclerView, 0, 0, 0, 0);
@@ -425,25 +425,25 @@ public class SessionFragment extends Fragment {
         switch (status) {
             case "registration_awaiting":
             case "registration":
-                binding.statusTextView.setTextColor(getResources().getColor(R.color.Amber500));
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.amber500));
                 binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_amber600);
                 break;
             case "client_awaiting":
             case "session_awaiting":
-                binding.statusTextView.setTextColor(getResources().getColor(R.color.Risloo500));
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.risloo500));
                 binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_risloo500);
                 break;
             case "in_session":
-                binding.statusTextView.setTextColor(getResources().getColor(R.color.Emerald500));
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.emerald500));
                 binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_emerald600);
                 break;
             case "canceled_by_client":
             case "canceled_by_center":
-                binding.statusTextView.setTextColor(getResources().getColor(R.color.Red500));
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.red500));
                 binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_red600);
                 break;
             default:
-                binding.statusTextView.setTextColor(getResources().getColor(R.color.CoolGray500));
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.coolGray500));
                 binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_coolgray400);
                 break;
         }
@@ -461,15 +461,15 @@ public class SessionFragment extends Fragment {
         items.add("");
 
         if (items.size() > 2) {
-            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
+            InitManager.spinnerOvalEnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.coolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
             InitManager.selectCustomActionSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
         } else if (items.size() == 2) {
             switch (items.get(0)) {
                 case "گزارشات":
-                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_clipboard_light, R.color.coolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
                 case "ویرایش":
-                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.CoolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
+                    InitManager.spinnerOvalUnable(requireActivity(), binding.menuSpinner.selectSpinner, binding.menuSpinner.selectImageView, R.drawable.ic_edit_light, R.color.coolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300, items.get(0));
                     break;
             }
         } else {

@@ -17,7 +17,7 @@
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_exclamation_triangle_light"
-        app:tint="@color/Red500" />
+        app:tint="@color/red500" />
 
     <TextView
         android:id="@+id/error_textView"
@@ -27,7 +27,7 @@
         android:gravity="right"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Red500"
+        android:textColor="@color/red500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         tools:text="متن خطا" />

@@ -5,7 +5,7 @@
     android:id="@+id/root_motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/CoolGray50"
+    android:background="@color/coolGray50"
     android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -37,7 +37,7 @@
         android:gravity="right"
         android:textSize="@dimen/_13ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray800"
+        android:textColor="@color/coolGray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
         android:gravity="center"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray600"
+        android:textColor="@color/coolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toTopOf="@id/prev_imageView"
@@ -93,7 +93,7 @@
         android:gravity="center"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray600"
+        android:textColor="@color/coolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toTopOf="@id/prev_imageView"
@@ -112,7 +112,7 @@
         android:background="@drawable/draw_2sdp_solid_white_border_1sdp_coolgray300_ripple_coolgray300"
         app:layout_constraintBottom_toTopOf="@id/divider_view"
         app:layout_constraintStart_toStartOf="@id/title_textView"
-        app:tint="@color/CoolGray500" />
+        app:tint="@color/coolGray500" />
 
     <ImageView
         android:id="@+id/next_imageView"
@@ -128,7 +128,7 @@
         app:layout_constraintBottom_toBottomOf="@id/prev_imageView"
         app:layout_constraintStart_toEndOf="@id/prev_imageView"
         app:layout_constraintTop_toTopOf="@id/prev_imageView"
-        app:tint="@color/CoolGray500" />
+        app:tint="@color/coolGray500" />
 
     <Spinner
         android:id="@+id/index_spinner"
@@ -155,7 +155,7 @@
         app:layout_constraintBottom_toBottomOf="@id/index_spinner"
         app:layout_constraintEnd_toEndOf="@id/index_spinner"
         app:layout_constraintTop_toTopOf="@id/index_spinner"
-        app:tint="@color/CoolGray500" />
+        app:tint="@color/coolGray500" />
 
     <include
         android:id="@+id/loading_includeLayout"
@@ -173,7 +173,7 @@
         android:id="@+id/divider_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/CoolGray200"
+        android:background="@color/coolGray200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -72,7 +72,7 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     private void initializer() {
         child = ((MainActivity) requireActivity()).fragmont.getChild();
 
-        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetTimeEntry), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetTimeEntry), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     private void listener() {

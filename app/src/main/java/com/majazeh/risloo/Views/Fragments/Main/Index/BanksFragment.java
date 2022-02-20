@@ -85,7 +85,7 @@ public class BanksFragment extends Fragment {
         binding.ibanIncludeLayout.inputEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(24)});
         binding.ibanIncludeLayout.footerTextView.setText(getResources().getString(R.string.MainIban) + " - " + "0");
 
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.BanksFragmentCreateButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.BanksFragmentCreateButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView,  getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
@@ -97,7 +97,7 @@ public class BanksFragment extends Fragment {
         binding.weekdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleWeekdayHeader));
         binding.monthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleMonthDayHeader));
 
-        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.BanksFragmentSettleAmountHeader), 5, 12, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.BanksFragmentSettleAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
         binding.scheduleGuideLayout.guideTextView.setText(getResources().getString(R.string.BanksFragmentSettleScheduleGuide));
@@ -106,8 +106,8 @@ public class BanksFragment extends Fragment {
         InitManager.input12sspSpinner(requireActivity(), binding.weekdayIncludeLayout.selectSpinner, R.array.SettleWeekDays);
         InitManager.input12sspSpinner(requireActivity(), binding.monthdayIncludeLayout.selectSpinner, R.array.SettleMonthDays);
 
-        InitManager.txtTextColorBackground(binding.scheduleHelperView.getRoot(), getResources().getString(R.string.BanksFragmentSettleScheduleHelper), getResources().getColor(R.color.Amber600), R.drawable.draw_2sdp_solid_amber50_border_right_2dp_amber400);
-        InitManager.txtTextColorBackground(binding.settleTextView.getRoot(), getResources().getString(R.string.BanksFragmentSettleImmediateButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_emerald600_ripple_emerald800);
+        InitManager.txtTextColorBackground(binding.scheduleHelperView.getRoot(), getResources().getString(R.string.BanksFragmentSettleScheduleHelper), getResources().getColor(R.color.amber600), R.drawable.draw_2sdp_solid_amber50_border_right_2dp_amber400);
+        InitManager.txtTextColorBackground(binding.settleTextView.getRoot(), getResources().getString(R.string.BanksFragmentSettleImmediateButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_emerald600_ripple_emerald800);
     }
 
     @SuppressLint("ClickableViewAccessibility")

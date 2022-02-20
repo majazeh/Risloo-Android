@@ -110,8 +110,8 @@ public class CreateSampleFragment extends Fragment {
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColorBackground(binding.bulkHelperView.getRoot(), getResources().getString(R.string.CreateSampleFragmentBulkHelper), getResources().getColor(R.color.CoolGray600), R.drawable.draw_2sdp_solid_coolgray50_border_right_2dp_coolgray400);
-        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.bulkHelperView.getRoot(), getResources().getString(R.string.CreateSampleFragmentBulkHelper), getResources().getColor(R.color.coolGray600), R.drawable.draw_2sdp_solid_coolgray50_border_right_2dp_coolgray400);
+        InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -124,7 +124,7 @@ public class CreateSampleFragment extends Fragment {
 
             @Override
             public void updateDrawState(@NonNull TextPaint textPaint) {
-                textPaint.setColor(getResources().getColor(R.color.Risloo500));
+                textPaint.setColor(getResources().getColor(R.color.risloo500));
                 textPaint.setUnderlineText(false);
             }
         };
@@ -428,7 +428,7 @@ public class CreateSampleFragment extends Fragment {
             String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
             String secondaryText = DateManager.jalDayName(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
-            binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.CoolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
+            binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.coolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
             binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
         }
 
@@ -567,7 +567,7 @@ public class CreateSampleFragment extends Fragment {
                         String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
                         String secondaryText = DateManager.jalDayName(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
-                        binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.CoolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
+                        binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.coolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
                         binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
                     } else if (sessionId.equals(model.getId())) {
                         sessionId = "";

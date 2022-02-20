@@ -78,7 +78,7 @@ public class EditPlatformFragment extends Fragment {
         InitManager.input12sspSpinner(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, R.array.PlatformSessions);
         InitManager.input12sspSpinner(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, R.array.PlatformIndentifiers);
 
-        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditPlatformFragmentButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditPlatformFragmentButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -173,12 +173,12 @@ public class EditPlatformFragment extends Fragment {
                 available = "1";
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOn));
-                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Emerald700));
+                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.emerald700));
             } else {
                 available = "0";
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOff));
-                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.CoolGray600));
+                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.coolGray600));
             }
         });
 
@@ -264,7 +264,7 @@ public class EditPlatformFragment extends Fragment {
             binding.availableSwitchCompat.getRoot().setChecked(true);
 
             binding.availableSwitchCompat.getRoot().setText(requireActivity().getResources().getString(R.string.AppSwicthOn));
-            binding.availableSwitchCompat.getRoot().setTextColor(requireActivity().getResources().getColor(R.color.Emerald700));
+            binding.availableSwitchCompat.getRoot().setTextColor(requireActivity().getResources().getColor(R.color.emerald700));
         }
 
         if (model.isSelected()) {

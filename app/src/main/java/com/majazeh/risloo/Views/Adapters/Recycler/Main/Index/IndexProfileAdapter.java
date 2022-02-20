@@ -80,7 +80,7 @@ public class IndexProfileAdapter extends RecyclerView.Adapter<IndexProfileHolder
     }
 
     private void setData(IndexProfileHolder holder, ProfileModel model) {
-        Picasso.get().load(model.getUrl()).placeholder(R.color.CoolGray100).into(holder.binding.avatarImageView);
+        Picasso.get().load(model.getUrl()).placeholder(R.color.coolGray100).into(holder.binding.avatarImageView);
 
         if (showTitle) {
             holder.binding.avatarTextView.setText(SelectionManager.getProfileExtras(activity, "fa", getFileNameSub(model.getFileName())));

@@ -116,11 +116,11 @@ public class IntentManager {
 
     public static void crop(Activity activity, Uri uri) {
         UCrop.Options options = new UCrop.Options();
-        options.setStatusBarColor(activity.getResources().getColor(R.color.Risloo500));
-        options.setToolbarColor(activity.getResources().getColor(R.color.Risloo500));
-        options.setToolbarWidgetColor(activity.getResources().getColor(R.color.White));
+        options.setStatusBarColor(activity.getResources().getColor(R.color.risloo500));
+        options.setToolbarColor(activity.getResources().getColor(R.color.risloo500));
+        options.setToolbarWidgetColor(activity.getResources().getColor(R.color.white));
         options.setToolbarTitle(activity.getResources().getString(R.string.AppImageCrop));
-        options.setRootViewBackgroundColor(activity.getResources().getColor(R.color.White));
+        options.setRootViewBackgroundColor(activity.getResources().getColor(R.color.white));
         options.setHideBottomControls(true);
 
         UCrop.of(uri, uri)

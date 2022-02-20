@@ -15,7 +15,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/CoolGray200" />
+        android:background="@color/coolGray200" />
 
     <View
         android:layout_width="match_parent"

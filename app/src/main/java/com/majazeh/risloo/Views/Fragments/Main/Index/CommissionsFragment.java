@@ -62,12 +62,12 @@ public class CommissionsFragment extends Fragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.contributionHeaderLayout.titleTextView.setText(getResources().getString(R.string.CommissionsFragmentContributionHeader));
-        binding.contributionHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.Emerald600));
+        binding.contributionHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.emerald600));
 
-        binding.shareIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CommissionsFragmentContributionShareHeader), 10, 16, getResources().getColor(R.color.CoolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.shareIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CommissionsFragmentContributionShareHeader), 10, 16, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.shareIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CommissionsFragmentContributionShareHint));
 
-        InitManager.txtTextColorBackground(binding.contributionTextView.getRoot(), getResources().getString(R.string.CommissionsFragmentContributionButton), getResources().getColor(R.color.White), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
+        InitManager.txtTextColorBackground(binding.contributionTextView.getRoot(), getResources().getString(R.string.CommissionsFragmentContributionButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
 
         binding.tableHeaderLayout.titleTextView.setText(getResources().getString(R.string.CommissionAdapterHeader));
 

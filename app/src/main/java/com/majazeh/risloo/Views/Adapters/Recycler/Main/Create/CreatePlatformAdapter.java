@@ -135,7 +135,7 @@ public class CreatePlatformAdapter extends RecyclerView.Adapter<CreatePlatformHo
 
     private void setData(CreatePlatformHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType())) ;
-        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.CoolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.coolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         setIdentifier(holder, model.getId(), model.getIdentifier());
 
@@ -181,7 +181,7 @@ public class CreatePlatformAdapter extends RecyclerView.Adapter<CreatePlatformHo
             holder.binding.selectedSwitchCompat.setChecked(true);
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
-            holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Emerald700));
+            holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.emerald700));
 
             holder.binding.roomCheckBox.setEnabled(true);
             holder.binding.roomCheckBox.setAlpha((float) 1);
@@ -191,7 +191,7 @@ public class CreatePlatformAdapter extends RecyclerView.Adapter<CreatePlatformHo
             holder.binding.selectedSwitchCompat.setChecked(false);
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
-            holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.CoolGray600));
+            holder.binding.selectedSwitchCompat.setTextColor(activity.getResources().getColor(R.color.coolGray600));
 
             holder.binding.roomCheckBox.setEnabled(false);
             holder.binding.roomCheckBox.setAlpha((float) 0.6);

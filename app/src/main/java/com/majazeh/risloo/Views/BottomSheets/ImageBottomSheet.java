@@ -54,8 +54,8 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
         child = ((MainActivity) requireActivity()).fragmont.getChild();
 
-        InitManager.txtTextColorBackground(binding.galleryTextView.getRoot(), getResources().getString(R.string.BottomSheetImageGallery), getResources().getColor(R.color.CoolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
-        InitManager.txtTextColorBackground(binding.cameraTextView.getRoot(), getResources().getString(R.string.BottomSheetImageCamera), getResources().getColor(R.color.CoolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
+        InitManager.txtTextColorBackground(binding.galleryTextView.getRoot(), getResources().getString(R.string.BottomSheetImageGallery), getResources().getColor(R.color.coolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
+        InitManager.txtTextColorBackground(binding.cameraTextView.getRoot(), getResources().getString(R.string.BottomSheetImageCamera), getResources().getColor(R.color.coolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
     }
 
     private void listener() {

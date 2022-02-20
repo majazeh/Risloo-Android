@@ -106,7 +106,7 @@ public class AuthSerialFragment extends Fragment {
 
         if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.LightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
+            Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.lightBlue500).into(binding.avatarIncludeLayout.avatarImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             if (!userModel.getName().equals(""))

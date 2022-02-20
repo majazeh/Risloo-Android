@@ -110,7 +110,7 @@ public class AuthPinFragment extends Fragment {
 
             @Override
             public void updateDrawState(@NonNull TextPaint textPaint) {
-                textPaint.setColor(getResources().getColor(R.color.CoolGray700));
+                textPaint.setColor(getResources().getColor(R.color.coolGray700));
                 textPaint.setUnderlineText(false);
             }
         };

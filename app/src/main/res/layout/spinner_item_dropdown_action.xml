@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        app:tint="@color/CoolGray500"
+        app:tint="@color/coolGray500"
         tools:src="@drawable/ic_info_circle_light" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:gravity="center|right"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/CoolGray600"
+        android:textColor="@color/coolGray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         tools:text="عنوان" />

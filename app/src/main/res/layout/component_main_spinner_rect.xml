@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="دکمه"
-        tools:textColor="@color/CoolGray500" />
+        tools:textColor="@color/coolGray500" />
 
     <ImageView
         android:id="@+id/angle_imageView"
@@ -52,6 +52,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/CoolGray500" />
+        app:tint="@color/coolGray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

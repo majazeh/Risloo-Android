@@ -21,7 +21,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         tools:text="5"
-        tools:textColor="@color/CoolGray700"
+        tools:textColor="@color/coolGray700"
         tools:background="@drawable/draw_oval_solid_transparent_border_1sdp_coolgray200" />
 
     <ImageView
