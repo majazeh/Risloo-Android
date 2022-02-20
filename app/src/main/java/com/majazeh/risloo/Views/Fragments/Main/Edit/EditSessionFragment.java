@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Tab.EditSessionAdapter;
+import com.majazeh.risloo.Views.adapters.tab.EditSessionAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Tab.EditSessionTabReferenceFragment;

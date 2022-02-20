@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
+package com.majazeh.risloo.Views.adapters.recycler.main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderSessionHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableSessionHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderSessionHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Table.TableSessionHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableSessionBinding;
 import com.majazeh.risloo.databinding.SingleItemTableSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Create;
+package com.majazeh.risloo.Views.adapters.recycler.main.Create;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Create.CreateCheckHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Create.CreateCheckHolder;
 import com.majazeh.risloo.databinding.SingleItemCreateCheckBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 

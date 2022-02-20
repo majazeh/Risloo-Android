@@ -15,7 +15,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexCenterPlatformAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.main.Index.IndexCenterPlatformAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterPlatformsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;

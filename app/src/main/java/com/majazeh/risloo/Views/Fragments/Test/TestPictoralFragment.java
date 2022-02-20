@@ -13,7 +13,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestPictoralAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.test.TestPictoralAdapter;
 import com.majazeh.risloo.databinding.FragmentTestPictoralBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Holder.Dialog;
+package com.majazeh.risloo.Views.adapters.holder.dialog;
 
 import androidx.recyclerview.widget.RecyclerView;
 

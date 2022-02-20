@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.adapters.recycler.main.Index;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexDownloadHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Index.IndexDownloadHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.DownloadsFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexDownloadBinding;
 import com.squareup.picasso.Picasso;

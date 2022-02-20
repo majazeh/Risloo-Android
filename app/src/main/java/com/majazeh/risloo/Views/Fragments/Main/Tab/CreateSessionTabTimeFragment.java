@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.dialog.DialogSelectedAdapter;
 
 import org.json.JSONException;
 

@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Index.IndexDownloadAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.main.Index.IndexDownloadAdapter;
 import com.majazeh.risloo.databinding.FragmentDownloadsBinding;
 
 import java.io.File;

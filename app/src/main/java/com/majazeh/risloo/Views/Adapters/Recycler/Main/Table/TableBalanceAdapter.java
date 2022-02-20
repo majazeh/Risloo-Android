@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
+package com.majazeh.risloo.Views.adapters.recycler.main.Table;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,8 +14,8 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderBalanceHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableBalanceHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderBalanceHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Table.TableBalanceHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableBalanceBinding;
 import com.majazeh.risloo.databinding.SingleItemTableBalanceBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

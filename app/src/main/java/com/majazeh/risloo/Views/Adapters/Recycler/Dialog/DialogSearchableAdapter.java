@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Dialog;
+package com.majazeh.risloo.Views.adapters.recycler.dialog;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogSearchableHolder;
+import com.majazeh.risloo.Views.adapters.holder.dialog.DialogSearchableHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.ReserveScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterTagsFragment;

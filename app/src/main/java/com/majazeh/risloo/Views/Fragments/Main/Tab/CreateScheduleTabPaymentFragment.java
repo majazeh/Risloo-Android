@@ -16,7 +16,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Create.CreateAxisAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.main.Create.CreateAxisAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

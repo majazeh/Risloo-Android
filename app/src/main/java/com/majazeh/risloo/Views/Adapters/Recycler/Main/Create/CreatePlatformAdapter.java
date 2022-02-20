@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Create;
+package com.majazeh.risloo.Views.adapters.recycler.main.Create;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,7 +14,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Create.CreatePlatformHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Create.CreatePlatformHolder;
 import com.majazeh.risloo.databinding.SingleItemCreatePlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

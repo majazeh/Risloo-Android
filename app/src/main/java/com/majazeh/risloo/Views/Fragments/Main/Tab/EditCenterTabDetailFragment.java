@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.FragmentEditCenterTabDetailBinding;
 import com.mre.ligheh.API.Response;

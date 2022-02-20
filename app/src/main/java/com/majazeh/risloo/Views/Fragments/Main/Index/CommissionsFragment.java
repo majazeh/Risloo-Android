@@ -16,7 +16,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.Table.TableCommissionAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.main.Table.TableCommissionAdapter;
 import com.majazeh.risloo.databinding.FragmentCommissionsBinding;
 
 import java.util.HashMap;

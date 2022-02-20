@@ -13,7 +13,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.AnimateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestPrerequisiteAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.test.TestPrerequisiteAdapter;
 import com.majazeh.risloo.databinding.FragmentTestPrerequisiteBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.FormModel;

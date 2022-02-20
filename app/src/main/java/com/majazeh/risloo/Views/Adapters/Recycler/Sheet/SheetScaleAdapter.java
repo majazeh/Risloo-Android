@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Sheet;
+package com.majazeh.risloo.Views.adapters.recycler.sheet;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.Utils.Interfaces.DiffUtilTypeModelCallback;
-import com.majazeh.risloo.Views.Adapters.Holder.Sheet.SheetScaleHolder;
+import com.majazeh.risloo.Views.adapters.holder.sheet.SheetScaleHolder;
 import com.majazeh.risloo.databinding.SingleItemSheetScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

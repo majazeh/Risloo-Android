@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Tab;
+package com.majazeh.risloo.Views.adapters.tab;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Index;
+package com.majazeh.risloo.Views.adapters.recycler.main.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,7 +15,7 @@ import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Index.IndexTagHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Index.IndexTagHolder;
 import com.majazeh.risloo.Views.Fragments.Main.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Index.RoomTagsFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexTagBinding;

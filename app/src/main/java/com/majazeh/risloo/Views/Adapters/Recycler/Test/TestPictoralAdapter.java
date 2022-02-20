@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Test;
+package com.majazeh.risloo.Views.adapters.recycler.test;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.majazeh.risloo.Utils.Interfaces.DiffUtilStringCallback;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPictoralHolder;
+import com.majazeh.risloo.Views.adapters.holder.test.TestPictoralHolder;
 import com.majazeh.risloo.databinding.SingleItemTestPictoralBinding;
 import com.squareup.picasso.Picasso;
 

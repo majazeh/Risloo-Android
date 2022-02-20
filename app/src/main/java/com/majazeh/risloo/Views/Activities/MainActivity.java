@@ -43,7 +43,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Managers.TreasuryManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Adapters.Recycler.Main.MainNavAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.main.MainNavAdapter;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Main.Create.CreatePracticeFragment;

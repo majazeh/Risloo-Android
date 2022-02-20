@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Holder.Main.Filter;
+package com.majazeh.risloo.Views.adapters.holder.main.Filter;
 
 import androidx.recyclerview.widget.RecyclerView;
 

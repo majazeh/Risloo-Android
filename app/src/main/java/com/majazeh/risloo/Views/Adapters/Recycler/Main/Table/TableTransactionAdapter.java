@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Table;
+package com.majazeh.risloo.Views.adapters.recycler.main.Table;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,8 +12,8 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Header.HeaderTransactionHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Table.TableTransactionHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Header.HeaderTransactionHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Table.TableTransactionHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableTransactionBinding;
 import com.majazeh.risloo.databinding.SingleItemTableTransactionBinding;
 import com.mre.ligheh.Model.TypeModel.TransactionModel;

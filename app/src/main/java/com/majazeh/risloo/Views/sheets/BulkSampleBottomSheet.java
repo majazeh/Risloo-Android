@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.activities.AuthActivity;
 import com.majazeh.risloo.Views.activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Sheet.SheetScaleAdapter;
+import com.majazeh.risloo.Views.adapters.recycler.sheet.SheetScaleAdapter;
 import com.majazeh.risloo.databinding.BottomSheetBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;

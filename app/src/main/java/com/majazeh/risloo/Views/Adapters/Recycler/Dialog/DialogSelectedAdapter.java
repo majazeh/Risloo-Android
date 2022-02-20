@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Dialog;
+package com.majazeh.risloo.Views.adapters.recycler.dialog;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogSelectedHolder;
+import com.majazeh.risloo.Views.adapters.holder.dialog.DialogSelectedHolder;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler.Main.Create;
+package com.majazeh.risloo.Views.adapters.recycler.main.Create;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Adapters.Holder.Main.Create.CreateAxisHolder;
+import com.majazeh.risloo.Views.adapters.holder.main.Create.CreateAxisHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Views.activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCreateAxisBinding;
