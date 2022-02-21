@@ -19,7 +19,7 @@ import com.majazeh.risloo.views.activities.ActivitySplash;
 import com.majazeh.risloo.databinding.BottomSheetVersionBinding;
 import com.mre.ligheh.Model.TypeModel.ClientModel;
 
-public class VersionBottomSheet extends BottomSheetDialogFragment {
+public class SheetVersion extends BottomSheetDialogFragment {
 
     // Binding
     private BottomSheetVersionBinding binding;

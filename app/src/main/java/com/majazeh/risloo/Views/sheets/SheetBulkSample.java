@@ -36,7 +36,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
+public class SheetBulkSample extends BottomSheetDialogFragment {
 
     // Binding
     private BottomSheetBulkSampleBinding binding;

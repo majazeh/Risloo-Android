@@ -22,7 +22,7 @@ import com.majazeh.risloo.views.fragments.main.tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.views.fragments.main.tab.EditCenterTabAvatarFragment;
 import com.majazeh.risloo.databinding.BottomSheetImageBinding;
 
-public class ImageBottomSheet extends BottomSheetDialogFragment {
+public class SheetImage extends BottomSheetDialogFragment {
 
     // Binding
     private BottomSheetImageBinding binding;

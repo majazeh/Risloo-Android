@@ -31,7 +31,7 @@ import java.util.Date;
 
 import saman.zamani.persiandate.PersianDate;
 
-public class DateBottomSheet extends BottomSheetDialogFragment {
+public class SheetDate extends BottomSheetDialogFragment {
 
     // Binding
     private BottomSheetDateBinding binding;

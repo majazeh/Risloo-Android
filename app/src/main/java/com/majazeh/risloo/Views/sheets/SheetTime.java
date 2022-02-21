@@ -29,7 +29,7 @@ import java.util.Date;
 
 import saman.zamani.persiandate.PersianDate;
 
-public class TimeBottomSheet extends BottomSheetDialogFragment {
+public class SheetTime extends BottomSheetDialogFragment {
 
     // Binding
     private BottomSheetTimeBinding binding;
