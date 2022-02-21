@@ -23,7 +23,7 @@ import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;
 
-public class AuthActivity extends AppCompatActivity {
+public class ActivityAuth extends AppCompatActivity {
 
     // Binding
     private ActivityAuthBinding binding;

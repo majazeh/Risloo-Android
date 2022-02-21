@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableCommissionAdapter;
 import com.majazeh.risloo.databinding.FragmentCommissionsBinding;
 
@@ -59,7 +59,7 @@ public class CommissionsFragment extends Fragment {
         data = new HashMap<>();
         data.put("page", 1);
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.contributionHeaderLayout.titleTextView.setText(getResources().getString(R.string.CommissionsFragmentContributionHeader));
         binding.contributionHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.emerald600));
@@ -80,7 +80,7 @@ public class CommissionsFragment extends Fragment {
     private void listener() {
         binding.shareIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.shareIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.shareIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.shareIncludeLayout.inputEditText);
             return false;
         });
 
@@ -106,7 +106,7 @@ public class CommissionsFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.shareErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.shareErrorLayout.getRoot(), binding.shareErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.shareErrorLayout.getRoot(), binding.shareErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.contributionTextView.getRoot());

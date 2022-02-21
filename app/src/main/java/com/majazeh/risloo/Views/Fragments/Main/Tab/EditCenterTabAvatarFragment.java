@@ -19,7 +19,7 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.FragmentEditCenterTabAvatarBinding;
 import com.mre.ligheh.API.Response;
@@ -64,11 +64,11 @@ public class EditCenterTabAvatarFragment extends Fragment {
     }
 
     private void initializer() {
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterTabAvatarAvatarGuide));
 
@@ -198,7 +198,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
                                     }
 
                                     if (key.equals("avatar"))
-                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                        ((ActivityMain) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                 }
 
                                 SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));

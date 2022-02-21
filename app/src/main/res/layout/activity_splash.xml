@@ -11,7 +11,7 @@
     android:focusableInTouchMode="true"
     android:layoutDirection="rtl"
     app:layoutDescription="@xml/activity_splash_scene"
-    tools:context=".views.activities.SplashActivity">
+    tools:context=".views.activities.ActivitySplash">
 
     <ImageView
         android:id="@+id/logo_imageView"

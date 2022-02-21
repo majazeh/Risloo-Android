@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
 import com.mre.ligheh.API.Response;
@@ -66,7 +66,7 @@ public class CreateCaseUserFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseUserFragmentReferenceHeader));
 
@@ -87,7 +87,7 @@ public class CreateCaseUserFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -164,7 +164,7 @@ public class CreateCaseUserFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCaseUser));
 
-                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
+                        ((ActivityMain) requireActivity()).navigatoon.navigateUp();
                     });
                 }
             }
@@ -197,7 +197,7 @@ public class CreateCaseUserFragment extends Fragment {
 
                                     switch (key) {
                                         case "client_id":
-                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                             break;
                                     }
                                 }

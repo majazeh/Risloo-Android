@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabSessionFragment;
 import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabTimeFragment;
 import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabSessionFragment;
@@ -70,7 +70,7 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        child = ((MainActivity) requireActivity()).fragmont.getChild();
+        child = ((ActivityMain) requireActivity()).fragmont.getChild();
 
         InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetTimeEntry), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }

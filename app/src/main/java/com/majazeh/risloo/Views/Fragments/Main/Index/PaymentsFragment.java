@@ -22,7 +22,7 @@ import com.majazeh.risloo.utils.managers.PaymentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TablePaymentAdapter;
 import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
 import com.mre.ligheh.API.Response;
@@ -79,7 +79,7 @@ public class PaymentsFragment extends Fragment {
         data = new HashMap<>();
         data.put("page", 1);
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.chargeHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeHeader));
         binding.chargeHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.emerald600));
@@ -125,7 +125,7 @@ public class PaymentsFragment extends Fragment {
 
         binding.amountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.amountIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.amountIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.amountIncludeLayout.inputEditText);
             return false;
         });
 
@@ -174,16 +174,16 @@ public class PaymentsFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.treasuryErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView);
             if (binding.amountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.chargeTextView.getRoot());
     }
 
     private void setArgs() {
-        UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
+        UserModel userModel = ((ActivityMain) requireActivity()).singleton.getUserModel();
         setData(userModel);
 
         TypeModel typeModel = PaymentsFragmentArgs.fromBundle(getArguments()).getTypeModel();
@@ -346,10 +346,10 @@ public class PaymentsFragment extends Fragment {
 
                                     switch (key) {
                                         case "treasury_id":
-                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                             break;
                                         case "amount":
-                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                             break;
                                     }
                                 }

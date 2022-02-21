@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexCenterPlatformAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterPlatformsBinding;
 import com.mre.ligheh.API.Response;
@@ -59,7 +59,7 @@ public class CenterPlatformsFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterPlatformsFragmentTitle));
 
@@ -70,7 +70,7 @@ public class CenterPlatformsFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToCreatePlatformFragment(centerModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToCreatePlatformFragment(centerModel);
         }).widget(binding.addImageView.getRoot());
     }
 

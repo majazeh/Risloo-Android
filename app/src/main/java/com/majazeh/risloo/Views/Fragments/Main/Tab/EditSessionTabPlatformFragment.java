@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Create.CreatePlatformAdapter;
 import com.majazeh.risloo.views.fragments.main.edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabPlatformBinding;
@@ -52,7 +52,7 @@ public class EditSessionTabPlatformFragment extends Fragment {
     private void initializer() {
         adapter = new CreatePlatformAdapter(requireActivity());
 
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.platformsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
@@ -138,25 +138,25 @@ public class EditSessionTabPlatformFragment extends Fragment {
 
     public void hideValid() {
         if (binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView);
 
         if (binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView);
 
         if (binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView);
     }
 
     public void showValid(String key, String validation) {
         switch (key) {
             case "platforms":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView, validation);
                 break;
             case "pin_platform":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView, validation);
                 break;
             case "identifier_platform":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView, validation);
                 break;
         }
     }

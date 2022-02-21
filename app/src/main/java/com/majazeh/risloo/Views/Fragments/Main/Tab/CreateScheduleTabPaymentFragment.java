@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Create.CreateAxisAdapter;
 import com.majazeh.risloo.views.fragments.main.create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabPaymentBinding;
@@ -56,7 +56,7 @@ public class CreateScheduleTabPaymentFragment extends Fragment {
     private void initializer() {
         axisAdapter = new CreateAxisAdapter(requireActivity());
 
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabPaymentPaymentHeader));
 
@@ -121,13 +121,13 @@ public class CreateScheduleTabPaymentFragment extends Fragment {
 
     public void hideValid() {
         if (binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView);
     }
 
     public void showValid(String key, String validation) {
         switch (key) {
             case "payment_status":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView, validation);
                 break;
         }
     }

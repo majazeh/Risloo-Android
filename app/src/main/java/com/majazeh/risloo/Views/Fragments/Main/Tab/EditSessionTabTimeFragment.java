@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -50,7 +50,7 @@ public class EditSessionTabTimeFragment extends Fragment {
     }
 
     private void initializer() {
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
@@ -63,7 +63,7 @@ public class EditSessionTabTimeFragment extends Fragment {
     private void listener() {
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.durationIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.durationIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.durationIncludeLayout.inputEditText);
             return false;
         });
 
@@ -146,25 +146,25 @@ public class EditSessionTabTimeFragment extends Fragment {
 
     public void hideValid() {
         if (binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
 
         if (binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
 
         if (binding.startDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.startDateErrorLayout.getRoot(), binding.startDateErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.startDateErrorLayout.getRoot(), binding.startDateErrorLayout.errorTextView);
     }
 
     public void showValid(String key, String validation) {
         switch (key) {
             case "time":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, validation);
                 break;
             case "duration":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, validation);
                 break;
             case "date":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.startDateErrorLayout.getRoot(), binding.startDateErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.startDateErrorLayout.getRoot(), binding.startDateErrorLayout.errorTextView, validation);
                 break;
         }
     }

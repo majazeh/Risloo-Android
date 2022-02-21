@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabReferenceBinding;
 import com.mre.ligheh.Model.Madule.List;
@@ -58,7 +58,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
     }
 
     private void initializer() {
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabReferenceTypeHeader));
         binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabReferenceCaseHeader));
@@ -127,7 +127,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
         binding.countIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.countIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.countIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.countIncludeLayout.inputEditText);
             return false;
         });
 
@@ -276,37 +276,37 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
     public void hideValid() {
         if (binding.selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView);
 
         if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
 
         if (binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
 
         if (binding.bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.bulkSessionErrorLayout.getRoot(), binding.bulkSessionErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.bulkSessionErrorLayout.getRoot(), binding.bulkSessionErrorLayout.errorTextView);
 
         if (binding.countErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((MainActivity) requireActivity()).validatoon.hideValid(binding.countErrorLayout.getRoot(), binding.countErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.countErrorLayout.getRoot(), binding.countErrorLayout.errorTextView);
     }
 
     public void showValid(String key, String validation) {
         switch (key) {
             case "selection_type":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView, validation);
                 break;
             case "clients_type":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
                 break;
             case "case_id":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
                 break;
             case "group_session":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.bulkSessionErrorLayout.getRoot(), binding.bulkSessionErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.bulkSessionErrorLayout.getRoot(), binding.bulkSessionErrorLayout.errorTextView, validation);
                 break;
             case "clients_number":
-                ((MainActivity) requireActivity()).validatoon.showValid(binding.countErrorLayout.getRoot(), binding.countErrorLayout.errorTextView, validation);
+                ((ActivityMain) requireActivity()).validatoon.showValid(binding.countErrorLayout.getRoot(), binding.countErrorLayout.errorTextView, validation);
                 break;
         }
     }

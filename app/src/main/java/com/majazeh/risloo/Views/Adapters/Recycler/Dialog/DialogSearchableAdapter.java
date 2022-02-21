@@ -26,7 +26,7 @@ import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.create.CreateCaseFragment;
 import com.majazeh.risloo.views.fragments.main.create.CreateCaseUserFragment;
 import com.majazeh.risloo.views.fragments.main.create.CreateCenterFragment;
@@ -115,8 +115,8 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
     }
 
     private void intializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
-        child = ((MainActivity) activity).fragmont.getChild();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
+        child = ((ActivityMain) activity).fragmont.getChild();
     }
 
     private void detector(DialogSearchableHolder holder, boolean selected) {

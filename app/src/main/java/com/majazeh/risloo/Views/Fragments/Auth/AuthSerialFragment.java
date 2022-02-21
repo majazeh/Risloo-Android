@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.AuthActivity;
+import com.majazeh.risloo.views.activities.ActivityAuth;
 import com.majazeh.risloo.databinding.FragmentAuthSerialBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
@@ -57,7 +57,7 @@ public class AuthSerialFragment extends Fragment {
     private void initializer() {
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((AuthActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityAuth) requireActivity()).singleton.getAuthorization());
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentTitle));
         binding.serialEditText.getRoot().setHint(getResources().getString(R.string.SerialFragmentInput));
@@ -77,7 +77,7 @@ public class AuthSerialFragment extends Fragment {
 
         binding.serialEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.serialEditText.getRoot().hasFocus())
-                ((AuthActivity) requireActivity()).inputon.select(binding.serialEditText.getRoot());
+                ((ActivityAuth) requireActivity()).inputon.select(binding.serialEditText.getRoot());
             return false;
         });
 
@@ -87,10 +87,10 @@ public class AuthSerialFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.serialEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
                 if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                    ((ActivityAuth) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
 
                 doWork("serial");
             }
@@ -102,7 +102,7 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void setData() {
-        userModel = ((AuthActivity) requireActivity()).singleton.getUserModel();
+        userModel = ((ActivityAuth) requireActivity()).singleton.getUserModel();
 
         if (userModel.getAvatar() != null && userModel.getAvatar().getMedium() != null && !userModel.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
@@ -139,8 +139,8 @@ public class AuthSerialFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).singleton.logout();
-                            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment();
+                            ((ActivityAuth) requireActivity()).singleton.logout();
+                            ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthLoginFragment();
 
                             DialogManager.dismissLoadingDialog();
                         });

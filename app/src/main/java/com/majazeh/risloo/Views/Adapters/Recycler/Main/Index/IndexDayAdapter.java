@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexDayHolder;
 import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
 import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
@@ -66,7 +66,7 @@ public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
     }
 
     private void intializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     private void detector(IndexDayHolder holder, long timestamp) {

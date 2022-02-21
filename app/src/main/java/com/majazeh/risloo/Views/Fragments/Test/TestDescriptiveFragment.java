@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.AnimateManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.databinding.FragmentTestDescriptiveBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
@@ -48,15 +48,15 @@ public class TestDescriptiveFragment extends Fragment {
     private void listener() {
         binding.answerEditText.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.answerEditText.inputEditText.hasFocus())
-                ((TestActivity) requireActivity()).inputon.select(binding.answerEditText.inputEditText);
+                ((ActivityTest) requireActivity()).inputon.select(binding.answerEditText.inputEditText);
             return false;
         });
 
         binding.answerEditText.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
             answer = binding.answerEditText.inputEditText.getText().toString().trim();
 
-            ((TestActivity) requireActivity()).sendItem(key, answer);
-            ((TestActivity) requireActivity()).inputon.clear(((TestActivity) requireActivity()).inputon.editText);
+            ((ActivityTest) requireActivity()).sendItem(key, answer);
+            ((ActivityTest) requireActivity()).inputon.clear(((ActivityTest) requireActivity()).inputon.editText);
             return false;
         });
 
@@ -81,7 +81,7 @@ public class TestDescriptiveFragment extends Fragment {
     }
 
     private void setArgs() {
-        FormModel formModel = ((TestActivity) requireActivity()).formModel;
+        FormModel formModel = ((ActivityTest) requireActivity()).formModel;
         setData(formModel);
     }
 

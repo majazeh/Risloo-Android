@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.databinding.FragmentCenterAccountingBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -54,7 +54,7 @@ public class CenterAccountingFragment extends Fragment {
     private void initializer() {
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         InitManager.layoutTextColorResTintBackground(requireActivity(), binding.treasuriesIncludeLayout.getRoot(), binding.treasuriesIncludeLayout.selectTextView, binding.treasuriesIncludeLayout.selectImageView, getResources().getString(R.string.CenterAccountingFragmentTreasuries), getResources().getColor(R.color.coolGray500), R.drawable.ic_wallet_light, R.color.risloo500, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_risloo50);
         InitManager.layoutTextColorResTintBackground(requireActivity(), binding.billingsIncludeLayout.getRoot(), binding.billingsIncludeLayout.selectTextView, binding.billingsIncludeLayout.selectImageView, getResources().getString(R.string.CenterAccountingFragmentBillings), getResources().getColor(R.color.coolGray500), R.drawable.ic_file_invoice_light, R.color.amber500, R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_amber200);
@@ -85,17 +85,17 @@ public class CenterAccountingFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (type.equals("counseling_center"))
-                ((MainActivity) requireActivity()).navigatoon.navigateToCommissionsFragment(centerModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToCommissionsFragment(centerModel);
             else
-                ((MainActivity) requireActivity()).navigatoon.navigateToCommissionsFragment(roomModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToCommissionsFragment(roomModel);
 
         }).widget(binding.commissionsIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (type.equals("counseling_center"))
-                ((MainActivity) requireActivity()).navigatoon.navigateToBalancesFragment(centerModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToBalancesFragment(centerModel);
             else
-                ((MainActivity) requireActivity()).navigatoon.navigateToBalancesFragment(roomModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToBalancesFragment(roomModel);
 
         }).widget(binding.balancesIncludeLayout.getRoot());
 

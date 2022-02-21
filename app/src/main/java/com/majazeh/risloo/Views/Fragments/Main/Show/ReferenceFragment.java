@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableCaseAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableSampleAdapter;
@@ -77,7 +77,7 @@ public class ReferenceFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         InitManager.imgResTintBackground(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.coolGray500, R.drawable.draw_oval_solid_white_border_1sdp_coolgray300_ripple_coolgray300);
 
@@ -103,9 +103,9 @@ public class ReferenceFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (!type.equals("room"))
-                ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterUserFragment(centerModel, userModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToEditCenterUserFragment(centerModel, userModel);
             else
-                ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterUserFragment(roomModel, userModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToEditCenterUserFragment(roomModel, userModel);
 
         }).widget(binding.editImageView.getRoot());
 
@@ -131,7 +131,7 @@ public class ReferenceFragment extends Fragment {
 
         userModel = (UserModel) ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (((MainActivity) requireActivity()).singleton.getUserModel().getId().equals(userModel.getId())) {
+        if (((ActivityMain) requireActivity()).singleton.getUserModel().getId().equals(userModel.getId())) {
             if (!type.equals("room"))
                 setData(this.centerModel.getAcceptation());
             else

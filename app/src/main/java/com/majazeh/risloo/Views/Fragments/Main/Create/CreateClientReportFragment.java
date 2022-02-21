@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.databinding.FragmentCreateClientReportBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -54,7 +54,7 @@ public class CreateClientReportFragment extends Fragment {
     private void initializer() {
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.encryptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateClientReportFragmentEncryptionHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateClientReportFragmentDescriptionHeader));
@@ -103,7 +103,7 @@ public class CreateClientReportFragment extends Fragment {
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.descriptionIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 
@@ -117,9 +117,9 @@ public class CreateClientReportFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.encryptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView);
             if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());

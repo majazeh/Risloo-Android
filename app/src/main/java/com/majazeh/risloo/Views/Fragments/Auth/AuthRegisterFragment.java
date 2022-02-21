@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.AuthActivity;
+import com.majazeh.risloo.views.activities.ActivityAuth;
 import com.majazeh.risloo.databinding.FragmentAuthRegisterBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
@@ -71,7 +71,7 @@ public class AuthRegisterFragment extends Fragment {
     private void listener() {
         binding.mobileEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileEditText.getRoot().hasFocus())
-                ((AuthActivity) requireActivity()).inputon.select(binding.mobileEditText.getRoot());
+                ((ActivityAuth) requireActivity()).inputon.select(binding.mobileEditText.getRoot());
             return false;
         });
 
@@ -81,18 +81,18 @@ public class AuthRegisterFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.mobileEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
                 if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                    ((ActivityAuth) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
 
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment()).widget(binding.loginLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthLoginFragment()).widget(binding.loginLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment()).widget(binding.passwordRecoverLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment()).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setHashmap() {
@@ -114,17 +114,17 @@ public class AuthRegisterFragment extends Fragment {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
                                 case "password":
-                                    ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
+                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
                                     break;
                                 case "mobileCode":
-                                    ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPinFragment(model);
+                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPinFragment(model);
                                     break;
                                 case "recovery":
-                                    ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
+                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
                                     break;
                             }
                         } else {
-                            ((AuthActivity) requireActivity()).singleton.login(model);
+                            ((ActivityAuth) requireActivity()).singleton.login(model);
                             IntentManager.main(requireActivity());
                         }
 
@@ -160,7 +160,7 @@ public class AuthRegisterFragment extends Fragment {
                                     }
 
                                     if (key.equals("mobile"))
-                                        ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                        ((ActivityAuth) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                 }
 
                                 SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));

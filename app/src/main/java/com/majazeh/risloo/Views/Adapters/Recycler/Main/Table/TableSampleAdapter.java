@@ -14,7 +14,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSampleHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableSampleHolder;
 import com.majazeh.risloo.views.fragments.main.index.SamplesFragment;
@@ -116,17 +116,17 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void initializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
     }
 
     private void listener(TableSampleHolder holder, SampleModel model, int position) {
         CustomClickView.onClickListener(() -> {
-            if (((MainActivity) activity).permissoon.showSamplesFragmentSample(((MainActivity) activity).singleton.getUserModel(), model))
-                ((MainActivity) activity).navigatoon.navigateToSampleFragment(model);
+            if (((ActivityMain) activity).permissoon.showSamplesFragmentSample(((ActivityMain) activity).singleton.getUserModel(), model))
+                ((ActivityMain) activity).navigatoon.navigateToSampleFragment(model);
 
         }).widget(holder.binding.getRoot());
 
@@ -139,7 +139,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }).widget(holder.binding.statusTextView);
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToSamplesFragment(model.getChainId(), null);
+            ((ActivityMain) activity).navigatoon.navigateToSamplesFragment(model.getChainId(), null);
         }).widget(holder.binding.bulkTextView);
     }
 

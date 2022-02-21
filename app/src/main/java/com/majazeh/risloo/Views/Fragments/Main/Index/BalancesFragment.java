@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableBalanceAdapter;
 import com.majazeh.risloo.databinding.FragmentBalancesBinding;
 
@@ -55,7 +55,7 @@ public class BalancesFragment extends Fragment {
         data = new HashMap<>();
         data.put("page", 1);
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.BalanceAdapterHeader));
 

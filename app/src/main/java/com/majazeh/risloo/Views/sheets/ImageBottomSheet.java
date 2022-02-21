@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.PermissionManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.create.CreateCenterFragment;
 import com.majazeh.risloo.views.fragments.main.tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.views.fragments.main.tab.EditCenterTabAvatarFragment;
@@ -51,8 +51,8 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void intializer() {
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-        child = ((MainActivity) requireActivity()).fragmont.getChild();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
+        child = ((ActivityMain) requireActivity()).fragmont.getChild();
 
         InitManager.txtTextColorBackground(binding.galleryTextView.getRoot(), getResources().getString(R.string.BottomSheetImageGallery), getResources().getColor(R.color.coolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
         InitManager.txtTextColorBackground(binding.cameraTextView.getRoot(), getResources().getString(R.string.BottomSheetImageCamera), getResources().getColor(R.color.coolGray500), R.drawable.draw_24sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);

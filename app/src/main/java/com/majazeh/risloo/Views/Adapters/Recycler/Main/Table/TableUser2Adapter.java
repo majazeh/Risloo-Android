@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderUser2Holder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableUser2Holder;
 import com.majazeh.risloo.views.fragments.main.show.SessionFragment;
@@ -114,11 +114,11 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void initializer(TableUser2Holder holder) {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
         InitManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserPosition);
     }
@@ -128,7 +128,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         CustomClickView.onClickListener(() -> {
             if (current instanceof SessionFragment) {
                 if (((SessionFragment) current).sessionModel != null && ((SessionFragment) current).sessionModel.getRoom() != null)
-                    ((MainActivity) activity).navigatoon.navigateToReferenceFragment(((SessionFragment) current).sessionModel.getRoom(), model);
+                    ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((SessionFragment) current).sessionModel.getRoom(), model);
 
             }
         }).widget(holder.binding.getRoot());

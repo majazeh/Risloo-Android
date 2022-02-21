@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableBillAdapter;
 import com.majazeh.risloo.databinding.FragmentBillingsBinding;
 import com.mre.ligheh.API.Response;
@@ -58,7 +58,7 @@ public class BillingsFragment extends Fragment {
         data = new HashMap<>();
         data.put("page", 1);
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.BillingsFragmentTitle));
 

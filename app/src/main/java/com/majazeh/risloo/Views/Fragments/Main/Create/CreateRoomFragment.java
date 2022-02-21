@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
@@ -62,7 +62,7 @@ public class CreateRoomFragment extends Fragment {
     private void initializer() {
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.psychologyIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomFragmentPsychologyHeader));
 
@@ -77,7 +77,7 @@ public class CreateRoomFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.psychologyErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -153,7 +153,7 @@ public class CreateRoomFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoom));
 
-                        ((MainActivity) requireActivity()).navigatoon.navigateToRoomFragment(roomModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToRoomFragment(roomModel);
                     });
                 }
             }
@@ -186,7 +186,7 @@ public class CreateRoomFragment extends Fragment {
 
                                     switch (key) {
                                         case "psychologist_id":
-                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                             break;
                                     }
                                 }

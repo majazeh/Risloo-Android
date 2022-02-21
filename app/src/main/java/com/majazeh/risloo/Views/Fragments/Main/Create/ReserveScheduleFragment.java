@@ -22,7 +22,7 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Create.CreateCheckAdapter;
 import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.mre.ligheh.API.Response;
@@ -87,7 +87,7 @@ public class ReserveScheduleFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.fieldIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentFieldHeader));
         binding.platformIncludeLayout.headerTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentPlatformHeader));
@@ -151,19 +151,19 @@ public class ReserveScheduleFragment extends Fragment {
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.nameIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.problemIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.problemIncludeLayout.inputEditText);
             return false;
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.descriptionIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 
@@ -250,21 +250,21 @@ public class ReserveScheduleFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.fieldErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView);
             if (binding.platformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView);
             if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
             if (binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
             if (binding.clientErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView);
             if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
             if (binding.problemErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
             if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.reserveTextView.getRoot());
@@ -274,7 +274,7 @@ public class ReserveScheduleFragment extends Fragment {
         scheduleModel = (ScheduleModel) ReserveScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
         setData(scheduleModel);
 
-        UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
+        UserModel userModel = ((ActivityMain) requireActivity()).singleton.getUserModel();
         setData(userModel);
     }
 
@@ -362,7 +362,7 @@ public class ReserveScheduleFragment extends Fragment {
     }
 
     private void setPermission() {
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleClientType(scheduleModel)) {
+        if (((ActivityMain) requireActivity()).permissoon.showReserveScheduleClientType(scheduleModel)) {
             binding.typeIncludeLayout.getRoot().setVisibility(View.VISIBLE);
 
             if (type.equals("center")) {
@@ -379,12 +379,12 @@ public class ReserveScheduleFragment extends Fragment {
             binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
         }
 
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleCase(scheduleModel) && binding.typeIncludeLayout.getRoot().getVisibility() != View.VISIBLE) {
+        if (((ActivityMain) requireActivity()).permissoon.showReserveScheduleCase(scheduleModel) && binding.typeIncludeLayout.getRoot().getVisibility() != View.VISIBLE) {
             binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             binding.caseGuideLayout.getRoot().setVisibility(View.VISIBLE);
         }
 
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleName(scheduleModel)) {
+        if (((ActivityMain) requireActivity()).permissoon.showReserveScheduleName(scheduleModel)) {
             binding.nameIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             binding.nameGuideLayout.getRoot().setVisibility(View.VISIBLE);
         } else {
@@ -392,7 +392,7 @@ public class ReserveScheduleFragment extends Fragment {
             binding.nameGuideLayout.getRoot().setVisibility(View.GONE);
         }
 
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleTreasury(scheduleModel))
+        if (((ActivityMain) requireActivity()).permissoon.showReserveScheduleTreasury(scheduleModel))
             binding.treasuryIncludeLayout.getRoot().setVisibility(View.VISIBLE);
         else
             binding.treasuryIncludeLayout.getRoot().setVisibility(View.GONE);
@@ -620,7 +620,7 @@ public class ReserveScheduleFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackScheduleReserved));
 
-                        ((MainActivity) requireActivity()).navigatoon.navigateToSessionFragment(scheduleModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToSessionFragment(scheduleModel);
                     });
                 }
             }
@@ -661,35 +661,35 @@ public class ReserveScheduleFragment extends Fragment {
 
                                         switch (key) {
                                             case "field":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "session_platform":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "client_typ":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "case_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "client_id":
                                                 if (type.equals("case") && clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0 && binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 else if (type.equals("center"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
 
                                                 break;
                                             case "problem":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "nickname":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "description":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "treasurie_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                         }
                                     }

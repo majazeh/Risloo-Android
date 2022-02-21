@@ -5,7 +5,7 @@ import android.net.Uri;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.instances.Paymont;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Payment;
 import com.mre.ligheh.Model.Madule.User;
@@ -25,7 +25,7 @@ public class PaymentManager {
 
         HashMap data = new HashMap<>();
         HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
         data.put("authorized_key", model.getAuthorizedKey());
 
@@ -71,9 +71,9 @@ public class PaymentManager {
         DialogManager.showPaymentDialog(activity, "finalize", Paymont.getInstance().getPaymentModel());
 
         HashMap data = new HashMap<>();
-        data.put("user", ((MainActivity) activity).singleton.getUserModel().getId());
+        data.put("user", ((ActivityMain) activity).singleton.getUserModel().getId());
         HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
         User.dashboard(data, header, new Response() {
             @Override
@@ -81,8 +81,8 @@ public class PaymentManager {
                 UserModel userModel = (UserModel) object;
 
                 activity.runOnUiThread(() -> {
-                    ((MainActivity) activity).singleton.update(userModel);
-                    ((MainActivity) activity).setData();
+                    ((ActivityMain) activity).singleton.update(userModel);
+                    ((ActivityMain) activity).setData();
 
                     DialogManager.dismissPaymentDialog();
                     navigate(activity);
@@ -103,13 +103,13 @@ public class PaymentManager {
         switch (Paymont.getInstance().getDestination()) {
             case R.id.billingsFragment:
             case R.id.sessionFragment:
-                ((MainActivity) activity).navigatoon.navigateToBillFragment(Paymont.getInstance().getTypeModel());
+                ((ActivityMain) activity).navigatoon.navigateToBillFragment(Paymont.getInstance().getTypeModel());
                 break;
             case R.id.paymentsFragment:
-                ((MainActivity) activity).navigatoon.navigateToPaymentsFragment(null);
+                ((ActivityMain) activity).navigatoon.navigateToPaymentsFragment(null);
                 break;
             case R.id.reserveScheduleFragment:
-                ((MainActivity) activity).navigatoon.navigateToReserveScheduleFragment(Paymont.getInstance().getTypeModel());
+                ((ActivityMain) activity).navigatoon.navigateToReserveScheduleFragment(Paymont.getInstance().getTypeModel());
                 break;
         }
     }

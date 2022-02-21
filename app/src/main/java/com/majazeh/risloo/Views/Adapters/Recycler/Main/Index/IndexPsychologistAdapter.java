@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexPsychologistHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexPsychologistBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -77,7 +77,7 @@ public class IndexPsychologistAdapter extends RecyclerView.Adapter<IndexPsycholo
     }
 
     private void initializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     private void listener(IndexPsychologistHolder holder, UserModel model) {

@@ -17,7 +17,7 @@ import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabPaymentFragment;
 import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabPaymentFragment;
 import com.majazeh.risloo.databinding.SingleItemDialogSelectedBinding;
@@ -126,7 +126,7 @@ public class DialogSelectedAdapter extends RecyclerView.Adapter<DialogSelectedHo
     }
 
     private void intializer() {
-        payment = ((MainActivity) activity).fragmont.getPayment();
+        payment = ((ActivityMain) activity).fragmont.getPayment();
     }
 
     private void listener(DialogSelectedHolder holder, int position) {

@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentDashboardBinding;
 import com.mre.ligheh.API.Response;
@@ -65,9 +65,9 @@ public class DashboardFragment extends Fragment {
         indexRoomAdapter = new IndexRoomAdapter(requireActivity());
 
         data = new HashMap<>();
-        data.put("user", ((MainActivity) requireActivity()).singleton.getUserModel().getId());
+        data.put("user", ((ActivityMain) requireActivity()).singleton.getUserModel().getId());
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.passwordMissingLayout.titleTextView.setText(getResources().getString(R.string.DashboardFragmentNoPasswordTitle));
         binding.centerMissingLayout.titleTextView.setText(getResources().getString(R.string.DashboardFragmentNoCenterTitle));
@@ -84,11 +84,11 @@ public class DashboardFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToEditUserFragment(userModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToEditUserFragment(userModel);
         }).widget(binding.passwordMissingLayout.actionTextView);
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToCentersFragment();
+            ((ActivityMain) requireActivity()).navigatoon.navigateToCentersFragment();
         }).widget(binding.centerMissingLayout.actionTextView);
 
         CustomClickView.onClickListener(() -> {
@@ -229,7 +229,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void setPermission() {
-        if (((MainActivity) requireActivity()).permissoon.showDashboardData(userModel))
+        if (((ActivityMain) requireActivity()).permissoon.showDashboardData(userModel))
             setData(userModel);
     }
 
@@ -241,8 +241,8 @@ public class DashboardFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).singleton.update(userModel);
-                        ((MainActivity) requireActivity()).setData();
+                        ((ActivityMain) requireActivity()).singleton.update(userModel);
+                        ((ActivityMain) requireActivity()).setData();
 
                         setPermission();
 

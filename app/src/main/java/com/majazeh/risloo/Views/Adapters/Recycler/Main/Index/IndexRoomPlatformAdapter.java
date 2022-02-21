@@ -22,7 +22,7 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexRoomPlatformHolder;
 import com.majazeh.risloo.views.fragments.main.index.RoomPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexRoomPlatformBinding;
@@ -95,13 +95,13 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
     }
 
     private void initializer(IndexRoomPlatformHolder holder) {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
 
         handler = new Handler();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
         InitManager.input8sspSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels);
     }
@@ -115,7 +115,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
             if (holder.binding.availableSwitchCompat.isChecked() && holder.binding.centerCheckBox.isChecked())
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.identifierEditText.hasFocus())
-                    ((MainActivity) activity).inputon.select(holder.binding.identifierEditText);
+                    ((ActivityMain) activity).inputon.select(holder.binding.identifierEditText);
             return false;
         });
 

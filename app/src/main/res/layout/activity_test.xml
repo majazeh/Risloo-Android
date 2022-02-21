@@ -11,7 +11,7 @@
     android:focusableInTouchMode="true"
     android:layoutDirection="rtl"
     app:layoutDescription="@xml/activity_test_scene"
-    tools:context=".views.activities.TestActivity">
+    tools:context=".views.activities.ActivityTest">
 
     <include
         android:id="@+id/debug_textView"

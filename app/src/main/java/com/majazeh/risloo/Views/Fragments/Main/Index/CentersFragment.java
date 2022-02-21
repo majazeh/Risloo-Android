@@ -18,7 +18,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexCenterAdapter;
 import com.majazeh.risloo.databinding.FragmentCentersBinding;
 import com.mre.ligheh.API.Response;
@@ -72,7 +72,7 @@ public class CentersFragment extends Fragment {
         data.put("page", 1);
         data.put("session_platforms", 1);
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
 
@@ -84,7 +84,7 @@ public class CentersFragment extends Fragment {
     private void listener() {
         binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.searchIncludeLayout.searchEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.searchIncludeLayout.searchEditText);
             return false;
         });
 
@@ -130,13 +130,13 @@ public class CentersFragment extends Fragment {
             }
         });
 
-        CustomClickView.onClickListener(() -> ((MainActivity) requireActivity()).navigatoon.navigateToCreateCenterFragment(null)).widget(binding.addImageView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityMain) requireActivity()).navigatoon.navigateToCreateCenterFragment(null)).widget(binding.addImageView.getRoot());
     }
 
     private void setPermission() {
-        UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
+        UserModel model = ((ActivityMain) requireActivity()).singleton.getUserModel();
 
-        if (((MainActivity) requireActivity()).permissoon.showCentersCreateCenter(model))
+        if (((ActivityMain) requireActivity()).permissoon.showCentersCreateCenter(model))
             binding.addImageView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.addImageView.getRoot().setVisibility(View.GONE);

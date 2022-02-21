@@ -25,7 +25,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.ParamsManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.create.CreateCenterFragment;
 import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabPaymentFragment;
 import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabSessionFragment;
@@ -90,9 +90,9 @@ public class SelectedDialog extends AppCompatDialogFragment {
     }
 
     private void initializer() {
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-        child = ((MainActivity) requireActivity()).fragmont.getChild();
-        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
+        child = ((ActivityMain) requireActivity()).fragmont.getChild();
+        payment = ((ActivityMain) requireActivity()).fragmont.getPayment();
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
@@ -101,7 +101,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
     private void listener() {
         binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.inputEditText);
             return false;
         });
 
@@ -208,7 +208,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
             calculateCount();
 
-            ((MainActivity) requireActivity()).inputon.clear(((MainActivity) requireActivity()).inputon.editText);
+            ((ActivityMain) requireActivity()).inputon.clear(((ActivityMain) requireActivity()).inputon.editText);
             binding.inputEditText.getText().clear();
         } catch (JSONException e) {
             e.printStackTrace();

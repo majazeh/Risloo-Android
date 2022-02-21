@@ -20,7 +20,7 @@ import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableSampleAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexReferenceAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableScaleAdapter;
@@ -78,7 +78,7 @@ public class BulkSampleFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferenceAdapterHeader));
         binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
@@ -340,7 +340,7 @@ public class BulkSampleFragment extends Fragment {
                                 IntentManager.test(requireActivity(), key);
                             } else {
                                 DialogManager.dismissLoadingDialog();
-                                SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getUserModel(), bulkSampleModel);
+                                SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((ActivityMain) requireActivity()).singleton.getUserModel(), bulkSampleModel);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

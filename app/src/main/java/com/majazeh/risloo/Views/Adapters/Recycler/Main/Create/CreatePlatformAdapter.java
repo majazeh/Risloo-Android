@@ -13,7 +13,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Create.CreatePlatformHolder;
 import com.majazeh.risloo.databinding.SingleItemCreatePlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
@@ -92,7 +92,7 @@ public class CreatePlatformAdapter extends RecyclerView.Adapter<CreatePlatformHo
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
             if (holder.binding.selectedSwitchCompat.isChecked() && holder.binding.roomCheckBox.isChecked())
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.identifierEditText.hasFocus())
-                    ((MainActivity) activity).inputon.select(holder.binding.identifierEditText);
+                    ((ActivityMain) activity).inputon.select(holder.binding.identifierEditText);
             return false;
         });
 

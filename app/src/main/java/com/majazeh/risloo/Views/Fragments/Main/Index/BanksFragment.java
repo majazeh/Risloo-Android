@@ -23,7 +23,7 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.TreasuryManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexBankAdapter;
 import com.majazeh.risloo.databinding.FragmentBanksBinding;
 import com.mre.ligheh.API.Response;
@@ -77,7 +77,7 @@ public class BanksFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.createHeaderLayout.titleTextView.setText(getResources().getString(R.string.BankAdapterTitle));
 
@@ -114,13 +114,13 @@ public class BanksFragment extends Fragment {
     private void listener() {
         binding.ibanIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.ibanIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.ibanIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.ibanIncludeLayout.inputEditText);
             return false;
         });
 
         binding.amountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.amountIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.amountIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.amountIncludeLayout.inputEditText);
             return false;
         });
 
@@ -323,41 +323,41 @@ public class BanksFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.ibanErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView);
             if (binding.amountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
             if (binding.accountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView);
             if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
             if (binding.weekdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView);
             if (binding.monthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView);
 
             doWork("create");
         }).widget(binding.createTextView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.ibanErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView);
             if (binding.amountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
             if (binding.accountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView);
             if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
             if (binding.weekdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView);
             if (binding.monthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView);
 
             doWork("settle");
         }).widget(binding.settleTextView.getRoot());
     }
 
     private void setArgs() {
-        UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
+        UserModel userModel = ((ActivityMain) requireActivity()).singleton.getUserModel();
         setData(userModel);
     }
 
@@ -678,7 +678,7 @@ public class BanksFragment extends Fragment {
 
                                         switch (key) {
                                             case "iban":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                         }
                                     }
@@ -732,19 +732,19 @@ public class BanksFragment extends Fragment {
 
                                         switch (key) {
                                             case "iban_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "type":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "amount":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "weekday":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "day":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                         }
                                     }

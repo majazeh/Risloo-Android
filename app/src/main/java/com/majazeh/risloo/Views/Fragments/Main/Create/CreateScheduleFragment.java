@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.tab.CreateScheduleAdapter;
 import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabPaymentFragment;
 import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabPlatformFragment;
@@ -75,7 +75,7 @@ public class CreateScheduleFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
     }
 
     private void setArgs() {
@@ -101,11 +101,11 @@ public class CreateScheduleFragment extends Fragment {
     }
 
     public void checkRequire() {
-        time = ((MainActivity) requireActivity()).fragmont.getTime();
-        reference = ((MainActivity) requireActivity()).fragmont.getReference();
-        session = ((MainActivity) requireActivity()).fragmont.getSession();
-        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
-        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
+        time = ((ActivityMain) requireActivity()).fragmont.getTime();
+        reference = ((ActivityMain) requireActivity()).fragmont.getReference();
+        session = ((ActivityMain) requireActivity()).fragmont.getSession();
+        platform = ((ActivityMain) requireActivity()).fragmont.getPlatform();
+        payment = ((ActivityMain) requireActivity()).fragmont.getPayment();
 
         // Time Data
         if (time instanceof CreateScheduleTabTimeFragment)
@@ -168,7 +168,7 @@ public class CreateScheduleFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSchedule));
 
-                        ((MainActivity) requireActivity()).navigatoon.navigateToSessionFragment(scheduleModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToSessionFragment(scheduleModel);
                     });
                 }
             }

@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 @SuppressLint("CustomSplashScreen")
-public class SplashActivity extends AppCompatActivity {
+public class ActivitySplash extends AppCompatActivity {
 
     // Binding
     private ActivitySplashBinding binding;

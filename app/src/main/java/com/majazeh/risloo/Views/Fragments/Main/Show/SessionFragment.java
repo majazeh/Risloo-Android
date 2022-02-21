@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexPsychologistAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableBillAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TablePracticeAdapter;
@@ -85,7 +85,7 @@ public class SessionFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.psychologistsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PsychologistAdapterHeader));
         binding.usersHeaderLayout.titleTextView.setText(getResources().getString(R.string.User2AdapterHeader));
@@ -116,12 +116,12 @@ public class SessionFragment extends Fragment {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
                 case "گزارشات":
                     if (sessionModel != null)
-                        ((MainActivity) requireActivity()).navigatoon.navigateToClientReportsFragment(sessionModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToClientReportsFragment(sessionModel);
 
                     break;
                 case "ویرایش":
                     if (sessionModel != null)
-                        ((MainActivity) requireActivity()).navigatoon.navigateToEditSessionFragment(sessionModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToEditSessionFragment(sessionModel);
 
                     break;
             }
@@ -144,12 +144,12 @@ public class SessionFragment extends Fragment {
                     switch (pos) {
                         case "گزارشات":
                             if (sessionModel != null)
-                                ((MainActivity) requireActivity()).navigatoon.navigateToClientReportsFragment(sessionModel);
+                                ((ActivityMain) requireActivity()).navigatoon.navigateToClientReportsFragment(sessionModel);
 
                             break;
                         case "ویرایش":
                             if (sessionModel != null)
-                                ((MainActivity) requireActivity()).navigatoon.navigateToEditSessionFragment(sessionModel);
+                                ((ActivityMain) requireActivity()).navigatoon.navigateToEditSessionFragment(sessionModel);
 
                             break;
                     }
@@ -168,25 +168,25 @@ public class SessionFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null)
-                ((MainActivity) requireActivity()).navigatoon.navigateToCreateSessionUserFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSessionUserFragment(sessionModel);
 
         }).widget(binding.usersAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null)
-                ((MainActivity) requireActivity()).navigatoon.navigateToCreatePracticeFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToCreatePracticeFragment(sessionModel);
 
         }).widget(binding.practicesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null)
-                ((MainActivity) requireActivity()).navigatoon.navigateToCreateSampleFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSampleFragment(sessionModel);
 
         }).widget(binding.samplesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null)
-                ((MainActivity) requireActivity()).navigatoon.navigateToCreateBillFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToCreateBillFragment(sessionModel);
 
         }).widget(binding.billsAddView.getRoot());
     }
@@ -455,7 +455,7 @@ public class SessionFragment extends Fragment {
 //        if (((MainActivity) requireActivity()).permissoon.showSessionDropdownReports(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
 //            items.add(requireActivity().getResources().getString(R.string.SessionFragmentReports));
 
-        if (((MainActivity) requireActivity()).permissoon.showSessionDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+        if (((ActivityMain) requireActivity()).permissoon.showSessionDropdownEdit(((ActivityMain) requireActivity()).singleton.getUserModel(), sessionModel))
             items.add(requireActivity().getResources().getString(R.string.SessionFragmentEdit));
 
         items.add("");
@@ -478,22 +478,22 @@ public class SessionFragment extends Fragment {
     }
 
     private void setPermission() {
-        if (((MainActivity) requireActivity()).permissoon.showSessionCreateUser(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+        if (((ActivityMain) requireActivity()).permissoon.showSessionCreateUser(((ActivityMain) requireActivity()).singleton.getUserModel(), sessionModel))
             binding.usersAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.usersAddView.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showSessionCreatePractice(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+        if (((ActivityMain) requireActivity()).permissoon.showSessionCreatePractice(((ActivityMain) requireActivity()).singleton.getUserModel(), sessionModel))
             binding.practicesAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.practicesAddView.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showSessionCreateSample(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+        if (((ActivityMain) requireActivity()).permissoon.showSessionCreateSample(((ActivityMain) requireActivity()).singleton.getUserModel(), sessionModel))
             binding.samplesAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.samplesAddView.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showSessionCreateBill(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+        if (((ActivityMain) requireActivity()).permissoon.showSessionCreateBill(((ActivityMain) requireActivity()).singleton.getUserModel(), sessionModel))
             binding.billsAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.billsAddView.getRoot().setVisibility(View.GONE);

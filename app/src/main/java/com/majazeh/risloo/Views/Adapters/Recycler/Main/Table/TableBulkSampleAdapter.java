@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderBulkSampleHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableBulkSampleHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableBulkSampleBinding;
@@ -113,13 +113,13 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void initializer() {
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableBulkSampleHolder holder, BulkSampleModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToBulkSampleFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToBulkSampleFragment(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
@@ -227,7 +227,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             IntentManager.test(activity, key);
                         } else {
                             DialogManager.dismissLoadingDialog();
-                            SheetManager.showBulkSampleBottomSheet(activity, key, ((MainActivity) activity).singleton.getUserModel(), bulkSampleModel);
+                            SheetManager.showBulkSampleBottomSheet(activity, key, ((ActivityMain) activity).singleton.getUserModel(), bulkSampleModel);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

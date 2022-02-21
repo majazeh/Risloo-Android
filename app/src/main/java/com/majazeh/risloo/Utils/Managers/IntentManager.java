@@ -17,10 +17,10 @@ import androidx.core.content.FileProvider;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.views.activities.AuthActivity;
-import com.majazeh.risloo.views.activities.DisplayActivity;
-import com.majazeh.risloo.views.activities.MainActivity;
-import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.ActivityAuth;
+import com.majazeh.risloo.views.activities.ActivityDisplay;
+import com.majazeh.risloo.views.activities.ActivityMain;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -32,14 +32,14 @@ public class IntentManager {
     */
 
     public static void main(Activity activity) {
-        Intent intent = new Intent(activity, MainActivity.class);
+        Intent intent = new Intent(activity, ActivityMain.class);
 
         activity.startActivity(intent);
         activity.finish();
     }
 
     public static void auth(Activity activity, String theory) {
-        Intent intent = new Intent(activity, AuthActivity.class);
+        Intent intent = new Intent(activity, ActivityAuth.class);
         intent.putExtra("theory", theory);
 
         activity.startActivity(intent);
@@ -47,14 +47,14 @@ public class IntentManager {
     }
 
     public static void test(Activity activity, String id) {
-        Intent intent = new Intent(activity, TestActivity.class);
+        Intent intent = new Intent(activity, ActivityTest.class);
         intent.putExtra("id", id);
 
         activity.startActivity(intent);
     }
 
     public static void display(Activity activity, String title, String path) {
-        Intent intent = new Intent(activity, DisplayActivity.class);
+        Intent intent = new Intent(activity, ActivityDisplay.class);
         intent.putExtra("title", title);
         intent.putExtra("path", path);
 

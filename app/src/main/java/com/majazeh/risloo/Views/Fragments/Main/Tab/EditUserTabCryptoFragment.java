@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserTabCryptoBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -51,11 +51,11 @@ public class EditUserTabCryptoFragment extends Fragment {
     }
 
     private void initializer() {
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabCryptoPublicHeader));
         binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabCryptoPrivateHeader));
@@ -68,13 +68,13 @@ public class EditUserTabCryptoFragment extends Fragment {
     private void listener() {
         binding.publicIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.publicIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.publicIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.publicIncludeLayout.inputEditText);
             return false;
         });
 
         binding.privateIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.privateIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.privateIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.privateIncludeLayout.inputEditText);
             return false;
         });
 
@@ -88,14 +88,14 @@ public class EditUserTabCryptoFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.publicErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
 
             doWork("public");
         }).widget(binding.publicEditTextView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.privateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
 
             doWork("private");
         }).widget(binding.privateEditTextView.getRoot());

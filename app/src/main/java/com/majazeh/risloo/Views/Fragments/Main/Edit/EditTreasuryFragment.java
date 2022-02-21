@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Treasury;
@@ -59,7 +59,7 @@ public class EditTreasuryFragment extends Fragment {
     private void initializer() {
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditTreasuryFragmentNameHeader));
 
@@ -72,7 +72,7 @@ public class EditTreasuryFragment extends Fragment {
     private void listener() {
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.titleIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
@@ -82,7 +82,7 @@ public class EditTreasuryFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.editTextView.getRoot());
@@ -124,7 +124,7 @@ public class EditTreasuryFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
 
-                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
+                        ((ActivityMain) requireActivity()).navigatoon.navigateUp();
                     });
                 }
             }
@@ -157,7 +157,7 @@ public class EditTreasuryFragment extends Fragment {
 
                                     switch (key) {
                                         case "title":
-                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                             break;
                                     }
                                 }

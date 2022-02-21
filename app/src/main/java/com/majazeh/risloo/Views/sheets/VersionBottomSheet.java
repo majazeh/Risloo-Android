@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.SplashActivity;
+import com.majazeh.risloo.views.activities.ActivitySplash;
 import com.majazeh.risloo.databinding.BottomSheetVersionBinding;
 import com.mre.ligheh.Model.TypeModel.ClientModel;
 
@@ -95,7 +95,7 @@ public class VersionBottomSheet extends BottomSheetDialogFragment {
                 IntentManager.finish(requireActivity());
                 break;
             case "current":
-                if (!((SplashActivity) requireActivity()).singleton.getToken().equals(""))
+                if (!((ActivitySplash) requireActivity()).singleton.getToken().equals(""))
                     IntentManager.main(requireActivity());
                 else
                     IntentManager.auth(requireActivity(), "login");

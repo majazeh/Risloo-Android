@@ -61,7 +61,7 @@ import com.yalantis.ucrop.UCrop;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityMain extends AppCompatActivity {
 
     // Binding
     private ActivityMainBinding binding;
@@ -174,9 +174,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {
                 if (currentId == motionLayout.getStartState())
-                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+                    ActivityMain.this.getWindow().setStatusBarColor(getResources().getColor(R.color.white));
                 else if (currentId == motionLayout.getEndState())
-                    MainActivity.this.getWindow().setStatusBarColor(getResources().getColor(R.color.coolGray50));
+                    ActivityMain.this.getWindow().setStatusBarColor(getResources().getColor(R.color.coolGray50));
             }
 
             @Override
@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                 navigatoon.navigateToPaymentsFragment(null);
                 break;
             case "خروج":
-                SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getUserModel());
+                SheetManager.showLogoutBottomSheet(ActivityMain.this, singleton.getUserModel());
                 break;
 
             // Drawer
@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
 
                         DialogManager.dismissLoadingDialog();
 
-                        SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLoginOtherUser));
+                        SnackManager.showSuccesSnack(ActivityMain.this, getResources().getString(R.string.SnackLoginOtherUser));
                         navigatoon.navigateToDashboardFragment();
                     });
                 }
@@ -359,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
 
                         DialogManager.dismissLoadingDialog();
 
-                        SnackManager.showSuccesSnack(MainActivity.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
+                        SnackManager.showSuccesSnack(ActivityMain.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
                         navigatoon.navigateToDashboardFragment();
                     });
                 }

@@ -11,7 +11,7 @@
     android:focusableInTouchMode="true"
     android:layoutDirection="rtl"
     app:layoutDescription="@xml/activity_auth_scene"
-    tools:context=".views.activities.AuthActivity">
+    tools:context=".views.activities.ActivityAuth">
 
     <include
         android:id="@+id/debug_textView"

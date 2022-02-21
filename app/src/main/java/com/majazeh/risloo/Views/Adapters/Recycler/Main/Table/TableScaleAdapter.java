@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderScaleHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableScaleHolder;
 import com.majazeh.risloo.views.fragments.main.index.ScalesFragment;
@@ -98,7 +98,7 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void initializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     private void listener(TableScaleHolder holder, ScaleModel model) {
@@ -106,13 +106,13 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        CustomClickView.onClickListener(() -> ((MainActivity) activity).navigatoon.navigateToCreateSampleFragment(model)).widget(holder.binding.createTextView);
+        CustomClickView.onClickListener(() -> ((ActivityMain) activity).navigatoon.navigateToCreateSampleFragment(model)).widget(holder.binding.createTextView);
     }
 
     private void setPermission(TableScaleHolder holder) {
-        UserModel model = ((MainActivity) activity).singleton.getUserModel();
+        UserModel model = ((ActivityMain) activity).singleton.getUserModel();
 
-        if (current instanceof ScalesFragment && ((MainActivity) activity).permissoon.showScalesCreateSample(model))
+        if (current instanceof ScalesFragment && ((ActivityMain) activity).permissoon.showScalesCreateSample(model))
             holder.binding.createTextView.setVisibility(View.VISIBLE);
         else
             holder.binding.createTextView.setVisibility(View.GONE);

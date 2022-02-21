@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexTagHolder;
 import com.majazeh.risloo.views.fragments.main.index.CenterTagsFragment;
 import com.majazeh.risloo.views.fragments.main.index.RoomTagsFragment;
@@ -84,11 +84,11 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
     }
 
     private void intializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
     }
 
     @SuppressLint("ClickableViewAccessibility")

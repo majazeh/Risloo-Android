@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderCenterUserHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableCenterUserHolder;
 import com.majazeh.risloo.views.fragments.main.index.CenterUsersFragment;
@@ -116,11 +116,11 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void initializer(TableCenterUserHolder holder) {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
         InitManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
     }
@@ -129,7 +129,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void listener(TableCenterUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof CenterUsersFragment)
-                ((MainActivity) activity).navigatoon.navigateToReferenceFragment(((CenterUsersFragment) current).centerModel, model);
+                ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((CenterUsersFragment) current).centerModel, model);
 
         }).widget(holder.binding.getRoot());
 
@@ -180,25 +180,25 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             break;
                         case "ساختن اتاق درمان":
                             if (current instanceof CenterUsersFragment)
-                                ((MainActivity) activity).navigatoon.navigateToCreateRoomFragment(((CenterUsersFragment) current).centerModel, model);
+                                ((ActivityMain) activity).navigatoon.navigateToCreateRoomFragment(((CenterUsersFragment) current).centerModel, model);
 
                             break;
                         case "اتاق درمان":
                             try {
                                 RoomModel roomModel = new RoomModel(new JSONObject().put("id", model.getMeta().getString("room_id")).put("type", "room").put("manager", model.object));
 
-                                ((MainActivity) activity).navigatoon.navigateToRoomFragment(roomModel);
+                                ((ActivityMain) activity).navigatoon.navigateToRoomFragment(roomModel);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             break;
                         case "ویرایش":
                             if (current instanceof CenterUsersFragment)
-                                ((MainActivity) activity).navigatoon.navigateToEditCenterUserFragment(((CenterUsersFragment) current).centerModel, model);
+                                ((ActivityMain) activity).navigatoon.navigateToEditCenterUserFragment(((CenterUsersFragment) current).centerModel, model);
 
                             break;
                         case "ورود به کاربری":
-                            ((MainActivity) activity).setUser("loginOtherUser", model.getId());
+                            ((ActivityMain) activity).setUser("loginOtherUser", model.getId());
                             break;
                     }
 

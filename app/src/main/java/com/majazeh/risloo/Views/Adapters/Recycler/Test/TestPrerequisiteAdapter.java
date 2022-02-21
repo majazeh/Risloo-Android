@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.views.adapters.holder.test.TestPreMultiHolder;
 import com.majazeh.risloo.views.adapters.holder.test.TestPreSelectHolder;
 import com.majazeh.risloo.views.adapters.holder.test.TestPreTextHolder;
@@ -121,13 +121,13 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
     private void listener(TestPreTextHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                ((TestActivity) activity).inputon.select(holder.binding.inputEditText);
+                ((ActivityTest) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
-            ((TestActivity) activity).inputon.clear(((TestActivity) activity).inputon.editText);
+            ((ActivityTest) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
+            ((ActivityTest) activity).inputon.clear(((ActivityTest) activity).inputon.editText);
             return false;
         });
     }
@@ -136,13 +136,13 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
     private void listener(TestPreMultiHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                ((TestActivity) activity).inputon.select(holder.binding.inputEditText);
+                ((ActivityTest) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
-            ((TestActivity) activity).inputon.clear(((TestActivity) activity).inputon.editText);
+            ((ActivityTest) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
+            ((ActivityTest) activity).inputon.clear(((ActivityTest) activity).inputon.editText);
             return false;
         });
     }
@@ -160,7 +160,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    ((TestActivity) activity).sendPre(item + 1, String.valueOf(position + 1));
+                    ((ActivityTest) activity).sendPre(item + 1, String.valueOf(position + 1));
 
                     userSelect = false;
                 }
@@ -219,10 +219,10 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         if (!model.getUserAnswered().equals("")) {
             holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUserAnswered()) - 1);
-            ((TestActivity) activity).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(holder.binding.selectSpinner.getSelectedItemPosition() + 1));
+            ((ActivityTest) activity).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(holder.binding.selectSpinner.getSelectedItemPosition() + 1));
         } else {
             holder.binding.selectSpinner.setSelection(0);
-            ((TestActivity) activity).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(1));
+            ((ActivityTest) activity).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(1));
         }
     }
 

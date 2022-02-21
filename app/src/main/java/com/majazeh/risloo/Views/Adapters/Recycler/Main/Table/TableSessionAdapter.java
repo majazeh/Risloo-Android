@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSessionHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableSessionHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableSessionBinding;
@@ -94,11 +94,11 @@ public class TableSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void listener(TableSessionHolder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToSessionFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToSessionFragment(model);
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToEditSessionFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToEditSessionFragment(model);
         }).widget(holder.binding.editImageView);
     }
 

@@ -31,7 +31,7 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.AuthActivity;
+import com.majazeh.risloo.views.activities.ActivityAuth;
 import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
@@ -94,7 +94,7 @@ public class AuthPinFragment extends Fragment {
     private void listener() {
         binding.pinEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.pinEditText.getRoot().hasFocus())
-                ((AuthActivity) requireActivity()).inputon.select(binding.pinEditText.getRoot());
+                ((ActivityAuth) requireActivity()).inputon.select(binding.pinEditText.getRoot());
             return false;
         });
 
@@ -132,10 +132,10 @@ public class AuthPinFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.pinEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
                 if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                    ((ActivityAuth) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
 
                 doWork("code");
             }
@@ -143,17 +143,17 @@ public class AuthPinFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment();
+            ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthLoginFragment();
         }).widget(binding.loginLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthRegisterFragment();
+            ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthRegisterFragment();
         }).widget(binding.registerLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment();
+            ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment();
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
@@ -230,14 +230,14 @@ public class AuthPinFragment extends Fragment {
                             if (model.getUser() == null) {
                                 switch (model.getTheory()) {
                                     case "password":
-                                        ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
+                                        ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
                                         break;
                                     case "recovery":
-                                        ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
+                                        ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
                                         break;
                                 }
                             } else {
-                                ((AuthActivity) requireActivity()).singleton.login(model);
+                                ((ActivityAuth) requireActivity()).singleton.login(model);
                                 IntentManager.main(requireActivity());
                             }
 
@@ -273,7 +273,7 @@ public class AuthPinFragment extends Fragment {
                                         }
 
                                         if (key.equals("code"))
-                                            ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            ((ActivityAuth) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                     }
 
                                     SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
@@ -312,7 +312,7 @@ public class AuthPinFragment extends Fragment {
         binding.pinEditText.getRoot().setText(pin);
 
         if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+            ((ActivityAuth) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
 
         doWork("code");
     }

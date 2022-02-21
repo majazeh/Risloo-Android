@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexPsychologistAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexReferenceAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableSampleAdapter;
@@ -77,7 +77,7 @@ public class CaseFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.psychologistsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PsychologistAdapterHeader));
         binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferenceAdapterHeader));
@@ -102,7 +102,7 @@ public class CaseFragment extends Fragment {
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
                 case "گزارشات":
-                    ((MainActivity) requireActivity()).navigatoon.navigateToClientReportsFragment(caseModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToClientReportsFragment(caseModel);
                     break;
                 case "ویرایش":
                     // TODO : Place Code Here
@@ -126,7 +126,7 @@ public class CaseFragment extends Fragment {
 
                     switch (pos) {
                         case "گزارشات":
-                            ((MainActivity) requireActivity()).navigatoon.navigateToClientReportsFragment(caseModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToClientReportsFragment(caseModel);
                             break;
                         case "ویرایش":
                             // TODO : Place Code Here
@@ -146,15 +146,15 @@ public class CaseFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToCreateCaseUserFragment(caseModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateCaseUserFragment(caseModel);
         }).widget(binding.referencesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToCreateSessionFragment(caseModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSessionFragment(caseModel);
         }).widget(binding.sessionsAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToCreateSampleFragment(caseModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSampleFragment(caseModel);
         }).widget(binding.samplesAddView.getRoot());
     }
 
@@ -231,17 +231,17 @@ public class CaseFragment extends Fragment {
     }
 
     private void setPermission() {
-        if (((MainActivity) requireActivity()).permissoon.showCaseCreateReference(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+        if (((ActivityMain) requireActivity()).permissoon.showCaseCreateReference(((ActivityMain) requireActivity()).singleton.getUserModel(), caseModel))
             binding.referencesAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.referencesAddView.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showCaseCreateSession(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+        if (((ActivityMain) requireActivity()).permissoon.showCaseCreateSession(((ActivityMain) requireActivity()).singleton.getUserModel(), caseModel))
             binding.sessionsAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.sessionsAddView.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showCaseCreateSample(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+        if (((ActivityMain) requireActivity()).permissoon.showCaseCreateSample(((ActivityMain) requireActivity()).singleton.getUserModel(), caseModel))
             binding.samplesAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.samplesAddView.getRoot().setVisibility(View.GONE);

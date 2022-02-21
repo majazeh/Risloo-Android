@@ -15,7 +15,7 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.dialog.DialogFilterHolder;
 import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
 import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
@@ -81,7 +81,7 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void intializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     private void detector(DialogFilterHolder holder, boolean selected) {

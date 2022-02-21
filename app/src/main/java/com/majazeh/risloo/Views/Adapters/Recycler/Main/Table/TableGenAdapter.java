@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.interfaces.DiffUtilStringAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilStringCallback;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldTextHolder;
 import com.majazeh.risloo.views.fragments.main.show.SampleFragment;
@@ -105,14 +105,14 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void intializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableFieldTextHolder holder) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable && MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
+                ((ActivityMain) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 
@@ -120,7 +120,7 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (current instanceof SampleFragment)
                 ((SampleFragment) current).sendGen("cornometer", holder.binding.inputEditText.getText().toString().trim());
 
-            ((MainActivity) activity).inputon.clear(((MainActivity) activity).inputon.editText);
+            ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
             return false;
         });
     }

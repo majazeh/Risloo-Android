@@ -15,7 +15,7 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexScheduleHolder;
 import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
 import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
@@ -107,21 +107,21 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
     }
 
     private void initializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     private void listener(IndexScheduleHolder holder, ScheduleModel model) {
         CustomClickView.onClickListener(() -> {
-            if (holder.binding.statusTextView.getText().toString().equals("در حال نوبت\u200Cگیری") && ((MainActivity) activity).permissoon.showCenterSchedulesFragmentReserveSchedule(((MainActivity) activity).singleton.getUserModel(), model)) {
+            if (holder.binding.statusTextView.getText().toString().equals("در حال نوبت\u200Cگیری") && ((ActivityMain) activity).permissoon.showCenterSchedulesFragmentReserveSchedule(((ActivityMain) activity).singleton.getUserModel(), model)) {
 
                 if (current instanceof CenterSchedulesFragment)
                     model.setTreasuries(((CenterSchedulesFragment) current).treasuries);
                 else if (current instanceof RoomSchedulesFragment)
                     model.setTreasuries(((RoomSchedulesFragment) current).treasuries);
 
-                ((MainActivity) activity).navigatoon.navigateToReserveScheduleFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToReserveScheduleFragment(model);
             } else {
-                ((MainActivity) activity).navigatoon.navigateToSessionFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToSessionFragment(model);
             }
         }).widget(holder.binding.getRoot());
     }

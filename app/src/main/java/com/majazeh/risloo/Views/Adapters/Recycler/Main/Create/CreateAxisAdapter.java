@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.adapters.holder.main.Create.CreateAxisHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.databinding.SingleItemCreateAxisBinding;
 
 import org.json.JSONException;
@@ -112,7 +112,7 @@ public class CreateAxisAdapter extends RecyclerView.Adapter<CreateAxisHolder> {
     private void listener(CreateAxisHolder holder, int position) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
+                ((ActivityMain) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 

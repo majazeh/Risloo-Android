@@ -14,7 +14,7 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.views.adapters.holder.test.TestChainHolder;
-import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.databinding.SingleItemTestChainBinding;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -73,7 +73,7 @@ public class TestChainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setActive(TestChainHolder holder, ChainModel model) {
-        if (!model.getId().equals("") && model.getId().equals(((TestActivity) activity).sampleAnswers.id)) {
+        if (!model.getId().equals("") && model.getId().equals(((ActivityTest) activity).sampleAnswers.id)) {
             InitManager.txtColorAppearance(activity, holder.binding.titleTextView, activity.getResources().getColor(R.color.risloo500), R.style.danaDemiBold);
             InitManager.imgResTintBackground(activity, holder.binding.activeImageView, R.drawable.ic_chevron_circle_left_solid, R.color.risloo500, 0);
         } else if (!model.getStatus().equals("") && !model.getStatus().equals("seald") && !model.getStatus().equals("open")) {

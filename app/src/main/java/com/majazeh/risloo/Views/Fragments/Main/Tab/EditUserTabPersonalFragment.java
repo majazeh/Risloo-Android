@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserTabPersonalBinding;
 import com.mre.ligheh.API.Response;
@@ -65,11 +65,11 @@ public class EditUserTabPersonalFragment extends Fragment {
     }
 
     private void initializer() {
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalNameHeader));
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalMobileHeader));
@@ -96,19 +96,19 @@ public class EditUserTabPersonalFragment extends Fragment {
     private void listener() {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.nameIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.mobileIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.mobileIncludeLayout.inputEditText);
             return false;
         });
 
         binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.emailIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.emailIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.emailIncludeLayout.inputEditText);
             return false;
         });
 
@@ -166,19 +166,19 @@ public class EditUserTabPersonalFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
             if (binding.mobileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
             if (binding.emailErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView);
             if (binding.birthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView);
             if (binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
             if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
             if (binding.genderErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.editTextView.getRoot());
@@ -260,27 +260,27 @@ public class EditUserTabPersonalFragment extends Fragment {
         if (current instanceof EditUserFragment) {
             UserModel model = ((EditUserFragment) current).userModel;
 
-            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalMobile(model))
+            if (((ActivityMain) requireActivity()).permissoon.showEditUserTabPersonalMobile(model))
                 binding.mobileIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.mobileIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalEmail(model))
+            if (((ActivityMain) requireActivity()).permissoon.showEditUserTabPersonalEmail(model))
                 binding.emailIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.emailIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalBirthday())
+            if (((ActivityMain) requireActivity()).permissoon.showEditUserTabPersonalBirthday())
                 binding.birthdayIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.birthdayIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalStatus(model))
+            if (((ActivityMain) requireActivity()).permissoon.showEditUserTabPersonalStatus(model))
                 binding.statusIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.statusIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalType(model))
+            if (((ActivityMain) requireActivity()).permissoon.showEditUserTabPersonalType(model))
                 binding.typeIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.typeIncludeLayout.getRoot().setVisibility(View.GONE);
@@ -338,7 +338,7 @@ public class EditUserTabPersonalFragment extends Fragment {
 
         setHashmap();
 
-        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getUserModel().getId())) {
+        if (Objects.equals(data.get("id"), ((ActivityMain) requireActivity()).singleton.getUserModel().getId())) {
             Auth.editProfile(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -347,8 +347,8 @@ public class EditUserTabPersonalFragment extends Fragment {
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.params(userModel);
-                            ((MainActivity) requireActivity()).setData();
+                            ((ActivityMain) requireActivity()).singleton.params(userModel);
+                            ((ActivityMain) requireActivity()).setData();
 
                             DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
@@ -375,25 +375,25 @@ public class EditUserTabPersonalFragment extends Fragment {
 
                                             switch (key) {
                                                 case "name":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "mobile":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "email":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "birthday":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "status":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "type":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "gender":
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
+                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 
@@ -451,25 +451,25 @@ public class EditUserTabPersonalFragment extends Fragment {
 
                                         switch (key) {
                                             case "name":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "mobile":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "email":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "birthday":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "status":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "type":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                             case "gender":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                                 break;
                                         }
                                     }

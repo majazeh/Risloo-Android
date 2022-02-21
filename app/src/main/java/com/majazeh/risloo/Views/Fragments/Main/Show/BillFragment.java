@@ -14,7 +14,7 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableTimeAdapter;
 import com.majazeh.risloo.databinding.FragmentBillBinding;
 import com.mre.ligheh.API.Response;
@@ -60,7 +60,7 @@ public class BillFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.timesHeaderLayout.titleTextView.setText(getResources().getString(R.string.TimeAdapterHeader));
 

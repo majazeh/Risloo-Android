@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderTreasuryHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableTreasuryHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableTreasuryBinding;
@@ -98,11 +98,11 @@ public class TableTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void listener(TableTreasuryHolder holder, TreasuriesModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToCreateTreasuryFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToCreateTreasuryFragment(model);
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToEditTreasuryFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToEditTreasuryFragment(model);
         }).widget(holder.binding.editImageView);
     }
 

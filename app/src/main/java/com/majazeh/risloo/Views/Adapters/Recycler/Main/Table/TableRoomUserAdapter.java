@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderRoomUserHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableRoomUserHolder;
 import com.majazeh.risloo.views.fragments.main.index.RoomUsersFragment;
@@ -98,13 +98,13 @@ public class TableRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     private void initializer(TableRoomUserHolder holder) {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     private void listener(TableRoomUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof RoomUsersFragment)
-                ((MainActivity) activity).navigatoon.navigateToReferenceFragment(((RoomUsersFragment) current).roomModel, model);
+                ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((RoomUsersFragment) current).roomModel, model);
 
         }).widget(holder.binding.getRoot());
     }

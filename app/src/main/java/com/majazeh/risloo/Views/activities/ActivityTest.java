@@ -49,7 +49,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class TestActivity extends AppCompatActivity {
+public class ActivityTest extends AppCompatActivity {
 
     // Binding
     private ActivityTestBinding binding;
@@ -195,14 +195,14 @@ public class TestActivity extends AppCompatActivity {
                         return;
                     }
 
-                    SnackManager.showDefaultSnack(TestActivity.this, getResources().getString(R.string.SnackSampleNull));
-                    IntentManager.finish(TestActivity.this);
+                    SnackManager.showDefaultSnack(ActivityTest.this, getResources().getString(R.string.SnackSampleNull));
+                    IntentManager.finish(ActivityTest.this);
                 });
             }
 
             @Override
             public void onFailure(String response) {
-                runOnUiThread(() -> IntentManager.finish(TestActivity.this));
+                runOnUiThread(() -> IntentManager.finish(ActivityTest.this));
             }
         });
     }
@@ -494,8 +494,8 @@ public class TestActivity extends AppCompatActivity {
 
                     DialogManager.dismissLoadingDialog();
 
-                    SnackManager.showSuccesSnack(TestActivity.this, getResources().getString(R.string.SnackSampleClosed));
-                    IntentManager.finish(TestActivity.this);
+                    SnackManager.showSuccesSnack(ActivityTest.this, getResources().getString(R.string.SnackSampleClosed));
+                    IntentManager.finish(ActivityTest.this);
                 });
             }
 
@@ -520,7 +520,7 @@ public class TestActivity extends AppCompatActivity {
                                 }
                             }
 
-                            SnackManager.showErrorSnack(TestActivity.this, allErrors.substring(0, allErrors.length() - 1));
+                            SnackManager.showErrorSnack(ActivityTest.this, allErrors.substring(0, allErrors.length() - 1));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -18,7 +18,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableRoomUserAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomUsersBinding;
 import com.mre.ligheh.API.Response;
@@ -71,7 +71,7 @@ public class RoomUsersFragment extends Fragment {
         data = new HashMap<>();
         data.put("page", 1);
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomUsersFragmentTitle));
 
@@ -85,7 +85,7 @@ public class RoomUsersFragment extends Fragment {
     private void listener() {
         binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.searchIncludeLayout.searchEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.searchIncludeLayout.searchEditText);
             return false;
         });
 
@@ -132,7 +132,7 @@ public class RoomUsersFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToCreateRoomUserFragment(roomModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateRoomUserFragment(roomModel);
         }).widget(binding.addImageView.getRoot());
     }
 

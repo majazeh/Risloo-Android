@@ -48,7 +48,7 @@
 
         <!-- Codes For App Activities -->
         <activity
-            android:name=".views.activities.SplashActivity"
+            android:name=".views.activities.ActivitySplash"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/LauncherTheme">
@@ -59,10 +59,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.activities.AuthActivity"
+            android:name=".views.activities.ActivityAuth"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".views.activities.MainActivity"
+            android:name=".views.activities.ActivityMain"
             android:exported="true"
             android:screenOrientation="portrait">
 
@@ -78,10 +78,10 @@
 
         </activity>
         <activity
-            android:name=".views.activities.DisplayActivity"
+            android:name=".views.activities.ActivityDisplay"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".views.activities.TestActivity"
+            android:name=".views.activities.ActivityTest"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.squareup.picasso.Picasso;
 
-public class DisplayActivity extends AppCompatActivity {
+public class ActivityDisplay extends AppCompatActivity {
 
     // Binding
     private ActivityDisplayBinding binding;

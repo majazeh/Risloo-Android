@@ -19,8 +19,8 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.AuthActivity;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityAuth;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.sheet.SheetScaleAdapter;
 import com.majazeh.risloo.databinding.BottomSheetBulkSampleBinding;
 import com.mre.ligheh.API.Response;
@@ -79,7 +79,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.scaleIncludeLayout.headerTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleScaleHeader));
         binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleNicknameHeader));
@@ -93,7 +93,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
     private void listener() {
         binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.nicknameIncludeLayout.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.nicknameIncludeLayout.inputEditText);
             return false;
         });
 
@@ -103,7 +103,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.nicknameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.hideValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
+                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.entryTextView.getRoot());
@@ -243,7 +243,7 @@ public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
                                     }
 
                                     if (key.equals("nickname"))
-                                        ((AuthActivity) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                        ((ActivityAuth) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                 }
 
                                 SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));

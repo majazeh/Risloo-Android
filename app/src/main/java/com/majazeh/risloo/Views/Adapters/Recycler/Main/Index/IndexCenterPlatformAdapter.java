@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexCenterPlatformHolder;
 import com.majazeh.risloo.views.fragments.main.index.CenterPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexCenterPlatformBinding;
@@ -89,11 +89,11 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
     }
 
     private void initializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -104,7 +104,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
 
         CustomClickView.onClickListener(() -> {
             if (current instanceof CenterPlatformsFragment)
-                ((MainActivity) activity).navigatoon.navigateToEditPlatformFragment(((CenterPlatformsFragment) current).centerModel, model);
+                ((ActivityMain) activity).navigatoon.navigateToEditPlatformFragment(((CenterPlatformsFragment) current).centerModel, model);
 
         }).widget(holder.binding.editImageView);
 

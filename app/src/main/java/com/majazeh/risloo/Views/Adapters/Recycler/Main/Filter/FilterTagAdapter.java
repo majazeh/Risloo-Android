@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Filter.FilterTagHolder;
 import com.majazeh.risloo.views.fragments.main.show.RoomFragment;
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
@@ -70,7 +70,7 @@ public class FilterTagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void intializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     private void listener(FilterTagHolder holder, TagModel model) {

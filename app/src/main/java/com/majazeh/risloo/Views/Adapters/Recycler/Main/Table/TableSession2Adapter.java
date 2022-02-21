@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSession2Holder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableSession2Holder;
 import com.majazeh.risloo.databinding.HeaderItemTableSession2Binding;
@@ -109,7 +109,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     private void initializer(TableSession2Holder holder) {
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
         InitManager.input8sspSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
     }
@@ -117,7 +117,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableSession2Holder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToSessionFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToSessionFragment(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.statusSpinner.setOnTouchListener((v, event) -> {
@@ -146,7 +146,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
         });
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToEditSessionFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToEditSessionFragment(model);
         }).widget(holder.binding.editImageView);
     }
 

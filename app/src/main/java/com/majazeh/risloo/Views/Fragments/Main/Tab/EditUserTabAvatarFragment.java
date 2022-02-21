@@ -19,7 +19,7 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
 import com.mre.ligheh.API.Response;
@@ -67,11 +67,11 @@ public class EditUserTabAvatarFragment extends Fragment {
     }
 
     private void initializer() {
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserTabAvatarAvatarGuide));
 
@@ -151,7 +151,7 @@ public class EditUserTabAvatarFragment extends Fragment {
 
         setHashmap();
 
-        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getUserModel().getId())) {
+        if (Objects.equals(data.get("id"), ((ActivityMain) requireActivity()).singleton.getUserModel().getId())) {
             Auth.changeAvatar(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -160,8 +160,8 @@ public class EditUserTabAvatarFragment extends Fragment {
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.params(userModel);
-                            ((MainActivity) requireActivity()).setData();
+                            ((ActivityMain) requireActivity()).singleton.params(userModel);
+                            ((ActivityMain) requireActivity()).setData();
 
                             DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
@@ -199,7 +199,7 @@ public class EditUserTabAvatarFragment extends Fragment {
                                         }
 
                                         if (key.equals("avatar"))
-                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                     }
 
                                     SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
@@ -253,7 +253,7 @@ public class EditUserTabAvatarFragment extends Fragment {
                                         }
 
                                         if (key.equals("avatar"))
-                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                     }
 
                                     SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));

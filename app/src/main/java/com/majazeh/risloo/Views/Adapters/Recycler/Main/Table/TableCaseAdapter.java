@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderCaseHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableCaseHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableCaseBinding;
@@ -94,7 +94,7 @@ public class TableCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void listener(TableCaseHolder holder, CaseModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToCaseFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToCaseFragment(model);
         }).widget(holder.binding.getRoot());
     }
 

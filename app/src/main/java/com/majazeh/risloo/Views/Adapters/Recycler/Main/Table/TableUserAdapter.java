@@ -15,7 +15,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderUserHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableUserHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableUserBinding;
@@ -101,7 +101,7 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToUserFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToUserFragment(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
@@ -122,9 +122,9 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     else if (pos.contains("@"))
                         IntentManager.email(activity, new String[]{pos}, "", "", "");
                     else if (pos.equals("ورود به کاربری"))
-                        ((MainActivity) activity).setUser("loginOtherUser", model.getId());
+                        ((ActivityMain) activity).setUser("loginOtherUser", model.getId());
                     else if (pos.equals("ویرایش"))
-                        ((MainActivity) activity).navigatoon.navigateToEditUserFragment(model);
+                        ((ActivityMain) activity).navigatoon.navigateToEditUserFragment(model);
 
                     parent.setSelection(parent.getAdapter().getCount());
 

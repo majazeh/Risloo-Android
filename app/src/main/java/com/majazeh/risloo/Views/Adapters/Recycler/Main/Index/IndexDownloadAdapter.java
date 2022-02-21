@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexDownloadHolder;
 import com.majazeh.risloo.views.fragments.main.index.DownloadsFragment;
 import com.majazeh.risloo.databinding.SingleItemIndexDownloadBinding;
@@ -81,7 +81,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
     }
 
     private void initializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     private void listener(IndexDownloadHolder holder, File file) {
@@ -90,7 +90,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                 IntentManager.file(activity, file);
             } else if (file.getName().contains("X1")) {
                 if (current instanceof DownloadsFragment)
-                    ((MainActivity) activity).navigatoon.navigateToFolderFragment(file.getName());
+                    ((ActivityMain) activity).navigatoon.navigateToFolderFragment(file.getName());
 
             } else {
                 IntentManager.file(activity, file);

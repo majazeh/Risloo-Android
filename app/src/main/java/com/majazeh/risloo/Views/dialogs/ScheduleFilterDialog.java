@@ -19,7 +19,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.ParamsManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.dialog.DialogFilterAdapter;
 import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
 import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
@@ -78,7 +78,7 @@ public class ScheduleFilterDialog extends AppCompatDialogFragment {
         filterRoomAdapter = new DialogFilterAdapter(requireActivity());
         filterStatusAdapter = new DialogFilterAdapter(requireActivity());
 
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.roomRecyclerView, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._4sdp), 0, 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.statusRecyclerView, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._4sdp), 0, 0);

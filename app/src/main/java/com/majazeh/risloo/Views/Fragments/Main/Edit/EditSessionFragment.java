@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.tab.EditSessionAdapter;
 import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabPaymentFragment;
 import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabPlatformFragment;
@@ -68,7 +68,7 @@ public class EditSessionFragment extends Fragment {
     private void initializer() {
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
     }
 
     private void setArgs() {
@@ -103,11 +103,11 @@ public class EditSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
-        time = ((MainActivity) requireActivity()).fragmont.getEditSessionTabTime();
-        reference = ((MainActivity) requireActivity()).fragmont.getEditSessionTabReference(hasCase);
-        session = ((MainActivity) requireActivity()).fragmont.getEditSessionTabSession(hasCase);
-        platform = ((MainActivity) requireActivity()).fragmont.getEditSessionTabPlatform(hasCase);
-        payment = ((MainActivity) requireActivity()).fragmont.getEditSessionTagPayment(hasCase);
+        time = ((ActivityMain) requireActivity()).fragmont.getEditSessionTabTime();
+        reference = ((ActivityMain) requireActivity()).fragmont.getEditSessionTabReference(hasCase);
+        session = ((ActivityMain) requireActivity()).fragmont.getEditSessionTabSession(hasCase);
+        platform = ((ActivityMain) requireActivity()).fragmont.getEditSessionTabPlatform(hasCase);
+        payment = ((ActivityMain) requireActivity()).fragmont.getEditSessionTagPayment(hasCase);
 
         // Time Data
         if (time instanceof EditSessionTabTimeFragment)
@@ -168,7 +168,7 @@ public class EditSessionFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
 
-                        ((MainActivity) requireActivity()).navigatoon.navigateUp();
+                        ((ActivityMain) requireActivity()).navigatoon.navigateUp();
                     });
                 }
             }

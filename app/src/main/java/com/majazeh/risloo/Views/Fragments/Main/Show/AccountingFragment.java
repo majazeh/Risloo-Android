@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.databinding.FragmentAccountingBinding;
 
 public class AccountingFragment extends Fragment {
@@ -43,19 +43,19 @@ public class AccountingFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToTreasuriesFragment();
+            ((ActivityMain) requireActivity()).navigatoon.navigateToTreasuriesFragment();
         }).widget(binding.treasuriesIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToBillingsFragment();
+            ((ActivityMain) requireActivity()).navigatoon.navigateToBillingsFragment();
         }).widget(binding.billingsIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToBanksFragment(null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToBanksFragment(null);
         }).widget(binding.banksIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToPaymentsFragment(null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToPaymentsFragment(null);
         }).widget(binding.paymentsIncludeLayout.getRoot());
     }
 

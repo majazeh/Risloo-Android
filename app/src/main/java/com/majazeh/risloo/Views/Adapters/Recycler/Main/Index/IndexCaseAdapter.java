@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexCaseHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexCaseBinding;
 import com.mre.ligheh.Model.Madule.List;
@@ -72,7 +72,7 @@ public class IndexCaseAdapter extends RecyclerView.Adapter<IndexCaseHolder> {
 
     private void listener(IndexCaseHolder holder, CaseModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToCaseFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToCaseFragment(model);
         }).widget(holder.binding.getRoot());
     }
 

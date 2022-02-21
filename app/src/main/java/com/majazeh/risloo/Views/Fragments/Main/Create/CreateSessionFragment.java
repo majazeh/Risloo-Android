@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.tab.CreateSessionAdapter;
 import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabPaymentFragment;
 import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabPlatformFragment;
@@ -74,7 +74,7 @@ public class CreateSessionFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
     }
 
     private void setArgs() {
@@ -105,10 +105,10 @@ public class CreateSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
-        time = ((MainActivity) requireActivity()).fragmont.getTime();
-        session = ((MainActivity) requireActivity()).fragmont.getSession();
-        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
-        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
+        time = ((ActivityMain) requireActivity()).fragmont.getTime();
+        session = ((ActivityMain) requireActivity()).fragmont.getSession();
+        platform = ((ActivityMain) requireActivity()).fragmont.getPlatform();
+        payment = ((ActivityMain) requireActivity()).fragmont.getPayment();
 
         // Time Data
         if (time instanceof CreateSessionTabTimeFragment)
@@ -163,7 +163,7 @@ public class CreateSessionFragment extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSession));
 
-                        ((MainActivity) requireActivity()).navigatoon.navigateToSessionFragment(sessionModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToSessionFragment(sessionModel);
                     });
                 }
             }

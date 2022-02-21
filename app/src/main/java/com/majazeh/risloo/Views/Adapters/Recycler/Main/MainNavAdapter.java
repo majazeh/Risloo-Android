@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.MainNavHolder;
 import com.majazeh.risloo.databinding.SingleItemMainNavBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -79,8 +79,8 @@ public class MainNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         CustomClickView.onDelayedListener(() -> {
             String title = holder.binding.nameTextView.getText().toString();
 
-            ((MainActivity) activity).setFragment(title);
-            ((MainActivity) activity).setDrawer("closeDrawer");
+            ((ActivityMain) activity).setFragment(title);
+            ((ActivityMain) activity).setDrawer("closeDrawer");
         }).widget(holder.itemView);
     }
 
@@ -117,16 +117,16 @@ public class MainNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public void setFocused(String value) {
         if (value.contains("نمونه\u200Cهای گروهی")) {
-            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+            if (((ActivityMain) activity).permissoon.showUsers(((ActivityMain) activity).singleton.getUserModel()) && ((ActivityMain) activity).permissoon.showBulkSamples(((ActivityMain) activity).singleton.getUserModel()))
                 selectedPosition = 5;
-            else if (((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+            else if (((ActivityMain) activity).permissoon.showBulkSamples(((ActivityMain) activity).singleton.getUserModel()))
                 selectedPosition = 4;
             else
                 selectedPosition = 10;
         }
 
         else if (value.contains("نمونه") || value.contains("نمونه\u200Cها")) {
-            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()))
+            if (((ActivityMain) activity).permissoon.showUsers(((ActivityMain) activity).singleton.getUserModel()))
                 selectedPosition = 4;
             else
                 selectedPosition = 3;
@@ -140,18 +140,18 @@ public class MainNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             selectedPosition = 3;
 
         else if (value.contains("ارزیابی\u200Cها")) {
-            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+            if (((ActivityMain) activity).permissoon.showUsers(((ActivityMain) activity).singleton.getUserModel()) && ((ActivityMain) activity).permissoon.showBulkSamples(((ActivityMain) activity).singleton.getUserModel()))
                 selectedPosition = 6;
-            else if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) || ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+            else if (((ActivityMain) activity).permissoon.showUsers(((ActivityMain) activity).singleton.getUserModel()) || ((ActivityMain) activity).permissoon.showBulkSamples(((ActivityMain) activity).singleton.getUserModel()))
                 selectedPosition = 5;
             else
                 selectedPosition = 10;
         }
 
         else if (value.contains("دانلودها")) {
-            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+            if (((ActivityMain) activity).permissoon.showUsers(((ActivityMain) activity).singleton.getUserModel()) && ((ActivityMain) activity).permissoon.showBulkSamples(((ActivityMain) activity).singleton.getUserModel()))
                 selectedPosition = 7;
-            else if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+            else if (((ActivityMain) activity).permissoon.showUsers(((ActivityMain) activity).singleton.getUserModel()) && ((ActivityMain) activity).permissoon.showBulkSamples(((ActivityMain) activity).singleton.getUserModel()))
                 selectedPosition = 6;
             else
                 selectedPosition = 10;

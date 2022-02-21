@@ -13,7 +13,7 @@ import androidx.navigation.NavDestination;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.create.ReserveScheduleFragmentArgs;
 import com.majazeh.risloo.views.fragments.main.edit.EditCenterFragmentArgs;
 import com.majazeh.risloo.views.fragments.main.edit.EditCenterUserFragmentArgs;
@@ -331,7 +331,7 @@ public class BreadCrumb {
             case R.id.referenceFragment: {
                 UserModel userModel = (UserModel) ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
 
-                if (((MainActivity) activity).singleton.getUserModel().getId().equals(userModel.getUserId())) {
+                if (((ActivityMain) activity).singleton.getUserModel().getId().equals(userModel.getUserId())) {
                     TypeModel centerModel = ReferenceFragmentArgs.fromBundle(arguments).getCenterModel();
 
                     if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
@@ -389,163 +389,163 @@ public class BreadCrumb {
             // -------------------- Drawer
 
             case R.id.dashboardFragment:
-                ((MainActivity) activity).navigatoon.navigateToDashboardFragment();
+                ((ActivityMain) activity).navigatoon.navigateToDashboardFragment();
                 break;
             case R.id.centersFragment:
-                ((MainActivity) activity).navigatoon.navigateToCentersFragment();
+                ((ActivityMain) activity).navigatoon.navigateToCentersFragment();
                 break;
             case R.id.casesFragment:
-                ((MainActivity) activity).navigatoon.navigateToCasesFragment();
+                ((ActivityMain) activity).navigatoon.navigateToCasesFragment();
                 break;
             case R.id.sessionsFragment:
-                ((MainActivity) activity).navigatoon.navigateToSessionsFragment();
+                ((ActivityMain) activity).navigatoon.navigateToSessionsFragment();
                 break;
             case R.id.usersFragment:
-                ((MainActivity) activity).navigatoon.navigateToUsersFragment();
+                ((ActivityMain) activity).navigatoon.navigateToUsersFragment();
                 break;
             case R.id.samplesFragment:
-                ((MainActivity) activity).navigatoon.navigateToSamplesFragment(chainId, sampleIds);
+                ((ActivityMain) activity).navigatoon.navigateToSamplesFragment(chainId, sampleIds);
                 break;
             case R.id.bulkSamplesFragment:
-                ((MainActivity) activity).navigatoon.navigateToBulkSamplesFragment();
+                ((ActivityMain) activity).navigatoon.navigateToBulkSamplesFragment();
                 break;
             case R.id.scalesFragment:
-                ((MainActivity) activity).navigatoon.navigateToScalesFragment();
+                ((ActivityMain) activity).navigatoon.navigateToScalesFragment();
                 break;
             case R.id.documentsFragment:
-                ((MainActivity) activity).navigatoon.navigateToDocumentsFragment();
+                ((ActivityMain) activity).navigatoon.navigateToDocumentsFragment();
                 break;
             case R.id.downloadsFragment:
-                ((MainActivity) activity).navigatoon.navigateToDownloadsFragment();
+                ((ActivityMain) activity).navigatoon.navigateToDownloadsFragment();
                 break;
 
             // -------------------- Toolbar
 
             case R.id.meFragment:
-                ((MainActivity) activity).navigatoon.navigateToMeFragment(((MainActivity) activity).singleton.getUserModel());
+                ((ActivityMain) activity).navigatoon.navigateToMeFragment(((ActivityMain) activity).singleton.getUserModel());
                 break;
             case R.id.accountingFragment:
-                ((MainActivity) activity).navigatoon.navigateToAccountingFragment();
+                ((ActivityMain) activity).navigatoon.navigateToAccountingFragment();
                 break;
             case R.id.paymentsFragment:
-                ((MainActivity) activity).navigatoon.navigateToPaymentsFragment(null);
+                ((ActivityMain) activity).navigatoon.navigateToPaymentsFragment(null);
                 break;
 
             // -------------------- Index
 
             case R.id.balancesFragment:
                 if (roomType.equals("counseling_center"))
-                    ((MainActivity) activity).navigatoon.navigateToBalancesFragment(centerModel);
+                    ((ActivityMain) activity).navigatoon.navigateToBalancesFragment(centerModel);
                 else
-                    ((MainActivity) activity).navigatoon.navigateToBalancesFragment(roomModel);
+                    ((ActivityMain) activity).navigatoon.navigateToBalancesFragment(roomModel);
 
                 break;
             case R.id.banksFragment:
-                ((MainActivity) activity).navigatoon.navigateToBanksFragment(null);
+                ((ActivityMain) activity).navigatoon.navigateToBanksFragment(null);
                 break;
             case R.id.billingsFragment:
-                ((MainActivity) activity).navigatoon.navigateToBillingsFragment();
+                ((ActivityMain) activity).navigatoon.navigateToBillingsFragment();
                 break;
             case R.id.centerPlatformsFragment:
-                ((MainActivity) activity).navigatoon.navigateToCenterPlatformsFragment(centerModel);
+                ((ActivityMain) activity).navigatoon.navigateToCenterPlatformsFragment(centerModel);
                 break;
             case R.id.centerSchedulesFragment:
-                ((MainActivity) activity).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                ((ActivityMain) activity).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                 break;
             case R.id.centerTagsFragment:
-                ((MainActivity) activity).navigatoon.navigateToCenterTagsFragment(centerModel);
+                ((ActivityMain) activity).navigatoon.navigateToCenterTagsFragment(centerModel);
                 break;
             case R.id.centerUsersFragment:
-                ((MainActivity) activity).navigatoon.navigateToCenterUsersFragment(centerModel);
+                ((ActivityMain) activity).navigatoon.navigateToCenterUsersFragment(centerModel);
                 break;
             case R.id.clientReportsFragment:
                 if (clientReportsType.equals("case"))
-                    ((MainActivity) activity).navigatoon.navigateToClientReportsFragment(caseModel);
+                    ((ActivityMain) activity).navigatoon.navigateToClientReportsFragment(caseModel);
                 else
-                    ((MainActivity) activity).navigatoon.navigateToClientReportsFragment(sessionModel);
+                    ((ActivityMain) activity).navigatoon.navigateToClientReportsFragment(sessionModel);
 
             break;
             case R.id.commissionsFragment:
                 if (roomType.equals("counseling_center"))
-                    ((MainActivity) activity).navigatoon.navigateToCommissionsFragment(centerModel);
+                    ((ActivityMain) activity).navigatoon.navigateToCommissionsFragment(centerModel);
                 else
-                    ((MainActivity) activity).navigatoon.navigateToCommissionsFragment(roomModel);
+                    ((ActivityMain) activity).navigatoon.navigateToCommissionsFragment(roomModel);
 
                 break;
             case R.id.roomPlatformsFragment:
-                ((MainActivity) activity).navigatoon.navigateToRoomPlatformsFragment(roomModel);
+                ((ActivityMain) activity).navigatoon.navigateToRoomPlatformsFragment(roomModel);
                 break;
             case R.id.roomSchedulesFragment:
-                ((MainActivity) activity).navigatoon.navigateToRoomSchedulesFragment(roomModel);
+                ((ActivityMain) activity).navigatoon.navigateToRoomSchedulesFragment(roomModel);
                 break;
             case R.id.roomTagsFragment:
-                ((MainActivity) activity).navigatoon.navigateToRoomTagsFragment(roomModel);
+                ((ActivityMain) activity).navigatoon.navigateToRoomTagsFragment(roomModel);
                 break;
             case R.id.roomUsersFragment:
-                ((MainActivity) activity).navigatoon.navigateToRoomUsersFragment(roomModel);
+                ((ActivityMain) activity).navigatoon.navigateToRoomUsersFragment(roomModel);
                 break;
             case R.id.roomsFragment:
-                ((MainActivity) activity).navigatoon.navigateToRoomsFragment(centerModel);
+                ((ActivityMain) activity).navigatoon.navigateToRoomsFragment(centerModel);
                 break;
             case R.id.treasuriesFragment:
-                ((MainActivity) activity).navigatoon.navigateToTreasuriesFragment();
+                ((ActivityMain) activity).navigatoon.navigateToTreasuriesFragment();
                 break;
 
             // -------------------- Show
 
             case R.id.billFragment:
-                ((MainActivity) activity).navigatoon.navigateToBillFragment(billingModel);
+                ((ActivityMain) activity).navigatoon.navigateToBillFragment(billingModel);
                 break;
             case R.id.bulkSampleFragment:
-                ((MainActivity) activity).navigatoon.navigateToBulkSampleFragment(bulkSampleModel);
+                ((ActivityMain) activity).navigatoon.navigateToBulkSampleFragment(bulkSampleModel);
                 break;
             case R.id.caseFragment:
-                ((MainActivity) activity).navigatoon.navigateToCaseFragment(caseModel);
+                ((ActivityMain) activity).navigatoon.navigateToCaseFragment(caseModel);
                 break;
             case R.id.centerAccountingFragment:
                 if (roomType.equals("counseling_center"))
-                    ((MainActivity) activity).navigatoon.navigateToCenterAccountingFragment(centerModel);
+                    ((ActivityMain) activity).navigatoon.navigateToCenterAccountingFragment(centerModel);
                 else
-                    ((MainActivity) activity).navigatoon.navigateToCenterAccountingFragment(roomModel);
+                    ((ActivityMain) activity).navigatoon.navigateToCenterAccountingFragment(roomModel);
 
                 break;
             case R.id.centerFragment:
-                ((MainActivity) activity).navigatoon.navigateToCenterFragment(centerModel);
+                ((ActivityMain) activity).navigatoon.navigateToCenterFragment(centerModel);
                 break;
             case R.id.folderFragment:
-                ((MainActivity) activity).navigatoon.navigateToFolderFragment(folderName);
+                ((ActivityMain) activity).navigatoon.navigateToFolderFragment(folderName);
                 break;
             case R.id.referenceFragment:
                 if (referenceType.equals("user"))
-                    ((MainActivity) activity).navigatoon.navigateToReferenceFragment(centerModel, userModel);
+                    ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(centerModel, userModel);
                 else if (referenceType.equals("center"))
-                    ((MainActivity) activity).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) activity).singleton.getUserModel());
+                    ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(centerModel, ((ActivityMain) activity).singleton.getUserModel());
                 else
-                    ((MainActivity) activity).navigatoon.navigateToReferenceFragment(roomModel, ((MainActivity) activity).singleton.getUserModel());
+                    ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(roomModel, ((ActivityMain) activity).singleton.getUserModel());
 
                 break;
             case R.id.roomFragment:
                 if (roomType.equals("room"))
-                    ((MainActivity) activity).navigatoon.navigateToRoomFragment(roomModel);
+                    ((ActivityMain) activity).navigatoon.navigateToRoomFragment(roomModel);
                 else
-                    ((MainActivity) activity).navigatoon.navigateToRoomFragment(centerModel);
+                    ((ActivityMain) activity).navigatoon.navigateToRoomFragment(centerModel);
 
                 break;
             case R.id.sampleFragment:
-                ((MainActivity) activity).navigatoon.navigateToSampleFragment(sampleModel);
+                ((ActivityMain) activity).navigatoon.navigateToSampleFragment(sampleModel);
                 break;
             case R.id.sessionFragment:
                 if (sessionType.equals("session"))
-                    ((MainActivity) activity).navigatoon.navigateToSessionFragment(sessionModel);
+                    ((ActivityMain) activity).navigatoon.navigateToSessionFragment(sessionModel);
                 else
-                    ((MainActivity) activity).navigatoon.navigateToSessionFragment(scheduleModel);
+                    ((ActivityMain) activity).navigatoon.navigateToSessionFragment(scheduleModel);
 
                 break;
             case R.id.treasuryFragment:
-                ((MainActivity) activity).navigatoon.navigateToTreasuryFragment(treasuriesModel);
+                ((ActivityMain) activity).navigatoon.navigateToTreasuryFragment(treasuriesModel);
                 break;
             case R.id.userFragment:
-                ((MainActivity) activity).navigatoon.navigateToUserFragment(userModel);
+                ((ActivityMain) activity).navigatoon.navigateToUserFragment(userModel);
                 break;
         }
     }
@@ -1783,7 +1783,7 @@ public class BreadCrumb {
             list = roomUsers();
 
         if (referenceType.equals("user")) {
-            if (userModel != null && userModel.getId() != null && userModel.getId().equals(((MainActivity) activity).singleton.getUserModel().getId()))
+            if (userModel != null && userModel.getId() != null && userModel.getId().equals(((ActivityMain) activity).singleton.getUserModel().getId()))
                 list.add(activity.getResources().getString(R.string.MeFragmentTitle));
             else if (userModel != null && userModel.getName() != null && !userModel.getName().equals(""))
                 list.add(userModel.getName());

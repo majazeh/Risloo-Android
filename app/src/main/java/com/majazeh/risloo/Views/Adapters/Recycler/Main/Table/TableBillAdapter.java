@@ -21,7 +21,7 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderBillHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableBillHolder;
 import com.majazeh.risloo.views.fragments.main.index.BillingsFragment;
@@ -126,11 +126,11 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void initializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
     }
 
     private void setWidget(HeaderBillHolder holder) {
@@ -140,7 +140,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableBillHolder holder, BillingModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToBillFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToBillFragment(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
@@ -199,7 +199,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         // Settled
         if (model.getType().equals("creditor")) {
             String debtorId = model.getDebtor().getId();
-            UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
+            UserModel userModel = ((ActivityMain) activity).singleton.getUserModel();
 
             if (userModel.getTreasuries() != null) {
                 for (TypeModel typeModel : userModel.getTreasuries().data()) {
@@ -219,7 +219,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             String centerId = ((SessionFragment) current).sessionModel.getRoom().getCenter().getId();
 
             if (model.getType().equals("creditor")) {
-                UserModel userModel = ((MainActivity) activity).singleton.getUserModel();
+                UserModel userModel = ((ActivityMain) activity).singleton.getUserModel();
 
                 if (userModel.getCenters() != null) {
                     for (TypeModel typeModel : userModel.getCenters().data()) {

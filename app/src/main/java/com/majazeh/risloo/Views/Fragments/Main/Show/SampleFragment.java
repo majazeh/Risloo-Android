@@ -20,7 +20,7 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexProfileAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableGenAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableItemAdapter;
@@ -92,7 +92,7 @@ public class SampleFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.halfsHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHalfHeader));
         binding.extrasHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
@@ -752,7 +752,7 @@ public class SampleFragment extends Fragment {
 
     public void sendPre(int key, String value) {
         sampleAnswers.addToPrerequisites(key, value);
-        sampleAnswers.sendPrerequisites(((MainActivity) requireActivity()).singleton.getToken(), new Response() {
+        sampleAnswers.sendPrerequisites(((ActivityMain) requireActivity()).singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {
@@ -775,7 +775,7 @@ public class SampleFragment extends Fragment {
 
     public void sendItem(int key, String value) {
         sampleAnswers.add(key, value);
-        sampleAnswers.sendRequest(((MainActivity) requireActivity()).singleton.getToken(), new Response() {
+        sampleAnswers.sendRequest(((ActivityMain) requireActivity()).singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {

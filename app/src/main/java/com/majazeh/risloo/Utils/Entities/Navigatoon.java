@@ -12,9 +12,9 @@ import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.NavigationTestDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.views.activities.AuthActivity;
-import com.majazeh.risloo.views.activities.MainActivity;
-import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.ActivityAuth;
+import com.majazeh.risloo.views.activities.ActivityMain;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.Objects;
@@ -32,11 +32,11 @@ public class Navigatoon {
     public Navigatoon(@NonNull Activity activity, @NonNull NavHostFragment navHostFragment) {
         navController = navHostFragment.getNavController();
 
-        if (activity instanceof AuthActivity)
+        if (activity instanceof ActivityAuth)
             navGraph = navController.getNavInflater().inflate(R.navigation.navigation_auth);
-        else if (activity instanceof MainActivity)
+        else if (activity instanceof ActivityMain)
             navGraph = navController.getNavInflater().inflate(R.navigation.navigation_main);
-        else if (activity instanceof TestActivity)
+        else if (activity instanceof ActivityTest)
             navGraph = navController.getNavInflater().inflate(R.navigation.navigation_test);
     }
 

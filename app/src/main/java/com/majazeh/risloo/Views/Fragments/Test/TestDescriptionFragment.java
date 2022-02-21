@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.utils.managers.AnimateManager;
-import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.databinding.FragmentTestDescriptionBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 
@@ -34,7 +34,7 @@ public class TestDescriptionFragment extends Fragment {
     }
 
     private void setArgs() {
-        FormModel formModel = ((TestActivity) requireActivity()).formModel;
+        FormModel formModel = ((ActivityTest) requireActivity()).formModel;
         setData(formModel);
     }
 

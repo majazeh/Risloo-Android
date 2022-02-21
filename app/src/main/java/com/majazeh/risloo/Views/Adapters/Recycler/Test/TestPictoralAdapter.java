@@ -13,7 +13,7 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilStringAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilStringCallback;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.views.adapters.holder.test.TestPictoralHolder;
 import com.majazeh.risloo.databinding.SingleItemTestPictoralBinding;
 import com.squareup.picasso.Picasso;
@@ -86,7 +86,7 @@ public class TestPictoralAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             resetItems();
 
-            ((TestActivity) activity).sendItem(key, String.valueOf(answer + 1));
+            ((ActivityTest) activity).sendItem(key, String.valueOf(answer + 1));
         }).widget(holder.itemView);
     }
 

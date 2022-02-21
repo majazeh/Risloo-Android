@@ -25,7 +25,7 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.ParamsManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.dialog.DialogSearchableAdapter;
 import com.majazeh.risloo.views.fragments.main.create.CreateCaseFragment;
 import com.majazeh.risloo.views.fragments.main.create.CreateCaseUserFragment;
@@ -119,14 +119,14 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private void initializer() {
         searchableAdapter = new DialogSearchableAdapter(requireActivity());
 
-        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-        child = ((MainActivity) requireActivity()).fragmont.getChild();
+        current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
+        child = ((ActivityMain) requireActivity()).fragmont.getChild();
 
         handler = new Handler();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
@@ -135,7 +135,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private void listener() {
         binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.inputEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.inputEditText);
             return false;
         });
 

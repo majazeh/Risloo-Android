@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.tab.EditUserAdapter;
 import com.majazeh.risloo.databinding.FragmentEditUserBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -98,7 +98,7 @@ public class EditUserFragment extends Fragment {
 
         tabLayoutMediator.attach();
 
-        if (((MainActivity) requireActivity()).navigatoon.getBackstackDestinationId() == R.id.dashboardFragment) {
+        if (((ActivityMain) requireActivity()).navigatoon.getBackstackDestinationId() == R.id.dashboardFragment) {
             binding.viewPager.getRoot().setCurrentItem(1);
         }
     }

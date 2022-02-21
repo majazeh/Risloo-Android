@@ -19,7 +19,7 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldMultiHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldSelectHolder;
@@ -153,14 +153,14 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     private void intializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableFieldTextHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable && MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
+                ((ActivityMain) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 
@@ -168,7 +168,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (current instanceof SampleFragment)
                 ((SampleFragment) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
 
-            ((MainActivity) activity).inputon.clear(((MainActivity) activity).inputon.editText);
+            ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
             return false;
         });
     }
@@ -177,7 +177,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private void listener(TableFieldMultiHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable && MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                ((MainActivity) activity).inputon.select(holder.binding.inputEditText);
+                ((ActivityMain) activity).inputon.select(holder.binding.inputEditText);
             return false;
         });
 
@@ -185,7 +185,7 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (current instanceof SampleFragment)
                 ((SampleFragment) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
 
-            ((MainActivity) activity).inputon.clear(((MainActivity) activity).inputon.editText);
+            ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
             return false;
         });
     }

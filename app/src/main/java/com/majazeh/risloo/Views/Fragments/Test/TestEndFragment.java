@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.AnimateManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.TestActivity;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
@@ -48,11 +48,11 @@ public class TestEndFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onDelayedListener(() -> ((TestActivity) requireActivity()).closeSample()).widget(binding.endTextView.getRoot());
+        CustomClickView.onDelayedListener(() -> ((ActivityTest) requireActivity()).closeSample()).widget(binding.endTextView.getRoot());
     }
 
     private void setArgs() {
-        SampleModel sampleModel = ((TestActivity) requireActivity()).sampleModel;
+        SampleModel sampleModel = ((ActivityTest) requireActivity()).sampleModel;
         setData(sampleModel);
     }
 

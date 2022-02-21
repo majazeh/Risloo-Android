@@ -14,7 +14,7 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexCenterHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexCenterBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -73,9 +73,9 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void listener(IndexCenterHolder holder, CenterModel model) {
         CustomClickView.onClickListener(() -> {
             if (model.getType().equals("counseling_center"))
-                ((MainActivity) activity).navigatoon.navigateToCenterFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToCenterFragment(model);
             else
-                ((MainActivity) activity).navigatoon.navigateToRoomFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToRoomFragment(model);
 
         }).widget(holder.binding.getRoot());
     }

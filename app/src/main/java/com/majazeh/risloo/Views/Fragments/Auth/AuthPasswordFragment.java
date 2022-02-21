@@ -22,7 +22,7 @@ import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.AuthActivity;
+import com.majazeh.risloo.views.activities.ActivityAuth;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
@@ -77,7 +77,7 @@ public class AuthPasswordFragment extends Fragment {
     private void listener() {
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.passwordIncludeLayout.inputEditText.hasFocus())
-                ((AuthActivity) requireActivity()).inputon.select(binding.passwordIncludeLayout.inputEditText);
+                ((ActivityAuth) requireActivity()).inputon.select(binding.passwordIncludeLayout.inputEditText);
             return false;
         });
 
@@ -143,20 +143,20 @@ public class AuthPasswordFragment extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
                 if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                    ((ActivityAuth) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
 
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthLoginFragment()).widget(binding.loginLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthLoginFragment()).widget(binding.loginLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthRegisterFragment()).widget(binding.registerLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthRegisterFragment()).widget(binding.registerLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment()).widget(binding.passwordRecoverLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment()).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setArgs() {
@@ -205,15 +205,15 @@ public class AuthPasswordFragment extends Fragment {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
                                 case "mobileCode":
-                                    ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPinFragment(model);
+                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPinFragment(model);
                                     break;
                                 case "recovery":
-                                    ((AuthActivity) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
+                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
                                     break;
                             }
                         } else {
-                            ((AuthActivity) requireActivity()).singleton.login(model);
-                            ((AuthActivity) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), password);
+                            ((ActivityAuth) requireActivity()).singleton.login(model);
+                            ((ActivityAuth) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), password);
 
                             IntentManager.main(requireActivity());
                         }
@@ -250,7 +250,7 @@ public class AuthPasswordFragment extends Fragment {
                                     }
 
                                     if (key.equals("password"))
-                                        ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                        ((ActivityAuth) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                 }
 
                                 SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));

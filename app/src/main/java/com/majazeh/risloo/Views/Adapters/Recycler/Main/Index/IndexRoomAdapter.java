@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.interfaces.ItemTouchHelperAdapter;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexRoomHolder;
 import com.majazeh.risloo.views.fragments.main.index.RoomsFragment;
 import com.majazeh.risloo.views.fragments.main.show.DashboardFragment;
@@ -91,17 +91,17 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
     }
 
     private void initializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
+        current = ((ActivityMain) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(IndexRoomHolder holder, RoomModel model) {
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToRoomFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToRoomFragment(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {

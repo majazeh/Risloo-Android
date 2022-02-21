@@ -11,7 +11,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderTransactionHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableTransactionHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableTransactionBinding;
@@ -103,7 +103,7 @@ public class TableTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) activity).navigatoon.navigateToBillFragment(model.getBilling());
+            ((ActivityMain) activity).navigatoon.navigateToBillFragment(model.getBilling());
         }).widget(holder.binding.billImageView);
     }
 

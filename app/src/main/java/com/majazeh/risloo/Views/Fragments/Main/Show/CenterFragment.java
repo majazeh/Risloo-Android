@@ -24,7 +24,7 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.MainActivity;
+import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterBinding;
 import com.mre.ligheh.API.Response;
@@ -84,7 +84,7 @@ public class CenterFragment extends Fragment {
         data = new HashMap<>();
         data.put("page", 1);
         header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
         binding.roomsHeaderLayout.titleTextView.setText(getResources().getString(R.string.RoomAdapterHeader));
 
@@ -108,25 +108,25 @@ public class CenterFragment extends Fragment {
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
                 case "اعضاء":
-                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
                     break;
                 case "برنامه درمانی":
-                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                     break;
                 case "پروفایل من":
-                    ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((ActivityMain) requireActivity()).singleton.getUserModel());
                     break;
                 case "ویرایش":
-                    ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
                     break;
                 case "محل برگزاری جلسات":
-                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
                     break;
                 case "اتاق\u200Cهای درمان":
-                    ((MainActivity) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
                     break;
                 case "حسابداری":
-                    ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
                     break;
             }
         }).widget(binding.menuSpinner.selectImageView);
@@ -147,25 +147,25 @@ public class CenterFragment extends Fragment {
 
                     switch (pos) {
                         case "اعضاء":
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
                             break;
                         case "برنامه درمانی":
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
                             break;
                         case "پروفایل من":
-                            ((MainActivity) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((MainActivity) requireActivity()).singleton.getUserModel());
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((ActivityMain) requireActivity()).singleton.getUserModel());
                             break;
                         case "ویرایش":
-                            ((MainActivity) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
                             break;
                         case "محل برگزاری جلسات":
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
                             break;
                         case "اتاق\u200Cهای درمان":
-                            ((MainActivity) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
                             break;
                         case "حسابداری":
-                            ((MainActivity) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
                             break;
                     }
 
@@ -185,13 +185,13 @@ public class CenterFragment extends Fragment {
             if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest)))
                 doWork();
             else
-                ((MainActivity) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
 
         }).widget(binding.actionTextView.getRoot());
 
         binding.roomsSearchLayout.searchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.roomsSearchLayout.searchEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputon.select(binding.roomsSearchLayout.searchEditText);
+                ((ActivityMain) requireActivity()).inputon.select(binding.roomsSearchLayout.searchEditText);
             return false;
         });
 
@@ -244,7 +244,7 @@ public class CenterFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((MainActivity) requireActivity()).navigatoon.navigateToCreateRoomFragment(centerModel, null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateRoomFragment(centerModel, null);
         }).widget(binding.roomsAddView.getRoot());
     }
 
@@ -363,7 +363,7 @@ public class CenterFragment extends Fragment {
     private void setDropdown(String status) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((ActivityMain) requireActivity()).permissoon.showCenterDropdownUsers(((ActivityMain) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
 
         if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest)))
@@ -372,13 +372,13 @@ public class CenterFragment extends Fragment {
         if (!binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest)))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
 
-        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((ActivityMain) requireActivity()).permissoon.showCenterDropdownEdit(((ActivityMain) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
 
-        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((ActivityMain) requireActivity()).permissoon.showCenterDropdownPlatforms(((ActivityMain) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentSessionPlatforms));
 
-        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownRooms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((ActivityMain) requireActivity()).permissoon.showCenterDropdownRooms(((ActivityMain) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentRooms));
 
 //        if (((MainActivity) requireActivity()).permissoon.showCenterDropdownAccounting(((MainActivity) requireActivity()).singleton.getUserModel(), status))
@@ -419,7 +419,7 @@ public class CenterFragment extends Fragment {
     }
 
     private void setPermission(String status) {
-        if (((MainActivity) requireActivity()).permissoon.showCenterCreateRoom(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((ActivityMain) requireActivity()).permissoon.showCenterCreateRoom(((ActivityMain) requireActivity()).singleton.getUserModel(), status))
             binding.roomsAddView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.roomsAddView.getRoot().setVisibility(View.GONE);
