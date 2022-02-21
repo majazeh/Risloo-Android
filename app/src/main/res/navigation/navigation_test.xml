@@ -3,61 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_test"
-    app:startDestination="@id/testPsyDescFragment"
+    app:startDestination="@id/fragmentTestPsyDesc"
     tools:ignore="ExtraText">
 
     ---------- // Fragments
 
     <fragment
-        android:id="@+id/testChainFragment"
+        android:id="@+id/fragmentTestChain"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestChain"
         android:label="@string/ChainFragmentTitle"
         tools:layout="@layout/fragment_test_chain" />
 
     <fragment
-        android:id="@+id/testDescriptionFragment"
+        android:id="@+id/fragmentTestDescription"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestDescription"
         android:label="@string/DescriptionFragmentTitle"
         tools:layout="@layout/fragment_test_description" />
 
     <fragment
-        android:id="@+id/testEndFragment"
+        android:id="@+id/fragmentTestEnd"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestEnd"
         android:label="@string/EndFragmentTitle"
         tools:layout="@layout/fragment_test_end" />
 
     <fragment
-        android:id="@+id/testEntityFragment"
+        android:id="@+id/fragmentTestEntity"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestEntity"
         android:label="@string/EntityFragmentTitle"
         tools:layout="@layout/fragment_test_entity" />
 
     <fragment
-        android:id="@+id/testDescriptiveFragment"
+        android:id="@+id/fragmentTestDescriptive"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestDescriptive"
         android:label="@string/DescriptiveFragmentTitle"
         tools:layout="@layout/fragment_test_descriptive" />
 
     <fragment
-        android:id="@+id/testOptionalFragment"
+        android:id="@+id/fragmentTestOptional"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestOptional"
         android:label="@string/OptionalFragmentTitle"
         tools:layout="@layout/fragment_test_optional" />
 
     <fragment
-        android:id="@+id/testPictoralFragment"
+        android:id="@+id/fragmentTestPictoral"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestPictoral"
         android:label="@string/PictoralFragmentTitle"
         tools:layout="@layout/fragment_test_pictoral" />
 
     <fragment
-        android:id="@+id/testPrerequisiteFragment"
+        android:id="@+id/fragmentTestPrerequisite"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestPrerequisite"
         android:label="@string/PrerequisiteFragmentTitle"
         tools:layout="@layout/fragment_test_prerequisite" />
 
     <fragment
-        android:id="@+id/testPsyDescFragment"
+        android:id="@+id/fragmentTestPsyDesc"
         android:name="com.majazeh.risloo.views.fragments.test.FragmentTestPsyDesc"
         android:label="@string/PsyDescFragmentTitle"
         tools:layout="@layout/fragment_test_psy_desc" />
@@ -65,39 +65,39 @@
     ---------- // Actions
 
     <action
-        android:id="@+id/action_global_testChainFragment"
-        app:destination="@id/testChainFragment" />
+        android:id="@+id/action_global_fragmentTestChain"
+        app:destination="@id/fragmentTestChain" />
 
     <action
-        android:id="@+id/action_global_testDescriptionFragment"
-        app:destination="@id/testDescriptionFragment" />
+        android:id="@+id/action_global_fragmentTestDescription"
+        app:destination="@id/fragmentTestDescription" />
 
     <action
-        android:id="@+id/action_global_testEndFragment"
-        app:destination="@id/testEndFragment" />
+        android:id="@+id/action_global_fragmentTestEnd"
+        app:destination="@id/fragmentTestEnd" />
 
     <action
-        android:id="@+id/action_global_testEntityFragment"
-        app:destination="@id/testEntityFragment" />
+        android:id="@+id/action_global_fragmentTestEntity"
+        app:destination="@id/fragmentTestEntity" />
 
     <action
-        android:id="@+id/action_global_testDescriptiveFragment"
-        app:destination="@id/testDescriptiveFragment" />
+        android:id="@+id/action_global_fragmentTestDescriptive"
+        app:destination="@id/fragmentTestDescriptive" />
 
     <action
-        android:id="@+id/action_global_testOptionalFragment"
-        app:destination="@id/testOptionalFragment" />
+        android:id="@+id/action_global_fragmentTestOptional"
+        app:destination="@id/fragmentTestOptional" />
 
     <action
-        android:id="@+id/action_global_testPictoralFragment"
-        app:destination="@id/testPictoralFragment" />
+        android:id="@+id/action_global_fragmentTestPictoral"
+        app:destination="@id/fragmentTestPictoral" />
 
     <action
-        android:id="@+id/action_global_testPrerequisiteFragment"
-        app:destination="@id/testPrerequisiteFragment" />
+        android:id="@+id/action_global_fragmentTestPrerequisite"
+        app:destination="@id/fragmentTestPrerequisite" />
 
     <action
-        android:id="@+id/action_global_testPsyDescFragment"
-        app:destination="@id/testPsyDescFragment" />
+        android:id="@+id/action_global_fragmentTestPsyDesc"
+        app:destination="@id/fragmentTestPsyDesc" />
 
 </navigation>

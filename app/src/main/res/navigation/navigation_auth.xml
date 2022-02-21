@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_auth"
-    app:startDestination="@id/authLoginFragment"
+    app:startDestination="@id/fragmentAuthLogin"
     tools:ignore="ExtraText">
 
     ---------- // Fragments
 
     <fragment
-        android:id="@+id/authLoginFragment"
+        android:id="@+id/fragmentAuthLogin"
         android:name="com.majazeh.risloo.views.fragments.auth.FragmentAuthLogin"
         android:label="@string/LoginFragmentTitle"
         tools:layout="@layout/fragment_auth_login" />
 
     <fragment
-        android:id="@+id/authPasswordChangeFragment"
+        android:id="@+id/fragmentAuthPasswordChange"
         android:name="com.majazeh.risloo.views.fragments.auth.FragmentAuthPasswordChange"
         android:label="@string/PasswordChangeFragmentTitle"
         tools:layout="@layout/fragment_auth_password_change" >
@@ -25,7 +25,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/authPasswordFragment"
+        android:id="@+id/fragmentAuthPassword"
         android:name="com.majazeh.risloo.views.fragments.auth.FragmentAuthPassword"
         android:label="@string/PasswordFragmentTitle"
         tools:layout="@layout/fragment_auth_password" >
@@ -35,13 +35,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/authPasswordRecoverFragment"
+        android:id="@+id/fragmentAuthPasswordRecover"
         android:name="com.majazeh.risloo.views.fragments.auth.FragmentAuthPasswordRecover"
         android:label="@string/PasswordRecoverFragmentTitle"
         tools:layout="@layout/fragment_auth_password_recover" />
 
     <fragment
-        android:id="@+id/authPinFragment"
+        android:id="@+id/fragmentAuthPin"
         android:name="com.majazeh.risloo.views.fragments.auth.FragmentAuthPin"
         android:label="@string/PinFragmentTitle"
         tools:layout="@layout/fragment_auth_pin" >
@@ -51,13 +51,13 @@
     </fragment>
 
     <fragment
-        android:id="@+id/authRegisterFragment"
+        android:id="@+id/fragmentAuthRegister"
         android:name="com.majazeh.risloo.views.fragments.auth.FragmentAuthRegister"
         android:label="@string/RegisterFragmentTitle"
         tools:layout="@layout/fragment_auth_register" />
 
     <fragment
-        android:id="@+id/authSerialFragment"
+        android:id="@+id/fragmentAuthSerial"
         android:name="com.majazeh.risloo.views.fragments.auth.FragmentAuthSerial"
         android:label="@string/SerialFragmentTitle"
         tools:layout="@layout/fragment_auth_serial" />
@@ -65,9 +65,9 @@
     ---------- // Actions
 
     <action
-        android:id="@+id/action_global_authLoginFragment"
-        app:destination="@id/authLoginFragment"
-        app:popUpTo="@id/authLoginFragment"
+        android:id="@+id/action_global_fragmentAuthLogin"
+        app:destination="@id/fragmentAuthLogin"
+        app:popUpTo="@id/fragmentAuthLogin"
         app:popUpToInclusive="true"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
@@ -75,48 +75,48 @@
         app:popExitAnim="@anim/slide_out_left" />
 
     <action
-        android:id="@+id/action_global_authPasswordChangeFragment"
-        app:destination="@id/authPasswordChangeFragment"
+        android:id="@+id/action_global_fragmentAuthPasswordChange"
+        app:destination="@id/fragmentAuthPasswordChange"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left" />
 
     <action
-        android:id="@+id/action_global_authPasswordFragment"
-        app:destination="@id/authPasswordFragment"
+        android:id="@+id/action_global_fragmentAuthPassword"
+        app:destination="@id/fragmentAuthPassword"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left" />
 
     <action
-        android:id="@+id/action_global_authPasswordRecoverFragment"
-        app:destination="@id/authPasswordRecoverFragment"
+        android:id="@+id/action_global_fragmentAuthPasswordRecover"
+        app:destination="@id/fragmentAuthPasswordRecover"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left" />
 
     <action
-        android:id="@+id/action_global_authPinFragment"
-        app:destination="@id/authPinFragment"
+        android:id="@+id/action_global_fragmentAuthPin"
+        app:destination="@id/fragmentAuthPin"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left" />
 
     <action
-        android:id="@+id/action_global_authRegisterFragment"
-        app:destination="@id/authRegisterFragment"
+        android:id="@+id/action_global_fragmentAuthRegister"
+        app:destination="@id/fragmentAuthRegister"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left" />
 
     <action
-        android:id="@+id/action_global_authSerialFragment"
-        app:destination="@id/authSerialFragment"
+        android:id="@+id/action_global_fragmentAuthSerial"
+        app:destination="@id/fragmentAuthSerial"
         app:enterAnim="@anim/slide_in_left"
         app:exitAnim="@anim/slide_out_right"
         app:popEnterAnim="@anim/slide_in_right"

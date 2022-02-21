@@ -140,7 +140,7 @@ public class FragmentAuthSerial extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((ActivityAuth) requireActivity()).singleton.logout();
-                            ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthLoginFragment();
+                            ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthLogin();
 
                             DialogManager.dismissLoadingDialog();
                         });

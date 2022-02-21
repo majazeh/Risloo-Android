@@ -256,19 +256,19 @@ public class ActivityTest extends AppCompatActivity {
 
         switch (formModel.getType()) {
             case "psychologist_description":
-                navigatoon.setStartDestinationId(R.id.testPsyDescFragment);
+                navigatoon.setStartDestinationId(R.id.fragmentTestPsyDesc);
                 break;
             case "chain":
-                navigatoon.setStartDestinationId(R.id.testChainFragment);
+                navigatoon.setStartDestinationId(R.id.fragmentTestChain);
                 break;
             case "prerequisites":
-                navigatoon.setStartDestinationId(R.id.testPrerequisiteFragment);
+                navigatoon.setStartDestinationId(R.id.fragmentTestPrerequisite);
                 break;
             case "description":
-                navigatoon.setStartDestinationId(R.id.testDescriptionFragment);
+                navigatoon.setStartDestinationId(R.id.fragmentTestDescription);
                 break;
             case "entities":
-                navigatoon.setStartDestinationId(R.id.testEntityFragment);
+                navigatoon.setStartDestinationId(R.id.fragmentTestEntity);
                 break;
             case "item":
                 ItemModel itemModel = (ItemModel) formModel.getObject();
@@ -276,13 +276,13 @@ public class ActivityTest extends AppCompatActivity {
                 switch (itemModel.getType()) {
                     case "text":
                         if (itemModel.getAnswer().getType().equals("descriptive"))
-                            navigatoon.setStartDestinationId(R.id.testDescriptiveFragment);
+                            navigatoon.setStartDestinationId(R.id.fragmentTestDescriptive);
                         else
-                            navigatoon.setStartDestinationId(R.id.testOptionalFragment);
+                            navigatoon.setStartDestinationId(R.id.fragmentTestOptional);
 
                         break;
                     case "image_url":
-                        navigatoon.setStartDestinationId(R.id.testPictoralFragment);
+                        navigatoon.setStartDestinationId(R.id.fragmentTestPictoral);
                         break;
                 }
 
@@ -318,25 +318,25 @@ public class ActivityTest extends AppCompatActivity {
     }
 
     private void setFramgent() {
-        if (navigatoon.getCurrentDestinationId() == R.id.testPrerequisiteFragment) {
+        if (navigatoon.getCurrentDestinationId() == R.id.fragmentTestPrerequisite) {
             sendPre();
         }
 
         switch (formModel.getType()) {
             case "psychologist_description":
-                navigatoon.navigateToTestPsyDescFragment();
+                navigatoon.navigateToFragmentTestPsyDesc();
                 break;
             case "chain":
-                navigatoon.navigateToTestChainFragment();
+                navigatoon.navigateToFragmentTestChain();
                 break;
             case "prerequisites":
-                navigatoon.navigateToTestPrerequisiteFragment();
+                navigatoon.navigateToFragmentTestPrerequisite();
                 break;
             case "description":
-                navigatoon.navigateToTestDescriptionFragment();
+                navigatoon.navigateToFragmentTestDescription();
                 break;
             case "entities":
-                navigatoon.navigateToTestEntityFragment();
+                navigatoon.navigateToFragmentTestEntity();
                 break;
             case "item":
                 ItemModel itemModel = (ItemModel) formModel.getObject();
@@ -344,19 +344,19 @@ public class ActivityTest extends AppCompatActivity {
                 switch (itemModel.getType()) {
                     case "text":
                         if (itemModel.getAnswer().getType().equals("descriptive"))
-                            navigatoon.navigateToTestDescriptiveFragment();
+                            navigatoon.navigateToFragmentTestDescriptive();
                         else
-                            navigatoon.navigateToTestOptionalFragment();
+                            navigatoon.navigateToFragmentTestOptional();
 
                         break;
                     case "image_url":
-                        navigatoon.navigateToTestPictoralFragment();
+                        navigatoon.navigateToFragmentTestPictoral();
                         break;
                 }
 
                 break;
             case "close":
-                navigatoon.navigateToTestEndFragment();
+                navigatoon.navigateToFragmentTestEnd();
                 break;
         }
     }
@@ -368,7 +368,7 @@ public class ActivityTest extends AppCompatActivity {
 
             binding.nextImageView.setClickable(true);
             binding.nextImageView.setAlpha(1F);
-        } else if (navigatoon.getCurrentDestinationId() == R.id.testEndFragment) {
+        } else if (navigatoon.getCurrentDestinationId() == R.id.fragmentTestEnd) {
             binding.prevImageView.setClickable(true);
             binding.prevImageView.setAlpha(1F);
 

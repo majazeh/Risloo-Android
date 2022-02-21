@@ -46,38 +46,38 @@ public class Navigatoon {
 
     // -------------------- Auth
 
-    public void navigateToAuthLoginFragment() {
-        NavDirections action = NavigationAuthDirections.actionGlobalAuthLoginFragment();
+    public void navigateToFragmentAuthLogin() {
+        NavDirections action = NavigationAuthDirections.actionGlobalFragmentAuthLogin();
         navController.navigate(action);
     }
 
-    public void navigateToAuthPasswordChangeFragment(TypeModel typeModel) {
-        NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(typeModel);
+    public void navigateToFragmentAuthPasswordChange(TypeModel typeModel) {
+        NavDirections action = NavigationAuthDirections.actionGlobalFragmentAuthPasswordChange(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToAuthPasswordFragment(TypeModel typeModel) {
-        NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(typeModel);
+    public void navigateToFragmentAuthPassword(TypeModel typeModel) {
+        NavDirections action = NavigationAuthDirections.actionGlobalFragmentAuthPassword(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToAuthPasswordRecoverFragment() {
-        NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordRecoverFragment();
+    public void navigateToFragmentAuthPasswordRecover() {
+        NavDirections action = NavigationAuthDirections.actionGlobalFragmentAuthPasswordRecover();
         navController.navigate(action);
     }
 
-    public void navigateToAuthPinFragment(TypeModel typeModel) {
-        NavDirections action = NavigationAuthDirections.actionGlobalAuthPinFragment(typeModel);
+    public void navigateToFragmentAuthPin(TypeModel typeModel) {
+        NavDirections action = NavigationAuthDirections.actionGlobalFragmentAuthPin(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToAuthRegisterFragment() {
-        NavDirections action = NavigationAuthDirections.actionGlobalAuthRegisterFragment();
+    public void navigateToFragmentAuthRegister() {
+        NavDirections action = NavigationAuthDirections.actionGlobalFragmentAuthRegister();
         navController.navigate(action);
     }
 
-    public void navigateToAuthSerialFragment() {
-        NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
+    public void navigateToFragmentAuthSerial() {
+        NavDirections action = NavigationAuthDirections.actionGlobalFragmentAuthSerial();
         navController.navigate(action);
     }
 
@@ -411,48 +411,48 @@ public class Navigatoon {
 
     // -------------------- Test
 
-    public void navigateToTestChainFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestChainFragment();
+    public void navigateToFragmentTestChain() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestChain();
         navController.navigate(action);
     }
 
-    public void navigateToTestDescriptionFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestDescriptionFragment();
+    public void navigateToFragmentTestDescription() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestDescription();
         navController.navigate(action);
     }
 
-    public void navigateToTestEndFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestEndFragment();
+    public void navigateToFragmentTestEnd() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestEnd();
         navController.navigate(action);
     }
 
-    public void navigateToTestEntityFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestEntityFragment();
+    public void navigateToFragmentTestEntity() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestEntity();
         navController.navigate(action);
     }
 
-    public void navigateToTestDescriptiveFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestDescriptiveFragment();
+    public void navigateToFragmentTestDescriptive() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestDescriptive();
         navController.navigate(action);
     }
 
-    public void navigateToTestOptionalFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestOptionalFragment();
+    public void navigateToFragmentTestOptional() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestOptional();
         navController.navigate(action);
     }
 
-    public void navigateToTestPictoralFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestPictoralFragment();
+    public void navigateToFragmentTestPictoral() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestPictoral();
         navController.navigate(action);
     }
 
-    public void navigateToTestPrerequisiteFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestPrerequisiteFragment();
+    public void navigateToFragmentTestPrerequisite() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestPrerequisite();
         navController.navigate(action);
     }
 
-    public void navigateToTestPsyDescFragment() {
-        NavDirections action = NavigationTestDirections.actionGlobalTestPsyDescFragment();
+    public void navigateToFragmentTestPsyDesc() {
+        NavDirections action = NavigationTestDirections.actionGlobalFragmentTestPsyDesc();
         navController.navigate(action);
     }
 

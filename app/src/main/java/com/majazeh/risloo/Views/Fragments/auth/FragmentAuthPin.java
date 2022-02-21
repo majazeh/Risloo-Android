@@ -143,17 +143,17 @@ public class FragmentAuthPin extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-            ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthLoginFragment();
+            ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthLogin();
         }).widget(binding.loginLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-            ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthRegisterFragment();
+            ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthRegister();
         }).widget(binding.registerLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             countDownTimer.cancel();
-            ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment();
+            ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthPasswordRecover();
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
@@ -230,10 +230,10 @@ public class FragmentAuthPin extends Fragment {
                             if (model.getUser() == null) {
                                 switch (model.getTheory()) {
                                     case "password":
-                                        ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
+                                        ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthPassword(model);
                                         break;
                                     case "recovery":
-                                        ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
+                                        ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthPasswordChange(model);
                                         break;
                                 }
                             } else {

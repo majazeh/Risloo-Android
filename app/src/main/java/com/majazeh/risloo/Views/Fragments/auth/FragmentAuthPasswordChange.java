@@ -152,11 +152,11 @@ public class FragmentAuthPasswordChange extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthLoginFragment()).widget(binding.loginLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthLogin()).widget(binding.loginLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthRegisterFragment()).widget(binding.registerLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthRegister()).widget(binding.registerLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment()).widget(binding.passwordRecoverLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthPasswordRecover()).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setArgs() {
@@ -205,10 +205,10 @@ public class FragmentAuthPasswordChange extends Fragment {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
                                 case "password":
-                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
+                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthPassword(model);
                                     break;
                                 case "mobileCode":
-                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPinFragment(model);
+                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthPin(model);
                                     break;
                             }
                         } else {

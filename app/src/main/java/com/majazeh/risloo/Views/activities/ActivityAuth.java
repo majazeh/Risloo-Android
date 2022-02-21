@@ -89,11 +89,11 @@ public class ActivityAuth extends AppCompatActivity {
     private void setExtra() {
         if (extras != null) {
             if (extras.getString("theory").equals("recover"))
-                navigatoon.setStartDestinationId(R.id.authPasswordRecoverFragment);
+                navigatoon.setStartDestinationId(R.id.fragmentAuthPasswordRecover);
             else if (extras.getString("theory").equals("register"))
-                navigatoon.setStartDestinationId(R.id.authRegisterFragment);
+                navigatoon.setStartDestinationId(R.id.fragmentAuthRegister);
             else
-                navigatoon.setStartDestinationId(R.id.authLoginFragment);
+                navigatoon.setStartDestinationId(R.id.fragmentAuthLogin);
         }
     }
 
@@ -116,7 +116,7 @@ public class ActivityAuth extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (navigatoon.getCurrentDestinationId() != navigatoon.getStartDestinationId() && navigatoon.getCurrentDestinationId() != R.id.authSerialFragment)
+        if (navigatoon.getCurrentDestinationId() != navigatoon.getStartDestinationId() && navigatoon.getCurrentDestinationId() != R.id.fragmentAuthSerial)
             navigatoon.navigateUp();
         else
             IntentManager.finish(this);
