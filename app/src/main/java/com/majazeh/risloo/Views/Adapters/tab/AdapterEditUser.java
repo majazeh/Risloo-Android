@@ -12,12 +12,12 @@ import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabPersonal;
 
 import java.util.HashMap;
 
-public class EditUserAdapter extends FragmentStateAdapter {
+public class AdapterEditUser extends FragmentStateAdapter {
 
     // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    public EditUserAdapter(@NonNull FragmentActivity fragment) {
+    public AdapterEditUser(@NonNull FragmentActivity fragment) {
         super(fragment);
     }
 

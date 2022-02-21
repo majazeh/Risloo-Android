@@ -13,7 +13,7 @@ import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabTime;
 
 import java.util.HashMap;
 
-public class EditSessionAdapter extends FragmentStateAdapter {
+public class AdapterEditSession extends FragmentStateAdapter {
 
     // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
@@ -21,7 +21,7 @@ public class EditSessionAdapter extends FragmentStateAdapter {
     // Vars
     private boolean hasCase;
 
-    public EditSessionAdapter(@NonNull FragmentActivity fragment, boolean hasCase) {
+    public AdapterEditSession(@NonNull FragmentActivity fragment, boolean hasCase) {
         super(fragment);
         this.hasCase = hasCase;
     }

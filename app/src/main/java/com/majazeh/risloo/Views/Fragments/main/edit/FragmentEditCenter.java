@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.adapters.tab.EditCenterAdapter;
+import com.majazeh.risloo.views.adapters.tab.AdapterEditCenter;
 import com.majazeh.risloo.databinding.FragmentEditCenterBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -31,7 +31,7 @@ public class FragmentEditCenter extends Fragment {
     public FragmentEditCenterBinding binding;
 
     // Adapters
-    public EditCenterAdapter adapter;
+    public AdapterEditCenter adapter;
 
     // Models
     public CenterModel centerModel;
@@ -92,7 +92,7 @@ public class FragmentEditCenter extends Fragment {
             type = model.getType();
         }
 
-        adapter = new EditCenterAdapter(requireActivity(), type);
+        adapter = new AdapterEditCenter(requireActivity(), type);
         setTabLayout();
 
         binding.viewPager.getRoot().setAdapter(adapter);
@@ -106,7 +106,7 @@ public class FragmentEditCenter extends Fragment {
             type = model.getType();
         }
 
-        adapter = new EditCenterAdapter(requireActivity(), type);
+        adapter = new AdapterEditCenter(requireActivity(), type);
         setTabLayout();
 
         binding.viewPager.getRoot().setAdapter(adapter);

@@ -10,7 +10,7 @@ import com.majazeh.risloo.views.fragments.main.tab.FragmentEditCenterTabDetail;
 
 import java.util.HashMap;
 
-public class EditCenterAdapter extends FragmentStateAdapter {
+public class AdapterEditCenter extends FragmentStateAdapter {
 
     // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
@@ -18,7 +18,7 @@ public class EditCenterAdapter extends FragmentStateAdapter {
     // Vars
     private String type;
 
-    public EditCenterAdapter(@NonNull FragmentActivity fragment, String type) {
+    public AdapterEditCenter(@NonNull FragmentActivity fragment, String type) {
         super(fragment);
         this.type = type;
     }

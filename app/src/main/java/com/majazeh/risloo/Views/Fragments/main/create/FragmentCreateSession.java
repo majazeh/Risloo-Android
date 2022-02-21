@@ -15,7 +15,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.adapters.tab.CreateSessionAdapter;
+import com.majazeh.risloo.views.adapters.tab.AdapterCreateSession;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabPayment;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabPlatform;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabSession;
@@ -39,7 +39,7 @@ public class FragmentCreateSession extends Fragment {
     public FragmentCreateSessionBinding binding;
 
     // Adapters
-    public CreateSessionAdapter adapter;
+    public AdapterCreateSession adapter;
 
     // Models
     public CaseModel caseModel;
@@ -67,7 +67,7 @@ public class FragmentCreateSession extends Fragment {
     }
 
     private void initializer() {
-        adapter = new CreateSessionAdapter(requireActivity());
+        adapter = new AdapterCreateSession(requireActivity());
 
         tabs = getResources().getStringArray(R.array.CreateSessionTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));

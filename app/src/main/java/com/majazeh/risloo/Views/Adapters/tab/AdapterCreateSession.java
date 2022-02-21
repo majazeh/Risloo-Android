@@ -12,12 +12,12 @@ import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabTime;
 
 import java.util.HashMap;
 
-public class CreateSessionAdapter extends FragmentStateAdapter {
+public class AdapterCreateSession extends FragmentStateAdapter {
 
     // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    public CreateSessionAdapter(@NonNull FragmentActivity fragment) {
+    public AdapterCreateSession(@NonNull FragmentActivity fragment) {
         super(fragment);
     }
 

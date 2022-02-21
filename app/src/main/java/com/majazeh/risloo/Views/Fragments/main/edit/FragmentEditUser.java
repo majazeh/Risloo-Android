@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.adapters.tab.EditUserAdapter;
+import com.majazeh.risloo.views.adapters.tab.AdapterEditUser;
 import com.majazeh.risloo.databinding.FragmentEditUserBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -29,7 +29,7 @@ public class FragmentEditUser extends Fragment {
     public FragmentEditUserBinding binding;
 
     // Adapters
-    public EditUserAdapter adapter;
+    public AdapterEditUser adapter;
 
     // Models
     public UserModel userModel;
@@ -52,7 +52,7 @@ public class FragmentEditUser extends Fragment {
     }
 
     private void initializer() {
-        adapter = new EditUserAdapter(requireActivity());
+        adapter = new AdapterEditUser(requireActivity());
 
         ArrayList<Integer> images = new ArrayList<>();
 

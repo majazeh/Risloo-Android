@@ -13,12 +13,12 @@ import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabPaym
 
 import java.util.HashMap;
 
-public class CreateScheduleAdapter extends FragmentStateAdapter {
+public class AdapterCreateSchedule extends FragmentStateAdapter {
 
     // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    public CreateScheduleAdapter(@NonNull FragmentActivity fragment) {
+    public AdapterCreateSchedule(@NonNull FragmentActivity fragment) {
         super(fragment);
     }
 

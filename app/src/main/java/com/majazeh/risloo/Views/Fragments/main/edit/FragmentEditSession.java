@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.adapters.tab.EditSessionAdapter;
+import com.majazeh.risloo.views.adapters.tab.AdapterEditSession;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabPayment;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabPlatform;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabReference;
@@ -37,7 +37,7 @@ public class FragmentEditSession extends Fragment {
     public FragmentEditSessionBinding binding;
 
     // Adapters
-    public EditSessionAdapter adapter;
+    public AdapterEditSession adapter;
 
     // Models
     public SessionModel sessionModel;
@@ -94,7 +94,7 @@ public class FragmentEditSession extends Fragment {
             tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
         }
 
-        adapter = new EditSessionAdapter(requireActivity(), hasCase);
+        adapter = new AdapterEditSession(requireActivity(), hasCase);
 
         binding.viewPager.getRoot().setAdapter(adapter);
         binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());

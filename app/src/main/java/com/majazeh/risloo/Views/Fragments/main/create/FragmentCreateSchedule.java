@@ -15,7 +15,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.adapters.tab.CreateScheduleAdapter;
+import com.majazeh.risloo.views.adapters.tab.AdapterCreateSchedule;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabPayment;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabPlatform;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabReference;
@@ -40,7 +40,7 @@ public class FragmentCreateSchedule extends Fragment {
     public FragmentCreateScheduleBinding binding;
 
     // Adapters
-    public CreateScheduleAdapter adapter;
+    public AdapterCreateSchedule adapter;
 
     // Models
     public RoomModel roomModel;
@@ -68,7 +68,7 @@ public class FragmentCreateSchedule extends Fragment {
     }
 
     private void initializer() {
-        adapter = new CreateScheduleAdapter(requireActivity());
+        adapter = new AdapterCreateSchedule(requireActivity());
 
         tabs = getResources().getStringArray(R.array.CreateScheduleTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
