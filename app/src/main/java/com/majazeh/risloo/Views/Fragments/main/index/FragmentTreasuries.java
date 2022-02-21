@@ -87,7 +87,7 @@ public class FragmentTreasuries extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateTreasuryFragment(((ActivityMain) requireActivity()).singleton.getUserModel());
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateTreasury(((ActivityMain) requireActivity()).singleton.getUserModel());
         }).widget(binding.addImageView.getRoot());
     }
 

@@ -119,9 +119,9 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
                 else if (current instanceof FragmentRoomSchedules)
                     model.setTreasuries(((FragmentRoomSchedules) current).treasuries);
 
-                ((ActivityMain) activity).navigatoon.navigateToReserveScheduleFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToFragmentReserveSchedule(model);
             } else {
-                ((ActivityMain) activity).navigatoon.navigateToSessionFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToFragmentSession(model);
             }
         }).widget(holder.binding.getRoot());
     }

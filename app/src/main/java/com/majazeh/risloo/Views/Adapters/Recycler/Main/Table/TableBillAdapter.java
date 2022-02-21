@@ -140,7 +140,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableBillHolder holder, BillingModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToBillFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentBill(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
@@ -293,9 +293,9 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                 PaymentModel paymentModel = new PaymentModel(paymentObject);
 
                                 if (current instanceof FragmentBillings)
-                                    Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.billingsFragment);
+                                    Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.fragmentBillings);
                                 else if (current instanceof FragmentSession)
-                                    Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.sessionFragment);
+                                    Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.fragmentSession);
 
                                 PaymentManager.request(activity, paymentModel);
                             }

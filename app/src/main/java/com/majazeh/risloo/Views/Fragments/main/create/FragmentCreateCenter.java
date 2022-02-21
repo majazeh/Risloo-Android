@@ -281,7 +281,7 @@ public class FragmentCreateCenter extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCenter));
 
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToCenterFragment(centerModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenter(centerModel);
                     });
 
                     if (avatarFile != null)

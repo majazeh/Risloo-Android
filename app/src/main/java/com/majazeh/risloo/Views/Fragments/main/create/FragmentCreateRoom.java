@@ -153,7 +153,7 @@ public class FragmentCreateRoom extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoom));
 
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToRoomFragment(roomModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentRoom(roomModel);
                     });
                 }
             }

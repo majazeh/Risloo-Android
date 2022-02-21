@@ -83,329 +83,329 @@ public class Navigatoon {
 
     // -------------------- Create
 
-    public void navigateToCreateBillFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateBillFragment(typeModel);
+    public void navigateToFragmentCreateBill(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateBill(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateCaseFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(typeModel);
+    public void navigateToFragmentCreateCase(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateCase(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateCaseUserFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateCaseUserFragment(typeModel);
+    public void navigateToFragmentCreateCaseUser(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateCaseUser(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateCenterFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateCenterFragment(typeModel);
+    public void navigateToFragmentCreateCenter(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateCenter(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateCenterUserFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateCenterUserFragment(typeModel);
+    public void navigateToFragmentCreateCenterUser(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateCenterUser(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateClientReportFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateClientReportFragment(typeModel);
+    public void navigateToFragmentCreateClientReport(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateClientReport(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateDocumentFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateDocumentFragment(typeModel);
+    public void navigateToFragmentCreateDocument(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateDocument(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreatePlatformFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreatePlatformFragment(typeModel);
+    public void navigateToFragmentCreatePlatform(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreatePlatform(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreatePracticeFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment(typeModel);
+    public void navigateToFragmentCreatePractice(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreatePractice(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateRoomFragment(TypeModel centerModel, TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(centerModel, typeModel);
+    public void navigateToFragmentCreateRoom(TypeModel centerModel, TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateRoom(centerModel, typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateRoomUserFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateRoomUserFragment(typeModel);
+    public void navigateToFragmentCreateRoomUser(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateRoomUser(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateSampleFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment(typeModel);
+    public void navigateToFragmentCreateSample(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateSample(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateScheduleFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(typeModel);
+    public void navigateToFragmentCreateSchedule(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateSchedule(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateSessionFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateSessionFragment(typeModel);
+    public void navigateToFragmentCreateSession(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateSession(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateSessionUserFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateSessionUserFragment(typeModel);
+    public void navigateToFragmentCreateSessionUser(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateSessionUser(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateTreasuryFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateTreasuryFragment(typeModel);
+    public void navigateToFragmentCreateTreasury(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateTreasury(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCreateUserFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCreateUserFragment(typeModel);
+    public void navigateToFragmentCreateUser(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCreateUser(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToReserveScheduleFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(typeModel);
+    public void navigateToFragmentReserveSchedule(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentReserveSchedule(typeModel);
         navController.navigate(action);
     }
 
     // -------------------- Edit
 
-    public void navigateToEditCenterFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(typeModel);
+    public void navigateToFragmentEditCenter(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentEditCenter(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToEditCenterUserFragment(TypeModel centerModel, TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(centerModel, typeModel);
+    public void navigateToFragmentEditCenterUser(TypeModel centerModel, TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentEditCenterUser(centerModel, typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToEditPlatformFragment(TypeModel centerModel, TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(centerModel, typeModel);
+    public void navigateToFragmentEditPlatform(TypeModel centerModel, TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentEditPlatform(centerModel, typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToEditSessionFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(typeModel);
+    public void navigateToFragmentEditSession(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentEditSession(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToEditTreasuryFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalEditTreasuryFragment(typeModel);
+    public void navigateToFragmentEditTreasury(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentEditTreasury(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToEditUserFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(typeModel);
+    public void navigateToFragmentEditUser(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentEditUser(typeModel);
         navController.navigate(action);
     }
 
     // -------------------- Index
 
-    public void navigateToBalancesFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalBalancesFragment(typeModel);
+    public void navigateToFragmentBalances(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentBalances(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToBanksFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalBanksFragment(typeModel);
+    public void navigateToFragmentBanks(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentBanks(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToBillingsFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
+    public void navigateToFragmentBillings() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentBillings();
         navController.navigate(action);
     }
 
-    public void navigateToBulkSamplesFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalBulkSamplesFragment();
+    public void navigateToFragmentBulkSamples() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentBulkSamples();
         navController.navigate(action);
     }
 
-    public void navigateToCasesFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalCasesFragment();
+    public void navigateToFragmentCases() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCases();
         navController.navigate(action);
     }
 
-    public void navigateToCenterPlatformsFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(typeModel);
+    public void navigateToFragmentCenterPlatforms(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCenterPlatforms(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCenterSchedulesFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(typeModel);
+    public void navigateToFragmentCenterSchedules(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCenterSchedules(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCentersFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalCentersFragment();
+    public void navigateToFragmentCenters() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCenters();
         navController.navigate(action);
     }
 
-    public void navigateToCenterTagsFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(typeModel);
+    public void navigateToFragmentCenterTags(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCenterTags(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCenterUsersFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(typeModel);
+    public void navigateToFragmentCenterUsers(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCenterUsers(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToClientReportsFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment(typeModel);
+    public void navigateToFragmentClientReports(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentClientReports(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCommissionsFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCommissionsFragment(typeModel);
+    public void navigateToFragmentCommissions(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCommissions(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToDocumentsFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalDocumentsFragment();
+    public void navigateToFragmentDocuments() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentDocuments();
         navController.navigate(action);
     }
 
-    public void navigateToDownloadsFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalDownloadsFragment();
+    public void navigateToFragmentDownloads() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentDownloads();
         navController.navigate(action);
     }
 
-    public void navigateToPaymentsFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment(typeModel);
+    public void navigateToFragmentPayments(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentPayments(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToRoomPlatformsFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(typeModel);
+    public void navigateToFragmentRoomPlatforms(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentRoomPlatforms(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToRoomSchedulesFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(typeModel);
+    public void navigateToFragmentRoomSchedules(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentRoomSchedules(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToRoomsFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalRoomsFragment(typeModel);
+    public void navigateToFragmentRooms(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentRooms(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToRoomTagsFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(typeModel);
+    public void navigateToFragmentRoomTags(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentRoomTags(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToRoomUsersFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(typeModel);
+    public void navigateToFragmentRoomUsers(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentRoomUsers(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToSamplesFragment(String chainId, String[] samplesIds) {
-        NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment(chainId, samplesIds);
+    public void navigateToFragmentSamples(String chainId, String[] samplesIds) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentSamples(chainId, samplesIds);
         navController.navigate(action);
     }
 
-    public void navigateToScalesFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
+    public void navigateToFragmentScales() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentScales();
         navController.navigate(action);
     }
 
-    public void navigateToSessionsFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalSessionsFragment();
+    public void navigateToFragmentSessions() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentSessions();
         navController.navigate(action);
     }
 
-    public void navigateToTreasuriesFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
+    public void navigateToFragmentTreasuries() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentTreasuries();
         navController.navigate(action);
     }
 
-    public void navigateToUsersFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalUsersFragment();
+    public void navigateToFragmentUsers() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentUsers();
         navController.navigate(action);
     }
 
     // -------------------- Show
 
-    public void navigateToAccountingFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalAccountingFragment();
+    public void navigateToFragmentAccounting() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentAccounting();
         navController.navigate(action);
     }
 
-    public void navigateToBillFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalBillFragment(typeModel);
+    public void navigateToFragmentBill(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentBill(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToBulkSampleFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(typeModel);
+    public void navigateToFragmentBulkSample(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentBulkSample(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCaseFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(typeModel);
+    public void navigateToFragmentCase(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCase(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCenterAccountingFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCenterAccountingFragment(typeModel);
+    public void navigateToFragmentCenterAccounting(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCenterAccounting(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToCenterFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalCenterFragment(typeModel);
+    public void navigateToFragmentCenter(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentCenter(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToDashboardFragment() {
-        NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
+    public void navigateToFragmentDashboard() {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentDashboard();
         navController.navigate(action);
     }
 
-    public void navigateToFolderFragment(String folderName) {
-        NavDirections action = NavigationMainDirections.actionGlobalFolderFragment(folderName);
+    public void navigateToFragmentFolder(String folderName) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentFolder(folderName);
         navController.navigate(action);
     }
 
-    public void navigateToMeFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalMeFragment(typeModel);
+    public void navigateToFragmentMe(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentMe(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToReferenceFragment(TypeModel centerModel, TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerModel, typeModel);
+    public void navigateToFragmentReference(TypeModel centerModel, TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentReference(centerModel, typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToRoomFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(typeModel);
+    public void navigateToFragmentRoom(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentRoom(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToSampleFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(typeModel);
+    public void navigateToFragmentSample(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentSample(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToSessionFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(typeModel);
+    public void navigateToFragmentSession(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentSession(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToTreasuryFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(typeModel);
+    public void navigateToFragmentTreasury(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentTreasury(typeModel);
         navController.navigate(action);
     }
 
-    public void navigateToUserFragment(TypeModel typeModel) {
-        NavDirections action = NavigationMainDirections.actionGlobalUserFragment(typeModel);
+    public void navigateToFragmentUser(TypeModel typeModel) {
+        NavDirections action = NavigationMainDirections.actionGlobalFragmentUser(typeModel);
         navController.navigate(action);
     }
 

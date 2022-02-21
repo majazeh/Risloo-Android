@@ -104,7 +104,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
 
         CustomClickView.onClickListener(() -> {
             if (current instanceof FragmentCenterPlatforms)
-                ((ActivityMain) activity).navigatoon.navigateToEditPlatformFragment(((FragmentCenterPlatforms) current).centerModel, model);
+                ((ActivityMain) activity).navigatoon.navigateToFragmentEditPlatform(((FragmentCenterPlatforms) current).centerModel, model);
 
         }).widget(holder.binding.editImageView);
 

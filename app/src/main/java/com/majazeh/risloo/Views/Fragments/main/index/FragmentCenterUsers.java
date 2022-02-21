@@ -132,7 +132,7 @@ public class FragmentCenterUsers extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateCenterUserFragment(centerModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateCenterUser(centerModel);
         }).widget(binding.addImageView.getRoot());
     }
 

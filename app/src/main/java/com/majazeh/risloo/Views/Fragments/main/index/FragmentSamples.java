@@ -133,7 +133,7 @@ public class FragmentSamples extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSampleFragment(null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateSample(null);
         }).widget(binding.addImageView.getRoot());
     }
 

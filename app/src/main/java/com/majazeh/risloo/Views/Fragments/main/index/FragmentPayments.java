@@ -312,7 +312,7 @@ public class FragmentPayments extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
 
-                        Paymont.getInstance().insertPayment(null, paymentModel, data, R.id.paymentsFragment);
+                        Paymont.getInstance().insertPayment(null, paymentModel, data, R.id.fragmentPayments);
                         PaymentManager.request(requireActivity(), paymentModel);
                     });
                 }

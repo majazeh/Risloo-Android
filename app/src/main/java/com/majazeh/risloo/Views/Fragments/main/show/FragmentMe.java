@@ -67,7 +67,7 @@ public class FragmentMe extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToEditUserFragment(userModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditUser(userModel);
         }).widget(binding.editImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {

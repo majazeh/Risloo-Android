@@ -98,11 +98,11 @@ public class TableTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void listener(TableTreasuryHolder holder, TreasuriesModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToCreateTreasuryFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentCreateTreasury(model);
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToEditTreasuryFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentEditTreasury(model);
         }).widget(holder.binding.editImageView);
     }
 

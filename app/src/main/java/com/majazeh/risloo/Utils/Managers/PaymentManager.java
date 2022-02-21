@@ -61,7 +61,7 @@ public class PaymentManager {
                 }
             }
 
-            if (Paymont.getInstance().getPaymentModel() != null && Paymont.getInstance().getDestination() != R.id.reserveScheduleFragment) {
+            if (Paymont.getInstance().getPaymentModel() != null && Paymont.getInstance().getDestination() != R.id.fragmentReserveSchedule) {
                 Paymont.getInstance().clearPayment();
             }
         }
@@ -101,15 +101,15 @@ public class PaymentManager {
 
     private static void navigate(Activity activity) {
         switch (Paymont.getInstance().getDestination()) {
-            case R.id.billingsFragment:
-            case R.id.sessionFragment:
-                ((ActivityMain) activity).navigatoon.navigateToBillFragment(Paymont.getInstance().getTypeModel());
+            case R.id.fragmentBillings:
+            case R.id.fragmentSession:
+                ((ActivityMain) activity).navigatoon.navigateToFragmentBill(Paymont.getInstance().getTypeModel());
                 break;
-            case R.id.paymentsFragment:
-                ((ActivityMain) activity).navigatoon.navigateToPaymentsFragment(null);
+            case R.id.fragmentPayments:
+                ((ActivityMain) activity).navigatoon.navigateToFragmentPayments(null);
                 break;
-            case R.id.reserveScheduleFragment:
-                ((ActivityMain) activity).navigatoon.navigateToReserveScheduleFragment(Paymont.getInstance().getTypeModel());
+            case R.id.fragmentReserveSchedule:
+                ((ActivityMain) activity).navigatoon.navigateToFragmentReserveSchedule(Paymont.getInstance().getTypeModel());
                 break;
         }
     }

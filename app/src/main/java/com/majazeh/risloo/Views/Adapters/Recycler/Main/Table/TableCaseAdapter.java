@@ -94,7 +94,7 @@ public class TableCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void listener(TableCaseHolder holder, CaseModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToCaseFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentCase(model);
         }).widget(holder.binding.getRoot());
     }
 

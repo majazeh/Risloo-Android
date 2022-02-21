@@ -117,7 +117,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableSession2Holder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToSessionFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentSession(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.statusSpinner.setOnTouchListener((v, event) -> {
@@ -146,7 +146,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToEditSessionFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentEditSession(model);
         }).widget(holder.binding.editImageView);
     }
 

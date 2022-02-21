@@ -72,7 +72,7 @@ public class FragmentUser extends Fragment {
         }).widget(binding.loginImageView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToEditUserFragment(userModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditUser(userModel);
         }).widget(binding.editImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {

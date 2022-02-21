@@ -119,7 +119,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableBulkSampleHolder holder, BulkSampleModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToBulkSampleFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentBulkSample(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnTouchListener((v, event) -> {

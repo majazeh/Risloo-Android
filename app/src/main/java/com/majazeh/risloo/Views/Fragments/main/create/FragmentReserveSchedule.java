@@ -620,7 +620,7 @@ public class FragmentReserveSchedule extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackScheduleReserved));
 
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToSessionFragment(scheduleModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSession(scheduleModel);
                     });
                 }
             }
@@ -636,7 +636,7 @@ public class FragmentReserveSchedule extends Fragment {
                                 JSONObject paymentObject = responseObject.getJSONObject("payment");
                                 PaymentModel paymentModel = new PaymentModel(paymentObject);
 
-                                Paymont.getInstance().insertPayment(scheduleModel, paymentModel, data, R.id.reserveScheduleFragment);
+                                Paymont.getInstance().insertPayment(scheduleModel, paymentModel, data, R.id.fragmentReserveSchedule);
                                 PaymentManager.request(requireActivity(), paymentModel);
                             } else {
                                 if (!responseObject.isNull("errors")) {

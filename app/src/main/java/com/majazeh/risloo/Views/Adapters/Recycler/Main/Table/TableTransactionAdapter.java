@@ -103,7 +103,7 @@ public class TableTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToBillFragment(model.getBilling());
+            ((ActivityMain) activity).navigatoon.navigateToFragmentBill(model.getBilling());
         }).widget(holder.binding.billImageView);
     }
 

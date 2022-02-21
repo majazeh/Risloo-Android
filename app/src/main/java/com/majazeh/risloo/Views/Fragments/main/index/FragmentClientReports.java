@@ -136,9 +136,9 @@ public class FragmentClientReports extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (type.equals("case"))
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCreateClientReportFragment(caseModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateClientReport(caseModel);
             else
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCreateClientReportFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateClientReport(sessionModel);
 
         }).widget(binding.addImageView.getRoot());
     }

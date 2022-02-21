@@ -72,7 +72,7 @@ public class IndexCaseAdapter extends RecyclerView.Adapter<IndexCaseHolder> {
 
     private void listener(IndexCaseHolder holder, CaseModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToCaseFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentCase(model);
         }).widget(holder.binding.getRoot());
     }
 

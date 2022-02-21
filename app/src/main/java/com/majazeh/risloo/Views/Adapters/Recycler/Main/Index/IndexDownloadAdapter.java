@@ -90,7 +90,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
                 IntentManager.file(activity, file);
             } else if (file.getName().contains("X1")) {
                 if (current instanceof FragmentDownloads)
-                    ((ActivityMain) activity).navigatoon.navigateToFolderFragment(file.getName());
+                    ((ActivityMain) activity).navigatoon.navigateToFragmentFolder(file.getName());
 
             } else {
                 IntentManager.file(activity, file);

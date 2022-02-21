@@ -94,11 +94,11 @@ public class TableSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void listener(TableSessionHolder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToSessionFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentSession(model);
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToEditSessionFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentEditSession(model);
         }).widget(holder.binding.editImageView);
     }
 

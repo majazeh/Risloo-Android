@@ -73,9 +73,9 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void listener(IndexCenterHolder holder, CenterModel model) {
         CustomClickView.onClickListener(() -> {
             if (model.getType().equals("counseling_center"))
-                ((ActivityMain) activity).navigatoon.navigateToCenterFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToFragmentCenter(model);
             else
-                ((ActivityMain) activity).navigatoon.navigateToRoomFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToFragmentRoom(model);
 
         }).widget(holder.binding.getRoot());
     }

@@ -101,7 +101,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
     @SuppressLint("ClickableViewAccessibility")
     private void listener(IndexRoomHolder holder, RoomModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToRoomFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentRoom(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {

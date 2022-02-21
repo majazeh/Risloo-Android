@@ -84,11 +84,11 @@ public class FragmentDashboard extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToEditUserFragment(userModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditUser(userModel);
         }).widget(binding.passwordMissingLayout.actionTextView);
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCentersFragment();
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenters();
         }).widget(binding.centerMissingLayout.actionTextView);
 
         CustomClickView.onClickListener(() -> {

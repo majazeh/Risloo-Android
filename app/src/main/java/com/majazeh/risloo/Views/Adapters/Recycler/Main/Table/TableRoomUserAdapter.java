@@ -104,7 +104,7 @@ public class TableRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     private void listener(TableRoomUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof FragmentRoomUsers)
-                ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((FragmentRoomUsers) current).roomModel, model);
+                ((ActivityMain) activity).navigatoon.navigateToFragmentReference(((FragmentRoomUsers) current).roomModel, model);
 
         }).widget(holder.binding.getRoot());
     }

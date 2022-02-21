@@ -70,7 +70,7 @@ public class FragmentCenterPlatforms extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreatePlatformFragment(centerModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreatePlatform(centerModel);
         }).widget(binding.addImageView.getRoot());
     }
 

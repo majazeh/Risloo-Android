@@ -126,7 +126,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void listener(TableSampleHolder holder, SampleModel model, int position) {
         CustomClickView.onClickListener(() -> {
             if (((ActivityMain) activity).permissoon.showSamplesFragmentSample(((ActivityMain) activity).singleton.getUserModel(), model))
-                ((ActivityMain) activity).navigatoon.navigateToSampleFragment(model);
+                ((ActivityMain) activity).navigatoon.navigateToFragmentSample(model);
 
         }).widget(holder.binding.getRoot());
 
@@ -139,7 +139,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }).widget(holder.binding.statusTextView);
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToSamplesFragment(model.getChainId(), null);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentSamples(model.getChainId(), null);
         }).widget(holder.binding.bulkTextView);
     }
 

@@ -128,7 +128,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         CustomClickView.onClickListener(() -> {
             if (current instanceof FragmentSession) {
                 if (((FragmentSession) current).sessionModel != null && ((FragmentSession) current).sessionModel.getRoom() != null)
-                    ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((FragmentSession) current).sessionModel.getRoom(), model);
+                    ((ActivityMain) activity).navigatoon.navigateToFragmentReference(((FragmentSession) current).sessionModel.getRoom(), model);
 
             }
         }).widget(holder.binding.getRoot());

@@ -260,7 +260,7 @@ public class FragmentCreateCase extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCase));
 
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToCaseFragment(caseModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCase(caseModel);
                     });
                 }
             }

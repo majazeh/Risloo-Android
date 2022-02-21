@@ -116,12 +116,12 @@ public class FragmentSession extends Fragment {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
                 case "گزارشات":
                     if (sessionModel != null)
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToClientReportsFragment(sessionModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentClientReports(sessionModel);
 
                     break;
                 case "ویرایش":
                     if (sessionModel != null)
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToEditSessionFragment(sessionModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditSession(sessionModel);
 
                     break;
             }
@@ -144,12 +144,12 @@ public class FragmentSession extends Fragment {
                     switch (pos) {
                         case "گزارشات":
                             if (sessionModel != null)
-                                ((ActivityMain) requireActivity()).navigatoon.navigateToClientReportsFragment(sessionModel);
+                                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentClientReports(sessionModel);
 
                             break;
                         case "ویرایش":
                             if (sessionModel != null)
-                                ((ActivityMain) requireActivity()).navigatoon.navigateToEditSessionFragment(sessionModel);
+                                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditSession(sessionModel);
 
                             break;
                     }
@@ -168,25 +168,25 @@ public class FragmentSession extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null)
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSessionUserFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateSessionUser(sessionModel);
 
         }).widget(binding.usersAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null)
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCreatePracticeFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreatePractice(sessionModel);
 
         }).widget(binding.practicesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null)
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSampleFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateSample(sessionModel);
 
         }).widget(binding.samplesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null)
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCreateBillFragment(sessionModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateBill(sessionModel);
 
         }).widget(binding.billsAddView.getRoot());
     }

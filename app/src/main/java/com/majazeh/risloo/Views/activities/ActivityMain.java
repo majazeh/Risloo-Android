@@ -263,13 +263,13 @@ public class ActivityMain extends AppCompatActivity {
 
             // Toolbar
             case "مشاهده پروفایل":
-                navigatoon.navigateToMeFragment(singleton.getUserModel());
+                navigatoon.navigateToFragmentMe(singleton.getUserModel());
                 break;
             case "حسابداری":
-                navigatoon.navigateToAccountingFragment();
+                navigatoon.navigateToFragmentAccounting();
                 break;
             case "شارژ حساب":
-                navigatoon.navigateToPaymentsFragment(null);
+                navigatoon.navigateToFragmentPayments(null);
                 break;
             case "خروج":
                 SheetManager.showLogoutBottomSheet(ActivityMain.this, singleton.getUserModel());
@@ -277,34 +277,34 @@ public class ActivityMain extends AppCompatActivity {
 
             // Drawer
             case "داشبورد":
-                navigatoon.navigateToDashboardFragment();
+                navigatoon.navigateToFragmentDashboard();
                 break;
             case "مراکز درمانی":
-                navigatoon.navigateToCentersFragment();
+                navigatoon.navigateToFragmentCenters();
                 break;
             case "پرونده\u200Cها":
-                navigatoon.navigateToCasesFragment();
+                navigatoon.navigateToFragmentCases();
                 break;
             case "جلسات":
-                navigatoon.navigateToSessionsFragment();
+                navigatoon.navigateToFragmentSessions();
                 break;
             case "اعضاء":
-                navigatoon.navigateToUsersFragment();
+                navigatoon.navigateToFragmentUsers();
                 break;
             case "نمونه\u200Cها":
-                navigatoon.navigateToSamplesFragment(null, null);
+                navigatoon.navigateToFragmentSamples(null, null);
                 break;
             case "نمونه\u200Cهای گروهی":
-                navigatoon.navigateToBulkSamplesFragment();
+                navigatoon.navigateToFragmentBulkSamples();
                 break;
             case "ارزیابی\u200Cها":
-                navigatoon.navigateToScalesFragment();
+                navigatoon.navigateToFragmentScales();
                 break;
             case "مدارک":
-                navigatoon.navigateToDocumentsFragment();
+                navigatoon.navigateToFragmentDocuments();
                 break;
             case "دانلودها":
-                navigatoon.navigateToDownloadsFragment();
+                navigatoon.navigateToFragmentDownloads();
                 break;
         }
     }
@@ -335,7 +335,7 @@ public class ActivityMain extends AppCompatActivity {
                         DialogManager.dismissLoadingDialog();
 
                         SnackManager.showSuccesSnack(ActivityMain.this, getResources().getString(R.string.SnackLoginOtherUser));
-                        navigatoon.navigateToDashboardFragment();
+                        navigatoon.navigateToFragmentDashboard();
                     });
                 }
 
@@ -360,7 +360,7 @@ public class ActivityMain extends AppCompatActivity {
                         DialogManager.dismissLoadingDialog();
 
                         SnackManager.showSuccesSnack(ActivityMain.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
-                        navigatoon.navigateToDashboardFragment();
+                        navigatoon.navigateToFragmentDashboard();
                     });
                 }
 

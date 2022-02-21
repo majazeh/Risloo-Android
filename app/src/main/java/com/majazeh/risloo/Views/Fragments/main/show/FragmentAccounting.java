@@ -43,19 +43,19 @@ public class FragmentAccounting extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToTreasuriesFragment();
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentTreasuries();
         }).widget(binding.treasuriesIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToBillingsFragment();
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBillings();
         }).widget(binding.billingsIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToBanksFragment(null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBanks(null);
         }).widget(binding.banksIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToPaymentsFragment(null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentPayments(null);
         }).widget(binding.paymentsIncludeLayout.getRoot());
     }
 

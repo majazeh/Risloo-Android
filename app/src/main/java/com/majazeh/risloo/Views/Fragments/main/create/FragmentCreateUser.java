@@ -337,7 +337,7 @@ public class FragmentCreateUser extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewUser));
 
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToUserFragment(userModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentUser(userModel);
                     });
                 }
             }

@@ -119,7 +119,7 @@ public class FragmentCreateSample extends Fragment {
         assessmentLinkSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                ((ActivityMain) requireActivity()).navigatoon.navigateToScalesFragment();
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentScales();
             }
 
             @Override
@@ -352,7 +352,7 @@ public class FragmentCreateSample extends Fragment {
                     break;
             }
         } else {
-            if (((ActivityMain) requireActivity()).navigatoon.getBackstackDestinationId() == R.id.bulkSamplesFragment) {
+            if (((ActivityMain) requireActivity()).navigatoon.getBackstackDestinationId() == R.id.fragmentBulkSamples) {
                 binding.typeTabLayout.getTabAt(2).select();
 
                 type = "bulk";
@@ -673,7 +673,7 @@ public class FragmentCreateSample extends Fragment {
                             DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBulkSample));
 
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToBulkSampleFragment(bulkSampleModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBulkSample(bulkSampleModel);
                         });
                     }
                 }
@@ -773,7 +773,7 @@ public class FragmentCreateSample extends Fragment {
                                 DialogManager.dismissLoadingDialog();
                                 SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
 
-                                ((ActivityMain) requireActivity()).navigatoon.navigateToSamplesFragment(null, sampleIds);
+                                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSamples(null, sampleIds);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

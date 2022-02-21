@@ -102,7 +102,7 @@ public class FragmentCase extends Fragment {
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
                 case "گزارشات":
-                    ((ActivityMain) requireActivity()).navigatoon.navigateToClientReportsFragment(caseModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentClientReports(caseModel);
                     break;
                 case "ویرایش":
                     // TODO : Place Code Here
@@ -126,7 +126,7 @@ public class FragmentCase extends Fragment {
 
                     switch (pos) {
                         case "گزارشات":
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToClientReportsFragment(caseModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentClientReports(caseModel);
                             break;
                         case "ویرایش":
                             // TODO : Place Code Here
@@ -146,15 +146,15 @@ public class FragmentCase extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateCaseUserFragment(caseModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateCaseUser(caseModel);
         }).widget(binding.referencesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSessionFragment(caseModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateSession(caseModel);
         }).widget(binding.sessionsAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateSampleFragment(caseModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateSample(caseModel);
         }).widget(binding.samplesAddView.getRoot());
     }
 

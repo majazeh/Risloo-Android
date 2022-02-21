@@ -163,7 +163,7 @@ public class FragmentCreateSession extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSession));
 
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToSessionFragment(sessionModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSession(sessionModel);
                     });
                 }
             }

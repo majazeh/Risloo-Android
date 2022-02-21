@@ -130,7 +130,7 @@ public class FragmentCenters extends Fragment {
             }
         });
 
-        CustomClickView.onClickListener(() -> ((ActivityMain) requireActivity()).navigatoon.navigateToCreateCenterFragment(null)).widget(binding.addImageView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateCenter(null)).widget(binding.addImageView.getRoot());
     }
 
     private void setPermission() {

@@ -126,7 +126,7 @@ public class FragmentUsers extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateUserFragment(null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateUser(null);
         }).widget(binding.addImageView.getRoot());
     }
 

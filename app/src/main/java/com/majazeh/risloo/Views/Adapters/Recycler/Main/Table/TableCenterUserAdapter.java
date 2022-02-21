@@ -129,7 +129,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private void listener(TableCenterUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof FragmentCenterUsers)
-                ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((FragmentCenterUsers) current).centerModel, model);
+                ((ActivityMain) activity).navigatoon.navigateToFragmentReference(((FragmentCenterUsers) current).centerModel, model);
 
         }).widget(holder.binding.getRoot());
 
@@ -180,21 +180,21 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             break;
                         case "ساختن اتاق درمان":
                             if (current instanceof FragmentCenterUsers)
-                                ((ActivityMain) activity).navigatoon.navigateToCreateRoomFragment(((FragmentCenterUsers) current).centerModel, model);
+                                ((ActivityMain) activity).navigatoon.navigateToFragmentCreateRoom(((FragmentCenterUsers) current).centerModel, model);
 
                             break;
                         case "اتاق درمان":
                             try {
                                 RoomModel roomModel = new RoomModel(new JSONObject().put("id", model.getMeta().getString("room_id")).put("type", "room").put("manager", model.object));
 
-                                ((ActivityMain) activity).navigatoon.navigateToRoomFragment(roomModel);
+                                ((ActivityMain) activity).navigatoon.navigateToFragmentRoom(roomModel);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             break;
                         case "ویرایش":
                             if (current instanceof FragmentCenterUsers)
-                                ((ActivityMain) activity).navigatoon.navigateToEditCenterUserFragment(((FragmentCenterUsers) current).centerModel, model);
+                                ((ActivityMain) activity).navigatoon.navigateToFragmentEditCenterUser(((FragmentCenterUsers) current).centerModel, model);
 
                             break;
                         case "ورود به کاربری":

@@ -132,7 +132,7 @@ public class FragmentRoomUsers extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateRoomUserFragment(roomModel);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateRoomUser(roomModel);
         }).widget(binding.addImageView.getRoot());
     }
 

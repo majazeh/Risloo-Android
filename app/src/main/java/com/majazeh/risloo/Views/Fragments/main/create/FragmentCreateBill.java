@@ -314,7 +314,7 @@ public class FragmentCreateBill extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBill));
 
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToBillFragment(billingModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBill(billingModel);
                     });
                 }
             }

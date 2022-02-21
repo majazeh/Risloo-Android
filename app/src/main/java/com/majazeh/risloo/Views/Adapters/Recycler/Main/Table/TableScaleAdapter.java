@@ -106,7 +106,7 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        CustomClickView.onClickListener(() -> ((ActivityMain) activity).navigatoon.navigateToCreateSampleFragment(model)).widget(holder.binding.createTextView);
+        CustomClickView.onClickListener(() -> ((ActivityMain) activity).navigatoon.navigateToFragmentCreateSample(model)).widget(holder.binding.createTextView);
     }
 
     private void setPermission(TableScaleHolder holder) {

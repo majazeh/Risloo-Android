@@ -168,7 +168,7 @@ public class FragmentCreateSchedule extends Fragment {
                         DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSchedule));
 
-                        ((ActivityMain) requireActivity()).navigatoon.navigateToSessionFragment(scheduleModel);
+                        ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSession(scheduleModel);
                     });
                 }
             }

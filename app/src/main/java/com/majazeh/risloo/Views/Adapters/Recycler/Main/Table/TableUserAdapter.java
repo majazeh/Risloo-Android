@@ -101,7 +101,7 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) activity).navigatoon.navigateToUserFragment(model);
+            ((ActivityMain) activity).navigatoon.navigateToFragmentUser(model);
         }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
@@ -124,7 +124,7 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     else if (pos.equals("ورود به کاربری"))
                         ((ActivityMain) activity).setUser("loginOtherUser", model.getId());
                     else if (pos.equals("ویرایش"))
-                        ((ActivityMain) activity).navigatoon.navigateToEditUserFragment(model);
+                        ((ActivityMain) activity).navigatoon.navigateToFragmentEditUser(model);
 
                     parent.setSelection(parent.getAdapter().getCount());
 

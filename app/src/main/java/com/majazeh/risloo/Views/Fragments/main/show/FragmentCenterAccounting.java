@@ -85,17 +85,17 @@ public class FragmentCenterAccounting extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (type.equals("counseling_center"))
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCommissionsFragment(centerModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCommissions(centerModel);
             else
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCommissionsFragment(roomModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCommissions(roomModel);
 
         }).widget(binding.commissionsIncludeLayout.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (type.equals("counseling_center"))
-                ((ActivityMain) requireActivity()).navigatoon.navigateToBalancesFragment(centerModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBalances(centerModel);
             else
-                ((ActivityMain) requireActivity()).navigatoon.navigateToBalancesFragment(roomModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBalances(roomModel);
 
         }).widget(binding.balancesIncludeLayout.getRoot());
 

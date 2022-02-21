@@ -122,7 +122,7 @@ public class FragmentDocuments extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateDocumentFragment(null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateDocument(null);
         }).widget(binding.addImageView.getRoot());
     }
 

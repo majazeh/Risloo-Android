@@ -103,9 +103,9 @@ public class FragmentReference extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (!type.equals("room"))
-                ((ActivityMain) requireActivity()).navigatoon.navigateToEditCenterUserFragment(centerModel, userModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditCenterUser(centerModel, userModel);
             else
-                ((ActivityMain) requireActivity()).navigatoon.navigateToEditCenterUserFragment(roomModel, userModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditCenterUser(roomModel, userModel);
 
         }).widget(binding.editImageView.getRoot());
 

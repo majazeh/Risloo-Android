@@ -108,25 +108,25 @@ public class FragmentCenter extends Fragment {
         CustomClickView.onClickListener(() -> {
             switch (binding.menuSpinner.selectImageView.getTag().toString()) {
                 case "اعضاء":
-                    ((ActivityMain) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterUsers(centerModel);
                     break;
                 case "برنامه درمانی":
-                    ((ActivityMain) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterSchedules(centerModel);
                     break;
                 case "پروفایل من":
-                    ((ActivityMain) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((ActivityMain) requireActivity()).singleton.getUserModel());
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentReference(centerModel, ((ActivityMain) requireActivity()).singleton.getUserModel());
                     break;
                 case "ویرایش":
-                    ((ActivityMain) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditCenter(centerModel);
                     break;
                 case "محل برگزاری جلسات":
-                    ((ActivityMain) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterPlatforms(centerModel);
                     break;
                 case "اتاق\u200Cهای درمان":
-                    ((ActivityMain) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentRooms(centerModel);
                     break;
                 case "حسابداری":
-                    ((ActivityMain) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
+                    ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterAccounting(centerModel);
                     break;
             }
         }).widget(binding.menuSpinner.selectImageView);
@@ -147,25 +147,25 @@ public class FragmentCenter extends Fragment {
 
                     switch (pos) {
                         case "اعضاء":
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToCenterUsersFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterUsers(centerModel);
                             break;
                         case "برنامه درمانی":
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterSchedules(centerModel);
                             break;
                         case "پروفایل من":
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToReferenceFragment(centerModel, ((ActivityMain) requireActivity()).singleton.getUserModel());
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentReference(centerModel, ((ActivityMain) requireActivity()).singleton.getUserModel());
                             break;
                         case "ویرایش":
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToEditCenterFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentEditCenter(centerModel);
                             break;
                         case "محل برگزاری جلسات":
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToCenterPlatformsFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterPlatforms(centerModel);
                             break;
                         case "اتاق\u200Cهای درمان":
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToRoomsFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentRooms(centerModel);
                             break;
                         case "حسابداری":
-                            ((ActivityMain) requireActivity()).navigatoon.navigateToCenterAccountingFragment(centerModel);
+                            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterAccounting(centerModel);
                             break;
                     }
 
@@ -185,7 +185,7 @@ public class FragmentCenter extends Fragment {
             if (binding.actionTextView.getRoot().getText().equals(getResources().getString(R.string.CenterFragmentRequest)))
                 doWork();
             else
-                ((ActivityMain) requireActivity()).navigatoon.navigateToCenterSchedulesFragment(centerModel);
+                ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCenterSchedules(centerModel);
 
         }).widget(binding.actionTextView.getRoot());
 
@@ -244,7 +244,7 @@ public class FragmentCenter extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            ((ActivityMain) requireActivity()).navigatoon.navigateToCreateRoomFragment(centerModel, null);
+            ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCreateRoom(centerModel, null);
         }).widget(binding.roomsAddView.getRoot());
     }
 
