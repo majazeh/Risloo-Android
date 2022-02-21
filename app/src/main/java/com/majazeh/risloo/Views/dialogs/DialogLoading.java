@@ -17,7 +17,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.ParamsManager;
 import com.majazeh.risloo.databinding.DialogLoadingBinding;
 
-public class LoadingDialog extends AppCompatDialogFragment {
+public class DialogLoading extends AppCompatDialogFragment {
 
     // Binding
     private DialogLoadingBinding binding;

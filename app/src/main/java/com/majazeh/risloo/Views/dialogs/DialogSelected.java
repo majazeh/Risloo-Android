@@ -39,7 +39,7 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class SelectedDialog extends AppCompatDialogFragment {
+public class DialogSelected extends AppCompatDialogFragment {
 
     // Binding
     private DialogSelectedBinding binding;

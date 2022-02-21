@@ -59,7 +59,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SearchableDialog extends AppCompatDialogFragment {
+public class DialogSearchable extends AppCompatDialogFragment {
 
     // Binding
     private DialogSearchableBinding binding;

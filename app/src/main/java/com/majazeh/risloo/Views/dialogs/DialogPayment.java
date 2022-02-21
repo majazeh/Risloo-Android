@@ -19,7 +19,7 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.databinding.DialogPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.PaymentModel;
 
-public class PaymentDialog extends AppCompatDialogFragment {
+public class DialogPayment extends AppCompatDialogFragment {
 
     // Binding
     private DialogPaymentBinding binding;

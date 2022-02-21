@@ -28,7 +28,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class ScheduleFilterDialog extends AppCompatDialogFragment {
+public class DialogScheduleFilter extends AppCompatDialogFragment {
 
     // Binding
     private DialogScheduleFilterBinding binding;
