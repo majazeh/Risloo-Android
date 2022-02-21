@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
-    tools:context=".views.fragments.main.tab.EditUserTabAvatarFragment">
+    tools:context=".views.fragments.main.tab.FragmentEditUserTabAvatar">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

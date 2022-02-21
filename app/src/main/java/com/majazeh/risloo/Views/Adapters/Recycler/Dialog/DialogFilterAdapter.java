@@ -17,8 +17,8 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.dialog.DialogFilterHolder;
-import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
-import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterSchedules;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomSchedules;
 import com.majazeh.risloo.databinding.SingleItemDialogFilterBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -120,26 +120,26 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void setActive(DialogFilterHolder holder, TypeModel item) {
         try {
-            if (current instanceof CenterSchedulesFragment) {
+            if (current instanceof FragmentCenterSchedules) {
                 switch (method) {
                     case "rooms": {
                         RoomModel model = (RoomModel) item;
 
-                        detector(holder, ((CenterSchedulesFragment) current).filterRoom.equals(model.getId()));
+                        detector(holder, ((FragmentCenterSchedules) current).filterRoom.equals(model.getId()));
                     } break;
                     case "status": {
                         String status = item.object.get("id").toString();
 
-                        detector(holder, ((CenterSchedulesFragment) current).filterStatus.equals(status));
+                        detector(holder, ((FragmentCenterSchedules) current).filterStatus.equals(status));
                     } break;
                 }
             }
 
-            if (current instanceof RoomSchedulesFragment) {
+            if (current instanceof FragmentRoomSchedules) {
                 if (method.equals("status")) {
                     String status = item.object.get("id").toString();
 
-                    detector(holder, ((RoomSchedulesFragment) current).filterStatus.equals(status));
+                    detector(holder, ((FragmentRoomSchedules) current).filterStatus.equals(status));
                 }
             }
         } catch (JSONException e) {
@@ -148,11 +148,11 @@ public class DialogFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void responseDialog(TypeModel item) {
-        if (current instanceof CenterSchedulesFragment)
-            ((CenterSchedulesFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentCenterSchedules)
+            ((FragmentCenterSchedules) current).responseDialog(method, item);
 
-        if (current instanceof RoomSchedulesFragment)
-            ((RoomSchedulesFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentRoomSchedules)
+            ((FragmentRoomSchedules) current).responseDialog(method, item);
     }
 
     @Override

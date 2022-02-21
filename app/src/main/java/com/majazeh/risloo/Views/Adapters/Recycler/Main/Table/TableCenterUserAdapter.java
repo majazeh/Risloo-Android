@@ -21,7 +21,7 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderCenterUserHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableCenterUserHolder;
-import com.majazeh.risloo.views.fragments.main.index.CenterUsersFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterUsers;
 import com.majazeh.risloo.databinding.HeaderItemTableCenterUserBinding;
 import com.majazeh.risloo.databinding.SingleItemTableCenterUserBinding;
 import com.mre.ligheh.API.Response;
@@ -128,8 +128,8 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableCenterUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
-            if (current instanceof CenterUsersFragment)
-                ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((CenterUsersFragment) current).centerModel, model);
+            if (current instanceof FragmentCenterUsers)
+                ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((FragmentCenterUsers) current).centerModel, model);
 
         }).widget(holder.binding.getRoot());
 
@@ -179,8 +179,8 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             doWork(holder, model, "kick", "status");
                             break;
                         case "ساختن اتاق درمان":
-                            if (current instanceof CenterUsersFragment)
-                                ((ActivityMain) activity).navigatoon.navigateToCreateRoomFragment(((CenterUsersFragment) current).centerModel, model);
+                            if (current instanceof FragmentCenterUsers)
+                                ((ActivityMain) activity).navigatoon.navigateToCreateRoomFragment(((FragmentCenterUsers) current).centerModel, model);
 
                             break;
                         case "اتاق درمان":
@@ -193,8 +193,8 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             }
                             break;
                         case "ویرایش":
-                            if (current instanceof CenterUsersFragment)
-                                ((ActivityMain) activity).navigatoon.navigateToEditCenterUserFragment(((CenterUsersFragment) current).centerModel, model);
+                            if (current instanceof FragmentCenterUsers)
+                                ((ActivityMain) activity).navigatoon.navigateToEditCenterUserFragment(((FragmentCenterUsers) current).centerModel, model);
 
                             break;
                         case "ورود به کاربری":
@@ -233,7 +233,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
         }
 
-        if (current instanceof CenterUsersFragment && !((CenterUsersFragment) current).centerModel.getManager().getUserId().equals(model.getUserId())) {
+        if (current instanceof FragmentCenterUsers && !((FragmentCenterUsers) current).centerModel.getManager().getUserId().equals(model.getUserId())) {
             holder.binding.positionSpinner.setEnabled(true);
             holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_coolgray200_ripple_coolgray300);
 
@@ -294,8 +294,8 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void setHashmap(UserModel model, String value, String method) {
-        if (current instanceof CenterUsersFragment)
-            data.put("id", ((CenterUsersFragment) current).centerModel.getId());
+        if (current instanceof FragmentCenterUsers)
+            data.put("id", ((FragmentCenterUsers) current).centerModel.getId());
 
         if (method.equals("position")) {
             data.put("userId", model.getId());

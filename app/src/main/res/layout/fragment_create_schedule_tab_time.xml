@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
-    tools:context=".views.fragments.main.tab.CreateScheduleTabTimeFragment">
+    tools:context=".views.fragments.main.tab.FragmentCreateScheduleTabTime">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

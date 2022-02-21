@@ -19,7 +19,7 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexCenterPlatformHolder;
-import com.majazeh.risloo.views.fragments.main.index.CenterPlatformsFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterPlatforms;
 import com.majazeh.risloo.databinding.SingleItemIndexCenterPlatformBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -103,8 +103,8 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            if (current instanceof CenterPlatformsFragment)
-                ((ActivityMain) activity).navigatoon.navigateToEditPlatformFragment(((CenterPlatformsFragment) current).centerModel, model);
+            if (current instanceof FragmentCenterPlatforms)
+                ((ActivityMain) activity).navigatoon.navigateToEditPlatformFragment(((FragmentCenterPlatforms) current).centerModel, model);
 
         }).widget(holder.binding.editImageView);
 
@@ -206,8 +206,8 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
     }
 
     private void setHashmap(SessionPlatformModel model, String value, String method) {
-        if (current instanceof CenterPlatformsFragment)
-            data.put("id", ((CenterPlatformsFragment) current).centerModel.getId());
+        if (current instanceof FragmentCenterPlatforms)
+            data.put("id", ((FragmentCenterPlatforms) current).centerModel.getId());
 
         data.put("platformId", model.getId());
         data.put(method, value);

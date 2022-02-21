@@ -17,8 +17,8 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexScheduleHolder;
-import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
-import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterSchedules;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomSchedules;
 import com.majazeh.risloo.databinding.SingleItemIndexScheduleBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
@@ -114,10 +114,10 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
         CustomClickView.onClickListener(() -> {
             if (holder.binding.statusTextView.getText().toString().equals("در حال نوبت\u200Cگیری") && ((ActivityMain) activity).permissoon.showCenterSchedulesFragmentReserveSchedule(((ActivityMain) activity).singleton.getUserModel(), model)) {
 
-                if (current instanceof CenterSchedulesFragment)
-                    model.setTreasuries(((CenterSchedulesFragment) current).treasuries);
-                else if (current instanceof RoomSchedulesFragment)
-                    model.setTreasuries(((RoomSchedulesFragment) current).treasuries);
+                if (current instanceof FragmentCenterSchedules)
+                    model.setTreasuries(((FragmentCenterSchedules) current).treasuries);
+                else if (current instanceof FragmentRoomSchedules)
+                    model.setTreasuries(((FragmentRoomSchedules) current).treasuries);
 
                 ((ActivityMain) activity).navigatoon.navigateToReserveScheduleFragment(model);
             } else {

@@ -44,12 +44,12 @@ import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.managers.TreasuryManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.recycler.main.MainNavAdapter;
-import com.majazeh.risloo.views.fragments.main.create.CreateCenterFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateDocumentFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreatePracticeFragment;
-import com.majazeh.risloo.views.fragments.main.show.SampleFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditCenterTabAvatarFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditUserTabAvatarFragment;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenter;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateDocument;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreatePractice;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSample;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditCenterTabAvatar;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabAvatar;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
@@ -405,22 +405,22 @@ public class ActivityMain extends AppCompatActivity {
                     IntentManager.file(this);
                     break;
                 case 200:
-                    if (fragmont.getCurrent() instanceof SampleFragment)
-                        IntentManager.download(this, ((SampleFragment) fragmont.getCurrent()).binding.scaleTextView.getText().toString(), ((SampleFragment) fragmont.getCurrent()).selectedProfileUrl);
+                    if (fragmont.getCurrent() instanceof FragmentSample)
+                        IntentManager.download(this, ((FragmentSample) fragmont.getCurrent()).binding.scaleTextView.getText().toString(), ((FragmentSample) fragmont.getCurrent()).selectedProfileUrl);
 
                     break;
                 case 300:
                     IntentManager.gallery(this);
                     break;
                 case 400:
-                    if (fragmont.getCurrent() instanceof CreateCenterFragment)
-                        ((CreateCenterFragment) fragmont.getCurrent()).avatarPath = IntentManager.camera(this);
+                    if (fragmont.getCurrent() instanceof FragmentCreateCenter)
+                        ((FragmentCreateCenter) fragmont.getCurrent()).avatarPath = IntentManager.camera(this);
 
-                    if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
-                        ((EditCenterTabAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
+                    if (fragmont.getChild() instanceof FragmentEditCenterTabAvatar)
+                        ((FragmentEditCenterTabAvatar) fragmont.getChild()).avatarPath = IntentManager.camera(this);
 
-                    if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
-                        ((EditUserTabAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
+                    if (fragmont.getChild() instanceof FragmentEditUserTabAvatar)
+                        ((FragmentEditUserTabAvatar) fragmont.getChild()).avatarPath = IntentManager.camera(this);
 
                     break;
             }
@@ -435,44 +435,44 @@ public class ActivityMain extends AppCompatActivity {
             case RESULT_OK: {
                 switch (requestCode) {
                     case 100:
-                        if (fragmont.getCurrent() instanceof CreateDocumentFragment)
-                            ((CreateDocumentFragment) fragmont.getCurrent()).responseAction("file", data);
+                        if (fragmont.getCurrent() instanceof FragmentCreateDocument)
+                            ((FragmentCreateDocument) fragmont.getCurrent()).responseAction("file", data);
 
-                        if (fragmont.getCurrent() instanceof CreatePracticeFragment)
-                            ((CreatePracticeFragment) fragmont.getCurrent()).responseAction("file", data);
+                        if (fragmont.getCurrent() instanceof FragmentCreatePractice)
+                            ((FragmentCreatePractice) fragmont.getCurrent()).responseAction("file", data);
 
                         break;
                     case 300:
-                        if (fragmont.getCurrent() instanceof CreateCenterFragment)
-                            ((CreateCenterFragment) fragmont.getCurrent()).responseAction("gallery", data);
+                        if (fragmont.getCurrent() instanceof FragmentCreateCenter)
+                            ((FragmentCreateCenter) fragmont.getCurrent()).responseAction("gallery", data);
 
-                        if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
-                            ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
+                        if (fragmont.getChild() instanceof FragmentEditCenterTabAvatar)
+                            ((FragmentEditCenterTabAvatar) fragmont.getChild()).responseAction("gallery", data);
 
-                        if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
-                            ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
+                        if (fragmont.getChild() instanceof FragmentEditUserTabAvatar)
+                            ((FragmentEditUserTabAvatar) fragmont.getChild()).responseAction("gallery", data);
 
                         break;
                     case 400:
-                        if (fragmont.getCurrent() instanceof CreateCenterFragment)
-                            ((CreateCenterFragment) fragmont.getCurrent()).responseAction("camera", data);
+                        if (fragmont.getCurrent() instanceof FragmentCreateCenter)
+                            ((FragmentCreateCenter) fragmont.getCurrent()).responseAction("camera", data);
 
-                        if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
-                            ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+                        if (fragmont.getChild() instanceof FragmentEditCenterTabAvatar)
+                            ((FragmentEditCenterTabAvatar) fragmont.getChild()).responseAction("camera", data);
 
-                        if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
-                            ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+                        if (fragmont.getChild() instanceof FragmentEditUserTabAvatar)
+                            ((FragmentEditUserTabAvatar) fragmont.getChild()).responseAction("camera", data);
 
                         break;
                     case UCrop.REQUEST_CROP:
-                        if (fragmont.getCurrent() instanceof CreateCenterFragment)
-                            ((CreateCenterFragment) fragmont.getCurrent()).responseAction("crop", data);
+                        if (fragmont.getCurrent() instanceof FragmentCreateCenter)
+                            ((FragmentCreateCenter) fragmont.getCurrent()).responseAction("crop", data);
 
-                        if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
-                            ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("crop", data);
+                        if (fragmont.getChild() instanceof FragmentEditCenterTabAvatar)
+                            ((FragmentEditCenterTabAvatar) fragmont.getChild()).responseAction("crop", data);
 
-                        if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
-                            ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("crop", data);
+                        if (fragmont.getChild() instanceof FragmentEditUserTabAvatar)
+                            ((FragmentEditUserTabAvatar) fragmont.getChild()).responseAction("crop", data);
 
                         break;
                 }

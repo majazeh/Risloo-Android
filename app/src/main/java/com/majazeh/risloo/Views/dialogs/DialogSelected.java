@@ -26,12 +26,12 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.ParamsManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.fragments.main.create.CreateCenterFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabPaymentFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabPaymentFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditCenterTabDetailFragment;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenter;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabPayment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabPayment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditCenterTabDetail;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
 
 import org.json.JSONException;
@@ -145,24 +145,24 @@ public class DialogSelected extends AppCompatDialogFragment {
     }
 
     private void setRecyclerView() {
-        if (current instanceof CreateCenterFragment) {
+        if (current instanceof FragmentCreateCenter) {
             if (method.equals("phones"))
-                binding.listRecyclerView.setAdapter(((CreateCenterFragment) current).phonesAdapter);
+                binding.listRecyclerView.setAdapter(((FragmentCreateCenter) current).phonesAdapter);
         }
 
-        if (child instanceof CreateScheduleTabSessionFragment) {
+        if (child instanceof FragmentCreateScheduleTabSession) {
             if (method.equals("axises"))
-                binding.listRecyclerView.setAdapter(((CreateScheduleTabSessionFragment) child).axisesAdapter);
+                binding.listRecyclerView.setAdapter(((FragmentCreateScheduleTabSession) child).axisesAdapter);
         }
 
-        if (child instanceof CreateSessionTabSessionFragment) {
+        if (child instanceof FragmentCreateSessionTabSession) {
             if (method.equals("axises"))
-                binding.listRecyclerView.setAdapter(((CreateSessionTabSessionFragment) child).axisesAdapter);
+                binding.listRecyclerView.setAdapter(((FragmentCreateSessionTabSession) child).axisesAdapter);
         }
 
-        if (child instanceof EditCenterTabDetailFragment) {
+        if (child instanceof FragmentEditCenterTabDetail) {
             if (method.equals("phones"))
-                binding.listRecyclerView.setAdapter(((EditCenterTabDetailFragment) child).phonesAdapter);
+                binding.listRecyclerView.setAdapter(((FragmentEditCenterTabDetail) child).phonesAdapter);
         }
 
         calculateCount();
@@ -170,38 +170,38 @@ public class DialogSelected extends AppCompatDialogFragment {
 
     private void addItem(TypeModel item) {
         try {
-            if (current instanceof CreateCenterFragment) {
+            if (current instanceof FragmentCreateCenter) {
                 if (method.equals("phones"))
-                    if (!((CreateCenterFragment) current).phonesAdapter.getIds().contains(item.object.getString("id")))
-                        ((CreateCenterFragment) current).phonesAdapter.addItem(item);
+                    if (!((FragmentCreateCenter) current).phonesAdapter.getIds().contains(item.object.getString("id")))
+                        ((FragmentCreateCenter) current).phonesAdapter.addItem(item);
                     else
                         ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHadSelectedPhone));
             }
 
-            if (child instanceof CreateScheduleTabSessionFragment) {
+            if (child instanceof FragmentCreateScheduleTabSession) {
                 if (method.equals("axises"))
-                    if (!((CreateScheduleTabSessionFragment) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
-                        ((CreateScheduleTabSessionFragment) child).axisesAdapter.addItem(item);
+                    if (!((FragmentCreateScheduleTabSession) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
+                        ((FragmentCreateScheduleTabSession) child).axisesAdapter.addItem(item);
 
                         addPayment(item);
                     } else
                         ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHadSelectedAxis));
             }
 
-            if (child instanceof CreateSessionTabSessionFragment) {
+            if (child instanceof FragmentCreateSessionTabSession) {
                 if (method.equals("axises"))
-                    if (!((CreateSessionTabSessionFragment) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
-                        ((CreateSessionTabSessionFragment) child).axisesAdapter.addItem(item);
+                    if (!((FragmentCreateSessionTabSession) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
+                        ((FragmentCreateSessionTabSession) child).axisesAdapter.addItem(item);
 
                         addPayment(item);
                     } else
                         ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHadSelectedAxis));
             }
 
-            if (child instanceof EditCenterTabDetailFragment) {
+            if (child instanceof FragmentEditCenterTabDetail) {
                 if (method.equals("phones"))
-                    if (!((EditCenterTabDetailFragment) child).phonesAdapter.getIds().contains(item.object.getString("id")))
-                        ((EditCenterTabDetailFragment) child).phonesAdapter.addItem(item);
+                    if (!((FragmentEditCenterTabDetail) child).phonesAdapter.getIds().contains(item.object.getString("id")))
+                        ((FragmentEditCenterTabDetail) child).phonesAdapter.addItem(item);
                     else
                         ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastHadSelectedPhone));
             }
@@ -216,11 +216,11 @@ public class DialogSelected extends AppCompatDialogFragment {
     }
 
     private void addPayment(TypeModel item) {
-        if (payment instanceof CreateScheduleTabPaymentFragment)
-            ((CreateScheduleTabPaymentFragment) payment).axisAdapter.addItem(item);
+        if (payment instanceof FragmentCreateScheduleTabPayment)
+            ((FragmentCreateScheduleTabPayment) payment).axisAdapter.addItem(item);
 
-        if (payment instanceof CreateSessionTabPaymentFragment)
-            ((CreateSessionTabPaymentFragment) payment).axisAdapter.addItem(item);
+        if (payment instanceof FragmentCreateSessionTabPayment)
+            ((FragmentCreateSessionTabPayment) payment).axisAdapter.addItem(item);
     }
 
     public void calculateCount() {

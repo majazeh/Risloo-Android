@@ -24,7 +24,7 @@ import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldMultiHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldSelectHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldTextHolder;
-import com.majazeh.risloo.views.fragments.main.show.SampleFragment;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSample;
 import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldMultiBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
@@ -160,8 +160,8 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (current instanceof SampleFragment)
-                ((SampleFragment) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString().trim());
+            if (current instanceof FragmentSample)
+                ((FragmentSample) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString().trim());
 
             ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
             return false;
@@ -177,8 +177,8 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (current instanceof SampleFragment)
-                ((SampleFragment) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString().trim());
+            if (current instanceof FragmentSample)
+                ((FragmentSample) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString().trim());
 
             ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
             return false;
@@ -198,8 +198,8 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    if (current instanceof SampleFragment)
-                        ((SampleFragment) current).sendItem(item + 1, String.valueOf(position + 1));
+                    if (current instanceof FragmentSample)
+                        ((FragmentSample) current).sendItem(item + 1, String.valueOf(position + 1));
 
                     userSelect = false;
                 }

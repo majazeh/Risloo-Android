@@ -17,12 +17,12 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSampleHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableSampleHolder;
-import com.majazeh.risloo.views.fragments.main.index.SamplesFragment;
-import com.majazeh.risloo.views.fragments.main.show.BulkSampleFragment;
-import com.majazeh.risloo.views.fragments.main.show.CaseFragment;
-import com.majazeh.risloo.views.fragments.main.show.DashboardFragment;
-import com.majazeh.risloo.views.fragments.main.show.ReferenceFragment;
-import com.majazeh.risloo.views.fragments.main.show.SessionFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentSamples;
+import com.majazeh.risloo.views.fragments.main.show.FragmentBulkSample;
+import com.majazeh.risloo.views.fragments.main.show.FragmentCase;
+import com.majazeh.risloo.views.fragments.main.show.FragmentDashboard;
+import com.majazeh.risloo.views.fragments.main.show.FragmentReference;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSession;
 import com.majazeh.risloo.databinding.HeaderItemTableSampleBinding;
 import com.majazeh.risloo.databinding.SingleItemTableSampleBinding;
 import com.mre.ligheh.API.Response;
@@ -144,17 +144,17 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void setWidget(HeaderSampleHolder holder) {
-        if (current instanceof SamplesFragment || current instanceof DashboardFragment) {
+        if (current instanceof FragmentSamples || current instanceof FragmentDashboard) {
             holder.binding.roomTextView.setVisibility(View.VISIBLE);
             holder.binding.caseTextView.setVisibility(View.VISIBLE);
 
             holder.binding.referenceTextView.setVisibility(View.VISIBLE);
-        } else if (current instanceof ReferenceFragment) {
+        } else if (current instanceof FragmentReference) {
             holder.binding.roomTextView.setVisibility(View.VISIBLE);
             holder.binding.caseTextView.setVisibility(View.VISIBLE);
 
             holder.binding.referenceTextView.setVisibility(View.GONE);
-        } else if (current instanceof BulkSampleFragment || current instanceof CaseFragment || current instanceof SessionFragment) {
+        } else if (current instanceof FragmentBulkSample || current instanceof FragmentCase || current instanceof FragmentSession) {
             holder.binding.roomTextView.setVisibility(View.GONE);
             holder.binding.caseTextView.setVisibility(View.GONE);
 
@@ -163,17 +163,17 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void setWidget(TableSampleHolder holder) {
-        if (current instanceof SamplesFragment || current instanceof DashboardFragment) {
+        if (current instanceof FragmentSamples || current instanceof FragmentDashboard) {
             holder.binding.roomTextView.setVisibility(View.VISIBLE);
             holder.binding.caseTextView.setVisibility(View.VISIBLE);
 
             holder.binding.referenceTextView.setVisibility(View.VISIBLE);
-        } else if (current instanceof ReferenceFragment) {
+        } else if (current instanceof FragmentReference) {
             holder.binding.roomTextView.setVisibility(View.VISIBLE);
             holder.binding.caseTextView.setVisibility(View.VISIBLE);
 
             holder.binding.referenceTextView.setVisibility(View.GONE);
-        } else if (current instanceof BulkSampleFragment || current instanceof CaseFragment || current instanceof SessionFragment) {
+        } else if (current instanceof FragmentBulkSample || current instanceof FragmentCase || current instanceof FragmentSession) {
             holder.binding.roomTextView.setVisibility(View.GONE);
             holder.binding.caseTextView.setVisibility(View.GONE);
 

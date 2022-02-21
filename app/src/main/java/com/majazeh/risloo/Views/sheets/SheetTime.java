@@ -17,12 +17,12 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabTimeFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabTimeFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabTimeFragment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabTime;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabTime;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabTime;
 import com.majazeh.risloo.databinding.BottomSheetTimeBinding;
 
 import java.util.Date;
@@ -77,23 +77,23 @@ public class SheetTime extends BottomSheetDialogFragment {
 
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            if (child instanceof CreateScheduleTabTimeFragment)
-                ((CreateScheduleTabTimeFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof FragmentCreateScheduleTabTime)
+                ((FragmentCreateScheduleTabTime) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof CreateScheduleTabSessionFragment)
-                ((CreateScheduleTabSessionFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof FragmentCreateScheduleTabSession)
+                ((FragmentCreateScheduleTabSession) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof CreateSessionTabTimeFragment)
-                ((CreateSessionTabTimeFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof FragmentCreateSessionTabTime)
+                ((FragmentCreateSessionTabTime) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof CreateSessionTabSessionFragment)
-                ((CreateSessionTabSessionFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof FragmentCreateSessionTabSession)
+                ((FragmentCreateSessionTabSession) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof EditSessionTabTimeFragment)
-                ((EditSessionTabTimeFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof FragmentEditSessionTabTime)
+                ((FragmentEditSessionTabTime) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof EditSessionTabSessionFragment)
-                ((EditSessionTabSessionFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof FragmentEditSessionTabSession)
+                ((FragmentEditSessionTabSession) child).responseBottomSheet(method, getTime());
 
             dismiss();
         }).widget(binding.entryTextView.getRoot());
@@ -102,10 +102,10 @@ public class SheetTime extends BottomSheetDialogFragment {
     private void setDialog() {
         switch (method) {
             case "startTime":
-                if (child instanceof CreateScheduleTabTimeFragment)
+                if (child instanceof FragmentCreateScheduleTabTime)
                     binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetScheduleStartTimeTitle));
 
-                if (child instanceof CreateSessionTabTimeFragment || child instanceof EditSessionTabTimeFragment)
+                if (child instanceof FragmentCreateSessionTabTime || child instanceof FragmentEditSessionTabTime)
                     binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetSessionStartTimeTitle));
 
                 break;

@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabPaymentFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabPlatformFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabTimeFragment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabPayment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabPlatform;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabTime;
 
 import java.util.HashMap;
 
@@ -26,19 +26,19 @@ public class CreateSessionAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0: {
-                Fragment fragment = new CreateSessionTabTimeFragment();
+                Fragment fragment = new FragmentCreateSessionTabTime();
                 hashMap.put(position, fragment);
                 return fragment;
             } case 1: {
-                Fragment fragment = new CreateSessionTabSessionFragment();
+                Fragment fragment = new FragmentCreateSessionTabSession();
                 hashMap.put(position, fragment);
                 return fragment;
             } case 2: {
-                Fragment fragment = new CreateSessionTabPlatformFragment();
+                Fragment fragment = new FragmentCreateSessionTabPlatform();
                 hashMap.put(position, fragment);
                 return fragment;
             } case 3: {
-                Fragment fragment = new CreateSessionTabPaymentFragment();
+                Fragment fragment = new FragmentCreateSessionTabPayment();
                 hashMap.put(position, fragment);
                 return fragment;
             } default:

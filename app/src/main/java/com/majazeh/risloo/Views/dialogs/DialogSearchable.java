@@ -27,18 +27,18 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.ParamsManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.dialog.DialogSearchableAdapter;
-import com.majazeh.risloo.views.fragments.main.create.CreateCaseFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateCaseUserFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateCenterFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateCenterUserFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateRoomFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateRoomUserFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateSampleFragment;
-import com.majazeh.risloo.views.fragments.main.create.ReserveScheduleFragment;
-import com.majazeh.risloo.views.fragments.main.index.CenterTagsFragment;
-import com.majazeh.risloo.views.fragments.main.index.RoomTagsFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabReferenceFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditCenterTabDetailFragment;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCase;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCaseUser;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenter;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenterUser;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateRoom;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateRoomUser;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateSample;
+import com.majazeh.risloo.views.fragments.main.create.FragmentReserveSchedule;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterTags;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomTags;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabReference;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditCenterTabDetail;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
@@ -178,7 +178,7 @@ public class DialogSearchable extends AppCompatDialogFragment {
                 binding.titleTextView.setText(getResources().getString(R.string.DialogReferenceTitle));
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogReferenceHint));
 
-                if (current instanceof ReserveScheduleFragment)
+                if (current instanceof FragmentReserveSchedule)
                     binding.entryButton.setVisibility(View.GONE);
                 else
                     binding.entryButton.setText(getResources().getString(R.string.DialogReferenceEntry));
@@ -187,7 +187,7 @@ public class DialogSearchable extends AppCompatDialogFragment {
                 binding.titleTextView.setText(getResources().getString(R.string.DialogTagTitle));
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogTagHint));
 
-                if (current instanceof CenterTagsFragment || current instanceof RoomTagsFragment)
+                if (current instanceof FragmentCenterTags || current instanceof FragmentRoomTags)
                     binding.entryButton.setVisibility(View.GONE);
                 else
                     binding.entryButton.setText(getResources().getString(R.string.DialogTagEntry));
@@ -226,25 +226,25 @@ public class DialogSearchable extends AppCompatDialogFragment {
     }
 
     private void setHashmap() {
-        if (current instanceof CreateCaseFragment) {
+        if (current instanceof FragmentCreateCase) {
             switch (method) {
                 case "references":
-                    if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
-                        CenterModel centerModel = (CenterModel) ((CreateCaseFragment) current).typeModel;
+                    if (StringManager.substring(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
+                        CenterModel centerModel = (CenterModel) ((FragmentCreateCase) current).typeModel;
                         data.put("id", centerModel.getId());
-                    } else if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
-                        RoomModel roomModel = (RoomModel) ((CreateCaseFragment) current).typeModel;
+                    } else if (StringManager.substring(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
+                        RoomModel roomModel = (RoomModel) ((FragmentCreateCase) current).typeModel;
                         data.put("id", roomModel.getId());
                     }
 
                     data.put("usage", "create_case");
                     break;
                 case "tags":
-                    if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
-                        CenterModel centerModel = (CenterModel) ((CreateCaseFragment) current).typeModel;
+                    if (StringManager.substring(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
+                        CenterModel centerModel = (CenterModel) ((FragmentCreateCase) current).typeModel;
                         data.put("region", centerModel.getId());
-                    } else if (StringManager.substring(((CreateCaseFragment) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
-                        RoomModel roomModel = (RoomModel) ((CreateCaseFragment) current).typeModel;
+                    } else if (StringManager.substring(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
+                        RoomModel roomModel = (RoomModel) ((FragmentCreateCase) current).typeModel;
                         data.put("region", roomModel.getCenter().getId());
                     }
 
@@ -252,50 +252,50 @@ public class DialogSearchable extends AppCompatDialogFragment {
             }
         }
 
-        if (current instanceof CreateCaseUserFragment) {
+        if (current instanceof FragmentCreateCaseUser) {
             if (method.equals("references")) {
-                data.put("id", ((CreateCaseUserFragment) current).caseModel.getRoom().getId());
-                data.put("not_in_case", ((CreateCaseUserFragment) current).caseModel.getId());
+                data.put("id", ((FragmentCreateCaseUser) current).caseModel.getRoom().getId());
+                data.put("not_in_case", ((FragmentCreateCaseUser) current).caseModel.getId());
             }
         }
 
-        if (current instanceof CreateCenterFragment) {
+        if (current instanceof FragmentCreateCenter) {
             if (method.equals("managers")) {
-                if (((CreateCenterFragment) current).type.equals("personal_clinic"))
+                if (((FragmentCreateCenter) current).type.equals("personal_clinic"))
                     data.put("personal_clinic", "no");
                 else
                     data.put("personal_clinic", "yes");
             }
         }
 
-        if (current instanceof CreateCenterUserFragment) {
+        if (current instanceof FragmentCreateCenterUser) {
             if (method.equals("rooms")) {
-                data.put("center", ((CreateCenterUserFragment) current).centerModel.getId());
+                data.put("center", ((FragmentCreateCenterUser) current).centerModel.getId());
             }
         }
 
-        if (current instanceof CreateRoomFragment) {
+        if (current instanceof FragmentCreateRoom) {
             if (method.equals("psychologies")) {
-                data.put("id", ((CreateRoomFragment) current).centerModel.getId());
+                data.put("id", ((FragmentCreateRoom) current).centerModel.getId());
                 data.put("has_room", "no");
                 data.put("position", "manager,operator,psychologist,under_supervision");
             }
         }
 
-        if (current instanceof CreateRoomUserFragment) {
+        if (current instanceof FragmentCreateRoomUser) {
             if (method.equals("references")) {
-                data.put("id", ((CreateRoomUserFragment) current).roomModel.getCenter().getId());
-                data.put("acceptation_room", ((CreateRoomUserFragment) current).roomModel.getId());
+                data.put("id", ((FragmentCreateRoomUser) current).roomModel.getCenter().getId());
+                data.put("acceptation_room", ((FragmentCreateRoomUser) current).roomModel.getId());
             }
         }
 
-        if (current instanceof CreateSampleFragment) {
+        if (current instanceof FragmentCreateSample) {
             switch (method) {
                 case "scales":
                     // TODO : Place Code If  Needed
                     break;
                 case "references":
-                    data.put("id", ((CreateSampleFragment) current).roomId);
+                    data.put("id", ((FragmentCreateSample) current).roomId);
                     data.put("status", "accepted");
                     break;
                 case "rooms":
@@ -303,53 +303,53 @@ public class DialogSearchable extends AppCompatDialogFragment {
                     data.put("instance", "1");
                     break;
                 case "cases":
-                    data.put("room", ((CreateSampleFragment) current).roomId);
+                    data.put("room", ((FragmentCreateSample) current).roomId);
                     data.put("instance", "1");
                     break;
                 case "sessions":
-                    data.put("case", ((CreateSampleFragment) current).caseId);
+                    data.put("case", ((FragmentCreateSample) current).caseId);
                     data.put("instance", "1");
                     break;
             }
         }
 
-        if (child instanceof CreateScheduleTabReferenceFragment) {
+        if (child instanceof FragmentCreateScheduleTabReference) {
             if (method.equals("cases")) {
-                data.put("room", ((CreateScheduleTabReferenceFragment) child).roomId);
+                data.put("room", ((FragmentCreateScheduleTabReference) child).roomId);
                 data.put("instance", "1");
             }
         }
 
-        if (current instanceof ReserveScheduleFragment) {
+        if (current instanceof FragmentReserveSchedule) {
             switch (method) {
                 case "references":
-                    data.put("id", ((ReserveScheduleFragment) current).roomId);
+                    data.put("id", ((FragmentReserveSchedule) current).roomId);
                     data.put("usage", "create_case");
                     break;
                 case "cases":
-                    data.put("room", ((ReserveScheduleFragment) current).roomId);
+                    data.put("room", ((FragmentReserveSchedule) current).roomId);
                     data.put("instance", "1");
                     break;
             }
         }
 
-        if (child instanceof EditCenterTabDetailFragment) {
+        if (child instanceof FragmentEditCenterTabDetail) {
             if (method.equals("managers")) {
-                if (((EditCenterTabDetailFragment) child).type.equals("personal_clinic"))
+                if (((FragmentEditCenterTabDetail) child).type.equals("personal_clinic"))
                     data.put("personal_clinic", "no");
                 else
                     data.put("personal_clinic", "yes");
             }
         }
 
-        if (current instanceof CenterTagsFragment) {
+        if (current instanceof FragmentCenterTags) {
             if (method.equals("tags"))
-                data.put("region", ((CenterTagsFragment) current).centerModel.getId());
+                data.put("region", ((FragmentCenterTags) current).centerModel.getId());
         }
 
-        if (current instanceof RoomTagsFragment) {
+        if (current instanceof FragmentRoomTags) {
             if (method.equals("tags"))
-                data.put("region", ((RoomTagsFragment) current).roomModel.getId());
+                data.put("region", ((FragmentRoomTags) current).roomModel.getId());
         }
 
         getData();
@@ -505,7 +505,7 @@ public class DialogSearchable extends AppCompatDialogFragment {
                 });
                 break;
             case "references":
-                if (current instanceof CreateRoomUserFragment)
+                if (current instanceof FragmentCreateRoomUser)
                     Center.users(data, header, new Response() {
                         @Override
                         public void onOK(Object object) {

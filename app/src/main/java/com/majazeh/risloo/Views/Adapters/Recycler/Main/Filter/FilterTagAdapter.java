@@ -13,7 +13,7 @@ import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Filter.FilterTagHolder;
-import com.majazeh.risloo.views.fragments.main.show.RoomFragment;
+import com.majazeh.risloo.views.fragments.main.show.FragmentRoom;
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -80,7 +80,7 @@ public class FilterTagAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             else
                 ids.remove(model.getId());
 
-            ((RoomFragment) current).responseAdapter();
+            ((FragmentRoom) current).responseAdapter();
         });
     }
 

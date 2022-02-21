@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.views.fragments.main.tab.EditUserTabAvatarFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditUserTabCryptoFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditUserTabPasswordFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditUserTabPersonalFragment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabAvatar;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabCrypto;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabPassword;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabPersonal;
 
 import java.util.HashMap;
 
@@ -26,19 +26,19 @@ public class EditUserAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0: {
-                Fragment fragment = new EditUserTabPersonalFragment();
+                Fragment fragment = new FragmentEditUserTabPersonal();
                 hashMap.put(position, fragment);
                 return fragment;
             } case 1: {
-                Fragment fragment = new EditUserTabPasswordFragment();
+                Fragment fragment = new FragmentEditUserTabPassword();
                 hashMap.put(position, fragment);
                 return fragment;
             } case 2: {
-                Fragment fragment = new EditUserTabAvatarFragment();
+                Fragment fragment = new FragmentEditUserTabAvatar();
                 hashMap.put(position, fragment);
                 return fragment;
             } case 3: {
-                Fragment fragment = new EditUserTabCryptoFragment();
+                Fragment fragment = new FragmentEditUserTabCrypto();
                 hashMap.put(position, fragment);
                 return fragment;
             } default:

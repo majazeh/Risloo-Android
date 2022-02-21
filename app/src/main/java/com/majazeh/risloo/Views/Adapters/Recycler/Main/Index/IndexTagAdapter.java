@@ -16,8 +16,8 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexTagHolder;
-import com.majazeh.risloo.views.fragments.main.index.CenterTagsFragment;
-import com.majazeh.risloo.views.fragments.main.index.RoomTagsFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterTags;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomTags;
 import com.majazeh.risloo.databinding.SingleItemIndexTagBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -141,10 +141,10 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
     }
 
     private void setHashmap(TagModel model) {
-        if (current instanceof CenterTagsFragment)
-            data.put("roomId", ((CenterTagsFragment) current).centerModel.getId());
-        else if (current instanceof RoomTagsFragment)
-            data.put("roomId", ((RoomTagsFragment) current).roomModel.getId());
+        if (current instanceof FragmentCenterTags)
+            data.put("roomId", ((FragmentCenterTags) current).centerModel.getId());
+        else if (current instanceof FragmentRoomTags)
+            data.put("roomId", ((FragmentRoomTags) current).roomModel.getId());
 
         data.put("id", model.getId());
         data.put("order", selectedHolder.getBindingAdapterPosition() + 1);
@@ -162,7 +162,7 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
 
         setHashmap(model);
 
-        if (current instanceof CenterTagsFragment) {
+        if (current instanceof FragmentCenterTags) {
             Center.orderTags(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -188,7 +188,7 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
                     });
                 }
             });
-        } else if (current instanceof RoomTagsFragment) {
+        } else if (current instanceof FragmentRoomTags) {
             Room.orderTags(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {

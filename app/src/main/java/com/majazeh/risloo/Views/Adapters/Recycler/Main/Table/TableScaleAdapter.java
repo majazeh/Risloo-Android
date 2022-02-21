@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderScaleHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableScaleHolder;
-import com.majazeh.risloo.views.fragments.main.index.ScalesFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentScales;
 import com.majazeh.risloo.databinding.HeaderItemTableScaleBinding;
 import com.majazeh.risloo.databinding.SingleItemTableScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
@@ -112,7 +112,7 @@ public class TableScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private void setPermission(TableScaleHolder holder) {
         UserModel model = ((ActivityMain) activity).singleton.getUserModel();
 
-        if (current instanceof ScalesFragment && ((ActivityMain) activity).permissoon.showScalesCreateSample(model))
+        if (current instanceof FragmentScales && ((ActivityMain) activity).permissoon.showScalesCreateSample(model))
             holder.binding.createTextView.setVisibility(View.VISIBLE);
         else
             holder.binding.createTextView.setVisibility(View.GONE);

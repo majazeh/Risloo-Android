@@ -20,7 +20,7 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderUser2Holder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableUser2Holder;
-import com.majazeh.risloo.views.fragments.main.show.SessionFragment;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSession;
 import com.majazeh.risloo.databinding.HeaderItemTableUser2Binding;
 import com.majazeh.risloo.databinding.SingleItemTableUser2Binding;
 import com.mre.ligheh.API.Response;
@@ -126,9 +126,9 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TableUser2Holder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
-            if (current instanceof SessionFragment) {
-                if (((SessionFragment) current).sessionModel != null && ((SessionFragment) current).sessionModel.getRoom() != null)
-                    ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((SessionFragment) current).sessionModel.getRoom(), model);
+            if (current instanceof FragmentSession) {
+                if (((FragmentSession) current).sessionModel != null && ((FragmentSession) current).sessionModel.getRoom() != null)
+                    ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((FragmentSession) current).sessionModel.getRoom(), model);
 
             }
         }).widget(holder.binding.getRoot());
@@ -188,9 +188,9 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (model.getField() != null)
             holder.binding.fieldTextView.setText(model.getField().getTitle());
 
-        if (current instanceof SessionFragment)
-            if (((SessionFragment) current).sessionModel != null && ((SessionFragment) current).sessionModel.getAvailableSessionPlatforms() != null)
-                setPlatform(holder, ((SessionFragment) current).sessionModel.getAvailableSessionPlatforms(), model);
+        if (current instanceof FragmentSession)
+            if (((FragmentSession) current).sessionModel != null && ((FragmentSession) current).sessionModel.getAvailableSessionPlatforms() != null)
+                setPlatform(holder, ((FragmentSession) current).sessionModel.getAvailableSessionPlatforms(), model);
 
         setPosition(holder, model);
     }
@@ -262,8 +262,8 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void setHashmap(UserModel model, String value, String method) {
-        if (current instanceof SessionFragment)
-            data.put("id", ((SessionFragment) current).sessionModel.getId());
+        if (current instanceof FragmentSession)
+            data.put("id", ((FragmentSession) current).sessionModel.getId());
 
         if (method.equals("position")) {
             data.put("userId", model.getId());

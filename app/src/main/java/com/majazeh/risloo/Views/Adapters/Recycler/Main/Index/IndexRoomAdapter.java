@@ -16,8 +16,8 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexRoomHolder;
-import com.majazeh.risloo.views.fragments.main.index.RoomsFragment;
-import com.majazeh.risloo.views.fragments.main.show.DashboardFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRooms;
+import com.majazeh.risloo.views.fragments.main.show.FragmentDashboard;
 import com.majazeh.risloo.databinding.SingleItemIndexRoomBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
@@ -124,7 +124,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
     }
 
     private void setData(IndexRoomHolder holder, RoomModel model) {
-        if (current instanceof DashboardFragment) {
+        if (current instanceof FragmentDashboard) {
             try {
 
                 if (model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("title") && !model.getCenter().getDetail().isNull("title") && !model.getCenter().getDetail().getString("title").equals(""))
@@ -159,7 +159,7 @@ public class IndexRoomAdapter extends RecyclerView.Adapter<IndexRoomHolder> impl
 
         }
 
-        if (current instanceof RoomsFragment) {
+        if (current instanceof FragmentRooms) {
             setAvailable(holder, true);
         }
     }

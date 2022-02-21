@@ -24,7 +24,7 @@ import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldMultiHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldSelectHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldTextHolder;
-import com.majazeh.risloo.views.fragments.main.show.SampleFragment;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSample;
 import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldMultiBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
@@ -165,8 +165,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (current instanceof SampleFragment)
-                ((SampleFragment) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
+            if (current instanceof FragmentSample)
+                ((FragmentSample) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
 
             ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
             return false;
@@ -182,8 +182,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (current instanceof SampleFragment)
-                ((SampleFragment) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
+            if (current instanceof FragmentSample)
+                ((FragmentSample) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
 
             ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
             return false;
@@ -203,8 +203,8 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    if (current instanceof SampleFragment)
-                        ((SampleFragment) current).sendPre(item + 1, String.valueOf(position + 1));
+                    if (current instanceof FragmentSample)
+                        ((FragmentSample) current).sendPre(item + 1, String.valueOf(position + 1));
 
                     userSelect = false;
                 }
@@ -275,13 +275,13 @@ public class TablePreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (!model.getUserAnswered().equals("")) {
             holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUserAnswered()) - 1);
 
-            if (current instanceof SampleFragment)
-                ((SampleFragment) current).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(holder.binding.selectSpinner.getSelectedItemPosition() + 1));
+            if (current instanceof FragmentSample)
+                ((FragmentSample) current).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(holder.binding.selectSpinner.getSelectedItemPosition() + 1));
         } else {
             holder.binding.selectSpinner.setSelection(holder.binding.selectSpinner.getCount());
 
-            if (current instanceof SampleFragment)
-                ((SampleFragment) current).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(1));
+            if (current instanceof FragmentSample)
+                ((FragmentSample) current).sampleAnswers.addToPrerequisites(position + 1, String.valueOf(1));
         }
     }
 

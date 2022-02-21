@@ -13,8 +13,8 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexDayHolder;
-import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
-import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterSchedules;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomSchedules;
 import com.majazeh.risloo.databinding.SingleItemIndexDayBinding;
 
 import java.util.ArrayList;
@@ -85,10 +85,10 @@ public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
 
     private void listener(IndexDayHolder holder, long timestamp) {
         CustomClickView.onDelayedListener(() -> {
-            if (current instanceof CenterSchedulesFragment)
-                ((CenterSchedulesFragment) current).responseAdapter(timestamp);
-            else if (current instanceof RoomSchedulesFragment)
-                ((RoomSchedulesFragment) current).responseAdapter(timestamp);
+            if (current instanceof FragmentCenterSchedules)
+                ((FragmentCenterSchedules) current).responseAdapter(timestamp);
+            else if (current instanceof FragmentRoomSchedules)
+                ((FragmentRoomSchedules) current).responseAdapter(timestamp);
 
             selectedTimestamp = timestamp;
             userSelect = true;

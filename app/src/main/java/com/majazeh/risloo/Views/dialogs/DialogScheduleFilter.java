@@ -21,8 +21,8 @@ import com.majazeh.risloo.utils.managers.ParamsManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.dialog.DialogFilterAdapter;
-import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragment;
-import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterSchedules;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomSchedules;
 import com.majazeh.risloo.databinding.DialogScheduleFilterBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -87,11 +87,11 @@ public class DialogScheduleFilter extends AppCompatDialogFragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            if (current instanceof CenterSchedulesFragment)
-                ((CenterSchedulesFragment) current).responseDialog("reset", null);
+            if (current instanceof FragmentCenterSchedules)
+                ((FragmentCenterSchedules) current).responseDialog("reset", null);
 
-            if (current instanceof RoomSchedulesFragment)
-                ((RoomSchedulesFragment) current).responseDialog("reset", null);
+            if (current instanceof FragmentRoomSchedules)
+                ((FragmentRoomSchedules) current).responseDialog("reset", null);
 
             dismiss();
         }).widget(binding.resetButton);

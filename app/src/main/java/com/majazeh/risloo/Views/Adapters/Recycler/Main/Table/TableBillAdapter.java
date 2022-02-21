@@ -24,8 +24,8 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderBillHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableBillHolder;
-import com.majazeh.risloo.views.fragments.main.index.BillingsFragment;
-import com.majazeh.risloo.views.fragments.main.show.SessionFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentBillings;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSession;
 import com.majazeh.risloo.databinding.HeaderItemTableBillBinding;
 import com.majazeh.risloo.databinding.SingleItemTableBillBinding;
 import com.mre.ligheh.API.Response;
@@ -215,8 +215,8 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         // Finall
-        if (current instanceof SessionFragment) {
-            String centerId = ((SessionFragment) current).sessionModel.getRoom().getCenter().getId();
+        if (current instanceof FragmentSession) {
+            String centerId = ((FragmentSession) current).sessionModel.getRoom().getCenter().getId();
 
             if (model.getType().equals("creditor")) {
                 UserModel userModel = ((ActivityMain) activity).singleton.getUserModel();
@@ -292,9 +292,9 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                 JSONObject paymentObject = responseObject.getJSONObject("payment");
                                 PaymentModel paymentModel = new PaymentModel(paymentObject);
 
-                                if (current instanceof BillingsFragment)
+                                if (current instanceof FragmentBillings)
                                     Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.billingsFragment);
-                                else if (current instanceof SessionFragment)
+                                else if (current instanceof FragmentSession)
                                     Paymont.getInstance().insertPayment(model, paymentModel, null, R.id.sessionFragment);
 
                                 PaymentManager.request(activity, paymentModel);

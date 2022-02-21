@@ -15,10 +15,10 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.adapters.holder.dialog.DialogSearchableHolder;
-import com.majazeh.risloo.views.fragments.main.create.CreateRoomUserFragment;
-import com.majazeh.risloo.views.fragments.main.create.ReserveScheduleFragment;
-import com.majazeh.risloo.views.fragments.main.index.CenterTagsFragment;
-import com.majazeh.risloo.views.fragments.main.index.RoomTagsFragment;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateRoomUser;
+import com.majazeh.risloo.views.fragments.main.create.FragmentReserveSchedule;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterTags;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomTags;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
@@ -27,16 +27,16 @@ import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.fragments.main.create.CreateCaseFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateCaseUserFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateCenterFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateCenterUserFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateRoomFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateSampleFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabReferenceFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabTimeFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabTimeFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditCenterTabDetailFragment;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCase;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCaseUser;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenter;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenterUser;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateRoom;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateSample;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabReference;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabTime;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabTime;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditCenterTabDetail;
 import com.majazeh.risloo.databinding.SingleItemDialogSearchableBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -220,155 +220,155 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
 
     private void setActive(DialogSearchableHolder holder, TypeModel item) {
         try {
-            if (current instanceof CreateCaseFragment) {
+            if (current instanceof FragmentCreateCase) {
                 switch (method) {
                     case "references": {
                         UserModel model = (UserModel) item;
 
-                        detector(holder, ((CreateCaseFragment) current).referencesAdapter.getIds().contains(model.getId()));
-                        calculateCount(((CreateCaseFragment) current).referencesAdapter.getIds().size());
+                        detector(holder, ((FragmentCreateCase) current).referencesAdapter.getIds().contains(model.getId()));
+                        calculateCount(((FragmentCreateCase) current).referencesAdapter.getIds().size());
                     } break;
                     case "tags": {
                         TagModel model = (TagModel) item;
 
-                        detector(holder, ((CreateCaseFragment) current).tagsAdapter.getIds().contains(model.getId()));
-                        calculateCount(((CreateCaseFragment) current).tagsAdapter.getIds().size());
+                        detector(holder, ((FragmentCreateCase) current).tagsAdapter.getIds().contains(model.getId()));
+                        calculateCount(((FragmentCreateCase) current).tagsAdapter.getIds().size());
                     } break;
                 }
             }
 
-            if (current instanceof CreateCaseUserFragment) {
+            if (current instanceof FragmentCreateCaseUser) {
                 if (method.equals("references")) {
                     UserModel model = (UserModel) item;
 
-                    detector(holder, ((CreateCaseUserFragment) current).referencesAdapter.getIds().contains(model.getId()));
-                    calculateCount(((CreateCaseUserFragment) current).referencesAdapter.getIds().size());
+                    detector(holder, ((FragmentCreateCaseUser) current).referencesAdapter.getIds().contains(model.getId()));
+                    calculateCount(((FragmentCreateCaseUser) current).referencesAdapter.getIds().size());
                 }
             }
 
-            if (current instanceof CreateCenterFragment) {
+            if (current instanceof FragmentCreateCenter) {
                 if (method.equals("managers")) {
                     UserModel model = (UserModel) item;
 
-                    detector(holder, ((CreateCenterFragment) current).managerId.equals(model.getId()));
+                    detector(holder, ((FragmentCreateCenter) current).managerId.equals(model.getId()));
                 }
             }
 
-            if (current instanceof CreateCenterUserFragment) {
+            if (current instanceof FragmentCreateCenterUser) {
                 if (method.equals("rooms")) {
                     RoomModel model = (RoomModel) item;
 
-                    detector(holder, ((CreateCenterUserFragment) current).centerModel.getId().equals(model.getId()));
+                    detector(holder, ((FragmentCreateCenterUser) current).centerModel.getId().equals(model.getId()));
                 }
             }
 
-            if (current instanceof CreateRoomFragment){
+            if (current instanceof FragmentCreateRoom){
                 if (method.equals("psychologies")) {
                     UserModel model = (UserModel) item;
 
-                    detector(holder, ((CreateRoomFragment) current).psychologyId.equals(model.getId()));
+                    detector(holder, ((FragmentCreateRoom) current).psychologyId.equals(model.getId()));
                 }
             }
 
-            if (current instanceof CreateRoomUserFragment){
+            if (current instanceof FragmentCreateRoomUser){
                 if (method.equals("references")) {
                     UserModel model = (UserModel) item;
 
-                    detector(holder, ((CreateRoomUserFragment) current).referencesAdapter.getIds().contains(model.getId()));
-                    calculateCount(((CreateRoomUserFragment) current).referencesAdapter.getIds().size());
+                    detector(holder, ((FragmentCreateRoomUser) current).referencesAdapter.getIds().contains(model.getId()));
+                    calculateCount(((FragmentCreateRoomUser) current).referencesAdapter.getIds().size());
                 }
             }
 
-            if (current instanceof CreateSampleFragment){
+            if (current instanceof FragmentCreateSample){
                 switch (method) {
                     case "scales": {
                         ScaleModel model = (ScaleModel) item;
 
-                        detector(holder, ((CreateSampleFragment) current).scalesAdapter.getIds().contains(model.getId()));
-                        calculateCount(((CreateSampleFragment) current).scalesAdapter.getIds().size());
+                        detector(holder, ((FragmentCreateSample) current).scalesAdapter.getIds().contains(model.getId()));
+                        calculateCount(((FragmentCreateSample) current).scalesAdapter.getIds().size());
                     } break;
                     case "references": {
                         UserModel model = (UserModel) item;
 
-                        detector(holder, ((CreateSampleFragment) current).referencesAdapter.getIds().contains(model.getId()));
-                        calculateCount(((CreateSampleFragment) current).referencesAdapter.getIds().size());
+                        detector(holder, ((FragmentCreateSample) current).referencesAdapter.getIds().contains(model.getId()));
+                        calculateCount(((FragmentCreateSample) current).referencesAdapter.getIds().size());
                     } break;
                     case "rooms": {
                         RoomModel model = (RoomModel) item;
 
-                        detector(holder, ((CreateSampleFragment) current).roomId.equals(model.getId()));
+                        detector(holder, ((FragmentCreateSample) current).roomId.equals(model.getId()));
                     } break;
                     case "cases": {
                         CaseModel model = (CaseModel) item;
 
-                        detector(holder, ((CreateSampleFragment) current).caseId.equals(model.getId()));
+                        detector(holder, ((FragmentCreateSample) current).caseId.equals(model.getId()));
                     } break;
                     case "sessions": {
                         SessionModel model = (SessionModel) item;
 
-                        detector(holder, ((CreateSampleFragment) current).sessionId.equals(model.getId()));
+                        detector(holder, ((FragmentCreateSample) current).sessionId.equals(model.getId()));
                     } break;
                 }
             }
 
-            if (child instanceof CreateScheduleTabReferenceFragment){
+            if (child instanceof FragmentCreateScheduleTabReference){
                 if (method.equals("cases")) {
                     CaseModel model = (CaseModel) item;
 
-                    detector(holder, ((CreateScheduleTabReferenceFragment) child).caseId.equals(model.getId()));
+                    detector(holder, ((FragmentCreateScheduleTabReference) child).caseId.equals(model.getId()));
                 }
             }
 
-            if (child instanceof CreateScheduleTabTimeFragment) {
+            if (child instanceof FragmentCreateScheduleTabTime) {
                 if (method.equals("patternDays")) {
-                    detector(holder, ((CreateScheduleTabTimeFragment) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                    calculateCount(((CreateScheduleTabTimeFragment) child).patternDaysAdapter.getIds().size());
+                    detector(holder, ((FragmentCreateScheduleTabTime) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                    calculateCount(((FragmentCreateScheduleTabTime) child).patternDaysAdapter.getIds().size());
                 }
             }
 
-            if (child instanceof CreateSessionTabTimeFragment) {
+            if (child instanceof FragmentCreateSessionTabTime) {
                 if (method.equals("patternDays")) {
-                    detector(holder, ((CreateSessionTabTimeFragment) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                    calculateCount(((CreateSessionTabTimeFragment) child).patternDaysAdapter.getIds().size());
+                    detector(holder, ((FragmentCreateSessionTabTime) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                    calculateCount(((FragmentCreateSessionTabTime) child).patternDaysAdapter.getIds().size());
                 }
             }
 
-            if (current instanceof ReserveScheduleFragment) {
+            if (current instanceof FragmentReserveSchedule) {
                 switch (method) {
                     case "references": {
                         UserModel model = (UserModel) item;
 
-                        detector(holder, ((ReserveScheduleFragment) current).referenceId.equals(model.getId()));
+                        detector(holder, ((FragmentReserveSchedule) current).referenceId.equals(model.getId()));
                     } break;
                     case "cases": {
                         CaseModel model = (CaseModel) item;
 
-                        detector(holder, ((ReserveScheduleFragment) current).caseId.equals(model.getId()));
+                        detector(holder, ((FragmentReserveSchedule) current).caseId.equals(model.getId()));
                     } break;
                 }
             }
 
-            if (child instanceof EditCenterTabDetailFragment) {
+            if (child instanceof FragmentEditCenterTabDetail) {
                 if (method.equals("managers")) {
                     UserModel model = (UserModel) item;
 
-                    detector(holder, ((EditCenterTabDetailFragment) child).managerId.equals(model.getId()));
+                    detector(holder, ((FragmentEditCenterTabDetail) child).managerId.equals(model.getId()));
                 }
             }
 
-            if (current instanceof CenterTagsFragment) {
+            if (current instanceof FragmentCenterTags) {
                 if (method.equals("tags")) {
                     TagModel model = (TagModel) item;
 
-                    detector(holder, ((CenterTagsFragment) current).adapter.selectedHolder.binding.titleTextView.getText().equals(model.getTitle()));
+                    detector(holder, ((FragmentCenterTags) current).adapter.selectedHolder.binding.titleTextView.getText().equals(model.getTitle()));
                 }
             }
 
-            if (current instanceof RoomTagsFragment) {
+            if (current instanceof FragmentRoomTags) {
                 if (method.equals("tags")) {
                     TagModel model = (TagModel) item;
 
-                    detector(holder, ((RoomTagsFragment) current).adapter.selectedHolder.binding.titleTextView.getText().equals(model.getTitle()));
+                    detector(holder, ((FragmentRoomTags) current).adapter.selectedHolder.binding.titleTextView.getText().equals(model.getTitle()));
                 }
             }
 
@@ -378,47 +378,47 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
     }
 
     private void responseDialog(TypeModel item) {
-        if (current instanceof CreateCaseFragment)
-            ((CreateCaseFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentCreateCase)
+            ((FragmentCreateCase) current).responseDialog(method, item);
 
-        if (current instanceof CreateCaseUserFragment)
-            ((CreateCaseUserFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentCreateCaseUser)
+            ((FragmentCreateCaseUser) current).responseDialog(method, item);
 
-        if (current instanceof CreateCenterFragment)
-            ((CreateCenterFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentCreateCenter)
+            ((FragmentCreateCenter) current).responseDialog(method, item);
 
-        if (current instanceof CreateCenterUserFragment)
-            ((CreateCenterUserFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentCreateCenterUser)
+            ((FragmentCreateCenterUser) current).responseDialog(method, item);
 
-        if (current instanceof CreateRoomFragment)
-            ((CreateRoomFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentCreateRoom)
+            ((FragmentCreateRoom) current).responseDialog(method, item);
 
-        if (current instanceof CreateRoomUserFragment)
-            ((CreateRoomUserFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentCreateRoomUser)
+            ((FragmentCreateRoomUser) current).responseDialog(method, item);
 
-        if (current instanceof CreateSampleFragment)
-            ((CreateSampleFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentCreateSample)
+            ((FragmentCreateSample) current).responseDialog(method, item);
 
-        if (child instanceof CreateScheduleTabReferenceFragment)
-            ((CreateScheduleTabReferenceFragment) child).responseDialog(method, item);
+        if (child instanceof FragmentCreateScheduleTabReference)
+            ((FragmentCreateScheduleTabReference) child).responseDialog(method, item);
 
-        if (child instanceof CreateScheduleTabTimeFragment)
-            ((CreateScheduleTabTimeFragment) child).responseDialog(method, item);
+        if (child instanceof FragmentCreateScheduleTabTime)
+            ((FragmentCreateScheduleTabTime) child).responseDialog(method, item);
 
-        if (child instanceof CreateSessionTabTimeFragment)
-            ((CreateSessionTabTimeFragment) child).responseDialog(method, item);
+        if (child instanceof FragmentCreateSessionTabTime)
+            ((FragmentCreateSessionTabTime) child).responseDialog(method, item);
 
-        if (current instanceof ReserveScheduleFragment)
-            ((ReserveScheduleFragment) current).responseDialog(method, item);
+        if (current instanceof FragmentReserveSchedule)
+            ((FragmentReserveSchedule) current).responseDialog(method, item);
 
-        if (child instanceof EditCenterTabDetailFragment)
-            ((EditCenterTabDetailFragment) child).responseDialog(method, item);
+        if (child instanceof FragmentEditCenterTabDetail)
+            ((FragmentEditCenterTabDetail) child).responseDialog(method, item);
 
-        if (current instanceof CenterTagsFragment)
-            ((CenterTagsFragment) current).adapter.responseDialog(method, item);
+        if (current instanceof FragmentCenterTags)
+            ((FragmentCenterTags) current).adapter.responseDialog(method, item);
 
-        if (current instanceof RoomTagsFragment)
-            ((RoomTagsFragment) current).adapter.responseDialog(method, item);
+        if (current instanceof FragmentRoomTags)
+            ((FragmentRoomTags) current).adapter.responseDialog(method, item);
     }
 
     private void calculateCount(int count) {

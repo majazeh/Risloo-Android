@@ -19,7 +19,7 @@ import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderFieldHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldTextHolder;
-import com.majazeh.risloo.views.fragments.main.show.SampleFragment;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSample;
 import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 
@@ -117,8 +117,8 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (current instanceof SampleFragment)
-                ((SampleFragment) current).sendGen("cornometer", holder.binding.inputEditText.getText().toString().trim());
+            if (current instanceof FragmentSample)
+                ((FragmentSample) current).sendGen("cornometer", holder.binding.inputEditText.getText().toString().trim());
 
             ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
             return false;

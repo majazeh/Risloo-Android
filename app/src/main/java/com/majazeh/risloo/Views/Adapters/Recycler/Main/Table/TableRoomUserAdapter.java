@@ -14,7 +14,7 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderRoomUserHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableRoomUserHolder;
-import com.majazeh.risloo.views.fragments.main.index.RoomUsersFragment;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomUsers;
 import com.majazeh.risloo.databinding.HeaderItemTableRoomUserBinding;
 import com.majazeh.risloo.databinding.SingleItemTableRoomUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -103,8 +103,8 @@ public class TableRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void listener(TableRoomUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
-            if (current instanceof RoomUsersFragment)
-                ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((RoomUsersFragment) current).roomModel, model);
+            if (current instanceof FragmentRoomUsers)
+                ((ActivityMain) activity).navigatoon.navigateToReferenceFragment(((FragmentRoomUsers) current).roomModel, model);
 
         }).widget(holder.binding.getRoot());
     }

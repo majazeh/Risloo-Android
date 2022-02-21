@@ -17,14 +17,14 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabTimeFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabTimeFragment;
-import com.majazeh.risloo.views.fragments.main.create.CreateUserFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditUserTabPersonalFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabSessionFragment;
-import com.majazeh.risloo.views.fragments.main.tab.EditSessionTabTimeFragment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabTime;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabTime;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateUser;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabPersonal;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabSession;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabTime;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
 
 import java.util.Date;
@@ -89,29 +89,29 @@ public class SheetDate extends BottomSheetDialogFragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (child instanceof CreateSessionTabTimeFragment)
-                ((CreateSessionTabTimeFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof FragmentCreateSessionTabTime)
+                ((FragmentCreateSessionTabTime) child).responseBottomSheet(method, getDate());
 
-            if (child instanceof CreateSessionTabSessionFragment)
-                ((CreateSessionTabSessionFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof FragmentCreateSessionTabSession)
+                ((FragmentCreateSessionTabSession) child).responseBottomSheet(method, getDate());
 
-            if (child instanceof CreateScheduleTabTimeFragment)
-                ((CreateScheduleTabTimeFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof FragmentCreateScheduleTabTime)
+                ((FragmentCreateScheduleTabTime) child).responseBottomSheet(method, getDate());
 
-            if (child instanceof CreateScheduleTabSessionFragment)
-                ((CreateScheduleTabSessionFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof FragmentCreateScheduleTabSession)
+                ((FragmentCreateScheduleTabSession) child).responseBottomSheet(method, getDate());
 
-            if (current instanceof CreateUserFragment)
-                ((CreateUserFragment) current).responseBottomSheet(method, getDate());
+            if (current instanceof FragmentCreateUser)
+                ((FragmentCreateUser) current).responseBottomSheet(method, getDate());
 
-            if (child instanceof EditSessionTabTimeFragment)
-                ((EditSessionTabTimeFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof FragmentEditSessionTabTime)
+                ((FragmentEditSessionTabTime) child).responseBottomSheet(method, getDate());
 
-            if (child instanceof EditSessionTabSessionFragment)
-                ((EditSessionTabSessionFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof FragmentEditSessionTabSession)
+                ((FragmentEditSessionTabSession) child).responseBottomSheet(method, getDate());
 
-            if (child instanceof EditUserTabPersonalFragment)
-                ((EditUserTabPersonalFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof FragmentEditUserTabPersonal)
+                ((FragmentEditUserTabPersonal) child).responseBottomSheet(method, getDate());
 
             dismiss();
         }).widget(binding.entryTextView.getRoot());
@@ -120,15 +120,15 @@ public class SheetDate extends BottomSheetDialogFragment {
     private void setDialog() {
         switch (method) {
             case "birthday":
-                if (child instanceof EditUserTabPersonalFragment)
+                if (child instanceof FragmentEditUserTabPersonal)
                     binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetMeBirthDateTitle));
 
-                if (current instanceof CreateUserFragment)
+                if (current instanceof FragmentCreateUser)
                     binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetUserBirthDateTitle));
 
                 break;
             case "startDate":
-                if (child instanceof EditSessionTabTimeFragment)
+                if (child instanceof FragmentEditSessionTabTime)
                     binding.titleTextView.getRoot().setText(getResources().getString(R.string.BottomSheetSessionStartDateTitle));
 
                 break;

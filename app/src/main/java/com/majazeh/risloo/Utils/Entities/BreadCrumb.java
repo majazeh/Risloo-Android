@@ -14,39 +14,39 @@ import androidx.navigation.NavDestination;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.fragments.main.create.ReserveScheduleFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.edit.EditCenterFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.edit.EditCenterUserFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.edit.EditPlatformFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.edit.EditSessionFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.edit.EditTreasuryFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.edit.EditUserFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.BalancesFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.CenterPlatformsFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.CenterSchedulesFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.CenterTagsFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.CenterUsersFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.ClientReportsFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.CommissionsFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.RoomPlatformsFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.RoomSchedulesFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.RoomTagsFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.RoomUsersFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.RoomsFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.index.SamplesFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.BillFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.BulkSampleFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.CaseFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.CenterAccountingFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.CenterFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.FolderFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.MeFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.ReferenceFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.RoomFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.SampleFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.SessionFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.TreasuryFragmentArgs;
-import com.majazeh.risloo.views.fragments.main.show.UserFragmentArgs;
+import com.majazeh.risloo.views.fragments.main.create.FragmentReserveScheduleArgs;
+import com.majazeh.risloo.views.fragments.main.edit.FragmentEditCenterArgs;
+import com.majazeh.risloo.views.fragments.main.edit.FragmentEditCenterUserArgs;
+import com.majazeh.risloo.views.fragments.main.edit.FragmentEditPlatformArgs;
+import com.majazeh.risloo.views.fragments.main.edit.FragmentEditSessionArgs;
+import com.majazeh.risloo.views.fragments.main.edit.FragmentEditTreasuryArgs;
+import com.majazeh.risloo.views.fragments.main.edit.FragmentEditUserArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentBalancesArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterPlatformsArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterSchedulesArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterTagsArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCenterUsersArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentClientReportsArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentCommissionsArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomPlatformsArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomSchedulesArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomTagsArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomUsersArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentRoomsArgs;
+import com.majazeh.risloo.views.fragments.main.index.FragmentSamplesArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentBillArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentBulkSampleArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentCaseArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentCenterAccountingArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentCenterArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentFolderArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentMeArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentReferenceArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentRoomArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSampleArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentSessionArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentTreasuryArgs;
+import com.majazeh.risloo.views.fragments.main.show.FragmentUserArgs;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -158,8 +158,8 @@ public class BreadCrumb {
             case R.id.usersFragment:
                 return users();
             case R.id.samplesFragment:
-                chainId = SamplesFragmentArgs.fromBundle(arguments).getChainId();
-                sampleIds = SamplesFragmentArgs.fromBundle(arguments).getSampleIds();
+                chainId = FragmentSamplesArgs.fromBundle(arguments).getChainId();
+                sampleIds = FragmentSamplesArgs.fromBundle(arguments).getSampleIds();
 
                 return samples();
             case R.id.bulkSamplesFragment:
@@ -174,7 +174,7 @@ public class BreadCrumb {
             // -------------------- Toolbar
 
             case R.id.meFragment:
-                setModels(MeFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentMeArgs.fromBundle(arguments).getTypeModel());
                 return me();
             case R.id.accountingFragment:
                 return accounting();
@@ -218,22 +218,22 @@ public class BreadCrumb {
             case R.id.createUserFragment:
                 return createUser();
             case R.id.reserveScheduleFragment:
-                setModels(ReserveScheduleFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentReserveScheduleArgs.fromBundle(arguments).getTypeModel());
                 return reserveSchedule();
 
             // -------------------- Edit
 
             case R.id.editCenterFragment:
-                setModels(EditCenterFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentEditCenterArgs.fromBundle(arguments).getTypeModel());
                 return editCenter();
             case R.id.editCenterUserFragment:
-                setModels(EditCenterUserFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentEditCenterUserArgs.fromBundle(arguments).getTypeModel());
                 return editCenterUser();
             case R.id.editPlatformFragment:
-                setModels(EditPlatformFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentEditPlatformArgs.fromBundle(arguments).getTypeModel());
                 return editPlatform();
             case R.id.editSessionFragment: {
-                TypeModel typeModel = EditSessionFragmentArgs.fromBundle(arguments).getTypeModel();
+                TypeModel typeModel = FragmentEditSessionArgs.fromBundle(arguments).getTypeModel();
 
                 if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel"))
                     sessionType = "schedule";
@@ -243,35 +243,35 @@ public class BreadCrumb {
                 setModels(typeModel);
                 return editSession();
             } case R.id.editTreasuryFragment:
-                setModels(EditTreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentEditTreasuryArgs.fromBundle(arguments).getTypeModel());
                 return editTreasury();
             case R.id.editUserFragment:
-                setModels(EditUserFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentEditUserArgs.fromBundle(arguments).getTypeModel());
                 return editUser();
 
             // -------------------- Index
 
             case R.id.balancesFragment:
-                setModels(BalancesFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentBalancesArgs.fromBundle(arguments).getTypeModel());
                 return balances();
             case R.id.banksFragment:
                 return banks();
             case R.id.billingsFragment:
                 return billings();
             case R.id.centerPlatformsFragment:
-                setModels(CenterPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentCenterPlatformsArgs.fromBundle(arguments).getTypeModel());
                 return centerPlatforms();
             case R.id.centerSchedulesFragment:
-                setModels(CenterSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentCenterSchedulesArgs.fromBundle(arguments).getTypeModel());
                 return centerSchedules();
             case R.id.centerTagsFragment:
-                setModels(CenterTagsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentCenterTagsArgs.fromBundle(arguments).getTypeModel());
                 return centerTags();
             case R.id.centerUsersFragment:
-                setModels(CenterUsersFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentCenterUsersArgs.fromBundle(arguments).getTypeModel());
                 return centerUsers();
             case R.id.clientReportsFragment: {
-                TypeModel typeModel = ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel();
+                TypeModel typeModel = FragmentClientReportsArgs.fromBundle(arguments).getTypeModel();
 
                 if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
                     clientReportsType = "case";
@@ -281,22 +281,22 @@ public class BreadCrumb {
                 setModels(typeModel);
                 return clientReports();
             } case R.id.commissionsFragment:
-                setModels(CommissionsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentCommissionsArgs.fromBundle(arguments).getTypeModel());
                 return commissions();
             case R.id.roomPlatformsFragment:
-                setModels(RoomPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentRoomPlatformsArgs.fromBundle(arguments).getTypeModel());
                 return roomPlatforms();
             case R.id.roomSchedulesFragment:
-                setModels(RoomSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentRoomSchedulesArgs.fromBundle(arguments).getTypeModel());
                 return roomSchedules();
             case R.id.roomTagsFragment:
-                setModels(RoomTagsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentRoomTagsArgs.fromBundle(arguments).getTypeModel());
                 return roomTags();
             case R.id.roomUsersFragment:
-                setModels(RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentRoomUsersArgs.fromBundle(arguments).getTypeModel());
                 return roomUsers();
             case R.id.roomsFragment:
-                setModels(RoomsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentRoomsArgs.fromBundle(arguments).getTypeModel());
                 return rooms();
             case R.id.treasuriesFragment:
                 return treasuries();
@@ -304,16 +304,16 @@ public class BreadCrumb {
             // -------------------- Show
 
             case R.id.billFragment:
-                setModels(BillFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentBillArgs.fromBundle(arguments).getTypeModel());
                 return bill();
             case R.id.bulkSampleFragment:
-                setModels(BulkSampleFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentBulkSampleArgs.fromBundle(arguments).getTypeModel());
                 return bulkSample();
             case R.id.caseFragment:
-                setModels(CaseFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentCaseArgs.fromBundle(arguments).getTypeModel());
                 return casse();
             case R.id.centerAccountingFragment: {
-                TypeModel typeModel = CenterAccountingFragmentArgs.fromBundle(arguments).getTypeModel();
+                TypeModel typeModel = FragmentCenterAccountingArgs.fromBundle(arguments).getTypeModel();
 
                 if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
                     roomType = "counseling_center";
@@ -323,16 +323,16 @@ public class BreadCrumb {
                 setModels(typeModel);
                 return centerAccounting();
             } case R.id.centerFragment:
-                setModels(CenterFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentCenterArgs.fromBundle(arguments).getTypeModel());
                 return center();
             case R.id.folderFragment:
-                folderName = FolderFragmentArgs.fromBundle(arguments).getFolderName();
+                folderName = FragmentFolderArgs.fromBundle(arguments).getFolderName();
                 return folder();
             case R.id.referenceFragment: {
-                UserModel userModel = (UserModel) ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
+                UserModel userModel = (UserModel) FragmentReferenceArgs.fromBundle(arguments).getTypeModel();
 
                 if (((ActivityMain) activity).singleton.getUserModel().getId().equals(userModel.getUserId())) {
-                    TypeModel centerModel = ReferenceFragmentArgs.fromBundle(arguments).getCenterModel();
+                    TypeModel centerModel = FragmentReferenceArgs.fromBundle(arguments).getCenterModel();
 
                     if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
                         referenceType = "center";
@@ -341,7 +341,7 @@ public class BreadCrumb {
 
                     setModels(centerModel);
                 } else {
-                    TypeModel typeModel = ReferenceFragmentArgs.fromBundle(arguments).getTypeModel();
+                    TypeModel typeModel = FragmentReferenceArgs.fromBundle(arguments).getTypeModel();
                     referenceType = "user";
 
                     setModels(typeModel);
@@ -349,7 +349,7 @@ public class BreadCrumb {
 
                 return reference();
             } case R.id.roomFragment: {
-                TypeModel typeModel = RoomFragmentArgs.fromBundle(arguments).getTypeModel();
+                TypeModel typeModel = FragmentRoomArgs.fromBundle(arguments).getTypeModel();
 
                 if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
                     roomType = "personal_clinic";
@@ -359,10 +359,10 @@ public class BreadCrumb {
                 setModels(typeModel);
                 return room();
             } case R.id.sampleFragment:
-                setModels(SampleFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentSampleArgs.fromBundle(arguments).getTypeModel());
                 return sample();
             case R.id.sessionFragment: {
-                TypeModel typeModel = SessionFragmentArgs.fromBundle(arguments).getTypeModel();
+                TypeModel typeModel = FragmentSessionArgs.fromBundle(arguments).getTypeModel();
 
                 if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel"))
                     sessionType = "schedule";
@@ -372,10 +372,10 @@ public class BreadCrumb {
                 setModels(typeModel);
                 return session();
             } case R.id.treasuryFragment:
-                setModels(TreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentTreasuryArgs.fromBundle(arguments).getTypeModel());
                 return treasury();
             case R.id.userFragment:
-                setModels(UserFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels(FragmentUserArgs.fromBundle(arguments).getTypeModel());
                 return user();
         }
 

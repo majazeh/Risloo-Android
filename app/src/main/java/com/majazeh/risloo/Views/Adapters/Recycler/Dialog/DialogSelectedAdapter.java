@@ -18,8 +18,8 @@ import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.views.fragments.main.tab.CreateScheduleTabPaymentFragment;
-import com.majazeh.risloo.views.fragments.main.tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabPayment;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabPayment;
 import com.majazeh.risloo.databinding.SingleItemDialogSelectedBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -186,11 +186,11 @@ public class DialogSelectedAdapter extends RecyclerView.Adapter<DialogSelectedHo
     }
 
     private void removePayment(int position) {
-        if (payment instanceof CreateScheduleTabPaymentFragment)
-            ((CreateScheduleTabPaymentFragment) payment).axisAdapter.removeItem(position);
+        if (payment instanceof FragmentCreateScheduleTabPayment)
+            ((FragmentCreateScheduleTabPayment) payment).axisAdapter.removeItem(position);
 
-        if (payment instanceof CreateSessionTabPaymentFragment)
-            ((CreateSessionTabPaymentFragment) payment).axisAdapter.removeItem(position);
+        if (payment instanceof FragmentCreateSessionTabPayment)
+            ((FragmentCreateSessionTabPayment) payment).axisAdapter.removeItem(position);
     }
 
     private void refreshCount() {
