@@ -28,7 +28,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class AuthRegisterFragment extends Fragment {
+public class FragmentAuthRegister extends Fragment {
 
     // Binding
     private FragmentAuthRegisterBinding binding;

@@ -23,7 +23,7 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityAuth;
-import com.majazeh.risloo.databinding.FragmentAuthPasswordBinding;
+import com.majazeh.risloo.databinding.FragmentAuthPasswordChangeBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
@@ -34,10 +34,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class AuthPasswordFragment extends Fragment {
+public class FragmentAuthPasswordChange extends Fragment {
 
     // Binding
-    private FragmentAuthPasswordBinding binding;
+    private FragmentAuthPasswordChangeBinding binding;
 
     // Objects
     private HashMap data, header;
@@ -48,7 +48,7 @@ public class AuthPasswordFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentAuthPasswordBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentAuthPasswordChangeBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -63,10 +63,10 @@ public class AuthPasswordFragment extends Fragment {
         data = new HashMap<>();
         header = new HashMap<>();
 
-        binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentTitle));
-        binding.passwordIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PasswordFragmentInput));
-        binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.PasswordFragmentGuide));
-        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentButton));
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordChangeFragmentTitle));
+        binding.passwordIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PasswordChangeFragmentInput));
+        binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.PasswordChangeFragmentGuide));
+        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordChangeFragmentButton));
 
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
         binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
@@ -160,7 +160,7 @@ public class AuthPasswordFragment extends Fragment {
     }
 
     private void setArgs() {
-        AuthModel authModel = (AuthModel) AuthPasswordFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        AuthModel authModel = (AuthModel) FragmentAuthPasswordChangeArgs.fromBundle(getArguments()).getTypeModel();
         setData(authModel);
     }
 
@@ -204,11 +204,11 @@ public class AuthPasswordFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
+                                case "password":
+                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordFragment(model);
+                                    break;
                                 case "mobileCode":
                                     ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPinFragment(model);
-                                    break;
-                                case "recovery":
-                                    ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordChangeFragment(model);
                                     break;
                             }
                         } else {

@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.majazeh.risloo.views.fragments.auth.AuthLoginFragment;
-import com.majazeh.risloo.views.fragments.auth.AuthPasswordChangeFragment;
-import com.majazeh.risloo.views.fragments.auth.AuthPasswordFragment;
-import com.majazeh.risloo.views.fragments.auth.AuthPasswordRecoverFragment;
-import com.majazeh.risloo.views.fragments.auth.AuthPinFragment;
-import com.majazeh.risloo.views.fragments.auth.AuthRegisterFragment;
-import com.majazeh.risloo.views.fragments.auth.AuthSerialFragment;
+import com.majazeh.risloo.views.fragments.auth.FragmentAuthLogin;
+import com.majazeh.risloo.views.fragments.auth.FragmentAuthPasswordChange;
+import com.majazeh.risloo.views.fragments.auth.FragmentAuthPassword;
+import com.majazeh.risloo.views.fragments.auth.FragmentAuthPasswordRecover;
+import com.majazeh.risloo.views.fragments.auth.FragmentAuthPin;
+import com.majazeh.risloo.views.fragments.auth.FragmentAuthRegister;
+import com.majazeh.risloo.views.fragments.auth.FragmentAuthSerial;
 import com.majazeh.risloo.views.fragments.main.create.CreateBillFragment;
 import com.majazeh.risloo.views.fragments.main.create.CreateCaseFragment;
 import com.majazeh.risloo.views.fragments.main.create.CreateCaseUserFragment;
@@ -95,15 +95,15 @@ import com.majazeh.risloo.views.fragments.main.tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.views.fragments.main.tab.EditUserTabCryptoFragment;
 import com.majazeh.risloo.views.fragments.main.tab.EditUserTabPasswordFragment;
 import com.majazeh.risloo.views.fragments.main.tab.EditUserTabPersonalFragment;
-import com.majazeh.risloo.views.fragments.test.TestChainFragment;
-import com.majazeh.risloo.views.fragments.test.TestDescriptionFragment;
-import com.majazeh.risloo.views.fragments.test.TestDescriptiveFragment;
-import com.majazeh.risloo.views.fragments.test.TestEndFragment;
-import com.majazeh.risloo.views.fragments.test.TestEntityFragment;
-import com.majazeh.risloo.views.fragments.test.TestOptionalFragment;
-import com.majazeh.risloo.views.fragments.test.TestPictoralFragment;
-import com.majazeh.risloo.views.fragments.test.TestPrerequisiteFragment;
-import com.majazeh.risloo.views.fragments.test.TestPsyDescFragment;
+import com.majazeh.risloo.views.fragments.test.FragmentTestChain;
+import com.majazeh.risloo.views.fragments.test.FragmentTestDescription;
+import com.majazeh.risloo.views.fragments.test.FragmentTestDescriptive;
+import com.majazeh.risloo.views.fragments.test.FragmentTestEnd;
+import com.majazeh.risloo.views.fragments.test.FragmentTestEntity;
+import com.majazeh.risloo.views.fragments.test.FragmentTestOptional;
+import com.majazeh.risloo.views.fragments.test.FragmentTestPictoral;
+import com.majazeh.risloo.views.fragments.test.FragmentTestPrerequisite;
+import com.majazeh.risloo.views.fragments.test.FragmentTestPsyDesc;
 
 public class Fragmont {
 
@@ -127,25 +127,25 @@ public class Fragmont {
 
         // -------------------- Auth
 
-        if (fragment instanceof AuthLoginFragment)
+        if (fragment instanceof FragmentAuthLogin)
             return fragment;
 
-        else if (fragment instanceof AuthPasswordChangeFragment)
+        else if (fragment instanceof FragmentAuthPasswordChange)
             return fragment;
 
-        else if (fragment instanceof AuthPasswordFragment)
+        else if (fragment instanceof FragmentAuthPassword)
             return fragment;
 
-        else if (fragment instanceof AuthPasswordRecoverFragment)
+        else if (fragment instanceof FragmentAuthPasswordRecover)
             return fragment;
 
-        else if (fragment instanceof AuthPinFragment)
+        else if (fragment instanceof FragmentAuthPin)
             return fragment;
 
-        else if (fragment instanceof AuthRegisterFragment)
+        else if (fragment instanceof FragmentAuthRegister)
             return fragment;
 
-        else if (fragment instanceof AuthSerialFragment)
+        else if (fragment instanceof FragmentAuthSerial)
             return fragment;
 
         // -------------------- Create
@@ -350,31 +350,31 @@ public class Fragmont {
 
         // -------------------- Test
 
-        else if (fragment instanceof TestChainFragment)
+        else if (fragment instanceof FragmentTestChain)
             return fragment;
 
-        else if (fragment instanceof TestDescriptionFragment)
+        else if (fragment instanceof FragmentTestDescription)
             return fragment;
 
-        else if (fragment instanceof TestEndFragment)
+        else if (fragment instanceof FragmentTestEnd)
             return fragment;
 
-        else if (fragment instanceof TestEntityFragment)
+        else if (fragment instanceof FragmentTestEntity)
             return fragment;
 
-        else if (fragment instanceof TestDescriptiveFragment)
+        else if (fragment instanceof FragmentTestDescriptive)
             return fragment;
 
-        else if (fragment instanceof TestOptionalFragment)
+        else if (fragment instanceof FragmentTestOptional)
             return fragment;
 
-        else if (fragment instanceof TestPictoralFragment)
+        else if (fragment instanceof FragmentTestPictoral)
             return fragment;
 
-        else if (fragment instanceof TestPrerequisiteFragment)
+        else if (fragment instanceof FragmentTestPrerequisite)
             return fragment;
 
-        else if (fragment instanceof TestPsyDescFragment)
+        else if (fragment instanceof FragmentTestPsyDesc)
             return fragment;
 
         return null;

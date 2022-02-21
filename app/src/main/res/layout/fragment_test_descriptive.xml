@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="never"
     android:layoutDirection="rtl"
-    tools:context=".views.fragments.test.TestDescriptiveFragment">
+    tools:context=".views.fragments.test.FragmentTestDescriptive">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -16,7 +16,7 @@ import com.mre.ligheh.Model.TypeModel.FormModel;
 
 import io.noties.markwon.Markwon;
 
-public class TestDescriptionFragment extends Fragment {
+public class FragmentTestDescription extends Fragment {
 
     // Binding
     private FragmentTestDescriptionBinding binding;

@@ -21,7 +21,7 @@ import com.majazeh.risloo.databinding.FragmentTestDescriptiveBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 
-public class TestDescriptiveFragment extends Fragment {
+public class FragmentTestDescriptive extends Fragment {
 
     // Binding
     private FragmentTestDescriptiveBinding binding;

@@ -13,12 +13,11 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityAuth;
-import com.majazeh.risloo.databinding.FragmentAuthLoginBinding;
+import com.majazeh.risloo.databinding.FragmentAuthPasswordRecoverBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
@@ -29,10 +28,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class AuthLoginFragment extends Fragment {
+public class FragmentAuthPasswordRecover extends Fragment {
 
     // Binding
-    private FragmentAuthLoginBinding binding;
+    private FragmentAuthPasswordRecoverBinding binding;
 
     // Objects
     private HashMap data, header;
@@ -43,7 +42,7 @@ public class AuthLoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentAuthLoginBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentAuthPasswordRecoverBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -56,18 +55,16 @@ public class AuthLoginFragment extends Fragment {
         data = new HashMap<>();
         header = new HashMap<>();
 
-        binding.titleTextView.getRoot().setText(getResources().getString(R.string.LoginFragmentTitle));
-        binding.mobileEditText.getRoot().setHint(getResources().getString(R.string.LoginFragmentInput));
-        binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.LoginFragmentGuide));
-        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.LoginFragmentButton));
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordRecoverFragmentTitle));
+        binding.mobileEditText.getRoot().setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
+        binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.PasswordRecoverFragmentGuide));
+        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordRecoverFragmentButton));
 
+        binding.loginHelperTextView.getRoot().setText(getResources().getString(R.string.AuthLoginHelper));
         binding.registerHelperTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterHelper));
-        binding.passwordRecoverHelperTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverHelper));
 
-        InitManager.txtTextAppearance(requireActivity(), binding.registerLinkTextView.getRoot(), getResources().getString(R.string.AuthRegisterLink), R.style.danaDemiBold);
-        binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
-
-        InitManager.input12sspAutoComplete(requireActivity(), binding.mobileEditText.getRoot(), ((ActivityAuth) requireActivity()).singleton.getRegistMobiles());
+        binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
+        binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -93,13 +90,13 @@ public class AuthLoginFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthRegisterFragment()).widget(binding.registerLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthLoginFragment()).widget(binding.loginLinkTextView.getRoot());
 
-        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthPasswordRecoverFragment()).widget(binding.passwordRecoverLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> ((ActivityAuth) requireActivity()).navigatoon.navigateToAuthRegisterFragment()).widget(binding.registerLinkTextView.getRoot());
     }
 
     private void setHashmap() {
-        data.put("authorized_key", mobile);
+        data.put("mobile", mobile);
     }
 
     private void doWork() {
@@ -107,7 +104,7 @@ public class AuthLoginFragment extends Fragment {
 
         setHashmap();
 
-        Auth.auth(data, header, new Response() {
+        Auth.recovery(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;
@@ -162,7 +159,7 @@ public class AuthLoginFragment extends Fragment {
                                         allErrors.append("\n");
                                     }
 
-                                    if (key.equals("authorized_key"))
+                                    if (key.equals("mobile"))
                                         ((ActivityAuth) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                 }
 

@@ -46,7 +46,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AuthPinFragment extends Fragment {
+public class FragmentAuthPin extends Fragment {
 
     // Binding
     private FragmentAuthPinBinding binding;
@@ -158,7 +158,7 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void setArgs() {
-        AuthModel authModel = (AuthModel) AuthPinFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        AuthModel authModel = (AuthModel) FragmentAuthPinArgs.fromBundle(getArguments()).getTypeModel();
         setData(authModel);
     }
 

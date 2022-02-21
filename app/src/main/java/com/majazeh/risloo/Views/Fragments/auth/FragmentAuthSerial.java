@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-public class AuthSerialFragment extends Fragment {
+public class FragmentAuthSerial extends Fragment {
 
     // Binding
     private FragmentAuthSerialBinding binding;

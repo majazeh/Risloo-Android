@@ -13,23 +13,23 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.AnimateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.views.activities.ActivityTest;
-import com.majazeh.risloo.views.adapters.recycler.test.TestPrerequisiteAdapter;
-import com.majazeh.risloo.databinding.FragmentTestPrerequisiteBinding;
+import com.majazeh.risloo.views.adapters.recycler.test.TestChainAdapter;
+import com.majazeh.risloo.databinding.FragmentTestChainBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 
-public class TestPrerequisiteFragment extends Fragment {
+public class FragmentTestChain extends Fragment {
 
     // Binding
-    private FragmentTestPrerequisiteBinding binding;
+    private FragmentTestChainBinding binding;
 
     // Adapters
-    private TestPrerequisiteAdapter adapter;
+    private TestChainAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentTestPrerequisiteBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentTestChainBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -41,12 +41,11 @@ public class TestPrerequisiteFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new TestPrerequisiteAdapter(requireActivity());
+        adapter = new TestChainAdapter(requireActivity());
 
-        binding.titleTextView.getRoot().setText(getResources().getString(R.string.PrerequisiteFragmentTitle));
-        binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.PrerequisiteFragmentDescription));
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.ChainFragmentTitle));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setArgs() {
@@ -65,7 +64,6 @@ public class TestPrerequisiteFragment extends Fragment {
 
     private void setAnimation() {
         AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.descriptionTextView.getRoot(), 500, 0f, 1f);
         AnimateManager.animateViewAlpha(binding.listRecyclerView.getRoot(), 500, 0f, 1f);
     }
 

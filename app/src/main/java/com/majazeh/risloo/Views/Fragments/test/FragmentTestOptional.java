@@ -13,28 +13,27 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.AnimateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.views.activities.ActivityTest;
-import com.majazeh.risloo.views.adapters.recycler.test.TestPictoralAdapter;
-import com.majazeh.risloo.databinding.FragmentTestPictoralBinding;
+import com.majazeh.risloo.views.adapters.recycler.test.TestOptionalAdapter;
+import com.majazeh.risloo.databinding.FragmentTestOptionalBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class TestPictoralFragment extends Fragment {
+public class FragmentTestOptional extends Fragment {
 
     // Binding
-    private FragmentTestPictoralBinding binding;
+    private FragmentTestOptionalBinding binding;
 
     // Adapters
-    private TestPictoralAdapter adapter;
+    private TestOptionalAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentTestPictoralBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentTestOptionalBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -46,9 +45,9 @@ public class TestPictoralFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new TestPictoralAdapter(requireActivity());
+        adapter = new TestOptionalAdapter(requireActivity());
 
-        InitManager.fixedGridRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setArgs() {
@@ -67,19 +66,26 @@ public class TestPictoralFragment extends Fragment {
                 binding.entityConstraintLayout.setVisibility(View.GONE);
             }
 
-            if (!item.getImageUrl().equals("")) {
-                Picasso.get().load(item.getImageUrl()).placeholder(R.color.coolGray100).into(binding.questionImageView.getRoot());
+            if (!item.getText().equals("")) {
+                binding.titleTextView.getRoot().setText(item.getText());
             } else {
-                Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.questionImageView.getRoot());
+                binding.titleTextView.getRoot().setText("نامعلوم");
             }
 
-            ArrayList<String> pics = new ArrayList<>();
+            if (!item.getDescription().equals("")) {
+                binding.descriptionTextView.getRoot().setText(item.getDescription());
+                binding.descriptionTextView.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                binding.descriptionTextView.getRoot().setVisibility(View.GONE);
+            }
+
+            ArrayList<String> options = new ArrayList<>();
             for (int i = 0; i < item.getAnswer().getOptions().length(); i++) {
-                pics.add(item.getAnswer().getOptions().get(i).toString());
+                options.add(item.getAnswer().getOptions().get(i).toString());
             }
 
-            if (pics.size() != 0) {
-                adapter.setItems(pics, item.getUserAnswered(), item.getIndex());
+            if (options.size() != 0) {
+                adapter.setItems(options, item.getUserAnswered(), item.getIndex());
                 binding.listRecyclerView.getRoot().setAdapter(adapter);
             }
         } catch (JSONException e) {
@@ -89,7 +95,8 @@ public class TestPictoralFragment extends Fragment {
 
     private void setAnimation() {
         AnimateManager.animateViewAlpha(binding.entityTextView.getRoot(), 500, 0f, 1f);
-        AnimateManager.animateViewAlpha(binding.questionImageView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.titleTextView.getRoot(), 500, 0f, 1f);
+        AnimateManager.animateViewAlpha(binding.descriptionTextView.getRoot(), 500, 0f, 1f);
         AnimateManager.animateViewAlpha(binding.listRecyclerView.getRoot(), 500, 0f, 1f);
     }
 

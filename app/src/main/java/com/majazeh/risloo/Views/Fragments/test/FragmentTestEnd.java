@@ -20,7 +20,7 @@ import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 
-public class TestEndFragment extends Fragment {
+public class FragmentTestEnd extends Fragment {
 
     // Binding
     private FragmentTestEndBinding binding;
