@@ -89,8 +89,8 @@ public abstract class onFailureException {
 
     public abstract void onValidation(HashMap<String, Object> map);
 
-    public abstract void onClient(String s);
+    public abstract void onClient(String message);
 
-    public abstract void onServerFail(String s);
+    public abstract void onServerFail(String message);
 
 }

@@ -21,7 +21,6 @@ public abstract class APIEvents {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onResponse(@NotNull Call call, @NotNull okhttp3.Response response) {
-
                 if (response.isSuccessful()) {
                     onOK(callback, response, aClass);
                 } else {

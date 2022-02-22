@@ -14,13 +14,13 @@ public class onFailureInitializer extends onFailureException {
     }
 
     @Override
-    public void onClient(String s) {
-        System.out.println(s);
+    public void onClient(String message) {
+        System.out.println(message);
     }
 
     @Override
-    public void onServerFail(String s) {
-        System.out.println(s);
+    public void onServerFail(String message) {
+        System.out.println(message);
     }
 
 

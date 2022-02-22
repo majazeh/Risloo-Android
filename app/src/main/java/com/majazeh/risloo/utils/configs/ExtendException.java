@@ -14,22 +14,30 @@ public class ExtendException extends onFailureException {
 
     public static Activity activity;
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public ExtendException(Response callback, Object object) {
         super(callback, object);
     }
 
+    /*
+    ---------- Methods ----------
+    */
+
     @Override
-    public void onClient(String s) {
-        logError("onClient: " + s);
+    public void onClient(String message) {
+        logError("onClient: " + message);
         dismissDialog();
-        snackMessage(s);
+        snackMessage(message);
     }
 
     @Override
-    public void onServerFail(String s) {
-        logError("onServerFail: " + s);
+    public void onServerFail(String message) {
+        logError("onServerFail: " + message);
         dismissDialog();
-        snackMessage(s);
+        snackMessage(message);
     }
 
     @Override
@@ -37,6 +45,10 @@ public class ExtendException extends onFailureException {
         logError("onValidation: " + map);
         dismissDialog();
     }
+
+    /*
+    ---------- Voids ----------
+    */
 
     private void logError(Object object) {
         System.out.println(object);
