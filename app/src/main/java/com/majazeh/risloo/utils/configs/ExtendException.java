@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
+
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.API.onFailureException;
 
@@ -12,6 +13,7 @@ import java.util.HashMap;
 
 public class ExtendException extends onFailureException {
 
+    // Objects
     public static Activity activity;
 
     /*

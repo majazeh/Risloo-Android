@@ -1,7 +1,6 @@
 package com.majazeh.risloo.utils.configs;
 
 import com.majazeh.risloo.utils.managers.DialogManager;
-
 import com.mre.ligheh.API.APIEvents;
 import com.mre.ligheh.API.APIRequest;
 import com.mre.ligheh.API.Response;
@@ -13,23 +12,24 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Objects;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 public class ExtendEvent extends APIEvents {
 
-    @SuppressWarnings("rawtypes")
-    public ExtendEvent(Response callback, Class classs, okhttp3.OkHttpClient client, okhttp3.Request request) {
+    public ExtendEvent(Response callback, Class classs, OkHttpClient client, Request request) {
         super(callback, classs, client, request);
         request(callback, classs, client, request);
     }
 
-    @SuppressWarnings("rawtypes")
     @Override
     public void onOK(Response callback, Object response, Class classs) {
         try {
             if (response.getClass().getName().equals("okhttp3.Response")) {
                 int code = ((okhttp3.Response) response).code();
-                JSONObject object = new JSONObject(Objects.requireNonNull(((okhttp3.Response) response).body()).string());
+                String body = ((okhttp3.Response) response).body().string();
+                JSONObject object = new JSONObject(body);
                 APIRequest.code = code;
                 Res res = new Res(object, classs);
                 callback.onOK(res.Build());
