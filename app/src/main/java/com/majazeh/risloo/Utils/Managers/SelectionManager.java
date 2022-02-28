@@ -5,8 +5,6 @@ import android.app.Activity;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.IOException;
-
 public class SelectionManager {
 
     /*
@@ -130,9 +128,11 @@ public class SelectionManager {
                         return list.getJSONObject(i).getString("fa_title");
                 }
             }
-        } catch (JSONException | IOException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
-        } return value;
+        }
+
+        return value;
     }
 
 }

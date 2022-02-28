@@ -23,89 +23,89 @@ public class CryptoManager {
     ---------- Funcs ----------
     */
 
-    public static String encrypt(String value, String publicKey)
-            throws NoSuchPaddingException,
-            NoSuchAlgorithmException,
-            BadPaddingException,
-            IllegalBlockSizeException,
-            InvalidKeySpecException,
-            InvalidKeyException {
+    public static String encrypt(String value, String publicKey) {
+        try {
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
+            cipher.init(Cipher.ENCRYPT_MODE, stringToPublicKey(getPublicKey(publicKey)));
 
-        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
-        cipher.init(Cipher.ENCRYPT_MODE, stringToPublicKey(getPublicKey(publicKey)));
+            byte[] data = value.getBytes();
+            int chunkSize = 245;
+            int encryptSize = (int) (Math.ceil(data.length / 245.0) * 256);
+            int idx = 0;
 
-        byte[] data = value.getBytes();
-        int chunkSize = 245;
-        int encryptSize = (int) (Math.ceil(data.length / 245.0) * 256);
-        int idx = 0;
+            ByteBuffer buffer = ByteBuffer.allocate(encryptSize);
+            while (idx < data.length) {
+                int len = Math.min(data.length - idx, chunkSize);
+                byte[] encryptChunk = cipher.doFinal(data, idx, len);
 
-        ByteBuffer buffer = ByteBuffer.allocate(encryptSize);
-        while (idx < data.length) {
-            int len = Math.min(data.length - idx, chunkSize);
-            byte[] encryptChunk = cipher.doFinal(data, idx, len);
+                buffer.put(encryptChunk);
+                idx += len;
+            }
 
-            buffer.put(encryptChunk);
-            idx += len;
+            byte[] encryptData = buffer.array();
+
+            return Base64.encodeToString(encryptData, Base64.DEFAULT);
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
+            e.printStackTrace();
+            return "";
         }
-
-        byte[] encryptData = buffer.array();
-
-        return Base64.encodeToString(encryptData, Base64.DEFAULT);
     }
 
-    public static String decrypt(String value, String privateKey)
-            throws NoSuchPaddingException,
-            NoSuchAlgorithmException,
-            BadPaddingException,
-            IllegalBlockSizeException,
-            InvalidKeySpecException,
-            InvalidKeyException {
+    public static String decrypt(String value, String privateKey) {
+        try {
+            Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
+            cipher.init(Cipher.DECRYPT_MODE, stringToPrivateKey(getPrivateKey(privateKey)));
 
-        Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
-        cipher.init(Cipher.DECRYPT_MODE, stringToPrivateKey(getPrivateKey(privateKey)));
+            byte[] data = Base64.decode(value, 1);
+            int chunkSize = 256;
+            int idx = 0;
 
-        byte[] data = Base64.decode(value, 1);
-        int chunkSize = 256;
-        int idx = 0;
+            ByteBuffer buffer = ByteBuffer.allocate(data.length);
+            while (idx < data.length) {
+                int len = Math.min(data.length - idx, chunkSize);
+                byte[] decryptchunk = cipher.doFinal(data, idx, len);
 
-        ByteBuffer buffer = ByteBuffer.allocate(data.length);
-        while (idx < data.length) {
-            int len = Math.min(data.length - idx, chunkSize);
-            byte[] decryptchunk = cipher.doFinal(data, idx, len);
+                buffer.put(decryptchunk);
+                idx += len;
+            }
 
-            buffer.put(decryptchunk);
-            idx += len;
+            byte[] decryptData = buffer.array();
+
+            return new String(decryptData).replaceAll("\u0000.*", "");
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
+            e.printStackTrace();
+            return "";
         }
-
-        byte[] decryptData = buffer.array();
-
-        return new String(decryptData).replaceAll("\u0000.*", "");
     }
 
     /*
     ---------- Convert ----------
     */
 
-    private static PublicKey stringToPublicKey(String publicKey)
-            throws NoSuchAlgorithmException,
-            InvalidKeySpecException {
+    private static PublicKey stringToPublicKey(String publicKey) {
+        try {
+            byte[] bytes = Base64.decode(publicKey, Base64.DEFAULT);
+            X509EncodedKeySpec spec = new X509EncodedKeySpec(bytes);
+            KeyFactory factory = KeyFactory.getInstance("RSA");
 
-        byte[] bytes = Base64.decode(publicKey, Base64.DEFAULT);
-        X509EncodedKeySpec spec = new X509EncodedKeySpec(bytes);
-        KeyFactory factory = KeyFactory.getInstance("RSA");
-
-        return factory.generatePublic(spec);
+            return factory.generatePublic(spec);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    private static PrivateKey stringToPrivateKey(String privateKey)
-            throws NoSuchAlgorithmException,
-            InvalidKeySpecException {
+    private static PrivateKey stringToPrivateKey(String privateKey) {
+        try {
+            byte[] bytes = Base64.decode(privateKey, Base64.DEFAULT);
+            PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(bytes);
+            KeyFactory factory = KeyFactory.getInstance("RSA");
 
-        byte[] bytes = Base64.decode(privateKey, Base64.DEFAULT);
-        PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(bytes);
-        KeyFactory factory = KeyFactory.getInstance("RSA");
-
-        return factory.generatePrivate(spec);
+            return factory.generatePrivate(spec);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /*
