@@ -164,7 +164,7 @@ public class FragmentEditUserTabAvatar extends Fragment {
                             ((ActivityMain) requireActivity()).setData();
 
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
 
                         if (avatarFile != null)
@@ -202,7 +202,7 @@ public class FragmentEditUserTabAvatar extends Fragment {
                                             ((ActivityMain) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -218,7 +218,7 @@ public class FragmentEditUserTabAvatar extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
 
                         if (avatarFile != null)
@@ -256,7 +256,7 @@ public class FragmentEditUserTabAvatar extends Fragment {
                                             ((ActivityMain) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

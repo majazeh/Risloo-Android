@@ -276,7 +276,7 @@ public class FragmentAuthPin extends Fragment {
                                             ((ActivityAuth) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -336,7 +336,7 @@ public class FragmentAuthPin extends Fragment {
                         autoSmsVerificate(code);
                     }
                 } else {
-                    SnackManager.showDefaultSnack(requireActivity(), "onReceiveFail: " + status.getStatusMessage());
+                    SnackManager.showSnackDefault(requireActivity(), "onReceiveFail: " + status.getStatusMessage());
                 }
             }
         }

@@ -289,7 +289,7 @@ public class FragmentEditUserTabPassword extends Fragment {
                             resetInputs();
 
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
                 }
@@ -330,7 +330,7 @@ public class FragmentEditUserTabPassword extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -348,7 +348,7 @@ public class FragmentEditUserTabPassword extends Fragment {
                             resetInputs();
 
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
                 }
@@ -386,7 +386,7 @@ public class FragmentEditUserTabPassword extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

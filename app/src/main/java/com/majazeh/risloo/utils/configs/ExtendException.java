@@ -58,7 +58,7 @@ public class ExtendException extends onFailureException {
 
     private void snackMessage(String message) {
         if (!message.equals("POVERTY"))
-            activity.runOnUiThread(() -> SnackManager.showDefaultSnack(activity, message));
+            activity.runOnUiThread(() -> SnackManager.showSnackDefault(activity, message));
     }
 
     private void toastMessage(String message) {

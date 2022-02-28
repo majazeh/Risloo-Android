@@ -195,7 +195,7 @@ public class ActivityTest extends AppCompatActivity {
                         return;
                     }
 
-                    SnackManager.showDefaultSnack(ActivityTest.this, getResources().getString(R.string.SnackSampleNull));
+                    SnackManager.showSnackDefault(ActivityTest.this, getResources().getString(R.string.SnackSampleNull));
                     IntentManager.finish(ActivityTest.this);
                 });
             }
@@ -494,7 +494,7 @@ public class ActivityTest extends AppCompatActivity {
 
                     DialogManager.dismissDialogLoading();
 
-                    SnackManager.showSuccesSnack(ActivityTest.this, getResources().getString(R.string.SnackSampleClosed));
+                    SnackManager.showSnackSucces(ActivityTest.this, getResources().getString(R.string.SnackSampleClosed));
                     IntentManager.finish(ActivityTest.this);
                 });
             }
@@ -520,7 +520,7 @@ public class ActivityTest extends AppCompatActivity {
                                 }
                             }
 
-                            SnackManager.showErrorSnack(ActivityTest.this, allErrors.substring(0, allErrors.length() - 1));
+                            SnackManager.showSnackError(ActivityTest.this, allErrors.substring(0, allErrors.length() - 1));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

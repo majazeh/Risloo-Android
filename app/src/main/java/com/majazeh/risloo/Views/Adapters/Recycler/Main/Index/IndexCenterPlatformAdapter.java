@@ -223,7 +223,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     DialogManager.dismissDialogLoading();
-                    SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+                    SnackManager.showSnackSucces(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                 });
             }
 

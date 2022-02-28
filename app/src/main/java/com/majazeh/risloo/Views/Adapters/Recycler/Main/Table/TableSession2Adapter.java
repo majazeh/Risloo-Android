@@ -196,7 +196,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     DialogManager.dismissDialogLoading();
-                    SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+                    SnackManager.showSnackSucces(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                 });
             }
 

@@ -671,7 +671,7 @@ public class FragmentCreateSample extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBulkSample));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackCreatedNewBulkSample));
 
                             ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBulkSample(bulkSampleModel);
                         });
@@ -745,7 +745,7 @@ public class FragmentCreateSample extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -771,7 +771,7 @@ public class FragmentCreateSample extends Fragment {
                                 sampleIds = ids.toArray(sampleIds);
 
                                 DialogManager.dismissDialogLoading();
-                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
+                                SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
 
                                 ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSamples(null, sampleIds);
                             } catch (JSONException e) {
@@ -848,7 +848,7 @@ public class FragmentCreateSample extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

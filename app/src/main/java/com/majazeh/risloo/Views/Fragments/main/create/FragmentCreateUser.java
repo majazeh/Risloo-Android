@@ -335,7 +335,7 @@ public class FragmentCreateUser extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissDialogLoading();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewUser));
+                        SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackCreatedNewUser));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentUser(userModel);
                     });
@@ -396,7 +396,7 @@ public class FragmentCreateUser extends Fragment {
                                     }
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

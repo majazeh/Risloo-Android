@@ -464,7 +464,7 @@ public class FragmentSample extends Fragment {
                     public void onOK(Object object) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleScored));
+                                SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackSampleScored));
 
                                 setStatus("done");
                             });
@@ -494,7 +494,7 @@ public class FragmentSample extends Fragment {
                                             }
                                         }
 
-                                        SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                        SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -513,7 +513,7 @@ public class FragmentSample extends Fragment {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
                                 DialogManager.dismissDialogLoading();
-                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleFilled));
+                                SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackSampleFilled));
 
                                 // TODO : Place Code If Needed
                             });
@@ -543,7 +543,7 @@ public class FragmentSample extends Fragment {
                                             }
                                         }
 
-                                        SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                        SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -562,7 +562,7 @@ public class FragmentSample extends Fragment {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
                                 DialogManager.dismissDialogLoading();
-                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleClosed));
+                                SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackSampleClosed));
 
                                 setStatus("closed");
                             });
@@ -592,7 +592,7 @@ public class FragmentSample extends Fragment {
                                             }
                                         }
 
-                                        SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                        SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -611,7 +611,7 @@ public class FragmentSample extends Fragment {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
                                 DialogManager.dismissDialogLoading();
-                                SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleOpened));
+                                SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackSampleOpened));
 
                                 setStatus("open");
                             });
@@ -641,7 +641,7 @@ public class FragmentSample extends Fragment {
                                             }
                                         }
 
-                                        SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                        SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -691,7 +691,7 @@ public class FragmentSample extends Fragment {
                                             }
                                         }
 
-                                        SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                        SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

@@ -246,7 +246,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
                                         ((ActivityAuth) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

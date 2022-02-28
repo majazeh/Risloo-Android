@@ -311,7 +311,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
                         DialogManager.dismissDialogLoading();
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+                        SnackManager.showSnackSucces(activity, activity.getResources().getString(R.string.SnackChangesSaved));
 
                         holder.binding.menuGroup.setVisibility(View.INVISIBLE);
                     });

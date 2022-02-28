@@ -17,10 +17,10 @@ import com.majazeh.risloo.databinding.SnackSuccesBinding;
 public class SnackManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Show ----------
     */
 
-    public static void showSuccesSnack(Activity activity, String value) {
+    public static void showSnackSucces(Activity activity, String value) {
         Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
 
@@ -32,10 +32,9 @@ public class SnackManager {
 
         SnackSuccesBinding binding = SnackSuccesBinding.inflate(LayoutInflater.from(activity));
         View bindingView = binding.getRoot();
-        CountDownTimer countDownTimer;
 
         final int[] i = {0};
-        countDownTimer = new CountDownTimer(3000, 30) {
+        CountDownTimer countDownTimer = new CountDownTimer(3000, 30) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -48,6 +47,7 @@ public class SnackManager {
                 i[0]++;
                 binding.timerProgressBar.setProgress(100);
             }
+
         }.start();
 
         binding.messageTextView.setText(value);
@@ -60,7 +60,7 @@ public class SnackManager {
         snackbar.show();
     }
 
-    public static void showErrorSnack(Activity activity, String value) {
+    public static void showSnackError(Activity activity, String value) {
         Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
 
@@ -72,10 +72,9 @@ public class SnackManager {
 
         SnackErrorBinding binding = SnackErrorBinding.inflate(LayoutInflater.from(activity));
         View bindingView = binding.getRoot();
-        CountDownTimer countDownTimer;
 
         final int[] i = {0};
-        countDownTimer = new CountDownTimer(3000, 30) {
+        CountDownTimer countDownTimer = new CountDownTimer(3000, 30) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -88,6 +87,7 @@ public class SnackManager {
                 i[0]++;
                 binding.timerProgressBar.setProgress(100);
             }
+
         }.start();
 
         binding.messageTextView.setText(value);
@@ -100,7 +100,7 @@ public class SnackManager {
         snackbar.show();
     }
 
-    public static void showDefaultSnack(Activity activity, String value) {
+    public static void showSnackDefault(Activity activity, String value) {
         Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
 
@@ -112,10 +112,9 @@ public class SnackManager {
 
         SnackDefaultBinding binding = SnackDefaultBinding.inflate(LayoutInflater.from(activity));
         View bindingView = binding.getRoot();
-        CountDownTimer countDownTimer;
 
         final int[] i = {0};
-        countDownTimer = new CountDownTimer(3000, 30) {
+        CountDownTimer countDownTimer = new CountDownTimer(3000, 30) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -128,6 +127,7 @@ public class SnackManager {
                 i[0]++;
                 binding.timerProgressBar.setProgress(100);
             }
+
         }.start();
 
         binding.messageTextView.setText(value);

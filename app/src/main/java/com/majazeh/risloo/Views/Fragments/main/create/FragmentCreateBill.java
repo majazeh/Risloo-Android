@@ -312,7 +312,7 @@ public class FragmentCreateBill extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissDialogLoading();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBill));
+                        SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackCreatedNewBill));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBill(billingModel);
                     });
@@ -364,7 +364,7 @@ public class FragmentCreateBill extends Fragment {
                                     }
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

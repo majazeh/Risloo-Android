@@ -256,7 +256,7 @@ public class FragmentCreatePlatform extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissDialogLoading();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewPlatform));
+                        SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackCreatedNewPlatform));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateUp();
                     });
@@ -311,7 +311,7 @@ public class FragmentCreatePlatform extends Fragment {
                                     }
                                 }
 
-                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

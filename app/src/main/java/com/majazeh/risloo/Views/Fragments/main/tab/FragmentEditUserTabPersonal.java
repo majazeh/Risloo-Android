@@ -351,7 +351,7 @@ public class FragmentEditUserTabPersonal extends Fragment {
                             ((ActivityMain) requireActivity()).setData();
 
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
                 }
@@ -402,7 +402,7 @@ public class FragmentEditUserTabPersonal extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), errors.substring(0, errors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -418,7 +418,7 @@ public class FragmentEditUserTabPersonal extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
                 }
@@ -474,7 +474,7 @@ public class FragmentEditUserTabPersonal extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

@@ -169,7 +169,7 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
                     List tags = (List) object;
 
                     activity.runOnUiThread(() -> {
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+                        SnackManager.showSnackSucces(activity, activity.getResources().getString(R.string.SnackChangesSaved));
 
                         items.clear();
                         if (!tags.data().isEmpty())
@@ -195,7 +195,7 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
                     List tags = (List) object;
 
                     activity.runOnUiThread(() -> {
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+                        SnackManager.showSnackSucces(activity, activity.getResources().getString(R.string.SnackChangesSaved));
 
                         items.clear();
                         if (!tags.data().isEmpty())

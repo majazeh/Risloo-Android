@@ -36,11 +36,10 @@ public class ToastManager {
             toast.setText(value);
         } catch (Exception exception) {
             ToastSuccesBinding binding = ToastSuccesBinding.inflate(LayoutInflater.from(activity));
+            View view = binding.getRoot();
 
             TextView textView = binding.getRoot();
             textView.setText(value);
-
-            View view = binding.getRoot();
 
             toast = new Toast(activity.getApplicationContext());
             toast.setDuration(Toast.LENGTH_LONG);
@@ -56,11 +55,10 @@ public class ToastManager {
             toast.setText(value);
         } catch (Exception exception) {
             ToastErrorBinding binding = ToastErrorBinding.inflate(LayoutInflater.from(activity));
+            View view = binding.getRoot();
 
             TextView textView = binding.getRoot();
             textView.setText(value);
-
-            View view = binding.getRoot();
 
             toast = new Toast(activity.getApplicationContext());
             toast.setDuration(Toast.LENGTH_LONG);
@@ -76,11 +74,10 @@ public class ToastManager {
             toast.setText(value);
         } catch (Exception exception) {
             ToastDefaultBinding binding = ToastDefaultBinding.inflate(LayoutInflater.from(activity));
+            View view = binding.getRoot();
 
             TextView textView = binding.getRoot();
             textView.setText(value);
-
-            View view = binding.getRoot();
 
             toast = new Toast(activity.getApplicationContext());
             toast.setDuration(Toast.LENGTH_LONG);

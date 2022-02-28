@@ -640,7 +640,7 @@ public class FragmentBanks extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewIban));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackCreatedNewIban));
 
                             resetInputs();
                             showShimmer();
@@ -683,7 +683,7 @@ public class FragmentBanks extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -699,7 +699,7 @@ public class FragmentBanks extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             DialogManager.dismissDialogLoading();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackIbanSettled));
+                            SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackIbanSettled));
                         });
                     }
                 }
@@ -749,7 +749,7 @@ public class FragmentBanks extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

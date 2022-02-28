@@ -111,7 +111,7 @@ public class SheetAuth extends BottomSheetDialogFragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissDialogLoading();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCenterUser));
+                        SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackCreatedNewCenterUser));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateUp();
 

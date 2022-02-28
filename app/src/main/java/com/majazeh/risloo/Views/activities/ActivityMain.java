@@ -334,7 +334,7 @@ public class ActivityMain extends AppCompatActivity {
 
                         DialogManager.dismissDialogLoading();
 
-                        SnackManager.showSuccesSnack(ActivityMain.this, getResources().getString(R.string.SnackLoginOtherUser));
+                        SnackManager.showSnackSucces(ActivityMain.this, getResources().getString(R.string.SnackLoginOtherUser));
                         navigatoon.navigateToFragmentDashboard();
                     });
                 }
@@ -359,7 +359,7 @@ public class ActivityMain extends AppCompatActivity {
 
                         DialogManager.dismissDialogLoading();
 
-                        SnackManager.showSuccesSnack(ActivityMain.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
+                        SnackManager.showSnackSucces(ActivityMain.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
                         navigatoon.navigateToFragmentDashboard();
                     });
                 }

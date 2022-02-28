@@ -618,7 +618,7 @@ public class FragmentReserveSchedule extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissDialogLoading();
-                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackScheduleReserved));
+                        SnackManager.showSnackSucces(requireActivity(), getResources().getString(R.string.SnackScheduleReserved));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSession(scheduleModel);
                     });
@@ -694,7 +694,7 @@ public class FragmentReserveSchedule extends Fragment {
                                         }
                                     }
 
-                                    SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
+                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
                                 }
                             }
                         } catch (JSONException e) {

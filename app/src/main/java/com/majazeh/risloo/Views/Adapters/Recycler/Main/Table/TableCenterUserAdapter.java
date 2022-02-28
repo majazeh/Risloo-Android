@@ -321,7 +321,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
                         DialogManager.dismissDialogLoading();
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+                        SnackManager.showSnackSucces(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                     });
                 }
 
@@ -342,7 +342,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         setAcceptation(holder, userModel);
 
                         DialogManager.dismissDialogLoading();
-                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
+                        SnackManager.showSnackSucces(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                     });
                 }
 
