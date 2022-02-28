@@ -1,14 +1,14 @@
 [
-    {
-        "fa_title": "مراجع",
-        "en_title": "client"
-    },
-    {
-        "fa_title": "درخواست",
-        "en_title": "apply"
-    },
-    {
-        "fa_title": "حذف",
-        "en_title": "remove"
-    }
+  {
+    "fa_title": "مراجع",
+    "en_title": "client"
+  },
+  {
+    "fa_title": "درخواست",
+    "en_title": "apply"
+  },
+  {
+    "fa_title": "حذف",
+    "en_title": "remove"
+  }
 ]

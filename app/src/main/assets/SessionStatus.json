@@ -1,42 +1,52 @@
 [
   {
     "fa_title": "پیش\u200Cنویس",
+    "fa_title_2": "پیش\u200Cنویس",
     "en_title": "draft"
   },
   {
     "fa_title": "زمان\u200Cبندی شده",
+    "fa_title_2": "در حال نوبت\u200Cگیری",
     "en_title": "registration_awaiting"
   },
   {
     "fa_title": "در انتظار تأیید مراجع",
+    "fa_title_2": "در انتظار تأیید مراجع",
     "en_title": "client_awaiting"
   },
   {
     "fa_title": "در انتظار تشکیل جلسه",
+    "fa_title_2": "در انتظار تشکیل جلسه",
     "en_title": "session_awaiting"
   },
   {
     "fa_title": "در جلسه",
+    "fa_title_2": "در جلسه",
     "en_title": "in_session"
   },
   {
     "fa_title": "پایان یافته",
+    "fa_title_2": "پایان یافته",
     "en_title": "finished"
   },
   {
     "fa_title": "لغو شده توسط مراجع",
+    "fa_title_2": "لغو شده توسط مراجع",
     "en_title": "canceled_by_client"
   },
   {
     "fa_title": "لغو شده توسط مرکز مشاوره",
+    "fa_title_2": "لغو شده توسط مرکز مشاوره",
     "en_title": "canceled_by_center"
   },
   {
     "fa_title": "نام نویسی",
+    "fa_title_2": "نام نویسی",
     "en_title": "registration"
   },
   {
     "fa_title": "در انتظار",
+    "fa_title_2": "در انتظار",
     "en_title": "awaiting"
   }
 ]

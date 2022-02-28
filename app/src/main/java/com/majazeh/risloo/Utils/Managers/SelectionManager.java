@@ -24,7 +24,7 @@ public class SelectionManager {
     }
 
     public static String getCaseStatus2(Activity activity, String local, String value) {
-        return getSelection(activity, "CaseStatus2.json", local, value);
+        return getSelection2(activity, "CaseStatus.json", local, value);
     }
 
     public static String getCenterStatus(Activity activity, String local, String value) {
@@ -84,7 +84,7 @@ public class SelectionManager {
     }
 
     public static String getSampleStatus2(Activity activity, String local, String value) {
-        return getSelection(activity, "SampleStatus2.json", local, value);
+        return getSelection2(activity, "SampleStatus.json", local, value);
     }
 
     public static String getSelectionType(Activity activity, String local, String value) {
@@ -96,7 +96,7 @@ public class SelectionManager {
     }
 
     public static String getSessionStatus2(Activity activity, String local, String value) {
-        return getSelection(activity, "SessionStatus2.json", local, value);
+        return getSelection2(activity, "SessionStatus.json", local, value);
     }
 
     public static String getUserPosition(Activity activity, String local, String value) {
@@ -126,6 +126,26 @@ public class SelectionManager {
                 } else {
                     if (value.equals(list.getJSONObject(i).getString("en_title")))
                         return list.getJSONObject(i).getString("fa_title");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return value;
+    }
+
+    private static String getSelection2(Activity activity, String asset, String local, String value) {
+        try {
+            JSONArray list = new JSONArray(JsonManager.getJson(activity, asset));
+
+            for (int i = 0; i < list.length(); i++) {
+                if (local.equals("en")) {
+                    if (value.equals(list.getJSONObject(i).getString("fa_title_2")))
+                        return list.getJSONObject(i).getString("en_title");
+                } else {
+                    if (value.equals(list.getJSONObject(i).getString("en_title")))
+                        return list.getJSONObject(i).getString("fa_title_2");
                 }
             }
         } catch (JSONException e) {

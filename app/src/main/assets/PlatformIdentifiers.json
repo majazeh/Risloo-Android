@@ -1,14 +1,14 @@
 [
-    {
-        "fa_title": "آدرس اینترنتی",
-        "en_title": "uri"
-    },
-    {
-        "fa_title": "شماره تماس",
-        "en_title": "phone"
-    },
-    {
-        "fa_title": "متن",
-        "en_title": "string"
-    }
+  {
+    "fa_title": "آدرس اینترنتی",
+    "en_title": "uri"
+  },
+  {
+    "fa_title": "شماره تماس",
+    "en_title": "phone"
+  },
+  {
+    "fa_title": "متن",
+    "en_title": "string"
+  }
 ]

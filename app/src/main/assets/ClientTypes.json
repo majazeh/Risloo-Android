@@ -1,22 +1,22 @@
 [
-    {
-        "fa_title": "ریسلو",
-        "en_title": "risloo"
-    },
-    {
-        "fa_title": "مرکز",
-        "en_title": "center"
-    },
-    {
-        "fa_title": "اتاق",
-        "en_title": "room"
-    },
-    {
-        "fa_title": "پرونده",
-        "en_title": "case"
-    },
-    {
-        "fa_title": "ساخت پرونده جدید",
-        "en_title": "new_case"
-    }
+  {
+    "fa_title": "ریسلو",
+    "en_title": "risloo"
+  },
+  {
+    "fa_title": "مرکز",
+    "en_title": "center"
+  },
+  {
+    "fa_title": "اتاق",
+    "en_title": "room"
+  },
+  {
+    "fa_title": "پرونده",
+    "en_title": "case"
+  },
+  {
+    "fa_title": "ساخت پرونده جدید",
+    "en_title": "new_case"
+  }
 ]

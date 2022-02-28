@@ -1,26 +1,32 @@
 [
   {
     "fa_title": "باز نشده",
+    "fa_title_2": "شروع",
     "en_title": "seald"
   },
   {
     "fa_title": "باز",
+    "fa_title_2": "ادامه",
     "en_title": "open"
   },
   {
     "fa_title": "بسته شده",
+    "fa_title_2": "نمره دهی",
     "en_title": "closed"
   },
   {
     "fa_title": "نمره دهی",
+    "fa_title_2": "در حال نمره دهی",
     "en_title": "scoring"
   },
   {
     "fa_title": "ساخت فایل\u200Cها",
+    "fa_title_2": "در حال ساخت فایل\u200Cها",
     "en_title": "creating_files"
   },
   {
     "fa_title": "انجام شده",
+    "fa_title_2": "انجام شده",
     "en_title": "done"
   }
 ]

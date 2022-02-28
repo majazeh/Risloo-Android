@@ -1,18 +1,18 @@
 [
-    {
-        "fa_title": "مدیر این مرکز درمانی",
-        "en_title": "manager"
-    },
-    {
-        "fa_title": "اپراتور این مرکز درمانی",
-        "en_title": "operator"
-    },
-    {
-        "fa_title": "روان\u200Cشناس این مرکز درمانی",
-        "en_title": "psychologist"
-    },
-    {
-        "fa_title": "مراجع این مرکز درمانی",
-        "en_title": "client"
-    }
+  {
+    "fa_title": "مدیر این مرکز درمانی",
+    "en_title": "manager"
+  },
+  {
+    "fa_title": "اپراتور این مرکز درمانی",
+    "en_title": "operator"
+  },
+  {
+    "fa_title": "روان\u200Cشناس این مرکز درمانی",
+    "en_title": "psychologist"
+  },
+  {
+    "fa_title": "مراجع این مرکز درمانی",
+    "en_title": "client"
+  }
 ]
