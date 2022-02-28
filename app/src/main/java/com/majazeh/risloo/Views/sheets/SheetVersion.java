@@ -84,9 +84,9 @@ public class SheetVersion extends BottomSheetDialogFragment {
         }
     }
 
-    public void setData(ClientModel model, String method) {
-        this.clientModel = model;
+    public void setData(String method, ClientModel clientModel) {
         this.method = method;
+        this.clientModel = clientModel;
     }
 
     private void navigate() {

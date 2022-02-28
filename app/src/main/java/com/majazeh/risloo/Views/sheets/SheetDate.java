@@ -183,7 +183,7 @@ public class SheetDate extends BottomSheetDialogFragment {
         return String.valueOf(timestamp);
     }
 
-    public void setDate(String timestamp, String method) {
+    public void setDate(String method, String timestamp) {
         this.method = method;
 
         long value = Long.parseLong(timestamp);

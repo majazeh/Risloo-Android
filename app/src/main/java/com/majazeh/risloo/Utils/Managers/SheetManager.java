@@ -61,7 +61,7 @@ public class SheetManager {
         else if (activity instanceof FragmentActivity)
             sheetDate.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetDate");
 
-        sheetDate.setDate(timestamp, method);
+        sheetDate.setDate(method, timestamp);
     }
 
     public static void showSheetImage(Activity activity) {
@@ -92,7 +92,7 @@ public class SheetManager {
         else if (activity instanceof FragmentActivity)
             sheetTime.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetTime");
 
-        sheetTime.setTime(timestamp, method);
+        sheetTime.setTime(method, timestamp);
     }
 
     public static void showSheetVersion(Activity activity, ClientModel clientModel, String method) {
@@ -103,7 +103,7 @@ public class SheetManager {
         else if (activity instanceof FragmentActivity)
             sheetVersion.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetVersion");
 
-        sheetVersion.setData(clientModel, method);
+        sheetVersion.setData(method, clientModel);
     }
 
     /*

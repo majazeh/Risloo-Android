@@ -144,7 +144,7 @@ public class SheetTime extends BottomSheetDialogFragment {
         return String.valueOf(timestamp);
     }
 
-    public void setTime(String timestamp, String method) {
+    public void setTime(String method, String timestamp) {
         this.method = method;
 
         long value = Long.parseLong(timestamp);

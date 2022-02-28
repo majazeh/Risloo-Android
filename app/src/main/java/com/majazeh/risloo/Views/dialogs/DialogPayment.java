@@ -81,9 +81,9 @@ public class DialogPayment extends AppCompatDialogFragment {
         }
     }
 
-    public void setData(String method, PaymentModel model) {
+    public void setData(String method, PaymentModel paymentModel) {
         this.method = method;
-        this.paymentModel = model;
+        this.paymentModel = paymentModel;
     }
 
     @Override
