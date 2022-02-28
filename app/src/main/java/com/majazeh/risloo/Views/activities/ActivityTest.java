@@ -384,7 +384,7 @@ public class ActivityTest extends AppCompatActivity {
     }
 
     private void setIndex() {
-        AnimateManager.animateProgressValue(binding.indexProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
+        AnimateManager.animateProgressBarValue(binding.indexProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
 
         String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
         binding.indexTextView.setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));

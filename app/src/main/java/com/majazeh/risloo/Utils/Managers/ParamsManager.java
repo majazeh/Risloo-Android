@@ -9,7 +9,7 @@ import com.google.android.material.appbar.AppBarLayout;
 public class ParamsManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Window ----------
     */
 
     public static WindowManager.LayoutParams wrapContent(Dialog dialog) {
@@ -41,6 +41,10 @@ public class ParamsManager {
 
         return layoutParams;
     }
+
+    /*
+    ---------- AppBar ----------
+    */
 
     public static void scrollEnterAlways(ViewGroup.LayoutParams viewParams) {
         AppBarLayout.LayoutParams appBarParams = (AppBarLayout.LayoutParams) viewParams;
