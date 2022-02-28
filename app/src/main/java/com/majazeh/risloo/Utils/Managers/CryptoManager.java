@@ -32,7 +32,7 @@ public class CryptoManager {
             InvalidKeyException {
 
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
-        cipher.init(Cipher.ENCRYPT_MODE, stringToPublicKey(getMainPublicKey(publicKey)));
+        cipher.init(Cipher.ENCRYPT_MODE, stringToPublicKey(getPublicKey(publicKey)));
 
         byte[] data = value.getBytes();
         int chunkSize = 245;
@@ -49,6 +49,7 @@ public class CryptoManager {
         }
 
         byte[] encryptData = buffer.array();
+
         return Base64.encodeToString(encryptData, Base64.DEFAULT);
     }
 
@@ -61,15 +62,15 @@ public class CryptoManager {
             InvalidKeyException {
 
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
-        cipher.init(Cipher.DECRYPT_MODE, stringToPrivateKey(getMainPrivateKey(privateKey)));
+        cipher.init(Cipher.DECRYPT_MODE, stringToPrivateKey(getPrivateKey(privateKey)));
 
-        byte[] data = Base64.decode(value,1);
+        byte[] data = Base64.decode(value, 1);
         int chunkSize = 256;
         int idx = 0;
 
         ByteBuffer buffer = ByteBuffer.allocate(data.length);
-        while(idx < data.length) {
-            int len = Math.min(data.length-idx, chunkSize);
+        while (idx < data.length) {
+            int len = Math.min(data.length - idx, chunkSize);
             byte[] decryptchunk = cipher.doFinal(data, idx, len);
 
             buffer.put(decryptchunk);
@@ -77,6 +78,7 @@ public class CryptoManager {
         }
 
         byte[] decryptData = buffer.array();
+
         return new String(decryptData).replaceAll("\u0000.*", "");
     }
 
@@ -88,40 +90,50 @@ public class CryptoManager {
             throws NoSuchAlgorithmException,
             InvalidKeySpecException {
 
-        byte[] keyBytes = Base64.decode(publicKey, Base64.DEFAULT);
-        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        return keyFactory.generatePublic(keySpec);
+        byte[] bytes = Base64.decode(publicKey, Base64.DEFAULT);
+        X509EncodedKeySpec spec = new X509EncodedKeySpec(bytes);
+        KeyFactory factory = KeyFactory.getInstance("RSA");
+
+        return factory.generatePublic(spec);
     }
 
     private static PrivateKey stringToPrivateKey(String privateKey)
             throws NoSuchAlgorithmException,
             InvalidKeySpecException {
 
-        byte[] keyBytes = Base64.decode(privateKey, Base64.DEFAULT);
-        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        return keyFactory.generatePrivate(keySpec);
+        byte[] bytes = Base64.decode(privateKey, Base64.DEFAULT);
+        PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(bytes);
+        KeyFactory factory = KeyFactory.getInstance("RSA");
+
+        return factory.generatePrivate(spec);
     }
 
     /*
-    ---------- Getter ----------
+    ---------- Getters ----------
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private static String getMainPublicKey(String publicKey) {
+    private static String getPublicKey(String publicKey) {
+        String prefix = "-----BEGIN PUBLIC KEY-----";
+        String suffix = "-----END PUBLIC KEY-----";
+
         publicKey.trim();
-        if (publicKey.startsWith("-----BEGIN PUBLIC KEY-----") && publicKey.endsWith("-----END PUBLIC KEY-----"))
-            return publicKey.substring(26, publicKey.length() - 24);
+
+        if (publicKey.startsWith(prefix) && publicKey.endsWith(suffix))
+            return publicKey.substring(prefix.length(), publicKey.length() - suffix.length());
         else
             return publicKey;
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private static String getMainPrivateKey(String privateKey) {
+    private static String getPrivateKey(String privateKey) {
+        String prefix = "-----BEGIN RSA PRIVATE KEY-----";
+        String suffix = "-----END RSA PRIVATE KEY-----";
+
         privateKey.trim();
-        if (privateKey.startsWith("-----BEGIN RSA PRIVATE KEY-----") && privateKey.endsWith("-----END RSA PRIVATE KEY-----"))
-            return privateKey.substring(31, privateKey.length() - 29);
+
+        if (privateKey.startsWith(prefix) && privateKey.endsWith(suffix))
+            return privateKey.substring(prefix.length(), privateKey.length() - suffix.length());
         else
             return privateKey;
     }

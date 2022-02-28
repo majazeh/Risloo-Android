@@ -12,20 +12,19 @@ public class JsonManager {
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static String getJson(Activity activity, String file) {
-        try {
-            InputStream inputStream = activity.getAssets().open(file);
+    public static String getJson(Activity activity, String file)
+            throws IOException {
 
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
+        InputStream inputStream = activity.getAssets().open(file);
 
-            inputStream.read(buffer);
-            inputStream.close();
+        int size = inputStream.available();
+        byte[] buffer = new byte[size];
+        String charset = "UTF-8";
 
-            return new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } return "";
+        inputStream.read(buffer);
+        inputStream.close();
+
+        return new String(buffer, charset);
     }
 
 }

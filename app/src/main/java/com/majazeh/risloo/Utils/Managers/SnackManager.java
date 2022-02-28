@@ -17,7 +17,7 @@ import com.majazeh.risloo.databinding.SnackSuccesBinding;
 public class SnackManager {
 
     /*
-    ---------- Show ----------
+    ---------- Funcs ----------
     */
 
     public static void showSnackSucces(Activity activity, String value) {
