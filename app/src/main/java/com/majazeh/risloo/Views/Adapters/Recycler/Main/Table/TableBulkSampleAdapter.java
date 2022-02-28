@@ -141,7 +141,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             break;
                         case "کپی کردن لینک":
                             IntentManager.clipboard(activity, model.getLink());
-                            ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastSampleLinkSaved));
+                            ToastManager.showToastSucces(activity, activity.getResources().getString(R.string.ToastSampleLinkSaved));
                             break;
                     }
 

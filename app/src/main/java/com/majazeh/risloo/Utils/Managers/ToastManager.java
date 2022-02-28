@@ -3,6 +3,7 @@ package com.majazeh.risloo.utils.managers;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.majazeh.risloo.databinding.ToastDefaultBinding;
@@ -15,69 +16,75 @@ public class ToastManager {
     private static Toast toast;
 
     /*
-    ---------- Funcs ----------
+    ---------- Show ----------
     */
 
     public static void showToast(Activity activity, String value) {
         try {
             toast.getView().isShown();
             toast.setText(value);
-        } catch (Exception e) {
+        } catch (Exception exception) {
             toast = Toast.makeText(activity, value, Toast.LENGTH_LONG);
         }
 
         toast.show();
     }
 
-    public static void showSuccesToast(Activity activity, String value) {
+    public static void showToastSucces(Activity activity, String value) {
         try {
             toast.getView().isShown();
             toast.setText(value);
-        } catch (Exception e) {
+        } catch (Exception exception) {
             ToastSuccesBinding binding = ToastSuccesBinding.inflate(LayoutInflater.from(activity));
 
-            View layout = binding.getRoot();
-            binding.getRoot().setText(value);
+            TextView textView = binding.getRoot();
+            textView.setText(value);
+
+            View view = binding.getRoot();
 
             toast = new Toast(activity.getApplicationContext());
             toast.setDuration(Toast.LENGTH_LONG);
-            toast.setView(layout);
+            toast.setView(view);
         }
 
         toast.show();
     }
 
-    public static void showErrorToast(Activity activity, String value) {
+    public static void showToastError(Activity activity, String value) {
         try {
             toast.getView().isShown();
             toast.setText(value);
-        } catch (Exception e) {
+        } catch (Exception exception) {
             ToastErrorBinding binding = ToastErrorBinding.inflate(LayoutInflater.from(activity));
 
-            View layout = binding.getRoot();
-            binding.getRoot().setText(value);
+            TextView textView = binding.getRoot();
+            textView.setText(value);
+
+            View view = binding.getRoot();
 
             toast = new Toast(activity.getApplicationContext());
             toast.setDuration(Toast.LENGTH_LONG);
-            toast.setView(layout);
+            toast.setView(view);
         }
 
         toast.show();
     }
 
-    public static void showDefaultToast(Activity activity, String value) {
+    public static void showToastDefault(Activity activity, String value) {
         try {
             toast.getView().isShown();
             toast.setText(value);
-        } catch (Exception e) {
+        } catch (Exception exception) {
             ToastDefaultBinding binding = ToastDefaultBinding.inflate(LayoutInflater.from(activity));
 
-            View layout = binding.getRoot();
-            binding.getRoot().setText(value);
+            TextView textView = binding.getRoot();
+            textView.setText(value);
+
+            View view = binding.getRoot();
 
             toast = new Toast(activity.getApplicationContext());
             toast.setDuration(Toast.LENGTH_LONG);
-            toast.setView(layout);
+            toast.setView(view);
         }
 
         toast.show();

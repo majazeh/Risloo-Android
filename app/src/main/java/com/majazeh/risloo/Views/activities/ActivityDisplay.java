@@ -111,7 +111,7 @@ public class ActivityDisplay extends AppCompatActivity {
             for (int grantResult : grantResults) {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
                     if (requestCode == 200) {
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionStorageException));
+                        ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionStorageException));
                     }
 
                     return;

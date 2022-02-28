@@ -62,7 +62,7 @@ public class ExtendException extends onFailureException {
     }
 
     private void toastMessage(String message) {
-        activity.runOnUiThread(() -> ToastManager.showDefaultToast(activity, message));
+        activity.runOnUiThread(() -> ToastManager.showToastDefault(activity, message));
     }
 
     private void dismissDialog() {

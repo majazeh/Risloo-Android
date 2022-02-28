@@ -116,7 +116,7 @@ public class FragmentBulkSample extends Fragment {
                     break;
                 case "کپی کردن لینک":
                     IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
-                    ToastManager.showSuccesToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastSampleLinkSaved));
+                    ToastManager.showToastSucces(requireActivity(), requireActivity().getResources().getString(R.string.ToastSampleLinkSaved));
                     break;
             }
         }).widget(binding.menuSpinner.selectImageView);
@@ -141,7 +141,7 @@ public class FragmentBulkSample extends Fragment {
                             break;
                         case "کپی کردن لینک":
                             IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
-                            ToastManager.showSuccesToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastSampleLinkSaved));
+                            ToastManager.showToastSucces(requireActivity(), requireActivity().getResources().getString(R.string.ToastSampleLinkSaved));
                             break;
                     }
 

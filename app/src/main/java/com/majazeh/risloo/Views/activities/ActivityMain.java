@@ -383,16 +383,16 @@ public class ActivityMain extends AppCompatActivity {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
                     switch (requestCode) {
                         case 100:
-                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionFileException));
+                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionFileException));
                             break;
                         case 200:
-                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionStorageException));
+                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionStorageException));
                             break;
                         case 300:
-                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionGalleryException));
+                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionGalleryException));
                             break;
                         case 400:
-                            ToastManager.showErrorToast(this, getResources().getString(R.string.ToastPermissionCameraException));
+                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionCameraException));
                             break;
                     }
 
@@ -480,18 +480,18 @@ public class ActivityMain extends AppCompatActivity {
             case RESULT_ERROR: {
                 switch (requestCode) {
                     case 100:
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastIntentFileException));
+                        ToastManager.showToastError(this, getResources().getString(R.string.ToastIntentFileException));
                         break;
                     case 300:
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastIntentGalleryException));
+                        ToastManager.showToastError(this, getResources().getString(R.string.ToastIntentGalleryException));
                         break;
                     case 400:
-                        ToastManager.showErrorToast(this, getResources().getString(R.string.ToastIntentCameraException));
+                        ToastManager.showToastError(this, getResources().getString(R.string.ToastIntentCameraException));
                         break;
                 }
             } break;
             case UCrop.RESULT_ERROR: {
-                ToastManager.showErrorToast(this, getResources().getString(R.string.ToastIntentCropException));
+                ToastManager.showToastError(this, getResources().getString(R.string.ToastIntentCropException));
                 break;
             }
         }

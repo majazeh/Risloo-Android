@@ -286,7 +286,7 @@ public class FragmentAuthPin extends Fragment {
                 }
             });
         } else if (method.equals("verification")) {
-            ToastManager.showDefaultToast(requireActivity(), getResources().getString(R.string.ToastFeatureNotAddedYet));
+            ToastManager.showToastDefault(requireActivity(), getResources().getString(R.string.ToastFeatureNotAddedYet));
 
             // TODO : Place Code if Needed
 

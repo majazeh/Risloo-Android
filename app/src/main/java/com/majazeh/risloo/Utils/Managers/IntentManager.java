@@ -217,7 +217,7 @@ public class IntentManager {
         try {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         } catch (ActivityNotFoundException e) {
-            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityPaymentException));
+            ToastManager.showToastDefault(activity, activity.getResources().getString(R.string.ToastActivityPaymentException));
         }
         activity.startActivity(intent);
     }
@@ -239,7 +239,7 @@ public class IntentManager {
 
             activity.startActivity(Intent.createChooser(intent, activity.getResources().getString(R.string.AppChooserFile)));
         } catch (ActivityNotFoundException e) {
-            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastActivityEmptyException));
+            ToastManager.showToastDefault(activity, activity.getResources().getString(R.string.ToastActivityEmptyException));
         }
     }
 
