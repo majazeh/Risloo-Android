@@ -89,12 +89,12 @@ public class FragmentEditCenterTabDetail extends Fragment {
     private void listener() {
         binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSelectedDialog(requireActivity(), "phones");
+                DialogManager.showDialogSelected(requireActivity(), "phones");
             return false;
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "managers");
+            DialogManager.showDialogSearchable(requireActivity(), "managers");
         }).widget(binding.managerIncludeLayout.selectTextView);
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -237,7 +237,7 @@ public class FragmentEditCenterTabDetail extends Fragment {
                     binding.managerIncludeLayout.selectTextView.setText("");
                 }
 
-                DialogManager.dismissSearchableDialog();
+                DialogManager.dismissDialogSearchable();
             } break;
         }
     }
@@ -273,7 +273,7 @@ public class FragmentEditCenterTabDetail extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -282,7 +282,7 @@ public class FragmentEditCenterTabDetail extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                     });
                 }

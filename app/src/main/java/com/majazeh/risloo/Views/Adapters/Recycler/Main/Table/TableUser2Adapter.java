@@ -279,7 +279,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void doWork(UserModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity, "");
+        DialogManager.showDialogLoading(activity, "");
 
         setHashmap(model, value, method);
 
@@ -287,7 +287,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             @Override
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
-                    DialogManager.dismissLoadingDialog();
+                    DialogManager.dismissDialogLoading();
                     SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                 });
             }

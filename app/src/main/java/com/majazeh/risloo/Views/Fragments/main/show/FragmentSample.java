@@ -505,14 +505,14 @@ public class FragmentSample extends Fragment {
                 });
                 break;
             case "fillSample":
-                DialogManager.showLoadingDialog(requireActivity(), "");
+                DialogManager.showDialogLoading(requireActivity(), "");
 
                 Sample.fill(data, header, new Response() {
                     @Override
                     public void onOK(Object object) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                DialogManager.dismissLoadingDialog();
+                                DialogManager.dismissDialogLoading();
                                 SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleFilled));
 
                                 // TODO : Place Code If Needed
@@ -554,14 +554,14 @@ public class FragmentSample extends Fragment {
                 });
                 break;
             case "closeSample":
-                DialogManager.showLoadingDialog(requireActivity(), "");
+                DialogManager.showDialogLoading(requireActivity(), "");
 
                 Sample.close(sampleAnswers, data, header, new Response() {
                     @Override
                     public void onOK(Object object) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                DialogManager.dismissLoadingDialog();
+                                DialogManager.dismissDialogLoading();
                                 SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleClosed));
 
                                 setStatus("closed");
@@ -603,14 +603,14 @@ public class FragmentSample extends Fragment {
                 });
                 break;
             case "openSample":
-                DialogManager.showLoadingDialog(requireActivity(), "");
+                DialogManager.showDialogLoading(requireActivity(), "");
 
                 Sample.open(data, header, new Response() {
                     @Override
                     public void onOK(Object object) {
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                DialogManager.dismissLoadingDialog();
+                                DialogManager.dismissDialogLoading();
                                 SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSampleOpened));
 
                                 setStatus("open");
@@ -652,7 +652,7 @@ public class FragmentSample extends Fragment {
                 });
                 break;
             case "scoreSample":
-                DialogManager.showLoadingDialog(requireActivity(), "");
+                DialogManager.showDialogLoading(requireActivity(), "");
 
                 Sample.score(data, header, new Response() {
                     @Override
@@ -661,7 +661,7 @@ public class FragmentSample extends Fragment {
 
                         if (isAdded()) {
                             requireActivity().runOnUiThread(() -> {
-                                DialogManager.dismissLoadingDialog();
+                                DialogManager.dismissDialogLoading();
 
                                 setStatus(sampleModel.getStatus());
                             });

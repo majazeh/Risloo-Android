@@ -216,7 +216,7 @@ public class FragmentAuthPin extends Fragment {
         if (method.equals("code")) {
             countDownTimer.cancel();
 
-            DialogManager.showLoadingDialog(requireActivity(), "");
+            DialogManager.showDialogLoading(requireActivity(), "");
 
             setHashmap(method);
 
@@ -241,7 +241,7 @@ public class FragmentAuthPin extends Fragment {
                                 IntentManager.main(requireActivity());
                             }
 
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                         });
                     }
                 }

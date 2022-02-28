@@ -142,11 +142,11 @@ public class FragmentReserveSchedule extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "cases");
+            DialogManager.showDialogSearchable(requireActivity(), "cases");
         }).widget(binding.caseIncludeLayout.selectContainer);
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "references");
+            DialogManager.showDialogSearchable(requireActivity(), "references");
         }).widget(binding.referenceIncludeLayout.selectTextView);
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -513,7 +513,7 @@ public class FragmentReserveSchedule extends Fragment {
                     binding.referenceIncludeLayout.selectTextView.setText("");
                 }
 
-                DialogManager.dismissSearchableDialog();
+                DialogManager.dismissDialogSearchable();
             } break;
             case "cases": {
                 CaseModel model = (CaseModel) item;
@@ -536,7 +536,7 @@ public class FragmentReserveSchedule extends Fragment {
                     binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                 }
 
-                DialogManager.dismissSearchableDialog();
+                DialogManager.dismissDialogSearchable();
             } break;
         }
     }
@@ -608,7 +608,7 @@ public class FragmentReserveSchedule extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -617,7 +617,7 @@ public class FragmentReserveSchedule extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackScheduleReserved));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSession(scheduleModel);

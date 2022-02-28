@@ -131,26 +131,26 @@ public class FragmentCreateSample extends Fragment {
 
         binding.scaleIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "scales");
+                DialogManager.showDialogSearchable(requireActivity(), "scales");
             return false;
         });
 
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "references");
+                DialogManager.showDialogSearchable(requireActivity(), "references");
             return false;
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "rooms");
+            DialogManager.showDialogSearchable(requireActivity(), "rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "cases");
+            DialogManager.showDialogSearchable(requireActivity(), "cases");
         }).widget(binding.caseIncludeLayout.selectContainer);
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "sessions");
+            DialogManager.showDialogSearchable(requireActivity(), "sessions");
         }).widget(binding.sessionIncludeLayout.selectContainer);
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -519,7 +519,7 @@ public class FragmentCreateSample extends Fragment {
                         binding.roomIncludeLayout.secondaryTextView.setText("");
                     }
 
-                    DialogManager.dismissSearchableDialog();
+                    DialogManager.dismissDialogSearchable();
                 } break;
                 case "references": {
                     UserModel model = (UserModel) item;
@@ -556,7 +556,7 @@ public class FragmentCreateSample extends Fragment {
                         setClients(null);
                     }
 
-                    DialogManager.dismissSearchableDialog();
+                    DialogManager.dismissDialogSearchable();
                 } break;
                 case "sessions": {
                     SessionModel model = (SessionModel) item;
@@ -576,7 +576,7 @@ public class FragmentCreateSample extends Fragment {
                         binding.sessionIncludeLayout.secondaryTextView.setText("");
                     }
 
-                    DialogManager.dismissSearchableDialog();
+                    DialogManager.dismissDialogSearchable();
                 } break;
             }
         } catch (JSONException e) {
@@ -658,7 +658,7 @@ public class FragmentCreateSample extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -670,7 +670,7 @@ public class FragmentCreateSample extends Fragment {
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewBulkSample));
 
                             ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentBulkSample(bulkSampleModel);
@@ -770,7 +770,7 @@ public class FragmentCreateSample extends Fragment {
                                 String[] sampleIds = new String[ids.size()];
                                 sampleIds = ids.toArray(sampleIds);
 
-                                DialogManager.dismissLoadingDialog();
+                                DialogManager.dismissDialogLoading();
                                 SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSample));
 
                                 ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSamples(null, sampleIds);

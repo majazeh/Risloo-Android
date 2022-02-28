@@ -103,7 +103,7 @@ public class FragmentAuthLogin extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -131,7 +131,7 @@ public class FragmentAuthLogin extends Fragment {
                             IntentManager.main(requireActivity());
                         }
 
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                     });
                 }
             }

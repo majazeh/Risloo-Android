@@ -299,7 +299,7 @@ public class FragmentPayments extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -310,7 +310,7 @@ public class FragmentPayments extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
 
                         Paymont.getInstance().insertPayment(null, paymentModel, data, R.id.fragmentPayments);
                         PaymentManager.request(requireActivity(), paymentModel);

@@ -99,7 +99,7 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
 
         CustomClickView.onDelayedListener(() -> {
             selectedHolder = holder;
-            DialogManager.showSearchableDialog(activity, "tags");
+            DialogManager.showDialogSearchable(activity, "tags");
         }).widget(holder.binding.titleTextView);
     }
 
@@ -133,7 +133,7 @@ public class IndexTagAdapter extends RecyclerView.Adapter<IndexTagHolder> {
                     selectedHolder.binding.titleTextView.setText("");
                 }
 
-                DialogManager.dismissSearchableDialog();
+                DialogManager.dismissDialogSearchable();
 
                 doWork(model);
             } break;

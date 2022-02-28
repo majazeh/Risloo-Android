@@ -275,7 +275,7 @@ public class FragmentEditUserTabPassword extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -288,7 +288,7 @@ public class FragmentEditUserTabPassword extends Fragment {
                             ((ActivityMain) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), newPassword);
                             resetInputs();
 
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
@@ -347,7 +347,7 @@ public class FragmentEditUserTabPassword extends Fragment {
                         requireActivity().runOnUiThread(() -> {
                             resetInputs();
 
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }

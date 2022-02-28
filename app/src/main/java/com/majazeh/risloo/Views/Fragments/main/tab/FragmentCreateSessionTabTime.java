@@ -112,7 +112,7 @@ public class FragmentCreateSessionTabTime extends Fragment {
 
         binding.patternDaysIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "patternDays");
+                DialogManager.showDialogSearchable(requireActivity(), "patternDays");
             return false;
         });
 

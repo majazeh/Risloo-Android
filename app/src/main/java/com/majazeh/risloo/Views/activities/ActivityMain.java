@@ -317,7 +317,7 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     public void setUser(String method, String userId) {
-        DialogManager.showLoadingDialog(this, "");
+        DialogManager.showDialogLoading(this, "");
 
         setHashmap(userId);
 
@@ -332,7 +332,7 @@ public class ActivityMain extends AppCompatActivity {
 
                         setData();
 
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
 
                         SnackManager.showSuccesSnack(ActivityMain.this, getResources().getString(R.string.SnackLoginOtherUser));
                         navigatoon.navigateToFragmentDashboard();
@@ -357,7 +357,7 @@ public class ActivityMain extends AppCompatActivity {
 
                         setData();
 
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
 
                         SnackManager.showSuccesSnack(ActivityMain.this, getResources().getString(R.string.SnackLogoutFormOtherUser));
                         navigatoon.navigateToFragmentDashboard();

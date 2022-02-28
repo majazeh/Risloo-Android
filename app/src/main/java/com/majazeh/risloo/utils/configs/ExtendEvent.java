@@ -44,7 +44,7 @@ public class ExtendEvent extends APIEvents {
     }
 
     public static void cancelRequest() {
-        cancel(() -> ExtendException.activity.runOnUiThread(DialogManager::dismissLoadingDialog));
+        cancel(() -> ExtendException.activity.runOnUiThread(DialogManager::dismissDialogLoading));
     }
 
 }

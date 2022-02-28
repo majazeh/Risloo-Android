@@ -187,7 +187,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     private void doWork(SessionModel model, String status) {
-        DialogManager.showLoadingDialog(activity, "");
+        DialogManager.showDialogLoading(activity, "");
 
         setHashmap(model, status);
 
@@ -195,7 +195,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
             @Override
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
-                    DialogManager.dismissLoadingDialog();
+                    DialogManager.dismissDialogLoading();
                     SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                 });
             }

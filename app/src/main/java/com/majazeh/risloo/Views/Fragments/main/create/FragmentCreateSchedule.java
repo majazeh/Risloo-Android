@@ -154,7 +154,7 @@ public class FragmentCreateSchedule extends Fragment {
     }
 
     public void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -165,7 +165,7 @@ public class FragmentCreateSchedule extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSchedule));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSession(scheduleModel);

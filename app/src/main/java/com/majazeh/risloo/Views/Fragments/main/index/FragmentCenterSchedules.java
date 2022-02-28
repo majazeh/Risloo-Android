@@ -93,7 +93,7 @@ public class FragmentCenterSchedules extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        CustomClickView.onDelayedListener(() -> DialogManager.showScheduleFilterDialog(requireActivity(), "center", filterableRooms.data(), filterableStatus.data())).widget(binding.filterImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> DialogManager.showDialogScheduleFilter(requireActivity(), "center", filterableRooms.data(), filterableStatus.data())).widget(binding.filterImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> responseDialog("rooms", null)).widget(binding.filterIncludeLayout.roomFilterLayout.removeImageView);
 
@@ -293,7 +293,7 @@ public class FragmentCenterSchedules extends Fragment {
             binding.filterIncludeLayout.getRoot().setVisibility(View.GONE);
         }
 
-        DialogManager.dismissScheduleFilterDialog();
+        DialogManager.dismissDialogScheduleFilter();
 
         showShimmer();
 

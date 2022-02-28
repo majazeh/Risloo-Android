@@ -149,7 +149,7 @@ public class FragmentCreateSession extends Fragment {
     }
 
     public void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -160,7 +160,7 @@ public class FragmentCreateSession extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewSession));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentSession(sessionModel);

@@ -248,7 +248,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void doWork(TableSampleHolder holder, SampleModel model, int position) {
-        DialogManager.showLoadingDialog(activity, "");
+        DialogManager.showDialogLoading(activity, "");
 
         setHashmap(model);
 
@@ -259,7 +259,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 items.add(position, sampleModel);
 
                 activity.runOnUiThread(() -> {
-                    DialogManager.dismissLoadingDialog();
+                    DialogManager.dismissDialogLoading();
                     setStatus(holder, sampleModel.getStatus());
                 });
             }

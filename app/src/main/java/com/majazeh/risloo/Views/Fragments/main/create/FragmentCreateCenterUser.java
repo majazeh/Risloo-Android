@@ -149,7 +149,7 @@ public class FragmentCreateCenterUser extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "rooms");
+            DialogManager.showDialogSearchable(requireActivity(), "rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
 
         CustomClickView.onDelayedListener(() -> {
@@ -219,7 +219,7 @@ public class FragmentCreateCenterUser extends Fragment {
                         binding.roomIncludeLayout.secondaryTextView.setText("");
                     }
 
-                    DialogManager.dismissSearchableDialog();
+                    DialogManager.dismissDialogSearchable();
                 } break;
             }
         } catch (JSONException e) {
@@ -270,7 +270,7 @@ public class FragmentCreateCenterUser extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -281,7 +281,7 @@ public class FragmentCreateCenterUser extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         AuthModel model = new AuthModel((JSONObject) object);
 
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((ActivityMain) requireActivity()).singleton.getUserModel());
                     });
                 }

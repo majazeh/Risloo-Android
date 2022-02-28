@@ -196,7 +196,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -207,7 +207,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
 
                         IntentManager.test(requireActivity(), model.getKey());
 

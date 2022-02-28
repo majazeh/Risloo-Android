@@ -28,48 +28,58 @@ public class DialogManager {
     ---------- Show ----------
     */
 
-    public static void showLoadingDialog(Activity activity, String title) {
+    public static void showDialogLoading(Activity activity, String title) {
         dialogLoading = new DialogLoading();
+
         if (activity instanceof AppCompatActivity)
             dialogLoading.show(((AppCompatActivity) activity).getSupportFragmentManager(), "loadingDialog");
         else if (activity instanceof FragmentActivity)
             dialogLoading.show(((FragmentActivity) activity).getSupportFragmentManager(), "loadingDialog");
+
         dialogLoading.setData(title);
     }
 
-    public static void showPaymentDialog(Activity activity, String method, PaymentModel model) {
+    public static void showDialogPayment(Activity activity, String method, PaymentModel model) {
         dialogPayment = new DialogPayment();
+
         if (activity instanceof AppCompatActivity)
             dialogPayment.show(((AppCompatActivity) activity).getSupportFragmentManager(), "paymentDialog");
         else if (activity instanceof FragmentActivity)
             dialogPayment.show(((FragmentActivity) activity).getSupportFragmentManager(), "paymentDialog");
+
         dialogPayment.setData(method, model);
     }
 
-    public static void showScheduleFilterDialog(Activity activity, String method, ArrayList<TypeModel> rooms, ArrayList<TypeModel> status) {
+    public static void showDialogScheduleFilter(Activity activity, String method, ArrayList<TypeModel> rooms, ArrayList<TypeModel> status) {
         dialogScheduleFilter = new DialogScheduleFilter();
+
         if (activity instanceof AppCompatActivity)
             dialogScheduleFilter.show(((AppCompatActivity) activity).getSupportFragmentManager(), "scheduleFilterBottomSheet");
         else if (activity instanceof FragmentActivity)
             dialogScheduleFilter.show(((FragmentActivity) activity).getSupportFragmentManager(), "scheduleFilterBottomSheet");
+
         dialogScheduleFilter.setData(method, rooms, status);
     }
 
-    public static void showSearchableDialog(Activity activity, String method) {
+    public static void showDialogSearchable(Activity activity, String method) {
         dialogSearchable = new DialogSearchable();
+
         if (activity instanceof AppCompatActivity)
             dialogSearchable.show(((AppCompatActivity) activity).getSupportFragmentManager(), "searchableDialog");
         else if (activity instanceof FragmentActivity)
             dialogSearchable.show(((FragmentActivity) activity).getSupportFragmentManager(), "searchableDialog");
+
         dialogSearchable.setData(method);
     }
 
-    public static void showSelectedDialog(Activity activity, String method) {
+    public static void showDialogSelected(Activity activity, String method) {
         dialogSelected = new DialogSelected();
+
         if (activity instanceof AppCompatActivity)
             dialogSelected.show(((AppCompatActivity) activity).getSupportFragmentManager(), "selectedDialog");
         else if (activity instanceof FragmentActivity)
             dialogSelected.show(((FragmentActivity) activity).getSupportFragmentManager(), "selectedDialog");
+
         dialogSelected.setData(method);
     }
 
@@ -77,35 +87,35 @@ public class DialogManager {
     ---------- Dismiss ----------
     */
 
-    public static void dismissLoadingDialog() {
+    public static void dismissDialogLoading() {
         if (dialogLoading != null) {
             dialogLoading.dismiss();
             dialogLoading = null;
         }
     }
 
-    public static void dismissPaymentDialog() {
+    public static void dismissDialogPayment() {
         if (dialogPayment != null) {
             dialogPayment.dismiss();
             dialogPayment = null;
         }
     }
 
-    public static void dismissScheduleFilterDialog() {
+    public static void dismissDialogScheduleFilter() {
         if (dialogScheduleFilter != null) {
             dialogScheduleFilter.dismiss();
             dialogScheduleFilter = null;
         }
     }
 
-    public static void dismissSearchableDialog() {
+    public static void dismissDialogSearchable() {
         if (dialogSearchable != null) {
             dialogSearchable.dismiss();
             dialogSearchable = null;
         }
     }
 
-    public static void dismissSelectedDialog() {
+    public static void dismissDialogSelected() {
         if (dialogSelected != null) {
             dialogSelected.dismiss();
             dialogSelected = null;
@@ -116,35 +126,35 @@ public class DialogManager {
     ---------- Getter ----------
     */
 
-    public static DialogLoading getLoadingDialog() {
+    public static DialogLoading getDialogLoading() {
         if (dialogLoading != null && dialogLoading.isVisible())
             return dialogLoading;
 
         return null;
     }
 
-    public static DialogPayment getPaymentDialog() {
+    public static DialogPayment getDialogPayment() {
         if (dialogPayment != null && dialogPayment.isVisible())
             return dialogPayment;
 
         return null;
     }
 
-    public static DialogScheduleFilter getScheduleFilterDialog() {
+    public static DialogScheduleFilter getDialogScheduleFilter() {
         if (dialogScheduleFilter != null && dialogScheduleFilter.isVisible())
             return dialogScheduleFilter;
 
         return null;
     }
 
-    public static DialogSearchable getSearchableDialog() {
+    public static DialogSearchable getDialogSearchable() {
         if (dialogSearchable != null && dialogSearchable.isVisible())
             return dialogSearchable;
 
         return null;
     }
 
-    public static DialogSelected getSelectedDialog() {
+    public static DialogSelected getDialogSelected() {
         if (dialogSelected != null && dialogSelected.isVisible())
             return dialogSelected;
 

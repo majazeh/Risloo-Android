@@ -127,7 +127,7 @@ public class FragmentAuthSerial extends Fragment {
     }
 
     private void doWork(String method) {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap(method);
 
@@ -142,7 +142,7 @@ public class FragmentAuthSerial extends Fragment {
                             ((ActivityAuth) requireActivity()).singleton.logout();
                             ((ActivityAuth) requireActivity()).navigatoon.navigateToFragmentAuthLogin();
 
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                         });
                     }
                 }

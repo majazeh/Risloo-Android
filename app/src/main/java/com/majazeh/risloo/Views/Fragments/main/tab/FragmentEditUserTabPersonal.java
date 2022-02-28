@@ -334,7 +334,7 @@ public class FragmentEditUserTabPersonal extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -350,7 +350,7 @@ public class FragmentEditUserTabPersonal extends Fragment {
                             ((ActivityMain) requireActivity()).singleton.params(userModel);
                             ((ActivityMain) requireActivity()).setData();
 
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }
@@ -417,7 +417,7 @@ public class FragmentEditUserTabPersonal extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
                         });
                     }

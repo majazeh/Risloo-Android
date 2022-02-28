@@ -306,7 +306,7 @@ public class FragmentCreateSessionTabSession extends Fragment {
 
         binding.axisIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSelectedDialog(requireActivity(), "axises");
+                DialogManager.showDialogSelected(requireActivity(), "axises");
             return false;
         });
 

@@ -462,7 +462,7 @@ public class ActivityTest extends AppCompatActivity {
     }
 
     public void closeSample() {
-        DialogManager.showLoadingDialog(this, "");
+        DialogManager.showDialogLoading(this, "");
 
         Sample.close(sampleAnswers, data, header, new Response() {
             @Override
@@ -477,7 +477,7 @@ public class ActivityTest extends AppCompatActivity {
                             ChainModel chainModel = (ChainModel) items.data().get(i);
 
                             if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != items.data().size() && !chainModel.getId().equals(sampleAnswers.id)) {
-                                DialogManager.dismissLoadingDialog();
+                                DialogManager.dismissDialogLoading();
 
                                 data.put("id", chainModel.getId());
                                 sampleAnswers.id = chainModel.getId();
@@ -492,7 +492,7 @@ public class ActivityTest extends AppCompatActivity {
                         }
                     }
 
-                    DialogManager.dismissLoadingDialog();
+                    DialogManager.dismissDialogLoading();
 
                     SnackManager.showSuccesSnack(ActivityTest.this, getResources().getString(R.string.SnackSampleClosed));
                     IntentManager.finish(ActivityTest.this);

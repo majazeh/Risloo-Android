@@ -21,7 +21,7 @@ public class PaymentManager {
     */
 
     public static void request(Activity activity, PaymentModel model) {
-        DialogManager.showPaymentDialog(activity, "request", model);
+        DialogManager.showDialogPayment(activity, "request", model);
 
         HashMap data = new HashMap<>();
         HashMap header = new HashMap<>();
@@ -35,7 +35,7 @@ public class PaymentManager {
                 PaymentModel model = (PaymentModel) object;
 
                 activity.runOnUiThread(() -> {
-                    DialogManager.dismissPaymentDialog();
+                    DialogManager.dismissDialogPayment();
                     IntentManager.browser(activity, model.getRedirect());
                 });
             }
@@ -68,7 +68,7 @@ public class PaymentManager {
     }
 
     private static void finalize(Activity activity) {
-        DialogManager.showPaymentDialog(activity, "finalize", Paymont.getInstance().getPaymentModel());
+        DialogManager.showDialogPayment(activity, "finalize", Paymont.getInstance().getPaymentModel());
 
         HashMap data = new HashMap<>();
         data.put("user", ((ActivityMain) activity).singleton.getUserModel().getId());
@@ -84,7 +84,7 @@ public class PaymentManager {
                     ((ActivityMain) activity).singleton.update(userModel);
                     ((ActivityMain) activity).setData();
 
-                    DialogManager.dismissPaymentDialog();
+                    DialogManager.dismissDialogPayment();
                     navigate(activity);
                 });
             }
@@ -92,7 +92,7 @@ public class PaymentManager {
             @Override
             public void onFailure(String response) {
                 activity.runOnUiThread(() -> {
-                    DialogManager.dismissPaymentDialog();
+                    DialogManager.dismissDialogPayment();
                     navigate(activity);
                 });
             }

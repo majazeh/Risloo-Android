@@ -317,7 +317,7 @@ public class FragmentBulkSample extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         HashMap authData = new HashMap<>();
         authData.put("authorized_key", bulkSampleModel.getLink());
@@ -336,10 +336,10 @@ public class FragmentBulkSample extends Fragment {
                             String key = jsonObject.getString("key");
 
                             if (key.startsWith("$")) {
-                                DialogManager.dismissLoadingDialog();
+                                DialogManager.dismissDialogLoading();
                                 IntentManager.test(requireActivity(), key);
                             } else {
-                                DialogManager.dismissLoadingDialog();
+                                DialogManager.dismissDialogLoading();
                                 SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((ActivityMain) requireActivity()).singleton.getUserModel(), bulkSampleModel);
                             }
                         } catch (JSONException e) {

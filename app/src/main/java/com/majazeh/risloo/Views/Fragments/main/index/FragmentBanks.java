@@ -629,7 +629,7 @@ public class FragmentBanks extends Fragment {
     }
 
     private void doWork(String method) {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap(method);
 
@@ -639,7 +639,7 @@ public class FragmentBanks extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewIban));
 
                             resetInputs();
@@ -698,7 +698,7 @@ public class FragmentBanks extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackIbanSettled));
                         });
                     }

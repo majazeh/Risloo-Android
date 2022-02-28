@@ -166,7 +166,7 @@ public class FragmentEditSessionTabReference extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "cases");
+            DialogManager.showDialogSearchable(requireActivity(), "cases");
         }).widget(binding.caseIncludeLayout.selectContainer);
 
         CustomClickView.onDelayedListener(() -> {
@@ -325,7 +325,7 @@ public class FragmentEditSessionTabReference extends Fragment {
                     setClients(null);
                 }
 
-                DialogManager.dismissSearchableDialog();
+                DialogManager.dismissDialogSearchable();
             } break;
         }
     }

@@ -191,7 +191,7 @@ public class FragmentAuthPasswordChange extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -218,7 +218,7 @@ public class FragmentAuthPasswordChange extends Fragment {
                             IntentManager.main(requireActivity());
                         }
 
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                     });
                 }
             }

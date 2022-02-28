@@ -692,7 +692,7 @@ public class FragmentRoom extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         Room.request(data, header, new Response() {
             @Override
@@ -702,7 +702,7 @@ public class FragmentRoom extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackSuccesAcceptation));
 
                         setAcceptation(roomModel);

@@ -92,13 +92,13 @@ public class FragmentCreateCase extends Fragment {
     private void listener() {
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "references");
+                DialogManager.showDialogSearchable(requireActivity(), "references");
             return false;
         });
 
         binding.tagsIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "tags");
+                DialogManager.showDialogSearchable(requireActivity(), "tags");
             return false;
         });
 
@@ -246,7 +246,7 @@ public class FragmentCreateCase extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -257,7 +257,7 @@ public class FragmentCreateCase extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCase));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentCase(caseModel);

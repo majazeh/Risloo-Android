@@ -194,8 +194,8 @@ public class DialogSelectedAdapter extends RecyclerView.Adapter<DialogSelectedHo
     }
 
     private void refreshCount() {
-        if (DialogManager.getSelectedDialog() != null)
-            DialogManager.getSelectedDialog().calculateCount();
+        if (DialogManager.getDialogSelected() != null)
+            DialogManager.getDialogSelected().calculateCount();
     }
 
     private void calculateCount() {

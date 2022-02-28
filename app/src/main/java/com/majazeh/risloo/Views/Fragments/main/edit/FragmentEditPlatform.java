@@ -306,7 +306,7 @@ public class FragmentEditPlatform extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -315,7 +315,7 @@ public class FragmentEditPlatform extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackChangesSaved));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateUp();

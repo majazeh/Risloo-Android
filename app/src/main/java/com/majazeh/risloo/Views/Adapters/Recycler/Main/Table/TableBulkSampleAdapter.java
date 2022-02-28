@@ -205,7 +205,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void doWork(BulkSampleModel model) {
-        DialogManager.showLoadingDialog(activity, "");
+        DialogManager.showDialogLoading(activity, "");
 
         setHashmap(model);
 
@@ -223,10 +223,10 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         String key = jsonObject.getString("key");
 
                         if (key.startsWith("$")) {
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             IntentManager.test(activity, key);
                         } else {
-                            DialogManager.dismissLoadingDialog();
+                            DialogManager.dismissDialogLoading();
                             SheetManager.showBulkSampleBottomSheet(activity, key, ((ActivityMain) activity).singleton.getUserModel(), bulkSampleModel);
                         }
                     } catch (JSONException e) {

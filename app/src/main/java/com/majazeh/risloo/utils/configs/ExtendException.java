@@ -66,7 +66,7 @@ public class ExtendException extends onFailureException {
     }
 
     private void dismissDialog() {
-        activity.runOnUiThread(DialogManager::dismissLoadingDialog);
+        activity.runOnUiThread(DialogManager::dismissDialogLoading);
     }
 
 }

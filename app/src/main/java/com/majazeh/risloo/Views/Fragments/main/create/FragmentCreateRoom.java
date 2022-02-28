@@ -72,7 +72,7 @@ public class FragmentCreateRoom extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showSearchableDialog(requireActivity(), "psychologies");
+            DialogManager.showDialogSearchable(requireActivity(), "psychologies");
         }).widget(binding.psychologyIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
@@ -126,7 +126,7 @@ public class FragmentCreateRoom extends Fragment {
                     binding.psychologyIncludeLayout.selectTextView.setText("");
                 }
 
-                DialogManager.dismissSearchableDialog();
+                DialogManager.dismissDialogSearchable();
             } break;
         }
     }
@@ -139,7 +139,7 @@ public class FragmentCreateRoom extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -150,7 +150,7 @@ public class FragmentCreateRoom extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoom));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateToFragmentRoom(roomModel);

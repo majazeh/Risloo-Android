@@ -101,7 +101,7 @@ public class SheetAuth extends BottomSheetDialogFragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -110,7 +110,7 @@ public class SheetAuth extends BottomSheetDialogFragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewCenterUser));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateUp();

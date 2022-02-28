@@ -122,7 +122,7 @@ public class FragmentEditUserTabCrypto extends Fragment {
     }
 
     private void doWork(String key) {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         if (key.equals("public")) {
             // TODO : Place Code Here

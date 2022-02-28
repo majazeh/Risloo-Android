@@ -214,7 +214,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
     }
 
     private void doWork(IndexCenterPlatformHolder holder, SessionPlatformModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity, "");
+        DialogManager.showDialogLoading(activity, "");
 
         setHashmap(model, value, method);
 
@@ -222,7 +222,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
             @Override
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
-                    DialogManager.dismissLoadingDialog();
+                    DialogManager.dismissDialogLoading();
                     SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
                 });
             }

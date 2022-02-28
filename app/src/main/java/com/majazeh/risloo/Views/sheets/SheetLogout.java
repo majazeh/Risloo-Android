@@ -93,14 +93,14 @@ public class SheetLogout extends BottomSheetDialogFragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         Auth.logout(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         ((ActivityMain) requireActivity()).singleton.logout();
 
                         IntentManager.auth(requireActivity(), "login");

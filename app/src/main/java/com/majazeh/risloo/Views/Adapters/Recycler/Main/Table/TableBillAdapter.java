@@ -267,7 +267,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void doWork(TableBillHolder holder, BillingModel model, int position, String method) {
-        DialogManager.showLoadingDialog(activity, "");
+        DialogManager.showDialogLoading(activity, "");
 
         setHashmap(model, position, method);
 
@@ -276,7 +276,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
 
                         // TODO : Place Code If Needed
                     });
@@ -310,7 +310,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.SnackChangesSaved));
 
                         holder.binding.menuGroup.setVisibility(View.INVISIBLE);

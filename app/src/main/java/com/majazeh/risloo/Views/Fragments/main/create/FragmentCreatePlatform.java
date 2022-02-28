@@ -246,7 +246,7 @@ public class FragmentCreatePlatform extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -255,7 +255,7 @@ public class FragmentCreatePlatform extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewPlatform));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateUp();

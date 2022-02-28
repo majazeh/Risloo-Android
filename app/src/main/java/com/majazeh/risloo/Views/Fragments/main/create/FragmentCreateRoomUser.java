@@ -81,7 +81,7 @@ public class FragmentCreateRoomUser extends Fragment {
     private void listener() {
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction())
-                DialogManager.showSearchableDialog(requireActivity(), "references");
+                DialogManager.showDialogSearchable(requireActivity(), "references");
             return false;
         });
 
@@ -152,7 +152,7 @@ public class FragmentCreateRoomUser extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity(), "");
+        DialogManager.showDialogLoading(requireActivity(), "");
 
         setHashmap();
 
@@ -161,7 +161,7 @@ public class FragmentCreateRoomUser extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        DialogManager.dismissLoadingDialog();
+                        DialogManager.dismissDialogLoading();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.SnackCreatedNewRoomUser));
 
                         ((ActivityMain) requireActivity()).navigatoon.navigateUp();
