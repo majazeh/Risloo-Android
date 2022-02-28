@@ -83,7 +83,7 @@ public class CryptoManager {
     }
 
     /*
-    ---------- Converts ----------
+    ---------- Convert ----------
     */
 
     private static PublicKey stringToPublicKey(String publicKey)
@@ -109,7 +109,7 @@ public class CryptoManager {
     }
 
     /*
-    ---------- Getters ----------
+    ---------- Getter ----------
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")

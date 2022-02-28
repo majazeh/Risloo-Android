@@ -19,7 +19,7 @@ public class SocialManager {
 
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + facebookID));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        } catch (Exception exception) {
+        } catch (Exception e) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + facebookID));
         }
 
@@ -34,7 +34,7 @@ public class SocialManager {
 
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=" + twitterID));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        } catch (Exception exception) {
+        } catch (Exception e) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/" + twitterID));
         }
 
@@ -49,7 +49,7 @@ public class SocialManager {
 
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=" + telegramID));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        } catch (Exception exception) {
+        } catch (Exception e) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/" + telegramID));
         }
 
@@ -64,7 +64,7 @@ public class SocialManager {
 
         try {
             context.startActivity(intent);
-        } catch (ActivityNotFoundException exception) {
+        } catch (ActivityNotFoundException e) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/" + instagramID));
             context.startActivity(intent);
         }

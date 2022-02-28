@@ -23,7 +23,7 @@ public class ToastManager {
         try {
             toast.getView().isShown();
             toast.setText(value);
-        } catch (Exception exception) {
+        } catch (Exception e) {
             toast = Toast.makeText(activity, value, Toast.LENGTH_LONG);
         }
 
@@ -34,7 +34,7 @@ public class ToastManager {
         try {
             toast.getView().isShown();
             toast.setText(value);
-        } catch (Exception exception) {
+        } catch (Exception e) {
             ToastSuccesBinding binding = ToastSuccesBinding.inflate(LayoutInflater.from(activity));
             View view = binding.getRoot();
 
@@ -53,7 +53,7 @@ public class ToastManager {
         try {
             toast.getView().isShown();
             toast.setText(value);
-        } catch (Exception exception) {
+        } catch (Exception e) {
             ToastErrorBinding binding = ToastErrorBinding.inflate(LayoutInflater.from(activity));
             View view = binding.getRoot();
 
@@ -72,7 +72,7 @@ public class ToastManager {
         try {
             toast.getView().isShown();
             toast.setText(value);
-        } catch (Exception exception) {
+        } catch (Exception e) {
             ToastDefaultBinding binding = ToastDefaultBinding.inflate(LayoutInflater.from(activity));
             View view = binding.getRoot();
 
