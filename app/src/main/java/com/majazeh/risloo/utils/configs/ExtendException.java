@@ -25,7 +25,7 @@ public class ExtendException extends onFailureException {
     }
 
     /*
-    ---------- Methods ----------
+    ---------- Funcs ----------
     */
 
     @Override
