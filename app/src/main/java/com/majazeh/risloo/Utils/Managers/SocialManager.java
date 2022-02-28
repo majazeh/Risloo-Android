@@ -13,6 +13,7 @@ public class SocialManager {
 
     public static void facebook(Context context, String facebookID) {
         Intent intent;
+
         try {
             context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
 
@@ -21,11 +22,13 @@ public class SocialManager {
         } catch (Exception exception) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + facebookID));
         }
+
         context.startActivity(intent);
     }
 
     public static void twitter(Context context, String twitterID) {
         Intent intent;
+
         try {
             context.getPackageManager().getPackageInfo("com.twitter.android", 0);
 
@@ -34,11 +37,13 @@ public class SocialManager {
         } catch (Exception exception) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/" + twitterID));
         }
+
         context.startActivity(intent);
     }
 
     public static void telegram(Context context, String telegramID) {
         Intent intent;
+
         try {
             context.getPackageManager().getPackageInfo("org.telegram.messenger", 0);
 
@@ -47,16 +52,19 @@ public class SocialManager {
         } catch (Exception exception) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/" + telegramID));
         }
+
         context.startActivity(intent);
     }
 
     public static void instagram(Context context, String instagramID) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/_u/" + instagramID));
+
         intent.setPackage("com.instagram.android");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
         try {
             context.startActivity(intent);
-        } catch (ActivityNotFoundException e) {
+        } catch (ActivityNotFoundException exception) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/" + instagramID));
             context.startActivity(intent);
         }
