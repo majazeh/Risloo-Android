@@ -1,14 +1,14 @@
 [
   {
-    "fa_title": "منقضی شده",
-    "en_title": "expired"
+    "en_title": "expired",
+    "fa_title": "منقضی شده"
   },
   {
-    "fa_title": "موفق",
-    "en_title": "success"
+    "en_title": "success",
+    "fa_title": "موفق"
   },
   {
-    "fa_title": "ناموفق",
-    "en_title": "fail"
+    "en_title": "fail",
+    "fa_title": "ناموفق"
   }
 ]

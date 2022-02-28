@@ -1,10 +1,10 @@
 [
   {
-    "fa_title": "حضوری",
-    "en_title": "face_to_face"
+    "en_title": "face_to_face",
+    "fa_title": "حضوری"
   },
   {
-    "fa_title": "مجازی",
-    "en_title": "virtual"
+    "en_title": "virtual",
+    "fa_title": "مجازی"
   }
 ]

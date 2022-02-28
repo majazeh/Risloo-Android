@@ -1,34 +1,34 @@
 [
   {
-    "fa_title": "مرتب شده با شماره سوال",
-    "en_title": "items_sort_key.png"
+    "en_title": "items_sort_key.png",
+    "fa_title": "مرتب شده با شماره سوال"
   },
   {
-    "fa_title": "مرتب شده با پاسخ ها",
-    "en_title": "items_sort_value.png"
+    "en_title": "items_sort_value.png",
+    "fa_title": "مرتب شده با پاسخ ها"
   },
   {
-    "fa_title": "مقیاس\u200Cهای روایی جدید",
-    "en_title": ".nv.png"
+    "en_title": ".nv.png",
+    "fa_title": "مقیاس\u200Cهای روایی جدید"
   },
   {
-    "fa_title": "مقیاس\u200Cهای بحرانی",
-    "en_title": ".critical.png"
+    "en_title": ".critical.png",
+    "fa_title": "مقیاس\u200Cهای بحرانی"
   },
   {
-    "fa_title": "مقیاس\u200Cهای تکمیلی",
-    "en_title": ".sup.png"
+    "en_title": ".sup.png",
+    "fa_title": "مقیاس\u200Cهای تکمیلی"
   },
   {
-    "fa_title": "مقیاس\u200Cهای هریس\u200Cلینگوز",
-    "en_title": ".hl.png"
+    "en_title": ".hl.png",
+    "fa_title": "مقیاس\u200Cهای هریس\u200Cلینگوز"
   },
   {
-    "fa_title": "مقیاس\u200Cهای Si",
-    "en_title": ".si.png"
+    "en_title": ".si.png",
+    "fa_title": "مقیاس\u200Cهای Si"
   },
   {
-    "fa_title": "مقیاس\u200Cهای محتوایی",
-    "en_title": ".content.png"
+    "en_title": ".content.png",
+    "fa_title": "مقیاس\u200Cهای محتوایی"
   }
 ]

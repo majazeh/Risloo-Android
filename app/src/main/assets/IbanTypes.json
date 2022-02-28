@@ -1,18 +1,18 @@
 [
   {
-    "fa_title": "تسویه آنی",
-    "en_title": "immediate"
+    "en_title": "immediate",
+    "fa_title": "تسویه آنی"
   },
   {
-    "fa_title": "زمانبندی: روزانه",
-    "en_title": "daily"
+    "en_title": "daily",
+    "fa_title": "زمانبندی: روزانه"
   },
   {
-    "fa_title": "زمانبندی: هفتگی",
-    "en_title": "weekly"
+    "en_title": "weekly",
+    "fa_title": "زمانبندی: هفتگی"
   },
   {
-    "fa_title": "زمانبندی: ماهانه",
-    "en_title": "monthly"
+    "en_title": "monthly",
+    "fa_title": "زمانبندی: ماهانه"
   }
 ]

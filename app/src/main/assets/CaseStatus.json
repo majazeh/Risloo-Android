@@ -1,22 +1,22 @@
 [
   {
+    "en_title": "without_case",
     "fa_title": "بدون پرونده",
-    "fa_title_2": "بدون پرونده",
-    "en_title": "without_case"
+    "fa_title_2": "بدون پرونده"
   },
   {
+    "en_title": "group",
     "fa_title": "گروهی",
-    "fa_title_2": "ساخت یک پرونده گروهی برای همه افراد",
-    "en_title": "group"
+    "fa_title_2": "ساخت یک پرونده گروهی برای همه افراد"
   },
   {
+    "en_title": "exist",
     "fa_title": "موجود",
-    "fa_title_2": "افزودن در پرونده انتخابی",
-    "en_title": "exist"
+    "fa_title_2": "افزودن در پرونده انتخابی"
   },
   {
+    "en_title": "personal",
     "fa_title": "شخصی",
-    "fa_title_2": "ساخت پرونده مجزا برای هر فرد",
-    "en_title": "personal"
+    "fa_title_2": "ساخت پرونده مجزا برای هر فرد"
   }
 ]

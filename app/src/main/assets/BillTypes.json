@@ -1,14 +1,14 @@
 [
   {
-    "fa_title": "نهایی",
-    "en_title": "final"
+    "en_title": "final",
+    "fa_title": "نهایی"
   },
   {
-    "fa_title": "بستانکار",
-    "en_title": "creditor"
+    "en_title": "creditor",
+    "fa_title": "بستانکار"
   },
   {
-    "fa_title": "بدهکار",
-    "en_title": "debtor"
+    "en_title": "debtor",
+    "fa_title": "بدهکار"
   }
 ]

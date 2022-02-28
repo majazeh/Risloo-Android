@@ -1,10 +1,10 @@
 [
   {
-    "fa_title": "با رمزگذاری",
-    "en_title": "with-encryption"
+    "en_title": "with-encryption",
+    "fa_title": "با رمزگذاری"
   },
   {
-    "fa_title": "بدون رمزگذاری",
-    "en_title": "without-encryption"
+    "en_title": "without-encryption",
+    "fa_title": "بدون رمزگذاری"
   }
 ]
