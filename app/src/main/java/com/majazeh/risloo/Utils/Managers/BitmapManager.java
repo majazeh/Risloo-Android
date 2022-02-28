@@ -19,28 +19,32 @@ import java.io.InputStream;
 public class BitmapManager {
 
     /*
-    ---------- Converts ----------
+    ---------- Convert ----------
     */
 
-    public static byte[] bitmapToByte(Bitmap image) {
+    public static byte[] bitmapToByte(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
         return byteArrayOutputStream.toByteArray();
     }
 
-    public static String bitmapToString(Bitmap image) {
+    public static String bitmapToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
         byte[] encodedByte = byteArrayOutputStream.toByteArray();
+
         return Base64.encodeToString(encodedByte, Base64.DEFAULT);
     }
 
-    public static Bitmap byteToBitmap(byte[] value) {
-        return BitmapFactory.decodeByteArray(value, 0, value.length);
+    public static Bitmap byteToBitmap(byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
-    public static Bitmap stringToBitmap(String value) {
-        byte[] decodedByte = Base64.decode(value, 0);
+    public static Bitmap stringToBitmap(String string) {
+        byte[] decodedByte = Base64.decode(string, 0);
+
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
@@ -55,6 +59,7 @@ public class BitmapManager {
     public static Bitmap uriToBitmap(Activity activity, Uri uri) {
         try {
             InputStream imageStream = activity.getContentResolver().openInputStream(uri);
+
             return BitmapFactory.decodeStream(imageStream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -63,52 +68,52 @@ public class BitmapManager {
     }
 
     /*
-    ---------- Funcs ----------
+    ---------- Public ----------
     */
 
-    public static Bitmap scaleToCenter(Bitmap image) {
-        int imageWidth = image.getWidth();
-        int imageHeight = image.getHeight();
+    public static Bitmap scaleToCenter(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
 
-        int newDimension = Math.min(imageWidth, imageHeight);
+        int dimension = Math.min(width, height);
 
-        if (newDimension > 960) {
-            newDimension = 960;
+        if (dimension > 960) {
+            dimension = 960;
         }
 
-        int left = (newDimension - imageWidth) / 2;
-        int top = (newDimension - imageHeight) / 2;
+        int left = (dimension - width) / 2;
+        int top = (dimension - height) / 2;
 
-        int right = left + imageWidth;
-        int bottom =top + imageHeight;
+        int right = left + width;
+        int bottom =top + height;
 
         RectF targetRect = new RectF(left, top, right, bottom);
+        Bitmap image = Bitmap.createBitmap(dimension, dimension, bitmap.getConfig());
 
-        Bitmap bitmap = Bitmap.createBitmap(newDimension, newDimension, image.getConfig());
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawBitmap(image, null, targetRect, null);
+        Canvas canvas = new Canvas(image);
+        canvas.drawBitmap(bitmap, null, targetRect, null);
 
-        return bitmap;
+        return image;
     }
 
-    public static Bitmap modifyOrientation(Bitmap image, String path) {
+    public static Bitmap modifyOrientation(Bitmap bitmap, String path) {
         try {
             ExifInterface exifInterface = new ExifInterface(path);
             int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
             switch (orientation) {
                 case ExifInterface.ORIENTATION_ROTATE_90:
-                    return rotateOrientation(image, 90);
+                    return rotateOrientation(bitmap, 90);
                 case ExifInterface.ORIENTATION_ROTATE_180:
-                    return rotateOrientation(image, 180);
+                    return rotateOrientation(bitmap, 180);
                 case ExifInterface.ORIENTATION_ROTATE_270:
-                    return rotateOrientation(image, 270);
+                    return rotateOrientation(bitmap, 270);
                 case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-                    return flipOrientation(image, true, false);
+                    return flipOrientation(bitmap, true, false);
                 case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-                    return flipOrientation(image, false, true);
+                    return flipOrientation(bitmap, false, true);
                 default:
-                    return image;
+                    return bitmap;
             }
 
         } catch (IOException e) {
@@ -117,24 +122,28 @@ public class BitmapManager {
         }
     }
 
-    private static Bitmap rotateOrientation(Bitmap image, float degrees) {
-        int imageWidth = image.getWidth();
-        int imageHeight = image.getHeight();
+    /*
+    ---------- Private ----------
+    */
+
+    private static Bitmap rotateOrientation(Bitmap bitmap, float degrees) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
 
         Matrix matrix = new Matrix();
         matrix.postRotate(degrees);
 
-        return Bitmap.createBitmap(image, 0, 0, imageWidth, imageHeight, matrix, true);
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
     }
 
-    private static Bitmap flipOrientation(Bitmap image, boolean horizontal, boolean vertical) {
-        int imageWidth = image.getWidth();
-        int imageHeight = image.getHeight();
+    private static Bitmap flipOrientation(Bitmap bitmap, boolean horizontal, boolean vertical) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
 
         Matrix matrix = new Matrix();
         matrix.preScale(horizontal ? -1 : 1, vertical ? -1 : 1);
 
-        return Bitmap.createBitmap(image, 0, 0, imageWidth, imageHeight, matrix, true);
+        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
     }
 
 }
