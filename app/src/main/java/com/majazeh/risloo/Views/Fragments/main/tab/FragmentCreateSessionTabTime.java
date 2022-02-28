@@ -163,19 +163,19 @@ public class FragmentCreateSessionTabTime extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), startTime, "startTime");
+            SheetManager.showSheetTime(requireActivity(), startTime, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), specifiedDate, "specifiedDate");
+            SheetManager.showSheetDate(requireActivity(), specifiedDate, "specifiedDate");
         }).widget(binding.specifiedDateIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), periodStartDate, "periodStartDate");
+            SheetManager.showSheetDate(requireActivity(), periodStartDate, "periodStartDate");
         }).widget(binding.periodStartDateIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), periodEndDate, "periodEndDate");
+            SheetManager.showSheetDate(requireActivity(), periodEndDate, "periodEndDate");
         }).widget(binding.periodEndDateIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {

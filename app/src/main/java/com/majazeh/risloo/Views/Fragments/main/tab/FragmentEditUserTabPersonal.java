@@ -125,7 +125,7 @@ public class FragmentEditUserTabPersonal extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), birthday, "birthday");
+            SheetManager.showSheetDate(requireActivity(), birthday, "birthday");
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {

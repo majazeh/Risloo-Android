@@ -272,7 +272,7 @@ public class ActivityMain extends AppCompatActivity {
                 navigatoon.navigateToFragmentPayments(null);
                 break;
             case "خروج":
-                SheetManager.showLogoutBottomSheet(ActivityMain.this, singleton.getUserModel());
+                SheetManager.showSheetLogout(ActivityMain.this, singleton.getUserModel());
                 break;
 
             // Drawer

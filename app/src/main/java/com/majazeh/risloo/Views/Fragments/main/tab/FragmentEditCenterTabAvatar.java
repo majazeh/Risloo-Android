@@ -77,7 +77,7 @@ public class FragmentEditCenterTabAvatar extends Fragment {
 
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showImageBottomSheet(requireActivity());
+            SheetManager.showSheetImage(requireActivity());
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         CustomClickView.onDelayedListener(() -> {

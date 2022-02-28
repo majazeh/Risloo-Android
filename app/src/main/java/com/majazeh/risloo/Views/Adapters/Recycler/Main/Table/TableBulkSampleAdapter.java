@@ -227,7 +227,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             IntentManager.test(activity, key);
                         } else {
                             DialogManager.dismissDialogLoading();
-                            SheetManager.showBulkSampleBottomSheet(activity, key, ((ActivityMain) activity).singleton.getUserModel(), bulkSampleModel);
+                            SheetManager.showSheetBulkSample(activity, key, ((ActivityMain) activity).singleton.getUserModel(), bulkSampleModel);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

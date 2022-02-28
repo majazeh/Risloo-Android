@@ -119,7 +119,7 @@ public class FragmentCreateCenter extends Fragment {
         }).widget(binding.managerIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showImageBottomSheet(requireActivity());
+            SheetManager.showSheetImage(requireActivity());
         }).widget(binding.avatarIncludeLayout.selectCircleImageView);
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {

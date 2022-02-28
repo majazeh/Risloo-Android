@@ -138,9 +138,9 @@ public class ActivitySplash extends AppCompatActivity {
 
     private void update(ClientModel model) {
         if (StringManager.compareVersionNames(PackageManager.versionNameNoSuffix(this), model.getForce()) == 1)
-            SheetManager.showVersionBottomSheet(this, model, "force");
+            SheetManager.showSheetVersion(this, model, "force");
         else if (StringManager.compareVersionNames(model.getForce(), model.getCurrent()) == 1)
-            SheetManager.showVersionBottomSheet(this, model, "current");
+            SheetManager.showSheetVersion(this, model, "current");
     }
 
     @Override

@@ -31,44 +31,78 @@ public class SheetManager {
     ---------- Show ----------
     */
 
-    public static void showAuthBottomSheet(Activity activity, String key, UserModel userModel) {
+    public static void showSheetAuth(Activity activity, String key, UserModel userModel) {
         sheetAuth = new SheetAuth();
-        sheetAuth.show(((FragmentActivity) activity).getSupportFragmentManager(), "authBottomSheet");
+
+        if (activity instanceof AppCompatActivity)
+            sheetAuth.show(((AppCompatActivity) activity).getSupportFragmentManager(), "sheetAuth");
+        else if (activity instanceof FragmentActivity)
+            sheetAuth.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetAuth");
+
         sheetAuth.setData(key, userModel);
     }
 
-    public static void showBulkSampleBottomSheet(Activity activity, String key, UserModel userModel, BulkSampleModel bulkSampleModel) {
+    public static void showSheetBulkSample(Activity activity, String key, UserModel userModel, BulkSampleModel bulkSampleModel) {
         sheetBulkSample = new SheetBulkSample();
-        sheetBulkSample.show(((FragmentActivity) activity).getSupportFragmentManager(), "bulkSampleBottomSheet");
+
+        if (activity instanceof AppCompatActivity)
+            sheetBulkSample.show(((AppCompatActivity) activity).getSupportFragmentManager(), "sheetBulkSample");
+        else if (activity instanceof FragmentActivity)
+            sheetBulkSample.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetBulkSample");
+
         sheetBulkSample.setData(key, userModel, bulkSampleModel);
     }
 
-    public static void showDateBottomSheet(Activity activity, String timestamp, String method) {
+    public static void showSheetDate(Activity activity, String timestamp, String method) {
         sheetDate = new SheetDate();
-        sheetDate.show(((FragmentActivity) activity).getSupportFragmentManager(), "dateBottomSheet");
+
+        if (activity instanceof AppCompatActivity)
+            sheetDate.show(((AppCompatActivity) activity).getSupportFragmentManager(), "sheetDate");
+        else if (activity instanceof FragmentActivity)
+            sheetDate.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetDate");
+
         sheetDate.setDate(timestamp, method);
     }
 
-    public static void showImageBottomSheet(Activity activity) {
+    public static void showSheetImage(Activity activity) {
         sheetImage = new SheetImage();
-        sheetImage.show(((FragmentActivity) activity).getSupportFragmentManager(), "imageBottomSheet");
+
+        if (activity instanceof AppCompatActivity)
+            sheetImage.show(((AppCompatActivity) activity).getSupportFragmentManager(), "sheetImage");
+        else if (activity instanceof FragmentActivity)
+            sheetImage.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetImage");
     }
 
-    public static void showLogoutBottomSheet(Activity activity, UserModel userModel) {
+    public static void showSheetLogout(Activity activity, UserModel userModel) {
         sheetLogout = new SheetLogout();
-        sheetLogout.show(((AppCompatActivity) activity).getSupportFragmentManager(), "logoutBottomSheet");
+
+        if (activity instanceof AppCompatActivity)
+            sheetLogout.show(((AppCompatActivity) activity).getSupportFragmentManager(), "sheetLogout");
+        else if (activity instanceof FragmentActivity)
+            sheetLogout.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetLogout");
+
         sheetLogout.setData(userModel);
     }
 
-    public static void showTimeBottomSheet(Activity activity, String timestamp, String method) {
+    public static void showSheetTime(Activity activity, String timestamp, String method) {
         sheetTime = new SheetTime();
-        sheetTime.show(((FragmentActivity) activity).getSupportFragmentManager(), "timeBottomSheet");
+
+        if (activity instanceof AppCompatActivity)
+            sheetTime.show(((AppCompatActivity) activity).getSupportFragmentManager(), "sheetTime");
+        else if (activity instanceof FragmentActivity)
+            sheetTime.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetTime");
+
         sheetTime.setTime(timestamp, method);
     }
 
-    public static void showVersionBottomSheet(Activity activity, ClientModel clientModel, String method) {
+    public static void showSheetVersion(Activity activity, ClientModel clientModel, String method) {
         sheetVersion = new SheetVersion();
-        sheetVersion.show(((FragmentActivity) activity).getSupportFragmentManager(), "versionBottomSheet");
+
+        if (activity instanceof AppCompatActivity)
+            sheetVersion.show(((AppCompatActivity) activity).getSupportFragmentManager(), "sheetVersion");
+        else if (activity instanceof FragmentActivity)
+            sheetVersion.show(((FragmentActivity) activity).getSupportFragmentManager(), "sheetVersion");
+
         sheetVersion.setData(clientModel, method);
     }
 
@@ -76,49 +110,49 @@ public class SheetManager {
     ---------- Dismiss ----------
     */
 
-    public static void dismissAuthBottomSheet() {
+    public static void dismissSheetAuth() {
         if (sheetAuth != null) {
             sheetAuth.dismiss();
             sheetAuth = null;
         }
     }
 
-    public static void dismissBulkSampleBottomSheet() {
+    public static void dismissSheetBulkSample() {
         if (sheetBulkSample != null) {
             sheetBulkSample.dismiss();
             sheetBulkSample = null;
         }
     }
 
-    public static void dismissDateBottomSheet() {
+    public static void dismissSheetDate() {
         if (sheetDate != null) {
             sheetDate.dismiss();
             sheetDate = null;
         }
     }
 
-    public static void dismissImageBottomSheet() {
+    public static void dismissSheetImage() {
         if (sheetImage != null) {
             sheetImage.dismiss();
             sheetImage = null;
         }
     }
 
-    public static void dismissLogoutBottomSheet() {
+    public static void dismissSheetLogout() {
         if (sheetLogout != null) {
             sheetLogout.dismiss();
             sheetLogout = null;
         }
     }
 
-    public static void dismissTimeBottomSheet() {
+    public static void dismissSheetTime() {
         if (sheetTime != null) {
             sheetTime.dismiss();
             sheetTime = null;
         }
     }
 
-    public static void dismissVersionBottomSheet() {
+    public static void dismissSheetVersion() {
         if (sheetVersion != null) {
             sheetVersion.dismiss();
             sheetVersion = null;
@@ -129,49 +163,49 @@ public class SheetManager {
     ---------- Getter ----------
     */
 
-    public static SheetAuth getAuthBottomSheet() {
+    public static SheetAuth getSheetAuth() {
         if (sheetAuth != null && sheetAuth.isVisible())
             return sheetAuth;
 
         return null;
     }
 
-    public static SheetBulkSample getBulkSampleBottomSheet() {
+    public static SheetBulkSample getSheetBulkSample() {
         if (sheetBulkSample != null && sheetBulkSample.isVisible())
             return sheetBulkSample;
 
         return null;
     }
 
-    public static SheetDate getDateBottomSheet() {
+    public static SheetDate getSheetDate() {
         if (sheetDate != null && sheetDate.isVisible())
             return sheetDate;
 
         return null;
     }
 
-    public static SheetImage getImageBottomSheet() {
+    public static SheetImage getSheetImage() {
         if (sheetImage != null && sheetImage.isVisible())
             return sheetImage;
 
         return null;
     }
 
-    public static SheetLogout getLogoutBottomSheet() {
+    public static SheetLogout getSheetLogout() {
         if (sheetLogout != null && sheetLogout.isVisible())
             return sheetLogout;
 
         return null;
     }
 
-    public static SheetTime getTimeBottomSheet() {
+    public static SheetTime getSheetTime() {
         if (sheetTime != null && sheetTime.isVisible())
             return sheetTime;
 
         return null;
     }
 
-    public static SheetVersion getVersionBottomSheet() {
+    public static SheetVersion getSheetVersion() {
         if (sheetVersion != null && sheetVersion.isVisible())
             return sheetVersion;
 

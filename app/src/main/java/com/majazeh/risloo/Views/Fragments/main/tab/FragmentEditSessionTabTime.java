@@ -72,11 +72,11 @@ public class FragmentEditSessionTabTime extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), startTime, "startTime");
+            SheetManager.showSheetTime(requireActivity(), startTime, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), startDate, "startDate");
+            SheetManager.showSheetDate(requireActivity(), startDate, "startDate");
         }).widget(binding.startDateIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {

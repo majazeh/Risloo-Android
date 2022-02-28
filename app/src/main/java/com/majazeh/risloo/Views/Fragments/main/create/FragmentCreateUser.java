@@ -190,7 +190,7 @@ public class FragmentCreateUser extends Fragment {
         }).widget(binding.passwordIncludeLayout.visibilityImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), birthday, "birthday");
+            SheetManager.showSheetDate(requireActivity(), birthday, "birthday");
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {

@@ -39,7 +39,7 @@ public class DialogManager {
         dialogLoading.setData(title);
     }
 
-    public static void showDialogPayment(Activity activity, String method, PaymentModel model) {
+    public static void showDialogPayment(Activity activity, String method, PaymentModel paymentModel) {
         dialogPayment = new DialogPayment();
 
         if (activity instanceof AppCompatActivity)
@@ -47,7 +47,7 @@ public class DialogManager {
         else if (activity instanceof FragmentActivity)
             dialogPayment.show(((FragmentActivity) activity).getSupportFragmentManager(), "paymentDialog");
 
-        dialogPayment.setData(method, model);
+        dialogPayment.setData(method, paymentModel);
     }
 
     public static void showDialogScheduleFilter(Activity activity, String method, ArrayList<TypeModel> rooms, ArrayList<TypeModel> status) {

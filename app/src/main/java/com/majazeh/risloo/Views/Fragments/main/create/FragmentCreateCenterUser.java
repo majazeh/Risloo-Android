@@ -282,7 +282,7 @@ public class FragmentCreateCenterUser extends Fragment {
                         AuthModel model = new AuthModel((JSONObject) object);
 
                         DialogManager.dismissDialogLoading();
-                        SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((ActivityMain) requireActivity()).singleton.getUserModel());
+                        SheetManager.showSheetAuth(requireActivity(), model.getKey(), ((ActivityMain) requireActivity()).singleton.getUserModel());
                     });
                 }
             }

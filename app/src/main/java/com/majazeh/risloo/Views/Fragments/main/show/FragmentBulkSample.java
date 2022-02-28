@@ -340,7 +340,7 @@ public class FragmentBulkSample extends Fragment {
                                 IntentManager.test(requireActivity(), key);
                             } else {
                                 DialogManager.dismissDialogLoading();
-                                SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((ActivityMain) requireActivity()).singleton.getUserModel(), bulkSampleModel);
+                                SheetManager.showSheetBulkSample(requireActivity(), key, ((ActivityMain) requireActivity()).singleton.getUserModel(), bulkSampleModel);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

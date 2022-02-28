@@ -293,19 +293,19 @@ public class FragmentEditSessionTabSession extends Fragment {
         // -------------------- BottomSheet
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), startAccurateTime, "accurateStartTime");
+            SheetManager.showSheetTime(requireActivity(), startAccurateTime, "accurateStartTime");
         }).widget(binding.startAccurateIncludeLayout.timeTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), startAccurateDate, "accurateStartDate");
+            SheetManager.showSheetDate(requireActivity(), startAccurateDate, "accurateStartDate");
         }).widget(binding.startAccurateIncludeLayout.dateTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), endAccurateTime, "accurateEndTime");
+            SheetManager.showSheetTime(requireActivity(), endAccurateTime, "accurateEndTime");
         }).widget(binding.endAccurateIncludeLayout.timeTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), endAccurateDate, "accurateEndDate");
+            SheetManager.showSheetDate(requireActivity(), endAccurateDate, "accurateEndDate");
         }).widget(binding.endAccurateIncludeLayout.dateTextView);
 
         // -------------------- Done
