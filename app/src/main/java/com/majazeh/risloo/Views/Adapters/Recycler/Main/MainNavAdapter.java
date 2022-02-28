@@ -87,7 +87,7 @@ public class MainNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private void setData(MainNavHolder holder, TypeModel model, int position) {
         try {
             holder.binding.nameTextView.setText(model.object.getString("title"));
-            holder.binding.descriptionTextView.setText(model.object.getString("description"));
+            holder.binding.descriptionTextView.setText(model.object.getString("desc"));
 
             holder.binding.iconImageView.setImageResource(model.object.getInt("image"));
 
@@ -176,7 +176,7 @@ public class MainNavAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public boolean areContentsTheSame(TypeModel oldTypeModel, TypeModel newTypeModel) {
         try {
             return newTypeModel.object.getString("title").equals(oldTypeModel.object.getString("title"))
-                    && newTypeModel.object.getString("description").equals(oldTypeModel.object.getString("description"))
+                    && newTypeModel.object.getString("desc").equals(oldTypeModel.object.getString("desc"))
                     && newTypeModel.object.getInt("image") == oldTypeModel.object.getInt("image");
         } catch (JSONException e) {
             e.printStackTrace();
