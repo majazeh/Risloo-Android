@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.views.fragments.main.create.FragmentCreateSession;
 import com.majazeh.risloo.databinding.FragmentCreateSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -62,8 +63,8 @@ public class FragmentCreateSessionTabTime extends Fragment {
 
         current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
-        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.startTimeIncludeLayout.headerTextView.setText(SpannableManager.foregroundColorSize(getResources().getString(R.string.CreateSessionTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.durationIncludeLayout.headerTextView.setText(SpannableManager.foregroundColorSize(getResources().getString(R.string.CreateSessionTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.dateTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimeDateTypeHeader));
         binding.specifiedDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimeSpecifiedDateHeader));
         binding.patternDaysIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimePatternDaysHeader));

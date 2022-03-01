@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderPaymentHolder;
@@ -94,7 +95,7 @@ public class TablePaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void setWidget(HeaderPaymentHolder holder) {
-        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.PaymentAdapterLeft), 11, 18, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.leftTextView.setText(SpannableManager.foregroundColorSize(activity.getResources().getString(R.string.PaymentAdapterLeft), 11, 18, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     private void listener(TablePaymentHolder holder, PaymentModel model) {

@@ -26,6 +26,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -214,7 +215,7 @@ public class ActivityTest extends AppCompatActivity {
 
         if (!sampleModel.getEdition().equals("")) {
             String title = binding.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getEdition());
-            binding.titleTextView.setText(StringManager.foregroundSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.coolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
+            binding.titleTextView.setText(SpannableManager.foregroundColorSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.coolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
         }
 
         if (sampleForm.getForms().length() != 0) {
@@ -387,7 +388,7 @@ public class ActivityTest extends AppCompatActivity {
         AnimateManager.animateProgressBarValue(binding.indexProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
 
         String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
-        binding.indexTextView.setText(StringManager.foregroundSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
+        binding.indexTextView.setText(SpannableManager.foregroundColorSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
         userSelect = false;
 

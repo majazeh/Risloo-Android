@@ -16,6 +16,7 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -62,8 +63,8 @@ public class FragmentCreateScheduleTabTime extends Fragment {
 
         current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
-        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.startTimeIncludeLayout.headerTextView.setText(SpannableManager.foregroundColorSize(getResources().getString(R.string.CreateScheduleTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.durationIncludeLayout.headerTextView.setText(SpannableManager.foregroundColorSize(getResources().getString(R.string.CreateScheduleTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.dateTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabTimeDateTypeHeader));
         binding.specifiedDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabTimeSpecifiedDateHeader));
         binding.patternDaysIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabTimePatternDaysHeader));

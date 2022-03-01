@@ -14,10 +14,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.utils.managers.AnimateManager;
-import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.databinding.FragmentTestDescriptiveBinding;
+import com.majazeh.risloo.utils.managers.AnimateManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
+import com.majazeh.risloo.views.activities.ActivityTest;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 
@@ -129,7 +129,7 @@ public class FragmentTestDescriptive extends Fragment {
         int endIndex = String.valueOf(availableChar).length();
 
         String value = availableChar + " / " + "255";
-        binding.answerEditText.countTextView.setText(StringManager.foregroundSize(value, 0, endIndex, getResources().getColor(R.color.coolGray700), (int) getResources().getDimension(R.dimen._11ssp)));
+        binding.answerEditText.countTextView.setText(SpannableManager.foregroundColorSize(value, 0, endIndex, getResources().getColor(R.color.coolGray700), (int) getResources().getDimension(R.dimen._11ssp)));
     }
 
     private void setAnimation() {

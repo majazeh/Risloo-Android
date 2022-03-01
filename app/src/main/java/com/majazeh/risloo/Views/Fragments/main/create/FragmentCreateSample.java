@@ -22,6 +22,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -368,7 +369,7 @@ public class FragmentCreateSample extends Fragment {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
         }
 
-        binding.scaleGuideLayout.guideTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.CreateSampleFragmentScaleGuide), 220, 228, assessmentLinkSpan));
+        binding.scaleGuideLayout.guideTextView.setText(SpannableManager.clickable(requireActivity().getResources().getString(R.string.CreateSampleFragmentScaleGuide), 220, 228, assessmentLinkSpan));
     }
 
     private void setData(ScaleModel model) {
@@ -428,7 +429,7 @@ public class FragmentCreateSample extends Fragment {
             String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
             String secondaryText = DateManager.jalDayName(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
-            binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.coolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
+            binding.sessionIncludeLayout.primaryTextView.setText(SpannableManager.foregroundColorSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.coolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
             binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
         }
 
@@ -567,7 +568,7 @@ public class FragmentCreateSample extends Fragment {
                         String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
                         String secondaryText = DateManager.jalDayName(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
-                        binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.coolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
+                        binding.sessionIncludeLayout.primaryTextView.setText(SpannableManager.foregroundColorSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.coolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
                         binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
                     } else if (sessionId.equals(model.getId())) {
                         sessionId = "";

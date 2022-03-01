@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderBalanceHolder;
@@ -98,7 +99,7 @@ public class TableBalanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void setWidget(HeaderBalanceHolder holder) {
-        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BalanceAdapterAmount), 10, 17, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.amountTextView.setText(SpannableManager.foregroundColorSize(activity.getResources().getString(R.string.BalanceAdapterAmount), 10, 17, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     @SuppressLint("ClickableViewAccessibility")

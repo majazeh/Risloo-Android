@@ -12,12 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentCommissionsBinding;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.StringManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableCommissionAdapter;
-import com.majazeh.risloo.databinding.FragmentCommissionsBinding;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -64,7 +64,7 @@ public class FragmentCommissions extends Fragment {
         binding.contributionHeaderLayout.titleTextView.setText(getResources().getString(R.string.CommissionsFragmentContributionHeader));
         binding.contributionHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.emerald600));
 
-        binding.shareIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CommissionsFragmentContributionShareHeader), 10, 16, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.shareIncludeLayout.headerTextView.setText(SpannableManager.foregroundColorSize(getResources().getString(R.string.CommissionsFragmentContributionShareHeader), 10, 16, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.shareIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CommissionsFragmentContributionShareHint));
 
         InitManager.txtTextColorBackground(binding.contributionTextView.getRoot(), getResources().getString(R.string.CommissionsFragmentContributionButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);

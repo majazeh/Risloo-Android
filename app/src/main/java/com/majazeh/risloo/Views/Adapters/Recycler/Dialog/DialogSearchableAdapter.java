@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.adapters.holder.dialog.DialogSearchableHolder;
 import com.majazeh.risloo.views.fragments.main.create.FragmentCreateRoomUser;
@@ -183,7 +184,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                     String primaryText = model.getId() + " " + "(" + SelectionManager.getSessionStatus(activity, "fa", model.getStatus()) + ")";
                     String secondaryText = DateManager.jalDayName(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
-                    holder.binding.titleTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), activity.getResources().getColor(R.color.coolGray600), (int) activity.getResources().getDimension(R.dimen._8ssp)));
+                    holder.binding.titleTextView.setText(SpannableManager.foregroundColorSize(primaryText, 10, primaryText.length(), activity.getResources().getColor(R.color.coolGray600), (int) activity.getResources().getDimension(R.dimen._8ssp)));
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
                     holder.binding.subTextView.setText(secondaryText);

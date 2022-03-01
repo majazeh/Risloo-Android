@@ -28,6 +28,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -181,7 +182,7 @@ public class FragmentAuthPin extends Fragment {
 
     private void startCountDownTimer() {
         binding.guideIncludeLayout.guideTextView.setText(StringManager.replace(requireActivity().getResources().getString(R.string.PinFragmentGuide), "09123456789", mobile));
-        binding.timerViewFlipper.resendTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
+        binding.timerViewFlipper.resendTextView.setText(SpannableManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
 
         countDownTimer.start();
     }

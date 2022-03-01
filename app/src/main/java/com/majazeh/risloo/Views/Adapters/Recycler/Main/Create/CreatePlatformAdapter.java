@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -135,7 +136,7 @@ public class CreatePlatformAdapter extends RecyclerView.Adapter<CreatePlatformHo
 
     private void setData(CreatePlatformHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType())) ;
-        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.coolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.titleTextView.setText(SpannableManager.foregroundColorSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.coolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         setIdentifier(holder, model.getId(), model.getIdentifier());
 

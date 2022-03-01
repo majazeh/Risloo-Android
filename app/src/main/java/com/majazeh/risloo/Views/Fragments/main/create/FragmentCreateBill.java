@@ -19,6 +19,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -75,7 +76,7 @@ public class FragmentCreateBill extends Fragment {
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateBillFragmentReferenceHeader));
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateBillFragmentTypeHeader));
         binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateBillFragmentTreasuryHeader));
-        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateBillFragmentAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.amountIncludeLayout.headerTextView.setText(SpannableManager.foregroundColorSize(getResources().getString(R.string.CreateBillFragmentAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
         InitManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.BillStatus);

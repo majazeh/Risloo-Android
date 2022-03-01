@@ -20,6 +20,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.TreasuryManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -97,7 +98,7 @@ public class FragmentBanks extends Fragment {
         binding.weekdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleWeekdayHeader));
         binding.monthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleMonthDayHeader));
 
-        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.BanksFragmentSettleAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.amountIncludeLayout.headerTextView.setText(SpannableManager.foregroundColorSize(getResources().getString(R.string.BanksFragmentSettleAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
         binding.scheduleGuideLayout.guideTextView.setText(getResources().getString(R.string.BanksFragmentSettleScheduleGuide));
