@@ -90,7 +90,7 @@ public class FragmentCreateRoom extends Fragment {
         TypeModel typeModel = FragmentCreateRoomArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel"))
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("UserModel"))
                 setData((UserModel) typeModel);
         }
     }

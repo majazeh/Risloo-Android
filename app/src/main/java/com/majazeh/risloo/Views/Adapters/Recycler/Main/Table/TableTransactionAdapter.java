@@ -112,17 +112,17 @@ public class TableTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreatedAt()), " "));
 
-        holder.binding.creditorTextView.setText(StringManager.separate(model.getCredit()));
-        holder.binding.debtorTextView.setText(StringManager.separate(model.getDebt()));
+        holder.binding.creditorTextView.setText(StringManager.seperatePlus(model.getCredit()));
+        holder.binding.debtorTextView.setText(StringManager.seperatePlus(model.getDebt()));
 
         if (model.getBalance().equals("0")) {
             holder.binding.leftTextView.setText(String.valueOf(model.getBalance()));
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.coolGray700));
         } else if (String.valueOf(model.getBalance()).contains("-")) {
-            holder.binding.leftTextView.setText(StringManager.minusSeparate(String.valueOf(model.getBalance())));
+            holder.binding.leftTextView.setText(StringManager.seperateMinus(String.valueOf(model.getBalance())));
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.red600));
         } else {
-            holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getBalance())));
+            holder.binding.leftTextView.setText(StringManager.seperatePlus(String.valueOf(model.getBalance())));
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.emerald600));
         }
     }

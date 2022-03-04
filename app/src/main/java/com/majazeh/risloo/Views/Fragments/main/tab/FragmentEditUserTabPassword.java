@@ -285,7 +285,7 @@ public class FragmentEditUserTabPassword extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((ActivityMain) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), newPassword);
+                            ((ActivityMain) requireActivity()).singleton.regist(StringManager.adjustMobile(mobile), newPassword);
                             resetInputs();
 
                             DialogManager.dismissDialogLoading();

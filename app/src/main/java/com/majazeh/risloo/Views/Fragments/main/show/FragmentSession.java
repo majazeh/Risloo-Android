@@ -194,10 +194,10 @@ public class FragmentSession extends Fragment {
     private void setArgs() {
         TypeModel typeModel = FragmentSessionArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel")) {
+        if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("ScheduleModel")) {
             scheduleModel = (ScheduleModel) typeModel;
             setData(scheduleModel);
-        } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+        } else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("SessionModel")) {
             sessionModel = (SessionModel) typeModel;
             setData(sessionModel);
         }

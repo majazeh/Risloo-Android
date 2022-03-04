@@ -229,10 +229,10 @@ public class DialogSearchable extends AppCompatDialogFragment {
         if (current instanceof FragmentCreateCase) {
             switch (method) {
                 case "references":
-                    if (StringManager.substring(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
+                    if (StringManager.suffix(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
                         CenterModel centerModel = (CenterModel) ((FragmentCreateCase) current).typeModel;
                         data.put("id", centerModel.getId());
-                    } else if (StringManager.substring(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
+                    } else if (StringManager.suffix(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
                         RoomModel roomModel = (RoomModel) ((FragmentCreateCase) current).typeModel;
                         data.put("id", roomModel.getId());
                     }
@@ -240,10 +240,10 @@ public class DialogSearchable extends AppCompatDialogFragment {
                     data.put("usage", "create_case");
                     break;
                 case "tags":
-                    if (StringManager.substring(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
+                    if (StringManager.suffix(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("CenterModel")) {
                         CenterModel centerModel = (CenterModel) ((FragmentCreateCase) current).typeModel;
                         data.put("region", centerModel.getId());
-                    } else if (StringManager.substring(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
+                    } else if (StringManager.suffix(((FragmentCreateCase) current).typeModel.getClass().getName(), '.').equals("RoomModel")) {
                         RoomModel roomModel = (RoomModel) ((FragmentCreateCase) current).typeModel;
                         data.put("region", roomModel.getCenter().getId());
                     }

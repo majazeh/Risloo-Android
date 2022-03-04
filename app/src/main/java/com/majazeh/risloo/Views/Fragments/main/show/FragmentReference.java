@@ -121,10 +121,10 @@ public class FragmentReference extends Fragment {
     private void setArgs() {
         TypeModel centerModel = FragmentReferenceArgs.fromBundle(getArguments()).getCenterModel();
 
-        if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel")) {
+        if (StringManager.suffix(centerModel.getClass().getName(), '.').equals("CenterModel")) {
             this.centerModel = (CenterModel) centerModel;
             setData(this.centerModel);
-        } else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel")) {
+        } else if (StringManager.suffix(centerModel.getClass().getName(), '.').equals("RoomModel")) {
             this.roomModel = (RoomModel) centerModel;
             setData(this.roomModel);
         }

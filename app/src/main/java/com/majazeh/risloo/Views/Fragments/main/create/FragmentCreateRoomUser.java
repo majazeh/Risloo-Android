@@ -97,7 +97,7 @@ public class FragmentCreateRoomUser extends Fragment {
         TypeModel typeModel = FragmentCreateRoomUserArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel")) {
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("RoomModel")) {
                 roomModel = (RoomModel) typeModel;
                 setData(roomModel);
             }

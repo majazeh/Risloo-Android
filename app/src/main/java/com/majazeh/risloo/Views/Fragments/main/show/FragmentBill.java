@@ -93,7 +93,7 @@ public class FragmentBill extends Fragment {
         }
 
         if (model.getAmount() != 0) {
-            binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())) + " " + getResources().getString(R.string.MainToman));
+            binding.amountTextView.setText(StringManager.seperatePlus(String.valueOf(model.getAmount())) + " " + getResources().getString(R.string.MainToman));
         } else {
             binding.amountTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
         }

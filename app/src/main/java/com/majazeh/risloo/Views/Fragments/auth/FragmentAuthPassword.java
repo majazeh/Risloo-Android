@@ -213,7 +213,7 @@ public class FragmentAuthPassword extends Fragment {
                             }
                         } else {
                             ((ActivityAuth) requireActivity()).singleton.login(model);
-                            ((ActivityAuth) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), password);
+                            ((ActivityAuth) requireActivity()).singleton.regist(StringManager.adjustMobile(mobile), password);
 
                             IntentManager.main(requireActivity());
                         }

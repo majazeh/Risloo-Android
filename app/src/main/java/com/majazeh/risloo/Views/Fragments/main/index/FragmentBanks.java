@@ -165,7 +165,7 @@ public class FragmentBanks extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!s.toString().equals("")) {
-                    String money = StringManager.separate(String.valueOf(s)) + " " + getResources().getString(R.string.MainToman);
+                    String money = StringManager.seperatePlus(String.valueOf(s)) + " " + getResources().getString(R.string.MainToman);
                     binding.amountIncludeLayout.footerTextView.setText(money);
                 } else {
                     String money = "0" + " " + getResources().getString(R.string.MainToman);
@@ -364,7 +364,7 @@ public class FragmentBanks extends Fragment {
 
     private void setData(UserModel model) {
         if (!TreasuryManager.getWallet(model.getTreasuries()).equals("0")) {
-            String value = StringManager.separate(TreasuryManager.getWallet(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
+            String value = StringManager.seperatePlus(TreasuryManager.getWallet(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
             binding.totalIncludeLayout.amountTextView.setText(value);
         } else {
             binding.totalIncludeLayout.amountTextView.setText("");
@@ -474,7 +474,7 @@ public class FragmentBanks extends Fragment {
             amount = value;
             binding.amountIncludeLayout.inputEditText.setText(amount);
 
-            String money = StringManager.separate(amount) + " " + getResources().getString(R.string.MainToman);
+            String money = StringManager.seperatePlus(amount) + " " + getResources().getString(R.string.MainToman);
             binding.amountIncludeLayout.footerTextView.setText(money);
         }
     }

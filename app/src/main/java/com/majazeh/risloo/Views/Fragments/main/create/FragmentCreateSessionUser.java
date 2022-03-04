@@ -164,7 +164,7 @@ public class FragmentCreateSessionUser extends Fragment {
         TypeModel typeModel = FragmentCreateSessionUserArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel")) {
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("SessionModel")) {
                 sessionModel = (SessionModel) typeModel;
                 setData(sessionModel);
             }

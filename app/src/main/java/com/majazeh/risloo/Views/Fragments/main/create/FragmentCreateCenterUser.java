@@ -172,7 +172,7 @@ public class FragmentCreateCenterUser extends Fragment {
         TypeModel typeModel = FragmentCreateCenterUserArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel")) {
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CenterModel")) {
                 centerModel = (CenterModel) typeModel;
                 setData(centerModel);
             }

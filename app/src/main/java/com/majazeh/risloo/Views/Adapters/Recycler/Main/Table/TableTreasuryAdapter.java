@@ -120,10 +120,10 @@ public class TableTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
             holder.binding.leftTextView.setText(String.valueOf(model.getBalance()));
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.coolGray700));
         } else if (String.valueOf(model.getBalance()).contains("-")) {
-            holder.binding.leftTextView.setText(StringManager.minusSeparate(String.valueOf(model.getBalance())));
+            holder.binding.leftTextView.setText(StringManager.seperateMinus(String.valueOf(model.getBalance())));
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.red600));
         } else {
-            holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getBalance())));
+            holder.binding.leftTextView.setText(StringManager.seperatePlus(String.valueOf(model.getBalance())));
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.emerald600));
         }
 

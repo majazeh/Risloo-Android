@@ -95,10 +95,10 @@ public class FragmentTreasury extends Fragment {
                 binding.amountTextView.setText(model.getBalance() + " " + getResources().getString(R.string.MainToman));
                 binding.amountTextView.setTextColor(getResources().getColor(R.color.coolGray700));
             } else if (String.valueOf(model.getBalance()).contains("-")) {
-                binding.amountTextView.setText(StringManager.minusSeparate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
+                binding.amountTextView.setText(StringManager.seperateMinus(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
                 binding.amountTextView.setTextColor(getResources().getColor(R.color.red600));
             } else {
-                binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
+                binding.amountTextView.setText(StringManager.seperatePlus(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
                 binding.amountTextView.setTextColor(getResources().getColor(R.color.emerald600));
             }
 

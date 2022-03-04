@@ -218,7 +218,7 @@ public class ActivityMain extends AppCompatActivity {
             }
 
             if (!TreasuryManager.getWalletAndGift(model.getTreasuries()).equals("0")) {
-                String value = StringManager.separate(TreasuryManager.getWalletAndGift(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
+                String value = StringManager.seperatePlus(TreasuryManager.getWalletAndGift(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
 
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(value);
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.VISIBLE);

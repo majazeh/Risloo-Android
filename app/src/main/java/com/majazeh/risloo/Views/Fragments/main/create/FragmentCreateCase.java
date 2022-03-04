@@ -140,9 +140,9 @@ public class FragmentCreateCase extends Fragment {
         typeModel = FragmentCreateCaseArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CenterModel"))
                 setData((CenterModel) typeModel);
-            else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+            else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("RoomModel"))
                 setData((RoomModel) typeModel);
 
         } else {

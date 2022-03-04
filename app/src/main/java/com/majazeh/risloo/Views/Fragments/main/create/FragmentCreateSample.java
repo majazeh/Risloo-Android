@@ -341,7 +341,7 @@ public class FragmentCreateSample extends Fragment {
         TypeModel typeModel = FragmentCreateSampleArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            switch (StringManager.substring(typeModel.getClass().getName(), '.')) {
+            switch (StringManager.suffix(typeModel.getClass().getName(), '.')) {
                 case "ScaleModel":
                     setData((ScaleModel) typeModel);
                     break;

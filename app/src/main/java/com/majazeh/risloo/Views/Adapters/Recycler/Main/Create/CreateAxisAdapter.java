@@ -131,7 +131,7 @@ public class CreateAxisAdapter extends RecyclerView.Adapter<CreateAxisHolder> {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!s.toString().equals("")) {
-                    String money = StringManager.separate(String.valueOf(s)) + " " + activity.getResources().getString(R.string.MainToman);
+                    String money = StringManager.seperatePlus(String.valueOf(s)) + " " + activity.getResources().getString(R.string.MainToman);
                     holder.binding.footerTextView.setText(money);
                 } else {
                     String money = "0" + " " + activity.getResources().getString(R.string.MainToman);
@@ -149,7 +149,7 @@ public class CreateAxisAdapter extends RecyclerView.Adapter<CreateAxisHolder> {
     private void setData(CreateAxisHolder holder, int position) {
         holder.binding.headerTextView.setText(activity.getResources().getString(R.string.AppSessionPrice) + " " + ids.get(position));
         holder.binding.inputEditText.setText(amounts.get(position));
-        holder.binding.footerTextView.setText(StringManager.separate(amounts.get(position)) + " " + activity.getResources().getString(R.string.MainToman));
+        holder.binding.footerTextView.setText(StringManager.seperatePlus(amounts.get(position)) + " " + activity.getResources().getString(R.string.MainToman));
     }
 
 }

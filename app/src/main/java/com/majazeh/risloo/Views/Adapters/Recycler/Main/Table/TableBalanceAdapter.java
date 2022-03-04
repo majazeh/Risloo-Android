@@ -155,10 +155,10 @@ public class TableBalanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             holder.binding.amountTextView.setText(amount);
             holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.coolGray700));
         } else if (amount.contains("-")) {
-            holder.binding.amountTextView.setText(StringManager.minusSeparate(amount));
+            holder.binding.amountTextView.setText(StringManager.seperateMinus(amount));
             holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.red600));
         } else {
-            holder.binding.amountTextView.setText(StringManager.separate(amount));
+            holder.binding.amountTextView.setText(StringManager.seperatePlus(amount));
             holder.binding.amountTextView.setTextColor(activity.getResources().getColor(R.color.emerald600));
         }
 

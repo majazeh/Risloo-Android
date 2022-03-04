@@ -235,9 +235,9 @@ public class BreadCrumb {
             case R.id.fragmentEditSession: {
                 TypeModel typeModel = FragmentEditSessionArgs.fromBundle(arguments).getTypeModel();
 
-                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel"))
+                if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("ScheduleModel"))
                     sessionType = "schedule";
-                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+                else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("SessionModel"))
                     sessionType = "session";
 
                 setModels(typeModel);
@@ -273,9 +273,9 @@ public class BreadCrumb {
             case R.id.fragmentClientReports: {
                 TypeModel typeModel = FragmentClientReportsArgs.fromBundle(arguments).getTypeModel();
 
-                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
+                if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CaseModel"))
                     clientReportsType = "case";
-                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+                else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("SessionModel"))
                     clientReportsType = "session";
 
                 setModels(typeModel);
@@ -315,9 +315,9 @@ public class BreadCrumb {
             case R.id.fragmentCenterAccounting: {
                 TypeModel typeModel = FragmentCenterAccountingArgs.fromBundle(arguments).getTypeModel();
 
-                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+                if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CenterModel"))
                     roomType = "counseling_center";
-                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+                else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("RoomModel"))
                     roomType = "personal_clinic";
 
                 setModels(typeModel);
@@ -334,9 +334,9 @@ public class BreadCrumb {
                 if (((ActivityMain) activity).singleton.getUserModel().getId().equals(userModel.getUserId())) {
                     TypeModel centerModel = FragmentReferenceArgs.fromBundle(arguments).getCenterModel();
 
-                    if (StringManager.substring(centerModel.getClass().getName(), '.').equals("CenterModel"))
+                    if (StringManager.suffix(centerModel.getClass().getName(), '.').equals("CenterModel"))
                         referenceType = "center";
-                    else if (StringManager.substring(centerModel.getClass().getName(), '.').equals("RoomModel"))
+                    else if (StringManager.suffix(centerModel.getClass().getName(), '.').equals("RoomModel"))
                         referenceType = "room";
 
                     setModels(centerModel);
@@ -351,9 +351,9 @@ public class BreadCrumb {
             } case R.id.fragmentRoom: {
                 TypeModel typeModel = FragmentRoomArgs.fromBundle(arguments).getTypeModel();
 
-                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+                if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CenterModel"))
                     roomType = "personal_clinic";
-                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+                else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("RoomModel"))
                     roomType = "room";
 
                 setModels(typeModel);
@@ -364,9 +364,9 @@ public class BreadCrumb {
             case R.id.fragmentSession: {
                 TypeModel typeModel = FragmentSessionArgs.fromBundle(arguments).getTypeModel();
 
-                if (StringManager.substring(typeModel.getClass().getName(), '.').equals("ScheduleModel"))
+                if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("ScheduleModel"))
                     sessionType = "schedule";
-                else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+                else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("SessionModel"))
                     sessionType = "session";
 
                 setModels(typeModel);
@@ -551,7 +551,7 @@ public class BreadCrumb {
     }
 
     private void setModels(TypeModel typeModel) {
-        switch (StringManager.substring(typeModel.getClass().getName(), '.')) {
+        switch (StringManager.suffix(typeModel.getClass().getName(), '.')) {
             case "BillingModel":
                 billingModel = (BillingModel) typeModel;
                 break;

@@ -73,7 +73,7 @@ public class DialogPayment extends AppCompatDialogFragment {
         }
 
         if (paymentModel.getAmount() != 0) {
-            String amount = StringManager.separate(String.valueOf(paymentModel.getAmount())) + " " + getResources().getString(R.string.MainToman);
+            String amount = StringManager.seperatePlus(String.valueOf(paymentModel.getAmount())) + " " + getResources().getString(R.string.MainToman);
             binding.amountTextView.setText(amount);
         } else {
             String amount = "0" + " " + getResources().getString(R.string.MainToman);

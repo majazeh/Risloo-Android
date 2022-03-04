@@ -78,10 +78,10 @@ public class FragmentEditCenter extends Fragment {
     private void setArgs() {
         TypeModel typeModel = FragmentEditCenterArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel")) {
+        if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CenterModel")) {
             centerModel = (CenterModel) typeModel;
             setData(centerModel);
-        } else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel")) {
+        } else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("RoomModel")) {
             roomModel = (RoomModel) typeModel;
             setData(roomModel);
         }

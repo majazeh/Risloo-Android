@@ -114,7 +114,7 @@ public class TableTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         else if (model.getDebtor() != null)
             holder.binding.debtorTextView.setText(model.getDebtor().getTitle());
 
-        holder.binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
+        holder.binding.amountTextView.setText(StringManager.seperatePlus(String.valueOf(model.getAmount())));
     }
 
 }

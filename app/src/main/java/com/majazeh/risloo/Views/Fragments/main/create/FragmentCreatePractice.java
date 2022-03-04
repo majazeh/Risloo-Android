@@ -107,7 +107,7 @@ public class FragmentCreatePractice extends Fragment {
         TypeModel typeModel = FragmentCreatePracticeArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("SessionModel"))
                 setData((SessionModel) typeModel);
         }
     }

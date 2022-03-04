@@ -106,7 +106,7 @@ public class TablePaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void setData(TablePaymentHolder holder, PaymentModel model) {
         holder.binding.serialTextView.setText(model.getId());
-        holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
+        holder.binding.leftTextView.setText(StringManager.seperatePlus(String.valueOf(model.getAmount())));
 
         if (model.getTreasury() != null)
             holder.binding.treasuryTextView.setText(model.getTreasury().getTitle());

@@ -143,7 +143,7 @@ public class FragmentPayments extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!s.toString().equals("")) {
-                    String money = StringManager.separate(String.valueOf(s)) + " " + getResources().getString(R.string.MainToman);
+                    String money = StringManager.seperatePlus(String.valueOf(s)) + " " + getResources().getString(R.string.MainToman);
                     binding.amountIncludeLayout.footerTextView.setText(money);
                 } else {
                     String money = "0" + " " + getResources().getString(R.string.MainToman);
@@ -190,7 +190,7 @@ public class FragmentPayments extends Fragment {
         TypeModel typeModel = FragmentPaymentsArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("PaymentModel"))
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("PaymentModel"))
                 setData((PaymentModel) typeModel);
         }
     }
@@ -200,7 +200,7 @@ public class FragmentPayments extends Fragment {
             amount = String.valueOf(model.getAmount());
             binding.amountIncludeLayout.inputEditText.setText(amount);
 
-            String money = StringManager.separate(amount) + " " + getResources().getString(R.string.MainToman);
+            String money = StringManager.seperatePlus(amount) + " " + getResources().getString(R.string.MainToman);
             binding.amountIncludeLayout.footerTextView.setText(money);
         }
 
@@ -229,7 +229,7 @@ public class FragmentPayments extends Fragment {
 
             if (model != null && model.isCreditable() && model.isMyTreasury() && !model.getSymbol().equals("gift")) {
                 titles.add(model.getTitle());
-                balances.add(getResources().getString(R.string.PaymentsFragmentChargeBalanceHint) + " " + StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
+                balances.add(getResources().getString(R.string.PaymentsFragmentChargeBalanceHint) + " " + StringManager.seperatePlus(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman));
                 treasuryIds.add(model.getId());
             }
         }

@@ -115,7 +115,7 @@ public class FragmentCreateBill extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!s.toString().equals("")) {
-                    String money = StringManager.separate(String.valueOf(s)) + " " + getResources().getString(R.string.MainToman);
+                    String money = StringManager.seperatePlus(String.valueOf(s)) + " " + getResources().getString(R.string.MainToman);
                     binding.amountIncludeLayout.footerTextView.setText(money);
                 } else {
                     String money = "0" + " " + getResources().getString(R.string.MainToman);
@@ -218,7 +218,7 @@ public class FragmentCreateBill extends Fragment {
         TypeModel typeModel = FragmentCreateBillArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("SessionModel"))
                 setData((SessionModel) typeModel);
         }
     }

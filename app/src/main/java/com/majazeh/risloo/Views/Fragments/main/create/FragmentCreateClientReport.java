@@ -129,9 +129,9 @@ public class FragmentCreateClientReport extends Fragment {
         TypeModel typeModel = FragmentCreateClientReportArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CaseModel"))
                 setData((CaseModel) typeModel);
-            else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+            else if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("SessionModel"))
                 setData((SessionModel) typeModel);
         }
     }

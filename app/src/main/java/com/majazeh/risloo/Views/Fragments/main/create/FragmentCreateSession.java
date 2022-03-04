@@ -81,7 +81,7 @@ public class FragmentCreateSession extends Fragment {
         TypeModel typeModel = FragmentCreateSessionArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel")) {
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CaseModel")) {
                 caseModel = (CaseModel) typeModel;
                 setData(caseModel);
             }

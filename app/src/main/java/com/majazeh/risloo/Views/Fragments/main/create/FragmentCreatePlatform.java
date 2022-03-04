@@ -202,7 +202,7 @@ public class FragmentCreatePlatform extends Fragment {
         TypeModel typeModel = FragmentCreatePlatformArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CenterModel"))
                 setData((CenterModel) typeModel);
         }
     }

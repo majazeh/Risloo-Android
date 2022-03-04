@@ -363,7 +363,7 @@ public class FragmentSample extends Fragment {
         for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
             ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
 
-            items.add(StringManager.profileMode(profile.getMode()));
+            items.add(StringManager.adjustProfile(profile.getMode()));
             profileUrls.add(profile.getUrl());
         }
 

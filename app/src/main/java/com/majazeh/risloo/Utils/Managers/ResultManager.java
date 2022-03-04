@@ -33,7 +33,7 @@ public class ResultManager {
         path = PathManager.localPath(activity, uri);
 
         if (path != null && textView != null) {
-            textView.setText(StringManager.substring(path, '/'));
+            textView.setText(StringManager.suffix(path, '/'));
         }
     }
 

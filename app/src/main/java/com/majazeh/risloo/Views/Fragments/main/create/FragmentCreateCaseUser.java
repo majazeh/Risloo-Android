@@ -97,7 +97,7 @@ public class FragmentCreateCaseUser extends Fragment {
         TypeModel typeModel = FragmentCreateCaseUserArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel")) {
+            if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CaseModel")) {
                 caseModel = (CaseModel) typeModel;
                 setData(caseModel);
             }

@@ -225,26 +225,26 @@ public class DateManager {
             if (persianDate.getShDay() < 10) {
                 if (persianDate.getHour() < 10) {
                     if (persianDate.getMinute() < 10)
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
                     else
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
                 } else {
                     if (persianDate.getMinute() < 10)
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
                     else
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
                 }
             } else {
                 if (persianDate.getHour() < 10) {
                     if (persianDate.getMinute() < 10)
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
                     else
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
                 } else {
                     if (persianDate.getMinute() < 10)
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
                     else
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
                 }
             }
         } else {
@@ -252,26 +252,26 @@ public class DateManager {
 
                 if (persianDate.getHour() < 10) {
                     if (persianDate.getMinute() < 10)
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
                     else
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
                 } else {
                     if (persianDate.getMinute() < 10)
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
                     else
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
                 }
             } else {
                 if (persianDate.getHour() < 10) {
                     if (persianDate.getMinute() < 10)
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
                     else
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
                 } else {
                     if (persianDate.getMinute() < 10)
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
                     else
-                        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+                        return StringManager.suffix(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
                 }
             }
         }
