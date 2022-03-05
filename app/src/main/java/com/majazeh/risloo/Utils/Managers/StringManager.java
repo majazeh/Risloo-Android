@@ -24,6 +24,10 @@ public class StringManager {
         return value.substring(0, value.indexOf(target));
     }
 
+    public static String prefix(String value, int target) {
+        return value.substring(0, target);
+    }
+
     public static String suffix(String value, char target) {
         return value.substring(value.lastIndexOf(target) + 1);
     }
@@ -76,7 +80,7 @@ public class StringManager {
     ---------- Char ----------
     */
 
-    public static String fisrtChar(String value) {
+    public static String firstChar(String value) {
         return String.valueOf(value.charAt(0));
     }
 
@@ -86,18 +90,52 @@ public class StringManager {
 
     public static String firstChars(String value) {
         if (!value.equals("")) {
+            String seperator = "";
+
             if (value.contains(" "))
-                return String.valueOf(value.charAt(0)) + value.substring(value.lastIndexOf(" ") + 1).charAt(0);
+                seperator = " ";
             else if (value.contains("-"))
-                return String.valueOf(value.charAt(0)) + value.substring(value.lastIndexOf("-") + 1).charAt(0);
+                seperator = "-";
             else if (value.contains("/"))
-                return String.valueOf(value.charAt(0)) + value.substring(value.lastIndexOf("/") + 1).charAt(0);
-            else
+                seperator = "/";
+
+            if (seperator.equals(" ") || seperator.equals("-") || seperator.equals("/")) {
+                String last = value.substring(value.lastIndexOf(seperator) + 1);
+
+                return String.valueOf(value.charAt(0)) + last.charAt(0);
+            } else {
                 return String.valueOf(value.charAt(0)) + value.charAt(1);
+            }
+
         }
 
         return value;
     }
+
+    public static String lastChars(String value) {
+        if (!value.equals("")) {
+            String seperator = "";
+
+            if (value.contains(" "))
+                seperator = " ";
+            else if (value.contains("-"))
+                seperator = "-";
+            else if (value.contains("/"))
+                seperator = "/";
+
+            if (seperator.equals(" ") || seperator.equals("-") || seperator.equals("/")) {
+                String first = value.substring(0, value.indexOf(seperator));
+
+                return String.valueOf(first.charAt(first.length() - 1)) + value.charAt(value.length() - 1);
+            } else {
+                return String.valueOf(value.charAt(value.length() - 2)) + value.charAt(value.length() - 1);
+            }
+
+        }
+
+        return value;
+    }
+
 
     /*
     ---------- Compare ----------
