@@ -85,7 +85,7 @@ public class FragmentCreateDocument extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (PermissionManager.filePermission(requireActivity()))
+            if (PermissionManager.file(requireActivity()))
                 IntentManager.file(requireActivity());
         }).widget(binding.fileIncludeLayout.selectTextView);
 

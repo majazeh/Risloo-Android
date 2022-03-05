@@ -149,7 +149,7 @@ public class FragmentSample extends Fragment {
                 if (userSelect) {
                     selectedProfileUrl = profileUrls.get(position);
 
-                    if (PermissionManager.storagePermission(requireActivity()))
+                    if (PermissionManager.storage(requireActivity()))
                         IntentManager.download(requireActivity(), binding.scaleTextView.getText().toString(), selectedProfileUrl);
 
                     parent.setSelection(parent.getAdapter().getCount());

@@ -14,7 +14,7 @@ public class PermissionManager {
     ---------- Funcs ----------
     */
 
-    public static boolean filePermission(Activity activity) {
+    public static boolean file(Activity activity) {
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -29,7 +29,7 @@ public class PermissionManager {
         }
     }
 
-    public static boolean storagePermission(Activity activity) {
+    public static boolean storage(Activity activity) {
         String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -44,7 +44,7 @@ public class PermissionManager {
         }
     }
 
-    public static boolean galleryPermission(Activity activity) {
+    public static boolean gallery(Activity activity) {
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -59,7 +59,7 @@ public class PermissionManager {
         }
     }
 
-    public static boolean cameraPermission(Activity activity) {
+    public static boolean camera(Activity activity) {
         String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

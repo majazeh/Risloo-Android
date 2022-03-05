@@ -60,14 +60,14 @@ public class SheetImage extends BottomSheetDialogFragment {
 
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            if (PermissionManager.galleryPermission(requireActivity()))
+            if (PermissionManager.gallery(requireActivity()))
                 IntentManager.gallery(requireActivity());
 
             dismiss();
         }).widget(binding.galleryTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            if (PermissionManager.cameraPermission(requireActivity())) {
+            if (PermissionManager.camera(requireActivity())) {
                 if (current instanceof FragmentCreateCenter)
                     ((FragmentCreateCenter) current).avatarPath = IntentManager.camera(requireActivity());
 

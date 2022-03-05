@@ -63,7 +63,7 @@ public class ActivityDisplay extends AppCompatActivity {
         CustomClickView.onClickListener(() -> IntentManager.share(this, path)).widget(binding.shareImageView);
 
         CustomClickView.onClickListener(() -> {
-            if (PermissionManager.storagePermission(this))
+            if (PermissionManager.storage(this))
                 IntentManager.download(this, title, path);
         }).widget(binding.downloadImageView);
 
