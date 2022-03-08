@@ -120,9 +120,9 @@ public class FragmentCenterSchedules extends Fragment {
     }
 
     private void setWeek(long timestamp) {
-        binding.weekTextView.getRoot().setText(DateManager.currentJalWeekString(timestamp));
+        binding.weekTextView.getRoot().setText(DateManager.jalWeekString(timestamp));
 
-        indexDayAdapter.setTimestamps(DateManager.currentJalWeekTimestamps(timestamp));
+        indexDayAdapter.setTimestamps(DateManager.jalWeekTimestamps(timestamp));
         binding.daysRecyclerView.setAdapter(indexDayAdapter);
 
         Objects.requireNonNull(binding.daysRecyclerView.getLayoutManager()).scrollToPosition(DateManager.positionTimestampDayName(timestamp));
