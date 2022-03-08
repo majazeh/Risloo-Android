@@ -125,7 +125,7 @@ public class FragmentCenterSchedules extends Fragment {
         indexDayAdapter.setTimestamps(DateManager.currentJalWeekTimestamps(timestamp));
         binding.daysRecyclerView.setAdapter(indexDayAdapter);
 
-        Objects.requireNonNull(binding.daysRecyclerView.getLayoutManager()).scrollToPosition(DateManager.dayNameTimestampPosition(timestamp));
+        Objects.requireNonNull(binding.daysRecyclerView.getLayoutManager()).scrollToPosition(DateManager.positionTimestampDayName(timestamp));
     }
 
     private void getTreasuries() {
