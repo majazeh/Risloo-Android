@@ -98,7 +98,7 @@ public class IndexDayAdapter extends RecyclerView.Adapter<IndexDayHolder> {
     }
 
     private void setData(IndexDayHolder holder, long timestamp) {
-        holder.binding.titleTextView.setText(DateManager.jalDayName(String.valueOf(timestamp)));
+        holder.binding.titleTextView.setText(DateManager.jalND(String.valueOf(timestamp)));
         holder.binding.dateTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(timestamp), "/"));
 
         if (!userSelect && currentTimestamp == timestamp) {

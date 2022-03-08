@@ -127,7 +127,7 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
     }
 
     private void setData(IndexScheduleHolder holder, ScheduleModel model) {
-        holder.binding.timeTextView.setText("ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStartedAt())));
+        holder.binding.timeTextView.setText("ساعت" + " " + DateManager.jalHHcMM(String.valueOf(model.getStartedAt())));
         holder.binding.durationTextView.setText(model.getDuration() + " دقیقه");
         holder.binding.nameTextView.setText(model.getRoom().getManager().getName());
 

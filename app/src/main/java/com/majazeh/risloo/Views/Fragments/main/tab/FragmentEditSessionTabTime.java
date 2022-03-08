@@ -91,10 +91,10 @@ public class FragmentEditSessionTabTime extends Fragment {
 
             if (model.getStartedAt() != 0) {
                 startTime = String.valueOf(model.getStartedAt());
-                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
+                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHcMM(startTime));
             } else {
                 startTime = String.valueOf(DateManager.currentTimestamp());
-                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
+                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHcMM(startTime));
             }
 
             if (model.getDuration() != 0) {
@@ -118,7 +118,7 @@ public class FragmentEditSessionTabTime extends Fragment {
         switch (method) {
             case "startTime":
                 startTime = data;
-                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
+                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHcMM(startTime));
                 break;
             case "startDate":
                 startDate = data;
@@ -129,7 +129,7 @@ public class FragmentEditSessionTabTime extends Fragment {
 
     public void setHashmap(HashMap data) {
         if (!startTime.equals(""))
-            data.put("time", DateManager.jalHHsMM(startTime));
+            data.put("time", DateManager.jalHHcMM(startTime));
         else
             data.remove("time");
 

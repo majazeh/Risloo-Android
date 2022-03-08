@@ -417,13 +417,13 @@ public class FragmentEditSessionTabSession extends Fragment {
                 startAccurateTime = String.valueOf(model.getOpensAt());
                 startAccurateDate = String.valueOf(model.getOpensAt());
 
-                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(startAccurateTime));
                 binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
             } else {
                 startAccurateTime = String.valueOf(DateManager.currentTimestamp());
                 startAccurateDate = String.valueOf(DateManager.currentTimestamp());
 
-                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(startAccurateTime));
                 binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
             }
 
@@ -431,13 +431,13 @@ public class FragmentEditSessionTabSession extends Fragment {
                 endAccurateTime = String.valueOf(model.getClosedAt());
                 endAccurateDate = String.valueOf(model.getClosedAt());
 
-                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(endAccurateTime));
                 binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
             } else {
                 endAccurateTime = String.valueOf(DateManager.currentTimestamp());
                 endAccurateDate = String.valueOf(DateManager.currentTimestamp());
 
-                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(endAccurateTime));
                 binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
             }
         }
@@ -447,7 +447,7 @@ public class FragmentEditSessionTabSession extends Fragment {
         switch (method) {
             case "accurateStartTime":
                 startAccurateTime = data;
-                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(startAccurateTime));
                 break;
             case "accurateStartDate":
                 startAccurateDate = data;
@@ -455,7 +455,7 @@ public class FragmentEditSessionTabSession extends Fragment {
                 break;
             case "accurateEndTime":
                 endAccurateTime = data;
-                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(endAccurateTime));
                 break;
             case "accurateEndDate":
                 endAccurateDate = data;

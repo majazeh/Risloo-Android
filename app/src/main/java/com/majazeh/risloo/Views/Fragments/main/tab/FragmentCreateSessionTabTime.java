@@ -187,7 +187,7 @@ public class FragmentCreateSessionTabTime extends Fragment {
 
     private void setData() {
         startTime = String.valueOf(DateManager.currentTimestamp());
-        binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
+        binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHcMM(startTime));
 
         specifiedDate = String.valueOf(DateManager.currentTimestamp());
         binding.specifiedDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(specifiedDate, "-"));
@@ -212,7 +212,7 @@ public class FragmentCreateSessionTabTime extends Fragment {
         switch (method) {
             case "startTime":
                 startTime = data;
-                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
+                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHcMM(startTime));
                 break;
             case "specifiedDate":
                 specifiedDate = data;
@@ -256,7 +256,7 @@ public class FragmentCreateSessionTabTime extends Fragment {
 
     public void setHashmap(HashMap data) {
         if (!startTime.equals(""))
-            data.put("time", DateManager.jalHHsMM(startTime));
+            data.put("time", DateManager.jalHHcMM(startTime));
         else
             data.remove("time");
 

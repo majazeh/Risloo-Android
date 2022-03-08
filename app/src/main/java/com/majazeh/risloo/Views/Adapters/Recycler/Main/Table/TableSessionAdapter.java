@@ -112,7 +112,7 @@ public class TableSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (model.getRoom() != null && model.getRoom().getCenter() != null && model.getRoom().getCenter().getDetail() != null && model.getRoom().getCenter().getDetail().has("title") && !model.getRoom().getCenter().getDetail().getString("title").equals(""))
                 holder.binding.centerTextView.setText(model.getRoom().getCenter().getDetail().getString("title"));
 
-            holder.binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getStartedAt()), " "));
+            holder.binding.startTimeTextView.setText(DateManager.jalNDsDDsNMsYYYYnHHcMM(String.valueOf(model.getStartedAt()), " "));
             holder.binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
             holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
 

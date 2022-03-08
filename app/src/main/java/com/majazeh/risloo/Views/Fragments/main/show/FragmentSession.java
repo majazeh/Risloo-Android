@@ -211,7 +211,7 @@ public class FragmentSession extends Fragment {
         }
 
         if (model.getStartedAt() != 0) {
-            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStartedAt()), " "));
+            binding.dateTextView.setText(DateManager.jalNDsDDsNMsYYYYsHHcMM(String.valueOf(model.getStartedAt()), " "));
         }
 
         if (model.getDuration() != 0) {
@@ -291,14 +291,14 @@ public class FragmentSession extends Fragment {
 
         if (model.getOpensAt() != 0) {
             binding.startTimeGroup.setVisibility(View.VISIBLE);
-            binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getOpensAt()), " "));
+            binding.startTimeTextView.setText(DateManager.jalNDsDDsNMsYYYYsHHcMM(String.valueOf(model.getOpensAt()), " "));
         } else {
             binding.startTimeGroup.setVisibility(View.GONE);
         }
 
         if (model.getClosedAt() != 0) {
             binding.endTimeGroup.setVisibility(View.VISIBLE);
-            binding.endTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getClosedAt()), " "));
+            binding.endTimeTextView.setText(DateManager.jalNDsDDsNMsYYYYsHHcMM(String.valueOf(model.getClosedAt()), " "));
         } else {
             binding.endTimeGroup.setVisibility(View.GONE);
         }
@@ -319,7 +319,7 @@ public class FragmentSession extends Fragment {
         }
 
         if (model.getStartedAt() != 0) {
-            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStartedAt()), " "));
+            binding.dateTextView.setText(DateManager.jalNDsDDsNMsYYYYsHHcMM(String.valueOf(model.getStartedAt()), " "));
         }
 
         if (model.getDuration() != 0) {
@@ -399,14 +399,14 @@ public class FragmentSession extends Fragment {
 
         if (model.getOpensAt() != 0) {
             binding.startTimeGroup.setVisibility(View.VISIBLE);
-            binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getOpensAt()), " "));
+            binding.startTimeTextView.setText(DateManager.jalNDsDDsNMsYYYYsHHcMM(String.valueOf(model.getOpensAt()), " "));
         } else {
             binding.startTimeGroup.setVisibility(View.GONE);
         }
 
         if (model.getClosedAt() != 0) {
             binding.endTimeGroup.setVisibility(View.VISIBLE);
-            binding.endTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getClosedAt()), " "));
+            binding.endTimeTextView.setText(DateManager.jalNDsDDsNMsYYYYsHHcMM(String.valueOf(model.getClosedAt()), " "));
         } else {
             binding.endTimeGroup.setVisibility(View.GONE);
         }

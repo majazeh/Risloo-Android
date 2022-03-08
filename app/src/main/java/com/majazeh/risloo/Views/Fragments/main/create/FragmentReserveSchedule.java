@@ -285,7 +285,7 @@ public class FragmentReserveSchedule extends Fragment {
         }
 
         if (model.getStartedAt() != 0) {
-            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStartedAt()), " "));
+            binding.dateTextView.setText(DateManager.jalNDsDDsNMsYYYYsHHcMM(String.valueOf(model.getStartedAt()), " "));
         }
 
         if (model.getDuration() != 0) {

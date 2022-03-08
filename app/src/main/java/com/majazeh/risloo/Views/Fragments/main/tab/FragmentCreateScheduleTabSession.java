@@ -340,13 +340,13 @@ public class FragmentCreateScheduleTabSession extends Fragment {
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "axises");
 
         startAccurateTime = String.valueOf(DateManager.currentTimestamp());
-        binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+        binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(startAccurateTime));
 
         startAccurateDate = String.valueOf(DateManager.currentTimestamp());
         binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
 
         endAccurateTime = String.valueOf(DateManager.currentTimestamp());
-        binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+        binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(startAccurateTime));
 
         endAccurateDate = String.valueOf(DateManager.currentTimestamp());
         binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
@@ -377,7 +377,7 @@ public class FragmentCreateScheduleTabSession extends Fragment {
         switch (method) {
             case "accurateStartTime":
                 startAccurateTime = data;
-                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(startAccurateTime));
                 break;
             case "accurateStartDate":
                 startAccurateDate = data;
@@ -385,7 +385,7 @@ public class FragmentCreateScheduleTabSession extends Fragment {
                 break;
             case "accurateEndTime":
                 endAccurateTime = data;
-                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHcMM(endAccurateTime));
                 break;
             case "accurateEndDate":
                 endAccurateDate = data;

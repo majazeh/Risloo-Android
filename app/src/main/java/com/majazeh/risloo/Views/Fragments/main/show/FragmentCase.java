@@ -176,7 +176,7 @@ public class FragmentCase extends Fragment {
             }
 
             if (model.getCreatedAt() != 0) {
-                binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCreatedAt()), " "));
+                binding.dateTextView.setText(DateManager.jalNDsDDsNMsYYYYsHHcMM(String.valueOf(model.getCreatedAt()), " "));
             }
 
             if (model.getTags() != null && model.getTags().data().size() != 0) {

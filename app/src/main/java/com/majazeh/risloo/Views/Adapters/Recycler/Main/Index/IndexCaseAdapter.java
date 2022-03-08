@@ -78,7 +78,7 @@ public class IndexCaseAdapter extends RecyclerView.Adapter<IndexCaseHolder> {
 
     private void setData(IndexCaseHolder holder, CaseModel model) {
         holder.binding.serialTextView.setText(model.getId());
-        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDD(String.valueOf(model.getCreatedAt()), " "));
+        holder.binding.dateTextView.setText(DateManager.jalNDsDDsNMsYYYY(String.valueOf(model.getCreatedAt()), " "));
         holder.binding.sessionCountTextView.setText(model.getSessionsCount() + " " + activity.getResources().getString(R.string.CaseAdapterSession));
 
         setClients(holder, model.getClients());
