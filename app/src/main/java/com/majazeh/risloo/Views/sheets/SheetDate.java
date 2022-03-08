@@ -176,7 +176,7 @@ public class SheetDate extends BottomSheetDialogFragment {
         month = binding.monthNumberPicker.getRoot().getValue();
         day = binding.dayNumberPicker.getRoot().getValue();
 
-        PersianDate persianDate = DateManager.createPersianDate(year, month, day, hour, minute, second);
+        PersianDate persianDate = DateManager.createJalPersianDate(year, month, day, hour, minute, second);
         Date date = DateManager.persianToDate(persianDate);
         long timestamp = DateManager.dateToTimestamp(date);
 

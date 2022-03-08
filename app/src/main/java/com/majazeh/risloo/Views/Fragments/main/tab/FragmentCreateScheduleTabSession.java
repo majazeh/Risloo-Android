@@ -406,9 +406,9 @@ public class FragmentCreateScheduleTabSession extends Fragment {
                 data.put("opens_at_type", startType);
 
                 if (startType.equals("relative"))
-                    data.put("opens_at", DateManager.relativeTimestamp(startRelativeDay, startRelativeHour, startRelativeMinute));
+                    data.put("opens_at", DateManager.timestampRelative(startRelativeDay, startRelativeHour, startRelativeMinute));
                 else
-                    data.put("opens_at", DateManager.accurateTimestamp(startAccurateTime, startAccurateDate));
+                    data.put("opens_at", DateManager.timestampAccurate(startAccurateTime, startAccurateDate));
 
             } else {
                 data.remove("opens_at_type");
@@ -421,9 +421,9 @@ public class FragmentCreateScheduleTabSession extends Fragment {
                     data.put("closed_at_type", endType);
 
                     if (endType.equals("relative"))
-                        data.put("closed_at", DateManager.relativeTimestamp(endRelativeDay, endRelativeHour, endRelativeMinute));
+                        data.put("closed_at", DateManager.timestampRelative(endRelativeDay, endRelativeHour, endRelativeMinute));
                     else
-                        data.put("closed_at", DateManager.accurateTimestamp(endAccurateTime, endAccurateDate));
+                        data.put("closed_at", DateManager.timestampAccurate(endAccurateTime, endAccurateDate));
 
                 } else {
                     data.remove("closed_at_type");

@@ -14,112 +14,8 @@ import saman.zamani.persiandate.PersianDate;
 
 public class DateManager {
 
-     /*
-    ---------- String & Date ----------
-    */
-
-    @SuppressLint("SimpleDateFormat")
-    public static Date stringToDate(String pattern, String value) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        try {
-            return simpleDateFormat.parse(value);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } return null;
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    public static String dateToString(String pattern, Date value) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        return simpleDateFormat.format(value);
-    }
-
     /*
-    ---------- Timestamp & Date ----------
-    */
-
-    public static Date timestampToDate(long value) {
-        Timestamp timestamp = new Timestamp(value * 1000);
-        return new Date(timestamp.getTime());
-    }
-
-    public static long dateToTimestamp(Date value) {
-        return value.getTime() / 1000;
-    }
-
-    /*
-    ---------- Accurate & Relative ----------
-    */
-
-    public static long accurateTimestamp(String time, String date) {
-        long timeLong = 0;
-        long dateLong = 0;
-
-        if (!time.equals(""))
-            timeLong = Long.parseLong(time);
-        if (!date.equals(""))
-            dateLong = Long.parseLong(date);
-
-        Date td = timestampToDate(timeLong);
-        Date dd = timestampToDate(dateLong);
-        PersianDate tpd = DateManager.dateToPersian(td);
-        PersianDate dpd = DateManager.dateToPersian(dd);
-
-        int year = dpd.getShYear();
-        int month = dpd.getShMonth();
-        int day = dpd.getShDay();
-        int hour = tpd.getHour();
-        int minute = tpd.getMinute();
-        int second = tpd.getSecond();
-
-        PersianDate mpd = DateManager.createPersianDate(year, month, day, hour, minute, second);
-        Date md = DateManager.persianToDate(mpd);
-
-        return DateManager.dateToTimestamp(md);
-    }
-
-    public static long relativeTimestamp(String day, String hour, String minute) {
-        long dayLong = 0;
-        long hourLong = 0;
-        long minuteLong = 0;
-
-        if (!day.equals(""))
-            dayLong = Long.parseLong(day);
-        if (!hour.equals(""))
-            hourLong = Long.parseLong(hour);
-        if (!minute.equals(""))
-            minuteLong = Long.parseLong(minute);
-
-        return (minuteLong * 60) + (hourLong * 60 * 60) + (dayLong * 24 * 60 * 60);
-    }
-
-    /*
-    ---------- PersianDate & Date ----------
-    */
-
-    public static Date persianToDate(PersianDate value) {
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        gregorianCalendar.set(value.getGrgYear(), value.getGrgMonth() - 1, value.getGrgDay(), value.getHour(), value.getMinute(), value.getSecond());
-
-        return gregorianCalendar.getTime();
-    }
-
-    public static PersianDate dateToPersian(Date value) {
-        int year = Integer.parseInt(dateToString("yyyy", value));
-        int month = Integer.parseInt(dateToString("MM", value));
-        int day = Integer.parseInt(dateToString("dd", value));
-        int hour = Integer.parseInt(dateToString("HH", value));
-        int minute = Integer.parseInt(dateToString("mm", value));
-        int second = Integer.parseInt(dateToString("ss", value));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day, hour, minute, second);
-
-        return persianDate;
-    }
-
-    /*
-    ---------- Current Time ----------
+    ---------- Current Timestamp & Date ----------
     */
 
     public static Date currentDate() {
@@ -132,16 +28,214 @@ public class DateManager {
     }
 
     /*
+    ---------- Convert Timestamp & Date ----------
+    */
+
+    public static Date timestampToDate(long value) {
+        Timestamp timestamp = new Timestamp(value * 1000);
+        return new Date(timestamp.getTime());
+    }
+
+    public static long dateToTimestamp(Date value) {
+        return value.getTime() / 1000;
+    }
+
+    /*
+    ---------- Convert String & Date ----------
+    */
+
+    @SuppressLint("SimpleDateFormat")
+    public static Date stringToDate(String pattern, String value) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+        try {
+            return simpleDateFormat.parse(value);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    public static String dateToString(String pattern, Date value) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(value);
+    }
+
+    /*
+    ---------- Convert PersianDate & Date ----------
+    */
+
+    public static Date persianToDate(PersianDate value) {
+        int year = value.getGrgYear();
+        int month = value.getGrgMonth() - 1;
+        int day = value.getGrgDay();
+        int hour = value.getHour();
+        int minute = value.getMinute();
+        int second = value.getSecond();
+
+        return createDate(year, month, day, hour, minute, second);
+    }
+
+    public static PersianDate dateToPersian(Date value) {
+        int year = Integer.parseInt(dateToString("yyyy", value));
+        int month = Integer.parseInt(dateToString("MM", value));
+        int day = Integer.parseInt(dateToString("dd", value));
+        int hour = Integer.parseInt(dateToString("HH", value));
+        int minute = Integer.parseInt(dateToString("mm", value));
+        int second = Integer.parseInt(dateToString("ss", value));
+
+        return createGrgPersianDate(year, month, day, hour, minute, second);
+    }
+
+    /*
     ---------- Create PersianDate & Date ----------
     */
 
     public static Date createDate(int year, int month, int day, int hour, int minute, int second) {
-        return new GregorianCalendar(year, month - 1, day, hour, minute, second).getTime();
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        gregorianCalendar.set(year, month, day, hour, minute, second);
+
+        return gregorianCalendar.getTime();
     }
 
-    public static PersianDate createPersianDate(int year, int month, int day, int hour, int minute, int second) {
-        return new PersianDate().initJalaliDate(year, month, day, hour, minute, second);
+    public static PersianDate createJalPersianDate(int year, int month, int day, int hour, int minute, int second) {
+        PersianDate persianDate = new PersianDate();
+        persianDate.initJalaliDate(year, month, day, hour, minute, second);
+
+        return persianDate;
     }
+
+    public static PersianDate createGrgPersianDate(int year, int month, int day, int hour, int minute, int second) {
+        PersianDate persianDate = new PersianDate();
+        persianDate.initGrgDate(year, month, day, hour, minute, second);
+
+        return persianDate;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    ---------- Timestamp Accurate & Relative ----------
+    */
+
+    public static long timestampAccurate(String time, String date) {
+        long timeLong = 0;
+        long dateLong = 0;
+
+        if (!time.equals(""))
+            timeLong = Long.parseLong(time);
+        if (!date.equals(""))
+            dateLong = Long.parseLong(date);
+
+        Date td = timestampToDate(timeLong);
+        Date dd = timestampToDate(dateLong);
+        PersianDate tpd = dateToPersian(td);
+        PersianDate dpd = dateToPersian(dd);
+
+        int year = dpd.getShYear();
+        int month = dpd.getShMonth();
+        int day = dpd.getShDay();
+        int hour = tpd.getHour();
+        int minute = tpd.getMinute();
+        int second = tpd.getSecond();
+
+        PersianDate mpd = createJalPersianDate(year, month, day, hour, minute, second);
+        Date md = persianToDate(mpd);
+
+        return DateManager.dateToTimestamp(md);
+    }
+
+    public static long timestampRelative(String day, String hour, String minute) {
+        long dayLong = 0;
+        long hourLong = 0;
+        long minuteLong = 0;
+
+        if (!day.equals(""))
+            dayLong = Long.parseLong(day);
+        if (!hour.equals(""))
+            hourLong = Long.parseLong(hour);
+        if (!minute.equals(""))
+            minuteLong = Long.parseLong(minute);
+
+        long dhms = dayLong * 24 * 60 * 60;
+        long hms = hourLong * 60 * 60;
+        long ms = minuteLong * 60;
+
+        return dhms + hms + ms;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*
     ---------- Persian Date's ----------

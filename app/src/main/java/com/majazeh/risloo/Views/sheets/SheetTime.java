@@ -137,7 +137,7 @@ public class SheetTime extends BottomSheetDialogFragment {
         hour = binding.hourNumberPicker.getRoot().getValue();
         minute = binding.minuteNumberPicker.getRoot().getValue();
 
-        PersianDate persianDate = DateManager.createPersianDate(year, month, day, hour, minute, second);
+        PersianDate persianDate = DateManager.createJalPersianDate(year, month, day, hour, minute, second);
         Date date = DateManager.persianToDate(persianDate);
         long timestamp = DateManager.dateToTimestamp(date);
 
