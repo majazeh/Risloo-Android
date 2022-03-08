@@ -23,8 +23,7 @@ public class DateManager {
     }
 
     public static long currentTimestamp() {
-        Date date = Calendar.getInstance().getTime();
-        return date.getTime() / 1000;
+        return currentDate().getTime() / 1000;
     }
 
     /*
@@ -32,8 +31,7 @@ public class DateManager {
     */
 
     public static Date timestampToDate(long value) {
-        Timestamp timestamp = new Timestamp(value * 1000);
-        return new Date(timestamp.getTime());
+        return new Date(new Timestamp(value * 1000).getTime());
     }
 
     public static long dateToTimestamp(Date value) {
@@ -163,6 +161,117 @@ public class DateManager {
         return dhms + hms + ms;
     }
 
+    /*
+    ---------- Timestamp Pre & Nxt ----------
+    */
+
+    public static long timestampPreFriday(long value) {
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        switch (persianDate.dayName()) {
+            case "شنبه":
+                return new Date(date.getTime() - (86400000)).getTime() / 1000;
+            case "یک\u200Cشنبه":
+                return new Date(date.getTime() - (2*86400000)).getTime() / 1000;
+            case "دوشنبه":
+                return new Date(date.getTime() - (3*86400000)).getTime() / 1000;
+            case "سه\u200Cشنبه":
+                return new Date(date.getTime() - (4*86400000)).getTime() / 1000;
+            case "چهارشنبه":
+                return new Date(date.getTime() - (5*86400000)).getTime() / 1000;
+            case "پنج\u200Cشنبه":
+                return new Date(date.getTime() - (6*86400000)).getTime() / 1000;
+            case "جمعه":
+                return new Date(date.getTime() - (7*86400000)).getTime() / 1000;
+            default:
+                return value;
+        }
+    }
+
+    public static long timestampNxtSaturday(long value) {
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        switch (persianDate.dayName()) {
+            case "شنبه":
+                return new Date(date.getTime() + (7*86400000)).getTime() / 1000;
+            case "یک\u200Cشنبه":
+                return new Date(date.getTime() + (6*86400000)).getTime() / 1000;
+            case "دوشنبه":
+                return new Date(date.getTime() + (5*86400000)).getTime() / 1000;
+            case "سه\u200Cشنبه":
+                return new Date(date.getTime() + (4*86400000)).getTime() / 1000;
+            case "چهارشنبه":
+                return new Date(date.getTime() + (3*86400000)).getTime() / 1000;
+            case "پنج\u200Cشنبه":
+                return new Date(date.getTime() + (2*86400000)).getTime() / 1000;
+            case "جمعه":
+                return new Date(date.getTime() + (86400000)).getTime() / 1000;
+            default:
+                return value;
+        }
+    }
+
+    /*
+    ---------- Date Corrector ----------
+    */
+
+    private static String dateCorrector(int firstMonth, int firstDay, int lastMonth, int lastDay) {
+        if (firstMonth < 10) {
+            if (firstDay < 10) {
+                if (lastMonth < 10) {
+                    if (lastDay < 10)
+                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
+                } else {
+                    if (lastDay < 10)
+                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + lastDay;
+                }
+            } else {
+                if (lastMonth < 10) {
+                    if (lastDay < 10)
+                        return "0" + firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return "0" + firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
+                } else {
+                    if (lastDay < 10)
+                        return "0" + firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return "0" + firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + lastDay;
+                }
+            }
+        } else {
+            if (firstDay < 10) {
+                if (lastMonth < 10) {
+                    if (lastDay < 10)
+                        return firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
+                } else {
+                    if (lastDay < 10)
+                        return firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + lastDay;
+                }
+            } else {
+                if (lastMonth < 10) {
+                    if (lastDay < 10)
+                        return firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
+                } else {
+                    if (lastDay < 10)
+                        return firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return firstMonth + "/" +firstDay + " تا " + lastMonth + "/" + lastDay;
+                }
+            }
+        }
+    }
 
 
 
@@ -222,10 +331,33 @@ public class DateManager {
 
 
 
+    /*
+    ---------- Timestamp Pre & Nxt ----------
+    */
 
+    public static int dayNameTimestampPosition(long value) {
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
 
-
-
+        switch (persianDate.dayName()) {
+            case "شنبه":
+                return 0;
+            case "یک\u200Cشنبه":
+                return 1;
+            case "دوشنبه":
+                return 2;
+            case "سه\u200Cشنبه":
+                return 3;
+            case "چهارشنبه":
+                return 4;
+            case "پنج\u200Cشنبه":
+                return 5;
+            case "جمعه":
+                return 6;
+            default:
+                return 7;
+        }
+    }
 
     /*
     ---------- Persian Date's ----------
@@ -398,80 +530,10 @@ public class DateManager {
     }
 
     /*
-    ---------- Calculate Timestamp's ----------
+    ---------- ????? ----------
     */
 
-    public static long preJalFridayTimestamp(long value) {
-        Date date = timestampToDate(value);
-        PersianDate persianDate = dateToPersian(date);
 
-        switch (persianDate.dayName()) {
-            case "شنبه":
-                return new Date(date.getTime() - (86400000)).getTime() / 1000;
-            case "یک\u200Cشنبه":
-                return new Date(date.getTime() - (2*86400000)).getTime() / 1000;
-            case "دوشنبه":
-                return new Date(date.getTime() - (3*86400000)).getTime() / 1000;
-            case "سه\u200Cشنبه":
-                return new Date(date.getTime() - (4*86400000)).getTime() / 1000;
-            case "چهارشنبه":
-                return new Date(date.getTime() - (5*86400000)).getTime() / 1000;
-            case "پنج\u200Cشنبه":
-                return new Date(date.getTime() - (6*86400000)).getTime() / 1000;
-            case "جمعه":
-                return new Date(date.getTime() - (7*86400000)).getTime() / 1000;
-            default:
-                return value;
-        }
-    }
-
-    public static long nxtJalSaturdayTimestamp(long value) {
-        Date date = timestampToDate(value);
-        PersianDate persianDate = dateToPersian(date);
-
-        switch (persianDate.dayName()) {
-            case "شنبه":
-                return new Date(date.getTime() + (7*86400000)).getTime() / 1000;
-            case "یک\u200Cشنبه":
-                return new Date(date.getTime() + (6*86400000)).getTime() / 1000;
-            case "دوشنبه":
-                return new Date(date.getTime() + (5*86400000)).getTime() / 1000;
-            case "سه\u200Cشنبه":
-                return new Date(date.getTime() + (4*86400000)).getTime() / 1000;
-            case "چهارشنبه":
-                return new Date(date.getTime() + (3*86400000)).getTime() / 1000;
-            case "پنج\u200Cشنبه":
-                return new Date(date.getTime() + (2*86400000)).getTime() / 1000;
-            case "جمعه":
-                return new Date(date.getTime() + (86400000)).getTime() / 1000;
-            default:
-                return value;
-        }
-    }
-
-    public static int dayNameTimestampPosition(long value) {
-        Date date = timestampToDate(value);
-        PersianDate persianDate = dateToPersian(date);
-
-        switch (persianDate.dayName()) {
-            case "شنبه":
-                return 0;
-            case "یک\u200Cشنبه":
-                return 1;
-            case "دوشنبه":
-                return 2;
-            case "سه\u200Cشنبه":
-                return 3;
-            case "چهارشنبه":
-                return 4;
-            case "پنج\u200Cشنبه":
-                return 5;
-            case "جمعه":
-                return 6;
-            default:
-                return 7;
-        }
-    }
 
     /*
     ---------- Current Week ----------
@@ -616,66 +678,6 @@ public class DateManager {
                 return timestamps;
             default:
                 return timestamps;
-        }
-    }
-
-    /*
-    ---------- Date Corrector ----------
-    */
-
-    public static String dateCorrector(int firstMonth, int firstDay, int lastMonth, int lastDay) {
-        if (firstMonth < 10) {
-            if (firstDay < 10) {
-                if (lastMonth < 10) {
-                    if (lastDay < 10)
-                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
-                    else
-                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
-                } else {
-                    if (lastDay < 10)
-                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
-                    else
-                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + lastDay;
-                }
-            } else {
-                if (lastMonth < 10) {
-                    if (lastDay < 10)
-                        return "0" + firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
-                    else
-                        return "0" + firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
-                } else {
-                    if (lastDay < 10)
-                        return "0" + firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
-                    else
-                        return "0" + firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + lastDay;
-                }
-            }
-        } else {
-            if (firstDay < 10) {
-                if (lastMonth < 10) {
-                    if (lastDay < 10)
-                        return firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
-                    else
-                        return firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
-                } else {
-                    if (lastDay < 10)
-                        return firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
-                    else
-                        return firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + lastDay;
-                }
-            } else {
-                if (lastMonth < 10) {
-                    if (lastDay < 10)
-                        return firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
-                    else
-                        return firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
-                } else {
-                    if (lastDay < 10)
-                        return firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
-                    else
-                        return firstMonth + "/" +firstDay + " تا " + lastMonth + "/" + lastDay;
-                }
-            }
         }
     }
 

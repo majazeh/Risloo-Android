@@ -96,9 +96,9 @@ public class FragmentRoomSchedules extends Fragment {
 
         CustomClickView.onDelayedListener(() -> responseDialog("status", null)).widget(binding.filterIncludeLayout.statusFilterLayout.removeImageView);
 
-        CustomClickView.onDelayedListener(() -> changeTimestamp(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> changeTimestamp(DateManager.timestampPreFriday(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
-        CustomClickView.onDelayedListener(() -> changeTimestamp(DateManager.nxtJalSaturdayTimestamp(currentTimestamp))).widget(binding.forwardImageView.getRoot());
+        CustomClickView.onDelayedListener(() -> changeTimestamp(DateManager.timestampNxtSaturday(currentTimestamp))).widget(binding.forwardImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
