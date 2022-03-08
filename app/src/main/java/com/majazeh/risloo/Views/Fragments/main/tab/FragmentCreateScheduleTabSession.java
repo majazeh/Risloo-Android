@@ -400,7 +400,7 @@ public class FragmentCreateScheduleTabSession extends Fragment {
         else
             data.remove("status");
 
-        if (status.equals("registration_awaiting")) {
+        if (status.equals("زمان\u200Cبندی شده")) {
 
             if (!startType.equals("")) {
                 data.put("opens_at_type", startType);

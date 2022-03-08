@@ -113,16 +113,6 @@ public class DateManager {
         return persianDate;
     }
 
-
-
-
-
-
-
-
-
-
-
     /*
     ---------- Timestamp Accurate & Relative ----------
     */
@@ -151,7 +141,7 @@ public class DateManager {
         PersianDate mpd = createJalPersianDate(year, month, day, hour, minute, second);
         Date md = persianToDate(mpd);
 
-        return DateManager.dateToTimestamp(md);
+        return dateToTimestamp(md);
     }
 
     public static long timestampRelative(String day, String hour, String minute) {

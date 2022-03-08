@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabSessionBinding;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
@@ -20,7 +21,6 @@ import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.FragmentEditSession;
-import com.majazeh.risloo.databinding.FragmentEditSessionTabSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 
 import java.util.HashMap;
@@ -470,8 +470,7 @@ public class FragmentEditSessionTabSession extends Fragment {
         else
             data.remove("status");
 
-        if (status.equals("registration_awaiting")) {
-
+        if (status.equals("زمان\u200Cبندی شده")) {
             if (!startType.equals("")) {
                 data.put("opens_at_type", startType);
 
