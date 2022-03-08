@@ -259,21 +259,21 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         if (model.getKickedAt() != 0 && model.getAcceptedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
 
-            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getAcceptedAt())));
-            holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getKickedAt())));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getAcceptedAt()), "-"));
+            holder.binding.kickedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getKickedAt()), "-"));
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
         } else if (model.getKickedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
 
             holder.binding.acceptedTextView.setText("");
-            holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getKickedAt())));
+            holder.binding.kickedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getKickedAt()), "-"));
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
         } else if (model.getAcceptedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "accepted"));
 
-            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getAcceptedAt())));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getAcceptedAt()), "-"));
             holder.binding.kickedTextView.setText("");
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterKick));

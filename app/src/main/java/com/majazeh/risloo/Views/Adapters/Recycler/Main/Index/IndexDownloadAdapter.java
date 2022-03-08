@@ -100,7 +100,7 @@ public class IndexDownloadAdapter extends RecyclerView.Adapter<IndexDownloadHold
 
     private void setData(IndexDownloadHolder holder, File file) {
         holder.binding.nameTextView.setText(file.getName());
-        holder.binding.dateTextView.setText(DateManager.jalNMMsDDsMMsDD(file.lastModified(), " "));
+        holder.binding.dateTextView.setText(DateManager.jalDDsNMsHHcMM(file.lastModified(), " "));
 
         setAvatar(holder, file);
     }

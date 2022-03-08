@@ -121,13 +121,13 @@ public class TableRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
     private void setAcceptation(TableRoomUserHolder holder, UserModel model) {
         if (model.getKickedAt() != 0 && model.getAcceptedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
-            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getKickedAt())));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getKickedAt()), "-"));
         } else if (model.getKickedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
-            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getKickedAt())));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getKickedAt()), "-"));
         } else if (model.getAcceptedAt() != 0) {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "accepted"));
-            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getAcceptedAt())));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getAcceptedAt()), "-"));
         } else {
             holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "waiting"));
             holder.binding.acceptedTextView.setText("");
