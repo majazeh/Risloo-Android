@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.majazeh.risloo.BuildConfig;
+import com.majazeh.risloo.R;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -91,6 +92,23 @@ public class GadgetManager {
         return "";
     }
 
+    private static void requestCrop(Activity activity, Uri uri) {
+        UCrop.Options options = new UCrop.Options();
+
+        options.setStatusBarColor(activity.getResources().getColor(R.color.risloo500));
+        options.setToolbarColor(activity.getResources().getColor(R.color.risloo500));
+        options.setToolbarWidgetColor(activity.getResources().getColor(R.color.white));
+        options.setToolbarTitle(activity.getResources().getString(R.string.AppImageCrop));
+        options.setRootViewBackgroundColor(activity.getResources().getColor(R.color.white));
+        options.setHideBottomControls(true);
+
+        UCrop.of(uri, uri)
+                .withAspectRatio(1, 1)
+                .withMaxResultSize(512, 512)
+                .withOptions(options)
+                .start(activity);
+    }
+
     /*
     ---------- Result ----------
     */
@@ -122,7 +140,7 @@ public class GadgetManager {
             StreamManager.saveBitmapToStream(b, f);
 
             file = f;
-            IntentManager.crop(activity, Uri.fromFile(file));
+            requestCrop(activity, Uri.fromFile(file));
         }
     }
 
@@ -147,7 +165,7 @@ public class GadgetManager {
             StreamManager.saveBitmapToStream(b, f);
 
             file = f;
-            IntentManager.crop(activity, Uri.fromFile(file));
+            requestCrop(activity, Uri.fromFile(file));
         }
 
     }

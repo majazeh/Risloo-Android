@@ -20,7 +20,6 @@ import com.majazeh.risloo.views.activities.ActivityAuth;
 import com.majazeh.risloo.views.activities.ActivityDisplay;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.activities.ActivityTest;
-import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 
@@ -62,26 +61,6 @@ public class IntentManager {
 
     public static void finish(Activity activity) {
         activity.finish();
-    }
-
-    /*
-    ---------- Requests ----------
-    */
-
-    public static void crop(Activity activity, Uri uri) {
-        UCrop.Options options = new UCrop.Options();
-        options.setStatusBarColor(activity.getResources().getColor(R.color.risloo500));
-        options.setToolbarColor(activity.getResources().getColor(R.color.risloo500));
-        options.setToolbarWidgetColor(activity.getResources().getColor(R.color.white));
-        options.setToolbarTitle(activity.getResources().getString(R.string.AppImageCrop));
-        options.setRootViewBackgroundColor(activity.getResources().getColor(R.color.white));
-        options.setHideBottomControls(true);
-
-        UCrop.of(uri, uri)
-                .withAspectRatio(1, 1)
-                .withMaxResultSize(512, 512)
-                .withOptions(options)
-                .start(activity);
     }
 
     /*
