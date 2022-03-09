@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ListManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Func's ----------
     */
 
     public static ArrayList<TypeModel> getDrawer(Activity activity, Permissoon permissoon, Singleton singleton) {

@@ -124,7 +124,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
                 Picasso.get().load(userModel.getAvatar().getMedium().getUrl()).placeholder(R.color.coolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nicknameIncludeLayout.inputEditText.getText().toString()));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(binding.nicknameIncludeLayout.inputEditText.getText().toString()));
 
                 Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
@@ -138,7 +138,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
                 Picasso.get().load(bulkSampleModel.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.coolGray100).into(binding.centerIncludeLayout.avatarCircleImageView);
             } else {
                 binding.centerIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.centerIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerIncludeLayout.nameTextView.getText().toString()));
+                binding.centerIncludeLayout.charTextView.setText(StringManager.charsFirst(binding.centerIncludeLayout.nameTextView.getText().toString()));
 
                 Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.centerIncludeLayout.avatarCircleImageView);
             }
@@ -152,7 +152,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
                 Picasso.get().load(bulkSampleModel.getRoom().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.coolGray100).into(binding.centerIncludeLayout.avatarSubCircleImageView);
             } else {
                 binding.centerIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
-                binding.centerIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.centerIncludeLayout.nameSubTextView.getText().toString()));
+                binding.centerIncludeLayout.charSubTextView.setText(StringManager.charsFirst(binding.centerIncludeLayout.nameSubTextView.getText().toString()));
 
                 Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.centerIncludeLayout.avatarSubCircleImageView);
             }

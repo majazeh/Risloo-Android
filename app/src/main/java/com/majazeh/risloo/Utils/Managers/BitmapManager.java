@@ -19,59 +19,37 @@ import java.io.InputStream;
 public class BitmapManager {
 
     /*
-    ---------- Convert ----------
+    ---------- Func's ----------
     */
 
-    public static byte[] bitmapToByte(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-
-        return byteArrayOutputStream.toByteArray();
-    }
-
-    public static String bitmapToString(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-
-        byte[] encodedByte = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(encodedByte, Base64.DEFAULT);
-    }
-
-    public static Bitmap byteToBitmap(byte[] bytes) {
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    }
-
-    public static Bitmap stringToBitmap(String string) {
-        byte[] decodedByte = Base64.decode(string, 0);
-
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-    }
-
-    public static Bitmap pathToBitmap(String path) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = false;
-        options.inSampleSize = Math.max(1, 2);
-
-        return BitmapFactory.decodeFile(path, options);
-    }
-
-    public static Bitmap uriToBitmap(Activity activity, Uri uri) {
+    public static Bitmap imageModify(Bitmap bitmap, String path) {
         try {
-            InputStream imageStream = activity.getContentResolver().openInputStream(uri);
+            ExifInterface exifInterface = new ExifInterface(path);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
-            return BitmapFactory.decodeStream(imageStream);
-        } catch (FileNotFoundException e) {
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    return orientationRotate(bitmap, 90);
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    return orientationRotate(bitmap, 180);
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    return orientationRotate(bitmap, 270);
+                case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+                    return orientationFlip(bitmap, true, false);
+                case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+                    return orientationFlip(bitmap, false, true);
+                default:
+                    return bitmap;
+            }
+
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
-    /*
-    ---------- Public ----------
-    */
-
-    public static Bitmap scaleToCenter(Bitmap bitmap) {
+    public static Bitmap imageScaleToCenter(Bitmap bitmap) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
 
@@ -96,37 +74,61 @@ public class BitmapManager {
         return image;
     }
 
-    public static Bitmap modifyOrientation(Bitmap bitmap, String path) {
+    /*
+    ---------- Convert's ----------
+    */
+
+    public static byte[] bitmapToByte(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    public static Bitmap byteToBitmap(byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    public static String bitmapToString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+        byte[] encodedByte = byteArrayOutputStream.toByteArray();
+
+        return Base64.encodeToString(encodedByte, Base64.DEFAULT);
+    }
+
+    public static Bitmap stringToBitmap(String string) {
+        byte[] decodedByte = Base64.decode(string, 0);
+
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    public static Bitmap pathToBitmap(String path) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = false;
+        options.inSampleSize = Math.max(1, 2);
+
+        return BitmapFactory.decodeFile(path, options);
+    }
+
+    public static Bitmap uriToBitmap(Activity activity, Uri uri) {
         try {
-            ExifInterface exifInterface = new ExifInterface(path);
-            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            InputStream imageStream = activity.getContentResolver().openInputStream(uri);
 
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    return rotateOrientation(bitmap, 90);
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    return rotateOrientation(bitmap, 180);
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    return rotateOrientation(bitmap, 270);
-                case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-                    return flipOrientation(bitmap, true, false);
-                case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-                    return flipOrientation(bitmap, false, true);
-                default:
-                    return bitmap;
-            }
-
-        } catch (IOException e) {
+            return BitmapFactory.decodeStream(imageStream);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
     /*
-    ---------- Private ----------
+    ---------- Orientation's ----------
     */
 
-    private static Bitmap rotateOrientation(Bitmap bitmap, float degrees) {
+    private static Bitmap orientationRotate(Bitmap bitmap, float degrees) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
 
@@ -136,7 +138,7 @@ public class BitmapManager {
         return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
     }
 
-    private static Bitmap flipOrientation(Bitmap bitmap, boolean horizontal, boolean vertical) {
+    private static Bitmap orientationFlip(Bitmap bitmap, boolean horizontal, boolean vertical) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
 

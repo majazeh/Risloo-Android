@@ -215,7 +215,7 @@ public class ActivityMain extends AppCompatActivity {
                 Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.coolGray100).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
             } else {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.charsFirst(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
             }
 
             if (!BalanceManager.balanceWalletAndGift(model.getTreasuries()).equals("0")) {

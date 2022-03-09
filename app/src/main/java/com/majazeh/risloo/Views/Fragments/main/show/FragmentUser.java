@@ -121,7 +121,7 @@ public class FragmentUser extends Fragment {
             Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.coolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+            binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }

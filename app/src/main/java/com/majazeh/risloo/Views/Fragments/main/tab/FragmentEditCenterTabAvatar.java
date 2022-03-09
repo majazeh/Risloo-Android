@@ -114,11 +114,11 @@ public class FragmentEditCenterTabAvatar extends Fragment {
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getDetail().getString("title")));
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(model.getDetail().getString("title")));
                     else if (model.getId() != null && !model.getId().equals(""))
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getId()));
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(model.getId()));
                     else
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(getResources().getString(R.string.AppDefaultUnknown)));
 
                     Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 }

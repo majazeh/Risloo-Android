@@ -110,11 +110,11 @@ public class FragmentAuthSerial extends Fragment {
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             if (!userModel.getName().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(userModel.getName()));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(userModel.getName()));
             else if (!userModel.getId().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(userModel.getId()));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(userModel.getId()));
             else
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(getResources().getString(R.string.AppDefaultUnknown)));
         }
     }
 

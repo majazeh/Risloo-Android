@@ -126,7 +126,7 @@ public class IndexCenterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             Picasso.get().load(url).placeholder(R.color.coolGray100).into(holder.binding.avatarCircleImageView);
         } else {
             holder.binding.charTextView.setVisibility(View.VISIBLE);
-            holder.binding.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
+            holder.binding.charTextView.setText(StringManager.charsFirst(holder.binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(holder.binding.avatarCircleImageView);
         }

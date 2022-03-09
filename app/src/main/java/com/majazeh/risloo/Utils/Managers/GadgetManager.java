@@ -135,7 +135,7 @@ public class GadgetManager {
 
         if (path != null && bitmap != null) {
             File f = FileManager.createInternalCachePath(activity, "image");
-            Bitmap b = BitmapManager.modifyOrientation(bitmap, path);
+            Bitmap b = BitmapManager.imageModify(bitmap, path);
 
             StreamManager.saveBitmapToStream(b, f);
 
@@ -160,7 +160,7 @@ public class GadgetManager {
 
         if (path != null && bitmap != null) {
             File f = FileManager.createInternalCachePath(activity, "image");
-            Bitmap b = BitmapManager.modifyOrientation(bitmap, path);
+            Bitmap b = BitmapManager.imageModify(bitmap, path);
 
             StreamManager.saveBitmapToStream(b, f);
 
@@ -178,12 +178,12 @@ public class GadgetManager {
 
         if (path != null && bitmap != null) {
             File f = FileManager.createInternalCachePath(activity, "image");
-            Bitmap b = BitmapManager.modifyOrientation(bitmap, path);
+            Bitmap b = BitmapManager.imageModify(bitmap, path);
 
             StreamManager.saveBitmapToStream(b, f);
 
             file = f;
-            circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
+            circleImageView.setImageBitmap(BitmapManager.imageModify(bitmap, path));
 
             if (textView != null) {
                 textView.setVisibility(View.GONE);

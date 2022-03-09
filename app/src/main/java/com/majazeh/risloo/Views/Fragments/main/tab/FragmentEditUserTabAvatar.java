@@ -111,11 +111,11 @@ public class FragmentEditUserTabAvatar extends Fragment {
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 if (model.getName() != null && !model.getName().equals(""))
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getName()));
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(model.getName()));
                 else if (model.getId() != null && !model.getId().equals(""))
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getId()));
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(model.getId()));
                 else
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultUnknown)));
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(getResources().getString(R.string.AppDefaultUnknown)));
 
                 Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }

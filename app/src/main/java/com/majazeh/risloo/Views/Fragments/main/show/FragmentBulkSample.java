@@ -183,7 +183,7 @@ public class FragmentBulkSample extends Fragment {
                 Picasso.get().load(model.getRoom().getCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.coolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
+                binding.avatarsIncludeLayout.charTextView.setText(StringManager.charsFirst(binding.centerTextView.getText().toString()));
 
                 Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             }
@@ -193,7 +193,7 @@ public class FragmentBulkSample extends Fragment {
                 Picasso.get().load(model.getRoom().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.coolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
-                binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
+                binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.charsFirst(binding.psychologyTextView.getText().toString()));
 
                 Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             }

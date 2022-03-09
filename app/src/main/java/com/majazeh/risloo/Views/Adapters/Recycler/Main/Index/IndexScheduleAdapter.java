@@ -258,7 +258,7 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
             Picasso.get().load(url).placeholder(R.color.coolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
+            holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.charsFirst(holder.binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.coolGray100).placeholder(R.color.coolGray100).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }

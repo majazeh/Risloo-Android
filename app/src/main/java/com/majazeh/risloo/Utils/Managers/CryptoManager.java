@@ -20,7 +20,7 @@ import javax.crypto.NoSuchPaddingException;
 public class CryptoManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Func's ----------
     */
 
     public static String encrypt(String value, String publicKey) {
@@ -47,8 +47,9 @@ public class CryptoManager {
             return Base64.encodeToString(encryptData, Base64.DEFAULT);
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
             e.printStackTrace();
-            return "";
         }
+
+        return "";
     }
 
     public static String decrypt(String value, String privateKey) {
@@ -74,12 +75,13 @@ public class CryptoManager {
             return new String(decryptData).replaceAll("\u0000.*", "");
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | InvalidKeyException e) {
             e.printStackTrace();
-            return "";
         }
+
+        return "";
     }
 
     /*
-    ---------- Convert ----------
+    ---------- Convert's ----------
     */
 
     private static PublicKey stringToPublicKey(String publicKey) {
@@ -91,8 +93,9 @@ public class CryptoManager {
             return factory.generatePublic(spec);
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
     private static PrivateKey stringToPrivateKey(String privateKey) {
@@ -104,12 +107,13 @@ public class CryptoManager {
             return factory.generatePrivate(spec);
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
     /*
-    ---------- Getter ----------
+    ---------- key's ----------
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")

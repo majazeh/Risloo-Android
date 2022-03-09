@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 public class StringManager {
 
     /*
-    ---------- Bracing ----------
+    ---------- Bracing's ----------
     */
 
     public static String bracing(int value) {
@@ -17,7 +17,7 @@ public class StringManager {
     }
 
     /*
-    ---------- Fix ----------
+    ---------- Fix's ----------
     */
 
     public static String prefix(String value, char target) {
@@ -36,12 +36,16 @@ public class StringManager {
         return value.substring(value.length() - target);
     }
 
+    /*
+    ---------- Change's ----------
+    */
+
     public static String replace(String value, String oldText, String newText) {
         return value.replace(oldText, newText);
     }
 
     /*
-    ---------- Seperate ----------
+    ---------- Seperate's ----------
     */
 
     public static String seperatePlus(String value) {
@@ -55,7 +59,7 @@ public class StringManager {
     }
 
     /*
-    ---------- Adjust ----------
+    ---------- Adjust's ----------
     */
 
     public static String adjustProfile(String value) {
@@ -77,18 +81,18 @@ public class StringManager {
     }
 
     /*
-    ---------- Char ----------
+    ---------- Char's ----------
     */
 
-    public static String firstChar(String value) {
+    public static String charFirst(String value) {
         return String.valueOf(value.charAt(0));
     }
 
-    public static String lastChar(String value) {
+    public static String charLast(String value) {
         return String.valueOf(value.charAt(value.length() - 1));
     }
 
-    public static String firstChars(String value) {
+    public static String charsFirst(String value) {
         if (!value.equals("")) {
             String seperator = "";
 
@@ -112,7 +116,7 @@ public class StringManager {
         return value;
     }
 
-    public static String lastChars(String value) {
+    public static String charsLast(String value) {
         if (!value.equals("")) {
             String seperator = "";
 
@@ -136,9 +140,8 @@ public class StringManager {
         return value;
     }
 
-
     /*
-    ---------- Compare ----------
+    ---------- Compare's ----------
     */
 
     public static int compareVersionNames(String oldVersionName, String newVersionName) {
