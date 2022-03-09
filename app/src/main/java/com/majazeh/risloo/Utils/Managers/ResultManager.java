@@ -27,7 +27,7 @@ public class ResultManager {
     ---------- Funcs ----------
     */
 
-    public static void fileResult(Activity activity, Intent data, TextView textView) {
+    public static void documentResult(Activity activity, Intent data, TextView textView) {
         Uri uri = data.getData();
 
         path = PathManager.localPath(activity, uri);

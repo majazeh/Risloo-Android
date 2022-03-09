@@ -83,7 +83,7 @@ public class FragmentCreateDocument extends Fragment {
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        CustomClickView.onDelayedListener(() -> IntentManager.file(requireActivity())).widget(binding.fileIncludeLayout.selectTextView);
+        CustomClickView.onDelayedListener(() -> IntentManager.document(requireActivity())).widget(binding.fileIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
@@ -105,8 +105,8 @@ public class FragmentCreateDocument extends Fragment {
 
     public void responseAction(String method, Intent data) {
         switch (method) {
-            case "file":
-                ResultManager.fileResult(requireActivity(), data, binding.fileIncludeLayout.nameTextView);
+            case "document":
+                ResultManager.documentResult(requireActivity(), data, binding.fileIncludeLayout.nameTextView);
 
                 filePath = ResultManager.path;
                 break;

@@ -14,7 +14,7 @@ public class PermissionManager {
     ---------- Funcs ----------
     */
 
-    public static boolean file(Activity activity) {
+    public static boolean document(Activity activity) {
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
         int requestCode = 100;
 

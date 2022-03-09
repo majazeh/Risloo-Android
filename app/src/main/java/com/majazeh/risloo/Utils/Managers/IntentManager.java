@@ -69,8 +69,8 @@ public class IntentManager {
     ---------- Requests ----------
     */
 
-    public static void file(Activity activity) {
-        if (PermissionManager.file(activity)) {
+    public static void document(Activity activity) {
+        if (PermissionManager.document(activity)) {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
             intent.addCategory(Intent.CATEGORY_DEFAULT);

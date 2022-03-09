@@ -402,7 +402,7 @@ public class ActivityMain extends AppCompatActivity {
 
             switch (requestCode) {
                 case 100:
-                    IntentManager.file(this);
+                    IntentManager.document(this);
                     break;
                 case 200:
                     if (fragmont.getCurrent() instanceof FragmentSample)
@@ -436,10 +436,10 @@ public class ActivityMain extends AppCompatActivity {
                 switch (requestCode) {
                     case 100:
                         if (fragmont.getCurrent() instanceof FragmentCreateDocument)
-                            ((FragmentCreateDocument) fragmont.getCurrent()).responseAction("file", data);
+                            ((FragmentCreateDocument) fragmont.getCurrent()).responseAction("document", data);
 
                         if (fragmont.getCurrent() instanceof FragmentCreatePractice)
-                            ((FragmentCreatePractice) fragmont.getCurrent()).responseAction("file", data);
+                            ((FragmentCreatePractice) fragmont.getCurrent()).responseAction("document", data);
 
                         break;
                     case 300:
