@@ -8,7 +8,7 @@ import java.io.InputStream;
 public class JsonManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Func's ----------
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")

@@ -7,7 +7,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 public class TreasuryManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Func's ----------
     */
 
     public static String getWallet(List treasuries) {

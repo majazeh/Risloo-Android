@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream;
 public class StreamManager {
 
     /*
-    ---------- Saves ----------
+    ---------- Save's ----------
     */
 
     public static void saveBitmapToStream(Bitmap bitmap, File file) {
@@ -56,7 +56,7 @@ public class StreamManager {
     }
 
     /*
-    ---------- Loads ----------
+    ---------- Load's ----------
     */
 
     public static Bitmap loadBitmapFromStream(File file) {

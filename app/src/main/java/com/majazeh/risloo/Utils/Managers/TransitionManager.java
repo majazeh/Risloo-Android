@@ -6,7 +6,7 @@ import android.view.View;
 public class TransitionManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Func's ----------
     */
 
     public static void transitionStart(View view, int duration) {

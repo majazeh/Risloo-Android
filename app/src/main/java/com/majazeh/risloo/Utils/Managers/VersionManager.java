@@ -9,7 +9,7 @@ import com.majazeh.risloo.R;
 public class VersionManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Func's ----------
     */
 
     public static int getVersionCode(Activity activity) {

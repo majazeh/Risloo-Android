@@ -8,7 +8,7 @@ import org.json.JSONException;
 public class SelectionManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Func's ----------
     */
 
     public static String getAcceptation(Activity activity, String local, String value) {
@@ -112,7 +112,7 @@ public class SelectionManager {
     }
 
     /*
-    ---------- Locals ----------
+    ---------- Local's ----------
     */
 
     private static String getSelection(Activity activity, String asset, String local, String value) {

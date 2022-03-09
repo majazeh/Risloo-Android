@@ -21,7 +21,7 @@ import org.json.JSONException;
 public class SpannableManager {
 
     /*
-    ---------- OneSpans ----------
+    ---------- OneSpan's ----------
     */
 
     public static SpannableString setClickable(String value, int startIndex, int endIndex, ClickableSpan clickableSpan) {
@@ -77,7 +77,7 @@ public class SpannableManager {
     }
 
     /*
-    ---------- TwoSpans ----------
+    ---------- TwoSpan's ----------
     */
 
     public static SpannableString setForegroundColorSize(String value, int startIndex, int endIndex, int color, int size) {
@@ -129,7 +129,7 @@ public class SpannableManager {
     }
 
     /*
-    ---------- ThreeSpans ----------
+    ---------- ThreeSpan's ----------
     */
 
     public static SpannableString setForegroundColorSizeStyle(String value, int startIndex, int endIndex, int color, int size, int style) {
@@ -161,7 +161,7 @@ public class SpannableManager {
     }
 
     /*
-    ---------- Builders ----------
+    ---------- Builder's ----------
     */
 
     public static SpannableStringBuilder setClicakblePhoneNumbers(Activity activity, JSONArray list) {
