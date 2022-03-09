@@ -11,9 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -21,7 +22,6 @@ import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.FragmentEditUser;
-import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.Madule.User;
@@ -125,16 +125,16 @@ public class FragmentEditUserTabAvatar extends Fragment {
     public void responseAction(String method, Intent data) {
         switch (method) {
             case "gallery":
-                ResultManager.galleryResult(requireActivity(), data);
+                GadgetManager.resultGallery(requireActivity(), data);
                 break;
             case "camera":
-                ResultManager.cameraResult(requireActivity(), avatarPath);
+                GadgetManager.resultCamera(requireActivity(), avatarPath);
                 break;
             case "crop":
-                ResultManager.cropResult(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                GadgetManager.resultCrop(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
 
-                avatarFile = ResultManager.file;
-                avatarPath = ResultManager.path;
+                avatarFile = GadgetManager.file;
+                avatarPath = GadgetManager.path;
                 break;
         }
     }

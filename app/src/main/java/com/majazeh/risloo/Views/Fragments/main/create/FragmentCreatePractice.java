@@ -17,7 +17,6 @@ import com.majazeh.risloo.databinding.FragmentCreatePracticeBinding;
 import com.majazeh.risloo.utils.managers.FileManager;
 import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -116,10 +115,10 @@ public class FragmentCreatePractice extends Fragment {
 
     public void responseAction(String method, Intent data) {
         switch (method) {
-            case "file":
-                ResultManager.documentResult(requireActivity(), data, binding.fileIncludeLayout.nameTextView);
+            case "document":
+                GadgetManager.resultDocument(requireActivity(), data, binding.fileIncludeLayout.nameTextView);
 
-                filePath = ResultManager.path;
+                filePath = GadgetManager.path;
                 break;
         }
     }

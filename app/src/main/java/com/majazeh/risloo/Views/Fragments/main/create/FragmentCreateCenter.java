@@ -13,15 +13,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.dialog.DialogSelectedAdapter;
-import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -212,16 +212,16 @@ public class FragmentCreateCenter extends Fragment {
     public void responseAction(String method, Intent data) {
         switch (method) {
             case "gallery":
-                ResultManager.galleryResult(requireActivity(), data);
+                GadgetManager.resultGallery(requireActivity(), data);
                 break;
             case "camera":
-                ResultManager.cameraResult(requireActivity(), avatarPath);
+                GadgetManager.resultCamera(requireActivity(), avatarPath);
                 break;
             case "crop":
-                ResultManager.cropResult(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
+                GadgetManager.resultCrop(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
 
-                avatarFile = ResultManager.file;
-                avatarPath = ResultManager.path;
+                avatarFile = GadgetManager.file;
+                avatarPath = GadgetManager.path;
                 break;
         }
     }
