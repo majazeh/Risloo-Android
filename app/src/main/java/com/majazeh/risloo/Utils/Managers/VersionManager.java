@@ -9,10 +9,10 @@ import com.majazeh.risloo.R;
 public class VersionManager {
 
     /*
-    ---------- Func's ----------
+    ---------- App's ----------
     */
 
-    public static int getVersionCode(Activity activity) {
+    public static int versionCode(Activity activity) {
         try {
             PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
 
@@ -24,7 +24,7 @@ public class VersionManager {
         return -1;
     }
 
-    public static String getVersionName(Activity activity) {
+    public static String versionName(Activity activity) {
         try {
             PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
 
@@ -36,7 +36,7 @@ public class VersionManager {
         return "";
     }
 
-    public static String getVersionNamePrefix(Activity activity) {
+    public static String versionNamePrefix(Activity activity) {
         try {
             PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
 
@@ -52,7 +52,7 @@ public class VersionManager {
         return "";
     }
 
-    public static String getVersionNameDesc(Activity activity) {
+    public static String versionNameDesc(Activity activity) {
         try {
             PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
 

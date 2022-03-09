@@ -5,6 +5,9 @@ import android.app.Activity;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class SelectionManager {
 
     /*
@@ -117,7 +120,7 @@ public class SelectionManager {
 
     private static String getSelection(Activity activity, String asset, String local, String value) {
         try {
-            JSONArray list = new JSONArray(JsonManager.getJson(activity, asset));
+            JSONArray list = new JSONArray(getJson(activity, asset));
 
             for (int i = 0; i < list.length(); i++) {
                 if (local.equals("en")) {
@@ -137,7 +140,7 @@ public class SelectionManager {
 
     private static String getSelection2(Activity activity, String asset, String local, String value) {
         try {
-            JSONArray list = new JSONArray(JsonManager.getJson(activity, asset));
+            JSONArray list = new JSONArray(getJson(activity, asset));
 
             for (int i = 0; i < list.length(); i++) {
                 if (local.equals("en")) {
@@ -153,6 +156,26 @@ public class SelectionManager {
         }
 
         return value;
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private static String getJson(Activity activity, String file) {
+        try {
+            InputStream inputStream = activity.getAssets().open(file);
+
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            String charset = "UTF-8";
+
+            inputStream.read(buffer);
+            inputStream.close();
+
+            return new String(buffer, charset);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 
 }
