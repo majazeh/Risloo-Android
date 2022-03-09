@@ -8,12 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.majazeh.risloo.utils.entities.Decoraton;
+import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.PermissionManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.squareup.picasso.Picasso;
 
 public class ActivityDisplay extends AppCompatActivity {
@@ -63,7 +63,7 @@ public class ActivityDisplay extends AppCompatActivity {
         CustomClickView.onClickListener(() -> IntentManager.share(this, path)).widget(binding.shareImageView);
 
         CustomClickView.onClickListener(() -> {
-            if (PermissionManager.storage(this))
+            if (GadgetManager.permissionSendTo(this))
                 IntentManager.download(this, title, path);
         }).widget(binding.downloadImageView);
 

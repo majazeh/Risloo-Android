@@ -102,7 +102,7 @@ public class GadgetManager {
         int requestCode = 100;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(activity, permissions[0]) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(activity, permissions[0]) == PackageManager.PERMISSION_GRANTED) {
                 return true;
             } else {
                 ActivityCompat.requestPermissions(activity, permissions, requestCode);
@@ -113,12 +113,12 @@ public class GadgetManager {
         }
     }
 
-    private static boolean permissionSendTo(Activity activity) {
+    public static boolean permissionSendTo(Activity activity) {
         String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
         int requestCode = 200;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(activity, permissions[0]) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(activity, permissions[0]) == PackageManager.PERMISSION_GRANTED) {
                 return true;
             } else {
                 ActivityCompat.requestPermissions(activity, permissions, requestCode);
@@ -134,7 +134,7 @@ public class GadgetManager {
         int requestCode = 300;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(activity, permissions[0]) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(activity, permissions[0]) == PackageManager.PERMISSION_GRANTED) {
                 return true;
             } else {
                 ActivityCompat.requestPermissions(activity, permissions, requestCode);
@@ -150,14 +150,14 @@ public class GadgetManager {
         int requestCode = 400;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(activity, permissions[0]) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                if (ContextCompat.checkSelfPermission(activity, permissions[1]) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(activity, permissions[0]) == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(activity, permissions[1]) == PackageManager.PERMISSION_GRANTED) {
                     return true;
                 } else {
                     ActivityCompat.requestPermissions(activity, new String[]{permissions[1]}, requestCode);
                     return false;
                 }
-            } else if (ContextCompat.checkSelfPermission(activity, permissions[1]) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            } else if (ContextCompat.checkSelfPermission(activity, permissions[1]) == PackageManager.PERMISSION_GRANTED) {
                 if (ContextCompat.checkSelfPermission(activity, permissions[0]) == PackageManager.PERMISSION_GRANTED) {
                     return true;
                 } else {

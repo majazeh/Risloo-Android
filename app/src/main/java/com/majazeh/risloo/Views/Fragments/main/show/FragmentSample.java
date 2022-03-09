@@ -12,10 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentSampleBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.PermissionManager;
 import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -25,7 +26,6 @@ import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexProfileAdapter
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableGenAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableItemAdapter;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TablePreAdapter;
-import com.majazeh.risloo.databinding.FragmentSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -149,7 +149,7 @@ public class FragmentSample extends Fragment {
                 if (userSelect) {
                     selectedProfileUrl = profileUrls.get(position);
 
-                    if (PermissionManager.storage(requireActivity()))
+                    if (GadgetManager.permissionSendTo(requireActivity()))
                         IntentManager.download(requireActivity(), binding.scaleTextView.getText().toString(), selectedProfileUrl);
 
                     parent.setSelection(parent.getAdapter().getCount());
