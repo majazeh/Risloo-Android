@@ -12,15 +12,14 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.BottomSheetImageBinding;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.PermissionManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenter;
-import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabAvatar;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditCenterTabAvatar;
-import com.majazeh.risloo.databinding.BottomSheetImageBinding;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabAvatar;
 
 public class SheetImage extends BottomSheetDialogFragment {
 
@@ -60,23 +59,20 @@ public class SheetImage extends BottomSheetDialogFragment {
 
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            if (PermissionManager.gallery(requireActivity()))
-                IntentManager.gallery(requireActivity());
+            IntentManager.gallery(requireActivity());
 
             dismiss();
         }).widget(binding.galleryTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            if (PermissionManager.camera(requireActivity())) {
-                if (current instanceof FragmentCreateCenter)
-                    ((FragmentCreateCenter) current).avatarPath = IntentManager.camera(requireActivity());
+            if (current instanceof FragmentCreateCenter)
+                ((FragmentCreateCenter) current).avatarPath = IntentManager.camera(requireActivity());
 
-                if (child instanceof FragmentEditCenterTabAvatar)
-                    ((FragmentEditCenterTabAvatar) child).avatarPath = IntentManager.camera(requireActivity());
+            if (child instanceof FragmentEditCenterTabAvatar)
+                ((FragmentEditCenterTabAvatar) child).avatarPath = IntentManager.camera(requireActivity());
 
-                if (child instanceof FragmentEditUserTabAvatar)
-                    ((FragmentEditUserTabAvatar) child).avatarPath = IntentManager.camera(requireActivity());
-            }
+            if (child instanceof FragmentEditUserTabAvatar)
+                ((FragmentEditUserTabAvatar) child).avatarPath = IntentManager.camera(requireActivity());
 
             dismiss();
         }).widget(binding.cameraTextView.getRoot());

@@ -13,15 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentCreatePracticeBinding;
 import com.majazeh.risloo.utils.managers.FileManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.PermissionManager;
 import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.databinding.FragmentCreatePracticeBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -86,10 +85,7 @@ public class FragmentCreatePractice extends Fragment {
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        CustomClickView.onDelayedListener(() -> {
-            if (PermissionManager.file(requireActivity()))
-                IntentManager.file(requireActivity());
-        }).widget(binding.fileIncludeLayout.selectTextView);
+        CustomClickView.onDelayedListener(() -> IntentManager.file(requireActivity())).widget(binding.fileIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)

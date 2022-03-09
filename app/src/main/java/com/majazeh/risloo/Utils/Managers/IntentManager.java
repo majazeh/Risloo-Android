@@ -70,45 +70,58 @@ public class IntentManager {
     */
 
     public static void file(Activity activity) {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        intent.setType("*/*");
+        if (PermissionManager.file(activity)) {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
-        activity.startActivityForResult(intent, 100);
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            intent.setType("*/*");
+
+            activity.startActivityForResult(intent, 100);
+        }
     }
 
     public static void sendTo(Activity activity, String number, String name, String value) {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("smsto:" + number));
-        intent.putExtra(name, value);
+        if (PermissionManager.storage(activity)) {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
 
-        activity.startActivityForResult(intent, 200);
+            intent.setData(Uri.parse("smsto:" + number));
+            intent.putExtra(name, value);
+
+            activity.startActivityForResult(intent, 200);
+        }
     }
 
     public static void gallery(Activity activity) {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
+        if (PermissionManager.gallery(activity)) {
+            Intent intent = new Intent(Intent.ACTION_PICK);
 
-        activity.startActivityForResult(intent, 300);
+            intent.setType("image/*");
+
+            activity.startActivityForResult(intent, 300);
+        }
     }
 
     public static String camera(Activity activity) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (PermissionManager.camera(activity)) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        File file = FileManager.createImageExternalFilesTempPath(activity, Environment.DIRECTORY_PICTURES);
-        if (file != null) {
-            Uri uri;
+            File file = FileManager.createImageExternalFilesTempPath(activity, Environment.DIRECTORY_PICTURES);
+            if (file != null) {
+                Uri uri;
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file);
-            else
-                uri = Uri.fromFile(file);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                    uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file);
+                else
+                    uri = Uri.fromFile(file);
 
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
-            activity.startActivityForResult(intent, 400);
+                activity.startActivityForResult(intent, 400);
 
-            return file.getAbsolutePath();
+                return file.getAbsolutePath();
+            }
+
+            return "";
         }
 
         return "";
@@ -259,12 +272,14 @@ public class IntentManager {
 
     public static void googlePlay(Context context) {
         Intent intent;
+
         try {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + "com.majazeh.risloo"));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         } catch (ActivityNotFoundException e) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + "com.majazeh.risloo"));
         }
+
         context.startActivity(intent);
     }
 
