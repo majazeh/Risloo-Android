@@ -9,17 +9,17 @@ public class TransitionManager {
     ---------- Func's ----------
     */
 
-    public static void transitionStart(View view, int duration) {
+    public static void transitionViewStart(View view, int duration) {
         TransitionDrawable transitionDrawable = (TransitionDrawable) view.getBackground();
         transitionDrawable.startTransition(duration);
     }
 
-    public static void transitionReverse(View view, int duration) {
+    public static void transitionViewReverse(View view, int duration) {
         TransitionDrawable transitionDrawable = (TransitionDrawable) view.getBackground();
         transitionDrawable.reverseTransition(duration);
     }
 
-    public static void transitionReset(View view) {
+    public static void transitionViewReset(View view) {
         TransitionDrawable transitionDrawable = (TransitionDrawable) view.getBackground();
         transitionDrawable.resetTransition();
     }

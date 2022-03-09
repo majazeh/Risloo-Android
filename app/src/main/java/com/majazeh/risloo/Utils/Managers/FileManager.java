@@ -9,7 +9,7 @@ import java.io.IOException;
 public class FileManager {
 
     /*
-    ---------- Create ----------
+    ---------- Create's ----------
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -87,7 +87,7 @@ public class FileManager {
     }
 
     /*
-    ---------- Has ----------
+    ---------- Has's ----------
     */
 
     public static boolean hasInternalCachePath(Activity activity, String title) {
@@ -127,7 +127,7 @@ public class FileManager {
     }
 
     /*
-    ---------- Delete ----------
+    ---------- Delete's ----------
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -180,7 +180,7 @@ public class FileManager {
 
 
     /*
-    ---------- Clear ----------
+    ---------- Clear's ----------
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -280,7 +280,7 @@ public class FileManager {
     }
 
     /*
-    ---------- List ----------
+    ---------- List's ----------
     */
 
     public static File[] listFilesInternalCachePath(Activity activity, String title) {
