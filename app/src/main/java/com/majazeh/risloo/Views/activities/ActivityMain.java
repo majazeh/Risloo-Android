@@ -33,6 +33,7 @@ import com.majazeh.risloo.utils.entities.Permissoon;
 import com.majazeh.risloo.utils.entities.Singleton;
 import com.majazeh.risloo.utils.entities.Validatoon;
 import com.majazeh.risloo.utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.ListManager;
@@ -402,7 +403,7 @@ public class ActivityMain extends AppCompatActivity {
 
             switch (requestCode) {
                 case 100:
-                    IntentManager.document(this);
+                    GadgetManager.requestDocument(this);
                     break;
                 case 200:
                     if (fragmont.getCurrent() instanceof FragmentSample)
@@ -410,17 +411,17 @@ public class ActivityMain extends AppCompatActivity {
 
                     break;
                 case 300:
-                    IntentManager.gallery(this);
+                    GadgetManager.requestGallery(this);
                     break;
                 case 400:
                     if (fragmont.getCurrent() instanceof FragmentCreateCenter)
-                        ((FragmentCreateCenter) fragmont.getCurrent()).avatarPath = IntentManager.camera(this);
+                        ((FragmentCreateCenter) fragmont.getCurrent()).avatarPath = GadgetManager.requestCamera(this);
 
                     if (fragmont.getChild() instanceof FragmentEditCenterTabAvatar)
-                        ((FragmentEditCenterTabAvatar) fragmont.getChild()).avatarPath = IntentManager.camera(this);
+                        ((FragmentEditCenterTabAvatar) fragmont.getChild()).avatarPath = GadgetManager.requestCamera(this);
 
                     if (fragmont.getChild() instanceof FragmentEditUserTabAvatar)
-                        ((FragmentEditUserTabAvatar) fragmont.getChild()).avatarPath = IntentManager.camera(this);
+                        ((FragmentEditUserTabAvatar) fragmont.getChild()).avatarPath = GadgetManager.requestCamera(this);
 
                     break;
             }

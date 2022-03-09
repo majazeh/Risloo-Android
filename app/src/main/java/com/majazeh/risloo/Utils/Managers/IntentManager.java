@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.provider.Settings;
 
 import androidx.core.content.FileProvider;
@@ -68,64 +67,6 @@ public class IntentManager {
     /*
     ---------- Requests ----------
     */
-
-    public static void document(Activity activity) {
-        if (PermissionManager.document(activity)) {
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-
-            intent.addCategory(Intent.CATEGORY_DEFAULT);
-            intent.setType("*/*");
-
-            activity.startActivityForResult(intent, 100);
-        }
-    }
-
-    public static void sendTo(Activity activity, String number, String name, String value) {
-        if (PermissionManager.storage(activity)) {
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-
-            intent.setData(Uri.parse("smsto:" + number));
-            intent.putExtra(name, value);
-
-            activity.startActivityForResult(intent, 200);
-        }
-    }
-
-    public static void gallery(Activity activity) {
-        if (PermissionManager.gallery(activity)) {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-
-            intent.setType("image/*");
-
-            activity.startActivityForResult(intent, 300);
-        }
-    }
-
-    public static String camera(Activity activity) {
-        if (PermissionManager.camera(activity)) {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            File file = FileManager.createImageExternalFilesTempPath(activity, Environment.DIRECTORY_PICTURES);
-            if (file != null) {
-                Uri uri;
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                    uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file);
-                else
-                    uri = Uri.fromFile(file);
-
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-
-                activity.startActivityForResult(intent, 400);
-
-                return file.getAbsolutePath();
-            }
-
-            return "";
-        }
-
-        return "";
-    }
 
     public static void crop(Activity activity, Uri uri) {
         UCrop.Options options = new UCrop.Options();
