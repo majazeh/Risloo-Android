@@ -68,8 +68,9 @@ public class StreamManager {
             return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
     public static JSONObject loadObjectFromStream(File file) {
@@ -82,8 +83,9 @@ public class StreamManager {
             return object;
         } catch (IOException | JSONException | ClassNotFoundException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
     public static JSONArray loadArrayFromStream(File file) {
@@ -96,8 +98,9 @@ public class StreamManager {
             return array;
         } catch (IOException | JSONException | ClassNotFoundException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
 }

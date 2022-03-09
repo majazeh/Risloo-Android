@@ -112,7 +112,7 @@ public class SelectionManager {
     }
 
     /*
-    ---------- Private ----------
+    ---------- Locals ----------
     */
 
     private static String getSelection(Activity activity, String asset, String local, String value) {
@@ -130,7 +130,9 @@ public class SelectionManager {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        } return value;
+        }
+
+        return value;
     }
 
     private static String getSelection2(Activity activity, String asset, String local, String value) {
@@ -148,7 +150,9 @@ public class SelectionManager {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        } return value;
+        }
+
+        return value;
     }
 
 }
