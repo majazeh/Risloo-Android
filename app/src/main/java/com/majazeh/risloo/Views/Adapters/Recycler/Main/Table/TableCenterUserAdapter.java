@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -153,7 +153,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getUserType(activity, "en", pos), "position");
+                    doWork(holder, model, JsonManager.getUserType(activity, "en", pos), "position");
 
                     userSelect = false;
                 }
@@ -226,7 +226,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void setPosition(TableCenterUserHolder holder, UserModel model) {
-        String position = SelectionManager.getUserType(activity, "fa", model.getPosition());
+        String position = JsonManager.getUserType(activity, "fa", model.getPosition());
         for (int i=0; i<holder.binding.positionSpinner.getCount(); i++) {
             if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
                 holder.binding.positionSpinner.setSelection(i);
@@ -257,28 +257,28 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         if (model.getKickedAt() != 0 && model.getAcceptedAt() != 0) {
-            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
+            holder.binding.statusTexView.setText(JsonManager.getAcceptation(activity, "fa", "kicked"));
 
             holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getAcceptedAt()), "-"));
             holder.binding.kickedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getKickedAt()), "-"));
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
         } else if (model.getKickedAt() != 0) {
-            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
+            holder.binding.statusTexView.setText(JsonManager.getAcceptation(activity, "fa", "kicked"));
 
             holder.binding.acceptedTextView.setText("");
             holder.binding.kickedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getKickedAt()), "-"));
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterAccept));
         } else if (model.getAcceptedAt() != 0) {
-            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "accepted"));
+            holder.binding.statusTexView.setText(JsonManager.getAcceptation(activity, "fa", "accepted"));
 
             holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getAcceptedAt()), "-"));
             holder.binding.kickedTextView.setText("");
 
             items.add(activity.getResources().getString(R.string.CenterUserAdapterKick));
         } else {
-            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "waiting"));
+            holder.binding.statusTexView.setText(JsonManager.getAcceptation(activity, "fa", "waiting"));
 
             holder.binding.acceptedTextView.setText("");
             holder.binding.kickedTextView.setText("");

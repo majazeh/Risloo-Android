@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSampleHolder;
@@ -216,7 +216,7 @@ public class TableSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void setStatus(TableSampleHolder holder, String status) {
-        holder.binding.statusTextView.setText(SelectionManager.getSampleStatus2(activity, "fa", status));
+        holder.binding.statusTextView.setText(JsonManager.getSampleStatus2(activity, "fa", status));
 
         switch (status) {
             case "seald":

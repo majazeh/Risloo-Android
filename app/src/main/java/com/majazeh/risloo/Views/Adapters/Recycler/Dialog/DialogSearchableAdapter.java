@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.adapters.holder.dialog.DialogSearchableHolder;
@@ -181,7 +181,7 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 case "sessions": {
                     SessionModel model = (SessionModel) item;
 
-                    String primaryText = model.getId() + " " + "(" + SelectionManager.getSessionStatus(activity, "fa", model.getStatus()) + ")";
+                    String primaryText = model.getId() + " " + "(" + JsonManager.getSessionStatus(activity, "fa", model.getStatus()) + ")";
                     String secondaryText = DateManager.jalND(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHcMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
                     holder.binding.titleTextView.setText(SpannableManager.spanForegroundColorSize(primaryText, 10, primaryText.length(), activity.getResources().getColor(R.color.coolGray600), (int) activity.getResources().getDimension(R.dimen._8ssp)));

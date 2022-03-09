@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Table.TableTimeAdapter;
@@ -89,7 +89,7 @@ public class FragmentBill extends Fragment {
         }
 
         if (model.getType() != null && !model.getType().equals("")) {
-            binding.statusTextView.setText(SelectionManager.getBillType(requireActivity(), "fa", model.getType()));
+            binding.statusTextView.setText(JsonManager.getBillType(requireActivity(), "fa", model.getType()));
         }
 
         if (model.getAmount() != 0) {

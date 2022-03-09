@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -218,7 +218,7 @@ public class IndexScheduleAdapter extends RecyclerView.Adapter<IndexScheduleHold
     }
 
     private void setStatus(IndexScheduleHolder holder, String status) {
-        holder.binding.statusTextView.setText(SelectionManager.getSessionStatus2(activity, "fa", status));
+        holder.binding.statusTextView.setText(JsonManager.getSessionStatus2(activity, "fa", status));
 
         switch (status) {
             case "registration_awaiting":

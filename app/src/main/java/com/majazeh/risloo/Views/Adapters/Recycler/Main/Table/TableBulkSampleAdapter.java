@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -162,7 +162,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         try {
             holder.binding.serialTextView.setText(model.getId());
             holder.binding.nameTextView.setText(model.getTitle());
-            holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCaseStatus()));
+            holder.binding.caseTextView.setText(JsonManager.getCaseStatus(activity, "fa", model.getCaseStatus()));
 
             if (model.getRoom() != null && model.getRoom().getManager() != null)
                 holder.binding.roomTextView.setText(model.getRoom().getManager().getName());
@@ -173,7 +173,7 @@ public class TableBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             if (model.getRoom() != null && model.getRoom().getType() != null && model.getRoom().getType().equals("personal_clinic"))
                 holder.binding.centerTextView.setVisibility(View.GONE);
 
-            holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getStatus()));
+            holder.binding.statusTextView.setText(JsonManager.getSampleStatus(activity, "fa", model.getStatus()));
             holder.binding.referenceTextView.setText(model.getMembersCount() + " / " + model.getJoined());
 
             setMenu(holder, model);

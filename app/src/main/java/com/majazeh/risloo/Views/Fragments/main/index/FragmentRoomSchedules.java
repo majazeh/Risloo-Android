@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
@@ -215,7 +215,7 @@ public class FragmentRoomSchedules extends Fragment {
                         if (!filterStatus.equals(item.object.get("id").toString())) {
                             filterStatus = item.object.get("id").toString();
 
-                            binding.filterIncludeLayout.statusFilterLayout.titleTextView.setText(SelectionManager.getSessionStatus2(requireActivity(), "fa", filterStatus));
+                            binding.filterIncludeLayout.statusFilterLayout.titleTextView.setText(JsonManager.getSessionStatus2(requireActivity(), "fa", filterStatus));
                             binding.filterIncludeLayout.statusFilterLayout.getRoot().setVisibility(View.VISIBLE);
                         } else if (filterStatus.equals(item.object.get("id").toString())) {
                             filterStatus = "";

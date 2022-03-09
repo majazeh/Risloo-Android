@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -204,11 +204,11 @@ public class FragmentBulkSample extends Fragment {
             }
 
             if (model.getCaseStatus() != null && !model.getCaseStatus().equals("")) {
-                binding.caseTextView.setText(SelectionManager.getCaseStatus(requireActivity(), "fa", model.getCaseStatus()));
+                binding.caseTextView.setText(JsonManager.getCaseStatus(requireActivity(), "fa", model.getCaseStatus()));
             }
 
             if (model.getStatus() != null && !model.getStatus().equals("")) {
-                binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", model.getStatus()));
+                binding.statusTextView.setText(JsonManager.getSampleStatus(requireActivity(), "fa", model.getStatus()));
             }
 
             if (model.getMembersCount() != -1 && model.getJoined() != -1) {

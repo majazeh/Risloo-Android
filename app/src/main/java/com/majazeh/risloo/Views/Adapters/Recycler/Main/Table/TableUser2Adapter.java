@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -169,7 +169,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(model, SelectionManager.getUserPosition(activity, "en", pos), "position");
+                    doWork(model, JsonManager.getUserPosition(activity, "en", pos), "position");
 
                     userSelect = false;
                 }
@@ -239,7 +239,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void setPosition(TableUser2Holder holder, UserModel model) {
-        String position = SelectionManager.getUserPosition(activity, "fa", model.getPosition());
+        String position = JsonManager.getUserPosition(activity, "fa", model.getPosition());
         for (int i=0; i<holder.binding.positionSpinner.getCount(); i++) {
             if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
                 holder.binding.positionSpinner.setSelection(i);

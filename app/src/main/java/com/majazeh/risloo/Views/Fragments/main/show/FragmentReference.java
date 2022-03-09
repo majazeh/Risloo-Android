@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -199,7 +199,7 @@ public class FragmentReference extends Fragment {
         }
 
         if (model.getPosition() != null && !model.getPosition().equals("")) {
-            binding.statusTextView.setText(SelectionManager.getReferencePosition(requireActivity(), "fa", model.getPosition()));
+            binding.statusTextView.setText(JsonManager.getReferencePosition(requireActivity(), "fa", model.getPosition()));
             binding.statusTextView.setVisibility(View.VISIBLE);
         } else {
             binding.statusTextView.setVisibility(View.GONE);
@@ -244,7 +244,7 @@ public class FragmentReference extends Fragment {
         }
 
         if (model != null && model.getPosition() != null && !model.getPosition().equals("")) {
-            binding.statusTextView.setText(SelectionManager.getReferencePosition(requireActivity(), "fa", model.getPosition()));
+            binding.statusTextView.setText(JsonManager.getReferencePosition(requireActivity(), "fa", model.getPosition()));
             binding.statusTextView.setVisibility(View.VISIBLE);
         } else {
             binding.statusTextView.setVisibility(View.GONE);

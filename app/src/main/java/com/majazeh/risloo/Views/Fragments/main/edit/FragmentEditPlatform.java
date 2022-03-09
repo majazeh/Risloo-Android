@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.databinding.FragmentEditPlatformBinding;
 import com.mre.ligheh.API.Response;
@@ -225,7 +225,7 @@ public class FragmentEditPlatform extends Fragment {
         }
 
         if (model.getType() != null && !model.getType().equals("")) {
-            sessionType = SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType());
+            sessionType = JsonManager.getPlatformSession(requireActivity(), "fa", model.getType());
             for (int i = 0; i < binding.sessionTypeIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.sessionTypeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(sessionType)) {
                     binding.sessionTypeIncludeLayout.selectSpinner.setSelection(i);
@@ -234,7 +234,7 @@ public class FragmentEditPlatform extends Fragment {
         }
 
         if (model.getIdentifierType() != null && !model.getIdentifierType().equals("")) {
-            indentifierType = SelectionManager.getPlatformIdentifier(requireActivity(), "fa", model.getIdentifierType());
+            indentifierType = JsonManager.getPlatformIdentifier(requireActivity(), "fa", model.getIdentifierType());
             for (int i = 0; i < binding.indentifierTypeIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.indentifierTypeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(indentifierType)) {
                     binding.indentifierTypeIncludeLayout.selectSpinner.setSelection(i);
@@ -280,12 +280,12 @@ public class FragmentEditPlatform extends Fragment {
             data.remove("title");
 
         if (!sessionType.equals(""))
-            data.put("type", SelectionManager.getPlatformSession(requireActivity(), "en", sessionType));
+            data.put("type", JsonManager.getPlatformSession(requireActivity(), "en", sessionType));
         else
             data.remove("type");
 
         if (!indentifierType.equals(""))
-            data.put("identifier_type", SelectionManager.getPlatformIdentifier(requireActivity(), "en", indentifierType));
+            data.put("identifier_type", JsonManager.getPlatformIdentifier(requireActivity(), "en", indentifierType));
         else
             data.remove("identifier_type");
 

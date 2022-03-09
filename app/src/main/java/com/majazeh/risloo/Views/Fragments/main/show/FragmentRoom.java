@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -517,7 +517,7 @@ public class FragmentRoom extends Fragment {
                 InitManager.txtTextColorBackground(binding.actionTextView.getRoot(), getResources().getString(R.string.RoomFragmentSchedules), getResources().getColor(R.color.risloo500), R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 binding.statusTextView.setVisibility(View.VISIBLE);
-                binding.statusTextView.setText(SelectionManager.getCenterStatus(requireActivity(), "fa", status));
+                binding.statusTextView.setText(JsonManager.getCenterStatus(requireActivity(), "fa", status));
 
                 switch (status) {
                     case "accepted":

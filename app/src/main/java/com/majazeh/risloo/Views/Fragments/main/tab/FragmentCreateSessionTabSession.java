@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
@@ -396,7 +396,7 @@ public class FragmentCreateSessionTabSession extends Fragment {
 
     public void setHashmap(HashMap data) {
         if (!status.equals(""))
-            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", status));
+            data.put("status", JsonManager.getSessionStatus(requireActivity(), "en", status));
         else
             data.remove("status");
 

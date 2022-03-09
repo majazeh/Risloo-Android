@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.utils.managers.DateManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderRoomUserHolder;
@@ -113,23 +113,23 @@ public class TableRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.View
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
-        holder.binding.positionTextView.setText(SelectionManager.getUserType(activity, "fa", model.getPosition()));
+        holder.binding.positionTextView.setText(JsonManager.getUserType(activity, "fa", model.getPosition()));
 
         setAcceptation(holder, model);
     }
 
     private void setAcceptation(TableRoomUserHolder holder, UserModel model) {
         if (model.getKickedAt() != 0 && model.getAcceptedAt() != 0) {
-            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
+            holder.binding.statusTexView.setText(JsonManager.getAcceptation(activity, "fa", "kicked"));
             holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getKickedAt()), "-"));
         } else if (model.getKickedAt() != 0) {
-            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "kicked"));
+            holder.binding.statusTexView.setText(JsonManager.getAcceptation(activity, "fa", "kicked"));
             holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getKickedAt()), "-"));
         } else if (model.getAcceptedAt() != 0) {
-            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "accepted"));
+            holder.binding.statusTexView.setText(JsonManager.getAcceptation(activity, "fa", "accepted"));
             holder.binding.acceptedTextView.setText(DateManager.jalHHcMMsYYsMMsDD(String.valueOf(model.getAcceptedAt()), "-"));
         } else {
-            holder.binding.statusTexView.setText(SelectionManager.getAcceptation(activity, "fa", "waiting"));
+            holder.binding.statusTexView.setText(JsonManager.getAcceptation(activity, "fa", "waiting"));
             holder.binding.acceptedTextView.setText("");
         }
     }

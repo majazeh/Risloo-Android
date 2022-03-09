@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -133,7 +133,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(model, SelectionManager.getSessionStatus(activity, "en", pos));
+                    doWork(model, JsonManager.getSessionStatus(activity, "en", pos));
 
                     userSelect = false;
                 }
@@ -159,7 +159,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     private void setStatus(TableSession2Holder holder, SessionModel model) {
-        String status = SelectionManager.getSessionStatus(activity, "fa", model.getStatus());
+        String status = JsonManager.getSessionStatus(activity, "fa", model.getStatus());
         for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
             if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
                 holder.binding.statusSpinner.setSelection(i);

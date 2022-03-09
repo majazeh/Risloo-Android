@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -285,7 +285,7 @@ public class FragmentCreateBill extends Fragment {
             data.remove("user_id");
 
         if (!type.equals(""))
-            data.put("type", SelectionManager.getBillType(requireActivity(), "en", type));
+            data.put("type", JsonManager.getBillType(requireActivity(), "en", type));
         else
             data.remove("type");
 

@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -277,14 +277,14 @@ public class FragmentSession extends Fragment {
 
         if (model.getPaymentStatus() != null && !model.getPaymentStatus().equals("")) {
             binding.paymentGroup.setVisibility(View.VISIBLE);
-            binding.paymentTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPaymentStatus()));
+            binding.paymentTextView.setText(JsonManager.getPaymentStatus(requireActivity(), "fa", model.getPaymentStatus()));
         } else {
             binding.paymentGroup.setVisibility(View.GONE);
         }
 
         if (model.getClientsType() != null && !model.getClientsType().equals("")) {
             binding.clientGroup.setVisibility(View.VISIBLE);
-            binding.clientTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClientsType()));
+            binding.clientTextView.setText(JsonManager.getClientType(requireActivity(), "fa", model.getClientsType()));
         } else {
             binding.clientGroup.setVisibility(View.GONE);
         }
@@ -385,14 +385,14 @@ public class FragmentSession extends Fragment {
 
         if (model.getPaymentStatus() != null && !model.getPaymentStatus().equals("")) {
             binding.paymentGroup.setVisibility(View.VISIBLE);
-            binding.paymentTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPaymentStatus()));
+            binding.paymentTextView.setText(JsonManager.getPaymentStatus(requireActivity(), "fa", model.getPaymentStatus()));
         } else {
             binding.paymentGroup.setVisibility(View.GONE);
         }
 
         if (model.getClientsType() != null && !model.getClientsType().equals("")) {
             binding.clientGroup.setVisibility(View.VISIBLE);
-            binding.clientTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClientsType()));
+            binding.clientTextView.setText(JsonManager.getClientType(requireActivity(), "fa", model.getClientsType()));
         } else {
             binding.clientGroup.setVisibility(View.GONE);
         }
@@ -420,7 +420,7 @@ public class FragmentSession extends Fragment {
     }
 
     private void setStatus(String status) {
-        binding.statusTextView.setText(SelectionManager.getSessionStatus2(requireActivity(), "fa", status));
+        binding.statusTextView.setText(JsonManager.getSessionStatus2(requireActivity(), "fa", status));
 
         switch (status) {
             case "registration_awaiting":

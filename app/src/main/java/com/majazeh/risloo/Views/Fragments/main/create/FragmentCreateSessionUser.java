@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -223,7 +223,7 @@ public class FragmentCreateSessionUser extends Fragment {
             SessionPlatformModel model = (SessionPlatformModel) typeModel;
 
             if (model != null) {
-                options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
+                options.add(model.getTitle() + " " + StringManager.bracing(JsonManager.getPlatformSession(requireActivity(), "fa", model.getType())));
                 platformIds.add(model.getId());
             }
         }

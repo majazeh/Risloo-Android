@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexBankHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexBankBinding;
@@ -211,7 +211,7 @@ public class IndexBankAdapter extends RecyclerView.Adapter<IndexBankHolder> {
     }
 
     private void setStatus(IndexBankHolder holder, String status) {
-        holder.binding.statusTextView.setText(SelectionManager.getIbanStatus(activity, "fa", status));
+        holder.binding.statusTextView.setText(JsonManager.getIbanStatus(activity, "fa", status));
 
         switch (status) {
             case "verified":

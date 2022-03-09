@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -108,7 +108,7 @@ public class FragmentSample extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            String status = SelectionManager.getSampleStatus(requireActivity(), "en", binding.statusTextView.getText().toString());
+            String status = JsonManager.getSampleStatus(requireActivity(), "en", binding.statusTextView.getText().toString());
 
             switch (status) {
                 case "seald":
@@ -122,7 +122,7 @@ public class FragmentSample extends Fragment {
         }).widget(binding.primaryTextView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
-            String status = SelectionManager.getSampleStatus(requireActivity(), "en", binding.statusTextView.getText().toString());
+            String status = JsonManager.getSampleStatus(requireActivity(), "en", binding.statusTextView.getText().toString());
 
             switch (status) {
                 case "seald":
@@ -230,7 +230,7 @@ public class FragmentSample extends Fragment {
     }
 
     private void setText(String status) {
-        binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", status));
+        binding.statusTextView.setText(JsonManager.getSampleStatus(requireActivity(), "fa", status));
 
         switch (status) {
             case "scoring":

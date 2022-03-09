@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -115,13 +115,13 @@ public class TablePaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         holder.binding.dateTextView.setText(DateManager.jalNDsDDsNMsYYYYnHHcMM(String.valueOf(model.getCreatedAt()), " "));
 
         if (model.getStatus().equals("expired")) {
-            holder.binding.statusTextView.setText(SelectionManager.getPaymentType(activity, "fa", model.getStatus()));
+            holder.binding.statusTextView.setText(JsonManager.getPaymentType(activity, "fa", model.getStatus()));
             holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.coolGray700));
         } else if (model.getStatus().equals("fail")) {
-            holder.binding.statusTextView.setText(SelectionManager.getPaymentType(activity, "fa", model.getStatus()));
+            holder.binding.statusTextView.setText(JsonManager.getPaymentType(activity, "fa", model.getStatus()));
             holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.red600));
         } else {
-            holder.binding.statusTextView.setText(SelectionManager.getPaymentType(activity, "fa", model.getStatus()));
+            holder.binding.statusTextView.setText(JsonManager.getPaymentType(activity, "fa", model.getStatus()));
             holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.emerald600));
         }
     }

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderUserHolder;
@@ -142,8 +142,8 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void setData(TableUserHolder holder, UserModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
-        holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getType()));
-        holder.binding.statusTextView.setText(SelectionManager.getUserStatus(activity, "fa", model.getStatus()));
+        holder.binding.typeTextView.setText(JsonManager.getUserType(activity, "fa", model.getType()));
+        holder.binding.statusTextView.setText(JsonManager.getUserStatus(activity, "fa", model.getStatus()));
 
         setMenu(holder, model);
     }

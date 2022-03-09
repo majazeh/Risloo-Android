@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.utils.managers.DateManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSessionHolder;
@@ -114,7 +114,7 @@ public class TableSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             holder.binding.startTimeTextView.setText(DateManager.jalNDsDDsNMsYYYYnHHcMM(String.valueOf(model.getStartedAt()), " "));
             holder.binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
-            holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
+            holder.binding.statusTextView.setText(JsonManager.getSessionStatus(activity, "fa", model.getStatus()));
 
             if (model.getCasse() != null)
                 holder.binding.caseTextView.setText(model.getCasse().getId());

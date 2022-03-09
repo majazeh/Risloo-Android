@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabSessionBinding;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -321,7 +321,7 @@ public class FragmentEditSessionTabSession extends Fragment {
             SessionModel model = ((FragmentEditSession) current).sessionModel;
 
             if (model.getStatus() != null && !model.getStatus().equals("")) {
-                status = SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus());
+                status = JsonManager.getSessionStatus(requireActivity(), "fa", model.getStatus());
                 for (int i=0; i<binding.statusIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.statusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
                         binding.statusIncludeLayout.selectSpinner.setSelection(i);
@@ -466,7 +466,7 @@ public class FragmentEditSessionTabSession extends Fragment {
 
     public void setHashmap(HashMap data) {
         if (!status.equals(""))
-            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", status));
+            data.put("status", JsonManager.getSessionStatus(requireActivity(), "en", status));
         else
             data.remove("status");
 

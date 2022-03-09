@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.FragmentEditSession;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabPaymentBinding;
@@ -94,7 +94,7 @@ public class FragmentEditSessionTabPayment extends Fragment {
             SessionModel model = ((FragmentEditSession) current).sessionModel;
 
             if (model.getPaymentStatus() != null && !model.getPaymentStatus().equals("")) {
-                payment = SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPaymentStatus());
+                payment = JsonManager.getPaymentStatus(requireActivity(), "fa", model.getPaymentStatus());
                 for (int i = 0; i < binding.paymentIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.paymentIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(payment)) {
                         binding.paymentIncludeLayout.selectSpinner.setSelection(i);
@@ -106,7 +106,7 @@ public class FragmentEditSessionTabPayment extends Fragment {
 
     public void setHashmap(HashMap data) {
         if (!payment.equals(""))
-            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", payment));
+            data.put("payment_status", JsonManager.getPaymentStatus(requireActivity(), "en", payment));
         else
             data.remove("payment_status");
     }

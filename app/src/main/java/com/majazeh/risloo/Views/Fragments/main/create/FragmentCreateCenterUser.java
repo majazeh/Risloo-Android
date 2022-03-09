@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -235,7 +235,7 @@ public class FragmentCreateCenterUser extends Fragment {
 
         if (type.equals("counseling_center")) {
             if (!position.equals(""))
-                data.put("position", SelectionManager.getUserType(requireActivity(), "en", position));
+                data.put("position", JsonManager.getUserType(requireActivity(), "en", position));
             else
                 data.remove("position");
 

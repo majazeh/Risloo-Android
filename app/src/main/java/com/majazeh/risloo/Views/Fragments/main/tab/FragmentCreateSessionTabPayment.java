@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -109,7 +109,7 @@ public class FragmentCreateSessionTabPayment extends Fragment {
 
     public void setHashmap(HashMap data) {
         if (!payment.equals(""))
-            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", payment));
+            data.put("payment_status", JsonManager.getPaymentStatus(requireActivity(), "en", payment));
         else
             data.remove("payment_status");
 

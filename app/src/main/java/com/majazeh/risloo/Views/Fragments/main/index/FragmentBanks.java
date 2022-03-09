@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -406,7 +406,7 @@ public class FragmentBanks extends Fragment {
                 binding.scheduleHelperView.getRoot().setVisibility(View.GONE);
 
                 if (scheduling.getString("type") != null && !scheduling.getString("type").equals("")) {
-                    type = SelectionManager.getIbanType(requireActivity(), "fa", scheduling.getString("type"));
+                    type = JsonManager.getIbanType(requireActivity(), "fa", scheduling.getString("type"));
 
                     switch (type) {
                         case "تسویه آنی":
@@ -583,7 +583,7 @@ public class FragmentBanks extends Fragment {
                 data.remove("iban_id");
 
             if (!type.equals("")) {
-                data.put("type", SelectionManager.getIbanType(requireActivity(), "en", type));
+                data.put("type", JsonManager.getIbanType(requireActivity(), "en", type));
 
                 switch (type) {
                     case "تسویه آنی":

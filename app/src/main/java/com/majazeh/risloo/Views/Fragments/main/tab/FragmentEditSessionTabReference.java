@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.edit.FragmentEditSession;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabReferenceBinding;
@@ -250,7 +250,7 @@ public class FragmentEditSessionTabReference extends Fragment {
             }
 
             if (model.getSelectionType() != null && !model.getSelectionType().equals("")) {
-                selection = SelectionManager.getSelectionType(requireActivity(), "fa", model.getSelectionType());
+                selection = JsonManager.getSelectionType(requireActivity(), "fa", model.getSelectionType());
                 for (int i = 0; i < binding.selectionIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.selectionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(selection)) {
                         binding.selectionIncludeLayout.selectSpinner.setSelection(i);
@@ -332,7 +332,7 @@ public class FragmentEditSessionTabReference extends Fragment {
 
     public void setHashmap(HashMap data) {
         if (!selection.equals(""))
-            data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", selection));
+            data.put("selection_type", JsonManager.getSelectionType(requireActivity(), "en", selection));
         else
             data.remove("selection_type");
 

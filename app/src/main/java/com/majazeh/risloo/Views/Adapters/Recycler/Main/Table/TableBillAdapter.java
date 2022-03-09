@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.PaymentManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -189,7 +189,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             holder.binding.debtorTextView.setText(model.getDebtor().getTitle());
 
         holder.binding.amountTextView.setText(StringManager.seperatePlus(String.valueOf(model.getAmount())));
-        holder.binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
+        holder.binding.statusTextView.setText(JsonManager.getBillType(activity, "fa", model.getType()));
 
         setMenu(holder, model);
     }

@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -150,7 +150,7 @@ public class FragmentCreateClientReport extends Fragment {
 
     private void setHashmap() {
         if (!encryption.equals(""))
-            data.put("encryption", SelectionManager.getEncryption(requireActivity(), "en", encryption));
+            data.put("encryption", JsonManager.getEncryption(requireActivity(), "en", encryption));
         else
             data.remove("encryption");
 

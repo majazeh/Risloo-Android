@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -149,7 +149,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
     }
 
     private void setData(IndexCenterPlatformHolder holder, SessionPlatformModel model) {
-        String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType()));
+        String title = model.getTitle() + " " + StringManager.bracing(JsonManager.getPlatformSession(activity, "fa", model.getType()));
         holder.binding.titleTextView.setText(SpannableManager.spanForegroundColorSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.coolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         setIdentifier(holder, model);

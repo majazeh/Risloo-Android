@@ -8,117 +8,117 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SelectionManager {
+public class JsonManager {
 
     /*
     ---------- Func's ----------
     */
 
     public static String getAcceptation(Activity activity, String local, String value) {
-        return getSelection(activity, "Acceptations.json", local, value);
+        return getAsset(activity, "Acceptations.json", local, value);
     }
 
     public static String getBillType(Activity activity, String local, String value) {
-        return getSelection(activity, "BillTypes.json", local, value);
+        return getAsset(activity, "BillTypes.json", local, value);
     }
 
     public static String getCaseStatus(Activity activity, String local, String value) {
-        return getSelection(activity, "CaseStatus.json", local, value);
+        return getAsset(activity, "CaseStatus.json", local, value);
     }
 
     public static String getCaseStatus2(Activity activity, String local, String value) {
-        return getSelection2(activity, "CaseStatus.json", local, value);
+        return getAsset2(activity, "CaseStatus.json", local, value);
     }
 
     public static String getCenterStatus(Activity activity, String local, String value) {
-        return getSelection(activity, "CenterStatus.json", local, value);
+        return getAsset(activity, "CenterStatus.json", local, value);
     }
 
     public static String getClientType(Activity activity, String local, String value) {
-        return getSelection(activity, "ClientTypes.json", local, value);
+        return getAsset(activity, "ClientTypes.json", local, value);
     }
 
     public static String getEncryption(Activity activity, String local, String value) {
-        return getSelection(activity, "Encryptions.json", local, value);
+        return getAsset(activity, "Encryptions.json", local, value);
     }
 
     public static String getIbanStatus(Activity activity, String local, String value) {
-        return getSelection(activity, "IbanStatus.json", local, value);
+        return getAsset(activity, "IbanStatus.json", local, value);
     }
 
     public static String getIbanType(Activity activity, String local, String value) {
-        return getSelection(activity, "IbanTypes.json", local, value);
+        return getAsset(activity, "IbanTypes.json", local, value);
     }
 
     public static String getPaymentStatus(Activity activity, String local, String value) {
-        return getSelection(activity, "PaymentStatus.json", local, value);
+        return getAsset(activity, "PaymentStatus.json", local, value);
     }
 
     public static String getPaymentType(Activity activity, String local, String value) {
-        return getSelection(activity, "PaymentTypes.json", local, value);
+        return getAsset(activity, "PaymentTypes.json", local, value);
     }
 
     public static String getPlatformIdentifier(Activity activity, String local, String value) {
-        return getSelection(activity, "PlatformIdentifiers.json", local, value);
+        return getAsset(activity, "PlatformIdentifiers.json", local, value);
     }
 
     public static String getPlatformLevel(Activity activity, String local, String value) {
-        return getSelection(activity, "PlatformLevels.json", local, value);
+        return getAsset(activity, "PlatformLevels.json", local, value);
     }
 
     public static String getPlatformSession(Activity activity, String local, String value) {
-        return getSelection(activity, "PlatformSessions.json", local, value);
+        return getAsset(activity, "PlatformSessions.json", local, value);
     }
 
     public static String getProfileExtras(Activity activity, String local, String value) {
-        return getSelection(activity, "ProfileExtras.json", local, value);
+        return getAsset(activity, "ProfileExtras.json", local, value);
     }
 
     public static String getReferencePosition(Activity activity, String local, String value) {
-        return getSelection(activity, "ReferencePositions.json", local, value);
+        return getAsset(activity, "ReferencePositions.json", local, value);
     }
 
     public static String getRoomStatus(Activity activity, String local, String value) {
-        return getSelection(activity, "RoomStatus.json", local, value);
+        return getAsset(activity, "RoomStatus.json", local, value);
     }
 
     public static String getSampleStatus(Activity activity, String local, String value) {
-        return getSelection(activity, "SampleStatus.json", local, value);
+        return getAsset(activity, "SampleStatus.json", local, value);
     }
 
     public static String getSampleStatus2(Activity activity, String local, String value) {
-        return getSelection2(activity, "SampleStatus.json", local, value);
+        return getAsset2(activity, "SampleStatus.json", local, value);
     }
 
     public static String getSelectionType(Activity activity, String local, String value) {
-        return getSelection(activity, "SelectionTypes.json", local, value);
+        return getAsset(activity, "SelectionTypes.json", local, value);
     }
 
     public static String getSessionStatus(Activity activity, String local, String value) {
-        return getSelection(activity, "SessionStatus.json", local, value);
+        return getAsset(activity, "SessionStatus.json", local, value);
     }
 
     public static String getSessionStatus2(Activity activity, String local, String value) {
-        return getSelection2(activity, "SessionStatus.json", local, value);
+        return getAsset2(activity, "SessionStatus.json", local, value);
     }
 
     public static String getUserPosition(Activity activity, String local, String value) {
-        return getSelection(activity, "UserPositions.json", local, value);
+        return getAsset(activity, "UserPositions.json", local, value);
     }
 
     public static String getUserStatus(Activity activity, String local, String value) {
-        return getSelection(activity, "UserStatus.json", local, value);
+        return getAsset(activity, "UserStatus.json", local, value);
     }
 
     public static String getUserType(Activity activity, String local, String value) {
-        return getSelection(activity, "UserTypes.json", local, value);
+        return getAsset(activity, "UserTypes.json", local, value);
     }
 
     /*
-    ---------- Local's ----------
+    ---------- Assets's ----------
     */
 
-    private static String getSelection(Activity activity, String asset, String local, String value) {
+    private static String getAsset(Activity activity, String asset, String local, String value) {
         try {
             JSONArray list = new JSONArray(getJson(activity, asset));
 
@@ -138,7 +138,7 @@ public class SelectionManager {
         return value;
     }
 
-    private static String getSelection2(Activity activity, String asset, String local, String value) {
+    private static String getAsset2(Activity activity, String asset, String local, String value) {
         try {
             JSONArray list = new JSONArray(getJson(activity, asset));
 
@@ -157,6 +157,10 @@ public class SelectionManager {
 
         return value;
     }
+
+    /*
+    ---------- Local's ----------
+    */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private static String getJson(Activity activity, String file) {

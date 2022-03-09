@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 import com.mre.ligheh.API.Response;
@@ -166,7 +166,7 @@ public class FragmentEditCenterUser extends Fragment {
         }
 
         if (model.getPosition() != null && !model.getPosition().equals("")) {
-            position = SelectionManager.getUserType(requireActivity(), "fa", model.getPosition());
+            position = JsonManager.getUserType(requireActivity(), "fa", model.getPosition());
             for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
                     binding.positionIncludeLayout.selectSpinner.setSelection(i);
@@ -209,7 +209,7 @@ public class FragmentEditCenterUser extends Fragment {
 
     private void setHashmap() {
         if (!position.equals(""))
-            data.put("position", SelectionManager.getUserType(requireActivity(), "en", position));
+            data.put("position", JsonManager.getUserType(requireActivity(), "en", position));
         else
             data.remove("position");
 

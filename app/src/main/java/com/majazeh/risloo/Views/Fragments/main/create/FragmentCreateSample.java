@@ -20,7 +20,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -426,7 +426,7 @@ public class FragmentCreateSample extends Fragment {
         if (model.getId() != null && !model.getId().equals("")) {
             sessionId = model.getId();
 
-            String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
+            String primaryText = sessionId + " " + "(" + JsonManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
             String secondaryText = DateManager.jalND(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHcMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
             binding.sessionIncludeLayout.primaryTextView.setText(SpannableManager.spanForegroundColorSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.coolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
@@ -565,7 +565,7 @@ public class FragmentCreateSample extends Fragment {
                     if (!sessionId.equals(model.getId())) {
                         sessionId = model.getId();
 
-                        String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
+                        String primaryText = sessionId + " " + "(" + JsonManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
                         String secondaryText = DateManager.jalND(String.valueOf(model.getStartedAt())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStartedAt()), ".") + " / " + "ساعت" + " " + DateManager.jalHHcMM(String.valueOf(model.getStartedAt())) + " / " + model.getDuration() + " " + "دقیقه";
 
                         binding.sessionIncludeLayout.primaryTextView.setText(SpannableManager.spanForegroundColorSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.coolGray600), (int) getResources().getDimension(R.dimen._8ssp)));
@@ -635,7 +635,7 @@ public class FragmentCreateSample extends Fragment {
                     data.remove("members_count");
 
                 if (!caseStatus.equals("")) {
-                    String status = SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus);
+                    String status = JsonManager.getCaseStatus2(requireActivity(), "en", caseStatus);
                     data.put("case_status", status);
 
                     if (status.equals("group") || status.equals("personal"))

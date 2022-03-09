@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.SelectionManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -200,7 +200,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getPlatformLevel(activity, "en", pos), "selected_level");
+                    doWork(holder, model, JsonManager.getPlatformLevel(activity, "en", pos), "selected_level");
 
                     userSelect = false;
                 }
@@ -214,7 +214,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
     }
 
     private void setData(IndexRoomPlatformHolder holder, SessionPlatformModel model) {
-        String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType()));
+        String title = model.getTitle() + " " + StringManager.bracing(JsonManager.getPlatformSession(activity, "fa", model.getType()));
         holder.binding.titleTextView.setText(SpannableManager.spanForegroundColorSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.coolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         holder.binding.identifierEditText.setText(model.getIdentifier());
@@ -227,7 +227,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
     }
 
     private void setLevel(IndexRoomPlatformHolder holder, SessionPlatformModel model) {
-        String level = SelectionManager.getPlatformLevel(activity, "fa", String.valueOf(model.getSelectedLevel()));
+        String level = JsonManager.getPlatformLevel(activity, "fa", String.valueOf(model.getSelectedLevel()));
         for (int i = 0; i < holder.binding.levelSpinner.getCount(); i++) {
             if (holder.binding.levelSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(level)) {
                 holder.binding.levelSpinner.setSelection(i);
