@@ -94,7 +94,7 @@ public class TableTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     private void setWidget(HeaderTreasuryHolder holder) {
-        holder.binding.leftTextView.setText(SpannableManager.setForegroundColorSize(activity.getResources().getString(R.string.TreasuryAdapterLeft), 11, 18, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.leftTextView.setText(SpannableManager.spanForegroundColorSize(activity.getResources().getString(R.string.TreasuryAdapterLeft), 11, 18, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     private void listener(TableTreasuryHolder holder, TreasuriesModel model) {

@@ -24,14 +24,14 @@ public class SpannableManager {
     ---------- OneSpan's ----------
     */
 
-    public static SpannableString setClickable(String value, int startIndex, int endIndex, ClickableSpan clickableSpan) {
+    public static SpannableString spanClickable(String value, int startIndex, int endIndex, ClickableSpan clickableSpan) {
         SpannableString spannableString = new SpannableString(value);
         spannableString.setSpan(clickableSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         return spannableString;
     }
 
-    public static SpannableString setStrikethrough(String value, int startIndex, int endIndex) {
+    public static SpannableString spanStrikethrough(String value, int startIndex, int endIndex) {
         SpannableString spannableString = new SpannableString(value);
 
         StrikethroughSpan strikeSpan = new StrikethroughSpan();
@@ -40,7 +40,7 @@ public class SpannableManager {
         return spannableString;
     }
 
-    public static SpannableString setForegroundColor(String value, int startIndex, int endIndex, int color) {
+    public static SpannableString spanForegroundColor(String value, int startIndex, int endIndex, int color) {
         SpannableString spannableString = new SpannableString(value);
 
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
@@ -49,7 +49,7 @@ public class SpannableManager {
         return spannableString;
     }
 
-    public static SpannableString setBackgroundColor(String value, int startIndex, int endIndex, int color) {
+    public static SpannableString spanBackgroundColor(String value, int startIndex, int endIndex, int color) {
         SpannableString spannableString = new SpannableString(value);
 
         BackgroundColorSpan colorSpan = new BackgroundColorSpan(color);
@@ -58,7 +58,7 @@ public class SpannableManager {
         return spannableString;
     }
 
-    public static SpannableString setSize(String value, int startIndex, int endIndex, int size) {
+    public static SpannableString spanSize(String value, int startIndex, int endIndex, int size) {
         SpannableString spannableString = new SpannableString(value);
 
         AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(size);
@@ -67,7 +67,7 @@ public class SpannableManager {
         return spannableString;
     }
 
-    public static SpannableString setStyle(String value, int startIndex, int endIndex, int style) {
+    public static SpannableString spanStyle(String value, int startIndex, int endIndex, int style) {
         SpannableString spannableString = new SpannableString(value);
 
         StyleSpan styleSpan = new StyleSpan(style);
@@ -80,7 +80,7 @@ public class SpannableManager {
     ---------- TwoSpan's ----------
     */
 
-    public static SpannableString setForegroundColorSize(String value, int startIndex, int endIndex, int color, int size) {
+    public static SpannableString spanForegroundColorSize(String value, int startIndex, int endIndex, int color, int size) {
         SpannableString spannableString = new SpannableString(value);
 
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
@@ -92,7 +92,7 @@ public class SpannableManager {
         return spannableString;
     }
 
-    public static SpannableString setForegroundColorStyle(String value, int startIndex, int endIndex, int color, int style) {
+    public static SpannableString spanForegroundColorStyle(String value, int startIndex, int endIndex, int color, int style) {
         SpannableString spannableString = new SpannableString(value);
 
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
@@ -104,7 +104,7 @@ public class SpannableManager {
         return spannableString;
     }
 
-    public static SpannableString setBackgroundColorSize(String value, int startIndex, int endIndex, int color, int size) {
+    public static SpannableString spanBackgroundColorSize(String value, int startIndex, int endIndex, int color, int size) {
         SpannableString spannableString = new SpannableString(value);
 
         BackgroundColorSpan colorSpan = new BackgroundColorSpan(color);
@@ -116,7 +116,7 @@ public class SpannableManager {
         return spannableString;
     }
 
-    public static SpannableString setBackgroundColorStyle(String value, int startIndex, int endIndex, int color, int style) {
+    public static SpannableString spanBackgroundColorStyle(String value, int startIndex, int endIndex, int color, int style) {
         SpannableString spannableString = new SpannableString(value);
 
         BackgroundColorSpan colorSpan = new BackgroundColorSpan(color);
@@ -132,7 +132,7 @@ public class SpannableManager {
     ---------- ThreeSpan's ----------
     */
 
-    public static SpannableString setForegroundColorSizeStyle(String value, int startIndex, int endIndex, int color, int size, int style) {
+    public static SpannableString spanForegroundColorSizeStyle(String value, int startIndex, int endIndex, int color, int size, int style) {
         SpannableString spannableString = new SpannableString(value);
 
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(color);
@@ -146,7 +146,7 @@ public class SpannableManager {
         return spannableString;
     }
 
-    public static SpannableString setBackgroundColorSizeStyle(String value, int startIndex, int endIndex, int color, int size, int style) {
+    public static SpannableString spanBackgroundColorSizeStyle(String value, int startIndex, int endIndex, int color, int size, int style) {
         SpannableString spannableString = new SpannableString(value);
 
         BackgroundColorSpan colorSpan = new BackgroundColorSpan(color);
@@ -164,7 +164,7 @@ public class SpannableManager {
     ---------- Builder's ----------
     */
 
-    public static SpannableStringBuilder setClicakblePhoneNumbers(Activity activity, JSONArray list) {
+    public static SpannableStringBuilder spanClicakblePhoneNumbers(Activity activity, JSONArray list) {
         SpannableStringBuilder spannableBuilder = new SpannableStringBuilder();
 
         try {

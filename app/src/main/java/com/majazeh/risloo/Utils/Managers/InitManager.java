@@ -609,12 +609,12 @@ public class InitManager {
 
             private void setData(int position) {
                 primaryTextView.setText(arrayList.get(position));
-                secondaryTextView.setText(SpannableManager.setForegroundColor(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
+                secondaryTextView.setText(SpannableManager.spanForegroundColor(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
             }
 
             private void setDataDropDown(int position) {
                 dropdownPrimaryTextView.setText(arrayList.get(position));
-                dropdownSecondaryTextView.setText(SpannableManager.setForegroundColor(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
+                dropdownSecondaryTextView.setText(SpannableManager.spanForegroundColor(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
             }
 
             @Override

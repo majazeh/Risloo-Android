@@ -16,7 +16,7 @@ public class ToastManager {
     private static Toast toast;
 
     /*
-    ---------- Func's ----------
+    ---------- Show's ----------
     */
 
     public static void showToast(Activity activity, String value) {

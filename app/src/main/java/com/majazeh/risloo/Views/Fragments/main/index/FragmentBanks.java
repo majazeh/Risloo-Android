@@ -22,7 +22,7 @@ import com.majazeh.risloo.utils.managers.SelectionManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.utils.managers.TreasuryManager;
+import com.majazeh.risloo.utils.managers.BalanceManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexBankAdapter;
@@ -98,7 +98,7 @@ public class FragmentBanks extends Fragment {
         binding.weekdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleWeekdayHeader));
         binding.monthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.BanksFragmentSettleMonthDayHeader));
 
-        binding.amountIncludeLayout.headerTextView.setText(SpannableManager.setForegroundColorSize(getResources().getString(R.string.BanksFragmentSettleAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.amountIncludeLayout.headerTextView.setText(SpannableManager.spanForegroundColorSize(getResources().getString(R.string.BanksFragmentSettleAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
         binding.scheduleGuideLayout.guideTextView.setText(getResources().getString(R.string.BanksFragmentSettleScheduleGuide));
@@ -363,8 +363,8 @@ public class FragmentBanks extends Fragment {
     }
 
     private void setData(UserModel model) {
-        if (!TreasuryManager.getWallet(model.getTreasuries()).equals("0")) {
-            String value = StringManager.seperatePlus(TreasuryManager.getWallet(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
+        if (!BalanceManager.balanceWallet(model.getTreasuries()).equals("0")) {
+            String value = StringManager.seperatePlus(BalanceManager.balanceWallet(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
             binding.totalIncludeLayout.amountTextView.setText(value);
         } else {
             binding.totalIncludeLayout.amountTextView.setText("");

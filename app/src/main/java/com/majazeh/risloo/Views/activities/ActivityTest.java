@@ -215,7 +215,7 @@ public class ActivityTest extends AppCompatActivity {
 
         if (!sampleModel.getEdition().equals("")) {
             String title = binding.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getEdition());
-            binding.titleTextView.setText(SpannableManager.setForegroundColorSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.coolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
+            binding.titleTextView.setText(SpannableManager.spanForegroundColorSize(title, binding.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.coolGray400), (int) getResources().getDimension(R.dimen._9ssp)));
         }
 
         if (sampleForm.getForms().length() != 0) {
@@ -388,7 +388,7 @@ public class ActivityTest extends AppCompatActivity {
         AnimateManager.animateProgressBarValue(binding.indexProgressBar, 500, sampleForm.itemSize(), sampleForm.getItemPosition());
 
         String index = sampleForm.itemSize() + " / " + sampleForm.getItemPosition();
-        binding.indexTextView.setText(SpannableManager.setForegroundColorSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
+        binding.indexTextView.setText(SpannableManager.spanForegroundColorSizeStyle(index, String.valueOf(sampleForm.itemSize()).length() + 3, index.length(), getResources().getColor(R.color.risloo500), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
         userSelect = false;
 

@@ -63,8 +63,8 @@ public class FragmentCreateSessionTabTime extends Fragment {
 
         current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
-        binding.startTimeIncludeLayout.headerTextView.setText(SpannableManager.setForegroundColorSize(getResources().getString(R.string.CreateSessionTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.durationIncludeLayout.headerTextView.setText(SpannableManager.setForegroundColorSize(getResources().getString(R.string.CreateSessionTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.startTimeIncludeLayout.headerTextView.setText(SpannableManager.spanForegroundColorSize(getResources().getString(R.string.CreateSessionTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.durationIncludeLayout.headerTextView.setText(SpannableManager.spanForegroundColorSize(getResources().getString(R.string.CreateSessionTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.dateTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimeDateTypeHeader));
         binding.specifiedDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimeSpecifiedDateHeader));
         binding.patternDaysIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimePatternDaysHeader));

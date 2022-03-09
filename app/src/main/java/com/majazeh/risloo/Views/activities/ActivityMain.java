@@ -42,7 +42,7 @@ import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
-import com.majazeh.risloo.utils.managers.TreasuryManager;
+import com.majazeh.risloo.utils.managers.BalanceManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.recycler.main.MainNavAdapter;
 import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenter;
@@ -218,8 +218,8 @@ public class ActivityMain extends AppCompatActivity {
                 binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
             }
 
-            if (!TreasuryManager.getWalletAndGift(model.getTreasuries()).equals("0")) {
-                String value = StringManager.seperatePlus(TreasuryManager.getWalletAndGift(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
+            if (!BalanceManager.balanceWalletAndGift(model.getTreasuries()).equals("0")) {
+                String value = StringManager.seperatePlus(BalanceManager.balanceWalletAndGift(model.getTreasuries())) + " " + getResources().getString(R.string.MainToman);
 
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(value);
                 binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setVisibility(View.VISIBLE);

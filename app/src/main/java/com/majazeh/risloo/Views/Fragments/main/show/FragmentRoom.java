@@ -373,7 +373,7 @@ public class FragmentRoom extends Fragment {
             }
 
             if (model.getDetail() != null && model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
-                binding.mobileTextView.setText(SpannableManager.setClicakblePhoneNumbers(requireActivity(), model.getDetail().getJSONArray("phone_numbers")));
+                binding.mobileTextView.setText(SpannableManager.spanClicakblePhoneNumbers(requireActivity(), model.getDetail().getJSONArray("phone_numbers")));
                 binding.mobileTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 binding.mobileGroup.setVisibility(View.VISIBLE);
@@ -432,7 +432,7 @@ public class FragmentRoom extends Fragment {
             }
 
             if (!type.equals("room") && model.getCenter() != null && model.getCenter().getDetail() != null && model.getCenter().getDetail().has("phone_numbers") && !model.getCenter().getDetail().isNull("phone_numbers") && model.getCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
-                binding.mobileTextView.setText(SpannableManager.setClicakblePhoneNumbers(requireActivity(), model.getCenter().getDetail().getJSONArray("phone_numbers")));
+                binding.mobileTextView.setText(SpannableManager.spanClicakblePhoneNumbers(requireActivity(), model.getCenter().getDetail().getJSONArray("phone_numbers")));
                 binding.mobileTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
                 binding.mobileGroup.setVisibility(View.VISIBLE);

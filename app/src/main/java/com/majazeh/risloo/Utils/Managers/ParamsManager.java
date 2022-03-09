@@ -32,7 +32,7 @@ public class ParamsManager {
         return layoutParams;
     }
 
-    public static WindowManager.LayoutParams windowMatchWrap(Dialog dialog) {
+    public static WindowManager.LayoutParams windowMatchAndWrap(Dialog dialog) {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(dialog.getWindow().getAttributes());
 

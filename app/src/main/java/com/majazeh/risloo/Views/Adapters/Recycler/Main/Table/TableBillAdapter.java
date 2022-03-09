@@ -135,7 +135,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setWidget(HeaderBillHolder holder) {
-        holder.binding.amountTextView.setText(SpannableManager.setForegroundColorSize(activity.getResources().getString(R.string.BillAdapterAmount), 5, 12, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.amountTextView.setText(SpannableManager.spanForegroundColorSize(activity.getResources().getString(R.string.BillAdapterAmount), 5, 12, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     @SuppressLint("ClickableViewAccessibility")
