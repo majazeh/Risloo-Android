@@ -9,10 +9,10 @@ import com.google.android.material.appbar.AppBarLayout;
 public class ParamsManager {
 
     /*
-    ---------- Window ----------
+    ---------- Window's ----------
     */
 
-    public static WindowManager.LayoutParams wrapContent(Dialog dialog) {
+    public static WindowManager.LayoutParams windowWrapContent(Dialog dialog) {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(dialog.getWindow().getAttributes());
 
@@ -22,7 +22,7 @@ public class ParamsManager {
         return layoutParams;
     }
 
-    public static WindowManager.LayoutParams matchParent(Dialog dialog) {
+    public static WindowManager.LayoutParams windowMatchParent(Dialog dialog) {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(dialog.getWindow().getAttributes());
 
@@ -32,7 +32,7 @@ public class ParamsManager {
         return layoutParams;
     }
 
-    public static WindowManager.LayoutParams matchWrapContent(Dialog dialog) {
+    public static WindowManager.LayoutParams windowMatchWrap(Dialog dialog) {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(dialog.getWindow().getAttributes());
 
@@ -43,15 +43,15 @@ public class ParamsManager {
     }
 
     /*
-    ---------- AppBar ----------
+    ---------- AppBar's ----------
     */
 
-    public static void scrollEnterAlways(ViewGroup.LayoutParams viewParams) {
+    public static void appbarScrollEnterAlways(ViewGroup.LayoutParams viewParams) {
         AppBarLayout.LayoutParams appBarParams = (AppBarLayout.LayoutParams) viewParams;
         appBarParams.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
     }
 
-    public static void noScroll(ViewGroup.LayoutParams viewParams) {
+    public static void appbarNoScroll(ViewGroup.LayoutParams viewParams) {
         AppBarLayout.LayoutParams appBarParams = (AppBarLayout.LayoutParams) viewParams;
         appBarParams.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_NO_SCROLL);
     }

@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 public class AnimateManager {
 
     /*
-    ---------- Window ----------
+    ---------- Window's ----------
     */
 
     public static void animateStatusBarColor(Window window, int duration, int fromColor, int toColor) {
@@ -28,7 +28,7 @@ public class AnimateManager {
     }
 
     /*
-    ---------- View ----------
+    ---------- View's ----------
     */
 
     public static void animateViewColor(View view, int duration, int fromColor, int toColor) {
@@ -45,7 +45,7 @@ public class AnimateManager {
     }
 
     /*
-    ---------- ProgressBar ----------
+    ---------- ProgressBar's ----------
     */
 
     public static void animateProgressBarValue(ProgressBar progressBar, int duration, int maxProgress, int toProgress) {

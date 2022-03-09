@@ -53,7 +53,7 @@ public class DialogScheduleFilter extends AppCompatDialogFragment {
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setContentView(binding.getRoot());
-        dialog.getWindow().setAttributes(ParamsManager.matchWrapContent(dialog));
+        dialog.getWindow().setAttributes(ParamsManager.windowMatchWrap(dialog));
 
         setCancelable(true);
 
