@@ -99,7 +99,7 @@ public class TableBalanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void setWidget(HeaderBalanceHolder holder) {
-        holder.binding.amountTextView.setText(SpannableManager.foregroundColorSize(activity.getResources().getString(R.string.BalanceAdapterAmount), 10, 17, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.amountTextView.setText(SpannableManager.setForegroundColorSize(activity.getResources().getString(R.string.BalanceAdapterAmount), 10, 17, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     @SuppressLint("ClickableViewAccessibility")

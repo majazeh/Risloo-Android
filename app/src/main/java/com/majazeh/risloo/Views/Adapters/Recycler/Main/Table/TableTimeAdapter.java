@@ -93,7 +93,7 @@ public class TableTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void setWidget(HeaderTimeHolder holder) {
-        holder.binding.amountTextView.setText(SpannableManager.foregroundColorSize(activity.getResources().getString(R.string.TimeAdapterAmount), 5, 12, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.amountTextView.setText(SpannableManager.setForegroundColorSize(activity.getResources().getString(R.string.TimeAdapterAmount), 5, 12, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     private void listener(TableTimeHolder holder, BillingModel model) {

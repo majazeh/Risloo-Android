@@ -150,7 +150,7 @@ public class IndexCenterPlatformAdapter extends RecyclerView.Adapter<IndexCenter
 
     private void setData(IndexCenterPlatformHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType()));
-        holder.binding.titleTextView.setText(SpannableManager.foregroundColorSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.coolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.titleTextView.setText(SpannableManager.setForegroundColorSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.coolGray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
 
         setIdentifier(holder, model);
 

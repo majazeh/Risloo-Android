@@ -95,7 +95,7 @@ public class TableTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void setWidget(HeaderTransactionHolder holder) {
-        holder.binding.leftTextView.setText(SpannableManager.foregroundColorSize(activity.getResources().getString(R.string.TransactionAdapterLeft), 11, 18, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.leftTextView.setText(SpannableManager.setForegroundColorSize(activity.getResources().getString(R.string.TransactionAdapterLeft), 11, 18, activity.getResources().getColor(R.color.coolGray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
     }
 
     private void listener(TableTransactionHolder holder, TransactionModel model) {

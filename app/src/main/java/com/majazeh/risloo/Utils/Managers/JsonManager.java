@@ -26,8 +26,9 @@ public class JsonManager {
             return new String(buffer, charset);
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
         }
+
+        return "";
     }
 
 }

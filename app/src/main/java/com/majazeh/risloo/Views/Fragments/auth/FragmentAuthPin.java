@@ -182,7 +182,7 @@ public class FragmentAuthPin extends Fragment {
 
     private void startCountDownTimer() {
         binding.guideIncludeLayout.guideTextView.setText(StringManager.replace(requireActivity().getResources().getString(R.string.PinFragmentGuide), "09123456789", mobile));
-        binding.timerViewFlipper.resendTextView.setText(SpannableManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
+        binding.timerViewFlipper.resendTextView.setText(SpannableManager.setClickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
 
         countDownTimer.start();
     }
