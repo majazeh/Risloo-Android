@@ -13,7 +13,7 @@ import com.majazeh.risloo.utils.configs.ExtendException;
 import com.majazeh.risloo.utils.entities.Decoraton;
 import com.majazeh.risloo.utils.entities.Singleton;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.PackageManager;
+import com.majazeh.risloo.utils.managers.VersionManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.databinding.ActivitySplashBinding;
@@ -83,7 +83,7 @@ public class ActivitySplash extends AppCompatActivity {
     }
 
     private void setData() {
-        binding.versionTextView.setText(PackageManager.versionNameDesc(this));
+        binding.versionTextView.setText(VersionManager.getVersionNameDesc(this));
     }
 
     private void getData() {
@@ -137,7 +137,7 @@ public class ActivitySplash extends AppCompatActivity {
     }
 
     private void update(ClientModel model) {
-        if (StringManager.compareVersionNames(PackageManager.versionNamePrefix(this), model.getForce()) == 1)
+        if (StringManager.compareVersionNames(VersionManager.getVersionNamePrefix(this), model.getForce()) == 1)
             SheetManager.showSheetVersion(this, model, "force");
         else if (StringManager.compareVersionNames(model.getForce(), model.getCurrent()) == 1)
             SheetManager.showSheetVersion(this, model, "current");
