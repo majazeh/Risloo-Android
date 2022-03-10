@@ -25,16 +25,16 @@ public class DialogManager {
     private static DialogSelected dialogSelected = null;
 
     /*
-    ---------- Show ----------
+    ---------- Show's ----------
     */
 
     public static void showDialogLoading(Activity activity, String title) {
         dialogLoading = new DialogLoading();
 
         if (activity instanceof AppCompatActivity)
-            dialogLoading.show(((AppCompatActivity) activity).getSupportFragmentManager(), "loadingDialog");
+            dialogLoading.show(((AppCompatActivity) activity).getSupportFragmentManager(), "dialogLoading");
         else if (activity instanceof FragmentActivity)
-            dialogLoading.show(((FragmentActivity) activity).getSupportFragmentManager(), "loadingDialog");
+            dialogLoading.show(((FragmentActivity) activity).getSupportFragmentManager(), "dialogLoading");
 
         dialogLoading.setData(title);
     }
@@ -43,9 +43,9 @@ public class DialogManager {
         dialogPayment = new DialogPayment();
 
         if (activity instanceof AppCompatActivity)
-            dialogPayment.show(((AppCompatActivity) activity).getSupportFragmentManager(), "paymentDialog");
+            dialogPayment.show(((AppCompatActivity) activity).getSupportFragmentManager(), "dialogPayment");
         else if (activity instanceof FragmentActivity)
-            dialogPayment.show(((FragmentActivity) activity).getSupportFragmentManager(), "paymentDialog");
+            dialogPayment.show(((FragmentActivity) activity).getSupportFragmentManager(), "dialogPayment");
 
         dialogPayment.setData(method, paymentModel);
     }
@@ -54,9 +54,9 @@ public class DialogManager {
         dialogScheduleFilter = new DialogScheduleFilter();
 
         if (activity instanceof AppCompatActivity)
-            dialogScheduleFilter.show(((AppCompatActivity) activity).getSupportFragmentManager(), "scheduleFilterBottomSheet");
+            dialogScheduleFilter.show(((AppCompatActivity) activity).getSupportFragmentManager(), "dialogScheduleFilter");
         else if (activity instanceof FragmentActivity)
-            dialogScheduleFilter.show(((FragmentActivity) activity).getSupportFragmentManager(), "scheduleFilterBottomSheet");
+            dialogScheduleFilter.show(((FragmentActivity) activity).getSupportFragmentManager(), "dialogScheduleFilter");
 
         dialogScheduleFilter.setData(method, rooms, status);
     }
@@ -65,9 +65,9 @@ public class DialogManager {
         dialogSearchable = new DialogSearchable();
 
         if (activity instanceof AppCompatActivity)
-            dialogSearchable.show(((AppCompatActivity) activity).getSupportFragmentManager(), "searchableDialog");
+            dialogSearchable.show(((AppCompatActivity) activity).getSupportFragmentManager(), "dialogSearchable");
         else if (activity instanceof FragmentActivity)
-            dialogSearchable.show(((FragmentActivity) activity).getSupportFragmentManager(), "searchableDialog");
+            dialogSearchable.show(((FragmentActivity) activity).getSupportFragmentManager(), "dialogSearchable");
 
         dialogSearchable.setData(method);
     }
@@ -76,15 +76,15 @@ public class DialogManager {
         dialogSelected = new DialogSelected();
 
         if (activity instanceof AppCompatActivity)
-            dialogSelected.show(((AppCompatActivity) activity).getSupportFragmentManager(), "selectedDialog");
+            dialogSelected.show(((AppCompatActivity) activity).getSupportFragmentManager(), "dialogSelected");
         else if (activity instanceof FragmentActivity)
-            dialogSelected.show(((FragmentActivity) activity).getSupportFragmentManager(), "selectedDialog");
+            dialogSelected.show(((FragmentActivity) activity).getSupportFragmentManager(), "dialogSelected");
 
         dialogSelected.setData(method);
     }
 
     /*
-    ---------- Dismiss ----------
+    ---------- Dismiss's ----------
     */
 
     public static void dismissDialogLoading() {
@@ -123,7 +123,7 @@ public class DialogManager {
     }
 
     /*
-    ---------- Getter ----------
+    ---------- Getter's ----------
     */
 
     public static DialogLoading getDialogLoading() {

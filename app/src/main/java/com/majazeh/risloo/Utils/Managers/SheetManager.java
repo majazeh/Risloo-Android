@@ -28,7 +28,7 @@ public class SheetManager {
     private static SheetVersion sheetVersion = null;
 
     /*
-    ---------- Show ----------
+    ---------- Show's ----------
     */
 
     public static void showSheetAuth(Activity activity, String key, UserModel userModel) {
@@ -107,7 +107,7 @@ public class SheetManager {
     }
 
     /*
-    ---------- Dismiss ----------
+    ---------- Dismiss's ----------
     */
 
     public static void dismissSheetAuth() {
@@ -160,7 +160,7 @@ public class SheetManager {
     }
 
     /*
-    ---------- Getter ----------
+    ---------- Getter's ----------
     */
 
     public static SheetAuth getSheetAuth() {
