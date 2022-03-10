@@ -1,5 +1,6 @@
 package com.majazeh.risloo.utils.managers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.net.Uri;
 
@@ -17,7 +18,7 @@ import java.util.HashMap;
 public class PaymentManager {
 
     /*
-    ---------- Voids ----------
+    ---------- Func's ----------
     */
 
     public static void request(Activity activity, PaymentModel model) {
@@ -25,18 +26,18 @@ public class PaymentManager {
 
         HashMap data = new HashMap<>();
         HashMap header = new HashMap<>();
-        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
+        header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
         data.put("authorized_key", model.getAuthorizedKey());
 
         Payment.auth(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                PaymentModel model = (PaymentModel) object;
+                PaymentModel paymentModel = (PaymentModel) object;
 
                 activity.runOnUiThread(() -> {
                     DialogManager.dismissDialogPayment();
-                    IntentManager.browser(activity, model.getRedirect());
+                    IntentManager.browser(activity, paymentModel.getRedirect());
                 });
             }
 
@@ -67,13 +68,18 @@ public class PaymentManager {
         }
     }
 
+    /*
+    ---------- Private's ----------
+    */
+
     private static void finalize(Activity activity) {
         DialogManager.showDialogPayment(activity, "finalize", Paymont.getInstance().getPaymentModel());
 
-        HashMap data = new HashMap<>();
-        data.put("user", ((ActivityMain) activity).singleton.getUserModel().getId());
         HashMap header = new HashMap<>();
+        HashMap data = new HashMap<>();
+
         header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
+        data.put("user", ((ActivityMain) activity).singleton.getUserModel().getId());
 
         User.dashboard(data, header, new Response() {
             @Override
@@ -99,6 +105,7 @@ public class PaymentManager {
         });
     }
 
+    @SuppressLint("NonConstantResourceId")
     private static void navigate(Activity activity) {
         switch (Paymont.getInstance().getDestination()) {
             case R.id.fragmentBillings:
