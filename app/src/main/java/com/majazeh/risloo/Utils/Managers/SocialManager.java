@@ -8,7 +8,7 @@ import android.net.Uri;
 public class SocialManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Func's ----------
     */
 
     public static void facebook(Context context, String facebookID) {

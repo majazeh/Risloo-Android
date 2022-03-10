@@ -595,7 +595,7 @@ public class DateManager {
     }
 
     /*
-    ---------- Arrange's ----------
+    ---------- Private's ----------
     */
 
     private static String arrangeWeek(int firstMonth, int firstDay, int lastMonth, int lastDay) {

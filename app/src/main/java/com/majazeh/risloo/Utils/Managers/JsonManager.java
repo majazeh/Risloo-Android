@@ -159,7 +159,7 @@ public class JsonManager {
     }
 
     /*
-    ---------- Local's ----------
+    ---------- Private's ----------
     */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
