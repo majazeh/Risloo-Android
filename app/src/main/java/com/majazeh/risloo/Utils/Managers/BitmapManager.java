@@ -19,6 +19,64 @@ import java.io.InputStream;
 public class BitmapManager {
 
     /*
+    ---------- Convert's ----------
+    */
+
+    public static byte[] bitmapToByte(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    public static Bitmap byteToBitmap(byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    /*
+    ---------- Convert's ----------
+    */
+
+    public static String bitmapToString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+        byte[] encodedByte = byteArrayOutputStream.toByteArray();
+
+        return Base64.encodeToString(encodedByte, Base64.DEFAULT);
+    }
+
+    public static Bitmap stringToBitmap(String string) {
+        byte[] decodedByte = Base64.decode(string, 0);
+
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
+
+    /*
+    ---------- Convert's ----------
+    */
+
+    public static Bitmap pathToBitmap(String path) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = false;
+        options.inSampleSize = Math.max(1, 2);
+
+        return BitmapFactory.decodeFile(path, options);
+    }
+
+    public static Bitmap uriToBitmap(Activity activity, Uri uri) {
+        try {
+            InputStream imageStream = activity.getContentResolver().openInputStream(uri);
+
+            return BitmapFactory.decodeStream(imageStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    /*
     ---------- Func's ----------
     */
 
@@ -72,56 +130,6 @@ public class BitmapManager {
         canvas.drawBitmap(bitmap, null, targetRect, null);
 
         return image;
-    }
-
-    /*
-    ---------- Convert's ----------
-    */
-
-    public static byte[] bitmapToByte(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-
-        return byteArrayOutputStream.toByteArray();
-    }
-
-    public static Bitmap byteToBitmap(byte[] bytes) {
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    }
-
-    public static String bitmapToString(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-
-        byte[] encodedByte = byteArrayOutputStream.toByteArray();
-
-        return Base64.encodeToString(encodedByte, Base64.DEFAULT);
-    }
-
-    public static Bitmap stringToBitmap(String string) {
-        byte[] decodedByte = Base64.decode(string, 0);
-
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
-    }
-
-    public static Bitmap pathToBitmap(String path) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = false;
-        options.inSampleSize = Math.max(1, 2);
-
-        return BitmapFactory.decodeFile(path, options);
-    }
-
-    public static Bitmap uriToBitmap(Activity activity, Uri uri) {
-        try {
-            InputStream imageStream = activity.getContentResolver().openInputStream(uri);
-
-            return BitmapFactory.decodeStream(imageStream);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
     /*

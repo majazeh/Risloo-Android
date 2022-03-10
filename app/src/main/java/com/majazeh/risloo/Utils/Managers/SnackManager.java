@@ -17,7 +17,7 @@ import com.majazeh.risloo.databinding.SnackSuccesBinding;
 public class SnackManager {
 
     /*
-    ---------- Funcs ----------
+    ---------- Show's ----------
     */
 
     public static void showSnackSucces(Activity activity, String value) {
@@ -25,7 +25,7 @@ public class SnackManager {
         View snackbarView = snackbar.getView();
 
         snackbarView.setBackgroundColor(Color.TRANSPARENT);
-        ViewCompat.setLayoutDirection(snackbarView,ViewCompat.LAYOUT_DIRECTION_RTL);
+        ViewCompat.setLayoutDirection(snackbarView, ViewCompat.LAYOUT_DIRECTION_RTL);
 
         Snackbar.SnackbarLayout snackbarLayout = (Snackbar.SnackbarLayout) snackbarView;
         snackbarLayout.setPadding((int) activity.getResources().getDimension(R.dimen._6sdp), 0, (int) activity.getResources().getDimension(R.dimen._6sdp), (int) activity.getResources().getDimension(R.dimen._6sdp));
@@ -65,7 +65,7 @@ public class SnackManager {
         View snackbarView = snackbar.getView();
 
         snackbarView.setBackgroundColor(Color.TRANSPARENT);
-        ViewCompat.setLayoutDirection(snackbarView,ViewCompat.LAYOUT_DIRECTION_RTL);
+        ViewCompat.setLayoutDirection(snackbarView, ViewCompat.LAYOUT_DIRECTION_RTL);
 
         Snackbar.SnackbarLayout snackbarLayout = (Snackbar.SnackbarLayout) snackbarView;
         snackbarLayout.setPadding((int) activity.getResources().getDimension(R.dimen._6sdp), 0, (int) activity.getResources().getDimension(R.dimen._6sdp), (int) activity.getResources().getDimension(R.dimen._6sdp));
@@ -105,7 +105,7 @@ public class SnackManager {
         View snackbarView = snackbar.getView();
 
         snackbarView.setBackgroundColor(Color.TRANSPARENT);
-        ViewCompat.setLayoutDirection(snackbarView,ViewCompat.LAYOUT_DIRECTION_RTL);
+        ViewCompat.setLayoutDirection(snackbarView, ViewCompat.LAYOUT_DIRECTION_RTL);
 
         Snackbar.SnackbarLayout snackbarLayout = (Snackbar.SnackbarLayout) snackbarView;
         snackbarLayout.setPadding((int) activity.getResources().getDimension(R.dimen._6sdp), 0, (int) activity.getResources().getDimension(R.dimen._6sdp), (int) activity.getResources().getDimension(R.dimen._6sdp));
