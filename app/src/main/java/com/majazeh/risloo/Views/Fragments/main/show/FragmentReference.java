@@ -88,9 +88,9 @@ public class FragmentReference extends Fragment {
         binding.casesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
         binding.samplesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.roomsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, 0, 0, 0, 0);
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.roomsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.casesSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")

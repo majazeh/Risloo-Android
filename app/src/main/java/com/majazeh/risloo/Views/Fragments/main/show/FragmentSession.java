@@ -103,11 +103,11 @@ public class FragmentSession extends Fragment {
         InitManager.imgResTintBackground(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.white, R.drawable.draw_oval_solid_emerald600_ripple_white);
         InitManager.imgResTintBackground(requireActivity(), binding.billsAddView.getRoot(), R.drawable.ic_plus_light, R.color.white, R.drawable.draw_oval_solid_emerald600_ripple_white);
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.usersSingleLayout.recyclerView, 0, 0, 0, 0);
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.practicesSingleLayout.recyclerView, 0, 0, 0, 0);
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.billsSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.usersSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.practicesSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.billsSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")

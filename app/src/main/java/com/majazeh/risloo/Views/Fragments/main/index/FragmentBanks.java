@@ -88,7 +88,7 @@ public class FragmentBanks extends Fragment {
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.BanksFragmentCreateButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView,  getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.indexSingleLayout.recyclerView,  getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
         binding.settleHeaderLayout.titleTextView.setText(getResources().getString(R.string.BanksFragmentTitle));
 

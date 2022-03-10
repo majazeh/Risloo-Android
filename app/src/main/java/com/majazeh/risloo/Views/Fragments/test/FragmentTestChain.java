@@ -45,7 +45,7 @@ public class FragmentTestChain extends Fragment {
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.ChainFragmentTitle));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._12sdp));
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setArgs() {

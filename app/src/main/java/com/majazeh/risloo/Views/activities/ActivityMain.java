@@ -137,7 +137,7 @@ public class ActivityMain extends AppCompatActivity {
 
         InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, ListManager.getToolbar(this));
 
-        InitManager.fixedVerticalRecyclerView2(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rvVerticalFixedNested(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void listener() {

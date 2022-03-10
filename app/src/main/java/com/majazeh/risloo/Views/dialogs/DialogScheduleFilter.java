@@ -80,8 +80,8 @@ public class DialogScheduleFilter extends AppCompatDialogFragment {
 
         current = ((ActivityMain) requireActivity()).fragmont.getCurrent();
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.roomRecyclerView, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._4sdp), 0, 0);
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.statusRecyclerView, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._4sdp), 0, 0);
+        InitManager.rvVerticalUnfixed(requireActivity(), binding.roomRecyclerView, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._4sdp), 0, 0);
+        InitManager.rvVerticalUnfixed(requireActivity(), binding.statusRecyclerView, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._4sdp), 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")

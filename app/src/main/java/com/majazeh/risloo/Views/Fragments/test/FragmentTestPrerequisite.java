@@ -46,7 +46,7 @@ public class FragmentTestPrerequisite extends Fragment {
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PrerequisiteFragmentTitle));
         binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.PrerequisiteFragmentDescription));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.listRecyclerView.getRoot(), getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setArgs() {

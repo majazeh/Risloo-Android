@@ -73,7 +73,7 @@ public class FragmentCommissions extends Fragment {
 
         binding.tableShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")

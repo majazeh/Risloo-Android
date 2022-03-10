@@ -72,7 +72,7 @@ public class FragmentCreateRoomUser extends Fragment {
 
         binding.referenceGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateRoomUserFragmentReferenceGuide));
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rvVerticalUnfixed(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomUserFragmentButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }

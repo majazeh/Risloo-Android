@@ -84,7 +84,7 @@ public class FragmentCreateSessionTabTime extends Fragment {
         binding.durationIncludeLayout.inputEditText.setText(duration);
         binding.repeatWeeksIncludeLayout.inputEditText.setText(repeatWeeks);
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.patternDaysIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rvVerticalUnfixed(requireActivity(), binding.patternDaysIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTabTimeButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }

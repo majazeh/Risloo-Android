@@ -107,7 +107,7 @@ public class FragmentReserveSchedule extends Fragment {
         binding.caseGuideLayout.guideTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentCaseGuide));
         binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentNameGuide));
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rvVerticalUnfixed(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.reserveTextView.getRoot(), getResources().getString(R.string.ReserveScheduleFragmentButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }

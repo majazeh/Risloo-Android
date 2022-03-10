@@ -29,75 +29,198 @@ import java.util.Collections;
 public class InitManager {
 
     /*
-    ---------- Texts ----------
+    ---------- TextView's ----------
     */
 
-    public static void txtTextColor(TextView txt, String txtValue, int txtColor) {
-        txt.setText(txtValue);
-        txt.setTextColor(txtColor);
+    // -------------------- Two
+
+    public static void txtTextColor(TextView txt, String value, int color) {
+        txt.setText(value);
+        txt.setTextColor(color);
     }
 
-    public static void txtColorBackground(TextView txt, int txtColor, int txtBackground) {
-        txt.setTextColor(txtColor);
-        txt.setBackgroundResource(txtBackground);
+    public static void txtTextAppearance(Activity activity, TextView txt, String value, int style) {
+        txt.setText(value);
+        txt.setTextAppearance(activity, style);
     }
 
-    public static void txtColorAppearance(Activity activity, TextView txt, int txtColor, int txtStyle) {
-        txt.setTextColor(txtColor);
-        txt.setTextAppearance(activity, txtStyle);
+    public static void txtColorBackground(TextView txt, int color, int background) {
+        txt.setTextColor(color);
+        txt.setBackgroundResource(background);
     }
 
-    public static void txtTextAppearance(Activity activity, TextView txt, String txtValue, int txtStyle) {
-        txt.setText(txtValue);
-        txt.setTextAppearance(activity, txtStyle);
+    public static void txtColorAppearance(Activity activity, TextView txt, int color, int style) {
+        txt.setTextColor(color);
+        txt.setTextAppearance(activity, style);
     }
 
-    public static void txtTextColorBackground(TextView txt, String txtValue, int txtColor, int txtBackground) {
-        txt.setText(txtValue);
-        txt.setTextColor(txtColor);
-        txt.setBackgroundResource(txtBackground);
+    // -------------------- Three
+
+    public static void txtTextColorBackground(TextView txt, String value, int color, int background) {
+        txt.setText(value);
+        txt.setTextColor(color);
+        txt.setBackgroundResource(background);
     }
 
     /*
-    ---------- Images ----------
+    ---------- ImageView's ----------
     */
 
-    public static void imgResTint(Activity activity, ImageView img, int imgRes, int imgColor) {
-        img.setImageResource(imgRes);
-        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+    // -------------------- Two
+
+    public static void imgResTint(Activity activity, ImageView img, int res, int tint) {
+        img.setImageResource(res);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, tint));
     }
 
-    public static void imgResTintBackground(Activity activity, ImageView img, int imgRes, int imgColor, int imgBackground) {
-        img.setImageResource(imgRes);
-        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
-        img.setBackgroundResource(imgBackground);
+    // -------------------- Three
+
+    public static void imgResTintBackground(Activity activity, ImageView img, int res, int tint, int background) {
+        img.setImageResource(res);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, tint));
+        img.setBackgroundResource(background);
     }
 
-    public static void imgResTintTag(Activity activity, ImageView img, int imgRes, int imgColor, String tag) {
-        img.setImageResource(imgRes);
-        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+    public static void imgResTintTag(Activity activity, ImageView img, int res, int tint, String tag) {
+        img.setImageResource(res);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, tint));
         img.setTag(tag);
     }
 
-    public static void imgResTintBackgroundTag(Activity activity, ImageView img, int imgRes, int imgColor, int imgBackground, String tag) {
-        img.setImageResource(imgRes);
-        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
-        img.setBackgroundResource(imgBackground);
-        img.setTag(tag);
-    }
+    // -------------------- Four
 
-    public static void imgResTintRotate(Activity activity, ImageView img, int imgRes, int imgColor, int degree) {
-        img.setImageResource(imgRes);
-        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+    public static void imgResTintBackgroundRotate(Activity activity, ImageView img, int res, int tint, int background, int degree) {
+        img.setImageResource(res);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, tint));
+        img.setBackgroundResource(background);
         img.setRotation(img.getRotation() + degree);
     }
 
-    public static void imgResTintBackgroundRotate(Activity activity, ImageView img, int imgRes, int imgColor, int imgBackground, int degree) {
+    /*
+    ---------- Layout's ----------
+    */
+
+    public static void lytTextColorResTintBackground(Activity activity, LinearLayout lyt, TextView txt, ImageView img, String txtValue, int txtColor, int imgRes, int imgTint, int lytBackground) {
+        txt.setText(txtValue);
+        txt.setTextColor(txtColor);
         img.setImageResource(imgRes);
-        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
-        img.setBackgroundResource(imgBackground);
-        img.setRotation(img.getRotation() + degree);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgTint));
+        lyt.setBackgroundResource(lytBackground);
     }
+
+    /*
+    ---------- RecyclerView's ----------
+    */
+
+    // -------------------- GridLayoutManager
+
+    public static void rvGridFixed(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("gridLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(null);
+    }
+
+    public static void rvGridUnfixed(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("gridLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setItemAnimator(null);
+    }
+
+    // -------------------- LinearLayoutManager - Horizontal
+
+    public static void rvHorizontalFixed(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("horizontalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(null);
+    }
+
+    public static void rvHorizontalUnfixed(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("horizontalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setItemAnimator(null);
+    }
+
+    // -------------------- LinearLayoutManager - Vertical
+
+    public static void rvVerticalFixedNested(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setNestedScrollingEnabled(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(null);
+    }
+
+    public static void rvVerticalFixedUnnested(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(null);
+    }
+
+    public static void rvVerticalUnfixed(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(false);
+        recyclerView.setItemAnimator(null);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*
     ---------- Spinners ----------
@@ -133,18 +256,6 @@ public class InitManager {
         txt.setTextColor(txtColor);
         ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
         spinner.setBackgroundResource(spinnerBackground);
-    }
-
-    /*
-    ---------- Layouts ----------
-    */
-
-    public static void layoutTextColorResTintBackground(Activity activity, LinearLayout layout, TextView txt, ImageView img, String txtValue, int txtColor, int imgRes, int imgColor, int layoutBackground) {
-        txt.setText(txtValue);
-        txt.setTextColor(txtColor);
-        img.setImageResource(imgRes);
-        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
-        layout.setBackgroundResource(layoutBackground);
     }
 
     /*
@@ -911,68 +1022,6 @@ public class InitManager {
 
         spinner.setAdapter(adapter);
         spinner.setSelection(adapter.getCount());
-    }
-
-    /*
-    ---------- RecyclerViews ----------
-    */
-
-    // -------------------- GridLayoutManager
-
-    public static void fixedGridRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new RecyclerViewDecoration("gridLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
-        recyclerView.setLayoutManager(new GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(null);
-    }
-
-    public static void unfixedGridRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new RecyclerViewDecoration("gridLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
-        recyclerView.setLayoutManager(new GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(false);
-    }
-
-    // -------------------- LinearLayoutManager Horizontal
-
-    public static void fixedHorizontalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new RecyclerViewDecoration("horizontalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(true);
-    }
-
-    public static void unfixedHorizontalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new RecyclerViewDecoration("horizontalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(false);
-    }
-
-    // -------------------- LinearLayoutManager Vertical
-
-    public static void fixedVerticalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new RecyclerViewDecoration("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(null);
-    }
-
-    public static void fixedVerticalRecyclerView2(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new RecyclerViewDecoration("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setNestedScrollingEnabled(true);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setItemAnimator(null);
-    }
-
-    public static void unfixedVerticalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new RecyclerViewDecoration("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        recyclerView.setNestedScrollingEnabled(false);
-        recyclerView.setHasFixedSize(false);
     }
 
 }

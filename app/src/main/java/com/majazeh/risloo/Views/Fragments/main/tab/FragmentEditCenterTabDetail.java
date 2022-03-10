@@ -80,7 +80,7 @@ public class FragmentEditCenterTabDetail extends Fragment {
         binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterTabDetailPhonesHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterTabDetailDescriptionHeader));
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rvVerticalUnfixed(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabDetailButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }

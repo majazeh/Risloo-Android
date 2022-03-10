@@ -65,7 +65,7 @@ public class FragmentTreasury extends Fragment {
 
         binding.transactionsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.transactionsSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.transactionsSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     private void setArgs() {

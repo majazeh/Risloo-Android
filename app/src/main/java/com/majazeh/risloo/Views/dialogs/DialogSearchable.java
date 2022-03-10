@@ -128,7 +128,7 @@ public class DialogSearchable extends AppCompatDialogFragment {
         header = new HashMap<>();
         header.put("Authorization", ((ActivityMain) requireActivity()).singleton.getAuthorization());
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rvVerticalUnfixed(requireActivity(), binding.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")

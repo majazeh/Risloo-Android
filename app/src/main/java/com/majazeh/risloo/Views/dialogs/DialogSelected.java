@@ -94,7 +94,7 @@ public class DialogSelected extends AppCompatDialogFragment {
         child = ((ActivityMain) requireActivity()).fragmont.getChild();
         payment = ((ActivityMain) requireActivity()).fragmont.getPayment();
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rvVerticalUnfixed(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")
