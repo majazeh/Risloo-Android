@@ -110,11 +110,11 @@ public class FragmentReference extends Fragment {
         }).widget(binding.editImageView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
-            IntentManager.phone(requireActivity(), binding.mobileTextView.getText().toString());
+            IntentManager.tel(requireActivity(), binding.mobileTextView.getText().toString());
         }).widget(binding.mobileTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            IntentManager.email(requireActivity(), new String[]{binding.emailTextView.getText().toString()}, "", "", "");
+            IntentManager.email(requireActivity(), new String[]{binding.emailTextView.getText().toString()}, "", "");
         }).widget(binding.emailTextView);
     }
 

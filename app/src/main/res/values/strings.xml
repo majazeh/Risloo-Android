@@ -15,6 +15,7 @@
     <string name="AppInputEmpty">فیلد خالی است.</string>
 
     <string name="AppChooserFile">باز کردن با</string>
+    <string name="AppChooserEmail"></string>
     <string name="AppChooserShare">اشتراک گذاری با</string>
 
     <string name="AppSearchHint">جستجو</string>
@@ -115,18 +116,19 @@
     <string name="ToastSampleDoublePressExit">برای خروج از نمونه دوباره کلیک کنید.</string>
     <string name="ToastSampleLinkSaved">لینک نمونه ذخیره شد.</string>
 
-    <string name="ToastActivityEmptyException">برنامه‌ای برای اجرا وجود ندارد.</string>
-    <string name="ToastActivityPaymentException">برنامه‌ای برای بارگذاری درگاه پرداخت وجود ندارد.</string>
+    <string name="ToastActivityFileException">برنامه‌ای برای باز کردن فایل وجود ندارد.</string>
+    <string name="ToastActivityBrowserException">برنامه‌ای برای باز کردن آدرس وجود ندارد.</string>
 
-    <string name="ToastPermissionFileException">ریسلو دسترسی به آپلود فایل ندارد.</string>
-    <string name="ToastPermissionStorageException">ریسلو دسترسی به ذخیره فایل ندارد.</string>
+    <string name="ToastPermissionDocumentException">ریسلو دسترسی به آپلود فایل ندارد.</string>
+    <string name="ToastPermissionSendToException">ریسلو دسترسی به ذخیره فایل ندارد.</string>
+    <string name="ToastPermissionDownloadException">ریسلو دسترسی به ذخیره فایل ندارد.</string>
     <string name="ToastPermissionGalleryException">ریسلو دسترسی به البوم ندارد.</string>
     <string name="ToastPermissionCameraException">ریسلو دسترسی به دوربین ندارد.</string>
 
-    <string name="ToastIntentFileException">خطا در انتخاب فایل! لطفا دوباره تلاش کنید.</string>
-    <string name="ToastIntentGalleryException">خطا در انتخاب تصویر! لطفا دوباره تلاش کنید.</string>
-    <string name="ToastIntentCameraException">خطا در گرفتن تصویر! لطفا دوباره تلاش کنید.</string>
-    <string name="ToastIntentCropException">خطا در کراپ تصویر! لطفا دوباره تلاش کنید.</string>
+    <string name="ToastResultDocumentException">خطا در انتخاب فایل! لطفا دوباره تلاش کنید.</string>
+    <string name="ToastResultGalleryException">خطا در انتخاب تصویر! لطفا دوباره تلاش کنید.</string>
+    <string name="ToastResultCameraException">خطا در گرفتن تصویر! لطفا دوباره تلاش کنید.</string>
+    <string name="ToastResultCropException">خطا در کراپ تصویر! لطفا دوباره تلاش کنید.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

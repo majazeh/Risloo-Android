@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.FragmentEditCenterTabAvatarBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.GadgetManager;
+import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
@@ -131,16 +131,16 @@ public class FragmentEditCenterTabAvatar extends Fragment {
     public void responseAction(String method, Intent data) {
         switch (method) {
             case "gallery":
-                GadgetManager.resultGallery(requireActivity(), data);
+                ResultManager.resultGallery(requireActivity(), data);
                 break;
             case "camera":
-                GadgetManager.resultCamera(requireActivity(), avatarPath);
+                ResultManager.resultCamera(requireActivity(), avatarPath);
                 break;
             case "crop":
-                GadgetManager.resultCrop(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                ResultManager.resultCrop(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
 
-                avatarFile = GadgetManager.file;
-                avatarPath = GadgetManager.path;
+                avatarFile = ResultManager.file;
+                avatarPath = ResultManager.path;
                 break;
         }
     }

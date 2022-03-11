@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.majazeh.risloo.utils.entities.Decoraton;
-import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -62,10 +61,7 @@ public class ActivityDisplay extends AppCompatActivity {
 
         CustomClickView.onClickListener(() -> IntentManager.share(this, path)).widget(binding.shareImageView);
 
-        CustomClickView.onClickListener(() -> {
-            if (GadgetManager.permissionSendTo(this))
-                IntentManager.download(this, title, path);
-        }).widget(binding.downloadImageView);
+        CustomClickView.onClickListener(() -> IntentManager.download(this, title, path)).widget(binding.downloadImageView);
 
         CustomClickView.onClickListener(() -> {
             if (binding.getRoot().getCurrentState() == R.id.end)
@@ -110,15 +106,15 @@ public class ActivityDisplay extends AppCompatActivity {
         if (grantResults.length > 0) {
             for (int grantResult : grantResults) {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                    if (requestCode == 200) {
-                        ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionStorageException));
+                    if (requestCode == 300) {
+                        ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionDownloadException));
                     }
 
                     return;
                 }
             }
 
-            if (requestCode == 200) {
+            if (requestCode == 300) {
                 IntentManager.download(this, title, path);
             }
         }

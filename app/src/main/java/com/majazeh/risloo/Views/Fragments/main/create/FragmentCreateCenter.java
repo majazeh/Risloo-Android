@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.GadgetManager;
+import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
@@ -212,16 +212,16 @@ public class FragmentCreateCenter extends Fragment {
     public void responseAction(String method, Intent data) {
         switch (method) {
             case "gallery":
-                GadgetManager.resultGallery(requireActivity(), data);
+                ResultManager.resultGallery(requireActivity(), data);
                 break;
             case "camera":
-                GadgetManager.resultCamera(requireActivity(), avatarPath);
+                ResultManager.resultCamera(requireActivity(), avatarPath);
                 break;
             case "crop":
-                GadgetManager.resultCrop(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
+                ResultManager.resultCrop(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
 
-                avatarFile = GadgetManager.file;
-                avatarPath = GadgetManager.path;
+                avatarFile = ResultManager.file;
+                avatarPath = ResultManager.path;
                 break;
         }
     }

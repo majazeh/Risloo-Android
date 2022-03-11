@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.BottomSheetImageBinding;
-import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenter;
@@ -59,20 +59,20 @@ public class SheetImage extends BottomSheetDialogFragment {
 
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            GadgetManager.requestGallery(requireActivity());
+            IntentManager.gallery(requireActivity());
 
             dismiss();
         }).widget(binding.galleryTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (current instanceof FragmentCreateCenter)
-                ((FragmentCreateCenter) current).avatarPath = GadgetManager.requestCamera(requireActivity());
+                ((FragmentCreateCenter) current).avatarPath = IntentManager.camera(requireActivity());
 
             if (child instanceof FragmentEditCenterTabAvatar)
-                ((FragmentEditCenterTabAvatar) child).avatarPath = GadgetManager.requestCamera(requireActivity());
+                ((FragmentEditCenterTabAvatar) child).avatarPath = IntentManager.camera(requireActivity());
 
             if (child instanceof FragmentEditUserTabAvatar)
-                ((FragmentEditUserTabAvatar) child).avatarPath = GadgetManager.requestCamera(requireActivity());
+                ((FragmentEditUserTabAvatar) child).avatarPath = IntentManager.camera(requireActivity());
 
             dismiss();
         }).widget(binding.cameraTextView.getRoot());

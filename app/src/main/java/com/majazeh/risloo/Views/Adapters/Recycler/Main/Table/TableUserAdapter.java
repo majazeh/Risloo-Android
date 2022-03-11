@@ -118,9 +118,9 @@ public class TableUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     String pos = parent.getItemAtPosition(position).toString();
 
                     if (pos.contains("989"))
-                        IntentManager.phone(activity, pos);
+                        IntentManager.tel(activity, pos);
                     else if (pos.contains("@"))
-                        IntentManager.email(activity, new String[]{pos}, "", "", "");
+                        IntentManager.email(activity, new String[]{pos}, "", "");
                     else if (pos.equals("ورود به کاربری"))
                         ((ActivityMain) activity).setUser("loginOtherUser", model.getId());
                     else if (pos.equals("ویرایش"))

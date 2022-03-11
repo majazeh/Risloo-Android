@@ -22,6 +22,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.majazeh.risloo.utils.configs.ExtendEvent;
 import com.majazeh.risloo.utils.configs.ExtendException;
 import com.majazeh.risloo.utils.entities.BreadCrumb;
@@ -32,8 +33,8 @@ import com.majazeh.risloo.utils.entities.Navigatoon;
 import com.majazeh.risloo.utils.entities.Permissoon;
 import com.majazeh.risloo.utils.entities.Singleton;
 import com.majazeh.risloo.utils.entities.Validatoon;
+import com.majazeh.risloo.utils.managers.BalanceManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.ListManager;
@@ -43,7 +44,6 @@ import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
-import com.majazeh.risloo.utils.managers.BalanceManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.recycler.main.MainNavAdapter;
 import com.majazeh.risloo.views.fragments.main.create.FragmentCreateCenter;
@@ -52,7 +52,6 @@ import com.majazeh.risloo.views.fragments.main.create.FragmentCreatePractice;
 import com.majazeh.risloo.views.fragments.main.show.FragmentSample;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditCenterTabAvatar;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabAvatar;
-import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
@@ -385,15 +384,15 @@ public class ActivityMain extends AppCompatActivity {
                 if (grantResult != PackageManager.PERMISSION_GRANTED) {
                     switch (requestCode) {
                         case 100:
-                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionFileException));
-                            break;
-                        case 200:
-                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionStorageException));
+                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionDocumentException));
                             break;
                         case 300:
-                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionGalleryException));
+                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionDownloadException));
                             break;
                         case 400:
+                            ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionGalleryException));
+                            break;
+                        case 500:
                             ToastManager.showToastError(this, getResources().getString(R.string.ToastPermissionCameraException));
                             break;
                     }
@@ -404,25 +403,25 @@ public class ActivityMain extends AppCompatActivity {
 
             switch (requestCode) {
                 case 100:
-                    GadgetManager.requestDocument(this);
+                    IntentManager.document(this);
                     break;
-                case 200:
+                case 300:
                     if (fragmont.getCurrent() instanceof FragmentSample)
                         IntentManager.download(this, ((FragmentSample) fragmont.getCurrent()).binding.scaleTextView.getText().toString(), ((FragmentSample) fragmont.getCurrent()).selectedProfileUrl);
 
                     break;
-                case 300:
-                    GadgetManager.requestGallery(this);
-                    break;
                 case 400:
+                    IntentManager.gallery(this);
+                    break;
+                case 500:
                     if (fragmont.getCurrent() instanceof FragmentCreateCenter)
-                        ((FragmentCreateCenter) fragmont.getCurrent()).avatarPath = GadgetManager.requestCamera(this);
+                        ((FragmentCreateCenter) fragmont.getCurrent()).avatarPath = IntentManager.camera(this);
 
                     if (fragmont.getChild() instanceof FragmentEditCenterTabAvatar)
-                        ((FragmentEditCenterTabAvatar) fragmont.getChild()).avatarPath = GadgetManager.requestCamera(this);
+                        ((FragmentEditCenterTabAvatar) fragmont.getChild()).avatarPath = IntentManager.camera(this);
 
                     if (fragmont.getChild() instanceof FragmentEditUserTabAvatar)
-                        ((FragmentEditUserTabAvatar) fragmont.getChild()).avatarPath = GadgetManager.requestCamera(this);
+                        ((FragmentEditUserTabAvatar) fragmont.getChild()).avatarPath = IntentManager.camera(this);
 
                     break;
             }
@@ -444,7 +443,7 @@ public class ActivityMain extends AppCompatActivity {
                             ((FragmentCreatePractice) fragmont.getCurrent()).responseAction("document", data);
 
                         break;
-                    case 300:
+                    case 400:
                         if (fragmont.getCurrent() instanceof FragmentCreateCenter)
                             ((FragmentCreateCenter) fragmont.getCurrent()).responseAction("gallery", data);
 
@@ -455,7 +454,7 @@ public class ActivityMain extends AppCompatActivity {
                             ((FragmentEditUserTabAvatar) fragmont.getChild()).responseAction("gallery", data);
 
                         break;
-                    case 400:
+                    case 500:
                         if (fragmont.getCurrent() instanceof FragmentCreateCenter)
                             ((FragmentCreateCenter) fragmont.getCurrent()).responseAction("camera", data);
 
@@ -482,18 +481,18 @@ public class ActivityMain extends AppCompatActivity {
             case RESULT_ERROR: {
                 switch (requestCode) {
                     case 100:
-                        ToastManager.showToastError(this, getResources().getString(R.string.ToastIntentFileException));
-                        break;
-                    case 300:
-                        ToastManager.showToastError(this, getResources().getString(R.string.ToastIntentGalleryException));
+                        ToastManager.showToastError(this, getResources().getString(R.string.ToastResultDocumentException));
                         break;
                     case 400:
-                        ToastManager.showToastError(this, getResources().getString(R.string.ToastIntentCameraException));
+                        ToastManager.showToastError(this, getResources().getString(R.string.ToastResultGalleryException));
+                        break;
+                    case 500:
+                        ToastManager.showToastError(this, getResources().getString(R.string.ToastResultCameraException));
                         break;
                 }
             } break;
             case UCrop.RESULT_ERROR: {
-                ToastManager.showToastError(this, getResources().getString(R.string.ToastIntentCropException));
+                ToastManager.showToastError(this, getResources().getString(R.string.ToastResultCropException));
                 break;
             }
         }

@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.FragmentSampleBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.GadgetManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
@@ -150,8 +149,7 @@ public class FragmentSample extends Fragment {
                 if (userSelect) {
                     selectedProfileUrl = profileUrls.get(position);
 
-                    if (GadgetManager.permissionSendTo(requireActivity()))
-                        IntentManager.download(requireActivity(), binding.scaleTextView.getText().toString(), selectedProfileUrl);
+                    IntentManager.download(requireActivity(), binding.scaleTextView.getText().toString(), selectedProfileUrl);
 
                     parent.setSelection(parent.getAdapter().getCount());
 

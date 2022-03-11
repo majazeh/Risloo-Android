@@ -183,7 +183,7 @@ public class SpannableManager {
 
                     @Override
                     public void onClick(@NonNull View widget) {
-                        IntentManager.phone(activity, label);
+                        IntentManager.tel(activity, label);
                     }
 
                     @Override
