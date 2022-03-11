@@ -61,7 +61,7 @@ public class FragmentBalances extends Fragment {
 
         binding.tableShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")

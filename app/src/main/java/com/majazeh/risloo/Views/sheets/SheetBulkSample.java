@@ -84,7 +84,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
         binding.scaleIncludeLayout.headerTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleScaleHeader));
         binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleNicknameHeader));
 
-        InitManager.rvVerticalUnfixed(requireActivity(), binding.scaleIncludeLayout.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rcvVerticalUnfixed(requireActivity(), binding.scaleIncludeLayout.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.entryTextView.getRoot(), getResources().getString(R.string.BottomSheetBulkSampleEntry), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }

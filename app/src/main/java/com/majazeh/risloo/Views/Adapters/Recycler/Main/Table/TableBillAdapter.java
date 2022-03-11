@@ -20,6 +20,7 @@ import com.majazeh.risloo.utils.managers.PaymentManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -250,7 +251,7 @@ public class TableBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         if (items.size() > 1) {
             holder.binding.menuGroup.setVisibility(View.VISIBLE);
-            InitManager.selectBillSpinner(activity, holder.binding.menuSpinner, items);
+            SpinnerManager.selectBillSpinner(activity, holder.binding.menuSpinner, items);
         } else {
             holder.binding.menuGroup.setVisibility(View.INVISIBLE);
         }

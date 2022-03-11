@@ -20,6 +20,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -79,7 +80,7 @@ public class FragmentCreateBill extends Fragment {
         binding.amountIncludeLayout.headerTextView.setText(SpannableManager.spanForegroundColorSize(getResources().getString(R.string.CreateBillFragmentAmountHeader), 5, 12, getResources().getColor(R.color.coolGray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.amountIncludeLayout.footerTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
 
-        InitManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.BillStatus);
+        SpinnerManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.BillStatus);
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateBillFragmentButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
@@ -252,7 +253,7 @@ public class FragmentCreateBill extends Fragment {
         options.add("");
         referenceIds.add("");
 
-        InitManager.input12sspSpinner(requireActivity(), binding.referenceIncludeLayout.selectSpinner, options);
+        SpinnerManager.input12sspSpinner(requireActivity(), binding.referenceIncludeLayout.selectSpinner, options);
     }
 
     private void setTreasury(List treasuries) {
@@ -270,7 +271,7 @@ public class FragmentCreateBill extends Fragment {
         options.add("");
         treasuryIds.add("");
 
-        InitManager.input12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
+        SpinnerManager.input12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
     }
 
     private void setHashmap() {

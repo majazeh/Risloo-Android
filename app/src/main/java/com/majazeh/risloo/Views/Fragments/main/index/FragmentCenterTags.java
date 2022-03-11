@@ -60,7 +60,7 @@ public class FragmentCenterTags extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterTagsFragmentTitle));
 
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setArgs() {

@@ -12,17 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.HeaderItemTableUser2Binding;
+import com.majazeh.risloo.databinding.SingleItemTableUser2Binding;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderUser2Holder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableUser2Holder;
 import com.majazeh.risloo.views.fragments.main.show.FragmentSession;
-import com.majazeh.risloo.databinding.HeaderItemTableUser2Binding;
-import com.majazeh.risloo.databinding.SingleItemTableUser2Binding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Session;
@@ -120,7 +120,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         header = new HashMap<>();
         header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
-        InitManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserPosition);
+        SpinnerManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserPosition);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -211,7 +211,7 @@ public class TableUser2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         options.add("");
         platformIds.add("");
 
-        InitManager.input8sspSpinner(activity, holder.binding.platformSpinner, options);
+        SpinnerManager.input8sspSpinner(activity, holder.binding.platformSpinner, options);
 
         // Set Selected Platform
         if (model.getSessionPlatform() != null) {

@@ -19,6 +19,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -98,11 +99,11 @@ public class FragmentSample extends Fragment {
         binding.extrasHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
         binding.fieldsHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.halfsRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.extrasRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.generalRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._6sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.prerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._6sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.itemRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._6sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.halfsRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.extrasRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.generalRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._6sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.prerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._6sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.itemRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._6sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -272,7 +273,7 @@ public class FragmentSample extends Fragment {
                 binding.secondaryTextView.getRoot().setVisibility(View.GONE);
 
                 InitManager.txtTextColorBackground(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.white), R.drawable.draw_16sdp_solid_risloo500_ripple_risloo50);
-                InitManager.spinnerRect(requireActivity(), binding.profilesTextView.selectSpinner, binding.profilesTextView.selectTextView, binding.profilesTextView.angleImageView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.risloo500), R.color.risloo500, R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
+                InitManager.spRectDropdown(requireActivity(), binding.profilesTextView.selectSpinner, binding.profilesTextView.selectTextView, binding.profilesTextView.angleImageView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.risloo500), R.color.risloo500, R.drawable.draw_16sdp_solid_white_border_1sdp_risloo500_ripple_risloo50);
 
                 break;
         }
@@ -371,7 +372,7 @@ public class FragmentSample extends Fragment {
         profileUrls.add("");
 
         if (items.size() > 2) {
-            InitManager.selectProfileSpinner(requireActivity(), binding.profilesTextView.selectSpinner, items);
+            SpinnerManager.selectProfileSpinner(requireActivity(), binding.profilesTextView.selectSpinner, items);
         } else {
             binding.profilesTextView.getRoot().setVisibility(View.GONE);
         }

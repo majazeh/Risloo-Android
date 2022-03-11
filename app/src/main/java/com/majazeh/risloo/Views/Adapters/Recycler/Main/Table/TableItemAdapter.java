@@ -15,9 +15,13 @@ import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldMultiBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
+import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
-import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderFieldHolder;
@@ -25,10 +29,6 @@ import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldMultiHolder
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldSelectHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableFieldTextHolder;
 import com.majazeh.risloo.views.fragments.main.show.FragmentSample;
-import com.majazeh.risloo.databinding.HeaderItemTableFieldBinding;
-import com.majazeh.risloo.databinding.SingleItemTableFieldMultiBinding;
-import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
-import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -307,7 +307,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             options.add("");
 
-            InitManager.input10sspSpinner(activity, holder.binding.selectSpinner, options);
+            SpinnerManager.input10sspSpinner(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
         }

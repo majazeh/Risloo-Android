@@ -40,6 +40,7 @@ import com.majazeh.risloo.utils.managers.ListManager;
 import com.majazeh.risloo.utils.managers.PaymentManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.managers.BalanceManager;
@@ -135,9 +136,9 @@ public class ActivityMain extends AppCompatActivity {
         data = new HashMap<>();
         header = new HashMap<>();
 
-        InitManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, ListManager.getToolbar(this));
+        SpinnerManager.selectToolbarSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.selectSpinner, ListManager.getToolbar(this));
 
-        InitManager.rvVerticalFixedNested(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.rcvVerticalFixedNested(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void listener() {

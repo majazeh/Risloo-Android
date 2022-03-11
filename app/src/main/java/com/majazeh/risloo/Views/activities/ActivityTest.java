@@ -27,6 +27,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -246,7 +247,7 @@ public class ActivityTest extends AppCompatActivity {
             options.add("");
             answers.add(false);
 
-            InitManager.inputCustomTestSpinner(this, binding.indexSpinner, options, answers);
+            SpinnerManager.inputCustomTestSpinner(this, binding.indexSpinner, options, answers);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.views.adapters.holder.test.TestPreMultiHolder;
 import com.majazeh.risloo.views.adapters.holder.test.TestPreSelectHolder;
@@ -235,7 +236,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
             options.add("");
 
-            InitManager.input10sspSpinner(activity, holder.binding.selectSpinner, options);
+            SpinnerManager.input10sspSpinner(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
         }

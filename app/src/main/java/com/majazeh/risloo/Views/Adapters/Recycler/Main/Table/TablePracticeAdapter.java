@@ -11,12 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderPracticeHolder;
-import com.majazeh.risloo.views.adapters.holder.main.Table.TablePracticeHolder;
 import com.majazeh.risloo.databinding.HeaderItemTablePracticeBinding;
 import com.majazeh.risloo.databinding.SingleItemTablePracticeBinding;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderPracticeHolder;
+import com.majazeh.risloo.views.adapters.holder.main.Table.TablePracticeHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -153,7 +153,7 @@ public class TablePracticeAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         if (items.size() > 1) {
             holder.binding.menuGroup.setVisibility(View.VISIBLE);
-            InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
+            SpinnerManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
         } else {
             holder.binding.menuGroup.setVisibility(View.INVISIBLE);
         }

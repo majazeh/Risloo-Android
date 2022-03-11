@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.HeaderItemTableSession2Binding;
+import com.majazeh.risloo.databinding.SingleItemTableSession2Binding;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSession2Holder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableSession2Holder;
-import com.majazeh.risloo.databinding.HeaderItemTableSession2Binding;
-import com.majazeh.risloo.databinding.SingleItemTableSession2Binding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -111,7 +111,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
         header = new HashMap<>();
         header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
-        InitManager.input8sspSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
+        SpinnerManager.input8sspSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
     }
 
     @SuppressLint("ClickableViewAccessibility")

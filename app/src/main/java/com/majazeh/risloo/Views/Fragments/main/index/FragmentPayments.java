@@ -21,6 +21,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.PaymentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -96,7 +97,7 @@ public class FragmentPayments extends Fragment {
 
         binding.tableShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.tableSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -238,7 +239,7 @@ public class FragmentPayments extends Fragment {
         balances.add("");
         treasuryIds.add("");
 
-        InitManager.inputCustomTreasurySpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, titles, balances);
+        SpinnerManager.inputCustomTreasurySpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, titles, balances);
 
         // Select First Treasury Item
         treasury = treasuryIds.get(0);

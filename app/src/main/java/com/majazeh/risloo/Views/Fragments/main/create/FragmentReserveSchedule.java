@@ -20,6 +20,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.PaymentManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -107,7 +108,7 @@ public class FragmentReserveSchedule extends Fragment {
         binding.caseGuideLayout.guideTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentCaseGuide));
         binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentNameGuide));
 
-        InitManager.rvVerticalUnfixed(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rcvVerticalUnfixed(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.reserveTextView.getRoot(), getResources().getString(R.string.ReserveScheduleFragmentButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
@@ -417,7 +418,7 @@ public class FragmentReserveSchedule extends Fragment {
         options.add("");
         fieldsIds.add("");
 
-        InitManager.input12sspSpinner(requireActivity(), binding.fieldIncludeLayout.selectSpinner, options);
+        SpinnerManager.input12sspSpinner(requireActivity(), binding.fieldIncludeLayout.selectSpinner, options);
     }
 
     private void setPlatform(List platforms) {
@@ -435,7 +436,7 @@ public class FragmentReserveSchedule extends Fragment {
         options.add("");
         platformIds.add("");
 
-        InitManager.input12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
+        SpinnerManager.input12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
     private void setTreasury(List treasuries) {
@@ -456,7 +457,7 @@ public class FragmentReserveSchedule extends Fragment {
         options.add("");
         treasuryIds.add("");
 
-        InitManager.input12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
+        SpinnerManager.input12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {

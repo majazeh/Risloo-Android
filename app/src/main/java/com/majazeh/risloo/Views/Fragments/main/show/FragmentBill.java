@@ -66,7 +66,7 @@ public class FragmentBill extends Fragment {
 
         binding.timesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.rvVerticalFixedUnnested(requireActivity(), binding.timesSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.rcvVerticalFixedUnnested(requireActivity(), binding.timesSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     private void setArgs() {

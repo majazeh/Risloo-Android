@@ -17,6 +17,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -83,7 +84,7 @@ public class FragmentCreateSessionUser extends Fragment {
         binding.clientIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionUserFragmentClientHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionUserFragmentDescriptionHeader));
 
-        InitManager.rvVerticalUnfixed(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.rcvVerticalUnfixed(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColorBackground(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionUserFragmentButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
@@ -213,7 +214,7 @@ public class FragmentCreateSessionUser extends Fragment {
         options.add("");
         axisIds.add("");
 
-        InitManager.input12sspSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options);
+        SpinnerManager.input12sspSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options);
     }
 
     private void setPlatform(List platforms) {
@@ -231,7 +232,7 @@ public class FragmentCreateSessionUser extends Fragment {
         options.add("");
         platformIds.add("");
 
-        InitManager.input12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
+        SpinnerManager.input12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
     private void setClients(List clients) {

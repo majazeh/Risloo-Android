@@ -12,18 +12,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.HeaderItemTableCenterUserBinding;
+import com.majazeh.risloo.databinding.SingleItemTableCenterUserBinding;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderCenterUserHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableCenterUserHolder;
 import com.majazeh.risloo.views.fragments.main.index.FragmentCenterUsers;
-import com.majazeh.risloo.databinding.HeaderItemTableCenterUserBinding;
-import com.majazeh.risloo.databinding.SingleItemTableCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -122,7 +122,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         header = new HashMap<>();
         header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
-        InitManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
+        SpinnerManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -290,7 +290,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         items.add(activity.getResources().getString(R.string.CenterUserAdapterEnter));
         items.add("");
 
-        InitManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
+        SpinnerManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
     }
 
     private void setHashmap(UserModel model, String value, String method) {

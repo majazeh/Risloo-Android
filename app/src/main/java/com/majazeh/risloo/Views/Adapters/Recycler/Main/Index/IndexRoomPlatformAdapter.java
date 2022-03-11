@@ -21,6 +21,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
+import com.majazeh.risloo.utils.managers.SpinnerManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -104,7 +105,7 @@ public class IndexRoomPlatformAdapter extends RecyclerView.Adapter<IndexRoomPlat
         header = new HashMap<>();
         header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
-        InitManager.input8sspSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels);
+        SpinnerManager.input8sspSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels);
     }
 
     @SuppressLint("ClickableViewAccessibility")
