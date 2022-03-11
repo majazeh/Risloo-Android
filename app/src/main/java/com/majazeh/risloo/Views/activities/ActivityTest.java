@@ -23,11 +23,10 @@ import com.majazeh.risloo.utils.entities.Singleton;
 import com.majazeh.risloo.utils.entities.Validatoon;
 import com.majazeh.risloo.utils.managers.AnimateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -247,7 +246,7 @@ public class ActivityTest extends AppCompatActivity {
             options.add("");
             answers.add(false);
 
-            SpinnerManager.inputCustomTestSpinner(this, binding.indexSpinner, options, answers);
+            DropdownManager.spinnerCustomTest(this, binding.indexSpinner, options, answers);
         } catch (JSONException e) {
             e.printStackTrace();
         }

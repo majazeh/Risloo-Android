@@ -20,7 +20,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.PaymentManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -418,7 +418,7 @@ public class FragmentReserveSchedule extends Fragment {
         options.add("");
         fieldsIds.add("");
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.fieldIncludeLayout.selectSpinner, options);
+        DropdownManager.spinner12ssp(requireActivity(), binding.fieldIncludeLayout.selectSpinner, options);
     }
 
     private void setPlatform(List platforms) {
@@ -436,7 +436,7 @@ public class FragmentReserveSchedule extends Fragment {
         options.add("");
         platformIds.add("");
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
+        DropdownManager.spinner12ssp(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
     private void setTreasury(List treasuries) {
@@ -457,7 +457,7 @@ public class FragmentReserveSchedule extends Fragment {
         options.add("");
         treasuryIds.add("");
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
+        DropdownManager.spinner12ssp(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, options);
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {

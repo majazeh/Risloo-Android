@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderCenterUserHolder;
@@ -122,7 +122,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         header = new HashMap<>();
         header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
-        SpinnerManager.input8sspSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
+        DropdownManager.spinner8ssp(activity, holder.binding.positionSpinner, R.array.UserTypes);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -290,7 +290,7 @@ public class TableCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         items.add(activity.getResources().getString(R.string.CenterUserAdapterEnter));
         items.add("");
 
-        SpinnerManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
+        DropdownManager.spinnerSelectAction(activity, holder.binding.menuSpinner, items);
     }
 
     private void setHashmap(UserModel model, String value, String method) {

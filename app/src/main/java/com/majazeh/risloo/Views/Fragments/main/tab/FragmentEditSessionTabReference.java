@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
@@ -70,7 +70,7 @@ public class FragmentEditSessionTabReference extends Fragment {
 
         binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.EditSessionTabReferenceCheckbox));
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes);
+        DropdownManager.spinner12ssp(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes);
 
         InitManager.txtTextColorBackground(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabReferenceButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_risloo500_ripple_risloo700);
     }
@@ -283,7 +283,7 @@ public class FragmentEditSessionTabReference extends Fragment {
 
         options.add("");
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, options);
+        DropdownManager.spinner12ssp(requireActivity(), binding.typeIncludeLayout.selectSpinner, options);
     }
 
     private void setClients(List clients) {

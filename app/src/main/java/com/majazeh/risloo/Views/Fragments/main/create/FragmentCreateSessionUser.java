@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -214,7 +214,7 @@ public class FragmentCreateSessionUser extends Fragment {
         options.add("");
         axisIds.add("");
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options);
+        DropdownManager.spinner12ssp(requireActivity(), binding.axisIncludeLayout.selectSpinner, options);
     }
 
     private void setPlatform(List platforms) {
@@ -232,7 +232,7 @@ public class FragmentCreateSessionUser extends Fragment {
         options.add("");
         platformIds.add("");
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
+        DropdownManager.spinner12ssp(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
     private void setClients(List clients) {

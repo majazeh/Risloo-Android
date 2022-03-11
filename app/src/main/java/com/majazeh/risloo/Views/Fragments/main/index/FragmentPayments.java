@@ -21,7 +21,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.PaymentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
@@ -239,7 +239,7 @@ public class FragmentPayments extends Fragment {
         balances.add("");
         treasuryIds.add("");
 
-        SpinnerManager.inputCustomTreasurySpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, titles, balances);
+        DropdownManager.spinnerCustomTreasury(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, titles, balances);
 
         // Select First Treasury Item
         treasury = treasuryIds.get(0);

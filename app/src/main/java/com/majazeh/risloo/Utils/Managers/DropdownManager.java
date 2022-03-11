@@ -1,5 +1,6 @@
 package com.majazeh.risloo.utils.managers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,20 +20,35 @@ import com.majazeh.risloo.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SpinnerManager {
+public class DropdownManager {
 
-    // -------------------- Input AutoComplete
+    /*
+    ---------- AutoComplete's ----------
+    */
 
-    public static void input12sspAutoComplete(Activity activity, AutoCompleteTextView act, ArrayList<String> arrayList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_dropdown_12ssp, arrayList);
-        act.setAdapter(adapter);
-    }
-
-    // -------------------- Input Spinner
-
-    public static void input12sspSpinner(Activity activity, Spinner spinner, int arrayRes) {
+    public static void autoComplete12ssp(Activity activity, AutoCompleteTextView autoComplete, int arrayRes) {
         ArrayList<String> arrayList = new ArrayList<>();
         Collections.addAll(arrayList, activity.getResources().getStringArray(arrayRes));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.auto_item_dropdown_12ssp, arrayList);
+        autoComplete.setAdapter(adapter);
+    }
+
+    public static void autoComplete12ssp(Activity activity, AutoCompleteTextView autoComplete, ArrayList<String> arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.auto_item_dropdown_12ssp, arrayList);
+        autoComplete.setAdapter(adapter);
+    }
+
+    /*
+    ---------- Spinner's ----------
+    */
+
+    // -------------------- 12ssp
+
+    public static void spinner12ssp(Activity activity, Spinner spinner, int arrayRes) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        Collections.addAll(arrayList, activity.getResources().getStringArray(arrayRes));
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_12ssp, arrayList) {
 
             private TextView dropdownTextView;
@@ -86,7 +102,7 @@ public class SpinnerManager {
         spinner.setSelection(adapter.getCount());
     }
 
-    public static void input12sspSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
+    public static void spinner12ssp(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_12ssp, arrayList) {
 
             private TextView dropdownTextView;
@@ -140,9 +156,12 @@ public class SpinnerManager {
         spinner.setSelection(adapter.getCount());
     }
 
-    public static void input10sspSpinner(Activity activity, Spinner spinner, int arrayRes) {
+    // -------------------- 10ssp
+
+    public static void spinner10ssp(Activity activity, Spinner spinner, int arrayRes) {
         ArrayList<String> arrayList = new ArrayList<>();
         Collections.addAll(arrayList, activity.getResources().getStringArray(arrayRes));
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
 
             private TextView dropdownTextView;
@@ -196,7 +215,7 @@ public class SpinnerManager {
         spinner.setSelection(adapter.getCount());
     }
 
-    public static void input10sspSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
+    public static void spinner10ssp(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
 
             private TextView dropdownTextView;
@@ -250,9 +269,12 @@ public class SpinnerManager {
         spinner.setSelection(adapter.getCount());
     }
 
-    public static void input8sspSpinner(Activity activity, Spinner spinner, int arrayRes) {
+    // -------------------- 8ssp
+
+    public static void spinner8ssp(Activity activity, Spinner spinner, int arrayRes) {
         ArrayList<String> arrayList = new ArrayList<>();
         Collections.addAll(arrayList, activity.getResources().getStringArray(arrayRes));
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_8ssp, arrayList) {
 
             private TextView dropdownTextView;
@@ -306,7 +328,7 @@ public class SpinnerManager {
         spinner.setSelection(adapter.getCount());
     }
 
-    public static void input8sspSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
+    public static void spinner8ssp(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_8ssp, arrayList) {
 
             private TextView dropdownTextView;
@@ -360,143 +382,9 @@ public class SpinnerManager {
         spinner.setSelection(adapter.getCount());
     }
 
-    // -------------------- Input Custom Spinner
+    // -------------------- Select
 
-    public static void inputCustomTestSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, ArrayList<Boolean> arrayList2) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
-
-            private TextView dropdownTextView;
-            private ImageView dropdownImageView;
-
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                return super.getView(position, convertView, viewGroup);
-            }
-
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_test, viewGroup, false);
-
-                initializer(view);
-
-                detector(view, position);
-
-                setData(position);
-
-                return view;
-            }
-
-            private void initializer(View view) {
-                dropdownTextView = view.findViewById(R.id.dropdown_textView);
-                dropdownImageView = view.findViewById(R.id.dropdown_imageView);
-            }
-
-            private void detector(View view, int position) {
-                if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
-                else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
-            }
-
-            private void setData(int position) {
-                dropdownTextView.setText(arrayList.get(position));
-
-                if (spinner.getSelectedItemPosition() == position)
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
-                else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
-
-                if (arrayList2.get(position))
-                    dropdownImageView.setVisibility(View.VISIBLE);
-                else
-                    dropdownImageView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public int getCount() {
-                return super.getCount() - 1;
-            }
-
-        };
-
-        spinner.setAdapter(adapter);
-        spinner.setSelection(adapter.getCount());
-    }
-
-    public static void inputCustomTreasurySpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, ArrayList<String> arrayList2) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_treasury, arrayList) {
-
-            private TextView primaryTextView;
-            private TextView secondaryTextView;
-
-            private TextView dropdownPrimaryTextView;
-            private TextView dropdownSecondaryTextView;
-
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_background_treasury, null, false);
-
-                initializer(view);
-
-                setData(position);
-
-                return view;
-            }
-
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_treasury, viewGroup, false);
-
-                initializerDropDown(view);
-
-                detectorDropDown(view, position);
-
-                setDataDropDown(position);
-
-                return view;
-            }
-
-            private void initializer(View view) {
-                primaryTextView = view.findViewById(R.id.primary_textView);
-                secondaryTextView = view.findViewById(R.id.secondary_textView);
-            }
-
-            private void initializerDropDown(View view) {
-                dropdownPrimaryTextView = view.findViewById(R.id.primary_textView);
-                dropdownSecondaryTextView = view.findViewById(R.id.secondary_textView);
-            }
-
-            private void detectorDropDown(View view, int position) {
-                if (spinner.getSelectedItemPosition() == position)
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
-                else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
-            }
-
-            private void setData(int position) {
-                primaryTextView.setText(arrayList.get(position));
-                secondaryTextView.setText(SpannableManager.spanForegroundColor(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
-            }
-
-            private void setDataDropDown(int position) {
-                dropdownPrimaryTextView.setText(arrayList.get(position));
-                dropdownSecondaryTextView.setText(SpannableManager.spanForegroundColor(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
-            }
-
-            @Override
-            public int getCount() {
-                return super.getCount() - 1;
-            }
-
-        };
-
-        spinner.setAdapter(adapter);
-        spinner.setSelection(adapter.getCount());
-    }
-
-    // -------------------- Select Spinner
-
-    public static void selectBillSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
+    public static void spinnerSelect10ssp(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
 
             private TextView dropdownTextView;
@@ -527,6 +415,8 @@ public class SpinnerManager {
             private void detector(View view, int position) {
                 if (arrayList.get(position).equals("پرداخت"))
                     view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_emerald300);
+                else if (arrayList.get(position).equals("خروج"))
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_red300);
                 else
                     view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
             }
@@ -536,107 +426,7 @@ public class SpinnerManager {
 
                 if (dropdownTextView.getText().toString().equals("پرداخت"))
                     dropdownTextView.setTextColor(activity.getResources().getColor(R.color.emerald600));
-                else
-                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
-            }
-
-            @Override
-            public int getCount() {
-                return super.getCount() - 1;
-            }
-
-        };
-
-        spinner.setAdapter(adapter);
-        spinner.setSelection(adapter.getCount());
-    }
-
-    public static void selectProfileSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
-
-            private TextView dropdownTextView;
-
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                return super.getView(position, convertView, viewGroup);
-            }
-
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_10ssp, viewGroup, false);
-
-                initializer(view);
-
-                detector(view);
-
-                setData(position);
-
-                return view;
-            }
-
-            private void initializer(View view) {
-                dropdownTextView = view.findViewById(R.id.dropdown_textView);
-                dropdownTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            }
-
-            private void detector(View view) {
-                view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray50_ripple_coolgray300);
-            }
-
-            private void setData(int position) {
-                dropdownTextView.setText(arrayList.get(position));
-            }
-
-            @Override
-            public int getCount() {
-                return super.getCount() - 1;
-            }
-
-        };
-
-        spinner.setAdapter(adapter);
-        spinner.setSelection(adapter.getCount());
-    }
-
-    public static void selectToolbarSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
-
-            private TextView dropdownTextView;
-
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                return super.getView(position, convertView, viewGroup);
-            }
-
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_10ssp, viewGroup, false);
-
-                initializer(view);
-
-                detector(view, position);
-
-                setData(position);
-
-                return view;
-            }
-
-            private void initializer(View view) {
-                dropdownTextView = view.findViewById(R.id.dropdown_textView);
-                dropdownTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            }
-
-            private void detector(View view, int position) {
-                if (arrayList.get(position).equals("خروج"))
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray50_ripple_coolred300);
-                else
-                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray50_ripple_coolgray300);
-            }
-
-            private void setData(int position) {
-                dropdownTextView.setText(arrayList.get(position));
-
-                if (dropdownTextView.getText().toString().equals("خروج"))
+                else if (dropdownTextView.getText().toString().equals("خروج"))
                     dropdownTextView.setTextColor(activity.getResources().getColor(R.color.red600));
                 else
                     dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
@@ -653,9 +443,7 @@ public class SpinnerManager {
         spinner.setSelection(adapter.getCount(), false);
     }
 
-    // -------------------- Select Custom Spinner
-
-    public static void selectCustomActionSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
+    public static void spinnerSelectAction(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
 
             private TextView dropdownTextView;
@@ -766,6 +554,141 @@ public class SpinnerManager {
 
                         break;
                 }
+            }
+
+            @Override
+            public int getCount() {
+                return super.getCount() - 1;
+            }
+
+        };
+
+        spinner.setAdapter(adapter);
+        spinner.setSelection(adapter.getCount(), false);
+    }
+
+    // -------------------- Custom
+
+    public static void spinnerCustomTest(Activity activity, Spinner spinner, ArrayList<String> arrayList, ArrayList<Boolean> arrayList2) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
+
+            private TextView dropdownTextView;
+            private ImageView dropdownImageView;
+
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                return super.getView(position, convertView, viewGroup);
+            }
+
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_test, viewGroup, false);
+
+                initializer(view);
+
+                detector(view, position);
+
+                setData(position);
+
+                return view;
+            }
+
+            private void initializer(View view) {
+                dropdownTextView = view.findViewById(R.id.dropdown_textView);
+                dropdownImageView = view.findViewById(R.id.dropdown_imageView);
+            }
+
+            private void detector(View view, int position) {
+                if (spinner.getSelectedItemPosition() == position)
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
+            }
+
+            private void setData(int position) {
+                dropdownTextView.setText(arrayList.get(position));
+
+                if (spinner.getSelectedItemPosition() == position)
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.risloo500));
+                else
+                    dropdownTextView.setTextColor(activity.getResources().getColor(R.color.coolGray600));
+
+                if (arrayList2.get(position))
+                    dropdownImageView.setVisibility(View.VISIBLE);
+                else
+                    dropdownImageView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public int getCount() {
+                return super.getCount() - 1;
+            }
+
+        };
+
+        spinner.setAdapter(adapter);
+        spinner.setSelection(adapter.getCount());
+    }
+
+    public static void spinnerCustomTreasury(Activity activity, Spinner spinner, ArrayList<String> arrayList, ArrayList<String> arrayList2) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_treasury, arrayList) {
+
+            private TextView primaryTextView;
+            private TextView secondaryTextView;
+
+            private TextView dropdownPrimaryTextView;
+            private TextView dropdownSecondaryTextView;
+
+            @SuppressLint({"ViewHolder", "InflateParams"})
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_background_treasury, null, false);
+
+                initializer(view);
+
+                setData(position);
+
+                return view;
+            }
+
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_treasury, viewGroup, false);
+
+                initializerDropDown(view);
+
+                detectorDropDown(view, position);
+
+                setDataDropDown(position);
+
+                return view;
+            }
+
+            private void initializer(View view) {
+                primaryTextView = view.findViewById(R.id.primary_textView);
+                secondaryTextView = view.findViewById(R.id.secondary_textView);
+            }
+
+            private void initializerDropDown(View view) {
+                dropdownPrimaryTextView = view.findViewById(R.id.primary_textView);
+                dropdownSecondaryTextView = view.findViewById(R.id.secondary_textView);
+            }
+
+            private void detectorDropDown(View view, int position) {
+                if (spinner.getSelectedItemPosition() == position)
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_coolgray100_ripple_coolgray300);
+                else
+                    view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_coolgray300);
+            }
+
+            private void setData(int position) {
+                primaryTextView.setText(arrayList.get(position));
+                secondaryTextView.setText(SpannableManager.spanForegroundColor(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
+            }
+
+            private void setDataDropDown(int position) {
+                dropdownPrimaryTextView.setText(arrayList.get(position));
+                dropdownSecondaryTextView.setText(SpannableManager.spanForegroundColor(arrayList2.get(position), 12, arrayList2.get(position).length(), activity.getResources().getColor(R.color.emerald600)));
             }
 
             @Override

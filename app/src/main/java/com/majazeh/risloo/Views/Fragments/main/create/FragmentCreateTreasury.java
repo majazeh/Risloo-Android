@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
@@ -160,7 +160,7 @@ public class FragmentCreateTreasury extends Fragment {
 
         options.add("");
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.regionIncludeLayout.selectSpinner, options);
+        DropdownManager.spinner12ssp(requireActivity(), binding.regionIncludeLayout.selectSpinner, options);
 
         // Select First Treasury Item
         regionId = "";

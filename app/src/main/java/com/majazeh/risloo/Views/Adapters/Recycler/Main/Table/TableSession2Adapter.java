@@ -17,7 +17,7 @@ import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSession2Holder;
@@ -111,7 +111,7 @@ public class TableSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
         header = new HashMap<>();
         header.put("Authorization", ((ActivityMain) activity).singleton.getAuthorization());
 
-        SpinnerManager.input8sspSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
+        DropdownManager.spinner8ssp(activity, holder.binding.statusSpinner, R.array.SessionStatus);
     }
 
     @SuppressLint("ClickableViewAccessibility")

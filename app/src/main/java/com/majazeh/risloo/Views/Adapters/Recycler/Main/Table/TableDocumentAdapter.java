@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.HeaderItemTableDocumentBinding;
 import com.majazeh.risloo.databinding.SingleItemTableDocumentBinding;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderDocumentHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableDocumentHolder;
@@ -156,7 +156,7 @@ public class TableDocumentAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         if (items.size() > 1) {
             holder.binding.menuGroup.setVisibility(View.VISIBLE);
-            SpinnerManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
+            DropdownManager.spinnerSelectAction(activity, holder.binding.menuSpinner, items);
         } else {
             holder.binding.menuGroup.setVisibility(View.INVISIBLE);
         }

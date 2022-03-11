@@ -21,7 +21,7 @@ import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.SpannableManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.BalanceManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -104,9 +104,9 @@ public class FragmentBanks extends Fragment {
 
         binding.scheduleGuideLayout.guideTextView.setText(getResources().getString(R.string.BanksFragmentSettleScheduleGuide));
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.IbanTypes);
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.weekdayIncludeLayout.selectSpinner, R.array.SettleWeekDays);
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.monthdayIncludeLayout.selectSpinner, R.array.SettleMonthDays);
+        DropdownManager.spinner12ssp(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.IbanTypes);
+        DropdownManager.spinner12ssp(requireActivity(), binding.weekdayIncludeLayout.selectSpinner, R.array.SettleWeekDays);
+        DropdownManager.spinner12ssp(requireActivity(), binding.monthdayIncludeLayout.selectSpinner, R.array.SettleMonthDays);
 
         InitManager.txtTextColorBackground(binding.scheduleHelperView.getRoot(), getResources().getString(R.string.BanksFragmentSettleScheduleHelper), getResources().getColor(R.color.amber600), R.drawable.draw_2sdp_solid_amber50_border_right_2dp_amber400);
         InitManager.txtTextColorBackground(binding.settleTextView.getRoot(), getResources().getString(R.string.BanksFragmentSettleImmediateButton), getResources().getColor(R.color.white), R.drawable.draw_24sdp_solid_emerald600_ripple_emerald800);
@@ -392,7 +392,7 @@ public class FragmentBanks extends Fragment {
         else
             binding.settleGroup.setVisibility(View.GONE);
 
-        SpinnerManager.input12sspSpinner(requireActivity(), binding.accountIncludeLayout.selectSpinner, options);
+        DropdownManager.spinner12ssp(requireActivity(), binding.accountIncludeLayout.selectSpinner, options);
 
         // Select First Account Item
         account = accountIds.get(0);

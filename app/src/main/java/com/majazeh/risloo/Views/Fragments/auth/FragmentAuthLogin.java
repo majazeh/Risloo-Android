@@ -16,7 +16,7 @@ import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityAuth;
 import com.majazeh.risloo.databinding.FragmentAuthLoginBinding;
@@ -68,7 +68,7 @@ public class FragmentAuthLogin extends Fragment {
         InitManager.txtTextAppearance(requireActivity(), binding.registerLinkTextView.getRoot(), getResources().getString(R.string.AuthRegisterLink), R.style.danaDemiBold);
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
 
-        SpinnerManager.input12sspAutoComplete(requireActivity(), binding.mobileEditText.getRoot(), ((ActivityAuth) requireActivity()).singleton.getRegistMobiles());
+        DropdownManager.autoComplete12ssp(requireActivity(), binding.mobileEditText.getRoot(), ((ActivityAuth) requireActivity()).singleton.getRegistMobiles());
     }
 
     @SuppressLint("ClickableViewAccessibility")

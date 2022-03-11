@@ -21,7 +21,7 @@ import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderFieldHolder;
@@ -307,7 +307,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             options.add("");
 
-            SpinnerManager.input10sspSpinner(activity, holder.binding.selectSpinner, options);
+            DropdownManager.spinner10ssp(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
         }

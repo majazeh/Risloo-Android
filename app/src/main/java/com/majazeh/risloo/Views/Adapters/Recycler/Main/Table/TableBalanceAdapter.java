@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.HeaderItemTableBalanceBinding;
 import com.majazeh.risloo.databinding.SingleItemTableBalanceBinding;
 import com.majazeh.risloo.utils.managers.SpannableManager;
-import com.majazeh.risloo.utils.managers.SpinnerManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderBalanceHolder;
@@ -175,7 +175,7 @@ public class TableBalanceAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (items.size() > 1) {
             holder.binding.menuGroup.setVisibility(View.VISIBLE);
-            SpinnerManager.selectCustomActionSpinner(activity, holder.binding.menuSpinner, items);
+            DropdownManager.spinnerSelectAction(activity, holder.binding.menuSpinner, items);
         } else {
             holder.binding.menuGroup.setVisibility(View.INVISIBLE);
         }
