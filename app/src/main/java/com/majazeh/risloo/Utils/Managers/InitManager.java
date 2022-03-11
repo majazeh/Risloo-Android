@@ -89,6 +89,8 @@ public class InitManager {
     ---------- Layout's ----------
     */
 
+    // -------------------- Five
+
     public static void lytTextColorResTintBackground(Activity activity, LinearLayout lyt, TextView txt, ImageView img, String txtValue, int txtColor, int imgRes, int imgTint, int lytBackground) {
         txt.setText(txtValue);
         txt.setTextColor(txtColor);

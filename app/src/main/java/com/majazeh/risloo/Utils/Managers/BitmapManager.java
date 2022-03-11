@@ -22,6 +22,8 @@ public class BitmapManager {
     ---------- Convert's ----------
     */
 
+    // -------------------- Bitmap & Byte
+
     public static byte[] bitmapToByte(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -33,9 +35,7 @@ public class BitmapManager {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
-    /*
-    ---------- Convert's ----------
-    */
+    // -------------------- Bitmap & String
 
     public static String bitmapToString(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -52,9 +52,7 @@ public class BitmapManager {
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
-    /*
-    ---------- Convert's ----------
-    */
+    // -------------------- Bitmap & Path
 
     public static Bitmap pathToBitmap(String path) {
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -63,6 +61,8 @@ public class BitmapManager {
 
         return BitmapFactory.decodeFile(path, options);
     }
+
+    // -------------------- Bitmap & Uri
 
     public static Bitmap uriToBitmap(Activity activity, Uri uri) {
         try {

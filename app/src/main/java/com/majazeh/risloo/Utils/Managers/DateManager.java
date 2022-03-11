@@ -34,6 +34,8 @@ public class DateManager {
     ---------- Convert's ----------
     */
 
+    // -------------------- Date & Timestamp
+
     public static Date timestampToDate(long value) {
         Timestamp timestamp = new Timestamp(value * 1000);
         long timeLong = timestamp.getTime();
@@ -47,9 +49,7 @@ public class DateManager {
         return timeLong / 1000;
     }
 
-    /*
-    ---------- Convert's ----------
-    */
+    // -------------------- Date & String
 
     @SuppressLint("SimpleDateFormat")
     public static Date stringToDate(String pattern, String value) {
@@ -71,9 +71,7 @@ public class DateManager {
         return simpleDateFormat.format(value);
     }
 
-    /*
-    ---------- Convert's ----------
-    */
+    // -------------------- Date & PersianDate
 
     public static Date persianToDate(PersianDate value) {
         int year = value.getGrgYear();
@@ -126,6 +124,8 @@ public class DateManager {
     ---------- Timestamp's ----------
     */
 
+    // -------------------- String
+
     public static long timestampAccurate(String time, String date) {
         long timeLong = 0;
         long dateLong = 0;
@@ -172,9 +172,7 @@ public class DateManager {
         return dhms + hms + ms;
     }
 
-    /*
-    ---------- Timestamp's ----------
-    */
+    // -------------------- long
 
     public static long timestampPreFriday(long value) {
         Date date = timestampToDate(value);

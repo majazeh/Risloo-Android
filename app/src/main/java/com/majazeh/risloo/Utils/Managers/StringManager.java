@@ -84,6 +84,8 @@ public class StringManager {
     ---------- Char's ----------
     */
 
+    // -------------------- Single
+
     public static String charFirst(String value) {
         return String.valueOf(value.charAt(0));
     }
@@ -91,6 +93,8 @@ public class StringManager {
     public static String charLast(String value) {
         return String.valueOf(value.charAt(value.length() - 1));
     }
+
+    // -------------------- Multi
 
     public static String charsFirst(String value) {
         if (!value.equals("")) {
