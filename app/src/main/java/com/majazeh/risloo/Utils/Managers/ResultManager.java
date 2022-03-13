@@ -4,13 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.core.content.FileProvider;
-
-import com.majazeh.risloo.BuildConfig;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
@@ -55,13 +51,7 @@ public class ResultManager {
     }
 
     public static void resultCamera(Activity activity, String selectedPath) {
-        Uri uri;
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", new File(selectedPath));
-        else
-            uri = Uri.fromFile(file);
-
+        Uri uri = UriManager.uri(activity, file, selectedPath);
         Bitmap bitmap = BitmapManager.pathToBitmap(selectedPath);
 
         IntentManager.mediaScan(activity, uri);
