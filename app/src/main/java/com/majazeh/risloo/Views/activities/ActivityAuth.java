@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.entities.Navigatoon;
 import com.majazeh.risloo.utils.entities.Singleton;
 import com.majazeh.risloo.utils.entities.Validatoon;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.interfaces.CustomClickView;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;

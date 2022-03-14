@@ -13,7 +13,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.interfaces.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderSampleHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableSampleHolder;

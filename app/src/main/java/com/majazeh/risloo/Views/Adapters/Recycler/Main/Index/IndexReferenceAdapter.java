@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.interfaces.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Index.IndexReferenceHolder;
 import com.majazeh.risloo.databinding.SingleItemIndexReferenceBinding;

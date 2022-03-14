@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.JsonManager;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.interfaces.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.dialog.DialogFilterHolder;
 import com.majazeh.risloo.views.fragments.main.index.FragmentCenterSchedules;

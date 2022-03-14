@@ -12,7 +12,7 @@ import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.majazeh.risloo.utils.entities.Decoraton;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
+import com.majazeh.risloo.utils.interfaces.CustomClickView;
 import com.squareup.picasso.Picasso;
 
 public class ActivityDisplay extends AppCompatActivity {

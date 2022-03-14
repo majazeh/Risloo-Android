@@ -1,4 +1,4 @@
-package com.majazeh.risloo.utils.widgets;
+package com.majazeh.risloo.utils.interfaces;
 
 import android.os.Handler;
 import android.view.View;

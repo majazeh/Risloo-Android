@@ -1,19 +1,20 @@
-package com.majazeh.risloo.utils.interfaces;
+package com.majazeh.risloo.utils.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 
+import com.majazeh.risloo.utils.interfaces.CutCopyPasteListener;
+
 public class CutCopyPasteEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     // Interfaces
-    private CutCopyPasteListener editText;
+    private CutCopyPasteListener listener;
 
-    // Void
-    public void setOnCutCopyPasteListener(CutCopyPasteListener editText) {
-        this.editText = editText;
-    }
+    /*
+    ---------- Intialize ----------
+    */
 
     public CutCopyPasteEditText(@NonNull Context context) {
         super(context);
@@ -27,23 +28,35 @@ public class CutCopyPasteEditText extends androidx.appcompat.widget.AppCompatEdi
         super(context, attrs, defStyle);
     }
 
+    /*
+    ---------- Method's ----------
+    */
+
     @Override
     public boolean onTextContextMenuItem(int id) {
-        if (editText != null) {
+        if (listener != null) {
             switch (id) {
                 case android.R.id.cut:
-                    editText.onCutListener();
+                    listener.onCutListener();
                     break;
                 case android.R.id.copy:
-                    editText.onCopyListener();
+                    listener.onCopyListener();
                     break;
                 case android.R.id.paste:
-                    editText.onPasteListener();
+                    listener.onPasteListener();
                     break;
             }
         }
 
         return super.onTextContextMenuItem(id);
+    }
+
+    /*
+    ---------- Custom's ----------
+    */
+
+    public void setOnCutCopyPasteListener(CutCopyPasteListener listener) {
+        this.listener = listener;
     }
 
 }

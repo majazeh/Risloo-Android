@@ -15,6 +15,10 @@ import com.majazeh.risloo.R;
 
 public class SingleNumberPicker extends NumberPicker {
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public SingleNumberPicker(@NonNull Context context) {
         super(context);
     }
@@ -26,6 +30,10 @@ public class SingleNumberPicker extends NumberPicker {
     public SingleNumberPicker(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
+    /*
+    ---------- Method's ----------
+    */
 
     @Override
     public void addView(@NonNull View view) {
@@ -44,6 +52,10 @@ public class SingleNumberPicker extends NumberPicker {
         super.addView(view, index, params);
         updateView(getContext(), view);
     }
+
+    /*
+    ---------- Custom's ----------
+    */
 
     private void updateView(@NonNull Context context, @NonNull View view) {
         if (view instanceof EditText) {

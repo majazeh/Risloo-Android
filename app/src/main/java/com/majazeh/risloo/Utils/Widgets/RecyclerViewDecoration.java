@@ -12,6 +12,10 @@ public class RecyclerViewDecoration extends RecyclerView.ItemDecoration {
     private final String layoutManager;
     private final int marginTop, marginBottom, marginInner, marginSide;
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public RecyclerViewDecoration(String layoutManager, int marginTop, int marginBottom, int marginInner, int marginSide) {
         this.layoutManager = layoutManager;
         this.marginTop = marginTop;
@@ -19,6 +23,10 @@ public class RecyclerViewDecoration extends RecyclerView.ItemDecoration {
         this.marginInner = marginInner;
         this.marginSide = marginSide;
     }
+
+    /*
+    ---------- Method's ----------
+    */
 
     @Override
     public void getItemOffsets(@NonNull Rect rect, @NonNull View view, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.State state) {

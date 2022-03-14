@@ -7,6 +7,10 @@ import androidx.annotation.NonNull;
 
 public class SquareImageView extends androidx.appcompat.widget.AppCompatImageView {
 
+    /*
+    ---------- Intialize ----------
+    */
+
     public SquareImageView(@NonNull Context context) {
         super(context);
     }
@@ -18,6 +22,10 @@ public class SquareImageView extends androidx.appcompat.widget.AppCompatImageVie
     public SquareImageView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
+
+    /*
+    ---------- Method's ----------
+    */
 
     @Override
     protected void onMeasure(int measuredWidth, int measuredHeight) {
