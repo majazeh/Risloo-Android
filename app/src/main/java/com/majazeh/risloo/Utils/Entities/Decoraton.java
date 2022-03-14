@@ -25,14 +25,14 @@ public class Decoraton {
     public Decoraton(@NonNull Activity activity) {
         this.activity = activity;
 
-        // Note : Making The Ui Not Jumping When HIding And Showing The System UI
+        // Note: Making The Ui Not Jumping When HIding And Showing The System UI
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             activity.getWindow().getAttributes().layoutInDisplayCutoutMode = LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         }
     }
 
     /*
-    ---------- Show System UI ----------
+    ---------- Show's ----------
     */
 
     public void showSystemUI(boolean lightStatus, boolean lightNav) {
@@ -180,10 +180,10 @@ public class Decoraton {
     }
 
     /*
-    ---------- System UI Colors ----------
+    ---------- Color's ----------
     */
 
-    public void setSystemUIColor(int statusColor, int navColor) {
+    public void colorSystemUI(int statusColor, int navColor) {
         if (lightStatus && lightNav) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -248,7 +248,7 @@ public class Decoraton {
     }
 
     /*
-    ---------- System UI Extras ----------
+    ---------- Extra's ----------
     */
 
     public void normalShowSystemUI() {

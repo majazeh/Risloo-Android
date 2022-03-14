@@ -41,7 +41,7 @@ public class Navigatoon {
     }
 
     /*
-    ---------- Directions ----------
+    ---------- Direction's ----------
     */
 
     // -------------------- Auth
@@ -463,8 +463,10 @@ public class Navigatoon {
     }
 
     /*
-    ---------- Setters ----------
+    ---------- Setter's ----------
     */
+
+    // -------------------- Int
 
     public void setStartDestinationId(int fragment) {
         navGraph.setStartDestination(fragment);
@@ -472,11 +474,13 @@ public class Navigatoon {
     }
 
     /*
-    ---------- Getters ----------
+    ---------- Getter's ----------
     */
 
+    // -------------------- Int
+
     public int getStartDestinationId() {
-        return navGraph.getStartDestination();
+        return navGraph.getStartDestinationId();
     }
 
     public int getCurrentDestinationId() {
@@ -486,6 +490,8 @@ public class Navigatoon {
     public int getBackstackDestinationId() {
         return Objects.requireNonNull(navController.getPreviousBackStackEntry()).getDestination().getId();
     }
+
+    // -------------------- NavController
 
     public NavController getNavController() {
         return navController;

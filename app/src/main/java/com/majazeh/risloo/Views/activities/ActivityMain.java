@@ -108,7 +108,7 @@ public class ActivityMain extends AppCompatActivity {
         Decoraton decoraton = new Decoraton(this);
 
         decoraton.showSystemUI(true, true);
-        decoraton.setSystemUIColor(getResources().getColor(R.color.white), getResources().getColor(R.color.coolGray50));
+        decoraton.colorSystemUI(getResources().getColor(R.color.white), getResources().getColor(R.color.coolGray50));
     }
 
     private void varianter() {

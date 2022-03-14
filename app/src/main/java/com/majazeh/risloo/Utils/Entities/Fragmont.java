@@ -553,7 +553,7 @@ public class Fragmont {
     }
 
     /*
-    ---------- EditSession ----------
+    ---------- Edit Session ----------
     */
 
     public Fragment getEditSessionTabTime() {

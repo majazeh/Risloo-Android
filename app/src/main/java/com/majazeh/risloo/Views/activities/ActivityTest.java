@@ -103,10 +103,10 @@ public class ActivityTest extends AppCompatActivity {
 
         if (dark) {
             decoraton.showSystemUI(false, true);
-            decoraton.setSystemUIColor(getResources().getColor(R.color.risloo500), getResources().getColor(R.color.coolGray50));
+            decoraton.colorSystemUI(getResources().getColor(R.color.risloo500), getResources().getColor(R.color.coolGray50));
         } else {
             decoraton.showSystemUI(true, true);
-            decoraton.setSystemUIColor(getResources().getColor(R.color.coolGray50), getResources().getColor(R.color.coolGray50));
+            decoraton.colorSystemUI(getResources().getColor(R.color.coolGray50), getResources().getColor(R.color.coolGray50));
         }
     }
 

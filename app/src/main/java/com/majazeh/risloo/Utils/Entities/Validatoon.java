@@ -23,7 +23,7 @@ public class Validatoon {
     }
 
     /*
-    ---------- Methods ----------
+    ---------- Func's ----------
     */
 
     public void emptyValid(LinearLayout errorLayout, TextView errorTextView) {

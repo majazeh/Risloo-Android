@@ -63,7 +63,7 @@ public class ActivitySplash extends AppCompatActivity {
         Decoraton decoraton = new Decoraton(this);
 
         decoraton.showSystemUI(false, false);
-        decoraton.setSystemUIColor(getResources().getColor(R.color.risloo500), getResources().getColor(R.color.risloo500));
+        decoraton.colorSystemUI(getResources().getColor(R.color.risloo500), getResources().getColor(R.color.risloo500));
     }
 
     private void varianter() {
