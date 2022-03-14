@@ -208,7 +208,7 @@ public class DialogSelected extends AppCompatDialogFragment {
 
             calculateCount();
 
-            ((ActivityMain) requireActivity()).inputon.clear(((ActivityMain) requireActivity()).inputon.editText);
+            ((ActivityMain) requireActivity()).inputon.clear(((ActivityMain) requireActivity()).inputon.editText());
             binding.inputEditText.getText().clear();
         } catch (JSONException e) {
             e.printStackTrace();

@@ -546,8 +546,8 @@ public class ActivityTest extends AppCompatActivity {
                 Rect outRect = new Rect();
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    if (inputon.editText != null && inputon.editText.hasFocus()) {
-                        inputon.clear(inputon.editText);
+                    if (inputon.editText() != null && inputon.editText().hasFocus()) {
+                        inputon.clear(inputon.editText());
                     }
                 }
             }

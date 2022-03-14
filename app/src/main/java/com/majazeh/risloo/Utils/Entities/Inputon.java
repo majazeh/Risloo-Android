@@ -15,10 +15,10 @@ public class Inputon {
 
     // Objects
     private final Activity activity;
-    private Drawable background;
 
     // Widgets
-    public EditText editText;
+    private EditText editText;
+    private Drawable background;
 
     /*
     ---------- Intialize ----------
@@ -29,7 +29,7 @@ public class Inputon {
     }
 
     /*
-    ---------- Methods ----------
+    ---------- Func's ----------
     */
 
     public void select(EditText editText) {
@@ -48,7 +48,15 @@ public class Inputon {
     }
 
     /*
-    ---------- Voids ----------
+    ---------- Getter's ----------
+    */
+
+    public EditText editText() {
+        return editText;
+    }
+
+    /*
+    ---------- Private's ----------
     */
 
     private void hideKeyboard(Activity activity, EditText editText) {

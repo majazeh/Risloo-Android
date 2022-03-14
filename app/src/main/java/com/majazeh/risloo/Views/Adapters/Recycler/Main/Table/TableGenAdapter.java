@@ -120,7 +120,7 @@ public class TableGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             if (current instanceof FragmentSample)
                 ((FragmentSample) current).sendGen("cornometer", holder.binding.inputEditText.getText().toString().trim());
 
-            ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText);
+            ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText());
             return false;
         });
     }

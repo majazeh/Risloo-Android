@@ -50,7 +50,7 @@ public class Singleton {
     }
 
     /*
-    ---------- Voids ----------
+    ---------- Func's ----------
     */
 
     public void login(AuthModel authModel) {
@@ -92,7 +92,7 @@ public class Singleton {
     }
 
     /*
-    ---------- Setters ----------
+    ---------- Setter's ----------
     */
 
     private void setToken(String value) {
@@ -141,12 +141,14 @@ public class Singleton {
 
                 if (large != null)
                     avatarArray.put(large);
+
             }
 
             jsonObject.put("avatar", avatarArray);
 
             editor.putString("usermodel", jsonObject.toString());
             editor.apply();
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -191,7 +193,7 @@ public class Singleton {
     }
 
     /*
-    ---------- Getters ----------
+    ---------- Getter's ----------
     */
 
     public String getToken() {
@@ -222,9 +224,12 @@ public class Singleton {
 
                 return new UserModel(jsonObject);
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
-        } return null;
+        }
+
+        return null;
     }
 
     public String getRegistPassword(String mobile) {
@@ -237,9 +242,12 @@ public class Singleton {
                         return model.object.getString("password");
                 }
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
-        } return "";
+        }
+
+        return "";
     }
 
     public ArrayList<String> getRegistMobiles() {
@@ -254,9 +262,12 @@ public class Singleton {
 
                 return mobiles;
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
-        } return new ArrayList<>();
+        }
+
+        return new ArrayList<>();
     }
 
 }
