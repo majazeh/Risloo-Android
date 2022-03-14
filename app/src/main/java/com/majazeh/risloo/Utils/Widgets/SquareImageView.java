@@ -20,8 +20,8 @@ public class SquareImageView extends androidx.appcompat.widget.AppCompatImageVie
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    protected void onMeasure(int measuredWidth, int measuredHeight) {
+        super.onMeasure(measuredWidth, measuredHeight);
         setMeasuredDimension(getMeasuredWidth(), getMeasuredWidth());
     }
 
