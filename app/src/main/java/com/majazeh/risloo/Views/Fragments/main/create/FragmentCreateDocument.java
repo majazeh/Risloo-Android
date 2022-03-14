@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.FileManager;
 import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.interfaces.CustomClickView;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 

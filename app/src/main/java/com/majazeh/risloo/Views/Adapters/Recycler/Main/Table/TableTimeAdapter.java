@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.utils.interfaces.CustomClickView;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderTimeHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableTimeHolder;
 import com.majazeh.risloo.databinding.HeaderItemTableTimeBinding;

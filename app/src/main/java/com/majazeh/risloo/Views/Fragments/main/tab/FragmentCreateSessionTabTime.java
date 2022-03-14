@@ -18,7 +18,7 @@ import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.views.fragments.main.create.FragmentCreateSession;
 import com.majazeh.risloo.databinding.FragmentCreateSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.utils.interfaces.CustomClickView;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;

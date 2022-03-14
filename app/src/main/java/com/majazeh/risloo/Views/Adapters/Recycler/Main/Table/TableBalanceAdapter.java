@@ -16,7 +16,7 @@ import com.majazeh.risloo.databinding.SingleItemTableBalanceBinding;
 import com.majazeh.risloo.utils.managers.SpannableManager;
 import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.utils.interfaces.CustomClickView;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderBalanceHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableBalanceHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;

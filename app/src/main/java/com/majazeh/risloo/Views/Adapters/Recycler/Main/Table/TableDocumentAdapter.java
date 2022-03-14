@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.HeaderItemTableDocumentBinding;
 import com.majazeh.risloo.databinding.SingleItemTableDocumentBinding;
 import com.majazeh.risloo.utils.managers.DropdownManager;
-import com.majazeh.risloo.utils.interfaces.CustomClickView;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderDocumentHolder;
 import com.majazeh.risloo.views.adapters.holder.main.Table.TableDocumentHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
