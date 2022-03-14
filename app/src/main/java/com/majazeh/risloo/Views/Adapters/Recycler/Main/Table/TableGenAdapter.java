@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.interfaces.DiffUtilStringAdapter;
-import com.majazeh.risloo.utils.interfaces.DiffUtilStringCallback;
+import com.majazeh.risloo.utils.widgets.DiffUtilStringCallback;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderFieldHolder;

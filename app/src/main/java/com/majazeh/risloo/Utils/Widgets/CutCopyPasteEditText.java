@@ -13,7 +13,7 @@ public class CutCopyPasteEditText extends androidx.appcompat.widget.AppCompatEdi
     private CutCopyPasteListener listener;
 
     /*
-    ---------- Intialize ----------
+    ---------- Intialize's ----------
     */
 
     public CutCopyPasteEditText(@NonNull Context context) {

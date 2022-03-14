@@ -20,7 +20,7 @@ import com.majazeh.risloo.databinding.SingleItemTableFieldMultiBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldSelectBinding;
 import com.majazeh.risloo.databinding.SingleItemTableFieldTextBinding;
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
-import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
+import com.majazeh.risloo.utils.widgets.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.views.activities.ActivityMain;

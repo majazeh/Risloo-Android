@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 public class SquareImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     /*
-    ---------- Intialize ----------
+    ---------- Intialize's ----------
     */
 
     public SquareImageView(@NonNull Context context) {

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
-import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelCallback;
+import com.majazeh.risloo.utils.widgets.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.interfaces.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.holder.main.Header.HeaderScaleHolder;

@@ -1,17 +1,18 @@
-package com.majazeh.risloo.utils.interfaces;
+package com.majazeh.risloo.utils.widgets;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+
+import com.majazeh.risloo.utils.interfaces.DiffUtilStringAdapter;
 
 public class DiffUtilStringCallback extends DiffUtil.ItemCallback<String> {
 
     // Interfaces
     private final DiffUtilStringAdapter adapter;
 
-    // Constructor
-    public DiffUtilStringCallback(DiffUtilStringAdapter adapter) {
-        this.adapter = adapter;
-    }
+    /*
+    ---------- Method's ----------
+    */
 
     @Override
     public boolean areItemsTheSame(@NonNull String oldString, @NonNull String newString) {
@@ -21,6 +22,14 @@ public class DiffUtilStringCallback extends DiffUtil.ItemCallback<String> {
     @Override
     public boolean areContentsTheSame(@NonNull String oldString, @NonNull String newString) {
         return adapter.areContentsTheSame(oldString, newString);
+    }
+
+    /*
+    ---------- Custom's ----------
+    */
+
+    public DiffUtilStringCallback(DiffUtilStringAdapter adapter) {
+        this.adapter = adapter;
     }
 
 }

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.StringManager;
-import com.majazeh.risloo.utils.interfaces.ItemTouchHelperCallback;
+import com.majazeh.risloo.utils.widgets.ItemTouchHelperCallback;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Index.IndexRoomAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomsBinding;

@@ -13,7 +13,7 @@ public class RecyclerViewDecoration extends RecyclerView.ItemDecoration {
     private final int marginTop, marginBottom, marginInner, marginSide;
 
     /*
-    ---------- Intialize ----------
+    ---------- Intialize's ----------
     */
 
     public RecyclerViewDecoration(String layoutManager, int marginTop, int marginBottom, int marginInner, int marginSide) {

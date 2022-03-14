@@ -1,29 +1,20 @@
-package com.majazeh.risloo.utils.interfaces;
+package com.majazeh.risloo.utils.widgets;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.utils.interfaces.ItemTouchHelperAdapter;
+
 public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     // Interfaces
     private final ItemTouchHelperAdapter adapter;
 
-    // Constructor
-    public ItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
-        this.adapter = adapter;
-    }
-
-    @Override
-    public boolean isLongPressDragEnabled() {
-        return true;
-    }
-
-    @Override
-    public boolean isItemViewSwipeEnabled() {
-        return false;
-    }
+    /*
+    ---------- Method's ----------
+    */
 
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
@@ -58,6 +49,24 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
         super.clearView(recyclerView, viewHolder);
 
         adapter.onItemClear(viewHolder);
+    }
+
+    @Override
+    public boolean isLongPressDragEnabled() {
+        return true;
+    }
+
+    @Override
+    public boolean isItemViewSwipeEnabled() {
+        return false;
+    }
+
+    /*
+    ---------- Custom's ----------
+    */
+
+    public ItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
+        this.adapter = adapter;
     }
 
 }

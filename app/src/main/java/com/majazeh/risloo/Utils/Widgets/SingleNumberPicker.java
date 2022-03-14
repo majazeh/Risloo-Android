@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 public class SingleNumberPicker extends NumberPicker {
 
     /*
-    ---------- Intialize ----------
+    ---------- Intialize's ----------
     */
 
     public SingleNumberPicker(@NonNull Context context) {
