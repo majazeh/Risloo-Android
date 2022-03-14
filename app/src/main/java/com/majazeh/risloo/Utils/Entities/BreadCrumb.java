@@ -96,32 +96,36 @@ public class BreadCrumb {
     }
 
     /*
-    ---------- Methods ----------
+    ---------- Func's ----------
     */
 
-    public SpannableStringBuilder getFa(NavDestination destination, Bundle arguments) {
-        SpannableStringBuilder builder = new SpannableStringBuilder();
-
-        navDestination = destination;
-
+    public SpannableStringBuilder getSpan(NavDestination destination, Bundle arguments) {
         ArrayList<String> list = intialize(destination, arguments);
+        SpannableStringBuilder spannableBuilder = new SpannableStringBuilder();
+
         for (int i = 0; i < list.size(); i++) {
             String label = list.get(i);
 
-            if (list.size() == 1 && label.equals("خانه"))
+            if (list.size() == 1 && label.equals("خانه")) {
                 label = activity.getResources().getString(R.string.DashboardFragmentWelcome);
+            }
 
-            builder.append(label);
+            spannableBuilder.append(label);
             if (i != list.size() - 1) {
-                builder.append("  >  ");
-                int position = i;
+                spannableBuilder.append("  >  ");
 
                 String finalLabel = label;
-                builder.setSpan(new ClickableSpan() {
+                int finalPosition = i;
+
+                int start = spannableBuilder.toString().indexOf(label);
+                int end = start + label.length();
+
+                spannableBuilder.setSpan(new ClickableSpan() {
+
                     @Override
                     public void onClick(@NonNull View widget) {
                         if (!finalLabel.equals("نامعلوم"))
-                            navigateTo(destinationIds.get(position));
+                            navigateTo(destinationIds.get(finalPosition));
                     }
 
                     @Override
@@ -130,108 +134,110 @@ public class BreadCrumb {
                         textPaint.setUnderlineText(false);
                     }
 
-                }, builder.toString().indexOf(label), builder.toString().indexOf(label) + label.length(), 0);
+                }, start, end, 0);
             }
         }
 
-        return builder;
+        return spannableBuilder;
     }
 
     /*
-    ---------- Voids ----------
+    ---------- Private's ----------
     */
 
     @SuppressLint("NonConstantResourceId")
     private ArrayList<String> intialize(NavDestination destination, Bundle arguments) {
+        navDestination = destination;
+
         switch (destination.getId()) {
 
             // -------------------- Drawer
 
             case R.id.fragmentDashboard:
-                return dashboard();
+                return dashboardList();
             case R.id.fragmentCenters:
-                return centers();
+                return centersList();
             case R.id.fragmentCases:
-                return cases();
+                return casesList();
             case R.id.fragmentSessions:
-                return sessions();
+                return sessionsList();
             case R.id.fragmentUsers:
-                return users();
+                return usersList();
             case R.id.fragmentSamples:
                 chainId = FragmentSamplesArgs.fromBundle(arguments).getChainId();
                 sampleIds = FragmentSamplesArgs.fromBundle(arguments).getSampleIds();
 
-                return samples();
+                return samplesList();
             case R.id.fragmentBulkSamples:
-                return bulkSamples();
+                return bulkSamplesList();
             case R.id.fragmentScales:
-                return scales();
+                return scalesList();
             case R.id.fragmentDocuments:
-                return documents();
+                return documentsList();
             case R.id.fragmentDownloads:
-                return downloads();
+                return downloadsList();
 
             // -------------------- Toolbar
 
             case R.id.fragmentMe:
                 setModels(FragmentMeArgs.fromBundle(arguments).getTypeModel());
-                return me();
+                return meList();
             case R.id.fragmentAccounting:
-                return accounting();
+                return accountingList();
             case R.id.fragmentPayments:
-                return payments();
+                return paymentsList();
 
             // -------------------- Create
 
             case R.id.fragmentCreateBill:
-                return createBill();
+                return createBillList();
             case R.id.fragmentCreateCase:
-                return createCase();
+                return createCaseList();
             case R.id.fragmentCreateCaseUser:
-                return createCaseUser();
+                return createCaseUserList();
             case R.id.fragmentCreateCenter:
-                return createCenter();
+                return createCenterList();
             case R.id.fragmentCreateCenterUser:
-                return createCenterUser();
+                return createCenterUserList();
             case R.id.fragmentCreateClientReport:
-                return createClientReport();
+                return createClientReportList();
             case R.id.fragmentCreateDocument:
-                return createDocument();
+                return createDocumentList();
             case R.id.fragmentCreatePlatform:
-                return createPlatform();
+                return createPlatformList();
             case R.id.fragmentCreatePractice:
-                return createPractice();
+                return createPracticeList();
             case R.id.fragmentCreateRoom:
-                return createRoom();
+                return createRoomList();
             case R.id.fragmentCreateRoomUser:
-                return createRoomUser();
+                return createRoomUserList();
             case R.id.fragmentCreateSample:
-                return createSample();
+                return createSampleList();
             case R.id.fragmentCreateSchedule:
-                return createSchedule();
+                return createScheduleList();
             case R.id.fragmentCreateSession:
-                return createSession();
+                return createSessionList();
             case R.id.fragmentCreateSessionUser:
-                return createSessionUser();
+                return createSessionUserList();
             case R.id.fragmentCreateTreasury:
-                return createTreasury();
+                return createTreasuryList();
             case R.id.fragmentCreateUser:
-                return createUser();
+                return createUserList();
             case R.id.fragmentReserveSchedule:
                 setModels(FragmentReserveScheduleArgs.fromBundle(arguments).getTypeModel());
-                return reserveSchedule();
+                return reserveScheduleList();
 
             // -------------------- Edit
 
             case R.id.fragmentEditCenter:
                 setModels(FragmentEditCenterArgs.fromBundle(arguments).getTypeModel());
-                return editCenter();
+                return editCenterList();
             case R.id.fragmentEditCenterUser:
                 setModels(FragmentEditCenterUserArgs.fromBundle(arguments).getTypeModel());
-                return editCenterUser();
+                return editCenterUserList();
             case R.id.fragmentEditPlatform:
                 setModels(FragmentEditPlatformArgs.fromBundle(arguments).getTypeModel());
-                return editPlatform();
+                return editPlatformList();
             case R.id.fragmentEditSession: {
                 TypeModel typeModel = FragmentEditSessionArgs.fromBundle(arguments).getTypeModel();
 
@@ -241,35 +247,36 @@ public class BreadCrumb {
                     sessionType = "session";
 
                 setModels(typeModel);
-                return editSession();
-            } case R.id.fragmentEditTreasury:
+                return editSessionList();
+            }
+            case R.id.fragmentEditTreasury:
                 setModels(FragmentEditTreasuryArgs.fromBundle(arguments).getTypeModel());
-                return editTreasury();
+                return editTreasuryList();
             case R.id.fragmentEditUser:
                 setModels(FragmentEditUserArgs.fromBundle(arguments).getTypeModel());
-                return editUser();
+                return editUserList();
 
             // -------------------- Index
 
             case R.id.fragmentBalances:
                 setModels(FragmentBalancesArgs.fromBundle(arguments).getTypeModel());
-                return balances();
+                return balancesList();
             case R.id.fragmentBanks:
-                return banks();
+                return banksList();
             case R.id.fragmentBillings:
-                return billings();
+                return billingsList();
             case R.id.fragmentCenterPlatforms:
                 setModels(FragmentCenterPlatformsArgs.fromBundle(arguments).getTypeModel());
-                return centerPlatforms();
+                return centerPlatformsList();
             case R.id.fragmentCenterSchedules:
                 setModels(FragmentCenterSchedulesArgs.fromBundle(arguments).getTypeModel());
-                return centerSchedules();
+                return centerSchedulesList();
             case R.id.fragmentCenterTags:
                 setModels(FragmentCenterTagsArgs.fromBundle(arguments).getTypeModel());
-                return centerTags();
+                return centerTagsList();
             case R.id.fragmentCenterUsers:
                 setModels(FragmentCenterUsersArgs.fromBundle(arguments).getTypeModel());
-                return centerUsers();
+                return centerUsersList();
             case R.id.fragmentClientReports: {
                 TypeModel typeModel = FragmentClientReportsArgs.fromBundle(arguments).getTypeModel();
 
@@ -279,39 +286,40 @@ public class BreadCrumb {
                     clientReportsType = "session";
 
                 setModels(typeModel);
-                return clientReports();
-            } case R.id.fragmentCommissions:
+                return clientReportsList();
+            }
+            case R.id.fragmentCommissions:
                 setModels(FragmentCommissionsArgs.fromBundle(arguments).getTypeModel());
-                return commissions();
+                return commissionsList();
             case R.id.fragmentRoomPlatforms:
                 setModels(FragmentRoomPlatformsArgs.fromBundle(arguments).getTypeModel());
-                return roomPlatforms();
+                return roomPlatformsList();
             case R.id.fragmentRoomSchedules:
                 setModels(FragmentRoomSchedulesArgs.fromBundle(arguments).getTypeModel());
-                return roomSchedules();
+                return roomSchedulesList();
             case R.id.fragmentRoomTags:
                 setModels(FragmentRoomTagsArgs.fromBundle(arguments).getTypeModel());
-                return roomTags();
+                return roomTagsList();
             case R.id.fragmentRoomUsers:
                 setModels(FragmentRoomUsersArgs.fromBundle(arguments).getTypeModel());
-                return roomUsers();
+                return roomUsersList();
             case R.id.fragmentRooms:
                 setModels(FragmentRoomsArgs.fromBundle(arguments).getTypeModel());
-                return rooms();
+                return roomsList();
             case R.id.fragmentTreasuries:
-                return treasuries();
+                return treasuriesList();
 
             // -------------------- Show
 
             case R.id.fragmentBill:
                 setModels(FragmentBillArgs.fromBundle(arguments).getTypeModel());
-                return bill();
+                return billList();
             case R.id.fragmentBulkSample:
                 setModels(FragmentBulkSampleArgs.fromBundle(arguments).getTypeModel());
-                return bulkSample();
+                return bulkSampleList();
             case R.id.fragmentCase:
                 setModels(FragmentCaseArgs.fromBundle(arguments).getTypeModel());
-                return casse();
+                return casseList();
             case R.id.fragmentCenterAccounting: {
                 TypeModel typeModel = FragmentCenterAccountingArgs.fromBundle(arguments).getTypeModel();
 
@@ -321,13 +329,14 @@ public class BreadCrumb {
                     roomType = "personal_clinic";
 
                 setModels(typeModel);
-                return centerAccounting();
-            } case R.id.fragmentCenter:
+                return centerAccountingList();
+            }
+            case R.id.fragmentCenter:
                 setModels(FragmentCenterArgs.fromBundle(arguments).getTypeModel());
-                return center();
+                return centerList();
             case R.id.fragmentFolder:
                 folderName = FragmentFolderArgs.fromBundle(arguments).getFolderName();
-                return folder();
+                return folderList();
             case R.id.fragmentReference: {
                 UserModel userModel = (UserModel) FragmentReferenceArgs.fromBundle(arguments).getTypeModel();
 
@@ -347,8 +356,9 @@ public class BreadCrumb {
                     setModels(typeModel);
                 }
 
-                return reference();
-            } case R.id.fragmentRoom: {
+                return referenceList();
+            }
+            case R.id.fragmentRoom: {
                 TypeModel typeModel = FragmentRoomArgs.fromBundle(arguments).getTypeModel();
 
                 if (StringManager.suffix(typeModel.getClass().getName(), '.').equals("CenterModel"))
@@ -357,10 +367,11 @@ public class BreadCrumb {
                     roomType = "room";
 
                 setModels(typeModel);
-                return room();
-            } case R.id.fragmentSample:
+                return roomList();
+            }
+            case R.id.fragmentSample:
                 setModels(FragmentSampleArgs.fromBundle(arguments).getTypeModel());
-                return sample();
+                return sampleList();
             case R.id.fragmentSession: {
                 TypeModel typeModel = FragmentSessionArgs.fromBundle(arguments).getTypeModel();
 
@@ -370,13 +381,14 @@ public class BreadCrumb {
                     sessionType = "session";
 
                 setModels(typeModel);
-                return session();
-            } case R.id.fragmentTreasury:
+                return sessionList();
+            }
+            case R.id.fragmentTreasury:
                 setModels(FragmentTreasuryArgs.fromBundle(arguments).getTypeModel());
-                return treasury();
+                return treasuryList();
             case R.id.fragmentUser:
                 setModels(FragmentUserArgs.fromBundle(arguments).getTypeModel());
-                return user();
+                return userList();
         }
 
         return new ArrayList<>();
@@ -464,7 +476,7 @@ public class BreadCrumb {
                 else
                     ((ActivityMain) activity).navigatoon.navigateToFragmentClientReports(sessionModel);
 
-            break;
+                break;
             case R.id.fragmentCommissions:
                 if (roomType.equals("counseling_center"))
                     ((ActivityMain) activity).navigatoon.navigateToFragmentCommissions(centerModel);
@@ -553,274 +565,34 @@ public class BreadCrumb {
     private void setModels(TypeModel typeModel) {
         switch (StringManager.suffix(typeModel.getClass().getName(), '.')) {
             case "BillingModel":
-                billingModel = (BillingModel) typeModel;
+                billingModel(typeModel);
                 break;
             case "BulkSampleModel":
-                bulkSampleModel = (BulkSampleModel) typeModel;
-
-                if (bulkSampleModel.getCasse() != null) {
-                    caseModel = bulkSampleModel.getCasse();
-
-                    if (caseModel.getRoom() != null) {
-                        roomModel = caseModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else if (bulkSampleModel.getRoom() != null) {
-                        roomModel = bulkSampleModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else {
-                        roomModel = null;
-                        roomType = "";
-
-                        centerModel = null;
-                    }
-
-                } else {
-                    caseModel = null;
-
-                    if (bulkSampleModel.getRoom() != null) {
-                        roomModel = bulkSampleModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else {
-                        roomModel = null;
-                        roomType = "";
-
-                        centerModel = null;
-                    }
-
-                }
-
+                bulkSampleModel(typeModel);
                 break;
             case "CaseModel":
-                caseModel = (CaseModel) typeModel;
-
-                if (caseModel.getRoom() != null) {
-                    roomModel = caseModel.getRoom();
-                    roomType = roomModel.getType();
-
-                    if (roomModel.getCenter() != null)
-                        centerModel = roomModel.getCenter();
-                    else
-                        centerModel = null;
-
-                } else {
-                    roomModel = null;
-                    roomType = "";
-
-                    centerModel = null;
-                }
-
+                caseModel(typeModel);
                 break;
             case "CenterModel":
-                centerModel = (CenterModel) typeModel;
-                roomType = centerModel.getType();
-
+                centerModel(typeModel);
                 break;
             case "RoomModel":
-                roomModel = (RoomModel) typeModel;
-                roomType = roomModel.getType();
-
-                if (roomModel.getCenter() != null)
-                    centerModel = roomModel.getCenter();
-                else if (navDestination.getId() != R.id.fragmentRoom)
-                    centerModel = null;
-
+                roomModel(typeModel);
                 break;
             case "SampleModel":
-                sampleModel = (SampleModel) typeModel;
-
-                if (sampleModel.getCasse() != null) {
-                    caseModel = sampleModel.getCasse();
-
-                    if (caseModel.getRoom() != null) {
-                        roomModel = caseModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else if (sampleModel.getRoom() != null) {
-                        roomModel = sampleModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else {
-                        roomModel = null;
-                        roomType = "";
-
-                        centerModel = null;
-                    }
-
-                } else {
-                    caseModel = null;
-
-                    if (sampleModel.getRoom() != null) {
-                        roomModel = sampleModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else {
-                        roomModel = null;
-                        roomType = "";
-
-                        centerModel = null;
-                    }
-
-                }
-
-                if (sampleModel.getClient() != null)
-                    userModel = sampleModel.getClient();
-                else
-                    userModel = null;
-
+                sampleModel(typeModel);
                 break;
             case "ScheduleModel":
-                scheduleModel = (ScheduleModel) typeModel;
-
-                if (scheduleModel.getCasse() != null) {
-                    caseModel = scheduleModel.getCasse();
-
-                    if (caseModel.getRoom() != null) {
-                        roomModel = caseModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else if (scheduleModel.getRoom() != null) {
-                        roomModel = scheduleModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else {
-                        roomModel = null;
-                        roomType = "";
-
-                        centerModel = null;
-                    }
-
-                } else {
-                    caseModel = null;
-
-                    if (scheduleModel.getRoom() != null) {
-                        roomModel = scheduleModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else {
-                        roomModel = null;
-                        roomType = "";
-
-                        centerModel = null;
-                    }
-
-                }
-
+                scheduleModel(typeModel);
                 break;
             case "SessionModel":
-                sessionModel = (SessionModel) typeModel;
-
-                if (sessionModel.getCasse() != null) {
-                    caseModel = sessionModel.getCasse();
-
-                    if (caseModel.getRoom() != null) {
-                        roomModel = caseModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else if (sessionModel.getRoom() != null) {
-                        roomModel = sessionModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else {
-                        roomModel = null;
-                        roomType = "";
-
-                        centerModel = null;
-                    }
-
-                } else {
-                    caseModel = null;
-
-                    if (sessionModel.getRoom() != null) {
-                        roomModel = sessionModel.getRoom();
-                        roomType = roomModel.getType();
-
-                        if (roomModel.getCenter() != null)
-                            centerModel = roomModel.getCenter();
-                        else
-                            centerModel = null;
-
-                    } else {
-                        roomModel = null;
-                        roomType = "";
-
-                        centerModel = null;
-                    }
-
-                }
-
+                sessionModel(typeModel);
                 break;
             case "TreasuriesModel":
-                treasuriesModel = (TreasuriesModel) typeModel;
-
-                if (treasuriesModel.getCenter() != null) {
-                    centerModel = treasuriesModel.getCenter();
-                    roomType = centerModel.getType();
-                } else {
-                    centerModel = null;
-                    roomType = null;
-                }
-
+                treasuriesModel(typeModel);
                 break;
             case "UserModel":
-                userModel = (UserModel) typeModel;
+                userModel(typeModel);
                 break;
             default:
                 // TODO : Place If Needed
@@ -829,16 +601,369 @@ public class BreadCrumb {
     }
 
     /*
+    ---------- Model ----------
+    */
+
+    private void billingModel(TypeModel typeModel) {
+        billingModel = (BillingModel) typeModel;
+    }
+
+    private void bulkSampleModel(TypeModel typeModel) {
+        bulkSampleModel = (BulkSampleModel) typeModel;
+
+        if (bulkSampleModel.getCasse() != null) {
+            caseModel = bulkSampleModel.getCasse();
+
+            if (caseModel.getRoom() != null) {
+                roomModel = caseModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else if (bulkSampleModel.getRoom() != null) {
+                roomModel = bulkSampleModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else {
+                roomModel = null;
+                roomType = "";
+
+                centerModel = null;
+            }
+
+        } else {
+            caseModel = null;
+
+            if (bulkSampleModel.getRoom() != null) {
+                roomModel = bulkSampleModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else {
+                roomModel = null;
+                roomType = "";
+
+                centerModel = null;
+            }
+
+        }
+    }
+
+    private void caseModel(TypeModel typeModel) {
+        caseModel = (CaseModel) typeModel;
+
+        if (caseModel.getRoom() != null) {
+            roomModel = caseModel.getRoom();
+            roomType = roomModel.getType();
+
+            if (roomModel.getCenter() != null)
+                centerModel = roomModel.getCenter();
+            else
+                centerModel = null;
+
+        } else {
+            roomModel = null;
+            roomType = "";
+
+            centerModel = null;
+        }
+    }
+
+    private void centerModel(TypeModel typeModel) {
+        centerModel = (CenterModel) typeModel;
+        roomType = centerModel.getType();
+    }
+
+    private void roomModel(TypeModel typeModel) {
+        roomModel = (RoomModel) typeModel;
+        roomType = roomModel.getType();
+
+        if (roomModel.getCenter() != null)
+            centerModel = roomModel.getCenter();
+        else if (navDestination.getId() != R.id.fragmentRoom)
+            centerModel = null;
+    }
+
+    private void sampleModel(TypeModel typeModel) {
+        sampleModel = (SampleModel) typeModel;
+
+        if (sampleModel.getCasse() != null) {
+            caseModel = sampleModel.getCasse();
+
+            if (caseModel.getRoom() != null) {
+                roomModel = caseModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else if (sampleModel.getRoom() != null) {
+                roomModel = sampleModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else {
+                roomModel = null;
+                roomType = "";
+
+                centerModel = null;
+            }
+
+        } else {
+            caseModel = null;
+
+            if (sampleModel.getRoom() != null) {
+                roomModel = sampleModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else {
+                roomModel = null;
+                roomType = "";
+
+                centerModel = null;
+            }
+
+        }
+
+        if (sampleModel.getClient() != null)
+            userModel = sampleModel.getClient();
+        else
+            userModel = null;
+    }
+
+    private void scheduleModel(TypeModel typeModel) {
+        scheduleModel = (ScheduleModel) typeModel;
+
+        if (scheduleModel.getCasse() != null) {
+            caseModel = scheduleModel.getCasse();
+
+            if (caseModel.getRoom() != null) {
+                roomModel = caseModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else if (scheduleModel.getRoom() != null) {
+                roomModel = scheduleModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else {
+                roomModel = null;
+                roomType = "";
+
+                centerModel = null;
+            }
+
+        } else {
+            caseModel = null;
+
+            if (scheduleModel.getRoom() != null) {
+                roomModel = scheduleModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else {
+                roomModel = null;
+                roomType = "";
+
+                centerModel = null;
+            }
+
+        }
+    }
+
+    private void sessionModel(TypeModel typeModel) {
+        sessionModel = (SessionModel) typeModel;
+
+        if (sessionModel.getCasse() != null) {
+            caseModel = sessionModel.getCasse();
+
+            if (caseModel.getRoom() != null) {
+                roomModel = caseModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else if (sessionModel.getRoom() != null) {
+                roomModel = sessionModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else {
+                roomModel = null;
+                roomType = "";
+
+                centerModel = null;
+            }
+
+        } else {
+            caseModel = null;
+
+            if (sessionModel.getRoom() != null) {
+                roomModel = sessionModel.getRoom();
+                roomType = roomModel.getType();
+
+                if (roomModel.getCenter() != null)
+                    centerModel = roomModel.getCenter();
+                else
+                    centerModel = null;
+
+            } else {
+                roomModel = null;
+                roomType = "";
+
+                centerModel = null;
+            }
+
+        }
+    }
+
+    private void treasuriesModel(TypeModel typeModel) {
+        treasuriesModel = (TreasuriesModel) typeModel;
+
+        if (treasuriesModel.getCenter() != null) {
+            centerModel = treasuriesModel.getCenter();
+            roomType = centerModel.getType();
+        } else {
+            centerModel = null;
+            roomType = null;
+        }
+    }
+
+    private void userModel(TypeModel typeModel) {
+        userModel = (UserModel) typeModel;
+    }
+
+    /*
     ---------- Drawer ----------
     */
 
-    private ArrayList<String> dashboard() {
+    // -------------------- String
+
+    private ArrayList<String> dashboardList() {
         ArrayList<String> list = new ArrayList<>();
         list.add(activity.getResources().getString(R.string.DashboardFragmentTitle));
 
         destinationIds = dashboardIds();
         return list;
     }
+
+    private ArrayList<String> centersList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.CentersFragmentTitle));
+
+        destinationIds = centersIds();
+        return list;
+    }
+
+    private ArrayList<String> casesList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.CasesFragmentTitle));
+
+        destinationIds = casesIds();
+        return list;
+    }
+
+    private ArrayList<String> sessionsList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.SessionsFragmentTitle));
+
+        destinationIds = sessionsIds();
+        return list;
+    }
+
+    private ArrayList<String> usersList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.UsersFragmentTitle));
+
+        destinationIds = usersIds();
+        return list;
+    }
+
+    private ArrayList<String> samplesList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.SamplesFragmentTitle));
+
+        destinationIds = samplesIds();
+        return list;
+    }
+
+    private ArrayList<String> bulkSamplesList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.BulkSamplesFragmentTitle));
+
+        destinationIds = bulkSamplesIds();
+        return list;
+    }
+
+    private ArrayList<String> scalesList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.ScalesFragmentTitle));
+
+        destinationIds = scalesIds();
+        return list;
+    }
+
+    private ArrayList<String> documentsList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.DocumentsFragmentTitle));
+
+        destinationIds = documentsIds();
+        return list;
+    }
+
+    private ArrayList<String> downloadsList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.DownloadsFragmentTitle));
+
+        destinationIds = downloadsIds();
+        return list;
+    }
+
+    // -------------------- Int
+
     private ArrayList<Integer> dashboardIds() {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(R.id.fragmentDashboard);
@@ -846,13 +971,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> centers() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.CentersFragmentTitle));
-
-        destinationIds = centersIds();
-        return list;
-    }
     private ArrayList<Integer> centersIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentCenters);
@@ -860,13 +978,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> cases() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.CasesFragmentTitle));
-
-        destinationIds = casesIds();
-        return list;
-    }
     private ArrayList<Integer> casesIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentCases);
@@ -874,13 +985,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> sessions() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.SessionsFragmentTitle));
-
-        destinationIds = sessionsIds();
-        return list;
-    }
     private ArrayList<Integer> sessionsIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentSessions);
@@ -888,13 +992,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> users() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.UsersFragmentTitle));
-
-        destinationIds = usersIds();
-        return list;
-    }
     private ArrayList<Integer> usersIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentUsers);
@@ -902,13 +999,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> samples() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.SamplesFragmentTitle));
-
-        destinationIds = samplesIds();
-        return list;
-    }
     private ArrayList<Integer> samplesIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentSamples);
@@ -916,13 +1006,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> bulkSamples() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.BulkSamplesFragmentTitle));
-
-        destinationIds = bulkSamplesIds();
-        return list;
-    }
     private ArrayList<Integer> bulkSamplesIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentBulkSamples);
@@ -930,13 +1013,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> scales() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.ScalesFragmentTitle));
-
-        destinationIds = scalesIds();
-        return list;
-    }
     private ArrayList<Integer> scalesIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentScales);
@@ -944,13 +1020,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> documents() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.DocumentsFragmentTitle));
-
-        destinationIds = documentsIds();
-        return list;
-    }
     private ArrayList<Integer> documentsIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentDocuments);
@@ -958,13 +1027,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> downloads() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.DownloadsFragmentTitle));
-
-        destinationIds = downloadsIds();
-        return list;
-    }
     private ArrayList<Integer> downloadsIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentDownloads);
@@ -976,13 +1038,34 @@ public class BreadCrumb {
     ---------- Toolbar ----------
     */
 
-    private ArrayList<String> me() {
-        ArrayList<String> list = dashboard();
+    // -------------------- String
+
+    private ArrayList<String> meList() {
+        ArrayList<String> list = dashboardList();
         list.add(activity.getResources().getString(R.string.MeFragmentTitle));
 
         destinationIds = meIds();
         return list;
     }
+
+    private ArrayList<String> accountingList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.AccountingFragmentTitle));
+
+        destinationIds = accountingIds();
+        return list;
+    }
+
+    private ArrayList<String> paymentsList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.PaymentsFragmentTitle));
+
+        destinationIds = paymentsIds();
+        return list;
+    }
+
+    // -------------------- Int
+
     private ArrayList<Integer> meIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentMe);
@@ -990,13 +1073,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> accounting() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.AccountingFragmentTitle));
-
-        destinationIds = accountingIds();
-        return list;
-    }
     private ArrayList<Integer> accountingIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentAccounting);
@@ -1004,13 +1080,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> payments() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.PaymentsFragmentTitle));
-
-        destinationIds = paymentsIds();
-        return list;
-    }
     private ArrayList<Integer> paymentsIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentPayments);
@@ -1022,13 +1091,154 @@ public class BreadCrumb {
     ---------- Create ----------
     */
 
-    private ArrayList<String> createBill() {
-        ArrayList<String> list = session();
+    // -------------------- String
+
+    private ArrayList<String> createBillList() {
+        ArrayList<String> list = sessionList();
         list.add(activity.getResources().getString(R.string.CreateBillFragmentTitle));
 
         destinationIds = createBillIds();
         return list;
     }
+
+    private ArrayList<String> createCaseList() {
+        ArrayList<String> list = roomList();
+        list.add(activity.getResources().getString(R.string.CreateCaseFragmentTitle));
+
+        destinationIds = createCaseIds();
+        return list;
+    }
+
+    private ArrayList<String> createCaseUserList() {
+        ArrayList<String> list = casseList();
+        list.add(activity.getResources().getString(R.string.CreateCaseUserFragmentTitle));
+
+        destinationIds = createCaseUserIds();
+        return list;
+    }
+
+    private ArrayList<String> createCenterList() {
+        ArrayList<String> list = centersList();
+        list.add(activity.getResources().getString(R.string.CreateCenterFragmentTitle));
+
+        destinationIds = createCenterIds();
+        return list;
+    }
+
+    private ArrayList<String> createCenterUserList() {
+        ArrayList<String> list = centerUsersList();
+        list.add(activity.getResources().getString(R.string.CreateCenterUserFragmentTitle));
+
+        destinationIds = createCenterUserIds();
+        return list;
+    }
+
+    private ArrayList<String> createClientReportList() {
+        ArrayList<String> list = clientReportsList();
+        list.add(activity.getResources().getString(R.string.CreateClientReportFragmentTitle));
+
+        destinationIds = createClientReportIds();
+        return list;
+    }
+
+    private ArrayList<String> createDocumentList() {
+        ArrayList<String> list = documentsList();
+        list.add(activity.getResources().getString(R.string.CreateDocumentFragmentTitle));
+
+        destinationIds = createDocumentIds();
+        return list;
+    }
+
+    private ArrayList<String> createPlatformList() {
+        ArrayList<String> list = centerPlatformsList();
+        list.add(activity.getResources().getString(R.string.CreatePlatformFragmentTitle));
+
+        destinationIds = createPlatformIds();
+        return list;
+    }
+
+    private ArrayList<String> createPracticeList() {
+        ArrayList<String> list = sessionList();
+        list.add(activity.getResources().getString(R.string.CreatePracticeFragmentTitle));
+
+        destinationIds = createPracticeIds();
+        return list;
+    }
+
+    private ArrayList<String> createRoomList() {
+        ArrayList<String> list = centerList();
+        list.add(activity.getResources().getString(R.string.CreateRoomFragmentTitle));
+
+        destinationIds = createRoomIds();
+        return list;
+    }
+
+    private ArrayList<String> createRoomUserList() {
+        ArrayList<String> list = roomUsersList();
+        list.add(activity.getResources().getString(R.string.CreateRoomUserFragmentTitle));
+
+        destinationIds = createRoomUserIds();
+        return list;
+    }
+
+    private ArrayList<String> createSampleList() {
+        ArrayList<String> list = samplesList();
+        list.add(activity.getResources().getString(R.string.CreateSampleFragmentTitle));
+
+        destinationIds = createSampleIds();
+        return list;
+    }
+
+    private ArrayList<String> createScheduleList() {
+        ArrayList<String> list = roomList();
+        list.add(activity.getResources().getString(R.string.CreateScheduleFragmentTitle));
+
+        destinationIds = createScheduleIds();
+        return list;
+    }
+
+    private ArrayList<String> createSessionList() {
+        ArrayList<String> list = casseList();
+        list.add(activity.getResources().getString(R.string.CreateSessionFragmentTitle));
+
+        destinationIds = createSessionIds();
+        return list;
+    }
+
+    private ArrayList<String> createSessionUserList() {
+        ArrayList<String> list = sessionList();
+        list.add(activity.getResources().getString(R.string.CreateSessionUserFragmentTitle));
+
+        destinationIds = createSessionUserIds();
+        return list;
+    }
+
+    private ArrayList<String> createTreasuryList() {
+        ArrayList<String> list = treasuriesList();
+        list.add(activity.getResources().getString(R.string.CreateTreasuryFragmentTitle));
+
+        destinationIds = createTreasuryIds();
+        return list;
+    }
+
+    private ArrayList<String> createUserList() {
+        ArrayList<String> list = usersList();
+        list.add(activity.getResources().getString(R.string.CreateUserFragmentTitle));
+
+        destinationIds = createUserIds();
+        return list;
+    }
+
+    private ArrayList<String> reserveScheduleList() {
+        ArrayList<String> list = roomSchedulesList();
+        list.add(activity.getResources().getString(R.string.AppReserve));
+
+        destinationIds = reserveScheduleIds();
+        return list;
+    }
+
+    // -------------------- Int
+
     private ArrayList<Integer> createBillIds() {
         ArrayList<Integer> list = sessionIds();
         list.add(R.id.fragmentCreateBill);
@@ -1036,13 +1246,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createCase() {
-        ArrayList<String> list = room();
-        list.add(activity.getResources().getString(R.string.CreateCaseFragmentTitle));
-
-        destinationIds = createCaseIds();
-        return list;
-    }
     private ArrayList<Integer> createCaseIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.fragmentCreateCase);
@@ -1050,13 +1253,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createCaseUser() {
-        ArrayList<String> list = casse();
-        list.add(activity.getResources().getString(R.string.CreateCaseUserFragmentTitle));
-
-        destinationIds = createCaseUserIds();
-        return list;
-    }
     private ArrayList<Integer> createCaseUserIds() {
         ArrayList<Integer> list = casseIds();
         list.add(R.id.fragmentCreateCaseUser);
@@ -1064,13 +1260,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createCenter() {
-        ArrayList<String> list = centers();
-        list.add(activity.getResources().getString(R.string.CreateCenterFragmentTitle));
-
-        destinationIds = createCenterIds();
-        return list;
-    }
     private ArrayList<Integer> createCenterIds() {
         ArrayList<Integer> list = centersIds();
         list.add(R.id.fragmentCreateCenter);
@@ -1078,13 +1267,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createCenterUser() {
-        ArrayList<String> list = centerUsers();
-        list.add(activity.getResources().getString(R.string.CreateCenterUserFragmentTitle));
-
-        destinationIds = createCenterUserIds();
-        return list;
-    }
     private ArrayList<Integer> createCenterUserIds() {
         ArrayList<Integer> list = centerUsersIds();
         list.add(R.id.fragmentCreateCenterUser);
@@ -1092,13 +1274,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createClientReport() {
-        ArrayList<String> list = clientReports();
-        list.add(activity.getResources().getString(R.string.CreateClientReportFragmentTitle));
-
-        destinationIds = createClientReportIds();
-        return list;
-    }
     private ArrayList<Integer> createClientReportIds() {
         ArrayList<Integer> list = clientReportsIds();
         list.add(R.id.fragmentCreateClientReport);
@@ -1106,13 +1281,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createDocument() {
-        ArrayList<String> list = documents();
-        list.add(activity.getResources().getString(R.string.CreateDocumentFragmentTitle));
-
-        destinationIds = createDocumentIds();
-        return list;
-    }
     private ArrayList<Integer> createDocumentIds() {
         ArrayList<Integer> list = documentsIds();
         list.add(R.id.fragmentCreateDocument);
@@ -1120,13 +1288,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createPlatform() {
-        ArrayList<String> list = centerPlatforms();
-        list.add(activity.getResources().getString(R.string.CreatePlatformFragmentTitle));
-
-        destinationIds = createPlatformIds();
-        return list;
-    }
     private ArrayList<Integer> createPlatformIds() {
         ArrayList<Integer> list = centerPlatformsIds();
         list.add(R.id.fragmentCreatePlatform);
@@ -1134,13 +1295,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createPractice() {
-        ArrayList<String> list = session();
-        list.add(activity.getResources().getString(R.string.CreatePracticeFragmentTitle));
-
-        destinationIds = createPracticeIds();
-        return list;
-    }
     private ArrayList<Integer> createPracticeIds() {
         ArrayList<Integer> list = sessionIds();
         list.add(R.id.fragmentCreatePractice);
@@ -1148,13 +1302,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createRoom() {
-        ArrayList<String> list = center();
-        list.add(activity.getResources().getString(R.string.CreateRoomFragmentTitle));
-
-        destinationIds = createRoomIds();
-        return list;
-    }
     private ArrayList<Integer> createRoomIds() {
         ArrayList<Integer> list = centerIds();
         list.add(R.id.fragmentCreateRoom);
@@ -1162,13 +1309,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createRoomUser() {
-        ArrayList<String> list = roomUsers();
-        list.add(activity.getResources().getString(R.string.CreateRoomUserFragmentTitle));
-
-        destinationIds = createRoomUserIds();
-        return list;
-    }
     private ArrayList<Integer> createRoomUserIds() {
         ArrayList<Integer> list = roomUsersIds();
         list.add(R.id.fragmentCreateRoomUser);
@@ -1176,13 +1316,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createSample() {
-        ArrayList<String> list = samples();
-        list.add(activity.getResources().getString(R.string.CreateSampleFragmentTitle));
-
-        destinationIds = createSampleIds();
-        return list;
-    }
     private ArrayList<Integer> createSampleIds() {
         ArrayList<Integer> list = samplesIds();
         list.add(R.id.fragmentCreateSample);
@@ -1190,13 +1323,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createSchedule() {
-        ArrayList<String> list = room();
-        list.add(activity.getResources().getString(R.string.CreateScheduleFragmentTitle));
-
-        destinationIds = createScheduleIds();
-        return list;
-    }
     private ArrayList<Integer> createScheduleIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.fragmentCreateSchedule);
@@ -1204,13 +1330,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createSession() {
-        ArrayList<String> list = casse();
-        list.add(activity.getResources().getString(R.string.CreateSessionFragmentTitle));
-
-        destinationIds = createSessionIds();
-        return list;
-    }
     private ArrayList<Integer> createSessionIds() {
         ArrayList<Integer> list = casseIds();
         list.add(R.id.fragmentCreateSession);
@@ -1218,13 +1337,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createSessionUser() {
-        ArrayList<String> list = session();
-        list.add(activity.getResources().getString(R.string.CreateSessionUserFragmentTitle));
-
-        destinationIds = createSessionUserIds();
-        return list;
-    }
     private ArrayList<Integer> createSessionUserIds() {
         ArrayList<Integer> list = sessionIds();
         list.add(R.id.fragmentCreateSessionUser);
@@ -1232,13 +1344,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createTreasury() {
-        ArrayList<String> list = treasuries();
-        list.add(activity.getResources().getString(R.string.CreateTreasuryFragmentTitle));
-
-        destinationIds = createTreasuryIds();
-        return list;
-    }
     private ArrayList<Integer> createTreasuryIds() {
         ArrayList<Integer> list = treasuriesIds();
         list.add(R.id.fragmentCreateTreasury);
@@ -1246,13 +1351,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> createUser() {
-        ArrayList<String> list = users();
-        list.add(activity.getResources().getString(R.string.CreateUserFragmentTitle));
-
-        destinationIds = createUserIds();
-        return list;
-    }
     private ArrayList<Integer> createUserIds() {
         ArrayList<Integer> list = usersIds();
         list.add(R.id.fragmentCreateUser);
@@ -1260,13 +1358,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> reserveSchedule() {
-        ArrayList<String> list = roomSchedules();
-        list.add(activity.getResources().getString(R.string.AppReserve));
-
-        destinationIds = reserveScheduleIds();
-        return list;
-    }
     private ArrayList<Integer> reserveScheduleIds() {
         ArrayList<Integer> list = roomSchedulesIds();
         list.add(R.id.fragmentReserveSchedule);
@@ -1278,19 +1369,64 @@ public class BreadCrumb {
     ---------- Edit ----------
     */
 
-    private ArrayList<String> editCenter() {
+    // -------------------- String
+
+    private ArrayList<String> editCenterList() {
         ArrayList<String> list;
 
         if (!roomType.equals("room"))
-            list = center();
+            list = centerList();
         else
-            list = room();
+            list = roomList();
 
         list.add(activity.getResources().getString(R.string.AppEdit));
 
         destinationIds = editCenterIds();
         return list;
     }
+
+    private ArrayList<String> editCenterUserList() {
+        ArrayList<String> list = referenceList();
+        list.add(activity.getResources().getString(R.string.AppEdit));
+
+        destinationIds = editCenterUserIds();
+        return list;
+    }
+
+    private ArrayList<String> editPlatformList() {
+        ArrayList<String> list = centerPlatformsList();
+        list.add(activity.getResources().getString(R.string.AppEdit));
+
+        destinationIds = editPlatformIds();
+        return list;
+    }
+
+    private ArrayList<String> editSessionList() {
+        ArrayList<String> list = sessionList();
+        list.add(activity.getResources().getString(R.string.AppEdit));
+
+        destinationIds = editSessionIds();
+        return list;
+    }
+
+    private ArrayList<String> editTreasuryList() {
+        ArrayList<String> list = treasuryList();
+        list.add(activity.getResources().getString(R.string.AppEdit));
+
+        destinationIds = editTreasuryIds();
+        return list;
+    }
+
+    private ArrayList<String> editUserList() {
+        ArrayList<String> list = userList();
+        list.add(activity.getResources().getString(R.string.AppEdit));
+
+        destinationIds = editUserIds();
+        return list;
+    }
+
+    // -------------------- int
+
     private ArrayList<Integer> editCenterIds() {
         ArrayList<Integer> list;
 
@@ -1304,13 +1440,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> editCenterUser() {
-        ArrayList<String> list = reference();
-        list.add(activity.getResources().getString(R.string.AppEdit));
-
-        destinationIds = editCenterUserIds();
-        return list;
-    }
     private ArrayList<Integer> editCenterUserIds() {
         ArrayList<Integer> list = referenceIds();
         list.add(R.id.fragmentEditCenterUser);
@@ -1318,13 +1447,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> editPlatform() {
-        ArrayList<String> list = centerPlatforms();
-        list.add(activity.getResources().getString(R.string.AppEdit));
-
-        destinationIds = editPlatformIds();
-        return list;
-    }
     private ArrayList<Integer> editPlatformIds() {
         ArrayList<Integer> list = centerPlatformsIds();
         list.add(R.id.fragmentEditPlatform);
@@ -1332,13 +1454,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> editSession() {
-        ArrayList<String> list = session();
-        list.add(activity.getResources().getString(R.string.AppEdit));
-
-        destinationIds = editSessionIds();
-        return list;
-    }
     private ArrayList<Integer> editSessionIds() {
         ArrayList<Integer> list = sessionIds();
         list.add(R.id.fragmentEditSession);
@@ -1346,13 +1461,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> editTreasury() {
-        ArrayList<String> list = treasury();
-        list.add(activity.getResources().getString(R.string.AppEdit));
-
-        destinationIds = editTreasuryIds();
-        return list;
-    }
     private ArrayList<Integer> editTreasuryIds() {
         ArrayList<Integer> list = treasuryIds();
         list.add(R.id.fragmentEditTreasury);
@@ -1360,13 +1468,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> editUser() {
-        ArrayList<String> list = user();
-        list.add(activity.getResources().getString(R.string.AppEdit));
-
-        destinationIds = editUserIds();
-        return list;
-    }
     private ArrayList<Integer> editUserIds() {
         ArrayList<Integer> list = userIds();
         list.add(R.id.fragmentEditUser);
@@ -1378,13 +1479,160 @@ public class BreadCrumb {
     ---------- Index ----------
     */
 
-    private ArrayList<String> balances() {
-        ArrayList<String> list = centerAccounting();
+    // -------------------- String
+
+    private ArrayList<String> balancesList() {
+        ArrayList<String> list = centerAccountingList();
         list.add(activity.getResources().getString(R.string.BalancesFragmentTitle));
 
         destinationIds = balancesIds();
         return list;
     }
+
+    private ArrayList<String> banksList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.BanksFragmentTitle));
+
+        destinationIds = banksIds();
+        return list;
+    }
+
+    private ArrayList<String> billingsList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.BillingsFragmentTitle));
+
+        destinationIds = billingsIds();
+        return list;
+    }
+
+    private ArrayList<String> centerPlatformsList() {
+        ArrayList<String> list;
+
+        if (!roomType.equals("room"))
+            list = centerList();
+        else
+            list = roomList();
+
+        list.add(activity.getResources().getString(R.string.AppPlatforms));
+
+        destinationIds = centerPlatformsIds();
+        return list;
+    }
+
+    private ArrayList<String> centerSchedulesList() {
+        ArrayList<String> list;
+
+        if (!roomType.equals("room"))
+            list = centerList();
+        else
+            list = roomList();
+
+        list.add(activity.getResources().getString(R.string.AppSchedules));
+
+        destinationIds = centerSchedulesIds();
+        return list;
+    }
+
+    private ArrayList<String> centerTagsList() {
+        ArrayList<String> list;
+
+        if (!roomType.equals("room"))
+            list = centerList();
+        else
+            list = roomList();
+
+        list.add(activity.getResources().getString(R.string.AppTags));
+
+        destinationIds = centerTagsIds();
+        return list;
+    }
+
+    private ArrayList<String> centerUsersList() {
+        ArrayList<String> list;
+
+        if (!roomType.equals("room"))
+            list = centerList();
+        else
+            list = roomList();
+
+        list.add(activity.getResources().getString(R.string.AppUsers));
+
+        destinationIds = centerUsersIds();
+        return list;
+    }
+
+    private ArrayList<String> clientReportsList() {
+        ArrayList<String> list;
+
+        if (clientReportsType.equals("case"))
+            list = casseList();
+        else
+            list = sessionList();
+
+        list.add(activity.getResources().getString(R.string.ClientReportsFragmentTitle));
+
+        destinationIds = clientReportsIds();
+        return list;
+    }
+
+    private ArrayList<String> commissionsList() {
+        ArrayList<String> list = centerAccountingList();
+        list.add(activity.getResources().getString(R.string.CommissionsFragmentTitle));
+
+        destinationIds = commissionsIds();
+        return list;
+    }
+
+    private ArrayList<String> roomPlatformsList() {
+        ArrayList<String> list = roomList();
+        list.add(activity.getResources().getString(R.string.AppPlatforms));
+
+        destinationIds = roomPlatformsIds();
+        return list;
+    }
+
+    private ArrayList<String> roomSchedulesList() {
+        ArrayList<String> list = roomList();
+        list.add(activity.getResources().getString(R.string.AppSchedules));
+
+        destinationIds = roomSchedulesIds();
+        return list;
+    }
+
+    private ArrayList<String> roomTagsList() {
+        ArrayList<String> list = roomList();
+        list.add(activity.getResources().getString(R.string.AppTags));
+
+        destinationIds = roomTagsIds();
+        return list;
+    }
+
+    private ArrayList<String> roomUsersList() {
+        ArrayList<String> list = roomList();
+        list.add(activity.getResources().getString(R.string.AppUsers));
+
+        destinationIds = roomUsersIds();
+        return list;
+    }
+
+    private ArrayList<String> roomsList() {
+        ArrayList<String> list = centerList();
+        list.add(activity.getResources().getString(R.string.AppRooms));
+
+        destinationIds = roomsIds();
+        return list;
+    }
+
+    private ArrayList<String> treasuriesList() {
+        ArrayList<String> list = dashboardList();
+        list.add(activity.getResources().getString(R.string.TreasuriesFragmentTitle));
+
+        destinationIds = treasuriesIds();
+        return list;
+    }
+
+    // -------------------- Int
+
     private ArrayList<Integer> balancesIds() {
         ArrayList<Integer> list = centerAccountingIds();
         list.add(R.id.fragmentBalances);
@@ -1392,13 +1640,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> banks() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.BanksFragmentTitle));
-
-        destinationIds = banksIds();
-        return list;
-    }
     private ArrayList<Integer> banksIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentBanks);
@@ -1406,13 +1647,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> billings() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.BillingsFragmentTitle));
-
-        destinationIds = billingsIds();
-        return list;
-    }
     private ArrayList<Integer> billingsIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentBillings);
@@ -1420,19 +1654,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> centerPlatforms() {
-        ArrayList<String> list;
-
-        if (!roomType.equals("room"))
-            list = center();
-        else
-            list = room();
-
-        list.add(activity.getResources().getString(R.string.AppPlatforms));
-
-        destinationIds = centerPlatformsIds();
-        return list;
-    }
     private ArrayList<Integer> centerPlatformsIds() {
         ArrayList<Integer> list;
 
@@ -1446,19 +1667,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> centerSchedules() {
-        ArrayList<String> list;
-
-        if (!roomType.equals("room"))
-            list = center();
-        else
-            list = room();
-
-        list.add(activity.getResources().getString(R.string.AppSchedules));
-
-        destinationIds = centerSchedulesIds();
-        return list;
-    }
     private ArrayList<Integer> centerSchedulesIds() {
         ArrayList<Integer> list;
 
@@ -1472,19 +1680,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> centerTags() {
-        ArrayList<String> list;
-
-        if (!roomType.equals("room"))
-            list = center();
-        else
-            list = room();
-
-        list.add(activity.getResources().getString(R.string.AppTags));
-
-        destinationIds = centerTagsIds();
-        return list;
-    }
     private ArrayList<Integer> centerTagsIds() {
         ArrayList<Integer> list;
 
@@ -1498,19 +1693,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> centerUsers() {
-        ArrayList<String> list;
-
-        if (!roomType.equals("room"))
-            list = center();
-        else
-            list = room();
-
-        list.add(activity.getResources().getString(R.string.AppUsers));
-
-        destinationIds = centerUsersIds();
-        return list;
-    }
     private ArrayList<Integer> centerUsersIds() {
         ArrayList<Integer> list;
 
@@ -1524,19 +1706,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> clientReports() {
-        ArrayList<String> list;
-
-        if (clientReportsType.equals("case"))
-            list = casse();
-        else
-            list = session();
-
-        list.add(activity.getResources().getString(R.string.ClientReportsFragmentTitle));
-
-        destinationIds = clientReportsIds();
-        return list;
-    }
     private ArrayList<Integer> clientReportsIds() {
         ArrayList<Integer> list;
 
@@ -1550,13 +1719,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> commissions() {
-        ArrayList<String> list = centerAccounting();
-        list.add(activity.getResources().getString(R.string.CommissionsFragmentTitle));
-
-        destinationIds = commissionsIds();
-        return list;
-    }
     private ArrayList<Integer> commissionsIds() {
         ArrayList<Integer> list = centerAccountingIds();
         list.add(R.id.fragmentCommissions);
@@ -1564,13 +1726,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> roomPlatforms() {
-        ArrayList<String> list = room();
-        list.add(activity.getResources().getString(R.string.AppPlatforms));
-
-        destinationIds = roomPlatformsIds();
-        return list;
-    }
     private ArrayList<Integer> roomPlatformsIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.fragmentRoomPlatforms);
@@ -1578,13 +1733,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> roomSchedules() {
-        ArrayList<String> list = room();
-        list.add(activity.getResources().getString(R.string.AppSchedules));
-
-        destinationIds = roomSchedulesIds();
-        return list;
-    }
     private ArrayList<Integer> roomSchedulesIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.fragmentRoomSchedules);
@@ -1592,13 +1740,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> roomTags() {
-        ArrayList<String> list = room();
-        list.add(activity.getResources().getString(R.string.AppTags));
-
-        destinationIds = roomTagsIds();
-        return list;
-    }
     private ArrayList<Integer> roomTagsIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.fragmentRoomTags);
@@ -1606,13 +1747,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> roomUsers() {
-        ArrayList<String> list = room();
-        list.add(activity.getResources().getString(R.string.AppUsers));
-
-        destinationIds = roomUsersIds();
-        return list;
-    }
     private ArrayList<Integer> roomUsersIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.fragmentRoomUsers);
@@ -1620,13 +1754,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> rooms() {
-        ArrayList<String> list = center();
-        list.add(activity.getResources().getString(R.string.AppRooms));
-
-        destinationIds = roomsIds();
-        return list;
-    }
     private ArrayList<Integer> roomsIds() {
         ArrayList<Integer> list = centerIds();
         list.add(R.id.fragmentRooms);
@@ -1634,13 +1761,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> treasuries() {
-        ArrayList<String> list = dashboard();
-        list.add(activity.getResources().getString(R.string.TreasuriesFragmentTitle));
-
-        destinationIds = treasuriesIds();
-        return list;
-    }
     private ArrayList<Integer> treasuriesIds() {
         ArrayList<Integer> list = dashboardIds();
         list.add(R.id.fragmentTreasuries);
@@ -1652,8 +1772,10 @@ public class BreadCrumb {
     ---------- Show ----------
     */
 
-    private ArrayList<String> bill() {
-        ArrayList<String> list = billings();
+    // -------------------- String
+
+    private ArrayList<String> billList() {
+        ArrayList<String> list = billingsList();
 
         if (billingModel != null && billingModel.getTitle() != null && !billingModel.getTitle().equals(""))
             list.add(billingModel.getTitle());
@@ -1665,15 +1787,9 @@ public class BreadCrumb {
         destinationIds = billIds();
         return list;
     }
-    private ArrayList<Integer> billIds() {
-        ArrayList<Integer> list = billingsIds();
-        list.add(R.id.fragmentBill);
 
-        return list;
-    }
-
-    private ArrayList<String> bulkSample() {
-        ArrayList<String> list = bulkSamples();
+    private ArrayList<String> bulkSampleList() {
+        ArrayList<String> list = bulkSamplesList();
 
         if (bulkSampleModel != null && bulkSampleModel.getTitle() != null && !bulkSampleModel.getTitle().equals(""))
             list.add(bulkSampleModel.getTitle());
@@ -1685,15 +1801,9 @@ public class BreadCrumb {
         destinationIds = bulkSampleIds();
         return list;
     }
-    private ArrayList<Integer> bulkSampleIds() {
-        ArrayList<Integer> list = bulkSamplesIds();
-        list.add(R.id.fragmentBulkSample);
 
-        return list;
-    }
-
-    private ArrayList<String> casse() {
-        ArrayList<String> list = room();
+    private ArrayList<String> casseList() {
+        ArrayList<String> list = roomList();
 
         if (caseModel != null && caseModel.getId() != null && !caseModel.getId().equals(""))
             list.add("پرونده" + " " + caseModel.getId());
@@ -1703,41 +1813,23 @@ public class BreadCrumb {
         destinationIds = casseIds();
         return list;
     }
-    private ArrayList<Integer> casseIds() {
-        ArrayList<Integer> list = roomIds();
-        list.add(R.id.fragmentCase);
 
-        return list;
-    }
-
-    private ArrayList<String> centerAccounting() {
+    private ArrayList<String> centerAccountingList() {
         ArrayList<String> list;
 
         if (roomType.equals("counseling_center"))
-            list = center();
+            list = centerList();
         else
-            list = room();
+            list = roomList();
 
         list.add(activity.getResources().getString(R.string.AppAccounting));
 
         destinationIds = centerAccountingIds();
         return list;
     }
-    private ArrayList<Integer> centerAccountingIds() {
-        ArrayList<Integer> list;
 
-        if (roomType.equals("counseling_center"))
-            list = centerIds();
-        else
-            list = roomIds();
-
-        list.add(R.id.fragmentCenterAccounting);
-
-        return list;
-    }
-
-    private ArrayList<String> center() {
-        ArrayList<String> list = centers();
+    private ArrayList<String> centerList() {
+        ArrayList<String> list = centersList();
 
         try {
             if (centerModel != null && centerModel.getDetail() != null && centerModel.getDetail().has("title") && !centerModel.getDetail().isNull("title") && !centerModel.getDetail().getString("title").equals(""))
@@ -1753,34 +1845,22 @@ public class BreadCrumb {
         destinationIds = centerIds();
         return list;
     }
-    private ArrayList<Integer> centerIds() {
-        ArrayList<Integer> list = centersIds();
-        list.add(R.id.fragmentCenter);
 
-        return list;
-    }
-
-    private ArrayList<String> folder() {
-        ArrayList<String> list = downloads();
+    private ArrayList<String> folderList() {
+        ArrayList<String> list = downloadsList();
         list.add(folderName);
 
         destinationIds = folderIds();
         return list;
     }
-    private ArrayList<Integer> folderIds() {
-        ArrayList<Integer> list = downloadsIds();
-        list.add(R.id.fragmentFolder);
 
-        return list;
-    }
-
-    private ArrayList<String> reference() {
+    private ArrayList<String> referenceList() {
         ArrayList<String> list;
 
         if (!roomType.equals("room"))
-            list = centerUsers();
+            list = centerUsersList();
         else
-            list = roomUsers();
+            list = roomUsersList();
 
         if (referenceType.equals("user")) {
             if (userModel != null && userModel.getId() != null && userModel.getId().equals(((ActivityMain) activity).singleton.getUserModel().getId()))
@@ -1798,26 +1878,14 @@ public class BreadCrumb {
         destinationIds = referenceIds();
         return list;
     }
-    private ArrayList<Integer> referenceIds() {
-        ArrayList<Integer> list;
 
-        if (!roomType.equals("room"))
-            list = centerUsersIds();
-        else
-            list = roomUsersIds();
-
-        list.add(R.id.fragmentReference);
-
-        return list;
-    }
-
-    private ArrayList<String> room() {
+    private ArrayList<String> roomList() {
         ArrayList<String> list;
 
         if (!roomType.equals("room"))
-            list = centers();
+            list = centersList();
         else
-            list = center();
+            list = centerList();
 
         if (!roomType.equals("room")) {
             if (centerModel != null && centerModel.getManager() != null && centerModel.getManager().getName() != null && !centerModel.getManager().getName().equals(""))
@@ -1838,6 +1906,138 @@ public class BreadCrumb {
         destinationIds = roomIds();
         return list;
     }
+
+    private ArrayList<String> sampleList() {
+        ArrayList<String> list;
+
+        if (caseModel != null)
+            list = casseList();
+        else
+            list = referenceList();
+
+        if (sampleModel != null && sampleModel.getTitle() != null && !sampleModel.getTitle().equals(""))
+            list.add(sampleModel.getTitle());
+        else if (sampleModel != null && sampleModel.getId() != null && !sampleModel.getId().equals(""))
+            list.add("نمونه" + " " + sampleModel.getId());
+        else
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
+
+        destinationIds = sampleIds();
+        return list;
+    }
+
+    private ArrayList<String> sessionList() {
+        ArrayList<String> list;
+
+        if (sessionType.equals("session") && sessionModel != null && sessionModel.getCasse() != null)
+            list = casseList();
+        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getCasse() != null)
+            list = casseList();
+        else
+            list = roomList();
+
+        if (sessionType.equals("session") && sessionModel != null && sessionModel.getId() != null && !sessionModel.getId().equals(""))
+            list.add("جلسه" + " " + sessionModel.getId());
+        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getId() != null && !scheduleModel.getId().equals(""))
+            list.add("جلسه" + " " + scheduleModel.getId());
+        else
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
+
+        destinationIds = sessionIds();
+        return list;
+    }
+
+    private ArrayList<String> treasuryList() {
+        ArrayList<String> list = treasuriesList();
+
+        if (treasuriesModel != null && treasuriesModel.getTitle() != null && !treasuriesModel.getTitle().equals(""))
+            list.add(treasuriesModel.getTitle());
+        else if (treasuriesModel != null && treasuriesModel.getId() != null && !treasuriesModel.getId().equals(""))
+            list.add(treasuriesModel.getId());
+        else
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
+
+        destinationIds = treasuryIds();
+        return list;
+    }
+
+    private ArrayList<String> userList() {
+        ArrayList<String> list = usersList();
+
+        if (userModel != null && userModel.getName() != null && !userModel.getName().equals(""))
+            list.add(userModel.getName());
+        else if (userModel != null && userModel.getId() != null && !userModel.getId().equals(""))
+            list.add(userModel.getId());
+        else
+            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
+
+        destinationIds = userIds();
+        return list;
+    }
+
+    // -------------------- Int
+
+    private ArrayList<Integer> billIds() {
+        ArrayList<Integer> list = billingsIds();
+        list.add(R.id.fragmentBill);
+
+        return list;
+    }
+
+    private ArrayList<Integer> bulkSampleIds() {
+        ArrayList<Integer> list = bulkSamplesIds();
+        list.add(R.id.fragmentBulkSample);
+
+        return list;
+    }
+
+    private ArrayList<Integer> casseIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.fragmentCase);
+
+        return list;
+    }
+
+    private ArrayList<Integer> centerAccountingIds() {
+        ArrayList<Integer> list;
+
+        if (roomType.equals("counseling_center"))
+            list = centerIds();
+        else
+            list = roomIds();
+
+        list.add(R.id.fragmentCenterAccounting);
+
+        return list;
+    }
+
+    private ArrayList<Integer> centerIds() {
+        ArrayList<Integer> list = centersIds();
+        list.add(R.id.fragmentCenter);
+
+        return list;
+    }
+
+    private ArrayList<Integer> folderIds() {
+        ArrayList<Integer> list = downloadsIds();
+        list.add(R.id.fragmentFolder);
+
+        return list;
+    }
+
+    private ArrayList<Integer> referenceIds() {
+        ArrayList<Integer> list;
+
+        if (!roomType.equals("room"))
+            list = centerUsersIds();
+        else
+            list = roomUsersIds();
+
+        list.add(R.id.fragmentReference);
+
+        return list;
+    }
+
     private ArrayList<Integer> roomIds() {
         ArrayList<Integer> list;
 
@@ -1851,24 +2051,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> sample() {
-        ArrayList<String> list;
-
-        if (caseModel != null)
-            list = casse();
-        else
-            list = reference();
-
-        if (sampleModel != null && sampleModel.getTitle() != null && !sampleModel.getTitle().equals(""))
-            list.add(sampleModel.getTitle());
-        else if (sampleModel != null && sampleModel.getId() != null && !sampleModel.getId().equals(""))
-            list.add("نمونه" + " " + sampleModel.getId());
-        else
-            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
-
-        destinationIds = sampleIds();
-        return list;
-    }
     private ArrayList<Integer> sampleIds() {
         ArrayList<Integer> list;
 
@@ -1882,26 +2064,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> session() {
-        ArrayList<String> list;
-
-        if (sessionType.equals("session") && sessionModel != null && sessionModel.getCasse() != null)
-            list = casse();
-        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getCasse() != null)
-            list = casse();
-        else
-            list = room();
-
-        if (sessionType.equals("session") && sessionModel != null && sessionModel.getId() != null && !sessionModel.getId().equals(""))
-            list.add("جلسه" + " " + sessionModel.getId());
-        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getId() != null && !scheduleModel.getId().equals(""))
-            list.add("جلسه" + " " + scheduleModel.getId());
-        else
-            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
-
-        destinationIds = sessionIds();
-        return list;
-    }
     private ArrayList<Integer> sessionIds() {
         ArrayList<Integer> list;
 
@@ -1917,19 +2079,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> treasury() {
-        ArrayList<String> list = treasuries();
-
-        if (treasuriesModel != null && treasuriesModel.getTitle() != null && !treasuriesModel.getTitle().equals(""))
-            list.add(treasuriesModel.getTitle());
-        else if (treasuriesModel != null && treasuriesModel.getId() != null && !treasuriesModel.getId().equals(""))
-            list.add(treasuriesModel.getId());
-        else
-            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
-
-        destinationIds = treasuryIds();
-        return list;
-    }
     private ArrayList<Integer> treasuryIds() {
         ArrayList<Integer> list = treasuriesIds();
         list.add(R.id.fragmentTreasury);
@@ -1937,19 +2086,6 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<String> user() {
-        ArrayList<String> list = users();
-
-        if (userModel != null && userModel.getName() != null && !userModel.getName().equals(""))
-            list.add(userModel.getName());
-        else if (userModel != null && userModel.getId() != null && !userModel.getId().equals(""))
-            list.add(userModel.getId());
-        else
-            list.add(activity.getResources().getString(R.string.AppDefaultUnknown));
-
-        destinationIds = userIds();
-        return list;
-    }
     private ArrayList<Integer> userIds() {
         ArrayList<Integer> list = usersIds();
         list.add(R.id.fragmentUser);

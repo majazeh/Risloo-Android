@@ -187,7 +187,7 @@ public class ActivityMain extends AppCompatActivity {
         });
 
         navigatoon.getNavController().addOnDestinationChangedListener((controller, destination, arguments) -> {
-            SpannableStringBuilder faBreadCump = breadCrumb.getFa(destination, arguments);
+            SpannableStringBuilder faBreadCump = breadCrumb.getSpan(destination, arguments);
 
             binding.contentIncludeLayout.breadcumpTextView.setText(faBreadCump);
             binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
