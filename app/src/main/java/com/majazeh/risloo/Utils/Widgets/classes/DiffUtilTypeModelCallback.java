@@ -1,9 +1,9 @@
-package com.majazeh.risloo.utils.widgets;
+package com.majazeh.risloo.utils.widgets.classes;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.utils.widgets.interfaces.DiffUtilTypeModelAdapter;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 public class DiffUtilTypeModelCallback extends DiffUtil.ItemCallback<TypeModel> {

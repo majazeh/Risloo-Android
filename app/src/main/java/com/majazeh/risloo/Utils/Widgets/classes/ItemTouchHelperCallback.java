@@ -1,11 +1,11 @@
-package com.majazeh.risloo.utils.widgets;
+package com.majazeh.risloo.utils.widgets.classes;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.utils.interfaces.ItemTouchHelperAdapter;
+import com.majazeh.risloo.utils.widgets.interfaces.ItemTouchHelperAdapter;
 
 public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 

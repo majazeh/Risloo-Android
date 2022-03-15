@@ -1,4 +1,4 @@
-package com.majazeh.risloo.utils.interfaces;
+package com.majazeh.risloo.utils.widgets.interfaces;
 
 import androidx.recyclerview.widget.RecyclerView;
 

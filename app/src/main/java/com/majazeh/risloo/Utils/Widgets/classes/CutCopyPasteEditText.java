@@ -1,11 +1,11 @@
-package com.majazeh.risloo.utils.widgets;
+package com.majazeh.risloo.utils.widgets.classes;
 
 import android.content.Context;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 
-import com.majazeh.risloo.utils.interfaces.CutCopyPasteListener;
+import com.majazeh.risloo.utils.widgets.interfaces.CutCopyPasteListener;
 
 public class CutCopyPasteEditText extends androidx.appcompat.widget.AppCompatEditText {
 

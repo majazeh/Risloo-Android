@@ -35,7 +35,7 @@ public class Paymont {
     }
 
     /*
-    ---------- Setters ----------
+    ---------- Func's ----------
     */
 
     public void insertPayment(TypeModel typeModel, PaymentModel paymentModel, HashMap hashmap, int destination) {
@@ -53,7 +53,7 @@ public class Paymont {
     }
 
     /*
-    ---------- Setters ----------
+    ---------- Setter's ----------
     */
 
     private void setTypeModel(TypeModel typeModel) {
@@ -73,7 +73,7 @@ public class Paymont {
     }
 
     /*
-    ---------- Getters ----------
+    ---------- Getter's ----------
     */
 
     public TypeModel getTypeModel() {

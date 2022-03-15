@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.AsyncListDiffer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.utils.interfaces.DiffUtilTypeModelAdapter;
-import com.majazeh.risloo.utils.widgets.DiffUtilTypeModelCallback;
+import com.majazeh.risloo.utils.widgets.interfaces.DiffUtilTypeModelAdapter;
+import com.majazeh.risloo.utils.widgets.classes.DiffUtilTypeModelCallback;
 import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.views.activities.ActivityTest;
 import com.majazeh.risloo.views.adapters.holder.test.TestPreMultiHolder;
