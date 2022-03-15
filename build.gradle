@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4' // Android Gradle
+        classpath 'com.android.tools.build:gradle:7.1.2' // Android Gradle
         classpath 'com.google.gms:google-services:4.3.10' // Google Services
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.8.1' // Firebase Crashlytics
         classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1'// Navigation SafeArgs
