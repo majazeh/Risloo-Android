@@ -12,23 +12,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentAuthLoginBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityAuth;
-import com.majazeh.risloo.databinding.FragmentAuthLoginBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class FragmentAuthLogin extends Fragment {
 
@@ -140,39 +135,7 @@ public class FragmentAuthLogin extends Fragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        try {
-                            JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder allErrors = new StringBuilder();
-
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    StringBuilder keyErrors = new StringBuilder();
-
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String error = errorsObject.getJSONArray(key).getString(i);
-
-                                        keyErrors.append(error);
-                                        keyErrors.append("\n");
-
-                                        allErrors.append(error);
-                                        allErrors.append("\n");
-                                    }
-
-                                    if (key.equals("authorized_key"))
-                                        ((ActivityAuth) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                }
-
-                                SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                    requireActivity().runOnUiThread(() -> ((ActivityAuth) requireActivity()).validatoon.requestValid(response, binding));
                 }
             }
         });

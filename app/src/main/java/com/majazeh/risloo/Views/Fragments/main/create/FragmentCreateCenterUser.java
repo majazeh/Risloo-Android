@@ -13,16 +13,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.JsonManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
-import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
@@ -34,7 +33,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class FragmentCreateCenterUser extends Fragment {
 
@@ -291,54 +289,7 @@ public class FragmentCreateCenterUser extends Fragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        try {
-                            JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder allErrors = new StringBuilder();
-
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    StringBuilder keyErrors = new StringBuilder();
-
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String error = errorsObject.getJSONArray(key).getString(i);
-
-                                        keyErrors.append(error);
-                                        keyErrors.append("\n");
-
-                                        allErrors.append(error);
-                                        allErrors.append("\n");
-                                    }
-
-                                    switch (key) {
-                                        case "mobile":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                        case "position":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                        case "room_id":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                        case "nickname":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                        case "create_case":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                    }
-                                }
-
-                                SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
                 }
             }
         });

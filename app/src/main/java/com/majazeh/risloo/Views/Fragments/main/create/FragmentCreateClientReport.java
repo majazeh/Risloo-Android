@@ -182,45 +182,7 @@ public class FragmentCreateClientReport extends Fragment {
 //            @Override
 //            public void onFailure(String response) {
 //                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            JSONObject responseObject = new JSONObject(response);
-//                            if (!responseObject.isNull("errors")) {
-//                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-//
-//                                Iterator<String> keys = (errorsObject.keys());
-//                                StringBuilder allErrors = new StringBuilder();
-//
-//                                while (keys.hasNext()) {
-//                                    String key = keys.next();
-//                                    StringBuilder keyErrors = new StringBuilder();
-//
-//                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-//                                        String error = errorsObject.getJSONArray(key).getString(i);
-//
-//                                        keyErrors.append(error);
-//                                        keyErrors.append("\n");
-//
-//                                        allErrors.append(error);
-//                                        allErrors.append("\n");
-//                                    }
-//
-//                                    switch (key) {
-//                                        case "encryption":
-//                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                            break;
-//                                        case "description":
-//                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                            break;
-//                                    }
-//                                }
-//
-//                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
+//                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
 //                }
 //            }
 //        });
