@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentEditCenterTabDetailBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
@@ -19,7 +20,6 @@ import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.views.fragments.main.edit.FragmentEditCenter;
-import com.majazeh.risloo.databinding.FragmentEditCenterTabDetailBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -32,7 +32,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class FragmentEditCenterTabDetail extends Fragment {
 
@@ -291,54 +290,7 @@ public class FragmentEditCenterTabDetail extends Fragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        try {
-                            JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder allErrors = new StringBuilder();
-
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    StringBuilder keyErrors = new StringBuilder();
-
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String error = errorsObject.getJSONArray(key).getString(i);
-
-                                        keyErrors.append(error);
-                                        keyErrors.append("\n");
-
-                                        allErrors.append(error);
-                                        allErrors.append("\n");
-                                    }
-
-                                    switch (key) {
-                                        case "manager_id":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                        case "title":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                        case "address":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                        case "description":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                        case "phone_numbers":
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                            break;
-                                    }
-                                }
-
-                                SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
                 }
             }
         });

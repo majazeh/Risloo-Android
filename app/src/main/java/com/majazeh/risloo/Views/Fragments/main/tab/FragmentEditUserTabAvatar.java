@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.ResultManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
@@ -29,12 +29,8 @@ import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Objects;
 
 public class FragmentEditUserTabAvatar extends Fragment {
@@ -175,39 +171,7 @@ public class FragmentEditUserTabAvatar extends Fragment {
                 @Override
                 public void onFailure(String response) {
                     if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            try {
-                                JSONObject responseObject = new JSONObject(response);
-                                if (!responseObject.isNull("errors")) {
-                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                    Iterator<String> keys = (errorsObject.keys());
-                                    StringBuilder allErrors = new StringBuilder();
-
-                                    while (keys.hasNext()) {
-                                        String key = keys.next();
-                                        StringBuilder keyErrors = new StringBuilder();
-
-                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                            String error = errorsObject.getJSONArray(key).getString(i);
-
-                                            keyErrors.append(error);
-                                            keyErrors.append("\n");
-
-                                            allErrors.append(error);
-                                            allErrors.append("\n");
-                                        }
-
-                                        if (key.equals("avatar"))
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                    }
-
-                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        });
+                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
                     }
                 }
             });
@@ -229,39 +193,7 @@ public class FragmentEditUserTabAvatar extends Fragment {
                 @Override
                 public void onFailure(String response) {
                     if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            try {
-                                JSONObject responseObject = new JSONObject(response);
-                                if (!responseObject.isNull("errors")) {
-                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                    Iterator<String> keys = (errorsObject.keys());
-                                    StringBuilder allErrors = new StringBuilder();
-
-                                    while (keys.hasNext()) {
-                                        String key = keys.next();
-                                        StringBuilder keyErrors = new StringBuilder();
-
-                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                            String error = errorsObject.getJSONArray(key).getString(i);
-
-                                            keyErrors.append(error);
-                                            keyErrors.append("\n");
-
-                                            allErrors.append(error);
-                                            allErrors.append("\n");
-                                        }
-
-                                        if (key.equals("avatar"))
-                                            ((ActivityMain) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                    }
-
-                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        });
+                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
                     }
                 }
             });

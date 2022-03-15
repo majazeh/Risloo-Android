@@ -31,13 +31,19 @@ import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 import com.majazeh.risloo.databinding.FragmentCreateSessionUserBinding;
 import com.majazeh.risloo.databinding.FragmentCreateTreasuryBinding;
 import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
+import com.majazeh.risloo.databinding.FragmentEditCenterTabAvatarBinding;
+import com.majazeh.risloo.databinding.FragmentEditCenterTabDetailBinding;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 import com.majazeh.risloo.databinding.FragmentEditPlatformBinding;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserTabPasswordBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserTabPersonalBinding;
 import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
 import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.majazeh.risloo.databinding.SheetBulkSampleBinding;
 import com.majazeh.risloo.utils.managers.SnackManager;
+import com.majazeh.risloo.views.activities.ActivityMain;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -424,6 +430,72 @@ public class Validatoon {
                                 break;
                             case "amount":
                                 showValid(((FragmentPaymentsBinding) binding).amountErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).amountErrorLayout.errorTextView, value);
+                                break;
+                        }
+
+                    // -------------------- Tab
+
+                    } else if (binding instanceof FragmentEditCenterTabAvatarBinding) {
+                        if (key.equals("avatar")) {
+                            showValid(((FragmentEditCenterTabAvatarBinding) binding).avatarErrorLayout.getRoot(), ((FragmentEditCenterTabAvatarBinding) binding).avatarErrorLayout.errorTextView, value);
+                        }
+
+                    } else if (binding instanceof FragmentEditCenterTabDetailBinding) {
+                        switch (key) {
+                            case "manager_id":
+                                showValid(((FragmentEditCenterTabDetailBinding) binding).managerErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).managerErrorLayout.errorTextView, value);
+                                break;
+                            case "title":
+                                showValid(((FragmentEditCenterTabDetailBinding) binding).titleErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).titleErrorLayout.errorTextView, value);
+                                break;
+                            case "address":
+                                showValid(((FragmentEditCenterTabDetailBinding) binding).addressErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).addressErrorLayout.errorTextView, value);
+                                break;
+                            case "description":
+                                showValid(((FragmentEditCenterTabDetailBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).descriptionErrorLayout.errorTextView, value);
+                                break;
+                            case "phone_numbers":
+                                showValid(((FragmentEditCenterTabDetailBinding) binding).phonesErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).phonesErrorLayout.errorTextView, value);
+                                break;
+                        }
+
+                    } else if (binding instanceof FragmentEditUserTabAvatarBinding) {
+                        if (key.equals("avatar")) {
+                            showValid(((FragmentEditUserTabAvatarBinding) binding).avatarErrorLayout.getRoot(), ((FragmentEditUserTabAvatarBinding) binding).avatarErrorLayout.errorTextView, value);
+                        }
+
+                    } else if (binding instanceof FragmentEditUserTabPasswordBinding) {
+                        switch (key) {
+                            case "password":
+                                showValid(((FragmentEditUserTabPasswordBinding) binding).currentPasswordErrorLayout.getRoot(), ((FragmentEditUserTabPasswordBinding) binding).currentPasswordErrorLayout.errorTextView, value);
+                                break;
+                            case "new_password":
+                                showValid(((FragmentEditUserTabPasswordBinding) binding).newPasswordErrorLayout.getRoot(), ((FragmentEditUserTabPasswordBinding) binding).newPasswordErrorLayout.errorTextView, value);
+                                break;
+                        }
+
+                    } else if (binding instanceof FragmentEditUserTabPersonalBinding) {
+                        switch (key) {
+                            case "name":
+                                showValid(((FragmentEditUserTabPersonalBinding) binding).nameErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).nameErrorLayout.errorTextView, value);
+                                break;
+                            case "mobile":
+                                showValid(((FragmentEditUserTabPersonalBinding) binding).mobileErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).mobileErrorLayout.errorTextView, value);
+                                break;
+                            case "email":
+                                showValid(((FragmentEditUserTabPersonalBinding) binding).emailErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).emailErrorLayout.errorTextView, value);
+                                break;
+                            case "birthday":
+                                showValid(((FragmentEditUserTabPersonalBinding) binding).birthdayErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).birthdayErrorLayout.errorTextView, value);
+                                break;
+                            case "status":
+                                showValid(((FragmentEditUserTabPersonalBinding) binding).statusErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).statusErrorLayout.errorTextView, value);
+                                break;
+                            case "type":
+                                showValid(((FragmentEditUserTabPersonalBinding) binding).typeErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).typeErrorLayout.errorTextView, value);
+                                break;
+                            case "gender":
+                                showValid(((FragmentEditUserTabPersonalBinding) binding).genderErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).genderErrorLayout.errorTextView, value);
                                 break;
                         }
 
