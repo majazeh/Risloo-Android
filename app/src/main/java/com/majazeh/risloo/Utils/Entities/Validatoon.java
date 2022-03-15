@@ -113,31 +113,33 @@ public class Validatoon {
                         allErrors.append("\n");
                     }
 
+                    String value = keyErrors.substring(0, keyErrors.length() - 1);
+
                     // -------------------- Auth
 
                     if (binding instanceof FragmentAuthLoginBinding) {
                         if (key.equals("authorized_key"))
-                            showValid(((FragmentAuthLoginBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthLoginBinding) binding).errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentAuthLoginBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthLoginBinding) binding).errorIncludeLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentAuthPasswordBinding) {
                         if (key.equals("password"))
-                            showValid(((FragmentAuthPasswordBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordBinding) binding).errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentAuthPasswordBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordBinding) binding).errorIncludeLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentAuthPasswordChangeBinding) {
                         if (key.equals("password"))
-                            showValid(((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentAuthPasswordRecoverBinding) {
                         if (key.equals("mobile"))
-                            showValid(((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentAuthPinBinding) {
                         if (key.equals("code"))
-                            showValid(((FragmentAuthPinBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPinBinding) binding).errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentAuthPinBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPinBinding) binding).errorIncludeLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentAuthRegisterBinding) {
                         if (key.equals("mobile"))
-                            showValid(((FragmentAuthRegisterBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthRegisterBinding) binding).errorIncludeLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentAuthRegisterBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthRegisterBinding) binding).errorIncludeLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentAuthSerialBinding) {
 
@@ -146,151 +148,151 @@ public class Validatoon {
                     } else if (binding instanceof FragmentCreateBillBinding) {
                         switch (key) {
                             case "title":
-                                showValid(((FragmentCreateBillBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateBillBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).titleErrorLayout.errorTextView, value);
                                 break;
                             case "user_id":
-                                showValid(((FragmentCreateBillBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateBillBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).referenceErrorLayout.errorTextView, value);
                                 break;
                             case "type":
-                                showValid(((FragmentCreateBillBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateBillBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).typeErrorLayout.errorTextView, value);
                                 break;
                             case "treasury":
-                                showValid(((FragmentCreateBillBinding) binding).treasuryErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateBillBinding) binding).treasuryErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).treasuryErrorLayout.errorTextView, value);
                                 break;
                             case "amount":
-                                showValid(((FragmentCreateBillBinding) binding).amountErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateBillBinding) binding).amountErrorLayout.getRoot(), ((FragmentCreateBillBinding) binding).amountErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreateCaseBinding) {
                         switch (key) {
                             case "title":
-                                showValid(((FragmentCreateCaseBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateCaseBinding) binding).titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCaseBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateCaseBinding) binding).titleErrorLayout.errorTextView, value);
                                 break;
                             case "client_id":
-                                showValid(((FragmentCreateCaseBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateCaseBinding) binding).referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCaseBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateCaseBinding) binding).referenceErrorLayout.errorTextView, value);
                                 break;
                             case "problem":
-                                showValid(((FragmentCreateCaseBinding) binding).problemErrorLayout.getRoot(), ((FragmentCreateCaseBinding) binding).problemErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCaseBinding) binding).problemErrorLayout.getRoot(), ((FragmentCreateCaseBinding) binding).problemErrorLayout.errorTextView, value);
                                 break;
                             case "tags":
-                                showValid(((FragmentCreateCaseBinding) binding).tagsErrorLayout.getRoot(), ((FragmentCreateCaseBinding) binding).tagsErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCaseBinding) binding).tagsErrorLayout.getRoot(), ((FragmentCreateCaseBinding) binding).tagsErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreateCaseUserBinding) {
                         if (key.equals("client_id"))
-                            showValid(((FragmentCreateCaseUserBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateCaseUserBinding) binding).referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentCreateCaseUserBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateCaseUserBinding) binding).referenceErrorLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentCreateCenterBinding) {
                         switch (key) {
                             case "type":
-                                showValid(((FragmentCreateCenterBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).typeErrorLayout.errorTextView, value);
                                 break;
                             case "manager_id":
-                                showValid(((FragmentCreateCenterBinding) binding).managerErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).managerErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterBinding) binding).managerErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).managerErrorLayout.errorTextView, value);
                                 break;
                             case "title":
-                                showValid(((FragmentCreateCenterBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).titleErrorLayout.errorTextView, value);
                                 break;
                             case "address":
-                                showValid(((FragmentCreateCenterBinding) binding).addressErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).addressErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterBinding) binding).addressErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).addressErrorLayout.errorTextView, value);
                                 break;
                             case "description":
-                                showValid(((FragmentCreateCenterBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).descriptionErrorLayout.errorTextView, value);
                                 break;
                             case "avatar":
-                                showValid(((FragmentCreateCenterBinding) binding).avatarErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).avatarErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterBinding) binding).avatarErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).avatarErrorLayout.errorTextView, value);
                                 break;
                             case "phone_numbers":
-                                showValid(((FragmentCreateCenterBinding) binding).phonesErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).phonesErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterBinding) binding).phonesErrorLayout.getRoot(), ((FragmentCreateCenterBinding) binding).phonesErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreateCenterUserBinding) {
                         switch (key) {
                             case "mobile":
-                                showValid(((FragmentCreateCenterUserBinding) binding).mobileErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).mobileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterUserBinding) binding).mobileErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).mobileErrorLayout.errorTextView, value);
                                 break;
                             case "position":
-                                showValid(((FragmentCreateCenterUserBinding) binding).positionErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).positionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterUserBinding) binding).positionErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).positionErrorLayout.errorTextView, value);
                                 break;
                             case "room_id":
-                                showValid(((FragmentCreateCenterUserBinding) binding).roomErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).roomErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterUserBinding) binding).roomErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).roomErrorLayout.errorTextView, value);
                                 break;
                             case "nickname":
-                                showValid(((FragmentCreateCenterUserBinding) binding).nicknameErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).nicknameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterUserBinding) binding).nicknameErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).nicknameErrorLayout.errorTextView, value);
                                 break;
                             case "create_case":
-                                showValid(((FragmentCreateCenterUserBinding) binding).caseErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).caseErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateCenterUserBinding) binding).caseErrorLayout.getRoot(), ((FragmentCreateCenterUserBinding) binding).caseErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreateClientReportBinding) {
                         switch (key) {
                             case "encryption":
-                                showValid(((FragmentCreateClientReportBinding) binding).encryptionErrorLayout.getRoot(), ((FragmentCreateClientReportBinding) binding).encryptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateClientReportBinding) binding).encryptionErrorLayout.getRoot(), ((FragmentCreateClientReportBinding) binding).encryptionErrorLayout.errorTextView, value);
                                 break;
                             case "description":
-                                showValid(((FragmentCreateClientReportBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateClientReportBinding) binding).descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateClientReportBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateClientReportBinding) binding).descriptionErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreateDocumentBinding) {
                         switch (key) {
                             case "name":
-                                showValid(((FragmentCreateDocumentBinding) binding).nameErrorLayout.getRoot(), ((FragmentCreateDocumentBinding) binding).nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateDocumentBinding) binding).nameErrorLayout.getRoot(), ((FragmentCreateDocumentBinding) binding).nameErrorLayout.errorTextView, value);
                                 break;
                             case "description":
-                                showValid(((FragmentCreateDocumentBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateDocumentBinding) binding).descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateDocumentBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateDocumentBinding) binding).descriptionErrorLayout.errorTextView, value);
                                 break;
                             case "file":
-                                showValid(((FragmentCreateDocumentBinding) binding).fileErrorLayout.getRoot(), ((FragmentCreateDocumentBinding) binding).fileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateDocumentBinding) binding).fileErrorLayout.getRoot(), ((FragmentCreateDocumentBinding) binding).fileErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreatePlatformBinding) {
                         switch (key) {
                             case "title":
-                                showValid(((FragmentCreatePlatformBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePlatformBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).titleErrorLayout.errorTextView, value);
                                 break;
                             case "type":
-                                showValid(((FragmentCreatePlatformBinding) binding).sessionTypeErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).sessionTypeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePlatformBinding) binding).sessionTypeErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).sessionTypeErrorLayout.errorTextView, value);
                                 break;
                             case "identifier_type":
-                                showValid(((FragmentCreatePlatformBinding) binding).indentifierTypeErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).indentifierTypeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePlatformBinding) binding).indentifierTypeErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).indentifierTypeErrorLayout.errorTextView, value);
                                 break;
                             case "identifier":
-                                showValid(((FragmentCreatePlatformBinding) binding).indentifierErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).indentifierErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePlatformBinding) binding).indentifierErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).indentifierErrorLayout.errorTextView, value);
                                 break;
                             case "selected":
-                                showValid(((FragmentCreatePlatformBinding) binding).sessionErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).sessionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePlatformBinding) binding).sessionErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).sessionErrorLayout.errorTextView, value);
                                 break;
                             case "available":
-                                showValid(((FragmentCreatePlatformBinding) binding).availableErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).availableErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePlatformBinding) binding).availableErrorLayout.getRoot(), ((FragmentCreatePlatformBinding) binding).availableErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreatePracticeBinding) {
                         switch (key) {
                             case "name":
-                                showValid(((FragmentCreatePracticeBinding) binding).nameErrorLayout.getRoot(), ((FragmentCreatePracticeBinding) binding).nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePracticeBinding) binding).nameErrorLayout.getRoot(), ((FragmentCreatePracticeBinding) binding).nameErrorLayout.errorTextView, value);
                                 break;
                             case "description":
-                                showValid(((FragmentCreatePracticeBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreatePracticeBinding) binding).descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePracticeBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreatePracticeBinding) binding).descriptionErrorLayout.errorTextView, value);
                                 break;
                             case "file":
-                                showValid(((FragmentCreatePracticeBinding) binding).fileErrorLayout.getRoot(), ((FragmentCreatePracticeBinding) binding).fileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreatePracticeBinding) binding).fileErrorLayout.getRoot(), ((FragmentCreatePracticeBinding) binding).fileErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreateRoomBinding) {
                         if (key.equals("psychologist_id"))
-                            showValid(((FragmentCreateRoomBinding) binding).psychologyErrorLayout.getRoot(), ((FragmentCreateRoomBinding) binding).psychologyErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentCreateRoomBinding) binding).psychologyErrorLayout.getRoot(), ((FragmentCreateRoomBinding) binding).psychologyErrorLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentCreateRoomUserBinding) {
                         if (key.equals("user_id"))
-                            showValid(((FragmentCreateRoomUserBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateRoomUserBinding) binding).referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                            showValid(((FragmentCreateRoomUserBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateRoomUserBinding) binding).referenceErrorLayout.errorTextView, value);
 
                     } else if (binding instanceof FragmentCreateSampleBinding) {
 
@@ -301,54 +303,54 @@ public class Validatoon {
                     } else if (binding instanceof FragmentCreateSessionUserBinding) {
                         switch (key) {
                             case "field":
-                                showValid(((FragmentCreateSessionUserBinding) binding).axisErrorLayout.getRoot(), ((FragmentCreateSessionUserBinding) binding).axisErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateSessionUserBinding) binding).axisErrorLayout.getRoot(), ((FragmentCreateSessionUserBinding) binding).axisErrorLayout.errorTextView, value);
                                 break;
                             case "session_platform":
-                                showValid(((FragmentCreateSessionUserBinding) binding).platformErrorLayout.getRoot(), ((FragmentCreateSessionUserBinding) binding).platformErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateSessionUserBinding) binding).platformErrorLayout.getRoot(), ((FragmentCreateSessionUserBinding) binding).platformErrorLayout.errorTextView, value);
                                 break;
                             case "client_id":
-                                showValid(((FragmentCreateSessionUserBinding) binding).clientErrorLayout.getRoot(), ((FragmentCreateSessionUserBinding) binding).clientErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateSessionUserBinding) binding).clientErrorLayout.getRoot(), ((FragmentCreateSessionUserBinding) binding).clientErrorLayout.errorTextView, value);
                                 break;
                             case "description":
-                                showValid(((FragmentCreateSessionUserBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateSessionUserBinding) binding).descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateSessionUserBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateSessionUserBinding) binding).descriptionErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreateTreasuryBinding) {
                         switch (key) {
                             case "title":
-                                showValid(((FragmentCreateTreasuryBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateTreasuryBinding) binding).titleErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateTreasuryBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateTreasuryBinding) binding).titleErrorLayout.errorTextView, value);
                                 break;
                             case "region_id":
-                                showValid(((FragmentCreateTreasuryBinding) binding).regionErrorLayout.getRoot(), ((FragmentCreateTreasuryBinding) binding).regionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateTreasuryBinding) binding).regionErrorLayout.getRoot(), ((FragmentCreateTreasuryBinding) binding).regionErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentCreateUserBinding) {
                         switch (key) {
                             case "name":
-                                showValid(((FragmentCreateUserBinding) binding).nameErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateUserBinding) binding).nameErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).nameErrorLayout.errorTextView, value);
                                 break;
                             case "mobile":
-                                showValid(((FragmentCreateUserBinding) binding).mobileErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).mobileErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateUserBinding) binding).mobileErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).mobileErrorLayout.errorTextView, value);
                                 break;
                             case "email":
-                                showValid(((FragmentCreateUserBinding) binding).emailErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).emailErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateUserBinding) binding).emailErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).emailErrorLayout.errorTextView, value);
                                 break;
                             case "password":
-                                showValid(((FragmentCreateUserBinding) binding).passwordErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).passwordErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateUserBinding) binding).passwordErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).passwordErrorLayout.errorTextView, value);
                                 break;
                             case "birthday":
-                                showValid(((FragmentCreateUserBinding) binding).birthdayErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).birthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateUserBinding) binding).birthdayErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).birthdayErrorLayout.errorTextView, value);
                                 break;
                             case "status":
-                                showValid(((FragmentCreateUserBinding) binding).statusErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).statusErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateUserBinding) binding).statusErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).statusErrorLayout.errorTextView, value);
                                 break;
                             case "type":
-                                showValid(((FragmentCreateUserBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateUserBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).typeErrorLayout.errorTextView, value);
                                 break;
                             case "gender":
-                                showValid(((FragmentCreateUserBinding) binding).genderErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).genderErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentCreateUserBinding) binding).genderErrorLayout.getRoot(), ((FragmentCreateUserBinding) binding).genderErrorLayout.errorTextView, value);
                                 break;
                         }
 
@@ -356,6 +358,8 @@ public class Validatoon {
 
                     }
                 }
+
+                // -------------------- End
 
                 SnackManager.showSnackError(activity, allErrors.substring(0, allErrors.length() - 1));
             }
