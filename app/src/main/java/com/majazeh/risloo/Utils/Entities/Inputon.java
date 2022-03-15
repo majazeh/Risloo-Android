@@ -41,18 +41,12 @@ public class Inputon {
     }
 
     public void clear() {
-        editText.clearFocus();
-        editText.setBackground(background);
+        if (editText != null && editText.hasFocus()) {
+            editText.clearFocus();
+            editText.setBackground(background);
 
-        hideKeyboard(activity, editText);
-    }
-
-    /*
-    ---------- Getter's ----------
-    */
-
-    public EditText editText() {
-        return editText;
+            hideKeyboard(activity, editText);
+        }
     }
 
     /*
