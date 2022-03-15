@@ -12,17 +12,17 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.SheetVersionBinding;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivitySplash;
-import com.majazeh.risloo.databinding.BottomSheetVersionBinding;
 import com.mre.ligheh.Model.TypeModel.ClientModel;
 
 public class SheetVersion extends BottomSheetDialogFragment {
 
     // Binding
-    private BottomSheetVersionBinding binding;
+    private SheetVersionBinding binding;
 
     // Models
     private ClientModel clientModel;
@@ -39,7 +39,7 @@ public class SheetVersion extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetVersionBinding.inflate(inflater, viewGroup, false);
+        binding = SheetVersionBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

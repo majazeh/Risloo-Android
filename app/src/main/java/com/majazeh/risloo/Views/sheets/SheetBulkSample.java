@@ -13,16 +13,16 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.SheetBulkSampleBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
+import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityAuth;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.sheet.SheetScaleAdapter;
-import com.majazeh.risloo.databinding.BottomSheetBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
@@ -39,7 +39,7 @@ import java.util.Iterator;
 public class SheetBulkSample extends BottomSheetDialogFragment {
 
     // Binding
-    private BottomSheetBulkSampleBinding binding;
+    private SheetBulkSampleBinding binding;
 
     // Adapters
     private SheetScaleAdapter scaleAdapter;
@@ -63,7 +63,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetBulkSampleBinding.inflate(inflater, viewGroup, false);
+        binding = SheetBulkSampleBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

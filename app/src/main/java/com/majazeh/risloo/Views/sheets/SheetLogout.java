@@ -11,13 +11,13 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.SheetLogoutBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.StringManager;
+import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
-import com.majazeh.risloo.databinding.BottomSheetLogoutBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 public class SheetLogout extends BottomSheetDialogFragment {
 
     // Binding
-    private BottomSheetLogoutBinding binding;
+    private SheetLogoutBinding binding;
 
     // Models
     private UserModel userModel;
@@ -45,7 +45,7 @@ public class SheetLogout extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetLogoutBinding.inflate(inflater, viewGroup, false);
+        binding = SheetLogoutBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.databinding.BottomSheetImageBinding;
+import com.majazeh.risloo.databinding.SheetImageBinding;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -24,7 +24,7 @@ import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabAvatar;
 public class SheetImage extends BottomSheetDialogFragment {
 
     // Binding
-    private BottomSheetImageBinding binding;
+    private SheetImageBinding binding;
 
     // Fragments
     private Fragment current, child;
@@ -38,7 +38,7 @@ public class SheetImage extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetImageBinding.inflate(inflater, viewGroup, false);
+        binding = SheetImageBinding.inflate(inflater, viewGroup, false);
 
         intializer();
 

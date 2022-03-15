@@ -13,19 +13,19 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.SheetDateBinding;
+import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
+import com.majazeh.risloo.views.fragments.main.create.FragmentCreateUser;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabSession;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabTime;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabSession;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabTime;
-import com.majazeh.risloo.views.fragments.main.create.FragmentCreateUser;
-import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabPersonal;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabSession;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabTime;
-import com.majazeh.risloo.databinding.BottomSheetDateBinding;
+import com.majazeh.risloo.views.fragments.main.tab.FragmentEditUserTabPersonal;
 
 import java.util.Date;
 
@@ -34,7 +34,7 @@ import saman.zamani.persiandate.PersianDate;
 public class SheetDate extends BottomSheetDialogFragment {
 
     // Binding
-    private BottomSheetDateBinding binding;
+    private SheetDateBinding binding;
 
     // Fragments
     private Fragment current, child;
@@ -52,7 +52,7 @@ public class SheetDate extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetDateBinding.inflate(inflater, viewGroup, false);
+        binding = SheetDateBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

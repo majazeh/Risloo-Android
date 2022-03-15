@@ -13,9 +13,10 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.SheetTimeBinding;
+import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabSession;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateScheduleTabTime;
@@ -23,7 +24,6 @@ import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabSessi
 import com.majazeh.risloo.views.fragments.main.tab.FragmentCreateSessionTabTime;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabSession;
 import com.majazeh.risloo.views.fragments.main.tab.FragmentEditSessionTabTime;
-import com.majazeh.risloo.databinding.BottomSheetTimeBinding;
 
 import java.util.Date;
 
@@ -32,7 +32,7 @@ import saman.zamani.persiandate.PersianDate;
 public class SheetTime extends BottomSheetDialogFragment {
 
     // Binding
-    private BottomSheetTimeBinding binding;
+    private SheetTimeBinding binding;
 
     // Fragments
     private Fragment child;
@@ -50,7 +50,7 @@ public class SheetTime extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetTimeBinding.inflate(inflater, viewGroup, false);
+        binding = SheetTimeBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
