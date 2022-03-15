@@ -40,7 +40,7 @@ public class Inputon {
         editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_risloo500);
     }
 
-    public void clear(EditText editText) {
+    public void clear() {
         editText.clearFocus();
         editText.setBackground(background);
 

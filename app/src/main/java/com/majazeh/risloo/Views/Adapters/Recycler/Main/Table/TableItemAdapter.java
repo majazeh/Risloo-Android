@@ -163,7 +163,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (current instanceof FragmentSample)
                 ((FragmentSample) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString().trim());
 
-            ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText());
+            ((ActivityMain) activity).inputon.clear();
             return false;
         });
     }
@@ -180,7 +180,7 @@ public class TableItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (current instanceof FragmentSample)
                 ((FragmentSample) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString().trim());
 
-            ((ActivityMain) activity).inputon.clear(((ActivityMain) activity).inputon.editText());
+            ((ActivityMain) activity).inputon.clear();
             return false;
         });
     }

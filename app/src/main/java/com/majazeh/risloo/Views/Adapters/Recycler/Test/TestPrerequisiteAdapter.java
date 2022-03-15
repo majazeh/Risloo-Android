@@ -127,7 +127,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
             ((ActivityTest) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
-            ((ActivityTest) activity).inputon.clear(((ActivityTest) activity).inputon.editText());
+            ((ActivityTest) activity).inputon.clear();
             return false;
         });
     }
@@ -142,7 +142,7 @@ public class TestPrerequisiteAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
             ((ActivityTest) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim());
-            ((ActivityTest) activity).inputon.clear(((ActivityTest) activity).inputon.editText());
+            ((ActivityTest) activity).inputon.clear();
             return false;
         });
     }

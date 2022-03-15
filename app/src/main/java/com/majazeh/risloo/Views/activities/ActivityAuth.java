@@ -106,7 +106,7 @@ public class ActivityAuth extends AppCompatActivity {
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                     if (inputon.editText() != null && inputon.editText().hasFocus()) {
-                        inputon.clear(inputon.editText());
+                        inputon.clear();
                     }
                 }
             }
