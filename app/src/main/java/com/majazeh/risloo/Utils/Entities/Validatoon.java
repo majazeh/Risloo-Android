@@ -15,7 +15,7 @@ import com.majazeh.risloo.databinding.FragmentAuthPasswordChangeBinding;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordRecoverBinding;
 import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
 import com.majazeh.risloo.databinding.FragmentAuthRegisterBinding;
-import com.majazeh.risloo.databinding.FragmentAuthSerialBinding;
+import com.majazeh.risloo.databinding.FragmentBanksBinding;
 import com.majazeh.risloo.databinding.FragmentCreateBillBinding;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
 import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
@@ -28,11 +28,13 @@ import com.majazeh.risloo.databinding.FragmentCreatePracticeBinding;
 import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 import com.majazeh.risloo.databinding.FragmentCreateRoomUserBinding;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
-import com.majazeh.risloo.databinding.FragmentCreateScheduleBinding;
-import com.majazeh.risloo.databinding.FragmentCreateSessionBinding;
 import com.majazeh.risloo.databinding.FragmentCreateSessionUserBinding;
 import com.majazeh.risloo.databinding.FragmentCreateTreasuryBinding;
 import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
+import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
+import com.majazeh.risloo.databinding.FragmentEditPlatformBinding;
+import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
+import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
 import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.majazeh.risloo.utils.managers.SnackManager;
 
@@ -73,22 +75,9 @@ public class Validatoon {
         errorTextView.setText("");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /*
+    ---------- New's ----------
+    */
 
     public void requestValid(String response, ViewBinding binding) {
         try {
@@ -118,30 +107,34 @@ public class Validatoon {
                     // -------------------- Auth
 
                     if (binding instanceof FragmentAuthLoginBinding) {
-                        if (key.equals("authorized_key"))
+                        if (key.equals("authorized_key")) {
                             showValid(((FragmentAuthLoginBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthLoginBinding) binding).errorIncludeLayout.errorTextView, value);
+                        }
 
                     } else if (binding instanceof FragmentAuthPasswordBinding) {
-                        if (key.equals("password"))
+                        if (key.equals("password")) {
                             showValid(((FragmentAuthPasswordBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordBinding) binding).errorIncludeLayout.errorTextView, value);
+                        }
 
                     } else if (binding instanceof FragmentAuthPasswordChangeBinding) {
-                        if (key.equals("password"))
+                        if (key.equals("password")) {
                             showValid(((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.errorTextView, value);
+                        }
 
                     } else if (binding instanceof FragmentAuthPasswordRecoverBinding) {
-                        if (key.equals("mobile"))
+                        if (key.equals("mobile")) {
                             showValid(((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.errorTextView, value);
+                        }
 
                     } else if (binding instanceof FragmentAuthPinBinding) {
-                        if (key.equals("code"))
+                        if (key.equals("code")) {
                             showValid(((FragmentAuthPinBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPinBinding) binding).errorIncludeLayout.errorTextView, value);
+                        }
 
                     } else if (binding instanceof FragmentAuthRegisterBinding) {
-                        if (key.equals("mobile"))
+                        if (key.equals("mobile")) {
                             showValid(((FragmentAuthRegisterBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthRegisterBinding) binding).errorIncludeLayout.errorTextView, value);
-
-                    } else if (binding instanceof FragmentAuthSerialBinding) {
+                        }
 
                     // -------------------- Create
 
@@ -181,8 +174,9 @@ public class Validatoon {
                         }
 
                     } else if (binding instanceof FragmentCreateCaseUserBinding) {
-                        if (key.equals("client_id"))
+                        if (key.equals("client_id")) {
                             showValid(((FragmentCreateCaseUserBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateCaseUserBinding) binding).referenceErrorLayout.errorTextView, value);
+                        }
 
                     } else if (binding instanceof FragmentCreateCenterBinding) {
                         switch (key) {
@@ -287,18 +281,17 @@ public class Validatoon {
                         }
 
                     } else if (binding instanceof FragmentCreateRoomBinding) {
-                        if (key.equals("psychologist_id"))
+                        if (key.equals("psychologist_id")) {
                             showValid(((FragmentCreateRoomBinding) binding).psychologyErrorLayout.getRoot(), ((FragmentCreateRoomBinding) binding).psychologyErrorLayout.errorTextView, value);
+                        }
 
                     } else if (binding instanceof FragmentCreateRoomUserBinding) {
-                        if (key.equals("user_id"))
+                        if (key.equals("user_id")) {
                             showValid(((FragmentCreateRoomUserBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateRoomUserBinding) binding).referenceErrorLayout.errorTextView, value);
+                        }
 
                     } else if (binding instanceof FragmentCreateSampleBinding) {
-
-                    } else if (binding instanceof FragmentCreateScheduleBinding) {
-
-                    } else if (binding instanceof FragmentCreateSessionBinding) {
+                        // TODO : Place Code Here
 
                     } else if (binding instanceof FragmentCreateSessionUserBinding) {
                         switch (key) {
@@ -355,6 +348,85 @@ public class Validatoon {
                         }
 
                     } else if (binding instanceof FragmentReserveScheduleBinding) {
+                        // TODO : Place Code Here
+
+                    // -------------------- Edit
+
+                    } else if (binding instanceof FragmentEditCenterUserBinding) {
+                        switch (key) {
+                            case "position":
+                                showValid(((FragmentEditCenterUserBinding) binding).positionErrorLayout.getRoot(), ((FragmentEditCenterUserBinding) binding).positionErrorLayout.errorTextView, value);
+                                break;
+                            case "name":
+                                showValid(((FragmentEditCenterUserBinding) binding).nicknameErrorLayout.getRoot(), ((FragmentEditCenterUserBinding) binding).nicknameErrorLayout.errorTextView, value);
+                                break;
+                            case "status":
+                                showValid(((FragmentEditCenterUserBinding) binding).statusErrorLayout.getRoot(), ((FragmentEditCenterUserBinding) binding).statusErrorLayout.errorTextView, value);
+                                break;
+                        }
+
+                    } else if (binding instanceof FragmentEditPlatformBinding) {
+                        switch (key) {
+                            case "title":
+                                showValid(((FragmentEditPlatformBinding) binding).titleErrorLayout.getRoot(), ((FragmentEditPlatformBinding) binding).titleErrorLayout.errorTextView, value);
+                                break;
+                            case "type":
+                                showValid(((FragmentEditPlatformBinding) binding).sessionTypeErrorLayout.getRoot(), ((FragmentEditPlatformBinding) binding).sessionTypeErrorLayout.errorTextView, value);
+                                break;
+                            case "identifier_type":
+                                showValid(((FragmentEditPlatformBinding) binding).indentifierTypeErrorLayout.getRoot(), ((FragmentEditPlatformBinding) binding).indentifierTypeErrorLayout.errorTextView, value);
+                                break;
+                            case "identifier":
+                                showValid(((FragmentEditPlatformBinding) binding).indentifierErrorLayout.getRoot(), ((FragmentEditPlatformBinding) binding).indentifierErrorLayout.errorTextView, value);
+                                break;
+                            case "selected":
+                                showValid(((FragmentEditPlatformBinding) binding).sessionErrorLayout.getRoot(), ((FragmentEditPlatformBinding) binding).sessionErrorLayout.errorTextView, value);
+                                break;
+                            case "available":
+                                showValid(((FragmentEditPlatformBinding) binding).availableErrorLayout.getRoot(), ((FragmentEditPlatformBinding) binding).availableErrorLayout.errorTextView, value);
+                                break;
+                        }
+
+                    } else if (binding instanceof FragmentEditTreasuryBinding) {
+                        if (key.equals("title")) {
+                            showValid(((FragmentEditTreasuryBinding) binding).titleErrorLayout.getRoot(), ((FragmentEditTreasuryBinding) binding).titleErrorLayout.errorTextView, value);
+                        }
+
+                    // -------------------- Index
+
+                    } else if (binding instanceof FragmentBanksBinding) {
+                        switch (key) {
+                            case "iban":
+                                showValid(((FragmentBanksBinding) binding).ibanErrorLayout.getRoot(), ((FragmentBanksBinding) binding).ibanErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                break;
+                            case "iban_id":
+                                showValid(((FragmentBanksBinding) binding).accountErrorLayout.getRoot(), ((FragmentBanksBinding) binding).accountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                break;
+                            case "type":
+                                showValid(((FragmentBanksBinding) binding).typeErrorLayout.getRoot(), ((FragmentBanksBinding) binding).typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                break;
+                            case "amount":
+                                showValid(((FragmentBanksBinding) binding).amountErrorLayout.getRoot(), ((FragmentBanksBinding) binding).amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                break;
+                            case "weekday":
+                                showValid(((FragmentBanksBinding) binding).weekdayErrorLayout.getRoot(), ((FragmentBanksBinding) binding).weekdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                break;
+                            case "day":
+                                showValid(((FragmentBanksBinding) binding).monthdayErrorLayout.getRoot(), ((FragmentBanksBinding) binding).monthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                break;
+                        }
+
+                    } else if (binding instanceof FragmentPaymentsBinding) {
+                        switch (key) {
+                            case "treasury_id":
+                                showValid(((FragmentPaymentsBinding) binding).treasuryErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                break;
+                            case "amount":
+                                showValid(((FragmentPaymentsBinding) binding).amountErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                break;
+                        }
+
+                    // -------------------- Sheet
 
                     }
                 }
