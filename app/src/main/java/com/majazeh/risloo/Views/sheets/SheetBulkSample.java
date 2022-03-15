@@ -17,10 +17,8 @@ import com.majazeh.risloo.databinding.SheetBulkSampleBinding;
 import com.majazeh.risloo.utils.managers.DialogManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
-import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.views.activities.ActivityAuth;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.sheet.SheetScaleAdapter;
 import com.mre.ligheh.API.Response;
@@ -31,10 +29,8 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class SheetBulkSample extends BottomSheetDialogFragment {
 
@@ -219,39 +215,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        try {
-                            JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder allErrors = new StringBuilder();
-
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    StringBuilder keyErrors = new StringBuilder();
-
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String error = errorsObject.getJSONArray(key).getString(i);
-
-                                        keyErrors.append(error);
-                                        keyErrors.append("\n");
-
-                                        allErrors.append(error);
-                                        allErrors.append("\n");
-                                    }
-
-                                    if (key.equals("nickname"))
-                                        ((ActivityAuth) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                }
-
-                                SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
                 }
             }
         });

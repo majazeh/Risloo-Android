@@ -36,6 +36,7 @@ import com.majazeh.risloo.databinding.FragmentEditPlatformBinding;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
 import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
 import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
+import com.majazeh.risloo.databinding.SheetBulkSampleBinding;
 import com.majazeh.risloo.utils.managers.SnackManager;
 
 import org.json.JSONException;
@@ -397,36 +398,41 @@ public class Validatoon {
                     } else if (binding instanceof FragmentBanksBinding) {
                         switch (key) {
                             case "iban":
-                                showValid(((FragmentBanksBinding) binding).ibanErrorLayout.getRoot(), ((FragmentBanksBinding) binding).ibanErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentBanksBinding) binding).ibanErrorLayout.getRoot(), ((FragmentBanksBinding) binding).ibanErrorLayout.errorTextView, value);
                                 break;
                             case "iban_id":
-                                showValid(((FragmentBanksBinding) binding).accountErrorLayout.getRoot(), ((FragmentBanksBinding) binding).accountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentBanksBinding) binding).accountErrorLayout.getRoot(), ((FragmentBanksBinding) binding).accountErrorLayout.errorTextView, value);
                                 break;
                             case "type":
-                                showValid(((FragmentBanksBinding) binding).typeErrorLayout.getRoot(), ((FragmentBanksBinding) binding).typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentBanksBinding) binding).typeErrorLayout.getRoot(), ((FragmentBanksBinding) binding).typeErrorLayout.errorTextView, value);
                                 break;
                             case "amount":
-                                showValid(((FragmentBanksBinding) binding).amountErrorLayout.getRoot(), ((FragmentBanksBinding) binding).amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentBanksBinding) binding).amountErrorLayout.getRoot(), ((FragmentBanksBinding) binding).amountErrorLayout.errorTextView, value);
                                 break;
                             case "weekday":
-                                showValid(((FragmentBanksBinding) binding).weekdayErrorLayout.getRoot(), ((FragmentBanksBinding) binding).weekdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentBanksBinding) binding).weekdayErrorLayout.getRoot(), ((FragmentBanksBinding) binding).weekdayErrorLayout.errorTextView, value);
                                 break;
                             case "day":
-                                showValid(((FragmentBanksBinding) binding).monthdayErrorLayout.getRoot(), ((FragmentBanksBinding) binding).monthdayErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentBanksBinding) binding).monthdayErrorLayout.getRoot(), ((FragmentBanksBinding) binding).monthdayErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     } else if (binding instanceof FragmentPaymentsBinding) {
                         switch (key) {
                             case "treasury_id":
-                                showValid(((FragmentPaymentsBinding) binding).treasuryErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentPaymentsBinding) binding).treasuryErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).treasuryErrorLayout.errorTextView, value);
                                 break;
                             case "amount":
-                                showValid(((FragmentPaymentsBinding) binding).amountErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).amountErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
+                                showValid(((FragmentPaymentsBinding) binding).amountErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).amountErrorLayout.errorTextView, value);
                                 break;
                         }
 
                     // -------------------- Sheet
+
+                    } else if (binding instanceof SheetBulkSampleBinding) {
+                        if (key.equals("nickname")) {
+                            showValid(((SheetBulkSampleBinding) binding).nicknameErrorLayout.getRoot(), ((SheetBulkSampleBinding) binding).nicknameErrorLayout.errorTextView, value);
+                        }
 
                     }
                 }
