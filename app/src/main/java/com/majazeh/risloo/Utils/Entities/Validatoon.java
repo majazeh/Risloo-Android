@@ -591,7 +591,7 @@ public class Validatoon {
         }
     }
 
-    public void showValid2(String key, String validation, ViewBinding binding) {
+    public void showValid(String key, String validation, ViewBinding binding) {
 
         // -------------------- Tab
 

@@ -125,7 +125,7 @@ public class FragmentCreateSessionTabPayment extends Fragment {
     }
 
     public void showValid(String key, String validation) {
-        ((ActivityMain) requireActivity()).validatoon.showValid2(key, validation, binding);
+        ((ActivityMain) requireActivity()).validatoon.showValid(key, validation, binding);
     }
 
     @Override
