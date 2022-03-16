@@ -98,7 +98,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
 
             doWork();
         }).widget(binding.entryTextView.getRoot());
@@ -214,7 +214,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
+                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.showValid(response, binding));
                 }
             }
         });

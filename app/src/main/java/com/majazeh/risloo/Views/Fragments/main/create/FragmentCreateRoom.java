@@ -72,7 +72,7 @@ public class FragmentCreateRoom extends Fragment {
         }).widget(binding.psychologyIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -156,7 +156,7 @@ public class FragmentCreateRoom extends Fragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
+                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.showValid(response, binding));
                 }
             }
         });

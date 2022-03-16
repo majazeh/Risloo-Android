@@ -249,7 +249,7 @@ public class FragmentReserveSchedule extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
 
             doWork();
         }).widget(binding.reserveTextView.getRoot());
@@ -624,7 +624,7 @@ public class FragmentReserveSchedule extends Fragment {
                                 Paymont.getInstance().insertPayment(scheduleModel, paymentModel, data, R.id.fragmentReserveSchedule);
                                 PaymentManager.request(requireActivity(), paymentModel);
                             } else {
-                                ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding);
+                                ((ActivityMain) requireActivity()).validatoon.showValid(response, binding);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

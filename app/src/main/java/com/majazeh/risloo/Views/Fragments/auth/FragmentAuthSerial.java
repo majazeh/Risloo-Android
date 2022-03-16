@@ -87,9 +87,9 @@ public class FragmentAuthSerial extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.serialEditText.getRoot().length() == 0) {
-                ((ActivityAuth) requireActivity()).validatoon.zeroValid(binding);
+                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding);
             } else {
-                ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
+                ((ActivityAuth) requireActivity()).validatoon.hideValid(binding);
 
                 doWork("serial");
             }

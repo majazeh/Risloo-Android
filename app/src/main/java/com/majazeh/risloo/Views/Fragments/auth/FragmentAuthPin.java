@@ -129,9 +129,9 @@ public class FragmentAuthPin extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.pinEditText.getRoot().length() == 0) {
-                ((ActivityAuth) requireActivity()).validatoon.zeroValid(binding);
+                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding);
             } else {
-                ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
+                ((ActivityAuth) requireActivity()).validatoon.hideValid(binding);
 
                 doWork("code");
             }
@@ -245,7 +245,7 @@ public class FragmentAuthPin extends Fragment {
                 @Override
                 public void onFailure(String response) {
                     if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> ((ActivityAuth) requireActivity()).validatoon.requestValid(response, binding));
+                        requireActivity().runOnUiThread(() -> ((ActivityAuth) requireActivity()).validatoon.showValid(response, binding));
                     }
                 }
             });
@@ -275,7 +275,7 @@ public class FragmentAuthPin extends Fragment {
         pin = code;
         binding.pinEditText.getRoot().setText(pin);
 
-        ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
+        ((ActivityAuth) requireActivity()).validatoon.hideValid(binding);
 
         doWork("code");
     }

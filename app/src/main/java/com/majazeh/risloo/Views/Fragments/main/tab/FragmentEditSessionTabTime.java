@@ -145,11 +145,11 @@ public class FragmentEditSessionTabTime extends Fragment {
     }
 
     public void hideValid() {
-        ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+        ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
     }
 
     public void showValid(String key, String validation) {
-        ((ActivityMain) requireActivity()).validatoon.requestValid2(key, validation, binding);
+        ((ActivityMain) requireActivity()).validatoon.showValid2(key, validation, binding);
     }
 
     @Override

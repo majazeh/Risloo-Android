@@ -105,7 +105,7 @@ public class FragmentCommissions extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
 
             doWork();
         }).widget(binding.contributionTextView.getRoot());

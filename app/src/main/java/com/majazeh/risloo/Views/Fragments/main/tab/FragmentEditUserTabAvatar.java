@@ -171,7 +171,7 @@ public class FragmentEditUserTabAvatar extends Fragment {
                 @Override
                 public void onFailure(String response) {
                     if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
+                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.showValid(response, binding));
                     }
                 }
             });
@@ -193,7 +193,7 @@ public class FragmentEditUserTabAvatar extends Fragment {
                 @Override
                 public void onFailure(String response) {
                     if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
+                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.showValid(response, binding));
                     }
                 }
             });

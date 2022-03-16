@@ -117,7 +117,7 @@ public class FragmentCreateClientReport extends Fragment {
         }).widget(binding.cryptoIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
 
             doWork();
         }).widget(binding.createTextView.getRoot());

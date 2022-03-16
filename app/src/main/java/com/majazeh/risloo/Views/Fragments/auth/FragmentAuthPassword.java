@@ -138,9 +138,9 @@ public class FragmentAuthPassword extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((ActivityAuth) requireActivity()).validatoon.zeroValid(binding);
+                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding);
             } else {
-                ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
+                ((ActivityAuth) requireActivity()).validatoon.hideValid(binding);
 
                 doWork();
             }
@@ -220,7 +220,7 @@ public class FragmentAuthPassword extends Fragment {
             @Override
             public void onFailure(String response) {
                 if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> ((ActivityAuth) requireActivity()).validatoon.requestValid(response, binding));
+                    requireActivity().runOnUiThread(() -> ((ActivityAuth) requireActivity()).validatoon.showValid(response, binding));
                 }
             }
         });

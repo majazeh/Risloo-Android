@@ -323,13 +323,13 @@ public class FragmentBanks extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
 
             doWork("create");
         }).widget(binding.createTextView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
-            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
 
             doWork("settle");
         }).widget(binding.settleTextView.getRoot());
@@ -632,7 +632,7 @@ public class FragmentBanks extends Fragment {
                 @Override
                 public void onFailure(String response) {
                     if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
+                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.showValid(response, binding));
                     }
                 }
             });
@@ -651,7 +651,7 @@ public class FragmentBanks extends Fragment {
                 @Override
                 public void onFailure(String response) {
                     if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
+                        requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.showValid(response, binding));
                     }
                 }
             });

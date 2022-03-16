@@ -86,7 +86,7 @@ public class FragmentCreateDocument extends Fragment {
         CustomClickView.onDelayedListener(() -> IntentManager.document(requireActivity())).widget(binding.fileIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
+            ((ActivityMain) requireActivity()).validatoon.hideValid(binding);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
