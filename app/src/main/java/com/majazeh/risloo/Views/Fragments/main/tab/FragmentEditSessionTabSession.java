@@ -520,37 +520,7 @@ public class FragmentEditSessionTabSession extends Fragment {
     }
 
     public void showValid(String key, String validation) {
-        switch (key) {
-            case "status":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
-                break;
-            case "opens_at_type":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.startTypeErrorLayout.getRoot(), binding.startTypeErrorLayout.errorTextView, validation);
-                break;
-            case "opens_at":
-                if (startType.equals("relative"))
-                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.startRelativeErrorLayout.getRoot(), binding.startRelativeErrorLayout.errorTextView, validation);
-                else if (startType.equals("absolute"))
-                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.startAccurateErrorLayout.getRoot(), binding.startAccurateErrorLayout.errorTextView, validation);
-
-                break;
-            case "closed_at_type":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.endTypeErrorLayout.getRoot(), binding.endTypeErrorLayout.errorTextView, validation);
-                break;
-            case "closed_at":
-                if (endType.equals("relative"))
-                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.endRelativeErrorLayout.getRoot(), binding.endRelativeErrorLayout.errorTextView, validation);
-                else if (endType.equals("absolute"))
-                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.endAccurateErrorLayout.getRoot(), binding.endAccurateErrorLayout.errorTextView, validation);
-
-                break;
-            case "description":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
-                break;
-            case "client_reminder":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.coordinationErrorLayout.getRoot(), binding.coordinationErrorLayout.errorTextView, validation);
-                break;
-        }
+        ((ActivityMain) requireActivity()).validatoon.requestValid2(key, validation, binding);
     }
 
     @Override
