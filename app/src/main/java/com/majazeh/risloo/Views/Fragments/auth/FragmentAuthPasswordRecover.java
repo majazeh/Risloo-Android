@@ -76,7 +76,7 @@ public class FragmentAuthPasswordRecover extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.mobileEditText.getRoot().length() == 0) {
-                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((ActivityAuth) requireActivity()).validatoon.zeroValid(binding);
             } else {
                 ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
 

@@ -83,25 +83,6 @@ public class Validatoon {
     ---------- Func's ----------
     */
 
-    public void emptyValid(LinearLayout errorLayout, TextView errorTextView) {
-        errorLayout.setVisibility(View.VISIBLE);
-        errorTextView.setText(activity.getResources().getString(R.string.AppInputEmpty));
-    }
-
-    private void showValid(LinearLayout errorLayout, TextView errorTextView, String value) {
-        errorLayout.setVisibility(View.VISIBLE);
-        errorTextView.setText(value);
-    }
-
-    private void hideValid(LinearLayout errorLayout, TextView errorTextView) {
-        errorLayout.setVisibility(View.GONE);
-        errorTextView.setText("");
-    }
-
-    /*
-    ---------- New's ----------
-    */
-
     public void requestValid(String response, ViewBinding binding) {
         try {
             JSONObject responseObject = new JSONObject(response);
@@ -1573,6 +1554,54 @@ public class Validatoon {
 
         // -------------------- End
 
+    }
+
+    public void zeroValid(ViewBinding binding) {
+
+        // -------------------- Auth
+
+        if (binding instanceof FragmentAuthLoginBinding)
+            emptyValid(((FragmentAuthLoginBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthLoginBinding) binding).errorIncludeLayout.errorTextView);
+
+        else if (binding instanceof FragmentAuthPasswordBinding)
+            emptyValid(((FragmentAuthPasswordBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordBinding) binding).errorIncludeLayout.errorTextView);
+
+        else if (binding instanceof FragmentAuthPasswordChangeBinding)
+            emptyValid(((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.errorTextView);
+
+        else if (binding instanceof FragmentAuthPasswordRecoverBinding)
+            emptyValid(((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.errorTextView);
+
+        else if (binding instanceof FragmentAuthPinBinding)
+            emptyValid(((FragmentAuthPinBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPinBinding) binding).errorIncludeLayout.errorTextView);
+
+        else if (binding instanceof FragmentAuthRegisterBinding)
+            emptyValid(((FragmentAuthRegisterBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthRegisterBinding) binding).errorIncludeLayout.errorTextView);
+
+        else if (binding instanceof FragmentAuthSerialBinding)
+            emptyValid(((FragmentAuthSerialBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthSerialBinding) binding).errorIncludeLayout.errorTextView);
+
+        // -------------------- Auth
+
+    }
+
+    /*
+    ---------- Private's ----------
+    */
+
+    private void emptyValid(LinearLayout errorLayout, TextView errorTextView) {
+        errorLayout.setVisibility(View.VISIBLE);
+        errorTextView.setText(activity.getResources().getString(R.string.AppInputEmpty));
+    }
+
+    private void showValid(LinearLayout errorLayout, TextView errorTextView, String validation) {
+        errorLayout.setVisibility(View.VISIBLE);
+        errorTextView.setText(validation);
+    }
+
+    private void hideValid(LinearLayout errorLayout, TextView errorTextView) {
+        errorLayout.setVisibility(View.GONE);
+        errorTextView.setText("");
     }
 
 }

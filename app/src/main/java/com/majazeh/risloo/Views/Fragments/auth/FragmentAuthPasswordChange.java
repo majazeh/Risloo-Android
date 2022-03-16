@@ -138,7 +138,7 @@ public class FragmentAuthPasswordChange extends Fragment {
 
         CustomClickView.onDelayedListener(() -> {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((ActivityAuth) requireActivity()).validatoon.zeroValid(binding);
             } else {
                 ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
 
