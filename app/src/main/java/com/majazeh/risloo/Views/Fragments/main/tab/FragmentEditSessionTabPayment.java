@@ -113,8 +113,7 @@ public class FragmentEditSessionTabPayment extends Fragment {
     }
 
     public void hideValid() {
-        if (binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView);
+        ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
     }
 
     public void showValid(String key, String validation) {

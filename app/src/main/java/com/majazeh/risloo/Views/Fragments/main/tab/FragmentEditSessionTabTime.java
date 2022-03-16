@@ -145,14 +145,7 @@ public class FragmentEditSessionTabTime extends Fragment {
     }
 
     public void hideValid() {
-        if (binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
-
-        if (binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
-
-        if (binding.startDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.startDateErrorLayout.getRoot(), binding.startDateErrorLayout.errorTextView);
+        ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
     }
 
     public void showValid(String key, String validation) {

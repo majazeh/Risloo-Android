@@ -313,32 +313,7 @@ public class FragmentCreateScheduleTabTime extends Fragment {
     }
 
     public void hideValid() {
-        if (binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
-
-        if (binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
-
-        if (binding.dateTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.dateTypeErrorLayout.getRoot(), binding.dateTypeErrorLayout.errorTextView);
-
-        if (binding.specifiedDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.specifiedDateErrorLayout.getRoot(), binding.specifiedDateErrorLayout.errorTextView);
-
-        if (binding.patternDaysErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.patternDaysErrorLayout.getRoot(), binding.patternDaysErrorLayout.errorTextView);
-
-        if (binding.patternTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.patternTypeErrorLayout.getRoot(), binding.patternTypeErrorLayout.errorTextView);
-
-        if (binding.repeatWeeksErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.repeatWeeksErrorLayout.getRoot(), binding.repeatWeeksErrorLayout.errorTextView);
-
-        if (binding.periodStartDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.periodStartDateErrorLayout.getRoot(), binding.periodStartDateErrorLayout.errorTextView);
-
-        if (binding.periodEndDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.periodEndDateErrorLayout.getRoot(), binding.periodEndDateErrorLayout.errorTextView);
+        ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
     }
 
     public void showValid(String key, String validation) {

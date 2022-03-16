@@ -452,35 +452,7 @@ public class FragmentCreateScheduleTabSession extends Fragment {
     }
 
     public void hideValid() {
-        if (binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
-
-        if (binding.startTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.startTypeErrorLayout.getRoot(), binding.startTypeErrorLayout.errorTextView);
-
-        if (binding.startRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.startRelativeErrorLayout.getRoot(), binding.startRelativeErrorLayout.errorTextView);
-
-        if (binding.startAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.startAccurateErrorLayout.getRoot(), binding.startAccurateErrorLayout.errorTextView);
-
-        if (binding.endTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.endTypeErrorLayout.getRoot(), binding.endTypeErrorLayout.errorTextView);
-
-        if (binding.endRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.endRelativeErrorLayout.getRoot(), binding.endRelativeErrorLayout.errorTextView);
-
-        if (binding.endAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.endAccurateErrorLayout.getRoot(), binding.endAccurateErrorLayout.errorTextView);
-
-        if (binding.axisErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView);
-
-        if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
-
-        if (binding.coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.coordinationErrorLayout.getRoot(), binding.coordinationErrorLayout.errorTextView);
+        ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
     }
 
     public void showValid(String key, String validation) {

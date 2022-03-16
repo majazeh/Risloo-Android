@@ -137,14 +137,7 @@ public class FragmentEditSessionTabPlatform extends Fragment {
     }
 
     public void hideValid() {
-        if (binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView);
-
-        if (binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView);
-
-        if (binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView);
+        ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
     }
 
     public void showValid(String key, String validation) {

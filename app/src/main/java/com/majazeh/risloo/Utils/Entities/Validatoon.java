@@ -30,6 +30,15 @@ import com.majazeh.risloo.databinding.FragmentCreatePracticeBinding;
 import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 import com.majazeh.risloo.databinding.FragmentCreateRoomUserBinding;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
+import com.majazeh.risloo.databinding.FragmentCreateScheduleTabPaymentBinding;
+import com.majazeh.risloo.databinding.FragmentCreateScheduleTabPlatformBinding;
+import com.majazeh.risloo.databinding.FragmentCreateScheduleTabReferenceBinding;
+import com.majazeh.risloo.databinding.FragmentCreateScheduleTabSessionBinding;
+import com.majazeh.risloo.databinding.FragmentCreateScheduleTabTimeBinding;
+import com.majazeh.risloo.databinding.FragmentCreateSessionTabPaymentBinding;
+import com.majazeh.risloo.databinding.FragmentCreateSessionTabPlatformBinding;
+import com.majazeh.risloo.databinding.FragmentCreateSessionTabSessionBinding;
+import com.majazeh.risloo.databinding.FragmentCreateSessionTabTimeBinding;
 import com.majazeh.risloo.databinding.FragmentCreateSessionUserBinding;
 import com.majazeh.risloo.databinding.FragmentCreateTreasuryBinding;
 import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
@@ -37,6 +46,11 @@ import com.majazeh.risloo.databinding.FragmentEditCenterTabAvatarBinding;
 import com.majazeh.risloo.databinding.FragmentEditCenterTabDetailBinding;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 import com.majazeh.risloo.databinding.FragmentEditPlatformBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabPaymentBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabPlatformBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabReferenceBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabSessionBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabTimeBinding;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
 import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
 import com.majazeh.risloo.databinding.FragmentEditUserTabCryptoBinding;
@@ -79,7 +93,7 @@ public class Validatoon {
         errorTextView.setText(value);
     }
 
-    public void hideValid(LinearLayout errorLayout, TextView errorTextView) {
+    private void hideValid(LinearLayout errorLayout, TextView errorTextView) {
         errorLayout.setVisibility(View.GONE);
         errorTextView.setText("");
     }
@@ -958,6 +972,253 @@ public class Validatoon {
             }
 
         // -------------------- Tab
+
+        } else if (binding instanceof FragmentCreateScheduleTabPaymentBinding) {
+            if (((FragmentCreateScheduleTabPaymentBinding) binding).paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabPaymentBinding) binding).paymentErrorLayout.getRoot(), ((FragmentCreateScheduleTabPaymentBinding) binding).paymentErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCreateScheduleTabPlatformBinding) {
+            if (((FragmentCreateScheduleTabPlatformBinding) binding).platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabPlatformBinding) binding).platformsErrorLayout.getRoot(), ((FragmentCreateScheduleTabPlatformBinding) binding).platformsErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot(), ((FragmentCreateScheduleTabPlatformBinding) binding).pinPlatformErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot(), ((FragmentCreateScheduleTabPlatformBinding) binding).identifierPlatformErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCreateScheduleTabReferenceBinding) {
+            if (((FragmentCreateScheduleTabReferenceBinding) binding).selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabReferenceBinding) binding).selectionErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).selectionErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabReferenceBinding) binding).typeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabReferenceBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).typeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabReferenceBinding) binding).caseErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabReferenceBinding) binding).caseErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).caseErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabReferenceBinding) binding).bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabReferenceBinding) binding).bulkSessionErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).bulkSessionErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabReferenceBinding) binding).countErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabReferenceBinding) binding).countErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).countErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCreateScheduleTabSessionBinding) {
+            if (((FragmentCreateScheduleTabSessionBinding) binding).statusErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).statusErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).statusErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).startTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).startTypeErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).startTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).startRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).startRelativeErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).startRelativeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).startAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).startAccurateErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).startAccurateErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).endTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).endTypeErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).endTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).endRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).endRelativeErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).endRelativeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).endAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).endAccurateErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).endAccurateErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).axisErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).axisErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).axisErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).descriptionErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabSessionBinding) binding).coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabSessionBinding) binding).coordinationErrorLayout.getRoot(), ((FragmentCreateScheduleTabSessionBinding) binding).coordinationErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCreateScheduleTabTimeBinding) {
+            if (((FragmentCreateScheduleTabTimeBinding) binding).startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).startTimeErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).startTimeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabTimeBinding) binding).durationErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).durationErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).durationErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabTimeBinding) binding).dateTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).dateTypeErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).dateTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabTimeBinding) binding).specifiedDateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).specifiedDateErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).specifiedDateErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabTimeBinding) binding).patternDaysErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).patternDaysErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).patternDaysErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabTimeBinding) binding).patternTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).patternTypeErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).patternTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabTimeBinding) binding).repeatWeeksErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).repeatWeeksErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).repeatWeeksErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabTimeBinding) binding).periodStartDateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).periodStartDateErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).periodStartDateErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateScheduleTabTimeBinding) binding).periodEndDateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateScheduleTabTimeBinding) binding).periodEndDateErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).periodEndDateErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCreateSessionTabPaymentBinding) {
+            if (((FragmentCreateSessionTabPaymentBinding) binding).paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabPaymentBinding) binding).paymentErrorLayout.getRoot(), ((FragmentCreateSessionTabPaymentBinding) binding).paymentErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCreateSessionTabPlatformBinding) {
+            if (((FragmentCreateSessionTabPlatformBinding) binding).platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabPlatformBinding) binding).platformsErrorLayout.getRoot(), ((FragmentCreateSessionTabPlatformBinding) binding).platformsErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot(), ((FragmentCreateSessionTabPlatformBinding) binding).pinPlatformErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot(), ((FragmentCreateSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCreateSessionTabSessionBinding) {
+            if (((FragmentCreateSessionTabSessionBinding) binding).statusErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).statusErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).statusErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).startTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).startTypeErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).startTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).startRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).startRelativeErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).startRelativeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).startAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).startAccurateErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).startAccurateErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).endTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).endTypeErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).endTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).endRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).endRelativeErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).endRelativeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).endAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).endAccurateErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).endAccurateErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).axisErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).axisErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).axisErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).descriptionErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabSessionBinding) binding).coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabSessionBinding) binding).coordinationErrorLayout.getRoot(), ((FragmentCreateSessionTabSessionBinding) binding).coordinationErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCreateSessionTabTimeBinding) {
+            if (((FragmentCreateSessionTabTimeBinding) binding).startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).startTimeErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).startTimeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabTimeBinding) binding).durationErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).durationErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).durationErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabTimeBinding) binding).dateTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).dateTypeErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).dateTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabTimeBinding) binding).specifiedDateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).specifiedDateErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).specifiedDateErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabTimeBinding) binding).patternDaysErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).patternDaysErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).patternDaysErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabTimeBinding) binding).patternTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).patternTypeErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).patternTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabTimeBinding) binding).repeatWeeksErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).repeatWeeksErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).repeatWeeksErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabTimeBinding) binding).periodStartDateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).periodStartDateErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).periodStartDateErrorLayout.errorTextView);
+            }
+            if (((FragmentCreateSessionTabTimeBinding) binding).periodEndDateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCreateSessionTabTimeBinding) binding).periodEndDateErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).periodEndDateErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabPaymentBinding) {
+            if (((FragmentEditSessionTabPaymentBinding) binding).paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabPaymentBinding) binding).paymentErrorLayout.getRoot(), ((FragmentEditSessionTabPaymentBinding) binding).paymentErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabPlatformBinding) {
+            if (((FragmentEditSessionTabPlatformBinding) binding).platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabPlatformBinding) binding).platformsErrorLayout.getRoot(), ((FragmentEditSessionTabPlatformBinding) binding).platformsErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot(), ((FragmentEditSessionTabPlatformBinding) binding).pinPlatformErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot(), ((FragmentEditSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabReferenceBinding) {
+            if (((FragmentEditSessionTabReferenceBinding) binding).selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabReferenceBinding) binding).selectionErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).selectionErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabReferenceBinding) binding).typeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabReferenceBinding) binding).typeErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).typeErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabReferenceBinding) binding).caseErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabReferenceBinding) binding).caseErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).caseErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabReferenceBinding) binding).problemErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabReferenceBinding) binding).problemErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).problemErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabReferenceBinding) binding).bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabReferenceBinding) binding).bulkSessionErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).bulkSessionErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabReferenceBinding) binding).countErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabReferenceBinding) binding).countErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).countErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabSessionBinding) {
+            if (((FragmentEditSessionTabSessionBinding) binding).statusErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).statusErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).statusErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabSessionBinding) binding).startTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).startTypeErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).startTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabSessionBinding) binding).startRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).startRelativeErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).startRelativeErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabSessionBinding) binding).startAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).startAccurateErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).startAccurateErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabSessionBinding) binding).endTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).endTypeErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).endTypeErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabSessionBinding) binding).endRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).endRelativeErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).endRelativeErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabSessionBinding) binding).endAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).endAccurateErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).endAccurateErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabSessionBinding) binding).descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).descriptionErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabSessionBinding) binding).coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabSessionBinding) binding).coordinationErrorLayout.getRoot(), ((FragmentEditSessionTabSessionBinding) binding).coordinationErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabTimeBinding) {
+            if (((FragmentEditSessionTabTimeBinding) binding).startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabTimeBinding) binding).startTimeErrorLayout.getRoot(), ((FragmentEditSessionTabTimeBinding) binding).startTimeErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabTimeBinding) binding).durationErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabTimeBinding) binding).durationErrorLayout.getRoot(), ((FragmentEditSessionTabTimeBinding) binding).durationErrorLayout.errorTextView);
+            }
+            if (((FragmentEditSessionTabTimeBinding) binding).startDateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditSessionTabTimeBinding) binding).startDateErrorLayout.getRoot(), ((FragmentEditSessionTabTimeBinding) binding).startDateErrorLayout.errorTextView);
+            }
 
         } else if (binding instanceof FragmentEditCenterTabDetailBinding) {
             if (((FragmentEditCenterTabDetailBinding) binding).managerErrorLayout.getRoot().getVisibility() == View.VISIBLE) {

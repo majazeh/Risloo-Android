@@ -276,20 +276,7 @@ public class FragmentCreateScheduleTabReference extends Fragment {
     }
 
     public void hideValid() {
-        if (binding.selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView);
-
-        if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
-
-        if (binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
-
-        if (binding.bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.bulkSessionErrorLayout.getRoot(), binding.bulkSessionErrorLayout.errorTextView);
-
-        if (binding.countErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityMain) requireActivity()).validatoon.hideValid(binding.countErrorLayout.getRoot(), binding.countErrorLayout.errorTextView);
+        ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
     }
 
     public void showValid(String key, String validation) {
