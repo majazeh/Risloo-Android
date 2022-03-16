@@ -43,7 +43,6 @@ import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
 import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.majazeh.risloo.databinding.SheetBulkSampleBinding;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.views.activities.ActivityMain;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -298,7 +297,45 @@ public class Validatoon {
                         }
 
                     } else if (binding instanceof FragmentCreateSampleBinding) {
-                        // TODO : Place Code Here
+                        switch (key) {
+                            case "scale_id":
+                                showValid(((FragmentCreateSampleBinding) binding).scaleErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).scaleErrorLayout.errorTextView, value);
+                                break;
+                            case "room_id":
+                                showValid(((FragmentCreateSampleBinding) binding).roomErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).roomErrorLayout.errorTextView, value);
+                                break;
+                            case "type":
+                                showValid(((FragmentCreateSampleBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).typeErrorLayout.errorTextView, value);
+                                break;
+                            case "title":
+                                showValid(((FragmentCreateSampleBinding) binding).titleErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).titleErrorLayout.errorTextView, value);
+                                break;
+                            case "members_count":
+                                showValid(((FragmentCreateSampleBinding) binding).membersCountErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).membersCountErrorLayout.errorTextView, value);
+                                break;
+                            case "case_status":
+                                showValid(((FragmentCreateSampleBinding) binding).caseStatusErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).caseStatusErrorLayout.errorTextView, value);
+                                break;
+                            case "problem":
+                                showValid(((FragmentCreateSampleBinding) binding).problemErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).problemErrorLayout.errorTextView, value);
+                                break;
+                            case "case_id":
+                                showValid(((FragmentCreateSampleBinding) binding).caseErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).caseErrorLayout.errorTextView, value);
+                                break;
+                            case "session_id":
+                                showValid(((FragmentCreateSampleBinding) binding).sessionErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).sessionErrorLayout.errorTextView, value);
+                                break;
+                            case "client_id":
+                                if (((FragmentCreateSampleBinding) binding).typeTabLayout.getSelectedTabPosition() == 0)
+                                    showValid(((FragmentCreateSampleBinding) binding).clientErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).clientErrorLayout.errorTextView, value);
+                                else if (((FragmentCreateSampleBinding) binding).typeTabLayout.getSelectedTabPosition() == 1)
+                                    showValid(((FragmentCreateSampleBinding) binding).referenceErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).referenceErrorLayout.errorTextView, value);
+
+                                break;
+                            case "psychologist_description":
+                                showValid(((FragmentCreateSampleBinding) binding).psychologyDescriptionErrorLayout.getRoot(), ((FragmentCreateSampleBinding) binding).psychologyDescriptionErrorLayout.errorTextView, value);
+                                break;
+                        }
 
                     } else if (binding instanceof FragmentCreateSessionUserBinding) {
                         switch (key) {
@@ -355,7 +392,39 @@ public class Validatoon {
                         }
 
                     } else if (binding instanceof FragmentReserveScheduleBinding) {
-                        // TODO : Place Code Here
+                        switch (key) {
+                            case "field":
+                                showValid(((FragmentReserveScheduleBinding) binding).fieldErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).fieldErrorLayout.errorTextView, value);
+                                break;
+                            case "session_platform":
+                                showValid(((FragmentReserveScheduleBinding) binding).platformErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).platformErrorLayout.errorTextView, value);
+                                break;
+                            case "client_typ":
+                                showValid(((FragmentReserveScheduleBinding) binding).typeErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).typeErrorLayout.errorTextView, value);
+                                break;
+                            case "case_id":
+                                showValid(((FragmentReserveScheduleBinding) binding).caseErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).caseErrorLayout.errorTextView, value);
+                                break;
+                            case "client_id":
+                                if (((FragmentReserveScheduleBinding) binding).typeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.second_radioButton && ((FragmentReserveScheduleBinding) binding).clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                                    showValid(((FragmentReserveScheduleBinding) binding).clientErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).clientErrorLayout.errorTextView, value);
+                                else if (((FragmentReserveScheduleBinding) binding).typeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton)
+                                    showValid(((FragmentReserveScheduleBinding) binding).referenceErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).referenceErrorLayout.errorTextView, value);
+
+                                break;
+                            case "problem":
+                                showValid(((FragmentReserveScheduleBinding) binding).problemErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).problemErrorLayout.errorTextView, value);
+                                break;
+                            case "nickname":
+                                showValid(((FragmentReserveScheduleBinding) binding).nameErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).nameErrorLayout.errorTextView, value);
+                                break;
+                            case "description":
+                                showValid(((FragmentReserveScheduleBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).descriptionErrorLayout.errorTextView, value);
+                                break;
+                            case "treasurie_id":
+                                showValid(((FragmentReserveScheduleBinding) binding).treasuryErrorLayout.getRoot(), ((FragmentReserveScheduleBinding) binding).treasuryErrorLayout.errorTextView, value);
+                                break;
+                        }
 
                     // -------------------- Edit
 

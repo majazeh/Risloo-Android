@@ -13,19 +13,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.majazeh.risloo.utils.instances.Paymont;
 import com.majazeh.risloo.utils.managers.DateManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
-import com.majazeh.risloo.utils.managers.InitManager;
-import com.majazeh.risloo.utils.managers.PaymentManager;
-import com.majazeh.risloo.utils.managers.JsonManager;
-import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.DropdownManager;
+import com.majazeh.risloo.utils.managers.InitManager;
+import com.majazeh.risloo.utils.managers.JsonManager;
+import com.majazeh.risloo.utils.managers.PaymentManager;
+import com.majazeh.risloo.utils.managers.SnackManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
 import com.majazeh.risloo.views.activities.ActivityMain;
 import com.majazeh.risloo.views.adapters.recycler.main.Create.CreateCheckAdapter;
-import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Schedules;
@@ -44,7 +44,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class FragmentReserveSchedule extends Fragment {
 
@@ -640,63 +639,7 @@ public class FragmentReserveSchedule extends Fragment {
                                 Paymont.getInstance().insertPayment(scheduleModel, paymentModel, data, R.id.fragmentReserveSchedule);
                                 PaymentManager.request(requireActivity(), paymentModel);
                             } else {
-                                if (!responseObject.isNull("errors")) {
-                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
-
-                                    Iterator<String> keys = (errorsObject.keys());
-                                    StringBuilder allErrors = new StringBuilder();
-
-                                    while (keys.hasNext()) {
-                                        String key = keys.next();
-                                        StringBuilder keyErrors = new StringBuilder();
-
-                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                            String error = errorsObject.getJSONArray(key).getString(i);
-
-                                            keyErrors.append(error);
-                                            keyErrors.append("\n");
-
-                                            allErrors.append(error);
-                                            allErrors.append("\n");
-                                        }
-
-                                        switch (key) {
-                                            case "field":
-                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                break;
-                                            case "session_platform":
-                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                break;
-                                            case "client_typ":
-                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                break;
-                                            case "case_id":
-                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                break;
-                                            case "client_id":
-                                                if (type.equals("case") && clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0 && binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                else if (type.equals("center"))
-                                                    ((ActivityMain) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-
-                                                break;
-                                            case "problem":
-                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                break;
-                                            case "nickname":
-                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                break;
-                                            case "description":
-                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                break;
-                                            case "treasurie_id":
-                                                ((ActivityMain) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-                                                break;
-                                        }
-                                    }
-
-                                    SnackManager.showSnackError(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-                                }
+                                ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
