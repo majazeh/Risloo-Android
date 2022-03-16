@@ -82,8 +82,7 @@ public class FragmentCreateRoomUser extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork();
         }).widget(binding.createTextView.getRoot());

@@ -77,8 +77,7 @@ public class FragmentEditTreasury extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork();
         }).widget(binding.editTextView.getRoot());

@@ -88,12 +88,7 @@ public class FragmentCreatePractice extends Fragment {
         CustomClickView.onDelayedListener(() -> IntentManager.document(requireActivity())).widget(binding.fileIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
-            if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
-            if (binding.fileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork();
         }).widget(binding.createTextView.getRoot());

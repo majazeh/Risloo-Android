@@ -115,10 +115,7 @@ public class FragmentCreateTreasury extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
-            if (binding.regionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
