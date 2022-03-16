@@ -98,8 +98,7 @@ public class SheetBulkSample extends BottomSheetDialogFragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.nicknameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork();
         }).widget(binding.entryTextView.getRoot());

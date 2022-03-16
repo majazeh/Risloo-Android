@@ -87,15 +87,13 @@ public class FragmentEditUserTabCrypto extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.publicErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork("public");
         }).widget(binding.publicEditTextView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.privateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork("private");
         }).widget(binding.privateEditTextView.getRoot());

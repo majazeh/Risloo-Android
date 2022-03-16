@@ -140,8 +140,7 @@ public class FragmentAuthPassword extends Fragment {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
                 ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
-                if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((ActivityAuth) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
 
                 doWork();
             }

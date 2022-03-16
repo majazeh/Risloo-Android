@@ -131,8 +131,7 @@ public class FragmentAuthPin extends Fragment {
             if (binding.pinEditText.getRoot().length() == 0) {
                 ((ActivityAuth) requireActivity()).validatoon.emptyValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
             } else {
-                if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((ActivityAuth) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
 
                 doWork("code");
             }
@@ -276,8 +275,7 @@ public class FragmentAuthPin extends Fragment {
         pin = code;
         binding.pinEditText.getRoot().setText(pin);
 
-        if (binding.errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-            ((ActivityAuth) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+        ((ActivityAuth) requireActivity()).validatoon.resetValid(binding);
 
         doWork("code");
     }

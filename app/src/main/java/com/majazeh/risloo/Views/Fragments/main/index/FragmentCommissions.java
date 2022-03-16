@@ -105,8 +105,7 @@ public class FragmentCommissions extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.shareErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.shareErrorLayout.getRoot(), binding.shareErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork();
         }).widget(binding.contributionTextView.getRoot());
@@ -194,42 +193,7 @@ public class FragmentCommissions extends Fragment {
 //            @Override
 //            public void onFailure(String response) {
 //                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            JSONObject responseObject = new JSONObject(response);
-//                            if (!responseObject.isNull("errors")) {
-//                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-//
-//                                Iterator<String> keys = (errorsObject.keys());
-//                                StringBuilder allErrors = new StringBuilder();
-//
-//                                while (keys.hasNext()) {
-//                                    String key = keys.next();
-//                                    StringBuilder keyErrors = new StringBuilder();
-//
-//                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-//                                        String error = errorsObject.getJSONArray(key).getString(i);
-//
-//                                        keyErrors.append(error);
-//                                        keyErrors.append("\n");
-//
-//                                        allErrors.append(error);
-//                                        allErrors.append("\n");
-//                                    }
-//
-//                                    switch (key) {
-//                                        case "commission":
-//                                            ((MainActivity) requireActivity()).validatoon.showValid(binding.shareErrorLayout.getRoot(), binding.shareErrorLayout.errorTextView, keyErrors.substring(0, keyErrors.length() - 1));
-//                                            break;
-//                                    }
-//                                }
-//
-//                                SnackManager.showErrorSnack(requireActivity(), allErrors.substring(0, allErrors.length() - 1));
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
+//                    requireActivity().runOnUiThread(() -> ((ActivityMain) requireActivity()).validatoon.requestValid(response, binding));
 //                }
 //            }
 //        });

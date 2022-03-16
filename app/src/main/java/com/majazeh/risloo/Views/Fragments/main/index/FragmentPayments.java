@@ -170,10 +170,7 @@ public class FragmentPayments extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.treasuryErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView);
-            if (binding.amountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork();
         }).widget(binding.chargeTextView.getRoot());

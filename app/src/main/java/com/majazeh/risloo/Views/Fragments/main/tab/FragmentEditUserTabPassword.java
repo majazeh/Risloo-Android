@@ -212,10 +212,7 @@ public class FragmentEditUserTabPassword extends Fragment {
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            if (Objects.equals(data.get("id"), ((ActivityMain) requireActivity()).singleton.getUserModel().getId()) && binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
-            if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork();
         }).widget(binding.editTextView.getRoot());

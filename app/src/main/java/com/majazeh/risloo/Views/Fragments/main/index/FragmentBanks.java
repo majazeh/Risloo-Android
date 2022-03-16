@@ -323,35 +323,13 @@ public class FragmentBanks extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.ibanErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView);
-            if (binding.amountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
-            if (binding.accountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView);
-            if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
-            if (binding.weekdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView);
-            if (binding.monthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork("create");
         }).widget(binding.createTextView.getRoot());
 
         CustomClickView.onDelayedListener(() -> {
-            if (binding.ibanErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.ibanErrorLayout.getRoot(), binding.ibanErrorLayout.errorTextView);
-            if (binding.amountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
-            if (binding.accountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.accountErrorLayout.getRoot(), binding.accountErrorLayout.errorTextView);
-            if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
-            if (binding.weekdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.weekdayErrorLayout.getRoot(), binding.weekdayErrorLayout.errorTextView);
-            if (binding.monthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((ActivityMain) requireActivity()).validatoon.hideValid(binding.monthdayErrorLayout.getRoot(), binding.monthdayErrorLayout.errorTextView);
+            ((ActivityMain) requireActivity()).validatoon.resetValid(binding);
 
             doWork("settle");
         }).widget(binding.settleTextView.getRoot());

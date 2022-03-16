@@ -15,7 +15,9 @@ import com.majazeh.risloo.databinding.FragmentAuthPasswordChangeBinding;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordRecoverBinding;
 import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
 import com.majazeh.risloo.databinding.FragmentAuthRegisterBinding;
+import com.majazeh.risloo.databinding.FragmentAuthSerialBinding;
 import com.majazeh.risloo.databinding.FragmentBanksBinding;
+import com.majazeh.risloo.databinding.FragmentCommissionsBinding;
 import com.majazeh.risloo.databinding.FragmentCreateBillBinding;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
 import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
@@ -37,6 +39,7 @@ import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 import com.majazeh.risloo.databinding.FragmentEditPlatformBinding;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
 import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserTabCryptoBinding;
 import com.majazeh.risloo.databinding.FragmentEditUserTabPasswordBinding;
 import com.majazeh.risloo.databinding.FragmentEditUserTabPersonalBinding;
 import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
@@ -492,6 +495,11 @@ public class Validatoon {
                                 break;
                         }
 
+                    } else if (binding instanceof FragmentCommissionsBinding) {
+                        if (key.equals("commission")) {
+                            showValid(((FragmentCommissionsBinding) binding).shareErrorLayout.getRoot(), ((FragmentCommissionsBinding) binding).shareErrorLayout.errorTextView, value);
+                        }
+
                     } else if (binding instanceof FragmentPaymentsBinding) {
                         switch (key) {
                             case "treasury_id":
@@ -585,6 +593,159 @@ public class Validatoon {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void resetValid(ViewBinding binding) {
+
+        // -------------------- Auth
+
+        if (binding instanceof FragmentAuthLoginBinding) {
+            if (((FragmentAuthLoginBinding) binding).errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentAuthLoginBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthLoginBinding) binding).errorIncludeLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentAuthPasswordBinding) {
+            if (((FragmentAuthPasswordBinding) binding).errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentAuthPasswordBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordBinding) binding).errorIncludeLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentAuthPasswordChangeBinding) {
+            if (((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordChangeBinding) binding).errorIncludeLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentAuthPasswordRecoverBinding) {
+            if (((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPasswordRecoverBinding) binding).errorIncludeLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentAuthPinBinding) {
+            if (((FragmentAuthPinBinding) binding).errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentAuthPinBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthPinBinding) binding).errorIncludeLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentAuthRegisterBinding) {
+            if (((FragmentAuthRegisterBinding) binding).errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentAuthRegisterBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthRegisterBinding) binding).errorIncludeLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentAuthSerialBinding) {
+            if (((FragmentAuthSerialBinding) binding).errorIncludeLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentAuthSerialBinding) binding).errorIncludeLayout.getRoot(), ((FragmentAuthSerialBinding) binding).errorIncludeLayout.errorTextView);
+            }
+
+        // -------------------- Create
+
+
+
+        // -------------------- Edit
+
+
+
+        // -------------------- Index
+
+        } else if (binding instanceof FragmentBanksBinding) {
+            if (((FragmentBanksBinding) binding).ibanErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentBanksBinding) binding).ibanErrorLayout.getRoot(), ((FragmentBanksBinding) binding).ibanErrorLayout.errorTextView);
+            }
+            if (((FragmentBanksBinding) binding).amountErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentBanksBinding) binding).amountErrorLayout.getRoot(), ((FragmentBanksBinding) binding).amountErrorLayout.errorTextView);
+            }
+            if (((FragmentBanksBinding) binding).accountErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentBanksBinding) binding).accountErrorLayout.getRoot(), ((FragmentBanksBinding) binding).accountErrorLayout.errorTextView);
+            }
+            if (((FragmentBanksBinding) binding).typeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentBanksBinding) binding).typeErrorLayout.getRoot(), ((FragmentBanksBinding) binding).typeErrorLayout.errorTextView);
+            }
+            if (((FragmentBanksBinding) binding).weekdayErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentBanksBinding) binding).weekdayErrorLayout.getRoot(), ((FragmentBanksBinding) binding).weekdayErrorLayout.errorTextView);
+            }
+            if (((FragmentBanksBinding) binding).monthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentBanksBinding) binding).monthdayErrorLayout.getRoot(), ((FragmentBanksBinding) binding).monthdayErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentCommissionsBinding) {
+            if (((FragmentCommissionsBinding) binding).shareErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentCommissionsBinding) binding).shareErrorLayout.getRoot(), ((FragmentCommissionsBinding) binding).shareErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentPaymentsBinding) {
+            if (((FragmentPaymentsBinding) binding).treasuryErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentPaymentsBinding) binding).treasuryErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).treasuryErrorLayout.errorTextView);
+            }
+            if (((FragmentPaymentsBinding) binding).amountErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentPaymentsBinding) binding).amountErrorLayout.getRoot(), ((FragmentPaymentsBinding) binding).amountErrorLayout.errorTextView);
+            }
+
+        // -------------------- Tab
+
+        } else if (binding instanceof FragmentEditCenterTabDetailBinding) {
+            if (((FragmentEditCenterTabDetailBinding) binding).managerErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditCenterTabDetailBinding) binding).managerErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).managerErrorLayout.errorTextView);
+            }
+            if (((FragmentEditCenterTabDetailBinding) binding).titleErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditCenterTabDetailBinding) binding).titleErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).titleErrorLayout.errorTextView);
+            }
+            if (((FragmentEditCenterTabDetailBinding) binding).addressErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditCenterTabDetailBinding) binding).addressErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).addressErrorLayout.errorTextView);
+            }
+            if (((FragmentEditCenterTabDetailBinding) binding).descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditCenterTabDetailBinding) binding).descriptionErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).descriptionErrorLayout.errorTextView);
+            }
+            if (((FragmentEditCenterTabDetailBinding) binding).phonesErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditCenterTabDetailBinding) binding).phonesErrorLayout.getRoot(), ((FragmentEditCenterTabDetailBinding) binding).phonesErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentEditUserTabCryptoBinding) {
+            if (((FragmentEditUserTabCryptoBinding) binding).publicErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabCryptoBinding) binding).publicErrorLayout.getRoot(), ((FragmentEditUserTabCryptoBinding) binding).publicErrorLayout.errorTextView);
+            }
+            if (((FragmentEditUserTabCryptoBinding) binding).privateErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabCryptoBinding) binding).privateErrorLayout.getRoot(), ((FragmentEditUserTabCryptoBinding) binding).privateErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentEditUserTabPasswordBinding) {
+            if (((FragmentEditUserTabPasswordBinding) binding).currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPasswordBinding) binding).currentPasswordErrorLayout.getRoot(), ((FragmentEditUserTabPasswordBinding) binding).currentPasswordErrorLayout.errorTextView);
+            }
+            if (((FragmentEditUserTabPasswordBinding) binding).newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPasswordBinding) binding).newPasswordErrorLayout.getRoot(), ((FragmentEditUserTabPasswordBinding) binding).newPasswordErrorLayout.errorTextView);
+            }
+
+        } else if (binding instanceof FragmentEditUserTabPersonalBinding) {
+            if (((FragmentEditUserTabPersonalBinding) binding).nameErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPersonalBinding) binding).nameErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).nameErrorLayout.errorTextView);
+            }
+            if (((FragmentEditUserTabPersonalBinding) binding).mobileErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPersonalBinding) binding).mobileErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).mobileErrorLayout.errorTextView);
+            }
+            if (((FragmentEditUserTabPersonalBinding) binding).emailErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPersonalBinding) binding).emailErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).emailErrorLayout.errorTextView);
+            }
+            if (((FragmentEditUserTabPersonalBinding) binding).birthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPersonalBinding) binding).birthdayErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).birthdayErrorLayout.errorTextView);
+            }
+            if (((FragmentEditUserTabPersonalBinding) binding).statusErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPersonalBinding) binding).statusErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).statusErrorLayout.errorTextView);
+            }
+            if (((FragmentEditUserTabPersonalBinding) binding).typeErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPersonalBinding) binding).typeErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).typeErrorLayout.errorTextView);
+            }
+            if (((FragmentEditUserTabPersonalBinding) binding).genderErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((FragmentEditUserTabPersonalBinding) binding).genderErrorLayout.getRoot(), ((FragmentEditUserTabPersonalBinding) binding).genderErrorLayout.errorTextView);
+            }
+
+        // -------------------- Sheet
+
+        } else if (binding instanceof SheetBulkSampleBinding) {
+            if (((SheetBulkSampleBinding) binding).nicknameErrorLayout.getRoot().getVisibility() == View.VISIBLE) {
+                hideValid(((SheetBulkSampleBinding) binding).nicknameErrorLayout.getRoot(), ((SheetBulkSampleBinding) binding).nicknameErrorLayout.errorTextView);
+            }
+
+        }
+
+        // -------------------- End
+
     }
 
 }
