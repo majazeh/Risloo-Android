@@ -598,15 +598,205 @@ public class Validatoon {
                         }
 
                     }
-                }
 
-                // -------------------- End
+                    // -------------------- End
+
+                }
 
                 SnackManager.showSnackError(activity, allErrors.substring(0, allErrors.length() - 1));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void requestValid2(String key, String value, ViewBinding binding) {
+
+        // -------------------- Tab
+
+        if (binding instanceof FragmentCreateScheduleTabPaymentBinding) {
+            if (key.equals("payment_status")) {
+                showValid(((FragmentCreateScheduleTabPaymentBinding) binding).paymentErrorLayout.getRoot(), ((FragmentCreateScheduleTabPaymentBinding) binding).paymentErrorLayout.errorTextView, value);
+            }
+
+        } else if (binding instanceof FragmentCreateScheduleTabPlatformBinding) {
+            switch (key) {
+                case "platforms":
+                    showValid(((FragmentCreateScheduleTabPlatformBinding) binding).platformsErrorLayout.getRoot(), ((FragmentCreateScheduleTabPlatformBinding) binding).platformsErrorLayout.errorTextView, value);
+                    break;
+                case "pin_platform":
+                    showValid(((FragmentCreateScheduleTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot(), ((FragmentCreateScheduleTabPlatformBinding) binding).pinPlatformErrorLayout.errorTextView, value);
+                    break;
+                case "identifier_platform":
+                    showValid(((FragmentCreateScheduleTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot(), ((FragmentCreateScheduleTabPlatformBinding) binding).identifierPlatformErrorLayout.errorTextView, value);
+                    break;
+            }
+
+        } else if (binding instanceof FragmentCreateScheduleTabReferenceBinding) {
+            switch (key) {
+                case "selection_type":
+                    showValid(((FragmentCreateScheduleTabReferenceBinding) binding).selectionErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).selectionErrorLayout.errorTextView, value);
+                    break;
+                case "clients_type":
+                    showValid(((FragmentCreateScheduleTabReferenceBinding) binding).typeErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).typeErrorLayout.errorTextView, value);
+                    break;
+                case "case_id":
+                    showValid(((FragmentCreateScheduleTabReferenceBinding) binding).caseErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).caseErrorLayout.errorTextView, value);
+                    break;
+                case "group_session":
+                    showValid(((FragmentCreateScheduleTabReferenceBinding) binding).bulkSessionErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).bulkSessionErrorLayout.errorTextView, value);
+                    break;
+                case "clients_number":
+                    showValid(((FragmentCreateScheduleTabReferenceBinding) binding).countErrorLayout.getRoot(), ((FragmentCreateScheduleTabReferenceBinding) binding).countErrorLayout.errorTextView, value);
+                    break;
+            }
+
+        } else if (binding instanceof FragmentCreateScheduleTabSessionBinding) {
+
+
+        } else if (binding instanceof FragmentCreateScheduleTabTimeBinding) {
+            switch (key) {
+                case "time":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).startTimeErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).startTimeErrorLayout.errorTextView, value);
+                    break;
+                case "duration":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).durationErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).durationErrorLayout.errorTextView, value);
+                    break;
+                case "date_type":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).dateTypeErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).dateTypeErrorLayout.errorTextView, value);
+                    break;
+                case "date":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).specifiedDateErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).specifiedDateErrorLayout.errorTextView, value);
+                    break;
+                case "week_days":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).patternDaysErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).patternDaysErrorLayout.errorTextView, value);
+                    break;
+                case "repeat_status":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).patternTypeErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).patternTypeErrorLayout.errorTextView, value);
+                    break;
+                case "repeat":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).repeatWeeksErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).repeatWeeksErrorLayout.errorTextView, value);
+                    break;
+                case "repeat_from":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).periodStartDateErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).periodStartDateErrorLayout.errorTextView, value);
+                    break;
+                case "repeat_to":
+                    showValid(((FragmentCreateScheduleTabTimeBinding) binding).periodEndDateErrorLayout.getRoot(), ((FragmentCreateScheduleTabTimeBinding) binding).periodEndDateErrorLayout.errorTextView, value);
+                    break;
+            }
+
+        } else if (binding instanceof FragmentCreateSessionTabPaymentBinding) {
+            if (key.equals("payment_status")) {
+                showValid(((FragmentCreateSessionTabPaymentBinding) binding).paymentErrorLayout.getRoot(), ((FragmentCreateSessionTabPaymentBinding) binding).paymentErrorLayout.errorTextView, value);
+            }
+
+        } else if (binding instanceof FragmentCreateSessionTabPlatformBinding) {
+            switch (key) {
+                case "platforms":
+                    showValid(((FragmentCreateSessionTabPlatformBinding) binding).platformsErrorLayout.getRoot(), ((FragmentCreateSessionTabPlatformBinding) binding).platformsErrorLayout.errorTextView, value);
+                    break;
+                case "pin_platform":
+                    showValid(((FragmentCreateSessionTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot(), ((FragmentCreateSessionTabPlatformBinding) binding).pinPlatformErrorLayout.errorTextView, value);
+                    break;
+                case "identifier_platform":
+                    showValid(((FragmentCreateSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot(), ((FragmentCreateSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.errorTextView, value);
+                    break;
+            }
+
+        } else if (binding instanceof FragmentCreateSessionTabSessionBinding) {
+
+
+        } else if (binding instanceof FragmentCreateSessionTabTimeBinding) {
+            switch (key) {
+                case "time":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).startTimeErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).startTimeErrorLayout.errorTextView, value);
+                    break;
+                case "duration":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).durationErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).durationErrorLayout.errorTextView, value);
+                    break;
+                case "date_type":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).dateTypeErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).dateTypeErrorLayout.errorTextView, value);
+                    break;
+                case "date":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).specifiedDateErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).specifiedDateErrorLayout.errorTextView, value);
+                    break;
+                case "week_days":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).patternDaysErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).patternDaysErrorLayout.errorTextView, value);
+                    break;
+                case "repeat_status":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).patternTypeErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).patternTypeErrorLayout.errorTextView, value);
+                    break;
+                case "repeat":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).repeatWeeksErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).repeatWeeksErrorLayout.errorTextView, value);
+                    break;
+                case "repeat_from":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).periodStartDateErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).periodStartDateErrorLayout.errorTextView, value);
+                    break;
+                case "repeat_to":
+                    showValid(((FragmentCreateSessionTabTimeBinding) binding).periodEndDateErrorLayout.getRoot(), ((FragmentCreateSessionTabTimeBinding) binding).periodEndDateErrorLayout.errorTextView, value);
+                    break;
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabPaymentBinding) {
+            if (key.equals("payment_status")) {
+                showValid(((FragmentEditSessionTabPaymentBinding) binding).paymentErrorLayout.getRoot(), ((FragmentEditSessionTabPaymentBinding) binding).paymentErrorLayout.errorTextView, value);
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabPlatformBinding) {
+            switch (key) {
+                case "platforms":
+                    showValid(((FragmentEditSessionTabPlatformBinding) binding).platformsErrorLayout.getRoot(), ((FragmentEditSessionTabPlatformBinding) binding).platformsErrorLayout.errorTextView, value);
+                    break;
+                case "pin_platform":
+                    showValid(((FragmentEditSessionTabPlatformBinding) binding).pinPlatformErrorLayout.getRoot(), ((FragmentEditSessionTabPlatformBinding) binding).pinPlatformErrorLayout.errorTextView, value);
+                    break;
+                case "identifier_platform":
+                    showValid(((FragmentEditSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.getRoot(), ((FragmentEditSessionTabPlatformBinding) binding).identifierPlatformErrorLayout.errorTextView, value);
+                    break;
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabReferenceBinding) {
+            switch (key) {
+                case "selection_type":
+                    showValid(((FragmentEditSessionTabReferenceBinding) binding).selectionErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).selectionErrorLayout.errorTextView, value);
+                    break;
+                case "clients_type":
+                    showValid(((FragmentEditSessionTabReferenceBinding) binding).typeErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).typeErrorLayout.errorTextView, value);
+                    break;
+                case "case_id":
+                    showValid(((FragmentEditSessionTabReferenceBinding) binding).caseErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).caseErrorLayout.errorTextView, value);
+                    break;
+                case "problem":
+                    showValid(((FragmentEditSessionTabReferenceBinding) binding).problemErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).problemErrorLayout.errorTextView, value);
+                    break;
+                case "group_session":
+                    showValid(((FragmentEditSessionTabReferenceBinding) binding).bulkSessionErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).bulkSessionErrorLayout.errorTextView, value);
+                    break;
+                case "clients_number":
+                    showValid(((FragmentEditSessionTabReferenceBinding) binding).countErrorLayout.getRoot(), ((FragmentEditSessionTabReferenceBinding) binding).countErrorLayout.errorTextView, value);
+                    break;
+            }
+
+        } else if (binding instanceof FragmentEditSessionTabSessionBinding) {
+
+
+        } else if (binding instanceof FragmentEditSessionTabTimeBinding) {
+            switch (key) {
+                case "time":
+                    showValid(((FragmentEditSessionTabTimeBinding) binding).startTimeErrorLayout.getRoot(), ((FragmentEditSessionTabTimeBinding) binding).startTimeErrorLayout.errorTextView, value);
+                    break;
+                case "duration":
+                    showValid(((FragmentEditSessionTabTimeBinding) binding).durationErrorLayout.getRoot(), ((FragmentEditSessionTabTimeBinding) binding).durationErrorLayout.errorTextView, value);
+                    break;
+                case "date":
+                    showValid(((FragmentEditSessionTabTimeBinding) binding).startDateErrorLayout.getRoot(), ((FragmentEditSessionTabTimeBinding) binding).startDateErrorLayout.errorTextView, value);
+                    break;
+            }
+
+        }
+
+        // -------------------- End
+
     }
 
     public void resetValid(ViewBinding binding) {

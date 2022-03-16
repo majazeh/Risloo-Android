@@ -104,17 +104,7 @@ public class FragmentCreateSessionTabPlatform extends Fragment {
     }
 
     public void showValid(String key, String validation) {
-        switch (key) {
-            case "platforms":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.platformsErrorLayout.getRoot(), binding.platformsErrorLayout.errorTextView, validation);
-                break;
-            case "pin_platform":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.pinPlatformErrorLayout.getRoot(), binding.pinPlatformErrorLayout.errorTextView, validation);
-                break;
-            case "identifier_platform":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.identifierPlatformErrorLayout.getRoot(), binding.identifierPlatformErrorLayout.errorTextView, validation);
-                break;
-        }
+        ((ActivityMain) requireActivity()).validatoon.requestValid2(key, validation, binding);
     }
 
     @Override

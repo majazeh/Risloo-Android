@@ -117,11 +117,7 @@ public class FragmentEditSessionTabPayment extends Fragment {
     }
 
     public void showValid(String key, String validation) {
-        switch (key) {
-            case "payment_status":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView, validation);
-                break;
-        }
+        ((ActivityMain) requireActivity()).validatoon.requestValid2(key, validation, binding);
     }
 
     @Override

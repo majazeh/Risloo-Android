@@ -149,17 +149,7 @@ public class FragmentEditSessionTabTime extends Fragment {
     }
 
     public void showValid(String key, String validation) {
-        switch (key) {
-            case "time":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, validation);
-                break;
-            case "duration":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, validation);
-                break;
-            case "date":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.startDateErrorLayout.getRoot(), binding.startDateErrorLayout.errorTextView, validation);
-                break;
-        }
+        ((ActivityMain) requireActivity()).validatoon.requestValid2(key, validation, binding);
     }
 
     @Override

@@ -377,26 +377,7 @@ public class FragmentEditSessionTabReference extends Fragment {
     }
 
     public void showValid(String key, String validation) {
-        switch (key) {
-            case "selection_type":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView, validation);
-                break;
-            case "clients_type":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
-                break;
-            case "case_id":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
-                break;
-            case "problem":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
-                break;
-            case "group_session":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.bulkSessionErrorLayout.getRoot(), binding.bulkSessionErrorLayout.errorTextView, validation);
-                break;
-            case "clients_number":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.countErrorLayout.getRoot(), binding.countErrorLayout.errorTextView, validation);
-                break;
-        }
+        ((ActivityMain) requireActivity()).validatoon.requestValid2(key, validation, binding);
     }
 
     @Override

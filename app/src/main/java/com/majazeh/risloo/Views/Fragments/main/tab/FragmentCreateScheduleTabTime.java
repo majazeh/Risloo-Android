@@ -317,35 +317,7 @@ public class FragmentCreateScheduleTabTime extends Fragment {
     }
 
     public void showValid(String key, String validation) {
-        switch (key) {
-            case "time":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, validation);
-                break;
-            case "duration":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, validation);
-                break;
-            case "date_type":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.dateTypeErrorLayout.getRoot(), binding.dateTypeErrorLayout.errorTextView, validation);
-                break;
-            case "date":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.specifiedDateErrorLayout.getRoot(), binding.specifiedDateErrorLayout.errorTextView, validation);
-                break;
-            case "week_days":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.patternDaysErrorLayout.getRoot(), binding.patternDaysErrorLayout.errorTextView, validation);
-                break;
-            case "repeat_status":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.patternTypeErrorLayout.getRoot(), binding.patternTypeErrorLayout.errorTextView, validation);
-                break;
-            case "repeat":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.repeatWeeksErrorLayout.getRoot(), binding.repeatWeeksErrorLayout.errorTextView, validation);
-                break;
-            case "repeat_from":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.periodStartDateErrorLayout.getRoot(), binding.periodStartDateErrorLayout.errorTextView, validation);
-                break;
-            case "repeat_to":
-                ((ActivityMain) requireActivity()).validatoon.showValid(binding.periodEndDateErrorLayout.getRoot(), binding.periodEndDateErrorLayout.errorTextView, validation);
-                break;
-        }
+        ((ActivityMain) requireActivity()).validatoon.requestValid2(key, validation, binding);
     }
 
     @Override
