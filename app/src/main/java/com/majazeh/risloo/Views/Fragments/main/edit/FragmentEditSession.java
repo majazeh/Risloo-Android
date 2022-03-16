@@ -199,6 +199,8 @@ public class FragmentEditSession extends Fragment {
                                         allErrors.append("\n");
                                     }
 
+                                    String validation = keyErrors.substring(0, keyErrors.length() - 1);
+
                                     switch (key) {
 
                                         // Time Data
@@ -206,7 +208,7 @@ public class FragmentEditSession extends Fragment {
                                         case "duration":
                                         case "date":
                                             if (time instanceof FragmentEditSessionTabTime)
-                                                ((FragmentEditSessionTabTime) time).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentEditSessionTabTime) time).showValid(key, validation);
 
                                             break;
 
@@ -218,7 +220,7 @@ public class FragmentEditSession extends Fragment {
                                         case "group_session":
                                         case "clients_number":
                                             if (!hasCase && reference instanceof FragmentEditSessionTabReference)
-                                                ((FragmentEditSessionTabReference) reference).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentEditSessionTabReference) reference).showValid(key, validation);
 
                                             break;
 
@@ -231,7 +233,7 @@ public class FragmentEditSession extends Fragment {
                                         case "description":
                                         case "client_reminder":
                                             if (session instanceof FragmentEditSessionTabSession)
-                                                ((FragmentEditSessionTabSession) session).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentEditSessionTabSession) session).showValid(key, validation);
 
                                             break;
 
@@ -240,14 +242,14 @@ public class FragmentEditSession extends Fragment {
                                         case "pin_platform":
                                         case "identifier_platform":
                                             if (platform instanceof FragmentEditSessionTabPlatform)
-                                                ((FragmentEditSessionTabPlatform) platform).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentEditSessionTabPlatform) platform).showValid(key, validation);
 
                                             break;
 
                                         // Payment Data
                                         case "payment_status":
                                             if (payment instanceof FragmentEditSessionTabPayment)
-                                                ((FragmentEditSessionTabPayment) payment).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentEditSessionTabPayment) payment).showValid(key, validation);
 
                                             break;
                                     }

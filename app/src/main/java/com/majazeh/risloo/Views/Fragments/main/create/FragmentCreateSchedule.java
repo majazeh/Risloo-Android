@@ -199,6 +199,8 @@ public class FragmentCreateSchedule extends Fragment {
                                         allErrors.append("\n");
                                     }
 
+                                    String validation = keyErrors.substring(0, keyErrors.length() - 1);
+
                                     switch (key) {
 
                                         // Time Data
@@ -212,7 +214,7 @@ public class FragmentCreateSchedule extends Fragment {
                                         case "repeat_from":
                                         case "repeat_to":
                                             if (time instanceof FragmentCreateScheduleTabTime)
-                                                ((FragmentCreateScheduleTabTime) time).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateScheduleTabTime) time).showValid(key, validation);
 
                                             break;
 
@@ -223,7 +225,7 @@ public class FragmentCreateSchedule extends Fragment {
                                         case "group_session":
                                         case "clients_number":
                                             if (reference instanceof FragmentCreateScheduleTabReference)
-                                                ((FragmentCreateScheduleTabReference) reference).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateScheduleTabReference) reference).showValid(key, validation);
 
                                             break;
 
@@ -237,7 +239,7 @@ public class FragmentCreateSchedule extends Fragment {
                                         case "description":
                                         case "client_reminder":
                                             if (session instanceof FragmentCreateScheduleTabSession)
-                                                ((FragmentCreateScheduleTabSession) session).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateScheduleTabSession) session).showValid(key, validation);
 
                                             break;
 
@@ -246,14 +248,14 @@ public class FragmentCreateSchedule extends Fragment {
                                         case "pin_platform":
                                         case "identifier_platform":
                                             if (platform instanceof FragmentCreateScheduleTabPlatform)
-                                                ((FragmentCreateScheduleTabPlatform) platform).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateScheduleTabPlatform) platform).showValid(key, validation);
 
                                             break;
 
                                         // Payment Data
                                         case "payment_status":
                                             if (payment instanceof FragmentCreateScheduleTabPayment)
-                                                ((FragmentCreateScheduleTabPayment) payment).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateScheduleTabPayment) payment).showValid(key, validation);
 
                                             break;
                                     }

@@ -194,6 +194,8 @@ public class FragmentCreateSession extends Fragment {
                                         allErrors.append("\n");
                                     }
 
+                                    String validation = keyErrors.substring(0, keyErrors.length() - 1);
+
                                     switch (key) {
 
                                         // Time Data
@@ -207,7 +209,7 @@ public class FragmentCreateSession extends Fragment {
                                         case "repeat_from":
                                         case "repeat_to":
                                             if (time instanceof FragmentCreateSessionTabTime)
-                                                ((FragmentCreateSessionTabTime) time).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateSessionTabTime) time).showValid(key, validation);
 
                                             break;
 
@@ -221,7 +223,7 @@ public class FragmentCreateSession extends Fragment {
                                         case "description":
                                         case "client_reminder":
                                             if (session instanceof FragmentCreateSessionTabSession)
-                                                ((FragmentCreateSessionTabSession) session).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateSessionTabSession) session).showValid(key, validation);
 
                                             break;
 
@@ -230,14 +232,14 @@ public class FragmentCreateSession extends Fragment {
                                         case "pin_platform":
                                         case "identifier_platform":
                                             if (platform instanceof FragmentCreateSessionTabPlatform)
-                                                ((FragmentCreateSessionTabPlatform) platform).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateSessionTabPlatform) platform).showValid(key, validation);
 
                                             break;
 
                                         // Payment Data
                                         case "payment_status":
                                             if (payment instanceof FragmentCreateSessionTabPayment)
-                                                ((FragmentCreateSessionTabPayment) payment).showValid(key, keyErrors.substring(0, keyErrors.length() - 1));
+                                                ((FragmentCreateSessionTabPayment) payment).showValid(key, validation);
 
                                             break;
                                     }
