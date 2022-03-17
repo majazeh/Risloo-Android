@@ -4,14 +4,12 @@ import static android.content.RestrictionsManager.RESULT_ERROR;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,13 +33,13 @@ import com.majazeh.risloo.utils.entities.Singleton;
 import com.majazeh.risloo.utils.entities.Validatoon;
 import com.majazeh.risloo.utils.managers.BalanceManager;
 import com.majazeh.risloo.utils.managers.DialogManager;
+import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.InitManager;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.managers.ListManager;
 import com.majazeh.risloo.utils.managers.PaymentManager;
 import com.majazeh.risloo.utils.managers.SheetManager;
 import com.majazeh.risloo.utils.managers.SnackManager;
-import com.majazeh.risloo.utils.managers.DropdownManager;
 import com.majazeh.risloo.utils.managers.StringManager;
 import com.majazeh.risloo.utils.managers.ToastManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
@@ -499,18 +497,9 @@ public class ActivityMain extends AppCompatActivity {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            View view = getCurrentFocus();
-            if (view instanceof EditText) {
-                Rect outRect = new Rect();
-                view.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    inputon.clear();
-                }
-            }
-        }
-        return super.dispatchTouchEvent(event);
+    public boolean dispatchTouchEvent(MotionEvent motionEvent) {
+        inputon.dispatch(motionEvent);
+        return super.dispatchTouchEvent(motionEvent);
     }
 
     @Override

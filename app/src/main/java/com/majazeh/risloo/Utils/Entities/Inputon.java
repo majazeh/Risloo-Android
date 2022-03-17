@@ -1,7 +1,10 @@
 package com.majazeh.risloo.utils.entities;
 
 import android.app.Activity;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -46,6 +49,24 @@ public class Inputon {
             editText.setBackground(background);
 
             hideKeyboard(activity, editText);
+        }
+    }
+
+    public void dispatch(MotionEvent motionEvent) {
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = activity.getCurrentFocus();
+
+            if (view instanceof EditText) {
+                Rect rect = new Rect();
+                view.getGlobalVisibleRect(rect);
+
+                int rawX = (int) motionEvent.getRawX();
+                int rawY = (int) motionEvent.getRawY();
+
+                if (!rect.contains(rawX, rawY)) {
+                    clear();
+                }
+            }
         }
     }
 

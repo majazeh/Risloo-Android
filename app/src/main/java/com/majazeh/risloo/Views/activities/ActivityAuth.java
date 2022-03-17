@@ -1,16 +1,15 @@
 package com.majazeh.risloo.views.activities;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.ActivityAuthBinding;
 import com.majazeh.risloo.utils.configs.ExtendException;
 import com.majazeh.risloo.utils.entities.Decoraton;
 import com.majazeh.risloo.utils.entities.Inputon;
@@ -19,7 +18,6 @@ import com.majazeh.risloo.utils.entities.Singleton;
 import com.majazeh.risloo.utils.entities.Validatoon;
 import com.majazeh.risloo.utils.managers.IntentManager;
 import com.majazeh.risloo.utils.widgets.CustomClickView;
-import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;
 
@@ -98,18 +96,9 @@ public class ActivityAuth extends AppCompatActivity {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            View view = getCurrentFocus();
-            if (view instanceof EditText) {
-                Rect outRect = new Rect();
-                view.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    inputon.clear();
-                }
-            }
-        }
-        return super.dispatchTouchEvent(event);
+    public boolean dispatchTouchEvent(MotionEvent motionEvent) {
+        inputon.dispatch(motionEvent);
+        return super.dispatchTouchEvent(motionEvent);
     }
 
     @Override
