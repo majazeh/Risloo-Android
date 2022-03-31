@@ -117,7 +117,7 @@ public class SampleModel extends TypeModel {
                     members.add(new UserModel(jsonObject.getJSONArray("members").getJSONObject(i)));
             }
 
-            if (!jsonObject.isNull("chain") && jsonObject.getJSONArray("chain").length() != 0) {
+            if (!jsonObject.isNull("chain")) {
                 if (jsonObject.get("chain").getClass().getName().equals("org.json.JSONObject")) {
                     JSONObject chain = jsonObject.getJSONObject("chain");
 

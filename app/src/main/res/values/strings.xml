@@ -126,6 +126,7 @@
     <string name="ToastPermissionCameraException">ریسلو دسترسی به دوربین ندارد.</string>
 
     <string name="ToastResultDocumentException">خطا در انتخاب فایل! لطفا دوباره تلاش کنید.</string>
+    <string name="ToastResultSendToException">خطا در ارسال فایل! لطفا دوباره تلاش کنید.</string>
     <string name="ToastResultGalleryException">خطا در انتخاب تصویر! لطفا دوباره تلاش کنید.</string>
     <string name="ToastResultCameraException">خطا در گرفتن تصویر! لطفا دوباره تلاش کنید.</string>
     <string name="ToastResultCropException">خطا در کراپ تصویر! لطفا دوباره تلاش کنید.</string>
