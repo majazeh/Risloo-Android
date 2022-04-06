@@ -48,7 +48,7 @@ dependencies {
     ---------- SquareUp Sdk's ----------
     */
 
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2' // SquareUp Okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.6' // SquareUp Okhttp3
 
     /*
     ---------- Apollo Sdk's ----------
@@ -60,7 +60,7 @@ dependencies {
     ---------- Jetbrains Sdk's ----------
     */
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2' // Jetbrains Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1-native-mt' // Jetbrains Coroutines
 
     /*
     ---------- Unit Sdk's ----------
