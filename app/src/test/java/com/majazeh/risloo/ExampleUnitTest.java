@@ -1,32 +1,30 @@
 package com.majazeh.risloo;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
-
+@RunWith(JUnit4.class)
 public class ExampleUnitTest {
 
-    private final Calculator underTest = new Calculator();
-
     @Test
-    public void itShuoldAddTwoNumbers() {
+    public void testAddFunc() {
 
-        // Given
+        // Give
         int numberOne = 20;
         int numberTwo = 30;
 
         // When
-        int result = underTest.add(numberOne, numberTwo);
+        Calculator calculator = new Calculator();
+        int result = calculator.add(numberOne, numberTwo);
 
         // Then
-        int expectedNumber = 50;
-        assertEquals(expectedNumber, result);
+        int expected = 50;
+
+        // Assert
+        assertThat(result).isEqualTo(expected);
     }
 
     public static class Calculator {
