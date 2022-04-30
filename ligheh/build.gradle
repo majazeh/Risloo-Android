@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     buildToolsVersion "31.0.0"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,7 +48,7 @@ dependencies {
     ---------- SquareUp Sdk's ----------
     */
 
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.6' // SquareUp Okhttp3
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.7' // SquareUp Okhttp3
 
     /*
     ---------- Apollo Sdk's ----------
