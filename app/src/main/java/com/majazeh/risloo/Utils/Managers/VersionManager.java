@@ -1,6 +1,6 @@
 package com.majazeh.risloo.utils.managers;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
@@ -12,9 +12,9 @@ public class VersionManager {
     ---------- Func's ----------
     */
 
-    public static int versionCode(Activity activity) {
+    public static int versionCode(Context context) {
         try {
-            PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
 
             return packageInfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
@@ -24,9 +24,9 @@ public class VersionManager {
         return -1;
     }
 
-    public static String versionName(Activity activity) {
+    public static String versionName(Context context) {
         try {
-            PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
 
             return packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
@@ -36,9 +36,9 @@ public class VersionManager {
         return "";
     }
 
-    public static String versionNamePrefix(Activity activity) {
+    public static String versionNamePrefix(Context context) {
         try {
-            PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
 
             if (packageInfo.versionName.contains("-"))
                 return StringManager.prefix(packageInfo.versionName, '-');
@@ -52,14 +52,14 @@ public class VersionManager {
         return "";
     }
 
-    public static String versionNameDesc(Activity activity) {
+    public static String versionNameDesc(Context context) {
         try {
-            PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
 
             if (packageInfo.versionName.contains("-"))
-                return activity.getResources().getString(R.string.AppVersion) + " " + StringManager.prefix(packageInfo.versionName, '-');
+                return context.getResources().getString(R.string.AppVersion) + " " + StringManager.prefix(packageInfo.versionName, '-');
             else
-                return activity.getResources().getString(R.string.AppVersion) + " " + packageInfo.versionName;
+                return context.getResources().getString(R.string.AppVersion) + " " + packageInfo.versionName;
 
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

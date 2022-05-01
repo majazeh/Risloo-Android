@@ -4,8 +4,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +16,10 @@ public class ExampleInstrumentedTest {
     @Test
     public void testAppContext() {
 
+        // Give
+        Context context = ApplicationProvider.getApplicationContext();
+
         // When
-        Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
         String result = context.getPackageName();
 
         // Then
