@@ -1,4 +1,4 @@
-package com.majazeh.risloo.utils.configs;
+package com.majazeh.risloo.Utils.configs;
 
 import android.app.Application;
 
@@ -12,11 +12,11 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        APIRequest.ExternalAPIEvents = ExtendEvent.class;
-        Exceptioner.External = ExtendException.class;
+        APIRequest.ExternalAPIEvents = com.majazeh.risloo.utils.configs.ExtendEvent.class;
+        Exceptioner.External = com.majazeh.risloo.utils.configs.ExtendException.class;
 
         if (BuildConfig.BUILD_TYPE.equals("debug"))
-            APIRequest.baseUrl = "https://bapi.risloo.ir/api/";
+            APIRequest.baseUrl = "https://dapi.risloo.ir/api/";
         else
             APIRequest.baseUrl = "https://api.risloo.ir/api/";
     }

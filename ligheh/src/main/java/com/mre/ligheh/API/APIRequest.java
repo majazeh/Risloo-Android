@@ -19,7 +19,7 @@ import okhttp3.Request;
 
 public class APIRequest extends APIEvents {
     public static Class ExternalAPIEvents;
-    public static String baseUrl = "https://bapi.risloo.ir/api/";
+    public static String baseUrl = "https://dapi.risloo.ir/api/";
     public static int code;
     public static OkHttpClient client;
 
